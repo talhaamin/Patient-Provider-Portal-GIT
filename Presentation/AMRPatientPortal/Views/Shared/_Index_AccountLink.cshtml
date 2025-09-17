@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AMR.Models.PatientAccountLinkModel>
+@using System.Web.Script.Serialization;
+<table class="box-table-a" id="tbl-LinkedAccount" summary="LinkedAccount">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Patient Name</th>
+                                    <th scope="col"></th>
+                                    <th></th>
+                                    <th></th>
+                                    
+                                    <th></th>
+                                    
+                               </tr>
+                            </thead>
+                             <tbody>
+                   @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var item in Model)
+                                    {
+                        <tr class="@((counter % 2 == 0) ? "r0" : "r1")">
+                            <td>@item.PatientName </td> 
+                            <td> </td>
+                             <td> </td>
+                             <td align="center"><span class="anc" onclick="deleteLinkedAccount('@item.PatientId','@item.PatientId_Linked');"><img src="/Content/img/delete.png"  />Remove Linked Account</span></td>
+                            
+    
+                      
+                   
+                        </tr>
+                       counter++;
+                                    }
+                                }
+                                   else
+                                {
+                                      <tr class="r1"> 
+                                <td>There is no records</td> 
+                                          <td></td> 
+                                          <td></td> <td></td> 
+                                          <td></td>
+                                        </tr>  
+                                 
+                                }
+                    </tbody>
+                            </table>
+

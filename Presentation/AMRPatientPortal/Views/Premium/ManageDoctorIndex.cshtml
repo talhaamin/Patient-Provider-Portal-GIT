@@ -1,0 +1,183 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@using System.Web.Script.Serialization;
+@using System.Web.Optimization;
+
+@model PremiumManageDoctorViewModel
+
+@{
+    ViewBag.Title = "Manage Doctor...";
+    Layout = "~/Views/Shared/_LayoutMasterPage.cshtml";
+}
+
+@* <style>
+
+            .validateTips { border: 1px solid transparent; padding: 0.3em; }
+</style>*@
+
+@Styles.Render("~/ManageDoctorIndex/css")
+
+@section Scripts
+{
+
+}
+
+
+<div id="containment-wrapper" style="border-bottom-style: none; border-top-style: none; border-right-style: none; border-left-width: 1px; border-left-color: rgb(166, 201, 226);">
+
+
+ <!-- Tabs -->
+<div id="tabs" style="width:98%; font-size:12px; margin-top:5px; margin-right:4px; height:98.5%;display: none;">
+	<ul>
+		<li><a href="#tabs-1" style="height:30px;"><p style="margin-top: -5px; margin-left:-10px;">Manage Doctor</p></a></li>
+                                   
+	</ul> 
+	<div id="tabs-1">
+          <!--Start of First Box -->
+                        <div id="#" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 0px; height:230px; left: 0px; width: 100%;">
+                            <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                                <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                                    style="margin-top: -1px; font-weight: normal; padding: 3px;">
+                                    <span style="font-weight:bold;"> Manage Doctor </span>
+
+                                     <!-- third ICON -->
+                                    <div id="divAddDoctor" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields();addDoctor();" onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                                        
+                                        <img src="@Url.Content("~/Content/img/add.png")" id="imgAddEmergency" />
+                                        <span class="anc" style="padding-right: 4px;">Add</span>
+                                    </div>
+                                    <!-- end of third icon-->
+                                </h5>
+
+                                <div  id="divPatientDoctorList" class="ui-widget-content" style="position: relative; top: -9px; border: none; overflow-y: auto; height: 190px;">
+                                    @Html.Partial("~/Views/Templates/ManageDoctor/_ManageDoctor.cshtml",Model.PatientDoctor)
+                                </div>
+                            </div>
+                        </div>
+          <!-- end of 1st box -->
+	</div>
+
+</div>
+    </div>
+
+
+
+<!-------- Start Pop up emergency contact(add/update) --------->
+<div id="doctor-form" title="Manage Doctor">
+  <center>  <span   class="validateTips"></span></center>
+    <form id="doctor-form-1" action="/" method="post">
+    <table width="699" height="366" border="0" cellpadding="0" cellspacing="2">
+        <tr>
+            <input type="hidden" id="hdnCurrentDoctorID" value="" />
+            <td width="220" height="36" align="right"><span class="star">*</span>Doctor's Name:</td>
+            <td width="14">&nbsp;</td>
+            <td colspan="2">
+                <label for="cname_txt"></label>
+                <input type="text" name="cname_txt" id="txtDname" class="txt" style="width:300px"/></td>
+        </tr>
+        <tr>
+            <td align="right" height="36"><span class="star">*</span>Speciality :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <label for="count_com"></label>
+                
+                     @Html.DropDownList("cmbDSpeciality", Model.DoctorSpeciality.ToDoctorSpecialityModelSelectList(), new { id = "cmbDSpeciality", @class = "txt",style="width:300px"})
+                </td>
+        </tr>
+        <tr>
+            <td align="right" height="36">Address 1:</td>
+            <td align="right">&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="add_txt" id="txtDAdd1" class="txt" style="width:300px"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" height="36">Address 2:</td>
+            <td align="right">&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="add_txt" id="txtDAdd2" class="txt" style="width:300px"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" height="35">City :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="city_txt" id="txtDCity" class="txt" style="width:250px"/></td>
+        </tr>
+        <tr>
+            <td align="right" height="35">State :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                
+                      @Html.DropDownList("cmbDStates", Model.States.ToStatesModelSelectList(), new { id = "cmbDStates", @class = "txt",style="width:250px" })
+                         </td>
+        </tr>
+        <tr>
+            <td align="right" height="35">Zip Code :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="zcode_txt" id="txtDZip" class="txt" style="width:100px"/></td>
+        </tr>
+        <tr>
+            <td align="right" height="36">Country :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <label for="count_com"></label>
+                
+                     @Html.DropDownList("cmbDCountry", Model.Country.ToCountryModelSelectList(), new { id = "cmbDCountry", @class = "txt",style="width:300px" })
+                   
+                </td>
+        </tr>
+        <tr>
+            <td align="right" height="35"><span class="star">*</span>Office Phone:</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="phone_txt" id="txtDOfficephone" class="txt" style="width:150px"/>
+                </td>
+        </tr>
+        <tr>
+            <td align="right" height="35">Cell Phone:</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="phone_txt" id="txtDMobphone" class="txt" style="width:150px"/>
+              </td>
+        </tr>
+        <tr>
+            <td align="right" height="35">Fax:</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="cell_txt" id="txtDFax" class="txt" style="width:150px"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" height="35"><span class="star">*</span>Email:</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="cell_txt" id="txtDEmail" class="txt" style="width:300px"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="35">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td width="23">
+                <input type="checkbox" name="checkbox" id="chkIsPrimary" />
+                <label for="checkbox"></label>
+            </td>
+            <td width="432">Primary </td>
+        </tr>
+ </table>
+    </form>
+</div>
+<!-------- End Pop up emergency contact(add/update) --------->
+
+
+
+
+
+  
+
+
+
+
+@Scripts.Render("~/ManageDoctorIndex/jquery")

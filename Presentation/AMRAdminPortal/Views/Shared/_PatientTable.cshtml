@@ -1,0 +1,66 @@
+﻿@model IEnumerable<AMR.Models.PatientSearchModel>
+
+<table class="table">
+
+        <thead>
+
+            <tr>
+
+                <th>Access ID</th>
+                <th>First Name</th>
+                <th style="width:100px;">Last Name</th>
+                <th style="width:150px;">Date of Birth</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Country</th>
+                <th>Home Phone</th>
+                <th>Email</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+            @if(Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    System.Text.StringBuilder jsonString = new System.Text.StringBuilder();
+
+                    jsonString.Append(" { ");
+                    jsonString.Append("\"PatientId\": \"" + item.PatientId + "\",");
+                    jsonString.Append("\"FirstName\": \"" + item.FirstName + "\",");
+                    jsonString.Append("\"LastName\":  \"" + item.LastName + "\",");
+                    jsonString.Append("\"Address1\":  \"" + item.Address1 + "\",");
+                    jsonString.Append("\"Address2\":  \"" + item.Address2 + "\",");
+                    jsonString.Append("\"City\":  \"" + item.City + "\",");
+                    jsonString.Append("\"State\":  \"" + item.State + "\",");
+                    jsonString.Append("\"Zip\":  \"" + item.Zip + "\",");
+                    jsonString.Append("\"Country\":  \"" + item.Country + "\",");
+                    jsonString.Append("\"CountryCode\":  \"" + item.CountryCode + "\",");
+                    jsonString.Append("\"HomePhone\":  \"" + (item.HomePhone) + "\",");
+                  //  jsonString.Append("\"DOB\":  \"" + (item.dob) + "\",");
+                    jsonString.Append("\"EMail\":  \"" + item.EMail + "\"");
+                    jsonString.Append("}");
+                    string dob = item.dob.ToString();
+                    string[] date = dob.Split(' ');
+                    string DateOfBirth = date[0];
+            <tr style="cursor:pointer;" onclick="ShowPatientData(@item.PatientId);">
+                <td><input type="hidden" id="@item.PatientId" value="@jsonString.ToString()"/><a style="cursor:pointer;" onclick="@*ShowPatientData(@item.PatientId);*@">@item.PatientId</a></td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                 <td>@DateOfBirth</td>
+                <td>@item.Address1 <br />@item.Address2</td>
+                <td>@item.City</td>
+                <td>@item.State</td>
+                <td>@item.Zip</td>
+                <td>@item.Country</td>
+                <td>@item.HomePhone</td>
+                <td>@item.EMail</td>
+            </tr>
+                }
+            }
+        </tbody>
+
+    </table>

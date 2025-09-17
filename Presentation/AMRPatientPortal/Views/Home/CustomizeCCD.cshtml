@@ -1,0 +1,1275 @@
+﻿@using AMR.Models
+@model HomeViewModel
+
+@using AMR.Core.Extensions;
+@{
+    ViewBag.Title = "CustomizeCCD";
+}
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+    <title>CUSTOMIZE</title>
+
+    <script src="@Url.Content("~/Content/js/jquery-1.9.1.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-1.9.2.custom.js")"></script>
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/themes/redmond/jquery-ui.css")" />
+    <link href="@Url.Content("~/Content/css/themes/redmond/jquery-ui-1.10.3.custom.css")" rel="stylesheet">
+    <script src="@Url.Content("~/Content/js/jquery-ui.js")"></script>
+    <script src="@Url.Content("~/Content/css/ui/jquery.ui.core.js")"></script>
+    <script src="@Url.Content("~/Content/js/validator.js")"></script>
+    <script src="@Url.Content("~/Content/js/timeout-dialog.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.idle-timer.js")"></script>
+    <script type="text/javascript">
+    
+            $(function () {
+                var timeout = @System.Configuration.ConfigurationManager.AppSettings["InactivityTimeout"]
+                 $(document).bind("idle.idleTimer", function () {
+                     // function you want to fire when the user goes idle
+
+
+                     var active = '@Session["LoginType"]';
+                     console.log(active);
+                     if (active == "Accessibility") {
+
+                         $.timeoutDialog({
+                             timeout: 1, countdown: 60,
+
+                             logout_redirect_url: '@Url.RouteUrl("logout", new { controller = "Home", action = "LogOff", CCDUrl = "CCD" })',
+
+                            restart_on_yes: true
+
+                        });
+                    }
+                    else {
+
+
+                        $.timeoutDialog({
+                            timeout: 1, countdown: 60,
+
+                            logout_redirect_url: 'window_close',
+                                @*'@Url.RouteUrl("logout", new { controller = "Home", action = "LogOff", CCDUrl = "" })',*@
+
+                       restart_on_yes: true
+
+                   });
+               }
+                 });
+            $(document).bind("active.idleTimer", function () {
+                // function you want to fire when the user becomes active again
+            });
+            $.idleTimer(timeout);
+        });
+        $(document).ready(function () {
+            function ShowLoader() {
+
+                $('#loader').css("display", "block")
+            }
+            function HideLoader() {
+
+                $('#loader').css("display", "none")
+            }
+            //$(window).resize(function () {
+            //    var height = $(this).height() - $("#header").height()
+            //    $('#content').height(height);
+            //});
+            //$(window).resize();
+
+            //ShowLoader();
+           // $('#loader').css("display", "block");
+            //$.ajax({
+            //    dataType: "json",
+            //    type: 'GET',
+            //    url: 'Get-CCD-Data',
+            //    success: function (data) {
+
+            //        //$.each(data, function (index, item) {
+
+
+            //        //    if (item.Id == "patientSummary") {
+            //        //        $('#PatientSummary').append(item.WidgetHtml);
+
+            //        //    }
+            //        //    else {
+            //        //        var newDiv = $("<div class='uploadBox' id='widget_" + item.Id + "'><h3><span style='font-weight:bold;'><a>" + item.Id + "</a></span><a href='#toc' style='float:right;'>Top</a></h3><div class='widgetTable'></div></div>");
+
+            //        //        $('#widgets').append(newDiv);
+            //        //        $('.widgetTable:last').append(item.WidgetHtml);
+            //        //        $('.widgetTable:last table').attr("summary", item.Id);
+            //        //    }
+
+            //        //});
+            //        HideLoader();
+            //    }
+            //});
+        });
+
+      
+       
+
+        function DownloadCCD() {
+            var d = new Date();
+            d.setTime(d.getTime() + 5000);
+           // d.setTime(d.getTime() + (24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toGMTString();
+            var cvalue = GetData();
+             document.cookie = "Cunstomize" + "=" + cvalue + "; " + expires;
+            var facilityId = '@Request.QueryString["Location"]';
+            var visitID = '@Request.QueryString["Visit"]';
+            var demograhics = $('#chkDemo').prop('checked');
+            var provider = $('#chkprovider').prop('checked');
+            var visit = $('#chkvisit').prop('checked');
+            var requestData = {
+                VisitID: visitID,
+                FacilityId: facilityId,
+                View: false,
+                Demographics: demograhics,
+                Provider: provider,
+                Visit: visit
+            };
+            var str = JSON.stringify(requestData);
+            location.href = '@Url.Action("CCDHtmlDownload")' + '?healthRecordData=' + str;
+            var requestURL = '@Url.Action("GetCCDDataXML")' + '?healthRecordData=' + str;
+            $('#iframeCCDXML').attr('src', requestURL);
+            $('#iframeCCDXML').load();
+        }
+        function SendCCD() {
+		    debugger;
+            var bValid = true;
+            var chkemail = $.trim($('#txtEmailCCD').val());
+            var valid = checkEmail(chkemail)
+            if (valid == false) {
+                alert("Please Enter Email Address");
+                bValid = false;
+            }
+            if (bValid) {
+                try {
+                    var d = new Date();
+                    d.setTime(d.getTime() + 5000);
+                   // d.setTime(d.getTime() + (24 * 60 * 60 * 1000));
+                    var expires = "expires=" + d.toGMTString();
+                    var cvalue = GetData();
+                    document.cookie = "Cunstomize" + "=" + cvalue + "; " + expires;
+                    var facilityId = '@Request.QueryString["Location"]';
+                    var visitID = '@Request.QueryString["Visit"]';
+                    var demograhics = $('#chkDemo').prop('checked');
+                    var provider = $('#chkprovider').prop('checked');
+                    var visit = $('#chkvisit').prop('checked');
+                    var HTMl = false;
+                    var XML = false;
+                    if (document.getElementById('CCDHTMLradio').checked) {
+                        HTMl = true;
+                    }
+                    if (document.getElementById('CCDXMLradio').checked) {
+                        XML = true;
+                    }
+                    var requestData = {
+                        VisitID: visitID,
+                        FacilityId: facilityId,
+                        EmailID: $.trim($('#txtEmailCCD').val()),
+                        Demographics: demograhics,
+                        Provider: provider,
+                        Visit: visit,
+                        CCDHTML: HTMl,
+                        CCDXML: XML
+                    };
+			
+                    $.ajax({
+                        type: 'POST',
+                        url: 'index-patient-CCD-Send',
+                        data: JSON.stringify(requestData),
+                        dataType: 'json',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            // if success
+
+                            alert(data);
+
+
+
+                            //   $("#vital-portlet").html(data[0]);
+
+
+
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            //if error
+//alert('test');
+                            alert('Error : ' + xhr.message);
+                            HideLoader();
+                        },
+                        complete: function (data) {
+                            // if completed
+                            HideLoader();
+
+                        },
+                        async: true,
+                        processData: false
+                    });
+                } catch (err) {
+
+                    if (err && err !== "") {
+                        alert(err.message);
+                       
+                    }
+                }
+            }
+        }
+        function SendView() {
+            //alert('test');
+          
+            var d = new Date();
+           // d.setTime(d.getTime() + (24 * 60 * 60 * 1000));
+            d.setTime(d.getTime() + 5000);
+            var expires = "expires=" + d.toGMTString();
+            var cvalue = GetData();
+           // alert(cvalue);
+            //alert(expires);
+            document.cookie = "Cunstomize" + "=" + cvalue + "; " + expires;
+            var facilityId = '@Request.QueryString["Location"]';
+            var visitID = '@Request.QueryString["Visit"]';
+            var demograhics = $('#chkDemo').prop('checked');
+            var provider = $('#chkprovider').prop('checked');
+            var visit = $('#chkvisit').prop('checked');
+            var requestData = {
+                VisitID: visitID,
+                FacilityId: facilityId,
+                View: true,
+                Demographics: demograhics,
+                Provider: provider,
+                Visit: visit
+            };
+            var str = JSON.stringify(requestData);
+            window.open('@Url.Action("GetCCDRun")' + '?healthRecordData=' + str);
+        }
+
+
+        function GetData() {
+            //alert($(".widget tbody tr td:eq(1) input").val())
+            var str = "";
+            $(".widget").each(function () {
+                str += $(this).attr('summary') + '~';
+                //alert(str);
+                //console.log(str)
+                var MyIndexValue = '';
+                var MyRows = $(this).find('tbody').find('tr');
+                if (MyRows.length > 0) {
+                    for (var i = 0; i < MyRows.length; i++) {
+                        var check = $(MyRows[i]).find('td:eq(0) input').prop('checked');
+                        if (check == true) {
+                            
+                            if (($(this).attr('summary') == 'POC') || $(this).attr('summary') == 'Clinical') {
+                                MyIndexValue += $(MyRows[i]).find('td:eq(0) input:hidden').val();
+                                MyIndexValue += '^' + $(MyRows[i]).find('td:eq(2)').html();
+                                MyIndexValue += '^' + $(MyRows[i]).find('td:eq(3)').html();
+                                MyIndexValue += '^' + $(MyRows[i]).find('td:eq(4)').html();
+                                MyIndexValue += '^' + $(MyRows[i]).find('td:eq(5)').html();
+                                MyIndexValue += '^' + $(MyRows[i]).find('td:eq(6)').html();
+                                MyIndexValue += '^' + $(MyRows[i]).find('td:eq(7)').html();
+                            }
+                            else if ($(this).attr('summary') == 'VisitReason') {
+                                MyIndexValue += $(MyRows[i]).find('td:eq(1) input:hidden').val();
+                                MyIndexValue += '^' + $(MyRows[i]).find('td:eq(2)').html();
+
+                            }
+                            else {
+                                MyIndexValue += $(MyRows[i]).find('td:eq(1) input').val();
+                            }
+                            if (i == MyRows.length - 1) {
+                                // MyIndexValue += '|';
+                            }
+                            else {
+                                MyIndexValue += '*';
+                            }
+                        }
+                        if (i == MyRows.length - 1) {
+                            MyIndexValue += '|';
+                        }
+                    }
+                }
+                else {
+                    MyIndexValue += '|';
+                }
+                str += MyIndexValue;
+            });
+            return str;
+            console.log(str);
+        }
+
+        function chkRows(widget, obj) {
+            var IsChecked = obj.checked;
+            var abc = document.getElementsByClassName(widget);
+            for (var i = 0; i < abc.length; i++) {
+                if (IsChecked) {
+                    abc[i].checked = true;
+                }
+                else {
+                    abc[i].checked = false;
+                }
+            }
+        }
+        
+        $(function () {
+            $(".btnEdit").bind("click", Edit);
+            $(".btnSave").bind("click", Save);
+            $(".btnEditReason").bind("click", EditReason);
+            $(".btnSaveReason").bind("click", SaveReason);
+            
+        });
+
+        function EditReason() {
+            var par = $(this).parent().parent().parent();
+            var tdReason = par.children("td:nth-child(3)");
+            var tdButtons = par.children("td:nth-child(4)");
+            tdReason.html("<input type='text' id='txtReason' style='width:400px;' value='" + tdReason.html() + "'/>");
+            tdButtons.html("<a href='#EditReason'><label class='btnSaveReason' style='cursor: pointer'>Save</label></a>");
+            $(".btnSaveReason").bind("click", SaveReason);
+        }
+        function SaveReason() {
+            alert('test');
+            var par = $(this).parent().parent().parent();
+            var tdReason = par.children("td:nth-child(3)");
+
+            tdReason.html(tdReason.children("input[type=text]").val());
+        }
+        function Edit() {
+            var par = $(this).parent().parent().parent();
+            var tdplanactivity = par.children("td:nth-child(5)");
+
+            var tdComment = par.children("td:nth-child(6)");
+            var tdplandate = par.children("td:nth-child(7)");
+            //var tdplangoal = par.children("td:nth-child(5)");
+
+            var tdButtons = par.children("td:nth-child(9)");
+            //tdName.html('');
+            tdplanactivity.html("<input type='text' id='txtplanactivity' value='" + tdplanactivity.html() + "' Style='width:400px' />");
+
+            tdComment.html("<input type='text' id='txtName' value='" + tdComment.html() + "'/>");
+            tdplandate.html("<input type='text' id='txtplandate' value='" + tdplandate.html() + "'/>");
+           // tdplangoal.html("<input type='text' id='txtplangoal' value='" + tdplangoal.html() + "'/>");
+
+            tdButtons.html("<a href='#EditPOC'><label class='btnSave' style='cursor: pointer'>Save</label></a>");
+            $(".btnSave").bind("click", Save);
+           // $('.btnSave').show();
+           // $('.btnEdit').hide();
+        }
+        function Save() {
+            var par = $(this).parent().parent().parent(); //tr
+            var tdComment = par.children("td:nth-child(6)");
+            var tdplanactivity = par.children("td:nth-child(5)");
+            var tdplandate = par.children("td:nth-child(7)");
+           // var tdplangoal = par.children("td:nth-child(5)");
+
+            var tdButtons = par.children("td:nth-child(9)");
+            tdComment.html(tdComment.children("input[type=text]").val());
+            tdplanactivity.html(tdplanactivity.children("input[type=text]").val());
+            tdplandate.html(tdplandate.children("input[type=text]").val());
+           // tdplangoal.html(tdplangoal.children("input[type=text]").val());
+            tdButtons.html("<a href='#EditPOC'><label class='btnEdit' style='cursor: pointer'>Edit</label></a>");
+            $(".btnEdit").bind("click", Edit);
+           // $('.btnSave').hide();
+           // $('.btnEdit').show();
+        }
+    </script>
+
+
+
+</head>
+<body>
+    <div id="content" style="height: 450px; overflow: scroll;">
+
+        <div id="PatientSummary">
+
+            <table width="100%">
+                <tr>
+                    <td height="54" colspan="5" align="center">
+                        <h1><strong>Customize Continuity of Care Document</strong>
+
+                        </h1>
+                        <h2>Created On: @DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss tt")</h2>
+
+
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="chkDemo" name="checkbox" checked="checked" /><label for="chkDemo"><strong>Include Demographics</strong></label></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td width="153" height="28"><strong>Patient :</strong></td>
+                    <td width="269" height="28">@Model.PatientSummary.FirstName @Model.PatientSummary.LastName</td>
+                    <td width="4">&nbsp;</td>
+                    <td width="152" height="28"><strong>Access ID : </strong></td>
+                    <td width="370" height="28">@Model.PatientSummary.PatientId</td>
+                    <td width="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong>Address :</strong></td>
+                    <td>@Model.PatientSummary.PAddress<br>
+                        @Model.PatientSummary.City, @Model.PatientSummary.State @Model.PatientSummary.Zip<br>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td height="28"><strong>Work Phone :</strong></td>
+                    <td height="28">@Model.PatientSummary.WorkPhone</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong>Birth Date :</strong></td>
+                    <td>@Model.PatientSummary.DOB</td>
+                    <td>&nbsp;</td>
+                    <td><strong>Mobile Phone :</strong></td>
+                    <td>@Model.PatientSummary.MobilePhone</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong>Preferred Language :</strong></td>
+                    <td>@Model.PatientSummary.PreferredLanguage</td>
+                    <td>&nbsp;</td>
+                    <td><strong>Sex :</strong></td>
+                    <td>@Model.PatientSummary.Gender</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong>Ethnicity :</strong></td>
+                    <td>@Model.PatientSummary.Ethnicity</td>
+                    <td>&nbsp;</td>
+                    <td><strong>Race :</strong></td>
+                    <td>@Model.PatientSummary.Race</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28">
+                        <input type="checkbox" id="chkprovider" name="chkprovider" checked="checked" /><strong><label for="chkprovider">Include Provider</label></strong></td>
+
+                    <td></td>
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong>Provider :</strong></td>
+                    <td>@Model.PatientVisitCCD.Title @Model.PatientVisitCCD.FirstName @Model.PatientVisitCCD.LastName </td>
+                    <td>&nbsp;</td>
+                   @*  <td ><strong>Reason For Visit :</strong></td>
+      <td>@Model.PatientVisitCCD.VisitReason</td>
+      <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <td height="28"><strong>Practice Name :</strong></td>
+                    <td>@Model.PatientVisitCCD.FacilityName
+
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong></strong></td>
+                    <td>@Model.PatientVisitCCD.Address1
+                        <br />
+                        @Model.PatientVisitCCD.City, @Model.PatientVisitCCD.State @Model.PatientVisitCCD.PostalCode
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong>Practice Phone :</strong></td>
+                    <td>@Model.PatientVisitCCD.FacilityPhone
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+               <tr>
+                    <td height="28">
+                        <input type="checkbox" id="chkvisit" name="chkvisit" checked="checked" /><strong><label for="chkvisit">Include Visit Information</label></strong></td>
+
+                    <td></td>
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td>&nbsp;</td>
+                </tr>
+                 <tr>
+                    <td height="28"><strong>Visit Date :</strong></td>
+                    <td>@Model.PatientVisitCCD.VisitDate
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                 <tr>
+                    <td height="28"><strong>Visit Location :</strong></td>
+                    <td>@Model.PatientVisitCCD.Address1
+                        <br />
+                        @Model.PatientVisitCCD.City, @Model.PatientVisitCCD.State @Model.PatientVisitCCD.PostalCode
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h3><a name="toc">Table of Contents</a></h3>
+           @* <img id="loader" src="https://www.amrportal.com/PatientPortal/Content/img/login-loader.gif" alt="Loading..." style="display: none;">*@
+            <ul>
+                 <li><a href="#widget_Reason">Reason For Visit/Chief Complaint</a></li>
+                 <li><a href="#widget_Medications Administered">Medications Administered During Visit</a></li>
+                <li><a href="#widget_Medications">Medications</a></li>
+                <li><a href="#widget_Problems">Problems</a></li>
+                <li><a href="#widget_Allergies, Adverse Reactions, Alerts">Allergies, Adverse Reactions, Alerts</a></li>
+                <li><a href="#widget_Immunizations">Immunizations</a></li>
+                <li><a href="#widget_Family History">Family History</a></li>
+                <li><a href="#widget_Procedures">Procedures</a></li>
+                <li><a href="#widget_Medical History">Medical History</a></li>
+                <li><a href="#widget_Vital Signs">Vital Signs</a></li>
+                <li><a href="#widget_Lab Tests">Lab Tests</a></li>
+                <li><a href="#widget_Plan Of Care">Care Plan</a></li>
+                <li><a href="#widget_ClinicalInstructions">Clinical Instructions</a></li>
+            </ul>
+        </div>
+        <div id="widgets">
+           @* @if (Model.Medications != null && Model.Medications.Count > 0)
+            {
+                *@
+            
+            <div class="uploadBox" id="widget_Reason">
+                    <h3><span style="font-weight: bold;">
+                        <input type="checkbox" id="chkRes" name="chkRes" onclick="chkRows('chkReason', this);" checked="checked" /><label for="chkRes"><a>Include Reason For Visit/Chief Complaint</a></label></span><a href="#toc" style="float: right;">Top</a></h3>
+                    <div class="widgetTable">
+
+                        <table class="widget" summary="VisitReason" id="EditReason" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Include</th>
+                                    <th style="display:none"></th>
+                                    <th>Reason For Visit/Chief Complaint</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                               
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="chkReason"   checked="checked" name="chkReasons" id="chkReasons_" /><label for="chkReasons_"  style="display:none;">Reason For Visit</label></td>
+                                        <td style="display:none">
+                                            <input type="hidden" value="1" />
+                                        </td>
+                                        <td>@Model.PatientVisitCCD.VisitReason</td>
+                                        <td><a href="#EditReason">
+                                            <label class="btnEditReason" style="cursor: pointer">EDIT</label>
+                                        </a>
+
+                                        </td>
+                                    </tr>
+                                
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            <div class="uploadBox" id="widget_Medications Administered">
+                    <h3><span style="font-weight: bold;">
+                        <input type="checkbox" id="chkmedAdm" name="chkmed" onclick="chkRows('chkMedicationsAdm', this);" checked="checked" /><label for="chkmedAdm"><a>Include Medications Administered During Visit</a></label></span><a href="#toc" style="float: right;">Top</a></h3>
+                    <div class="widgetTable">
+
+                        <table class="widget" summary="MedsAdministered" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Include</th>
+                                    <th>RxNorm Code</th>
+                                    <th>Product</th>
+                                    <th>Medication Name</th>
+                                    <th>Frequency</th>
+                                    <th>Date Started</th>
+                                    <th>Status</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach (var item in Model.MedicationsAdministered)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="chkMedicationsAdm"   checked="checked" name="medicationid" id="medicationAdm_@item.PatientMedicationCntr" /><label for="medicationAdm_@item.PatientMedicationCntr"  style="display:none;">medication Adm</label></td>
+                                        <td>
+                                            <input type="hidden" value="@item.PatientMedicationCntr" />@item.CodeValue</td>
+                                        <td>Medication</td>
+                                        <td>@item.MedicationName</td>
+                                        <td>@item.Frequency</td>
+                                        <td>@item.StartDate</td>
+                                        <td>@item.Status</td>
+                                        <td>@item.Note</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            <div class="uploadBox" id="widget_Medications">
+                    <h3><span style="font-weight: bold;">
+                    <input type="checkbox" id="chkmed" name="chkmed" onclick="chkRows('chkMedications', this);" checked="checked" /><label for="chkmed"><a>Include Medications</a></label></span><a href="#toc" style="float: right;">Top</a></h3>
+                    <div class="widgetTable">
+
+                        <table class="widget" summary="Medications" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Include</th>
+                                    <th>RxNorm Code</th>
+                                    <th>Product</th>
+                                    <th>Medication Name</th>
+                                    <th>Frequency</th>
+                                    <th>Date Started</th>
+                                    <th>Status</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach (var item in Model.Medications)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="chkMedications"   checked="checked" name="medicationid" id="medication_@item.PatientMedicationCntr" /><label for="medication_@item.PatientMedicationCntr"  style="display:none;">medication</label></td>
+                                        <td>
+                                            <input type="hidden" value="@item.PatientMedicationCntr" />@item.CodeValue</td>
+                                        <td>Medication</td>
+                                        <td>@item.MedicationName</td>
+                                        <td>@item.Frequency</td>
+                                    @if (Convert.ToDateTime(item.StartDate).ToShortTimeString() == "12:00 AM") 
+                                    {
+                                        <td>@Convert.ToDateTime(item.StartDate).ToShortDateString()</td>
+                                    }
+                                     else
+                                    {
+                                       <td>@item.StartDate</td> 
+                                    }
+
+                                        <td>@item.Status</td>
+                                        <td>@item.Note</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+           @* }
+            @if (Model.Problems != null && Model.Problems.Count > 0)
+            {
+                *@
+            
+            <div class="uploadBox" id="widget_Problems">
+                    <h3><span style="font-weight: bold;">
+                        <input type="checkbox" id="chkProblems" onclick="chkRows('chkProblems', this);" checked="checked" name="chkProblems" />
+                        <label for="chkProblems"><a>Include Problems</a></label></span><a href="#toc" style="float: right;">Top</a></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="Problems" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Include</th>
+                                    <th>SNOMED Code</th>
+                                    <th>Patient Problem</th>
+                                    <th>Status</th>
+                                    <th>Date Diagnosed</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach (var item1 in Model.Problems)
+                                {
+		 
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="chkProblems"  checked="checked" name="Problemsid" id="Problemsid_@item1.PatientProblemCntr" /><label for="Problemsid_@item1.PatientProblemCntr" style="display:none;"> problem</label></td>
+
+                                        <td>@item1.CodeValue<input type="hidden" value="@item1.PatientProblemCntr" /></td>
+                                        <td>@item1.Condition</td>
+                                        <td>@item1.ConditionStatus</td>
+                                    @{
+                                    DateTime dtexDate;
+                                    if (item1.EffectiveDate.Length == 8 && DateTime.TryParseExact(item1.EffectiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtexDate))
+                                    {
+                                        DateTime dtEff = DateTime.ParseExact(item1.EffectiveDate, "yyyyMMdd", null);
+                                        string s = dtEff.ToString("MM/dd/yyyy");
+
+                                        <td>@s</td>
+                                    }
+
+
+
+                                    else if ((item1.EffectiveDate).Trim().Length == 6)
+                                    {
+                                        string strYear = item1.EffectiveDate.Substring(0, 4);
+                                        string strMonth = item1.EffectiveDate.Substring(4, 2);
+                                        string strEffectiveDate = strMonth + "/" + strYear;
+                                        <td>@strEffectiveDate</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@item1.EffectiveDate</td>
+                                    }
+                                                   
+                                                   
+                                    }
+
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            @*}
+            @if (Model.Allergies != null && Model.Allergies.Count > 0)
+            {
+                *@<div class="uploadBox" id="widget_Allergies, Adverse Reactions, Alerts">
+                    <h3><span style="font-weight: bold;">
+                        <input type="checkbox" id="ckhallergies" onclick="chkRows('ckhallergies', this);" name="ckhallergies" checked="checked" /><label for="ckhallergies"><a>Include Allergies, Adverse Reactions, Alerts</a></label></span><a href="#toc" style="float: right;">Top</a></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="Allergies" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Include</th>
+                                    <th>SNOMED Code</th>
+                                    <th>RxNorm Code</th>
+                                    <th>Medication/Agent Allergy</th>
+                                    <th>Reaction</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach (var item2 in Model.Allergies)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="ckhallergies"  checked="checked" name ="Allergiesid" id ="Allergiesid_@item2.PatientAllergyCntr"/><label for="Allergiesid_@item2.PatientAllergyCntr" style="display:none;">allergies</label></td>
+
+                                        <td>416098002<input type="hidden" value="@item2.PatientAllergyCntr" /></td>
+                                        <td>@item2.CodeValue_Allergen</td>
+                                        <td>@item2.Allergen</td>
+                                        <td>@item2.Reaction</td>
+                                        <td>@item2.ConditionStatus</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+            @*}
+            @if (Model.Immunizations != null && Model.Immunizations.Count > 0)
+            {
+                *@<div class="uploadBox" id="widget_Immunizations">
+                    <h3><span style="font-weight: bold;">
+                        <input type="checkbox" onclick="chkRows('chkImmunizations', this);" id="chkImmunizations" checked="checked" name="ckhImmunizations" /><label for="chkImmunizations"><a>Include Immunizations</a></label></span><a href="#toc" style="float: right;">Top</a></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="Immunizations" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Include</th>
+                                    <th>Vaccine</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody>
+                                @foreach (var item3 in Model.Immunizations)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="chkImmunizations"   checked="checked" name="Immunizationsid" id="Immunizationsid_@item3.PatientImmunizationCntr" /><label for="Immunizationsid_@item3.PatientImmunizationCntr" style="display:none;">immunization</label></td>
+
+                                        <td>
+                                            <input type="hidden" value="@item3.PatientImmunizationCntr" />@item3.Vaccine</td>
+                                        <td>@item3.ImmunizationDate</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+           @* }
+            @if (Model.SocialHistories != null && Model.SocialHistories.Count > 0)
+            {
+                *@<div class="uploadBox" id="widget_Social History">
+                    <h3><span style="font-weight: bold;">
+                        <input type="checkbox" id="chkSocial" onclick="chkRows('chkSocial', this);" name="chkSocial" checked="checked" /><label for="chkSocial"><a>Include Social History</a></label></span><a href="#toc" style="float: right;">Top</a></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="Social" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Include</th>
+                                    <th>Code System</th>
+                                    <th>Code</th>
+                                    <th>Description</th>
+                                    <th>Begin Date</th>
+                                    <th>End Date</th>
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody>
+                                @foreach (var item4 in Model.SocialHistories)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="chkSocial"  checked="checked" name="Socialid" id="Socialid_@item4.PatSocialHistCntr"   /><label for="Socialid_@item4.PatSocialHistCntr" style="display:none;">social</label></td>
+
+                                        <td>
+                                            <input type="hidden" value="@item4.PatSocialHistCntr" />
+                                            @item4.CodeSystem</td>
+                                        <td>@item4.CodeValue</td>
+                                        <td>@item4.Description</td>
+                                        <td>@item4.BeginDate</td>
+                                        <td>@item4.EndDate</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+          @*  }
+             @if (Model.Procedures != null && Model.Procedures.Count > 0)
+            {
+            *@
+            <div class="uploadBox" id="widget_Family History">
+                    <h3>
+                        <span style="font-weight: bold;">
+                            <input type="checkbox" id="chkFamily" onclick="chkRows('chkFamily', this);" name="chkFamily" checked="checked" /><label for="chkFamily"><span>Include Family History</span></label></span><a href="#toc" style="float: right;">Top</a></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="Family History" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Include</th>
+                                    <th>Code System</th>
+                                    <th>Code Relationship</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody>
+                                @foreach (var item4 in Model.FamilyHistories)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="chkFamily"  checked="checked" name="Familyid" id="Familyid_@item4.PatFamilyHistCntr"   /><label for="Familyid_@item4.PatFamilyHistCntr" style="display:none;">family</label></td>
+
+                                        <td>
+                                            <input type="hidden" value="@item4.PatFamilyHistCntr" />
+                                            @item4.CodeSystem</td>
+                                        <td>@item4.Relationship</td>
+                                        <td>@item4.Description</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            
+            <div class="uploadBox" id="widget_Procedures">
+                <h3><span style="font-weight: bold;">
+                    <input type="checkbox" id="chkProcedures" onclick="chkRows('chkProcedures', this);" name="chkProcedures" checked="checked" /><label for="chkProcedures"><a>Include Procedures</a></label>
+                    </span><a href="#toc" style="float: right;">Top</a></h3>
+                <div class="widgetTable">
+                    <table class="widget" summary="Procedures" border="1" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Include</th>
+                                <th>Code System</th>
+                                <th>Code</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                              @foreach (var item in Model.Procedures)
+                                {
+                            <tr>
+                                <td>
+                                            <input type="checkbox" class="chkProcedures"  checked="checked" name="Socialid" id="Procid_@item.PatProcedureCntr"   /><label for="Procid_@item.PatProcedureCntr" style="display:none;">Procedure</label></td>
+                                <td>
+                                            <input type="hidden" value="@item.PatProcedureCntr" />
+                                    @item.CodeSystem
+                                             </td>
+                                <td>@item.CodeValue</td>
+                                <td>@item.Description</td>
+                                <td>1/15/2014</td>
+                            </tr>
+                              }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="uploadBox" id="widget_Medical History">
+                    <h3><span style="font-weight: bold;">
+                        <input type="checkbox" id="chkMedicalHistory" onclick="chkRows('chkMedicalHistory', this);" name="chkMedicalHistory" checked="checked" /><label for="chkMedicalHistory"><span> Medical History</span></label></span><a href="#toc" style="float: right;">Top</a></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="Medical History" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Include</th>
+                                    <th>Code Date</th>
+                                    <th>Diagnosis/Disease</th>
+                                    <th>Note</th>
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody>
+                                @foreach (var item in Model.MedicalHistories)
+                                {
+                                    <tr>
+                                          <td>
+                                            <input type="checkbox" class="chkMedicalHistory"  checked="checked" name="MedicalHistoryid" id="MedicalHistoryid_@item.PatMedicalHistCntr"   /><label for="MedicalHistoryid_@item.PatMedicalHistCntr" style="display:none;">Medical History</label></td>
+
+                                        <td>
+                                            <input type="hidden" value="@item.PatMedicalHistCntr" />
+                                             @{
+                                                DateTime dtexDate;
+                                                if (item.DateOfOccurance.Length == 8 && DateTime.TryParseExact(item.DateOfOccurance, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtexDate))
+                                                {
+                                                    DateTime dtEff = DateTime.ParseExact(item.DateOfOccurance, "yyyyMMdd", null);
+                                                    string s = dtEff.ToString("MM/dd/yyyy");
+                                                                                           
+                                                    @s
+                                                }
+                                                else if ((item.DateOfOccurance).Trim().Length == 6)
+                                                {
+                                                    string strYear = item.DateOfOccurance.Substring(0, 4);
+                                                    string strMonth = item.DateOfOccurance.Substring(4, 2);
+                                                    string strOccDate = strMonth + "/" + strYear;
+                                                    
+                                                     @strOccDate
+                                                    
+                                                }
+                                                else
+                                                {
+                                                    @item.DateOfOccurance
+                                                }          
+                                             }
+                                        </td>
+                                        <td>
+                                           @item.Description
+                                        </td>
+                                            
+                                        <td>@item.Note</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            @* }
+             @if (Model.VitalSigns != null && Model.VitalSigns.Count > 0)
+            {
+            *@<div class="uploadBox" id="widget_Vital Signs">
+                <h3><span style="font-weight: bold;">
+                    <input type="checkbox" id="chkVitalSigns" onclick="chkRows('chkVitalSigns', this);" name="chkVitalSigns" checked="checked" /><label for="chkVitalSigns"><a>Include Vital Signs</a></label>
+                    </span><a href="#toc" style="float: right;">Top</a></h3>
+                <div class="widgetTable">
+                    <table class="widget" summary="VitalSigns" border="1" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Include</th>
+                                <th>Date / Time</th>
+                                <th>BP-Sys(mm[Hg]</th>
+                                <th>BP-Dia(mm[Hg]</th>
+                                <th>HR(bpm)</th>
+                                <th>RR(rpm)</th>
+                                <th>Temp</th>
+                                <th>WT</th>
+                                <th>HT</th>
+                                <th>BMI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             @foreach (var item in Model.VitalSigns)
+                                {
+                            <tr>
+                                  <td>
+                                            <input type="checkbox" class="chkVitalSigns"  checked="checked" name="Socialid" id="Vitalsid_@item.PatientVitalCntr"   /><label for="Vitalsid_@item.PatientVitalCntr" style="display:none;">Vitals</label></td>
+                             @if (Convert.ToDateTime(item.VitalDate).ToShortTimeString() == "12:00 AM")
+                             {
+                                <td>
+                                            <input type="hidden" value="@item.PatientVitalCntr" />
+                                             @Convert.ToDateTime(item.VitalDate).ToShortDateString()</td>
+                             }
+                             else
+                             {
+                                 <td>
+                                            <input type="hidden" value="@item.PatientVitalCntr" />
+                                             @item.VitalDate</td>
+                             }
+
+                                <td>@item.Systolic</td>
+                                <td>@item.Diastolic</td>
+                                <td>@item.Pulse</td>
+                                <td>@item.Respiration</td>
+                                <td>@item.Temperature</td>
+                                <td>@item.WeightLb</td>
+                                <td>@item.HeightIn</td>
+                                <td>@*27.5*@</td>
+                            </tr>
+                             }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           @*  }
+            @if (Model.LabResults != null && Model.LabResults.Count > 0)
+            {
+                *@<div class="uploadBox" id="widget_Lab Tests">
+                    <h3><span style="font-weight: bold;">
+                        <input type="checkbox" id="ckhDiagnostic" onclick="chkRows('ckhDiagnostic', this);" name="ckhDiagnostic" checked="checked" /><label for="ckhDiagnostic"><a>Include Lab Tests</a></label></span><a href="#toc" style="float: right;">Top</a></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="LabResults" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Include</th>
+                                    <th>Test</th>
+                                    <th>Result</th>
+                                    <th>Ref. Range</th>
+                                    <th>Abnormal Flag</th>
+                                    <th>Date Performed</th>
+                                    <th>Set</th>
+                                    <th>Code System</th>
+                                    <th>Code</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach (var item5 in Model.LabResults)
+                                {
+                          
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="ckhDiagnostic"  checked="checked"  name ="Diagnosticid" id="Diagnosticid_@item5.LabResultCntr"/><label for="Diagnosticid_@item5.LabResultCntr" style=" display:none;">Diagnostic</label></td>
+
+                                        <td>@item5.LabName<input type="hidden" value="@item5.LabResultCntr" /></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>@item5.ReportDate</td>
+                                        <td></td>
+                                        <td>@*@item5.CodeSystemId*@</td>
+                                        <td>@*@item5.CodeValue*@</td>
+                                    </tr>
+                  
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+           @* }
+            @if (Model.Pocs != null && Model.Pocs.Count > 0)
+            {
+                *@<div class="uploadBox" id="widget_Plan Of Care">
+                    <h3><span style="font-weight: bold;">
+                        <input type="checkbox" id="chkplan" onclick="chkRows('chkplan', this);" name="chkplan" checked="checked" /><label for="chkplan"><a>Include Care Plan</a></label></span><a href="#toc" style="float: right;">Top</a></h3>
+                    <div class="widgetTable">
+                        <table class="widget" id="EditPOC" summary="POC" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Include</th>
+                                    <th>Type</th>
+                                    <th>Code System</th>
+                                    <th>Code</th>                                    
+                                    <th>Instructions</th>
+                                    <th>Comments</th>
+                                    <th>Planned Date/Time</th>
+                                    <th>Plan/Goal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var item in Model.Pocs)
+                                {
+                               
+                           
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="chkplan"   checked="checked"  name ="Planid" id="Planid_@item.PlanCntr" /><label for="Planid_@item.PlanCntr" style="display:none;">Plan</label>
+                                            <input type="hidden" value="@item.PlanCntr" />
+                                        </td>
+                                        <td>@item.InstructionType</td>
+                                         <td>@item.CodeSystem</td>
+                                        <td>@item.CodeValue</td>                                       
+                                        <td>@item.Instruction</td>
+                                        <td>@item.Note</td>
+                                    @if (item.AppointmentDateTime.ToString() == "1/1/1900 00:00:00" || item.AppointmentDateTime.ToString() == "1/1/1900 12:00:00 AM")
+                                    {
+                                        <td></td>
+                                    }
+                                    else if (Convert.ToDateTime(item.AppointmentDateTime).ToShortTimeString() == "12:00 AM")
+                                    {
+                                        <td>@Convert.ToDateTime(item.AppointmentDateTime).ToShortDateString()</td> 
+                                    }
+                                    else
+                                    {
+                                       <td>@item.AppointmentDateTime</td> 
+                                    } 
+                                        <td>@item.Goal</td>
+                                        <td><a href="#EditPOC">
+                                            <label class="btnEdit" style="cursor: pointer">EDIT</label>
+                                            </a>
+                                           
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+         @*   }*@
+            <div class="uploadBox" id="widget_ClinicalInstructions">
+                    <h3><span style="font-weight: bold;">
+                        <input type="checkbox" id="chkCI" onclick="chkRows('chkCI', this);" name="chkCI" checked="checked" /><label for="chkCI"><a>Include Clinical Instructions</a></label></span><a href="#toc" style="float: right;">Top</a></h3>
+                    <div class="widgetTable">
+                        <table class="widget" id="EditCI" summary="Clinical" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Include</th>
+                                    <th>Type</th>
+                                    <th>Code System</th>
+                                    <th>Code</th>                                    
+                                    <th>Instructions</th>
+                                    <th>Comments</th>
+                                    <th>Planned Date/Time</th>
+                                    <th>Plan/Goal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var item in Model.ClinicalInstructions)
+                                {
+                               
+                           
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="chkCI"   checked="checked"  name ="CIid" id="CIid_@item.PlanCntr" /><label for="CIid_@item.PlanCntr" style="display:none;">Plan</label>
+                                            <input type="hidden" value="@item.PlanCntr" />
+                                        </td>
+                                        <td>@item.InstructionType</td>
+                                         <td>@item.CodeSystem</td>
+                                        <td>@item.CodeValue</td>                                       
+                                        <td>@item.Instruction</td>
+                                        <td>@item.Note</td>
+                                    @if (item.AppointmentDateTime.ToString() == "1/1/1900 00:00:00" || item.AppointmentDateTime.ToString() == "1/1/1900 12:00:00 AM")
+                                    {
+                                        <td></td>
+                                    }
+                                    else if (Convert.ToDateTime(item.AppointmentDateTime).ToShortTimeString() == "12:00 AM")
+                                    {
+                                        <td>@Convert.ToDateTime(item.AppointmentDateTime).ToShortDateString()</td> 
+                                    }
+                                    else
+                                    {
+                                       <td>@item.AppointmentDateTime</td> 
+                                    } 
+                                        <td>@item.Goal</td>
+                                        <td><a href="#EditCI">
+                                            <label class="btnEdit" style="cursor: pointer">EDIT</label>
+                                            </a>
+                                           
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <div style="margin-left: 10%; margin-right: 10%; width: 100%;">
+        <table style="margin-left: 10%; margin-right: 10%; width: 1000;">
+            <tr>
+               @* <td width="30%"></td>*@
+                <td @*align="right"*@>
+                    <label id="lbl">Email:</label></td>
+                <td>
+                    <input type="text" id="txtEmailCCD" name="txtemail" style="width: 200px;" /><label for="txtEmailCCD" style="display: none;">email</label></td>
+                   <td><input type="radio"name="ccd" id="CCDHTMLradio" value="CCDHTML" checked="checked"></td>
+<td><label for="CCDHTMLradio" style="width:100px">CCD (Human-Readable)</label></td>
+<td><input type="radio" name="ccd" id="CCDXMLradio" value="CCDXML"></td>
+<td><label for="CCDXMLradio" style="width:100px">CCD (CCDA XML)</label></td>
+    
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                @*<td colspan="3">
+                    <button id="View" style="width: 20%;" onclick="SendView();">View</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button id="Download" style="width: 20%;" onclick="DownloadCCD();">Download</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button id="Transmit" style="width: 20%;" onclick="SendCCD();">Transmit</button></td>*@
+            </tr>
+
+        </table>
+    </div>
+         <table width ="1000"> 
+             <tr><td><button id="View" style="width: 200px;margin-left:100px;" onclick="SendView();">View</button></td>
+
+    <td><button id="Download" style="width: 200px;margin-left:100px;" onclick="DownloadCCD();">Download</button></td>
+
+    <td><button id="Transmit" style="width: 200px;margin-left:100px;" onclick="SendCCD();">Transmit</button>
+
+    <div style="display: none;">
+        <iframe id="iframeCCDXML" onload="HideLoader();" src="" width="100%" height="100%" title="CCD Download"></iframe>
+        </td>
+                 </tr>
+        </table>
+    
+    </div>
+</body>
+</html>

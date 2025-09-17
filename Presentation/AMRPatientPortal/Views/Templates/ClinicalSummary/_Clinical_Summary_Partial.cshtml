@@ -1,0 +1,789 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@using System.Web.Optimization;
+@model ClinicalSummaryViewModel
+  <table width="960" border="0" cellspacing="0" cellpadding="0">
+@*    <tr>
+      <td colspan="6" ><img src="../Content/img/amr.png" width="428" height="81"  /></td>
+        <td  colspan="3" align="right"><button onclick="window.print();" > Print</button></td>
+    </tr>*@
+@*    <tr>
+      <td height="54" colspan="5" align="center"><h1><strong>Chart Summary</strong><br />
+      </h1></td>
+      <td>&nbsp;</td>
+    </tr>*@
+    <tr>
+      <td width="153"  height="28"><strong>Patient :</strong></td>
+      <td width="269" height="28">@Html.DisplayTextFor(a => a.PatientSummary.LastName)</td>
+      <td width="4">&nbsp;</td>
+      <td width="152"  height="28"><strong>Access ID : </strong></td>
+      <td width="370" height="28">@Html.DisplayTextFor(a => a.PatientSummary.PatientId)</td>
+      <td width="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td  height="28"><strong>Address :</strong></td>
+      <td>@Html.DisplayTextFor(a => a.PatientSummary.PAddress)</td>
+      <td>&nbsp;</td>
+      <td  height="28"><strong>Work Phone :</strong></td>
+      <td height="28"> @Html.DisplayTextFor(a => a.PatientSummary.WorkPhone)</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td  height="28"><strong>Date of Birth :</strong></td>
+      <td>@Html.DisplayTextFor(a => a.PatientSummary.DOB)</td>
+      <td>&nbsp;</td>
+      <td ><strong>Mobile Phone :</strong></td>
+      <td>@Html.DisplayTextFor(a => a.PatientSummary.MobilePhone)</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td  height="28"><strong>Preferred Language :</strong></td>
+      <td>@Html.DisplayTextFor(a => a.PatientSummary.PreferredLanguage)</td>
+      <td>&nbsp;</td>
+      <td ><strong>Sex :</strong></td>
+      <td>@Html.DisplayTextFor(a => a.PatientSummary.Gender)</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td  height="28"><strong>Ethnicity :</strong></td>
+      <td>@Html.DisplayTextFor(a => a.PatientSummary.Ethnicity)</td>
+      <td>&nbsp;</td>
+      <td ><strong>Race :</strong></td>
+      <td>@Html.DisplayTextFor(a => a.PatientSummary.Race)</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="28" ><strong>Provider :</strong></td>
+      <td>@Model.PatientVisitCCD.Title @Model.PatientVisitCCD.FirstName @Model.PatientVisitCCD.LastName </td>
+      <td>&nbsp;</td>
+      <td >    @*  <strong>Smoking Status :</strong>*@</td>
+      <td>@*@Html.DisplayTextFor(a => a.PatientSummary.SmokingStatus)*@</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td  height="28"><strong>Practice Name :</strong></td>
+       <td>@Model.PatientVisitCCD.FacilityName <br />
+          @Model.PatientVisitCCD.Address1, @Model.PatientVisitCCD.City @Model.PatientVisitCCD.State <br />
+          @Model.PatientVisitCCD.Phone
+      </td>
+      <td>&nbsp;</td>
+      <td >@*<strong>Emergency Contact :</strong>*@</td>
+      <td>@*@Html.DisplayTextFor(a => a.PatientSummary.EmergencyHomePhone)*@</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="32" ><strong>Practice Phone :</strong></td>
+      <td>@Model.PatientVisitCCD.FacilityPhone</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+
+          <tr>
+      <td height="32" ><strong>Visit Date :</strong></td>
+      <td>@Model.PatientVisitCCD.VisitDate</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+      
+          <tr>
+      <td height="32" ><strong>Visit Location :</strong></td>
+      <td>@Model.PatientVisitCCD.Address1
+                        <br />
+                        @Model.PatientVisitCCD.City, @Model.PatientVisitCCD.State @Model.PatientVisitCCD.PostalCode
+                    </td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+            <tr>
+      <td height="32" ></td>
+      <td></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+      
+    <tr>
+      <td height="39" ><h2>Purpose</h2></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="155" colspan="5"><p>Patient Request<br />
+        <br />
+        This document was generated based on the following:</p><ul>
+        <li>insurance information</li>
+        <li>family history and social history</li>
+        <li>active, inactive and resolved problems</li>
+        <li>active, lapsed, discontinued and administered medications</li>
+        <li>active, inactive and resolved allergies</li>
+        <li>immunizations and advance directives</li>
+        <li>vital signs, encounters and procedures</li>
+      <li>lab results</li></ul> </p></td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+
+            <h3 >Table of Contents</h3>
+            <ul>
+                <li  id="Reason"><a href="#widget_Reason For Visit/Chief Complaint">Reason For Visit/Chief Complaint</a></li>
+                <li  id="Administered"><a href="#widget_Medications Administered">Medications Administered During Visit</a></li>
+                <li  id="Medications"><a href="#widget_Medications">Medications</a></li>
+                <li  id="Problems"><a href="#widget_Problems">Problems</a></li>
+                <li  id="Allergies"><a href="#widget_Allergies, Adverse Reactions, Alerts">Allergies, Adverse Reactions, Alerts</a></li>
+                <li  id="Immunizations"><a href="#widget_Immunizations">Immunizations</a></li>
+                <li  id="Social"><a href="#widget_Social History">Social History</a></li>
+                <li  id="Procedures"><a href="#widget_Procedures">Procedures</a></li>
+                <li  id="Vital"><a href="#widget_Vital Signs">Vital Signs</a></li>
+                <li id="Lab"><a href="#widget_Lab Tests">Lab Tests</a></li>
+                <li  id="Care"><a href="#widget_Care Plan">Care Plan</a></li>
+               <li  id="Clinical"><a href="#widget_Clinical Instructions">Clinical Instructions</a></li>
+            </ul>
+       
+<div>
+    @if(Model.PatientShare.Insurance ==true)
+    {
+       
+<h2>Insurance</h2> 
+        <div id="">
+  <table width="960" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="172" align="center" ><strong>Member Number</strong></td>
+      <td width="268" align="center"><strong>Plan Name</strong></td>
+      <td width="104" align="center"><strong>Subscriber</strong></td>
+    </tr>
+
+         @foreach (var item in Model.Insurance)
+         {
+    <tr>
+        
+      <td height="24">@item.MemberNumber</td>
+      <td >@item.PlanName</td>
+      <td align="center">@item.Subscriber</td>
+    </tr>
+         
+         }
+       </table>
+            </div>
+    }
+    @if(Model.PatientShare.Visit ==true)
+    {  
+  <h2>    Visit Info<br />
+  </h2>
+        <div id="widget_Reason For Visit/Chief Complaint">
+        
+  <table width="959" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="284" align="center" ><strong>Visit Reason</strong></td>
+      <td width="254" align="center"><strong>Provider </strong></td>
+      <td width="219" align="center"><strong>Location</strong></td>
+      <td width="192" align="center" ><strong>Date</strong></td>
+    </tr>
+    
+  @foreach (var item in Model.Visits.Select((x, i) => new { VisitModel = x, Index = i + 1 }))
+  {
+    <tr>  
+      <td height="24">  @item.VisitModel.VisitReason </td>
+      <td align="center">   @item.VisitModel.ProviderName</td>
+      <td align="center">&nbsp;   @item.VisitModel.FacilityName</td>
+      <td align="center"> @item.VisitModel.VisitDate</td>
+    </tr>
+        
+  }
+    
+    
+  </table>
+            </div>
+    }
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+
+ @if(Model.PatientShare.Problem ==true)
+ {
+  <h2> Problem List  <br />
+  </h2>
+     <div id="widget_Problems">
+  <table width="959" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="284" align="center" ><strong>Condition</strong></td>
+      <td width="254" align="center"><strong>Effective Date(S)</strong></td>      
+      <td width="192" align="center" ><strong>Condition Status</strong></td>
+    </tr>
+    @foreach (var item in Model.Problems.Select((x, i) => new { ProblemModel = x, Index = i + 1 }))
+    {
+       <tr>
+      <td height="24"> @item.ProblemModel.Condition</td>      
+                                 @{
+                                    DateTime dtexDate;
+                                    if (item.ProblemModel.EffectiveDate.Length == 8 && DateTime.TryParseExact(item.ProblemModel.EffectiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtexDate))
+                                    {
+                                        DateTime dtEff = DateTime.ParseExact(item.ProblemModel.EffectiveDate, "yyyyMMdd", null);
+                                        string s = dtEff.ToString("MM/dd/yyyy");
+
+                                        <td align="center">@s</td>
+                                    }
+                                    else if ((item.ProblemModel.EffectiveDate).Trim().Length == 6)
+                                    {
+                                        string strYear = item.ProblemModel.EffectiveDate.Substring(0, 4);
+                                        string strMonth = item.ProblemModel.EffectiveDate.Substring(4, 2);
+                                        string strEffectiveDate = strMonth + "/" + strYear;
+                                        <td align="center">@strEffectiveDate</td>
+                                    }
+                                    else
+                                    {
+                                        <td align="center">@item.ProblemModel.EffectiveDate</td>
+                                    }
+                                                   
+                                                   
+                                    }     
+      <td align="center">@item.ProblemModel.ConditionStatus</td>
+    </tr>
+    }
+  
+  </table>
+         </div>
+ }
+
+    @if(Model.PatientShare.Medication ==true)
+    {
+  <h2>Medications</h2>
+        <div id="widget_Medications">
+  <table width="960" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="214" align="center" ><strong>Name</strong></td>
+      <td width="100" align="center"><strong>Quantity </strong></td>
+      <td width="99" align="center"><strong>Refills</strong></td>      
+      <td width="161" align="center" ><strong>Status</strong></td>
+    </tr>
+    @foreach (var item in Model.Medications.Select((x, i) => new { PatientMedicationModel = x, Index = i + 1 }))
+    {
+       <tr>
+      <td height="28"> @item.PatientMedicationModel.MedicationName</td>
+      <td align="center"> @item.PatientMedicationModel.Quantity</td>
+      <td align="center"> @item.PatientMedicationModel.Refills</td>      
+      <td align="center"> @item.PatientMedicationModel.Status</td>
+    </tr>
+    }
+    
+  </table>
+            </div>
+        
+    }
+
+    @if(Model.PatientShare.Allergy ==true)
+    {
+  <h2>Allergies and Adverse Reactions<br />
+  </h2>
+        <div id="widget_Allergies, Adverse Reactions, Alerts">
+  <table width="960" border="1" cellspacing="0" cellpadding="0">
+        <tr>
+      <td width="174" align="center" ><strong>Allergen</strong></td>
+      <td width="45" align="center"><strong>Type</strong></td>
+      <td width="331" align="center"><strong>Reaction</strong></td>
+      <td width="119" align="center" ><strong>Effective Date(s)</strong></td>
+      <td width="291" align="center" ><strong>Status</strong></td>
+    </tr>
+
+       @foreach (var item in Model.Allergies.Select((x, i) => new { AllergyModel = x, Index = i + 1 }))
+       {
+      <tr>
+      <td height="24">@item.AllergyModel.Allergen</td>
+      <td align="center">@item.AllergyModel.AllergenType</td>
+      <td align="center">@item.AllergyModel.Reaction</td>      
+            @{
+                                DateTime dtexDate;
+                                if (item.AllergyModel.EffectiveDate.Length == 8 && DateTime.TryParseExact(item.AllergyModel.EffectiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtexDate))
+                                {
+                                    DateTime dtEff = DateTime.ParseExact(item.AllergyModel.EffectiveDate, "yyyyMMdd", null);
+                                    string s = dtEff.ToString("MM/dd/yyyy");
+
+                                    <td align="center">@s</td>
+                                }
+                                else if ((item.AllergyModel.EffectiveDate).Trim().Length == 6)
+                                {
+                                    string strYear = item.AllergyModel.EffectiveDate.Substring(0, 4);
+                                    string strMonth = item.AllergyModel.EffectiveDate.Substring(4, 2);
+                                    string strEffectiveDate = strMonth + "/" + strYear;
+                                        <td align="center">@strEffectiveDate</td>
+                                }
+                                else
+                                {
+                                    <td align="center">@item.AllergyModel.EffectiveDate</td>
+                                }
+                            } 
+      <td align="center">@item.AllergyModel.ConditionStatus</td>
+    </tr>
+       }
+  
+ 
+  </table>
+            </div>
+    }
+
+    @if(Model.PatientShare.VitalSigns ==true)
+    {
+  <h2>Vital Signs</h2>
+        <div id="widget_Vital Signs">
+  <table width="960" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="172" align="center" ><strong>Observation</strong></td>
+      <td width="111" align="center"><strong>Blood Pressure</strong></td>
+      <td width="235" align="center"><strong>Weight(lb)</strong></td>
+      <td width="270" align="center" ><strong>Height</strong></td>
+      <td width="160" align="center" ><strong>BMI</strong></td>
+    </tr>
+  
+       @foreach (var item in Model.VitalSigns.Select((x, i) => new { PatientVitalSignModel = x, Index = i + 1 }))
+       {
+           decimal calc = item.PatientVitalSignModel.HeightIn * item.PatientVitalSignModel.HeightIn;
+         <tr>
+      <td height="24">@item.PatientVitalSignModel.VitalDate</td>
+      <td align="center">@item.PatientVitalSignModel.BloodPressurePosn</td>
+      <td align="center">@item.PatientVitalSignModel.WeightLb</td>
+      <td align="center">@item.PatientVitalSignModel.HeightIn</td>
+        @if (calc != 0)
+        {
+       <td align="center">@(Math.Round(Convert.ToDecimal((@item.PatientVitalSignModel.WeightLb / (calc))), 3) * 703)  </td>
+        }
+        else
+        {
+       <td>0 </td>
+        }
+    </tr>
+       }
+   
+  </table>
+            </div>
+    }
+  <p><br />
+    <br />
+    <br />
+  </p>
+
+  @if(Model.PatientShare.LabResults ==true)
+  {
+  
+      <div id="widget_Lab Tests">
+ @foreach (var item1 in Model.LabResults.Select((x, i) => new { LabTestModel = x, Index = i + 1 }))
+   {
+       <h2>Lab Test And Result</h2>
+       <table width="959" border="1" cellspacing="0" cellpadding="0">
+      
+    
+           <thead>
+                                            <tr>
+                                                <th scope="col"><strong>Lab Facility</strong></th>
+                                                <th scope="col"><strong>Order Date</strong></th>
+                                                <th scope="col"><strong>Provider</strong></th>
+                                                <th scope="col"><strong>Collection Date</strong></th>
+                                                <th scope="col"><strong>Requisition</strong></th>
+                                                <th scope="col"><strong>Report Date</strong></th>
+                                                <th scope="col"><strong>Specimen</strong></th>
+                                                <th scope="col"><strong>Review Date</strong></th>
+
+                                            </tr>
+                                        </thead>
+             <tbody>
+                 <tr>
+
+                                                        <td>@item1.LabTestModel.LabName</td>                                                        
+                                                        @if (item1.LabTestModel.OrderDate.ToString() == "1/1/1900 00:00:00" || item1.LabTestModel.OrderDate.ToString() == "1/1/1900 12:00:00 AM")
+                                                        {
+                                                        <td></td>
+                                                         }
+                                                        else if (Convert.ToDateTime(item1.LabTestModel.OrderDate).ToShortTimeString() == "12:00 AM")
+                                                        {
+                                                        <td align="center">@Convert.ToDateTime(item1.LabTestModel.OrderDate).ToShortDateString()</td> 
+                                                        }
+                                                        else
+                                                        {
+                                                        <td align="center">@item1.LabTestModel.OrderDate</td> 
+                                                         }
+                                                        <td>@item1.LabTestModel.ProviderName</td>                                                        
+                                                          @if (item1.LabTestModel.CollectionDate.ToString() == "1/1/1900 00:00:00" || item1.LabTestModel.CollectionDate.ToString() == "1/1/1900 12:00:00 AM")
+                                                        {
+                                                        <td></td>
+                                                         }
+                                                          else if (Convert.ToDateTime(item1.LabTestModel.CollectionDate).ToShortTimeString() == "12:00 AM")
+                                                         {
+                                                        <td align="center">@Convert.ToDateTime(item1.LabTestModel.CollectionDate).ToShortDateString()</td> 
+                                                        }
+                                                         else
+                                                        {
+                                                        <td align="center">@item1.LabTestModel.CollectionDate</td> 
+                                                        }
+                                                        <td>@item1.LabTestModel.Requisiton</td>                                                        
+                                                         @if (item1.LabTestModel.ReportDate.ToString() == "1/1/1900 00:00:00" || item1.LabTestModel.ReportDate.ToString() == "1/1/1900 12:00:00 AM")
+                                                        {
+                                                        <td></td>
+                                                         }
+                                                         else if (Convert.ToDateTime(item1.LabTestModel.ReportDate).ToShortTimeString() == "12:00 AM")
+                                                          {
+                                                        <td align="center">@Convert.ToDateTime(item1.LabTestModel.ReportDate).ToShortDateString()</td> 
+                                                        }
+                                                        else
+                                                        {
+                                                        <td align="center">@item1.LabTestModel.ReportDate</td> 
+                                                           }
+                                                        <td>@item1.LabTestModel.Specimen</td>                                                        
+                                                         @if (item1.LabTestModel.ReviewDate.ToString() == "1/1/1900 00:00:00" || item1.LabTestModel.ReviewDate.ToString() == "1/1/1900 12:00:00 AM")
+                                                        {
+                                                        <td></td>
+                                                         }
+                                                         else if (Convert.ToDateTime(item1.LabTestModel.ReviewDate).ToShortTimeString() == "12:00 AM")
+                                                          {
+                                                        <td align="center">@Convert.ToDateTime(item1.LabTestModel.ReviewDate).ToShortDateString()</td> 
+                                                        }
+                                                        else
+                                                        {
+                                                        <td align="center">@item1.LabTestModel.ReviewDate</td> 
+                                                         }
+
+                    </tr>
+                
+                 </tbody>
+           
+          
+     
+     
+   
+  </table>
+       
+  <br /><br />
+ 
+  
+       
+  <table width="960" border="1" cellspacing="0" cellpadding="0">
+   
+      <thead>
+                                            <tr>
+                                                <th scope="col"><strong>Components</strong></th>
+                                                <th scope="col"><strong>Results</strong></th>
+                                                <th scope="col"><strong>Ref Range</strong></th>
+                                                <th scope="col"><strong>Units</strong></th>
+                                                <th scope="col"><strong>Abnormal</strong></th>
+                                                <th scope="col"><strong>Result Status</strong></th>
+                                                
+                                            </tr>
+       </thead>
+      <tbody>
+         
+         
+   @foreach (var item2 in Model.LabResultTest.Select((x, i) => new { LabResultModel = x, Index = i + 1 }))
+   {
+       if (item1.LabTestModel.LabResultCntr == item2.LabResultModel.LabResultCntr)
+       {
+          <tr>
+      <td height="23">@item2.LabResultModel.Component</td>
+      <td align="center">@item2.LabResultModel.Result</td>
+      <td align="center">@item2.LabResultModel.RefRange </td>
+      <td align="center">@item2.LabResultModel.Units</td>
+      <td align="center">@item2.LabResultModel.AbNormal</td>
+      <td align="center">@item2.LabResultModel.ResultStatus</td>
+    </tr>
+       }
+   } 
+          </tbody>
+  </table>
+ }
+          </div>
+   }
+  
+    
+  <br /><br />
+ @*<table width="959" border="1" cellspacing="0" cellpadding="0">
+      
+    
+           <thead>
+                                            <tr>
+                                                <th scope="col"><strong>Lab Facility</strong></th>
+                                                <th scope="col"><strong>Order Date</strong></th>
+                                                <th scope="col"><strong>Provider</strong></th>
+                                                <th scope="col"><strong>Collection Date</strong></th>
+                                                <th scope="col"><strong>Requisition</strong></th>
+                                                <th scope="col"><strong>Report Date</strong></th>
+                                                <th scope="col"><strong>Specimen</strong></th>
+                                                <th scope="col"><strong>Review Date</strong></th>
+
+                                            </tr>
+                                        </thead>
+             <tbody>
+                  @foreach (var item in Model.LabResults.Select((x,i) => new { LabTestModel =x, Index =i +1}))//.Allergies.Select((x, i) => new { AllergyModel = x, Index = i + 1 }))
+    {
+                 <tr>
+
+                                                        <td>@item.LabTestModel.FacilityId</td>
+                                                        <td>@item.LabTestModel.OrderDate</td>
+                                                        <td>@item.LabTestModel.ProviderId_Requested</td>
+                                                        <td>@item.LabTestModel.CollectionDate</td>
+                                                        <td>@item.LabTestModel.Requisiton</td>
+                                                        <td>@item.LabTestModel.ReportDate</td>
+                                                        <td>@item.LabTestModel.Specimen</td>
+                                                        <td>@item.LabTestModel.ReviewDate</td>
+
+                    </tr>
+                  }
+                 </tbody>
+      
+     
+   
+  </table>
+  <table width="639" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="186"><strong>Test:</strong></td>
+      <td width="453"><strong>REFLEXIVE  URINE CULTURE</strong></td>
+    </tr>
+  </table>
+  <br />
+  <table width="960" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="214" align="center" ><strong>Components</strong></td>
+      <td width="186" align="center"><strong>Results </strong></td>
+      <td width="147" align="center"><strong>Ref Range</strong></td>
+      <td width="81" align="center"><strong>Units</strong></td>
+      <td width="157" align="center"><strong>Abnormal</strong></td>
+      <td width="161" align="center" ><strong>Result Status</strong></td>
+    </tr>
+    <tr>
+      <td height="23">REFLEXIVE URINE CULTURE</td>
+      <td align="center">NO CULTURE INDICATED</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">Final</td>
+    </tr>
+  </table>*@
+    @if(Model.PatientShare.FamilyHistory ==true)
+    {
+  <h2>Family History<br />
+  </h2>
+        <div id="">
+  <table width="960" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="167"  ><strong>Relationship</strong></td>
+      <td width="258" align="center"><strong>Description</strong></td>
+      <td width="185" align="center"><strong>Qualifier</strong></td>
+      <td width="120" align="center" ><strong>Comments</strong></td>
+      <td width="218" align="center" ><strong>Date Reported</strong></td>
+    </tr>
+     @foreach (var item in Model.FamilyHistories.Select((x, i) => new { FamilyHistoryModel = x, Index = i + 1 }))
+     {
+       <tr>
+      <td height="24">@item.FamilyHistoryModel.FamilyMember</td>
+      <td >@item.FamilyHistoryModel.Description</td>
+      <td align="center">@item.FamilyHistoryModel.Qualifier</td>
+      <td align="center">@item.FamilyHistoryModel.Note</td>
+      <td align="center">@item.FamilyHistoryModel.DateReported</td>
+    </tr>
+     }
+   
+  </table>
+            </div>
+    }
+
+    @if(Model.PatientShare.SocialHistory ==true)
+    {
+  <h2>Social History</h2>
+        <div id="widget_Social History">
+  <table width="960" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="172" align="center" ><strong>Description</strong></td>
+      <td width="268" align="center"><strong>Qualifier</strong></td>
+      <td width="104" align="center"><strong>Begin Date</strong></td>
+      <td width="114" align="center" ><strong>End Date</strong></td>
+      <td width="290" align="center" ><strong>Comments</strong></td>
+    </tr>
+
+       @foreach (var item in Model.SocialHistories.Select((x, i) => new { SocialHistoryModel = x, Index = i + 1 }))
+       {
+    <tr>
+      <td height="24">   @item.SocialHistoryModel.Description</td>
+      <td align="center">@item.SocialHistoryModel.Qualifier</td>      
+         @{
+                                            DateTime dtBDate;
+                                            if (item.SocialHistoryModel.BeginDate.Length == 8 && DateTime.TryParseExact(item.SocialHistoryModel.BeginDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtBDate))
+                                            {
+                                                DateTime dtOcc = DateTime.ParseExact(item.SocialHistoryModel.BeginDate, "yyyyMMdd", null);
+                                                string s = dtOcc.ToString("MM/dd/yyyy");
+
+                                                <td align="center">@s</td>
+                                            }
+                                            else if ((item.SocialHistoryModel.BeginDate).Trim().Length == 6)
+                                            {
+                                                string strYear = item.SocialHistoryModel.BeginDate.Substring(0, 4);
+                                                string strMonth = item.SocialHistoryModel.BeginDate.Substring(4, 2);
+                                                string strBDate = strMonth + "/" + strYear;
+                                                <td align="center">@strBDate</td>
+                                            }
+                                            else
+                                            {
+                                                <td align="center">@item.SocialHistoryModel.BeginDate</td>
+                                            }      
+                                          }
+     
+         @{
+                                            DateTime dtEDate;
+                                            if (item.SocialHistoryModel.EndDate.Length == 8 && DateTime.TryParseExact(item.SocialHistoryModel.EndDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtEDate))
+                                                {
+                                                    DateTime dtEndDate = DateTime.ParseExact(item.SocialHistoryModel.EndDate, "yyyyMMdd", null);
+                                                    string s = dtEndDate.ToString("MM/dd/yyyy");
+
+                                                    <td align="center">@s</td>
+                                                }
+                                            else if ((item.SocialHistoryModel.EndDate).Trim().Length == 6)
+                                                {
+                                                    string strYear = item.SocialHistoryModel.EndDate.Substring(0, 4);
+                                                    string strMonth = item.SocialHistoryModel.EndDate.Substring(4, 2);
+                                                    string strEDate = strMonth + "/" + strYear;
+                                                    <td align="center">@strEDate</td>
+                                                }
+                                                else
+                                                {
+                                                    <td align="center">@item.SocialHistoryModel.EndDate</td>
+                                                }
+                            
+                                                   
+                                         }
+
+      <td align="center">@item.SocialHistoryModel.Note</td>
+    </tr>
+       }
+     
+  </table>
+            </div>
+    }
+  <p><br />
+    <br />
+   
+  </p>
+
+  @if(Model.PatientShare.Procedure ==true)
+  {
+  <h2> Procedures<br />
+</h2>
+      <div id="widget_Procedures">
+  <table width="960" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="302" align="center" ><strong>Description</strong></td>
+      <td width="196" align="center"><strong>Diagnosis</strong></td>
+      <td width="166" align="center"><strong> Performing Provider</strong></td>
+      <td width="140" align="center"><strong>Service Location</strong></td>
+      <td width="144" align="center"><strong>Service Date</strong></td>
+    </tr>
+   @foreach (var item in Model.Procedures.Select((x, i) => new { ProcedureModel = x, Index = i + 1 }))
+   {
+    <tr>
+      <td height="38">@item.ProcedureModel.Description</td>
+      <td >@item.ProcedureModel.Diagnosis</td>
+      <td >@item.ProcedureModel.PerformedBy</td>
+      <td >@item.ProcedureModel.ServiceLocation<br /></td>      
+         @{
+                                            DateTime dtSDate;
+                                            if (item.ProcedureModel.ServiceDate.Length == 8 && DateTime.TryParseExact(item.ProcedureModel.ServiceDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtSDate))
+                                                {
+                                                    DateTime dtServiceDate = DateTime.ParseExact(item.ProcedureModel.ServiceDate, "yyyyMMdd", null);
+                                                    string s = dtServiceDate.ToString("MM/dd/yyyy");
+
+                                                    <td align="center">@s</td>
+                                                }
+                                            else if ((item.ProcedureModel.ServiceDate).Trim().Length == 6)
+                                                {
+                                                    string strYear = item.ProcedureModel.ServiceDate.Substring(0, 4);
+                                                    string strMonth = item.ProcedureModel.ServiceDate.Substring(4, 2);
+                                                    string strSDate = strMonth + "/" + strYear;
+                                                    <td align="center">@strSDate</td>
+                                                }
+                                                else
+                                                {
+                                                    <td align="center">@item.ProcedureModel.ServiceDate</td>
+                                                }
+                            
+                                                   
+                                         }
+
+    </tr>
+   }
+   </table>
+          </div>
+  }
+  <br/>
+  <br/>
+    @if(Model.PatientShare.PlanOfCare ==true)
+    {
+  <h2>Care Plan</h2>
+        <div id="widget_Care Plan">
+  <table width="960" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="172" align="center" ><strong>Instruction Type</strong></td>
+      <td width="268" align="center"><strong>Instruction</strong></td>
+      <td width="104" align="center"><strong>Goal</strong></td>
+      <td width="114" align="center" ><strong>Note</strong></td>
+      <td width="290" align="center" ><strong>Appointment Date</strong></td>
+    </tr>
+
+        @foreach (var item in Model.Pocs.Select((x, i) => new { POCModel = x, Index = i + 1 }))
+        {
+    <tr>
+      <td height="24">@item.POCModel.InstructionType</td>
+      <td >@item.POCModel.Instruction</td>
+      <td align="center">@item.POCModel.Goal</td>
+      <td align="center">@item.POCModel.Note</td>      
+	 @if (item.POCModel.AppointmentDateTime.ToString() == "1/1/1900 00:00:00" || item.POCModel.AppointmentDateTime.ToString() == "1/1/1900 12:00:00 AM")
+                                    {
+                                        <td></td>
+                                    }
+                                    else if (Convert.ToDateTime(item.POCModel.AppointmentDateTime).ToShortTimeString() == "12:00 AM")
+                                    {
+                                        <td align="center">@Convert.ToDateTime(item.POCModel.AppointmentDateTime).ToShortDateString()</td> 
+                                    }
+                                    else
+                                    {
+                                       <td align="center">@item.POCModel.AppointmentDateTime</td> 
+                                    }
+    </tr>
+            
+        }
+    
+  </table>
+            </div>
+    }
+  <br />
+    <br />
+      @if(Model.PatientShare.ClinicalDoc ==true)
+      {
+         <h2>Documents</h2>
+          <div>
+  <table width="960" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="172" align="center" ><strong>Date</strong></td>
+      <td width="268" align="center"><strong>Document Description</strong></td>
+      <td width="104" align="center"><strong>Notes</strong></td>
+    </tr>
+
+        @foreach (var item in Model.Documents.Select((x, i) => new { DocumentModel = x, Index = i + 1 }))
+        {
+    <tr>
+      <td height="24">@item.DocumentModel.DateCreated.ToShortDateString()</td>
+      <td >@item.DocumentModel.DocumentDescription</td>
+      <td align="center">@item.DocumentModel.Notes</td>
+    </tr>
+         
+        }
+       </table> 
+              </div> 
+      }
+</div>
+    

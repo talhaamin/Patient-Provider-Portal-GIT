@@ -1,0 +1,91 @@
+﻿@model IEnumerable<AMR.Models.PatientModel>
+
+
+
+
+<table class="box-table-a" id="tbl-ListOfUser" summary="ListOfUser" style="padding:2px; width:70%; border-color: rgb(166, 201, 226); margin-left:0%;border-style: solid; border-width: 1px;">
+                    <thead>
+                        <tr>
+                            <th scope="col" >id</th>
+                            <th scope="col" >Name</th>
+                         
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            int counter=0;
+                            
+                            foreach (var item in Model)
+                            {
+                                
+                                <tr class="@((counter % 2 == 0) ? "r1" : "r0")" onclick="GetSecurityQuestionwithClick('@item.PatientId','@item.EMail');">
+                                    <td>@item.PatientId</td>
+                                    <td>@item.FirstName @item.LastName</td>
+                                    
+                               </tr>
+                            
+                                counter++;
+                            }
+                        }
+                        else
+                        {
+                              <tr class="r0">
+                                <td width="200px;" colspan="2">No Information Available.</td>
+                          
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+
+
+<style>
+.box-table-a
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin-top: 1px;
+	width: 100%;
+	text-align: left;
+	
+	-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;
+}
+.box-table-a th
+{
+	font-size: 13px;
+	font-weight: normal;
+	padding: 2px;
+	background: #b9c9fe;
+	border-top: 1px solid #aabcfe;
+	border-bottom: 1px solid #fff;
+	color: #039;
+}
+
+.box-table-a tr.r0 td
+{
+	padding: 2px;
+	background: #DDE4FF;
+	border-bottom: 1px solid #fff;
+	color: #669;
+	border-top: 1px solid transparent;
+	cursor: pointer;
+}
+.box-table-a tr.r1 td
+{
+	padding: 2px;
+	background: #F2F5FF;
+	border-bottom: 1px solid #fff;
+	color: #669;
+	border-top: 1px solid transparent;
+	cursor: pointer;
+}
+.box-table-a tr:hover td
+{
+	background: #d0dafd;
+	color: #339;
+
+}
+</style>
+

@@ -1,0 +1,115 @@
+﻿@model IEnumerable<AMR.Models.SocialHistoryModel>
+@using System.Web.Script.Serialization;
+
+<table class="box-table-a" id="tab-SocialHistory" summary="Appointments">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Description</th>                                                
+                                                <th scope="col">Qualifier</th>
+                                                <th scope="col">Code Value</th>
+                                                <th scope="col">Start Date </th>
+                                                <th scope="col">End Date </th>                                                                                                                                              
+                                                <th scope="col"></th>  
+                                                <th scope="col" style="text-align:center;" class="showHideThis">Edit</th>
+                                                <th scope="col" style="text-align:center;">Details</th>
+                                                <th scope="col" style="text-align:center;" class="showHideThis">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null && Model.Count() > 0)
+                                            {
+                                                int counter=0;
+                                                foreach (var item in Model)
+                                                {
+                                                    @*
+                                                    StringBuilder jsonStringSocial = new StringBuilder();
+
+                                                    jsonStringSocial.Append(" { ");
+                                                    jsonStringSocial.Append("\"PatSocialHistCntr\": \"" + item.PatSocialHistCntr + "\",");
+                                                    jsonStringSocial.Append("\"Description\": \"" + item.Description + "\",");
+                                                    jsonStringSocial.Append("\"Qualifier\":  \"" + item.Qualifier + "\",");
+                                                    jsonStringSocial.Append("\"CodeValue\":  \"" + item.CodeValue + "\",");
+                                                    jsonStringSocial.Append("\"BeginDate\":  \"" + (item.BeginDate) + "\",");
+                                                    jsonStringSocial.Append("\"EndDate\":  \"" + item.EndDate + "\",");
+                                                    jsonStringSocial.Append("\"Note\":  \"" + item.Note + "\"");
+                                                    jsonStringSocial.Append("}");
+                                                    *@
+                                                
+                                                    var jsonStr = new JavaScriptSerializer().Serialize(item);
+                              
+                                                    <tr class="@((counter % 2 == 0) ? "r1" : "r0")">
+                                                        <td><input type="hidden" id="hdSocial@(item.PatSocialHistCntr)" value="@jsonStr" />@item.Description</td>
+                                                        <td>@item.Qualifier</td>
+                                                        <td>@item.CodeValue</td>
+                                                        @{
+                                                            DateTime dtBDate;
+                                                            if (item.BeginDate.Length == 8 && DateTime.TryParseExact(item.BeginDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtBDate))
+                                                            {
+                                                                DateTime dtOcc = DateTime.ParseExact(item.BeginDate, "yyyyMMdd", null);
+                                                                string s = dtOcc.ToString("MM/dd/yyyy");
+
+                                                                <td>@s</td>
+                                                            }
+                                                            else if ((item.BeginDate).Trim().Length == 6)
+                                                            {
+                                                                string strYear = item.BeginDate.Substring(0, 4);
+                                                                string strMonth = item.BeginDate.Substring(4, 2);
+                                                                string strBDate = strMonth + "/" + strYear;
+                                                                <td>@strBDate</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>@item.BeginDate</td>
+                                                            }
+                                                         }
+
+                                                        @{
+                                                            DateTime dtEDate;
+                                                            if (item.EndDate.Length == 8 && DateTime.TryParseExact(item.EndDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtEDate))
+                                                            {
+                                                                DateTime dtEndDate = DateTime.ParseExact(item.EndDate, "yyyyMMdd", null);
+                                                                string s = dtEndDate.ToString("MM/dd/yyyy");
+
+                                                                <td>@s</td>
+                                                            }
+
+
+
+                                                            else if ((item.EndDate).Trim().Length == 6)
+                                                            {
+                                                                string strYear = item.EndDate.Substring(0, 4);
+                                                                string strMonth = item.EndDate.Substring(4, 2);
+                                                                string strEDate = strMonth + "/" + strYear;
+                                                                <td>@strEDate</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>@item.EndDate</td>
+                                                            }
+                                                       }
+                                                   
+                                                        
+                                                        <td></td>
+                                                    
+                                                        <td align="center" class="showHideThis">
+                                                            <img onclick="socialHistoryEdit(@item.PatSocialHistCntr);"   src="Content/img/edit.png" />
+                                                        </td>
+                                                        <td align="center">
+                                                            <img  onclick="socialHistoryDetails(@item.PatSocialHistCntr); "  id="social_hist_delete" src="Content/img/details.png" />
+                                                        </td>
+                                                        <td align="center" class="showHideThis">
+                                                            <img  onclick="socialHistoryDelete(@item.PatSocialHistCntr); "  id="lab_result_details" src="Content/img/delete.png" />
+                                                        </td>
+                                                   </tr>
+                                                    counter++;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                <td width="200px;">No Information Available.</td>
+                            </tr>
+                                            }
+                                        </tbody>
+</table>
+

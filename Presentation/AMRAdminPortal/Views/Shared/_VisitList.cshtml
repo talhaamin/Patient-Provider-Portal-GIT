@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AMR.Models.VisitModel>
+@using System.Text;
+<table class="box-table-a" id="tbl-Visits" summary="Visits">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Visit Date</span> </th>                            
+                            
+                            <th scope="col" style="vertical-align:middle">Reason for visit</th>    
+                            <th scope="col" style="vertical-align:middle">Delete</th>                              
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count()>0)
+                        {
+                            int counter =0;
+                            foreach (var item in Model)
+                            {
+                                StringBuilder jsonVisitString = new StringBuilder();
+
+                                jsonVisitString.Append("{");
+                                jsonVisitString.Append("\"VisitID\": \"" + item.VisitID + "\",");
+                                jsonVisitString.Append("\"ProviderName\": \"" + item.ProviderName + "\",");
+                                jsonVisitString.Append("\"VisitDate\":  \"" + item.VisitDate.ToShortDateString() + "\",");
+                                jsonVisitString.Append("\"VisitReason\":  \"" + item.VisitReason + "\",");
+                                jsonVisitString.Append("\"FacilityName\":  \"" + item.FacilityName + "\",");
+                                jsonVisitString.Append("\"FacilityAddress\":  \"" + item.FacilityAddress + "\",");
+                                jsonVisitString.Append("\"FacilityCityStatePostal\":  \"" + item.FacilityCityStatePostal + "\"");
+                                jsonVisitString.Append("}");
+                                <tr >
+                                    <td style="vertical-align:middle" width="95px"><input type="hidden" id="hdVisit@(item.VisitID)" value="@jsonVisitString.ToString()" />@item.VisitDate.ToShortDateString()</td>                                    
+                                    
+                                    <td style="vertical-align:middle"><span style="margin-left:2px;">@item.VisitReason</span></td>
+                                    <td style="padding-left: 10px;">
+                                                                <img onclick="DeleteConfrimationVisit('@item.VisitID','@item.FacilityId');"   src="@Url.Content("~/Content/img/delete.png")" />
+                                                            </td>
+                                </tr>
+                                counter++;
+                            }
+                        }
+                        else
+                        {
+                             <tr>
+                                <td style="vertical-align:middle" width="200px;">No Information Available.</td>
+                            </tr>
+                        }
+                    </tbody>
+</table>
+

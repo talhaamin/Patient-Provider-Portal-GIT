@@ -1,0 +1,24 @@
+﻿@model IEnumerable<AMR.Models.PatientAccountLinkModel>
+@using System.Web.Script.Serialization;
+
+ <ul id="sublist">
+     @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientId.ToString() != AMR.Core.Utilities.RequestHelper.MyGlobalVar.UserLogin)
+                                        {
+     
+                                            AMR.Controllers.Controllers.Base.BaseController bc = new AMR.Controllers.Controllers.Base.BaseController();
+                                            string[] Pat = bc.GetPatientname();
+                                          <li class="link" onclick="SwitchAccount('@Pat[1]');"><a href="#" class="sublink"  style="width: 195px; font-size: 12px; font-weight: normal; margin-left: 30px;">@Pat[0]</a></li>
+                                            
+                                           
+                                        }           
+        @if (Model != null && Model.Count() > 0)
+                                { 
+                                   foreach (var item in Model)
+                                    {
+                                            <li class="link" onclick="SwitchAccount('@item.PatientId');"><a href="#" class="sublink"  style="width: 195px; font-size: 12px; font-weight: normal; margin-left: 30px;">@item.PatientName</a></li>
+                                    }
+                                      
+                                }
+                                  
+          
+      </ul>

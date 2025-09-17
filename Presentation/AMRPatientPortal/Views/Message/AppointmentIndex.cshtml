@@ -1,0 +1,1885 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@using System.Web.Optimization;
+@model MessageCenterModel
+
+@{
+    ViewBag.Title = "[Patient Portal] Appointments";
+
+    Layout = "~/Views/Shared/_LayoutMasterPage.cshtml";
+}
+ <style>
+
+.tdhide{
+
+visibility: hidden
+
+}
+
+tr.selected {
+    background-color: #039
+}
+tr.selected:hover td {
+    background: #039
+}
+     #Inform_Head {
+         background-color: #EAF4FD;
+         height: 100px;
+margin-top: 10px;
+border: 1px solid #A6C9E2;
+     }
+
+     #reply {
+         background-color: #FFF;
+
+border: 1px solid #A6C9E2;
+margin-top: 10px;
+     }
+</style>
+@section Scripts
+{
+   
+    <script>
+        $(function () {
+            $("#txtPrefDateFrom").datepicker({
+                dateFormat: 'mm/dd/yy',
+
+            });
+            $("#txtPrefDateTo").datepicker({
+                dateFormat: 'mm/dd/yy',
+
+            });
+        });
+        $(function () {
+        //   enablecontroll();
+        //    var Location = $("#cmbAppointmentFacility1"),
+        //          Provider = $("#cmbAppointmentDoctor1"),
+        //        Urgency = $("#cmbMessageUrgency1"),
+        //        PrefferedTime = $("#cmbPreftime"),
+
+        //       allFields = $([]).add(Location).add(Provider).add(Urgency).add(PrefferedTime),
+
+        //    tips = $(".validateTips");
+        //    function updateTips(t) {
+        //        tips
+        //        .text(t)
+        //        .addClass("ui-state-highlight ui-corner-all");
+        //        setTimeout(function () {
+        //            //  tips.removeClass("ui-state-highlight", 1500);
+        //        }, 500);
+        //    }
+        //    function checkLength(o, n) {
+
+        //        if (o.val() == -1) {
+        //            o.addClass("ui-state-error");
+        //            updateTips(n);
+        //            return false;
+        //        } else {
+        //            return true;
+        //        }
+        //    }
+        //    function checkRegexp(o, regexp, n) {
+        //        if (!(regexp.test(o.val()))) {
+        //            o.addClass("ui-state-error");
+        //            updateTips(n);
+        //            return false;
+        //        } else {
+        //            return true;
+        //        }
+        //    }
+
+
+            //$("#Createappbtn-form").dialog({
+            //    autoOpen: false,
+            //    show: {
+            //        effect: "blind",
+            //        duration: 1000
+            //    },
+            //    hide: {
+            //        effect: "blind",
+            //        duration: 1000
+            //    },
+
+            //    width: 850,
+            //    modal: true,
+            //    buttons: {
+            //        "Send": function () {
+            //            var bValid = true;
+            //            allFields.removeClass("ui-state-error");
+            //            //bValid = bValid && checkLength(Location, "Please Select Location");
+            //            //bvalid = bvalid && checkLength(Provider, "Please Select Provider");
+            //            //bValid = bValid && checkLength(Urgency, "Please Select Urgency");
+            //            //bvalid = bvalid && checkLength(PrefferedTime, "Please Select Preffered Time");
+
+
+
+            //            function chkStr(value) {
+            //                var str;
+            //                if (value == true) {
+            //                    str = '1';
+            //                    return str;
+            //                }
+            //                else if (value == false) {
+            //                    str = '0';
+            //                    return str;
+            //                }
+            //            };
+
+
+
+            //            var PreferredPeriod1 = chkStr($('#chkmorCreate').prop('checked'));
+            //            PreferredPeriod1 += chkStr($('#chkAftCreate').prop('checked'));
+            //            PreferredPeriod1 += chkStr($('#chkeveCreate').prop('checked'));
+
+            //            var PreferredWeekDay1 = chkStr($('#chkmonCreate').prop('checked'));
+            //            PreferredWeekDay1 += chkStr($('#chktueCreate').prop('checked'));
+            //            PreferredWeekDay1 += chkStr($('#chkwedCreate').prop('checked'));
+            //            PreferredWeekDay1 += chkStr($('#chkthuCreate').prop('checked'));
+            //            PreferredWeekDay1 += chkStr($('#chkfriCreate').prop('checked'));
+            //           // PreferredWeekDay1 += chkStr($('#chksat').prop('checked'));
+            //           // PreferredWeekDay1 += chkStr($('#chksun').prop('checked'));
+            //            //alert(PreferredWeekDay1);
+            //            //bValid = true;
+
+            //            if (bValid) {
+            //                //ajax 
+            //                try {
+            //                    if (($('#cmbAppointmentFacility1Create option:selected').val()) == -1 && ($('#cmbAppointmentDoctor1 option:selected').val()) == -1 && ($('#cmbMessageUrgency1Create option:selected').val()) == -1 && ($('#cmbPreftime option:selected').val()) == -1) {
+            //                        alert("Please Select 'Location , Provider , urgency , Preferred Time' ");
+            //                        return false;
+            //                    }
+            //                    else if (($('#cmbAppointmentDoctor1 option:selected').val()) == -1 && ($('#cmbMessageUrgency1Create option:selected').val()) == -1 && ($('#cmbPreftimeCreate option:selected').val()) == -1) {
+            //                        alert("Please Select 'Provider , urgency , Preferred Time' ");
+            //                        return false;
+            //                    }
+            //                    else if (($('#cmbAppointmentFacility1Create option:selected').val()) == -1 && ($('#cmbMessageUrgency1Create option:selected').val()) == -1 && ($('#cmbPreftimeCreate option:selected').val()) == -1) {
+            //                        alert("Please Select 'Location , urgency , Preferred Time' ");
+            //                        return false;
+            //                    }
+            //                    else if (($('#cmbAppointmentFacility1Create option:selected').val()) == -1 && ($('#cmbAppointmentDoctor1 option:selected').val()) == -1 && ($('#cmbPreftimeCreate option:selected').val()) == -1) {
+            //                        alert("Please Select 'Location , Provider , Preferred Time' ");
+            //                        return false;
+            //                    }
+            //                    else if (($('#cmbAppointmentFacility1Create option:selected').val()) == -1 && ($('#cmbAppointmentDoctor1 option:selected').val()) == -1 && ($('#cmbMessageUrgency1Create option:selected').val()) == -1) {
+            //                        alert("Please Select 'Location , Provider , Urgency' ");
+            //                        return false;
+            //                    }
+            //                    else if (($('#cmbAppointmentFacility1Create option:selected').val()) == -1 && ($('#cmbAppointmentDoctor1 option:selected').val()) == -1) {
+            //                        alert("Please Select 'Location , Provider ' ");
+            //                        return false;
+            //                    }
+            //                    else if (($('#cmbMessageUrgency1Create option:selected').val()) == -1 && ($('#cmbPreftimeCreate option:selected').val()) == -1) {
+            //                        alert("Please Select 'Urgency , Preferred Time ' ");
+            //                        return false;
+            //                    }
+            //                    else if (($('#cmbAppointmentDoctor1 option:selected').val()) == -1 && ($('#cmbMessageUrgency1Create option:selected').val()) == -1) {
+            //                        alert("Please Select 'Provider , Urgency ' ");
+            //                        return false;
+            //                    }
+            //                    else if (($('#cmbAppointmentFacility1Create option:selected').val()) == -1 && ($('#cmbMessageUrgency1Create option:selected').val()) == -1) {
+            //                        alert("Please Select 'Location , Urgency ' ");
+            //                        return false;
+            //                    }
+            //                    else if (($('#cmbAppointmentDoctor1 option:selected').val()) == -1 && ($('#cmbPreftimeCreate option:selected').val()) == -1) {
+            //                        alert("Please Select 'Provider , Preferred Time ' ");
+            //                        return false;
+            //                    }
+            //                    else if (($('#cmbAppointmentFacility1Create option:selected').val()) == -1) {
+            //                        alert("Please Select 'Location ' ");
+            //                        return false;
+            //                    }
+            //                    else if (($('#cmbAppointmentDoctor1 option:selected').val()) == -1) {
+            //                        alert("Please Select 'Provider ' ");
+            //                        return false;
+            //                    }
+            //                    else if (($('#cmbMessageUrgency1Create option:selected').val()) == -1) {
+            //                        alert("Please Select ' Urgency ' option");
+            //                        return false;
+            //                    }
+            //                    else if (($('#cmbPreftimeCreate option:selected').val()) == -1) {
+            //                        alert("Please Select ' Preferred Time ' ");
+            //                        return false;
+            //                    }
+            //                    var textComment = $.trim($('#txtCommentCreate').val());
+            //                    if (($('#txtPrefDateFromCreate').val()) == "" && ($('#txtPrefDateToCreate').val()) == "") {
+            //                        $('#txtPrefDateFromCreate').val('01/01/1900');
+            //                        $('#txtPrefDateToCreate').val('01/01/1900');
+            //                    }
+            //                    else if (($('#txtPrefDateFromCreate').val()) == "") {
+            //                        $('#txtPrefDateFromCreate').val('01/01/1900');
+            //                    }
+
+            //                    else if (($('#txtPrefDateToCreate').val()) == "") {
+            //                        $('#txtPrefDateToCreate').val('01/01/1900');
+            //                    }
+            //                    var txt = textComment.replace(/\n/g, "\\n");
+            //                    var requestData = {
+            //                        FacilityId: $.trim($('#cmbAppointmentFacility1Create option:selected').val()),//
+            //                        ProviderId_To: $.trim($('#cmbAppointmentDoctor1 option:selected').val()),//
+            //                       // ProviderId_Appointment: $.trim($('#cmbAppointmentDoctor1').val()),
+            //                        MessageUrgency: $.trim($('#cmbMessageUrgency1Create option:selected').val()),
+            //                        PreferredPeriod: PreferredPeriod1,
+            //                        PreferredWeekDay: PreferredWeekDay1,
+
+            //                        AppointmentStart: $.trim($('#txtPrefDateFromCreate').val()),
+            //                        AppointmentEnd: $.trim($('#txtPrefDateToCreate').val()),
+            //                        PreferredTime: $.trim($('#cmbPreftimeCreate option:selected').text()),
+            //                        VisitReason: $.trim($('#txtReasonCreate').val()),
+            //                        MessageRequest: txt,
+            //                        status:"appointmentmenu"
+
+            //                    };
+
+
+            //                    $.ajax({
+            //                        type: 'POST',
+            //                        url: 'index-Appointment-save',
+            //                        data: JSON.stringify(requestData),
+            //                        contentType: 'application/json; charset=utf-8',
+            //                        dataType: 'json',
+            //                        success: function (data) {
+            //                            //alert(data);
+            //                            $("#MessageHeaderGrid1").empty();
+            //                            $("#MessageHeaderGrid1").html(data);
+            //                            //alert(data);
+            //                            $("#tbl-App").fixedHeaderTable();
+            //                            clearthecontroll();
+            //                           // alert("Appointment Request Sent Successfully");
+            //                        },
+            //                        error: function (xhr, ajaxOptions, thrownError) {
+            //                            //if error
+
+            //                            alert('Error : ' + xhr.message);
+            //                            HideLoader();
+            //                        },
+            //                        complete: function (data) {
+            //                            // if completed
+            //                            HideLoader();
+
+            //                        },
+            //                        async: true,
+            //                        processData: false
+            //                    });
+            //                } catch (err) {
+
+            //                    if (err && err !== "") {
+            //                        alert(err.message);
+            //                        HideLoader();
+            //                    }
+            //                }
+            //                allFields.val("").removeClass("ui-state-error");
+            //                $(".validateTips ").empty();
+            //                $("span").removeClass("ui-state-highlight");
+            //                $(this).dialog("close");
+            //                ShowLoader();
+
+
+            //                //                        end ajax
+
+
+            //            }
+            //        },
+            //        Close: function () {
+            //            allFields.val("").removeClass("ui-state-error");
+            //            $(".validateTips ").empty();
+            //            $("span").removeClass("ui-state-highlight");
+            //            clearthecontroll();
+            //            $(this).dialog("close");
+            //        }
+            //    },
+            //    close: function () {
+            //        clearthecontroll();
+            //    }
+            //});
+            ////$("#createappbtn")
+            ////.click(function () {
+            ////    $("#Createappbtn-form").dialog("open");
+            ////});
+            $("#createaddappointments").click(function () {
+                $("#appcount").html("You have <strong>" + 256 + "</strong> characters remaining");
+
+                $("#appbtn-form").dialog("open");
+            });
+
+        });
+        function ConfrimDialog(id) {
+            $("#dialog-confirm").html("Are you sure you want to delete this record?");
+
+            // Define the Dialog and its properties.
+            $("#dialog-confirm").dialog({
+                resizable: false,
+                modal: true,
+                title: "Confirm",
+                height: 140,
+                width: 400,
+                buttons: {
+                    "Yes": function () {
+                        $(this).dialog('close');
+                        DeleteAppointment(id);
+                    },
+                    "No": function () {
+                        $(this).dialog('close');
+                        //callback(false);
+                    }
+                }
+            });
+
+        }
+        function DeleteAppointment(id)
+        {
+            chkAccess();
+            $("#dialog-confirm").dialog("close");
+            ShowLoader();
+            try {
+
+
+
+                var requestData = {
+                    MessageId: id
+
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'Appointment-delete',
+                    data: JSON.stringify(requestData),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        // if success
+                        // alert("Success : " + data);
+
+                        $("#MessageHeaderGrid1").html(data);
+                      //  $("#MessageHeaderGrid1").fixedHeaderTable();
+
+                        $("#tbl-App").fixedHeaderTable();
+                        HideLoader();
+
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //if error
+
+                        alert('Error : ' + xhr.message);
+                        HideLoader();
+                    },
+                    complete: function (data) {
+                        // if completed
+                        HideLoader();
+
+                    },
+                    async: true,
+                    processData: false
+                });
+
+            } catch (err) {
+
+                if (err && err !== "") {
+                    alert(err.message);
+                    HideLoader();
+                }
+            }
+
+
+        }
+        function LoadFacityProvider() {
+         //   ShowLoaderForAppointment();
+            try {
+                var requestData = {
+                    FacilityID: $.trim($('#cmbAppointmentFacility1 option:selected').val()),
+                    Value: "",
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'Get-Provider-Facility-Data',
+                    data: JSON.stringify(requestData),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        // if success
+
+                        $("#DivFacityProvider").html(data);
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        var myCookie = getCookie(".Patient");
+
+                        if (myCookie == null) {
+                            // do cookie doesn't exist stuff;
+                            window.location = '/Login'
+                            //xhr.getResponseHeader('Location');
+                        }
+                        else {
+
+                        alert('Error : ' + xhr.message);
+                        }
+                        HideLoader();
+                    },
+                    complete: function (data) {
+                        // if completed
+                     //   HideLoaderForAppointment();
+
+                    },
+                    async: true,
+                    processData: false
+                });
+            }
+            catch (err) {
+
+                if (err && err !== "") {
+                    alert(err.message);
+                    HideLoader();
+                }
+            }
+        }
+    </script>  
+  @*  <script>
+        // start of appointmnet button script
+
+        $(function () {
+
+            tips = $(".validateTips");
+
+
+
+            $("#appbtn-form").dialog({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "blind",
+                    duration: 1000
+                },
+
+                width: 850,
+                modal: true,
+                buttons: {
+                    //"Save": function () {
+                    //    var bValid = true;
+
+
+
+                    //    function chkStr(value) {
+                    //        var str;
+                    //        if (value == true) {
+                    //            str = '1';
+                    //            return str;
+                    //        }
+                    //        else if (value == false) {
+                    //            str = '0';
+                    //            return str;
+                    //        }
+                    //    };
+                    //    var PreferredPeriod1 = chkStr($('#chkmor').prop('checked'));
+                    //    PreferredPeriod1 += chkStr($('#chkAft').prop('checked'));
+                    //    PreferredPeriod1 += chkStr($('#chkeve').prop('checked'));
+
+                    //    var PreferredWeekDay1 = chkStr($('#chkmon').prop('checked'));
+                    //    PreferredWeekDay1 += chkStr($('#chktue').prop('checked'));
+                    //    PreferredWeekDay1 += chkStr($('#chkwed').prop('checked'));
+                    //    PreferredWeekDay1 += chkStr($('#chkthu').prop('checked'));
+                    //    PreferredWeekDay1 += chkStr($('#chkfri').prop('checked'));
+                    //    //alert(PreferredWeekDay1);
+                    //    //bValid = false;
+
+                    //    if (bValid) {
+                    //        //ajax 
+                    //        try {
+
+
+                    //            var requestData = {
+                    //                FacilityId: $.trim($('#cmbAppointmentFacility1').val()),
+                    //                ProviderId_To: $.trim($('#cmbAppointmentDoctor1').val()),
+                    //                ProviderId_Appointment: $.trim($('#cmbAppointmentDoctor1').val()),
+                    //                MessageUrgencyId: $.trim($('#cmbMessageUrgency1').val()),
+                    //                PreferredPeriod: PreferredPeriod1,
+                    //                PreferredWeekDay: PreferredWeekDay1,
+
+                    //                AppointmentStart: $.trim($('#txtPrefDateFrom').val()),
+                    //                AppointmentEnd: $.trim($('#txtPrefDateTo').val()),
+                    //                PreferredTime: $.trim($('#cmbPreftime option:selected').text()),
+                    //                VisitReason: $.trim($('#txtReason').val()),
+                    //                MessageRequest: $.trim($('#txtComment').val())
+
+                    //            };
+
+
+                    //            $.ajax({
+                    //                type: 'POST',
+                    //                url: 'index-Appointment-save',
+                    //                data: JSON.stringify(requestData),
+                    //                dataType: 'json',
+                    //                contentType: 'application/json; charset=utf-8',
+                    //                success: function (data) {
+                    //                    // if success
+                    //                    // alert("Success : " + data);
+                    //                    // $("#immunization-portlet").html(data);
+                    //                    $("#Appointment-portlet").html(data);
+                    //                    //alert(data);
+
+                    //                },
+                    //                error: function (xhr, ajaxOptions, thrownError) {
+                    //                    //if error
+
+                    //                    alert('Error : ' + xhr.message);
+                    //                    HideLoader();
+                    //                },
+                    //                complete: function (data) {
+                    //                    // if completed
+                    //                    HideLoader();
+
+                    //                },
+                    //                async: true,
+                    //                processData: false
+                    //            });
+                    //        } catch (err) {
+
+                    //            if (err && err !== "") {
+                    //                alert(err.message);
+                    //                HideLoader();
+                    //            }
+                    //        }
+                    //        $(this).dialog("close");
+                    //        ShowLoader();
+
+
+                    //        //                        end ajax
+
+
+                    //    }
+                    //},
+                    Close: function () {
+                        $(this).dialog("close");
+                    }
+                },
+                close: function () {
+
+                }
+            });
+            //$("#createappbtn")
+            //.button()
+            //.click(function () {
+            //    $("#appbtn-form").dialog("open");
+            //});
+            //$("#createaddappointments")
+            //.button()
+            //.click(function () {
+            //    $("#appbtn-form").dialog("open");
+            //});
+
+        });
+
+        //- end of appointment button script
+
+
+        $(function () {
+            $("input[type=submit], a, button")
+            .button()
+            .click(function (event) {
+                // event.preventDefault();
+            });
+        });
+
+
+        $(document).ready(function () {
+
+            $('#MessageHeaderGrid').find('td').css('text-align', 'center');
+            $('#MessageHeaderGrid').find('th').css('text-align', 'center');
+            // Call horizontalNav on the navigations wrapping element
+            $('.full-width').horizontalNav(
+                 {
+                     responsive: false
+
+                 });
+        });
+
+        function checkAll(checkId) {
+            var inputs = document.getElementsByTagName("input");
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].type == "checkbox" && inputs[i].id == checkId) {
+                    if (inputs[i].checked == true) {
+                        inputs[i].checked = false;
+                    } else if (inputs[i].checked == false) {
+                        inputs[i].checked = true;
+                    }
+                }
+            }
+        }
+
+
+        function AppointmentDetail(id) {
+            try {
+                var obj = jQuery.parseJSON($("#hdAppointmentDetails" + id).val());
+                
+            
+                function chkstr(value) {
+                    if (value == '0') {
+                        return false;
+                    }
+                    if (value == '1')
+                        return true;
+                }
+                $('#cmbAppointmentFacility1').val($.trim(obj.FacilityId));
+                $('#cmbAppointmentDoctor1').val($.trim(obj.ProviderId_To));
+                $('#chkmor').prop('checked', chkstr(obj.PreferredPeriod[0]));
+                $('#chkAft').prop('checked', chkstr(obj.PreferredPeriod[1]));
+                $('#chkeve').prop('checked', chkstr(obj.PreferredPeriod[2]));
+                $('#cmbMessageUrgency1').val($.trim(obj.MessageUrgencyId));
+                $('#chkmon').prop('checked', chkstr(obj.PreferredWeekDay[0]));
+                $('#chktue').prop('checked', chkstr(obj.PreferredWeekDay[1]));
+                $('#chkwed').prop('checked', chkstr(obj.PreferredWeekDay[2]));
+                $('#chkthu').prop('checked', chkstr(obj.PreferredWeekDay[3]));
+                $('#chkfri').prop('checked', chkstr(obj.PreferredWeekDay[4]));
+                $('#txtPrefDateFrom').val($.trim(obj.AppointmentStart));
+                $('#txtPrefDateTo').val($.trim(obj.AppointmentEnd));
+                $('#cmbPreftime option:selected').text($.trim(obj.PreferredTime));
+                $('#txtReason').val($.trim(obj.VisitReason));
+                $('#txtComment').val($.trim(obj.MessageRequest));
+
+
+                $('#cmbAppointmentFacility1').attr("disabled", true);
+                $('#cmbAppointmentDoctor1').attr("disabled", true);
+                $('#chkmor').attr("disabled", true);
+                $('#chkAft').attr("disabled", true);
+                $('#chkeve').attr("disabled", true);
+                $('#cmbMessageUrgency1').attr("disabled", true);
+                $('#chkmon').attr("disabled", true);
+                $('#chktue').attr("disabled", true);
+                $('#chkwed').attr("disabled", true);
+                $('#chkthu').attr("disabled", true);
+                $('#chkfri').attr("disabled", true);
+                $('#txtPrefDateFrom').attr("disabled", true);
+                $('#txtPrefDateTo').attr("disabled", true);
+                $('#cmbPreftime').attr("disabled", true);
+                $('#txtReason').attr("disabled", true);
+                $('#txtComment').attr("disabled", true);
+
+            } catch (e) {
+                alert(e.message);
+            }
+            $("#appbtn-form").dialog("open");
+            //alert(id);
+        }
+        function AppointmentDelete(id) {
+           
+            ShowLoader();
+            try {
+                var requestData = {
+                    DeletedMessageIDs: id
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'Appointment-Cancel',
+                    data: JSON.stringify(requestData),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        // if success
+                        // alert("Success : " + data);
+                        $("#MessageHeaderGrid").html(data);
+                        $("#tbl-App").fixedHeaderTable();
+                        HideLoader();
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //if error
+
+                        alert('Error : ' + xhr.message);
+                        HideLoader();
+                    },
+                    complete: function (data) {
+                        // if completed
+                        HideLoader();
+
+                    },
+                    async: true,
+                    processData: false
+                });
+
+            } catch (err) {
+
+                if (err && err !== "") {
+                    alert(err.message);
+                    HideLoader();
+                }
+            }
+        }
+
+     
+    </script>*@
+     
+}
+
+<!--pop up Appointment button -->
+@*
+<div id="appbtn-form" title="Appointment Request">
+    <center>  <span   class="validateTips"></span></center>
+    <table width="100%" height="433" border="0
+        " cellpadding="0" cellspacing="2">
+        <tr>
+            <td width="250" height="35" align="right">Location :</td>
+            <td width="2">&nbsp;</td>
+            <td colspan="2">
+          
+                @Html.DropDownList("cmbAppointmentFacility1", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentFacility1", @onchange = "LoadFacityProvider();" })
+                <span id="apDiv9">
+
+    
+
+</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Provider :</td>
+            <td align="right">&nbsp;</td>
+            <td colspan="2">
+                <div id="DivFacityProvider">
+                @Html.Partial("_FacilityProvider", Model.Providers)
+              
+            </div>
+                    </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Period :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="439" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="21">
+                            <input type="checkbox" name="mor_chk" id="chkmor" style="margin-left:10px;"/></td>
+                        <td width="50"><div style="margin-left:5px;">Morning</div></td>
+                        <td width="21">
+                            <input type="checkbox" name="aft_chk" id="chkAft" style="margin-left:10px;"/></td>
+                        <td width="68"  ><div style="margin-left:5px;">Afternoon</div></td>
+                        <td width="21">
+                            <input type="checkbox" name="eve_chk" id="chkeve" style="margin-left:10px;" /></td>
+                        <td width="84"  ><div style="margin-left:5px;">Evening</div></td>
+                        <td width="61"  ><div style="margin-left:15px;">Urgency:</div></td>
+                        <td width="119">
+                            <div style="margin-left:3px;">
+                              @Html.DropDownList("cmbMessageUrgency1", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:150px; margin-left:20px;", id = "cmbMessageUrgency1" })
+                          </div>
+                        </td>
+                    </tr>
+                </table>
+                <label for="urg_com"></label>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Week day :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="445" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="22">
+                            <input type="checkbox" name="mon_chk" id="chkmon" style="margin-left:10px;"/></td>
+                        <td width="51"><div style="margin-left:5px;">Monday</div></td>
+                        <td width="22">
+                            <input type="checkbox" name="tue_chk" id="chktue" style="margin-left:10px;"/></td>
+                        <td width="63"><div style="margin-left:5px;">Tuesday</div></td>
+                        <td width="22">
+                            <input type="checkbox" name="wed_chk" id="chkwed" style="margin-left:10px;"/></td>
+                        <td width="72"><div style="margin-left:5px;">Wednesday</div></td>
+                        <td width="22">
+                            <input type="checkbox" name="thu_chk" id="chkthu" style="margin-left:10px;"/></td>
+                        <td width="70"><div style="margin-left:5px;">Thursday</div></td>
+                        
+                    </tr>
+                    <tr>
+                        <td width="22">
+                            <input type="checkbox" name="fri_chk" id="chkfri" style="margin-left:10px;"/></td>
+                        <td width="79"><div style="margin-left:5px;">Friday</div></td>
+                        <td width="22">
+                            <input type="checkbox" name="fri_chk" id="chksat" style="margin-left:10px;"/></td>
+                        <td width="79"><div style="margin-left:5px;">Saturday</div></td>
+                        <td width="22">
+                            <input type="checkbox" name="fri_chk" id="chksun" style="margin-left:10px;"/></td>
+                        <td width="79"><div style="margin-left:5px;">Sunday</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Date Range :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="367" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="118">
+                            <input type="text" name="pref_txt" id="txtPrefDateFrom" class="com" /></td>
+                        <td width="19">&nbsp;</td>
+                        <td width="216">
+                            <input type="text" name="pref_txt" id="txtPrefDateTo" class="com" /></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Time: </td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <select name="preft_com" id="cmbPreftime" class="com">
+                      <option value="-1">--select--</option>                    
+  <option value="7">7:00 am</option>
+  <option value="8">8:00 am</option>
+  <option value="9">9:00 am</option>
+  <option value="10">10:00 am</option>
+  <option value="11">11:00 am</option>
+  <option value="12">12:00 pm</option>
+  <option value="13">1:00 pm</option>
+  <option value="14">2:00 pm</option>
+  <option value="15">3:00 pm</option>
+  <option value="16">4:00 pm</option>
+  <option value="17">5:00 pm</option>
+  <option value="18">6:00 pm</option>
+ 
+                </select>
+                
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="33" align="right">Reason for visit :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="reas_txt" id="txtReason" class="btxt" /></td>
+        </tr>
+        <tr>
+            <td width="250" align="right">Comments :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <textarea name="comm_txta" cols="45" rows="5" class="btxta" id="txtComment"></textarea></td>
+        </tr>
+        <tr>
+            <td width="250" align="right">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+
+    </table>
+
+</div>*@
+@*<div id="appbtn-form" title="Appointment Request">
+    <center>  <span   class="validateTips"></span></center>
+    <table width="100%" height="433" border="0
+        " cellpadding="0" cellspacing="2">
+        <tr>
+            <td width="250" height="35" align="right">Location :</td>
+            <td width="2">&nbsp;</td>
+            <td colspan="2">
+          
+                @Html.DropDownList("cmbAppointmentFacility1", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentFacility1", @onchange = "LoadFacityProvider();" })
+                <span id="apDiv9">
+
+    
+
+</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Provider :</td>
+            <td align="right">&nbsp;</td>
+            <td colspan="2">
+                <div id="DivFacityProvider">
+                @Html.Partial("_FacilityProvider", Model.Providers)
+              
+            </div>
+                    </td>
+        </tr>
+        <tr>
+              <td  ><div style="float:right;margin-Top:4px;">Urgent :</div></td>
+                    <td align="right">&nbsp;</td>
+                        <td  colspan="2">
+                            <div style="margin-left:0px;">
+                              @Html.DropDownList("cmbMessageUrgency1", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:150px; ", id = "cmbMessageUrgency1" })
+                          </div>
+                        </td>
+        </tr>
+        <tr>
+            <td width="250"  align="right" style="padding-top:7px;" valign="Top">Preferred Time of Day :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="439" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                         <td >
+                            <input type="checkbox" name="mor_chk" id="chkmor" style=""/></td>
+                        <td width="50"><div style="margin-left:5px;margin-Top:4px;">Morning</div></td>
+                        <td width="21">
+                            <input type="checkbox" name="aft_chk" id="chkAft" style="margin-left:10px;"/></td>
+                        <td width="68"  ><div style="margin-left:5px;margin-Top:4px;">Afternoon</div></td>
+                        <td width="21">
+                            <input type="checkbox" name="eve_chk" id="chkeve" style="margin-left:10px;" /></td>
+                        <td width="84"  ><div style="margin-left:5px;margin-Top:4px;">Evening</div></td>
+                        <td width="61"  ><div style="margin-left:15px;margin-Top:4px;"></div></td>
+                        <td width="119">
+                            <div style="margin-left:3px;">
+                           
+                          </div>
+                        </td>
+                    </tr>
+                </table>
+                <label for="urg_com"></label>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" valign="Top" style="padding-top:7px;" align="right">Preferred Day :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="445" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                 <td >
+                            <input type="checkbox" name="mon_chk" id="chkmon" style="" /></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;">Monday</div></td>
+                        <td >
+                            <input type="checkbox" name="tue_chk" id="chktue" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;"">Tuesday</div></td>
+                        <td >
+                            <input type="checkbox" name="wed_chk" id="chkwed" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;"">Wednesday</div></td>
+                        <td >
+                            <input type="checkbox" name="thu_chk" id="chkthu" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;"">Thursday</div></td>
+                        
+                    </tr>
+                    <tr>
+<td >
+                            <input type="checkbox" name="fri_chk" id="chkfri" /></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;">Friday</div></td>
+                        <td >
+                            <input type="checkbox" name="fri_chk" id="chksat" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;">Saturday</div></td>
+                        <td >
+                            <input type="checkbox" name="fri_chk" id="chksun" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2x;margin-top:4px;">Sunday</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Date Range :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="367" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="118">
+                            <input type="text" name="pref_txt" id="txtPrefDateFrom" class="com" /></td>
+                        <td>    <img id="show-date-PreferedStart" src="Content/img/calender.png" style="margin-top:-3px; cursor:pointer; margin-left:-15px;"/></td>
+                        <td width="19">&nbsp;</td>
+                        <td width="19">&nbsp;</td>
+                        <td width="216">
+                            <input type="text" name="pref_txt" id="txtPrefDateTo" class="com" /></td>
+                        <td>    <img id="show-date-PreferredEnd" src="Content/img/calender.png" style="margin-top:-3px; cursor:pointer; margin-left:-105px;"/></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Time: </td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <select name="preft_com" id="cmbPreftime" class="com">
+                      <option value="-1">--select--</option>                    
+  <option value="7">7:00 am</option>
+  <option value="8">8:00 am</option>
+  <option value="9">9:00 am</option>
+  <option value="10">10:00 am</option>
+  <option value="11">11:00 am</option>
+  <option value="12">12:00 pm</option>
+  <option value="13">1:00 pm</option>
+  <option value="14">2:00 pm</option>
+  <option value="15">3:00 pm</option>
+  <option value="16">4:00 pm</option>
+  <option value="17">5:00 pm</option>
+  <option value="18">6:00 pm</option>
+ 
+                </select>
+                
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="33" align="right">Reason for Visit :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="reas_txt" id="txtReason" class="btxt" /></td>
+        </tr>
+        <tr>
+            <td width="250" align="right">Comments :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <textarea name="comm_txta" cols="45" rows="5" class="btxta" id="txtComment"></textarea></td>
+        </tr>
+        <tr>
+            <td width="250" align="right">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+
+    </table>
+
+</div>*@
+
+
+<!--End  of Appointment button-->
+
+<div id="quicklinks" class="draggable ui-widget-content ui-corner-all" style="position: absolute; top: 20px; left: 3%; width: 94%; height: 70px;display:none;">
+        <div id="cart" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+               <input id="hdFlag" type="hidden" value=" " />
+            <div class="ui-widget-content" style="position: relative; top: 0px; border: none;">
+
+            @*    <button    onclick="ControllMessageCompose();HidevaluecmbMessageType()"id="createmsg"  class="beer ui-button ui-widget ui-state-default ui-corner-all"  style="font-size: 0.9em; font-weight: normal" title="Send Message" type="submit">
+                    <img src="Content/img/2.png" />&nbsp;&nbsp;Compose Message</button>
+
+                <button   onclick="ControllAppointment();" id="createappbtn" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Appointment" type="submit">
+                    <img src="Content/img/3.png" style="margin-left:-7px;" />&nbsp;&nbsp;Appointment Request</button>
+
+
+                <button id="refillMEd"   onclick="RefillDialog(); ControllRefill();" role="button" aria-disabled="false" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal"  title="Refill Medication" type="submit">
+                    <img src="Content/img/4.png" />Refill Request</button>
+
+                <button  onclick="ControllReferall();" id="createreqbtn"  class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Referral" type="submit">
+                    <img src="Content/img/1.png" />&nbsp;&nbsp;Referral Request</button>*@
+                   @if (@AMR.Core.Utilities.RequestHelper.MyGlobalVar.GeneralMessageAvailable){
+                <button    onclick="ControllMessageCompose();HidevaluecmbMessageType()"id="createmsg"  class="beer ui-button ui-widget ui-state-default ui-corner-all"  style="font-size: 0.9em; font-weight: normal" title="Send Message" type="submit">
+                    <img src="Content/img/2.png" />&nbsp;&nbsp;Compose Message</button>
+                }
+                else
+                {
+                      <button    onclick="ControllMessageCompose();HidevaluecmbMessageType()"id="createmsg"  class="beer ui-button ui-widget ui-state-default ui-corner-all"  style="font-size: 0.9em; font-weight: normal" title="Send Message" disabled="disabled" type="submit">
+                    <img src="Content/img/2.png" />&nbsp;&nbsp;Compose Message</button>
+                }
+                @if (@AMR.Core.Utilities.RequestHelper.MyGlobalVar.AppointmentMessageAvailable)
+                {
+                <button   onclick="ControllAppointment();" id="createappbtn" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Appointment" type="submit">
+                    <img src="Content/img/3.png" style="margin-left:-7px;" />&nbsp;&nbsp;Appointment Request</button>
+                }
+                else
+                {
+                      <button   onclick="ControllAppointment();" id="createappbtn" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Appointment" disabled="disabled" type="submit">
+                    <img src="Content/img/3.png" style="margin-left:-7px;" />&nbsp;&nbsp;Appointment Request</button>
+                }
+
+                @if (@AMR.Core.Utilities.RequestHelper.MyGlobalVar.MedicationMessageAvailable)
+                {
+                <button id="refillMEd"   onclick="RefillDialog(); ControllRefill();" role="button" aria-disabled="false" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal"  title="Refill Medication" type="submit">
+                    <img src="Content/img/4.png" />Refill Request</button>
+                }
+                else
+                {
+                     <button id="refillMEd"   onclick="RefillDialog(); ControllRefill();" role="button" aria-disabled="false" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal"  title="Refill Medication" disabled="disabled" type="submit">
+                    <img src="Content/img/4.png" />Refill Request</button>
+                }
+              
+                  @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.ReferralMessageAvailable)
+                  {
+                <button    onclick="ControllReferall();" id="createreqbtn"  class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Referral" type="submit">
+                    <img src="Content/img/1.png" />&nbsp;&nbsp;Referral Request</button>
+                  }
+                  else
+                  {
+                     <button    onclick="ControllReferall();" id="createreqbtn"  class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Referral" disabled="disabled" type="submit">
+                    <img src="Content/img/1.png" />&nbsp;&nbsp;Referral Request</button>
+                  }
+            </div>
+        </div>
+    </div>
+<div id="containment-wrapper"  style="border-bottom-style: none; border-top-style: none; border-right-style: none; border-left-width: 1px; border-left-color: rgb(166, 201, 226);">
+    
+          <div id="#Appointment" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 90px;  left: 0px; width: 100%;height:788px;">
+                                   <div id="acclink" style="position: absolute; top: 1px; left: 0px; right: 0px; height:190px;" class="ui-corner-all">
+                                <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                                    style="margin-top: -1px; font-weight: normal; padding: 3px;"><span style="font-weight:bold;">Appointments</span>   
+                                    <span id="createaddappointments" style="float:right;" class="anc" onclick="clearFields();" ><img src="/Content/img/3.png" style="height:18px;"  /> Request an Appointment </span>
+                                           </h5>
+    <div id="MessageHeaderGrid1" name="MessageHeaderGrid" style="margin-top: 10px; border: 1px solid; border-color: rgb(166, 201, 226); height: 250px; overflow-x: auto;"  class="ui-corner-all"  >
+        
+        @Html.Partial("AppointmentTab_index", Model.Messages)  
+            </div> 
+                                         <div id="AppintmentDetailGrid" name="AppintmentDetailGrid" style="border: 1px solid; border-color: rgb(166, 201, 226); margin-top:10px;"
+                class="ui-corner-all">
+          
+            </div> 
+            <!--AppointmentDetail 2nd grid end here -->
+           <div id="detail-Appointment-Request">
+            </div>
+              </div></div>
+
+</div>
+<div id="ComposeMessage" title="Compose Message" >
+        <input type="hidden" id="hdSentFlag" value=""/><input type="hidden" id="hdReplyMessageId" value=""/>
+        <input type="hidden" id="hdAttachmentName" value=""/>
+        <input type="hidden" id="hdAttachmentTest" value=""/>
+        <input type="hidden" id="hdFacilityId" value="test"/>
+        <input type="hidden" id="hdProviderId_To" value=""/>
+        <input type="hidden" id="hdMessageRequest" value=""/>
+        <input type="hidden" id="hdMessageTypeId" value=""/>
+        <input type="hidden" id="hdMessageUrgencyId" value=""/>
+        <input type="hidden" id="hdFlag" value=""/>
+    <div style="vertical-align:top;">
+        <table>
+            <tr>
+               
+                <td><input type="file" id="files" name="file" /><input id="my-simple-upload" type="file" value="" name="MyAttachFile" style="display:none;"/><input type="button" value="Browse..." id="browse" />@*<label id="BrowseName" style="margin-top:-20px;margin-left:100px"></label>*@</td>
+                <td><input type="hidden" id="ByteData" value="" "/></td>
+                <td><input type="hidden" id="FileBytes" value="" "/></td>
+                <td><label id="BrowseName" style="margin-top:-20px;margin-left:60px"></label><input type="button" id="btncancelupload" value="Cancel" style="display: inline-block;margin-top:-1px;height:28px;" /></td>
+            </tr>
+        </table>
+        <div id="progress_bar"><div class="percent">0%</div></div>
+         @* <img src="Content/img/attach.gif" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">
+       *@ 
+       </div>  <br>
+        <p>
+            @*Please note that you can expect to receive a response within 1 bussiness day*@
+        </p>
+        <div>
+            <table width="705" height="180" border="1" style="border-color: rgb(166, 201, 226);">
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Location:</b>
+                     
+                             @Html.DropDownList("cmbAppointmentFacility", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = " txt  ui-corner-all bcom", style = "width:400px; margin-left:33px;", id = "cmbAppointmentFacility", @onchange = "LoadFacilityProviderSendMessage();" })
+                                <span id="apDiv9" ><img id="loader1" src="Content/img/login-loader.gif"  style="margin-left:530px;  margin-top:-30px; display:none;" /></span>
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>To:</b>
+                              <div id="DivLoadFacilityProviderSendMessage" style="margin-top:-30px;">
+                             @Html.Partial("_FacilityProviderSendMessage", Model.Providers)
+                             @* @Html.DropDownList("cmbAppointmentDoctor", Model.Providers.ToProviderModelSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:405px; margin-left:72px;", id = "cmbAppointmentDoctor" })*@
+                                 </div>
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Subject:</b>
+                             @Html.DropDownList("cmbMessageType", Model.MessageType.ToMessageTypeModelSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:403px; margin-left:45px;", id = "cmbMessageType" })
+
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                           <b>Urgent:</b>
+                               <select id="cmbMessageUrgency" class="txt" style="width:90px; margin-left:47px;">
+                     
+                      
+                      <option value="false" selected="selected">No</option><option value="true">Yes</option>
+</select>  
+                           @*  @Html.DropDownList("cmbMessageUrgency", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:170px; margin-left:20px;", id = "cmbMessageUrgency" })*@
+                            @* <select style="margin-left: 0px; margin-top: -15px; width: 100px;" class="txt">
+                                <option>Arial</option>
+                            </select>
+                            <select style="margin-left: 0px; margin-top: -15px; width: 70px;" class="txt">
+                                <option>12</option>
+                            </select>
+                            <button>
+                                <img src="Content/img/bold.png" width="20px"></button>
+                            <button>
+                                <img src="Content/img/italic.png" width="20px"></button>
+                            <button>
+                                <img src="Content/img/underline.png" width="20px"></button>*@
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="150" colspan="2" bgcolor="#FFFFFF"> 
+                   <textarea id="txtMessageWrite" class="txt" rows="5" cols="45" style="height:150px; width:685px;" maxlength="256"> </textarea>
+                    </td>
+                </tr>
+                <tr><td><div id="counter" style="text-align:right;"></div></td></tr>
+            </table>
+        </div>
+    </div>
+<div id="appbtn-form" title="Appointment Request">
+    <center>  <span   class="validateTips"></span></center>
+    <table width="100%" height="433" border="0
+        " cellpadding="0" cellspacing="2">
+        <tr>
+            <td width="250" height="35" align="right">Location :</td>
+            <td width="2">&nbsp;</td>
+            <td colspan="2">
+          
+                @Html.DropDownList("cmbAppointmentFacility1", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentFacility1", @onchange = "LoadFacityProvider();" })
+                <span id="apDiv9">
+
+    
+
+</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Provider :</td>
+            <td align="right">&nbsp;</td>
+            <td colspan="2">
+                <div id="DivFacityProvider">
+                @Html.Partial("_FacilityProvider", Model.Providers)@*//,ViewData["ApptId"]*@
+                @*@Html.DropDownList("cmbAppointmentDoctor1", Model.Providers.ToProviderModelSelectList(), new { @class = " txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentDoctor1" })*@
+            </div>
+                    </td>
+        </tr>
+        <tr>
+              <td  ><div style="float:right;margin-Top:4px;">Urgent :</div></td>
+                    <td align="right">&nbsp;</td>
+                        <td  colspan="2">
+                            <select id="cmbMessageUrgency1" class="txt" style="width:90px">
+                     @* <option value="-1">--Select--</option>*@
+                      
+                      <option value="false" selected="selected">No</option><option value="true">Yes</option>
+</select>    
+                            @*<div style="margin-left:0px;">
+                              @Html.DropDownList("cmbMessageUrgency1", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:150px; ", id = "cmbMessageUrgency1" })
+                          </div>*@
+                        </td>
+        </tr>
+        <tr>
+            <td width="250"  align="right" style="padding-top:7px;" valign="Top">Preferred Time of Day :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="439" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                         <td >
+                            <input type="checkbox" name="mor_chk" id="chkmor" style=""/></td>
+                        <td width="50"><div style="margin-left:5px;margin-Top:4px;">Morning</div></td>
+                        <td width="21">
+                            <input type="checkbox" name="aft_chk" id="chkAft" style="margin-left:10px;"/></td>
+                        <td width="68"  ><div style="margin-left:5px;margin-Top:4px;">Afternoon</div></td>
+                        <td width="21">
+                            <input type="checkbox" name="eve_chk" id="chkeve" style="margin-left:10px;" /></td>
+                        <td width="84"  ><div style="margin-left:5px;margin-Top:4px;">Evening</div></td>
+                        <td width="61"  ><div style="margin-left:15px;margin-Top:4px;"></div></td>
+                        <td width="119">
+                            <div style="margin-left:3px;">
+                             @* @Html.DropDownList("cmbMessageUrgency1", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:150px; margin-left:20px;", id = "cmbMessageUrgency1" })*@
+                          </div>
+                        </td>
+                    </tr>
+                </table>
+                <label for="urg_com"></label>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" valign="Top" style="padding-top:7px;" align="right">Preferred Day :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="445" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                 <td >
+                            <input type="checkbox" name="mon_chk" id="chkmon" style="" /></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;">Monday</div></td>
+                        <td >
+                            <input type="checkbox" name="tue_chk" id="chktue" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;"">Tuesday</div></td>
+                        <td >
+                            <input type="checkbox" name="wed_chk" id="chkwed" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;"">Wednesday</div></td>
+                        <td >
+                            <input type="checkbox" name="thu_chk" id="chkthu" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;"">Thursday</div></td>
+                        
+                    </tr>
+                    <tr>
+<td >
+                            <input type="checkbox" name="fri_chk" id="chkfri" /></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;">Friday</div></td>
+                        <td >
+                            <input type="checkbox" name="fri_chk" id="chksat" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;">Saturday</div></td>
+                        <td >
+                            <input type="checkbox" name="fri_chk" id="chksun" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2x;margin-top:4px;">Sunday</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Date Range :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="367" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="118">
+                            <input type="text" name="pref_txt" id="txtPrefDateFrom" class="com" /></td>
+                        <td>    <img id="show-date-PreferedStart" src="Content/img/calender.png" style="margin-top:-3px; cursor:pointer; margin-left:-15px;"/></td>
+                        <td width="19">&nbsp;</td>
+                        <td width="19">&nbsp;</td>
+                        <td width="216">
+                            <input type="text" name="pref_txt" id="txtPrefDateTo" class="com" /></td>
+                        <td>    <img id="show-date-PreferredEnd" src="Content/img/calender.png" style="margin-top:-3px; cursor:pointer; margin-left:-105px;"/></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Time: </td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <select name="preft_com" id="cmbPreftime" class="com">
+                      <option value="-1">--select--</option>                    
+  <option value="7">7:00 am</option>
+  <option value="8">8:00 am</option>
+  <option value="9">9:00 am</option>
+  <option value="10">10:00 am</option>
+  <option value="11">11:00 am</option>
+  <option value="12">12:00 pm</option>
+  <option value="13">1:00 pm</option>
+  <option value="14">2:00 pm</option>
+  <option value="15">3:00 pm</option>
+  <option value="16">4:00 pm</option>
+  <option value="17">5:00 pm</option>
+  <option value="18">6:00 pm</option>
+ <option value="19">7:00 pm</option>
+  <option value="20">8:00 pm</option>
+                </select>
+                
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="33" align="right">Reason for Visit :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="reas_txt" id="txtReason" class="btxt" /></td>
+        </tr>
+        <tr>
+            <td width="250" align="right">Comments :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <textarea name="comm_txta" cols="45" rows="5" class="btxta" id="txtComment" maxlength="256"></textarea></td>
+        </tr>
+          <tr>
+            
+            <td colspan="3" align="right"><div id="appcount"></div></td>
+        </tr>
+
+    </table>
+
+</div>
+<div id="dialog-refill" title="Refill Request">
+    <center>  <span   class="validateTips"></span></center>
+    <table border="0" width="100%" height="300px">
+        <tr>
+            <td width="30%" height="40"><span class="form_text" style="color: #000066;">Location:</span></td>
+            <td>
+
+                  @Html.DropDownList("cmbAppointmentFacilityRefill", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentFacilityRefill", @onchange = "LoadFacityProviderRefil();LoadRefilmediaction();" })
+    
+
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Doctor: </td>
+            <td>
+                <div id="refildiv">
+                @Html.Partial("_CmbRefildoctorDropDown", Model.Providers)
+                    </div>
+
+           @*    @Html.DropDownList("cmbDoctor", Model.Providers.ToProviderModelSelectList(), new { @class = " txt  ui-corner-all", style = "width:200px;", id = "cmbDoctor" })*@
+
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" height="40"><span class="form_text" style="color: #000066;">Medication:</span></td>
+            <td>
+                <div id="refilmed">
+                @Html.Partial("_Index_RefillMedication", Model.Medications)
+                    </div>
+            </td>
+        </tr>
+
+
+        
+
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Number of Refills: </td>
+            <td>
+                <input type="text" name="txtCountRefills" id="txtCountRefills" class="txt ui-corner-all" />
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Pharmacy: </td>
+            <td>
+                <table>
+<tr><td>
+<div id="cmbPharmacy">
+
+          
+                 @Html.Action("RefillPharmacypartialview", "Home", new { @class = "txt  ui-corner-all", style = "width:200px;", id = "cmbRFPharmacy"  })
+              
+ </div>
+</td>
+<td><span><img  src="Content/img/add.png" />
+<span id="addPharmacy" class="anc" onclick="OpenPharmacyDialoge();" style="font-size: 13px; padding-right: 17px;">Add</span></span>
+</td>
+</tr>
+</table>
+               <div > </div> <div id="PharmAddress" style="color:red;"></div><div><input type="hidden" id="Phone" value="" /></div>
+            </td>
+            
+        </tr>
+
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Comments: </td>
+            <td>
+                <textarea multiline="true" style="height: 96px; width: 453px;" id="txtComments" rows="3" cols="5" class="txt  ui-corner-all" maxlength="256"></textarea>
+            </td>
+        </tr>
+            <tr>
+            
+            <td colspan="3" align="right"><div id="refillcount"></div></td>
+        </tr>
+
+
+
+    </table>
+
+</div>
+<div id="reqbtn-form" title="Referral Request">
+    <table width="100%" border="0" cellpadding="0" cellspacing="2">
+        <tr>
+            <td width="250" height="35" align="right">Location :</td>
+            <td width="2">&nbsp;</td>
+            <td width="571">
+               
+                   @Html.DropDownList("cmbAppointmentFacility3", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentFacility3", @onchange = "LoadFacilityProviderRequestRefferal();" })
+         <span id="apDiv9">
+
+    <img id="loader4" src="Content/img/login-loaderwhite.gif" style="margin-left: 420px; margin-top: -30px; display: none;"></img>
+
+</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="250" height="35" align="right">Send Request to :</td>
+            <td width="2">&nbsp;</td>
+            <td width="571">
+                
+                  <div id="DivFacilityProviderRequestRefferal">
+                @Html.Partial("_FacilityProviderRequestRefferal", Model.Providers)
+                
+            </div>
+                   @*@Html.DropDownList("cmbRProvider", Model.Providers.ToProviderModelSelectList(), new { @class = " txt  ui-corner-all bcom", style = "width:400px;", id = "cmbRProvider" })*@
+         </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Reason for Referral :</td>
+            <td align="right">&nbsp;</td>
+            <td>
+                <input type="text" name="reas_txt3" id="txtReqRes" class="btxt" /></td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Comments :</td>
+            <td>&nbsp;</td>
+            <td>
+                <textarea name="comm_txta2" cols="45" rows="5" class="btxta" id="txtRComm" maxlength="256"></textarea></td>
+        </tr>
+            <tr>
+            
+            <td colspan="3" align="right">
+                <div id="referallcount"></div>
+
+            </td>
+        </tr>
+     
+    </table>
+
+
+</div>
+<div id="dialog-pharmacy" title="Add a Pharmacy">
+           
+    <table border="0" width="100%">
+
+        <tr>
+            <td align="right" width="140px;"><span style="color:red;"  >*</span><span class="form_text"  >Pharmacy Name : </span></td>
+            <td>
+                <input type="hidden" id="txtPharmID" value="0" />
+                <input type="text" name="name" id="txtPharmacyName" class="txt ui-corner-all" style="width: 240px;"/>
+            </td>
+        </tr>
+           <tr>
+        <td align="right"><span style="color:red;"  >*</span><span class="form_text" >Address Line 1 : </span> </td>
+                <td>
+                <input type="text" name="name" id="txtPharmAddress1" style="width: 240px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><span class="form_text" >Address Line 2 : </span></td>
+           
+            <td>
+                <input type="text" name="name" id="txtPharmAddress2" style="width: 240px;" class="txt ui-corner-all" /></td>
+        </tr>
+            <tr>
+            <td align="right"><span style="color:red;"  >*</span><span class="form_text" >City : </span></td>
+           
+            <td>
+                <input type="text" name="name" id="txtPharmCity" class="txt ui-corner-all" width="150px;" /></td>
+          
+        </tr>
+
+            <tr>
+            <td align="right"><span style="color:red;"  >*</span><span class="form_text" >State : </span></td>
+           
+           <td>
+                @*<input type="text" name="name" id="txtPharmState" class="txt ui-corner-all" />*@
+               <select style="visibility: visible;" class="coms" name="state" id="cmbStates" tabindex="11">
+									
+										<option value="AL">AL</option>
+									
+										<option value="AK">AK</option>
+									
+										<option value="AS">AS</option>
+									
+										<option value="AZ">AZ</option>
+									
+										<option value="AR">AR</option>
+									
+										<option value="AA">AA</option>
+									
+										<option value="AE">AE</option>
+									
+										<option value="AP">AP</option>
+									
+										<option value="CA">CA</option>
+									
+										<option value="CO">CO</option>
+									
+										<option value="CT">CT</option>
+									
+										<option value="DE">DE</option>
+									
+										<option value="DC">DC</option>
+									
+										<option value="FL">FL</option>
+									
+										<option value="GA">GA</option>
+									
+										<option value="GU">GU</option>
+									
+										<option value="HI">HI</option>
+									
+										<option value="ID">ID</option>
+									
+										<option value="IL">IL</option>
+									
+										<option value="IN">IN</option>
+									
+										<option value="IA">IA</option>
+									
+										<option value="KS">KS</option>
+									
+										<option value="KY">KY</option>
+									
+										<option value="LA">LA</option>
+									
+										<option value="ME">ME</option>
+									
+										<option value="MH">MH</option>
+									
+										<option value="MD">MD</option>
+									
+										<option value="MA">MA</option>
+									
+										<option value="MI">MI</option>
+									
+										<option value="FM">FM</option>
+									
+										<option value="MN">MN</option>
+									
+										<option value="MS">MS</option>
+									
+										<option value="MO">MO</option>
+									
+										<option value="MT">MT</option>
+									
+										<option value="NE">NE</option>
+									
+										<option value="NV">NV</option>
+									
+										<option value="NH">NH</option>
+									
+										<option value="NJ">NJ</option>
+									
+										<option value="NM">NM</option>
+									
+										<option value="NY">NY</option>
+									
+										<option value="NC">NC</option>
+									
+										<option value="ND">ND</option>
+									
+										<option value="MP">MP</option>
+									
+										<option value="OH">OH</option>
+									
+										<option value="OK">OK</option>
+									
+										<option value="OR">OR</option>
+									
+										<option value="PW">PW</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PR">PR</option>
+									
+										<option value="RI">RI</option>
+									
+										<option value="SC">SC</option>
+									
+										<option value="TN">TN</option>
+									
+										<option value="TX">TX</option>
+									
+										<option value="UT">UT</option>
+									
+										<option value="VT">VT</option>
+									
+										<option value="VI">VI</option>
+									
+										<option value="VA">VA</option>
+									
+										<option value="WA">WA</option>
+									
+										<option value="WV">WV</option>
+									
+										<option value="WI">WI</option>
+									
+										<option value="WY">WY</option>
+									
+										<option value="SD">SD</option>
+									
+								</select>
+            </td>
+        </tr>
+
+        <tr>
+            <td align="right"><span style="color:red;"  >*</span><span class="form_text" >Zip Code : </span></td>
+           
+          <td>
+                <input type="text" name="name" id="txtPharmZipCode" class="txt ui-corner-all" style="width: 100px;" />
+            </td>
+        </tr>
+
+
+          <tr>
+            <td align="right"><span class="form_text" >Phone : </span></td>
+           
+          <td>
+                <input type="text" name="name" id="txtPhone" style="width: 190px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+           <tr>
+            <td align="right"><span class="form_text" >Website : </span></td>
+           
+          <td>
+       <input type="text" name="name" id="txtWebsite" style="width: 240px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+
+
+
+      
+        
+    </table>
+
+  
+    <table style="margin-top: -15px;">
+        <tr>
+          
+        </tr>
+        
+    </table>
+
+ 
+    <h3 style="margin-top: 25px; color: rgb(29, 89, 135); font-size: 22px;">Preferred Pharmacy</h3>
+    <table>
+        <tr>
+            <td width="30%"><span class="form_text">
+                <input name="chk" type="checkbox" value="" id="chkPref">
+            </span></td>
+            <td width="-20%"><span class="form_text" style="margin-left: -80px; color: #9B9B9B;">Would you like to make this your preferred pharmacy?</span> </td>
+        </tr>
+    </table>
+</div>
+
+<div id="dialog-confirm">
+
+</div>
+<div id="appbtn-form1" title="Appointment Request Details">
+    <table width="100%" height="433" border="0" cellpadding="0" cellspacing="2">
+        <tr>
+            <td width="250" height="35" align="right">Location :</td>
+            <td width="2">&nbsp;</td>
+            <td colspan="2">
+                @Html.DropDownList("cmbAppointmentFacility2", Model.Facilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentFacility2" })
+
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Provider :</td>
+            <td align="right">&nbsp;</td>
+            <td colspan="2">
+                @Html.DropDownList("cmbAppointmentDoctor2", Model.Providers.ToProviderModelSelectList(), new { @class = " txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentDoctor2" })
+            </td>
+        </tr>
+        <tr>
+              <td  ><div style="float:right;margin-Top:4px;">Urgent :</div></td>
+                    <td align="right">&nbsp;</td>
+                        <td  colspan="2">
+                            <select id="cmbMessageUrgency2" class="txt" style="width:90px">
+                     @* <option value="-1">--Select--</option>*@
+                      
+                      <option value="false" selected="selected">No</option><option value="true">Yes</option>
+</select>    
+                            @*<div style="margin-left:0px;">
+                              @Html.DropDownList("cmbMessageUrgency1", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:150px; ", id = "cmbMessageUrgency1" })
+                          </div>*@
+                        </td>
+        </tr>
+        <tr>
+            <td width="250"  align="right" style="padding-top:7px;" valign="Top">Preferred Time of Day :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="439" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="21">
+                            <input type="checkbox" name="mor_chk" id="chkmor1" style="margin-left:10px;"/></td>
+                        <td width="50"><div style="margin-left:5px;">Morning</div></td>
+                        <td width="21">
+                            <input type="checkbox" name="aft_chk" id="chkAft1" style="margin-left:10px;"/></td>
+                        <td width="68"  ><div style="margin-left:5px;">Afternoon</div></td>
+                        <td width="21">
+                            <input type="checkbox" name="eve_chk" id="chkeve1" style="margin-left:10px;" /></td>
+                        <td width="84"  ><div style="margin-left:5px;">Evening</div></td>
+                       @* <td width="61"  ><div style="margin-left:15px;">Urgency:</div></td>
+                        <td width="119">
+                            
+                              @Html.DropDownList("cmbMessageUrgency2", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:135px; margin-left:20px;", id = "cmbMessageUrgency2" })
+                          
+                        </td>*@
+                    </tr>
+                </table>
+                <label for="urg_com"></label>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Day :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="445" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="22">
+                            <input type="checkbox" name="mon_chk" id="chkmon1" style="margin-left:10px;"/></td>
+                        <td width="51"><div style="margin-left:5px;">Monday</div></td>
+                        <td width="22">
+                            <input type="checkbox" name="tue_chk" id="chktue1" style="margin-left:10px;"/></td>
+                        <td width="63"><div style="margin-left:5px;">Tuesday</div></td>
+                        <td width="22">
+                            <input type="checkbox" name="wed_chk" id="chkwed1" style="margin-left:10px;"/></td>
+                        <td width="72"><div style="margin-left:5px;">Wednesday</div></td>
+                        <td width="22">
+                            <input type="checkbox" name="thu_chk" id="chkthu1" style="margin-left:10px;"/></td>
+                        <td width="70"><div style="margin-left:5px;">Thursday</div></td>
+                        
+                    </tr>
+                    <tr>
+                        <td width="22">
+                            <input type="checkbox" name="fri_chk" id="chkfri1" style="margin-left:10px;"/></td>
+                        <td width="79"><div style="margin-left:5px;">Friday</div></td>
+                        <td width="22">
+                            <input type="checkbox" name="fri_chk" id="chksat1" style="margin-left:10px;"/></td>
+                        <td width="79"><div style="margin-left:5px;">Saturday</div></td>
+                        <td width="22">
+                            <input type="checkbox" name="fri_chk" id="chksun1" style="margin-left:10px;"/></td>
+                        <td width="79"><div style="margin-left:5px;">Sunday</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Date Range :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="367" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="118">
+                            <input type="text" name="pref_txt" id="txtPrefDateFrom1" class="com" /></td>
+                        <td width="19">&nbsp;</td>
+                        <td width="216">
+                            <input type="text" name="pref_txt" id="txtPrefDateTo1" class="com" /></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Time  :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <select name="preft_com" id="cmbPreftime1" class="com">
+                    <option value="0">12:00 am</option>
+  <option value="1">1:00 am</option>
+  <option value="2">2:00 am</option>
+  <option value="3">3:00 am</option>
+  <option value="4">4:00 am</option>
+  <option value="5">5:00 am</option>
+  <option value="6">6:00 am</option>
+  <option value="7">7:00 am</option>
+  <option value="8">8:00 am</option>
+  <option value="9">9:00 am</option>
+  <option value="10">10:00 am</option>
+  <option value="11">11:00 am</option>
+  <option value="12">12:00 pm</option>
+  <option value="13">1:00 pm</option>
+  <option value="14">2:00 pm</option>
+  <option value="15">3:00 pm</option>
+  <option value="16">4:00 pm</option>
+  <option value="17">5:00 pm</option>
+  <option value="18">6:00 pm</option>
+  <option value="19">7:00 pm</option>
+  <option value="20">8:00 pm</option>
+  <option value="21">9:00 pm</option>
+  <option value="22">10:00 pm</option>
+  <option value="23">11:00 pm</option>
+                </select>
+                
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="33" align="right">Reason for visit :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="reas_txt" id="txtReason1" class="btxt" /></td>
+        </tr>
+        <tr>
+            <td width="250" align="right">Comments :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <textarea name="comm_txta" cols="45" rows="5" class="btxta" id="txtComment1"></textarea></td>
+        </tr>
+        <tr>
+            <td width="250" align="right">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+
+    </table>
+
+                          </div>
+
+
+
+@Scripts.Render("~/AppointmentIndex/jquery")

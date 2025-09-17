@@ -1,0 +1,92 @@
+﻿@model IEnumerable<AMR.Models.ProcedureModel>
+@using System.Text;
+@using System.Web.Script.Serialization;
+<table class="box-table-a" id="tbl-Procedure" summary="ProcedureInformation">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Date</span></th>
+                                    <th scope="col" style="vertical-align:middle"> <span style="margin-left:2px;">Description</span></th>                 
+                                    
+                               </tr>
+                            </thead>
+                             <tbody>
+                   @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var item in Model)
+                                    {
+                                        StringBuilder jsonStringAllergy = new StringBuilder();
+                                         DateTime dtSerDate;
+                                         string fServiceDate;
+                                            if (item.ServiceDate.Length == 8 && DateTime.TryParseExact(item.ServiceDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtSerDate))
+                                            {
+                                                DateTime dtSer = DateTime.ParseExact(item.ServiceDate, "yyyyMMdd", null);
+                                                fServiceDate = dtSer.ToString("MM/dd/yyyy");                                                
+                                            }
+                                            else if ((item.ServiceDate).Trim().Length == 6)
+                                            {
+                                                string strYear = item.ServiceDate.Substring(0, 4);
+                                                string strMonth = item.ServiceDate.Substring(4, 2);
+                                                fServiceDate = strMonth + "/" + strYear;
+                                                
+                                            }
+                                            else
+                                            {
+                                                fServiceDate = item.ServiceDate;
+                                            }      
+                                        jsonStringAllergy.Append(" { ");
+                                        jsonStringAllergy.Append("\"PatProcedureCntr\": \"" + item.PatProcedureCntr + "\",");
+                                        jsonStringAllergy.Append("\"PatientId\": \"" + item.PatientId + "\",");
+                                        jsonStringAllergy.Append("\"Description\":  \"" + item.Description + "\",");
+                                        jsonStringAllergy.Append("\"Note\":  \"" + item.Note + "\",");
+                                        jsonStringAllergy.Append("\"ServiceDate\":  \"" + fServiceDate + "\",");
+                                        jsonStringAllergy.Append("\"flag\":  \"" + item.flag + "\"");
+                                       
+                                        jsonStringAllergy.Append("}");
+                                       // var jsonStr = new JavaScriptSerializer().Serialize(item);
+                        <tr class="@((counter % 2 == 0) ? "r0" : "r1") "  onclick="OpenProcRecord(@item.PatProcedureCntr);">
+                                 
+                       @{
+                                            DateTime dtSDate;
+                                            if (item.ServiceDate.Length == 8 && DateTime.TryParseExact(item.ServiceDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtSDate))
+                                            {
+                                                DateTime dtSer = DateTime.ParseExact(item.ServiceDate, "yyyyMMdd", null);
+                                                string s = dtSer.ToString("MM/dd/yyyy");
+                                                if(s == "01/01/1900")
+                                    {
+                                    <td style="vertical-align:middle"></td>
+                                    }
+                                    else{
+                                    <td style="vertical-align:middle">@s</td>
+                                    }
+                                                @*<td width="120px">@s</td>*@
+                                            }
+                                            else if ((item.ServiceDate).Trim().Length == 6)
+                                            {
+                                                string strYear = item.ServiceDate.Substring(0, 4);
+                                                string strMonth = item.ServiceDate.Substring(4, 2);
+                                                string strSDate = strMonth + "/" + strYear;
+                                                <td width="120px" style="vertical-align:middle">@strSDate</td>
+                                            }
+                                            else
+                                            {
+                                                <td width="120px" style="vertical-align:middle">@item.ServiceDate</td>
+                                            }      
+                                          }
+
+                        <td style="vertical-align:middle"><input type="hidden" id="hdProcedure@(item.PatProcedureCntr)" value="@jsonStringAllergy.ToString()" />@item.Description </td>                          
+                        </tr>  counter++;
+                                    }
+                                }
+                                   else
+                                {
+                                      <tr> 
+                                <td style="vertical-align:middle">No Information Available</td> 
+                                          <td></td> 
+                                          <td></td> 
+                                        </tr>  
+                                  @* @Html.Partial("_NoRecordFound",2) *@
+                                }
+                    </tbody>
+                            </table>
+

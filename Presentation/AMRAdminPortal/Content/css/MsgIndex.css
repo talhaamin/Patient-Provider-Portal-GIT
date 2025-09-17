@@ -1,0 +1,38 @@
+﻿ .weight {
+        
+        font-weight:normal;
+        }
+        body {
+            background-color: rgb(234,244,253);
+        }
+
+        li {
+            text-decoration: none;
+        }
+
+        #tabs {
+            margin-top: 10px;
+            height:1210px;
+        }
+
+        #Inform_Head {
+            background-color: rgb(234,244,253);
+            height: 100px;
+            margin-top: 10px;
+            border: 1px solid;
+            border-color: rgb(166, 201, 226);
+        }
+
+        #reply {
+            background-color: white;
+            height: 590px;
+            border: 1px solid;
+            border-color: rgb(166, 201, 226);
+            margin-top: 10px;
+        }
+               #my-simple-upload {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    display: block;
+}

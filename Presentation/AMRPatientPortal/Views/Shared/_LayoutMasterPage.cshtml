@@ -1,0 +1,1980 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    
+    @Styles.Render("~/Content/css/bootstrap")
+    @Styles.Render("~/Content/css/justified")
+    @Styles.Render("~/Content/css/timepicker")
+    @Styles.Render("~/Content/css/themes/redmond/css-jquery-ui.css")
+    @Styles.Render("~/Content/css/fixed-header/css")
+    @Styles.Render("~/Content/css/css-style-main.css")
+    @Styles.Render("~/Content/css/table")
+    @*@Styles.Render("~/Content/css/themes/redmond/custom")*@
+    @Scripts.Render("~/Bundle/jquery")
+    @Scripts.Render("~/Bundle/jquery-ui")
+    @Scripts.Render("~/Bundle/utility-script")
+   @* @Scripts.Render("~/Bundle/jquery-timeoutdialog")*@
+    @Scripts.Render("~/Bundle/LayoutMaster")
+    @Scripts.Render("~/Bundle/jquery-fileupload")
+    @Scripts.Render("~/Bundle/CheckBrowser")
+    <script type="text/javascript" src="@Url.Content("~/Content/js/CookieHandler.js")"></script>
+    <script type="text/javascript" src="@Url.Content( "~/Content/js/jquery.idle-timer.js")"></script> 
+   <script type="text/javascript" src="@Url.Content("~/Content/js/timeout-dialog.js")"></script>
+     
+   @*<script type="text/javascript" src="@Url.Content("~/Content/js/jquery.mb.browser.min.js")"></script>
+      <script type="text/javascript" src="@Url.Content("~/Content/js/jquery.mb.browser.js")"></script>
+ *@ 
+    @*<style type="text/css">
+
+    </style>*@
+      
+        <!-- Bootstrap core CSS -->
+   @* <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="@Url.Content("~/Content/css/justified-nav.css")" rel="stylesheet">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/themes/redmond/jquery-ui.css")" />
+   *@
+    <link href="@Url.Content("~/Content/css/themes/redmond/jquery-ui-1.10.3.custom.css")" rel="stylesheet">
+    @*<link href="@Url.Content("~/Content/css/table-style.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/navigation-bar.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/style-main.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/jquery-ui-timepicker-addon.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/fixed-header/960.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/fixed-header/defaultTheme.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/fixed-header/myTheme.css")" rel="stylesheet" />*@
+    <link href="~/Content/css/bootstrap.min-combo.css" rel="stylesheet" />
+
+      @*<script src="@Url.Content("~/Content/js/jquery-1.9.1.js")"></script>*@
+
+    @*<script src="@Url.Content("~/Content/css/ui/jquery.ui.core.js")"></script>
+	<script src="@Url.Content("~/Content/css/ui/jquery.ui.widget.js")"></script>
+	<script src="@Url.Content("~/Content/css/ui/jquery.ui.accordion.js")"></script>*@
+   
+    @*<script src="@Url.Content("~/Content/js/jquery-1.9.2.custom.js")"></script>*@
+    @*<script src="@Url.Content("~/Content/js/jquery-ui.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.maskedinput-1.2.2.js")"></script>
+    <script src="@Url.Content("~/Content/js/validator.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.maskedinput.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-ui-timepicker-addon.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.fileupload.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.fileupload-ui.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.iframe-transport.js")"></script>
+    <script src="@Url.Content("~/Content/js/timeout-dialog.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.idle-timer.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.fixedheadertable.js")"></script>
+   <script src="@Url.Content("~/Content/js/LayoutMaster.js")"></script>*@
+  	<script>
+  	    $(window).on("storage", function (e) {
+  	        var event = e.originalEvent
+  	       
+  	        if (event.key == "quit") {
+  	           
+  	            var x = readCookie('storagecookie')
+  	            if (x) {
+  	                if (x == "patient") {
+  	                    eraseCookie('storagecookie');
+  	                    window.location.href = '@Url.RouteUrl("login")';
+  	                }
+  	            }
+  	        }
+
+  	    })
+
+  	   
+	</script>
+    <script>
+      function deleteAllCookies() {
+          var cookies = document.cookie.split(";");
+
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i];
+              var eqPos = cookie.indexOf("=");
+              var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+              document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+          }
+      }
+      var isClose = false;
+      var keyboardevent = false;
+      
+
+   
+      window.onbeforeunload = function (e) {
+        
+         // detectRefresh();
+          
+          //if (self.close == true) {
+
+          //    console.log('self.close');
+          //    isClose = false;
+          //}
+          //else {
+          //    isClose = true;
+          //    //if (window.event) //for IE.
+          //    //{
+
+          //    //    if (window.event.clientX < 40 && window.event.clientY < 0 && keyboardevent == false) {
+          //    //        console.log('Window back button');
+          //    //        isClose = true;
+          //    //    }
+          //    //    else if (keyboardevent == false) {
+          //    //        console.log('Window refreshed');
+          //    //        isClose = true;
+          //    //    }
+
+          //    //}
+          //    //else { // FF and chrome
+
+          //    //    if (event.currentTarget.performance.navigation.type == 1 && keyboardevent == false) {
+          //    //        console.log('Window refreshed');
+          //    //        isClose = true;
+          //    //    }
+          //    //    if (event.currentTarget.performance.navigation.type == 2 && keyboardevent == false) {
+          //    //        console.log('Window back button');
+          //    //        isClose = true;
+          //    //    }
+
+          //    //}
+          //}
+
+      
+
+        
+          if (!isClose) {
+            //  deleteAllCookies();
+              return;
+          }
+          else {
+              isClose = false;
+              keyboardevent = false;
+              // return  "You are not closing";
+          }
+      }
+
+      //this code will handle the F5 or Ctrl+F5 key
+
+      // Collapse | Copy Code
+
+      //need to handle more cases like ctrl+R whose codes are not listed here
+      document.onkeydown = checkKeycode
+      function checkKeycode(e) {
+
+
+          if (!e) //Firefox and Safari gets argument directly.
+          {
+              e = window.event; // this is for IE
+          }
+
+          var keycode = e.keyCode ? e.keyCode : e.which;
+
+          if (keycode == 116) {
+              // for Ctrl +F5
+              isClose = true;
+              keyboardevent = true;
+          }
+          else if (keycode == 17) {
+              // for Ctrl + W
+              isClose = false;
+              keyboardevent = true;
+          }
+          else if (keycode == 115) {
+              // for Alt+ F4
+              isClose = false;
+              keyboardevent = true;
+          }
+          else if (keycode == 8) {
+              //back space
+              isClose = true;
+              keyboardevent = true;
+          }
+          else if (keycode == 82) {
+              // for Ctrl+ R
+              isClose = true;
+              keyboardevent = true;
+          }
+
+      }
+      function mouseDownSetFlag() {
+
+          isClose = true;
+      }
+      function doUnload() {
+          //if(!isClose)
+          //{
+          //    alert('window is closing');
+          //}
+      }
+</script>
+   
+    <script>
+        $(function () {
+            $("#AlreadyLog1").dialog({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 100
+                },
+                hide: {
+                    effect: "blind",
+                    duration: 100
+                },
+
+                width: 700,
+                modal: true,
+                buttons: {
+                    "Ok": function () {
+                        $(this).dialog("close");
+                        isClose = true;
+                       // window.opener = "something";
+                       // window.open('', '_self','').close();
+                        window.location.href = '@Url.RouteUrl("another-session")';
+                    }
+                },
+                close: function () {
+                    isClose = true;
+                    //window.opener = "something";
+                    //window.open('', '_self', '').close();
+                    window.location.href = '@Url.RouteUrl("another-session")';
+                   
+                }
+            });
+        })
+        
+        function onPageLoad() {
+          //  alert(document.referrer);
+            var myCookie = getCookie(".Patient");
+          
+            if (myCookie != null) {
+              
+                if (document.referrer=='')// this means if blank then run the dialog box code
+                {
+                   // $('#err-msg').text("Another user is currently logged in and must be logged out to continue");
+                    // $("#AlreadyLog1").dialog("open");
+                    isClose = true;
+                    window.location.href = '@Url.RouteUrl("another-session")';
+                }
+               
+
+            }
+
+        }
+
+
+       
+        </script>
+    <script type="text/javascript">
+
+        var GeneralMessageAvailable = false;
+        var AppointmentMessageAvailable = false;
+        var ReferralMessageAvailable = false;
+        var MedicationMessageAvailable = false;
+        function LogoutUser() {
+            $.post('/logout', function (data) {
+                window.location = '/';
+            });
+        }
+        $(document).ready(function () {
+        
+            
+          //  onPageLoad();
+
+           var AccessId = '@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientId';
+            localStorage.setItem("AccessId", AccessId);
+            var user = navigator.userAgent;
+            var abc = '@Request.RawUrl.Contains("clinical")'
+           var message = '@Request.RawUrl.Contains("message")'
+           var version = getInternetExplorerVersion();
+           var browser = get_browser();
+           //  alert("Browser is " + browser);
+           // alert(version);
+           var ver = get_browser_version();
+           // alert(ver);
+
+           if (user.indexOf("MSIE") != "-1") {
+
+               $("#switch").css("width", "206px");
+               $("#switch").css("margin-left", "5px");
+               $(".link").css("width", "195px");
+               $(".link").css("margin-left", "-42px");
+               $(".sublink").css("margin-left", "4.5px");
+               $(".sublink").css("width", "206px");
+               $("#switch").css("margin-top", "1px");
+           }
+           //if (version == -1) {
+           //    //alert("HI12");
+           //    $("#switch").css("width", "195px");
+           //    $("#switch").css("margin-left", "0px");
+           //    $(".link").css("width", "195px");
+           //    $(".link").css("margin-left", "-34px");
+           //    $(".sublink").css("margin-left", "5px");
+           //    $(".sublink").css("width", "195px");
+           //}
+           if (ver = 10.0) {
+               $("#switch").css("width", "206px");
+               $("#switch").css("margin-left", "0.5px");
+               $(".link").css("width", "195px");
+               $(".link").css("margin-left", "-34px");
+               $(".sublink").css("margin-left", "4.5px");
+               $(".sublink").css("width", "206px");
+               $("#switch").css("margin-top", "1px");
+           }
+           var clinical = '@Request.RawUrl.Contains("clinicals")';
+            if (clinical == "True") {
+
+                if (user.indexOf("Firefox") != "-1") {
+                    // alert("FF");
+                    $("#sublist").css("width", "220px");
+                    $("#sublist").css("margin-left", "20px");
+                    $("#accordian").css("width", "220px");
+                    $("#switch").css("width", "220px");
+                    $("#switch").css("margin-left", "20px");
+                    $(".link").css("width", "210px");
+                    $(".link").css("margin-left", "-42px");
+                    $(".sublink").css("margin-left", "2px");
+                    $(".sublink").css("width", "220px");
+                    $("#head").css("margin-top", "4px");
+                }
+                if (user.indexOf("MSIE") != "-1") {
+                    // alert("MSIE");
+                    $("#sublist").css("width", "220px");
+                    $("#sublist").css("margin-left", "16px");
+                    $("#accordian").css("width", "210px");
+                    $("#switch").css("width", "220px");
+                    $("#switch").css("margin-left", "9px");
+                    $(".link").css("width", "210px");
+                    $(".link").css("margin-left", "-42px");
+                    $(".sublink").css("margin-left", "5px");
+                    $(".sublink").css("width", "220px");
+                    $("#switch").css("margin-top", "1px");
+                }
+                //if (version > -1) {
+                //    //  alert("HI");
+                //    $("#switch").css("width", "195px");
+                //    $("#switch").css("margin-left", "0px");
+                //    $(".link").css("width", "195px");
+                //    $(".link").css("margin-left", "-34px");
+                //    $(".sublink").css("margin-left", "5px");
+                //    $(".sublink").css("width", "195px");
+                //}
+                if (browser == "Netscape") {
+                    $("#sublist").css("width", "220px");
+                    $("#sublist").css("margin-left", "20px");
+                    $("#accordian").css("width", "210px");
+                    $("#switch").css("width", "220px");
+                    $("#switch").css("margin-left", "8px");
+                    $(".link").css("width", "210px");
+                    $(".link").css("margin-left", "-42px");
+                    $(".sublink").css("margin-left", "0px");
+                    $(".sublink").css("width", "220px");
+                    $("#switch").css("margin-top", "1px");
+                }
+                if (user.indexOf("Chrome") != "-1") {
+
+                    $("#sublist").css("width", "220px");
+                    $("#sublist").css("margin-left", "20px");
+                    $("#accordian").css("width", "210px");
+                    $("#switch").css("width", "220px");
+                    $("#switch").css("margin-left", "18px");
+                    $(".link").css("width", "210px");
+                    $(".link").css("margin-left", "-42px");
+                    $(".sublink").css("margin-left", "0px");
+                    $(".sublink").css("width", "220px");
+                    $("#head").css("margin-top", "5px");
+                }
+            }
+            var message = '@Request.RawUrl.Contains("message")';
+
+              if (message == "True") {
+                  // alert("message");
+                  // $("#switch").css("width", "210px");
+                  // $("#switch").css("margin-left", "12px");
+                  if (user.indexOf("Firefox") != "-1") {
+
+
+                      $("#sublist").css("width", "200px");
+                      $("#sublist").css("margin-left", "20px");
+                      $("#accordian").css("width", "210px");
+                      $("#switch").css("width", "206px");
+                      $("#switch").css("margin-left", "17px");
+                      $(".link").css("width", "203px");
+                      $(".link").css("margin-left", "-45px");
+                      $(".sublink").css("margin-left", "2px");
+                      $(".sublink").css("width", "206px");
+                      $("#head").css("margin-top", "7px");
+                    
+                  }
+                  if (user.indexOf("MSIE") != "-1") {
+
+                      $("#sublist").css("width", "220px");
+                      $("#sublist").css("margin-left", "20px");
+                      $("#accordian").css("width", "210px");
+                      $("#switch").css("width", "206px");
+                      $("#switch").css("margin-left", "7px");
+                      $(".link").css("width", "203px");
+                      $(".link").css("margin-left", "-42px");
+                      $(".sublink").css("margin-left", "-1px");
+                      $(".sublink").css("width", "206px");
+                  }
+                  if (browser == "Netscape") {
+                      $("#sublist").css("width", "220px");
+                      $("#sublist").css("margin-left", "20px");
+                      $("#accordian").css("width", "210px");
+                      $("#switch").css("width", "206px");
+                      $("#switch").css("margin-left", "7px");
+                      $(".link").css("width", "203px");
+                      $(".link").css("margin-left", "-42px");
+                      $(".sublink").css("margin-left", "-1px");
+                      $(".sublink").css("width", "206px");
+                  }
+                  if (user.indexOf("Chrome") != "-1") {
+
+                      $("#sublist").css("width", "200px");
+                      $("#sublist").css("margin-left", "20px");
+                      $("#accordian").css("width", "210px");
+                      $("#switch").css("width", "206px");
+                      $("#switch").css("margin-left", "17px");
+                      $(".link").css("width", "205px");
+                      $(".link").css("margin-left", "-42px");
+                      $(".sublink").css("margin-left", "-1px");
+                      $(".sublink").css("width", "206px");
+                      $("#head").css("margin-top", "7px");
+                  }
+              }
+              if (user.indexOf("Firefox") != "-1") {
+                  if (clinical == "False" && message == "False") {
+                      //   alert("firefox");
+                      $("#switch").css("width", "206px");
+                      $("#switch").css("margin-left", "10px");
+                      $(".link").css("width", "195px");
+                      $(".link").css("margin-left", "-34px");
+                      $(".sublink").css("margin-left", "4px");
+                      $(".sublink").css("width", "206px");
+                      $("#switch").css("margin-top", "-15px");
+                  }
+              }
+              if (user.indexOf("MSIE") != "-1") {
+
+                  if (clinical == "False" && message == "False" && ver > 10.0) {
+                      // alert("MISE123");
+                      $("#switch").css("width", "195px");
+                      $("#switch").css("margin-left", "8px");
+                      $(".link").css("width", "195px");
+                      $(".link").css("margin-left", "-45px");
+                      $(".sublink").css("margin-left", "5px");
+                      $(".sublink").css("width", "195px");
+                      $("#switch").css("margin-top", "-15px");
+
+                  }
+                  //else {
+                  //   // alert("MISE");
+                  //    $("#switch").css("width", "195px");
+                  //    $("#switch").css("margin-left", "0px");
+                  //    $(".link").css("width", "195px");
+                  //    $(".link").css("margin-left", "-34px");
+                  //    $(".sublink").css("margin-left", "5px");
+                  //    $(".sublink").css("width", "195px");
+                  //}
+                  if (browser == "Netscape") {
+                      $("#switch").css("width", "205px");
+                      $("#switch").css("margin-left", "0px");
+                      $(".link").css("width", "195px");
+                      $(".link").css("margin-left", "-34px");
+                      $(".sublink").css("margin-left", "5px");
+                      $(".sublink").css("width", "205px");
+                      $("#switch").css("margin-top", "-15px");
+                  }
+
+              }
+              if (user.indexOf("Chrome") != "-1") {
+
+
+                  if (clinical == "False" && message == "False") {
+                     
+                      $("#sublist").css("width", "210px");
+                      $("#sublist").css("margin-left", "20px");
+                      $("#accordian").css("width", "210px");
+                      $("#switch").css("width", "206px");
+                      $("#switch").css("margin-left", "17px");
+                      $(".link").css("width", "210px");
+                      $(".link").css("margin-left", "-42px");
+                      $(".sublink").css("margin-left", "-1px");
+                      $(".sublink").css("width", "206px");
+                      $("#head").css("margin-top", "5px");
+                      $("#Green_Panel").css("margin-top", "5px");
+                      $("#switch").css("margin-top", "4px");
+
+
+
+
+                  }
+              }
+       });
+          function getInternetExplorerVersion()
+              // Returns the version of Internet Explorer or a -1
+              // (indicating the use of another browser).
+          {
+              var rv = -1; // Return value assumes failure.
+              if (navigator.appName == 'Microsoft Internet Explorer') {
+                  var ua = navigator.userAgent;
+                  var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+                  if (re.exec(ua) != null)
+                      rv = parseFloat(RegExp.$1);
+              }
+              return rv;
+          }
+          function get_browser_version() {
+              var N = navigator.appName, ua = navigator.userAgent, tem;
+              var M = ua.match(/(opera|chrome|safari|firefox|msie|trident)\/?\s*(\.?\d+(\.\d+)*)/i);
+
+              if (M && (tem = ua.match(/version\/([\.\d]+)/i)) != null) M[2] = tem[1];
+              M = M ? [M[1], M[2]] : [N, navigator.appVersion, '-?'];
+
+              return M[1];
+          }
+          function get_browser() {
+              var N = navigator.appName, ua = navigator.userAgent, tem;
+              var M = ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+
+              if (M && (tem = ua.match(/version\/([\.\d]+)/i)) != null) M[2] = tem[1];
+              M = M ? [M[1], M[2]] : [N, navigator.appVersion, '-?'];
+
+              return M[0];
+          }
+
+          $(document).ready(function () {
+
+               GeneralMessageAvailable =  '@AMR.Core.Utilities.RequestHelper.MyGlobalVar.GeneralMessageAvailable';
+               AppointmentMessageAvailable = '@AMR.Core.Utilities.RequestHelper.MyGlobalVar.AppointmentMessageAvailable';
+               ReferralMessageAvailable = '@AMR.Core.Utilities.RequestHelper.MyGlobalVar.ReferralMessageAvailable';
+              MedicationMessageAvailable = '@AMR.Core.Utilities.RequestHelper.MyGlobalVar.MedicationMessageAvailable';
+              if (GeneralMessageAvailable == "True" || AppointmentMessageAvailable == "True" || ReferralMessageAvailable == "True" || MedicationMessageAvailable == "True") {
+                  //     $("#quicklinks").css("display", "block");
+                //  alert("true");
+                  var medicationindex = '@Request.RawUrl.Contains("medication-index")';
+                  var Problem = '@Request.RawUrl.Contains("ProblemsIndex")';
+                  var message = '@Request.RawUrl.Contains("message-center")';
+                  var PatientInfo = '@Request.RawUrl.Contains("Patient-Info")';
+                  var summaryclinical = '@Request.RawUrl.Contains("summary-clinical")';
+                  var appointmentIndex = '@Request.RawUrl.Contains("appointments-index")';
+                  var Documents = '@Request.RawUrl.Contains("Documents")';
+                  var premiummanagedoctor = '@Request.RawUrl.Contains("premium-manage-doctor")';
+                  var premiumcontact = '@Request.RawUrl.Contains("premium-emergency-contact")';
+                  var ShareMyRecords = '@Request.RawUrl.Contains("premium-ShareMyRecords")';
+                  var AccountRecords = '@Request.RawUrl.Contains("accounts-index")';
+                  var Login = '@Request.RawUrl.Contains("Login=False")';
+                //  alert(Login);
+
+                  
+
+                  
+
+                  
+                  $("#quicklinks").css({ "position": "absolute", "top": "20px", "left": "3%", "width": "94%", "height": "70px", "display": "block" });
+                  $("#tabs").css({ "font-size": "12px", "margin-top": "90px", "display": "block" });
+                  // $("#tabs-1").css({ "height": "800" });
+                  // $("#ChartSummaryPartial").css({ "height": "800" });
+                  $("#Index").css({ "position": "absolute", "height": "845px", "top": "100px", "left": "5px", "display": "block", "width": "98%" });
+                  $("problem-portlet-tab").css({ "position": "relative", "top": "0px", "border": "none", "overflow-y": "auto", "height": "750px" });
+                  $("#MedIndex").css({ "margin-top": "135px", "width": "945px", "margin-left": "-10px" });
+                  $("#Div1").css({ "position": "absolute", "top": "95px", "left": "3%", "width": "94%", "height": "35px" });
+
+                  if (PatientInfo == "True") {
+                      $("#cart2").css({ "margin-top": "0px", "margin-left": "0px", "width": "930px", "height": "150px", "position": "absolute", "top": "1px", "left": "0px", "right": "0px", "border": "1px solid rgb(166, 201, 226)" });
+                      $("#Appointment").css({ "position": "relative", "top": "90px", "left": "0px", "width": "100%", "height": "775px" });
+                      $("#ClinicalIndexSub").css({ "position": "absolute", "top": "130px", "left": "0px", "right": "5px" });
+                      $("#ClinicalIndex").css({ "position": "absolute", "top": "140px", "left": "0px", "right": "5px", "width": "950px", "height": "1100px", "border": "1px solid #A6C9E2" });
+                      $("#ClinicalIndexsub1").css({ "position": "relative", "top": "165px", "height": "1060px", "width": "950px", "left": "-11px", "overflow-y": "auto" });
+                      $("#DocumentsIndex").css({ "position": "relative", "top": "105px", "height": "725px", "left": "0px", "margin-right": "-15px", "width": "98.5%" });
+                      $("#tabs").css("height", "840px");
+                      $("#quicklinks").css({ "position": "absolute", "top": "20px", "left": "13px", "width": "96%", "height": "70px", "display": "block" });
+
+
+                  }
+                  else {
+                      if (medicationindex == "True") {
+
+                        //  alert("true");
+                          $("#tabs").css("height", "790px");
+                          $("#cart2Find").css({ "margin-top": "500px", "margin-left": "5px", "width": "940px", "height": "350px", "position": "absolute", "top": "80px", "left": "0px", "right": "0px", "border": "1px solid rgb(166, 201, 226)" });
+                          $("#quicklinks").css({ "position": "absolute", "top": "20px", "left": "5px", "width": "98%", "height": "70px", "display": "block" });
+                          $("#Div1").css({ "position": "absolute", "top": "95px", "left": "5px", "width": "98%", "height": "35px" });
+
+
+                      }
+                      if (Problem == "True") {
+                        //  alert("Problem");
+                          $("problem-portlet-tab").css({ "position": "relative", "top": "0px", "border": "none", "overflow-y": "auto", "height": "750px" });
+                          $("#Div1Problem").css({ "position": "absolute", "top": "5px", "left": "3%", "width": "94%", "height": "35px" });
+                          $("#quicklinks").css({ "position": "absolute", "top": "20px", "left": "5px", "width": "98%", "height": "70px", "display": "block" });
+                        //  $("#Div2").css({ "position": "absolute", "top": "95px", "left": "5px", "width": "98%", "height": "35px" });
+
+                      }
+                      if (message == "True") {
+                          $("#tabs").css({ "font-size": "12px", "margin-top": "90px", "display": "block", "height": "1170px" });
+                          $("#reply").css({ "height": "550px" });
+                          $("#quicklinks").css({ "position": "absolute", "top": "20px", "left": "13px", "width": "96.5%", "height": "70px", "display": "block" });
+
+                          //  font-size: 12px; margin-top: 90px; width: 930px; display: block; height:1170px;
+                      }
+                      if (summaryclinical == "True")
+                      {
+                          $("#quicklinks").css({ "position": "absolute", "top": "20px", "left": "5px", "width": "98%", "height": "70px", "display": "block" });
+                          $("#Div1").css({ "position": "absolute", "top": "95px", "left": "5px", "width": "98%", "height": "35px" });
+
+                      }
+
+                      if (appointmentIndex == "True")
+                      {
+                          $("#quicklinks").css({ "position": "absolute", "top": "20px", "left": "15px", "width": "96%", "height": "70px", "display": "block" });
+
+
+                      }
+                      if (Documents == "True")
+                      {
+                          $("#quicklinks").css({ "position": "absolute", "top": "20px", "left": "1px", "width": "98%", "height": "70px", "display": "block" });
+
+                      }
+                      if (premiummanagedoctor == "True")
+                      {
+                          $("#tabs").css({ "font-size": "12px", "margin-top": "5px", "margin-right": "4px", "display": "block", "height": "98.5%", "width": "98%" });
+
+
+                         // width: 98%; font-size: 12px; margin-top: 90px; margin-right: 4px; height: 98.5%; display: block;
+                      }
+                      if (premiumcontact == "True")
+                      {
+                      //    $("#tabs").css({ "font-size": "12px", "margin-top": "5px", "display": "block", "height": "1170px" });
+                          $("#tabs").css({ "font-size": "12px", "margin-top": "5px", "margin-right": "4px", "display": "block", "height": "98.5%", "width": "98%" });
+
+                      }
+                      if (ShareMyRecords == "True")
+                      {
+                          $("#tabs").css({ "font-size": "12px", "margin-top": "5px", "margin-right": "4px", "display": "block", "height": "98.5%", "width": "98%" });
+
+                      }
+                      if (AccountRecords == "True")
+                      {
+                          $("#tabs").css({ "font-size": "12px", "margin-top": "5px", "margin-right": "4px", "display": "block", "height": "98.5%", "width": "98%" });
+
+                      }
+                      $("#med-div").css({ "position": "absolute", "top": "400px", "height": "160px", "left": "1%", "width": "96.88%" });
+                      $("#cart2").css({ "margin-top": "0px", "margin-left": "0px", "width": "930px", "height": "150px", "position": "absolute", "top": "1px", "left": "0px", "right": "0px", "border": "1px solid rgb(166, 201, 226)" });
+                      $("#Appointment").css({ "position": "relative", "top": "90px", "left": "0px", "width": "100%", "height": "786px" });
+                      $("#ClinicalIndexSub").css({ "position": "absolute", "top": "130px", "left": "0px", "right": "5px" });
+                      $("#ClinicalIndex").css({ "position": "absolute", "top": "140px", "left": "0px", "right": "5px", "width": "950px", "height": "1100px", "border": "1px solid #A6C9E2" });
+                      $("#ClinicalIndexsub1").css({ "position": "relative", "top": "165px", "height": "1060px", "width": "950px", "left": "-11px", "overflow-y": "auto" });
+                      $("#DocumentsIndex").css({ "position": "relative", "top": "105px", "height": "725px", "left": "0px", "margin-right": "-15px", "width": "98.5%" });
+
+                      if (Login == "True")
+                      {
+                          $("#tabs").css({ "font-size": "12px", "margin-top": "5px", "margin-right": "4px", "display": "block", "height": "98.5%", "width": "98%" });
+
+                      }
+                      //     "position": "relative", "top": "90px" , "left": "0px", "width": "100%","height":"775px"
+                      //  "position": "absolute", "top": "95px", "left": "3%", "width": "94%", "height": "35px"
+
+                      //    "position" : "absolute", "top": "20px", "left": "3%", "width": "94%", "height": "70px"
+                  }
+              }
+              else {
+                  var PatientInfo = '@Request.RawUrl.Contains("Patient-Info")';
+                  if (PatientInfo == "True") {
+                      $("#widgetdiv").css({ "position": "absolute", "top": "55px", "left": "3%", "width": "94%", "height": "890px", "display": "block", "overflow-y": "auto", "overflow-x": "hidden" });
+                      //  $("#tabs").css({ "font-size": "12px", "margin-top": "10px", "display": "block" })
+                      $("#cart1").css({ "position": "absolute", "top": "55px", "left": "0px", "right": "5px" });
+                      //$("#MedIndex").css({ "margin-top": "150px" });
+                      //$("#med-div").css({ "position": "absolute", "top": "420px", "height": "160px", "left": "1%", "width": "96.88%" });
+                      $("problem-portlet-tab").css({ "position": "relative", "top": "0px", "border": "none", "overflow-y": "auto", "height": "810px" });
+                      $("#MedIndex").css("margin-top", "50px");
+                      $("#Appointment").css({ "position": "relative", "top": "0px", "left": "0px", "width": "100%", "height": "775px" });
+                      $("#ClinicalIndexSub").css({ "position": "absolute", "top": "40px", "left": "0px", "right": "5px" });
+                      $("#ClinicalIndexsub1").css({ "position": "relative", "top": "73px", "height": "1060px", "width": "950px", "left": "-11px", "overflow-y": "auto" });
+                      $("#ClinicalIndex").css({ "position": "absolute", "top": "55px", "left": "0px", "right": "5px", "width": "950px", "height": "1090px", "border": "1px solid #A6C9E2" });
+
+                  }
+                  else {
+                    //  alert("else");
+                      $("#Div1").css({ "position": "absolute", "top": "15px", "left": "3%", "width": "94%", "height": "35px", "display": "block" });
+                      $("#widgetdiv").css({ "position": "absolute", "top": "55px", "left": "3%", "width": "94%", "height": "890px", "display": "block", "overflow-y": "auto", "overflow-x": "hidden" });
+                      $("#tabs").css({ "font-size": "12px", "margin-top": "10px", "display": "block" })
+                      $("#cart1").css({ "position": "absolute", "top": "55px", "left": "0px", "right": "5px" });
+                      //$("#MedIndex").css({ "margin-top": "150px" });
+                      //$("#med-div").css({ "position": "absolute", "top": "420px", "height": "160px", "left": "1%", "width": "96.88%" });
+                      $("problem-portlet-tab").css({ "position": "relative", "top": "0px", "border": "none", "overflow-y": "auto", "height": "810px" });
+                      $("#MedIndex").css("margin-top", "50px");
+                      $("#Appointment").css({ "position": "relative", "top": "0px", "left": "0px", "width": "100%", "height": "775px" });
+                      $("#ClinicalIndexSub").css({ "position": "absolute", "top": "40px", "left": "0px", "right": "5px" });
+                      $("#ClinicalIndexsub1").css({ "position": "relative", "top": "73px", "height": "1060px", "width": "950px", "left": "-11px", "overflow-y": "auto" });
+                      $("#ClinicalIndex").css({ "position": "absolute", "top": "55px", "left": "0px", "right": "5px", "width": "950px", "height": "1090px", "border": "1px solid #A6C9E2" });
+                      $("#DocumentsIndex").css({ "position": "relative", "top": "105px", "height": "725px", "left": "0px", "margin-right": "-15px", "width": "98.5%" });
+
+                  }
+
+                  var Documents = '@Request.RawUrl.Contains("Documents")';
+                  if (Documents == "True")
+                  {
+                      $("#cart1").css({ "position": "absolute", "top": "5px", "left": "0px", "right": "5px" });
+                      $("#DocumentsIndex").css({ "position": "relative", "top": "5px", "height": "725px", "left": "0px", "margin-right": "-15px", "width": "98.5%" });
+
+
+                  }
+
+                  //   position: absolute; display: block; left: 3%; width: 94%; height: 800px; top: 135px; ,"overflow-y": "auto","overflow-x":"hidden";
+                  //  position: absolute; top: 15px; left: 3%; width: 94%; height: 35px;
+                  $("#quicklinks").css("display", "none");
+              }
+              //alert("GeneralMessageAvailable value 1"+GeneralMessageAvailable);
+              //alert("AppointmentMessageAvailable value 1"+AppointmentMessageAvailable);
+              //alert("ReferralMessageAvailable value 1"+ReferralMessageAvailable);
+              //alert("MedicationMessageAvailable value 1"+MedicationMessageAvailable);
+          });
+        function MessageTabOpenPage()
+        {
+            if (GeneralMessageAvailable == "True" || AppointmentMessageAvailable == "True" || ReferralMessageAvailable == "True" || MedicationMessageAvailable == "True") {
+                //window.location.href = '@Url.RouteUrl("message-index")';
+                chkLogin('@Url.RouteUrl("message-index")');
+            }
+            else {
+
+                alert("You are not connected to a provider so this feature is currently disabled");
+            }
+
+        }
+        function AppointmentTabOpenPage()
+        {
+            if (AppointmentMessageAvailable == "True")
+            {
+                //window.location.href = '@Url.RouteUrl("appointment-index")';
+                chkLogin('@Url.RouteUrl("appointment-index")');
+             }
+             else {
+
+                 alert("You are not connected to a provider so this feature is currently disabled");
+             }
+
+
+        }
+</script>
+   
+    <script>
+        @*$(document).ready(function () {
+
+
+            var upgrade = '@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag';
+            if (upgrade == 'False') {
+                $('#updgradeTest').html('<button id="UpgradePremium" class=" ui-button ui-widget ui-state-default ui-corner-all" onclick="enabling_buttons();UpgradePremium()" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">' +
+                                '<img src="Content/img/upgrade.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">    Upgrade</button>');
+            }
+            else {
+                $('#updgradeTest').html('<button id="UpgradePremium" class=" ui-button ui-widget ui-state-default ui-corner-all" onclick="enabling_buttons();UpgradePremium()" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">' +
+                              '<img src="Content/img/upgrade.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">    Downgrade</button>');
+
+            }
+        });*@
+
+        function UpgradePremiumPat() {
+
+            var returnurl = '@Request.Url.PathAndQuery';
+             var upgrade = '@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag';
+             // alert(returnurl);
+             document.location = '@Url.Action("UpgradePremium", "Home")' + "/?upgrade=" + upgrade + "&returnurl=" + returnurl;
+             //, new { upgrade = true ,returnurl= returnurl}
+        }
+
+
+        //var IDLE_TIMEOUT = 30; //seconds
+        @* var idleSeconds = 0;
+        var IDLE_TIMEOUT =@System.Configuration.ConfigurationManager.AppSettings["InactivityTimeout"]
+
+        //alert(IDLE_TIMEOUT);
+        document.onclick = function () {
+            idleSeconds = 0;
+        };
+        document.onmousemove = function () {
+            idleSeconds = 0;
+        };
+        document.onkeypress = function () {
+            idleSeconds = 0;
+        };
+        window.setInterval(CheckIdleTime, 5000);
+
+        function CheckIdleTime() {
+            idleSeconds = idleSeconds + 5;
+            
+            if (idleSeconds >= IDLE_TIMEOUT) {
+
+        $.timeoutDialog({
+         timeout: 10, countdown: 30,
+         logout_redirect_url: '@Url.RouteUrl("logout", new { controller = "Home", action = "LogOff" })',
+            restart_on_yes: true
+     });*@
+        // location.href = @*'@Url.RouteUrl("logout", new { controller = "Home", action = "LogOff" })';*@
+        //  }
+        // }
+        $(document).ready(function () {
+           
+            
+                if ($(window).width() <= 1250) {
+                    $('.header').css('width', '1250px');
+                    $('.wrapper').css('width', '1250px');
+                    //$('.line-separator').css('margin-left', '23%');
+                }
+                else {
+                    $('.header').css('width', '100%');
+                    $('.wrapper').css('width', '100%');
+                    //$('.line-separator').css('margin-left', '26%');
+                }
+           
+        });
+        $(function () {
+        $(window).resize(function () {
+            if ($(window).width() <= 1250) {
+
+                $('.header').css('width', '1250px');
+                $('.wrapper').css('width', '1250px');
+                //$('.line-separator').css('margin-left', '23%');
+            }
+            else {
+                $('.header').css('width', '100%');
+                $('.wrapper').css('width', '100%');
+                //$('.line-separator').css('margin-left', '26%');
+            }
+        });
+        });
+
+        $(function () {
+            var timeout = @System.Configuration.ConfigurationManager.AppSettings["InactivityTimeout"]
+              $(document).bind("idle.idleTimer", function () {
+                  // function you want to fire when the user goes idle
+                 
+
+                  $.timeoutDialog({
+                      timeout: 1, countdown: 60,
+                      logout_redirect_url: '@Url.RouteUrl("logout", new { controller = "Home", action = "LogOff" })',
+                    restart_on_yes: true
+                });
+            });
+              $(document).bind("active.idleTimer", function () {
+                  // function you want to fire when the user becomes active again
+              });
+              $.idleTimer(timeout);
+          });
+        
+
+
+        $(document).ready(function () {
+
+
+            var upgrade = '@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag';
+                if (upgrade == 'False') {
+                    $('#updgradeTest').html('<button id="UpgradePremium" class=" ui-button ui-widget ui-state-default ui-corner-all" onclick="enabling_buttons();UpgradePremium()" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">' +
+                                    '<img src="Content/img/upgrade.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">    Upgrade</button>');
+                }
+                else {
+                    
+                    @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientId == 16 || AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientId == 17)
+                    { 
+                      <Text>$('#updgradeTest').html('<button id="UpgradePremium" class=" ui-button ui-widget ui-state-default ui-corner-all" onclick="enabling_buttons();UpgradePremium()" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">' +
+                                  '<img src="Content/img/upgrade.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">    Downgrade</button>');
+                    </Text>
+                    }
+                  
+                }
+
+
+                var c = document.getElementById("mycanvas");
+                var ctx = c.getContext("2d");
+                var imageLoader = document.getElementById('fu-my-simple-upload');
+                imageLoader.addEventListener('change', handleImage, false);
+
+                $("#accordian h3").click(function () {
+                   // $("#switch").css("width", "195px");
+                    //alert('tst accordian');
+                    //slide up all the link lists
+                    $("#accordian ul ul").slideUp();
+                    //slide down the link list below the h3 clicked - only if its closed
+                    if (!$(this).next().is(":visible")) {
+                    //    $("#switch").css("width", "210px");
+                        $(this).next().slideDown();
+                        $("#tbl-LinkedAccount").fixedHeaderTable();
+
+                    }
+                })
+
+                function handleImage(e) {
+                    // alert('test');
+                    var reader = new FileReader();
+                    reader.onload = function (event) {
+                        var img = new Image();
+                        img.onload = function () {
+                            //canvas.width = img.width;
+                            //canvas.height = img.height;
+                            ctx.drawImage(img, 0, 0, 200, 200);
+                        }
+                        img.src = event.target.result;
+                    }
+                    reader.readAsDataURL(e.target.files[0]);
+                }
+
+                $('.disable_button').prop('disabled', true);
+
+                $('.disable_button1').css('color', 'rgb(220, 220, 220)');
+                //$('.disable_button1').prop('disabled', true);
+
+                $('.disable_button2').css('color', 'rgb(220, 220, 220)');
+                //$('.disable_button2').prop('disabled', true);
+
+                $('.disable_button3').css('color', 'rgb(220, 220, 220)');
+                //$('.disable_button3').prop('disabled', true);
+
+                $('.disable_button4').css('color', 'rgb(220, 220, 220)');
+                //$('.disable_button4').prop('disabled', true);
+
+                $('.disable_button5').css('color', 'rgb(220, 220, 220)');
+                $('.disable_button6').css('color', 'rgb(220, 220, 220)');
+                $('.disable_button7').css('color', 'rgb(220, 220, 220)');
+                $('.disable_button8').css('color', 'rgb(220, 220, 220)');
+                $('.disable_button9').css('color', 'rgb(220, 220, 220)');
+                $('.disable_button10').css('color', 'rgb(220, 220, 220)');
+                $('.disable_button11').css('color', 'rgb(220, 220, 220)');
+                $('.disable_button12').css('color', 'rgb(220, 220, 220)');
+                $('.disable_button13').css('color', 'rgb(220, 220, 220)');
+                $('.disable_button14').css('color', 'rgb(220, 220, 220)');
+                $('.disable_button15').css('color', 'rgb(220, 220, 220)');
+                $('.disable_button16').css('color', 'rgb(220, 220, 220)');
+                $('.disable_button17').css('color', 'rgb(220, 220, 220)');
+                // $('.disable_button5').prop('disabled', true);
+
+                var premium='@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag';
+            var active = '@AMR.Core.Utilities.RequestHelper.MyGlobalVar.ActiveFlag';
+           @* alert("premium is" + premium);
+            alert("active is " + active);
+            if (premium == "False" && active == "False")
+            {
+                window.location='@Url.Action("PaymentTransfer", "Home")';
+            }
+            else if (premium == "False")
+            {
+                window.location = '@Url.Action("PaymentTransfer", "Home")';
+            }*@
+
+            });
+
+        $(document).ready(function () {
+           // var premium = '@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag';
+           // var active = '@AMR.Core.Utilities.RequestHelper.MyGlobalVar.ActiveFlag';
+           // alert(premium);
+           // alert(active);
+           // if (premium == "False" && active == "False")
+           // {
+           //     window.location.href = '@Url.Action("PaymentTransfer", "Home")'
+           // }
+        });
+
+        function UpgradePremium() {
+
+           
+            var returnurl = '@Request.Url.PathAndQuery';
+            var upgrade = '@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag';
+            
+            if (upgrade == "False")
+            {
+                 @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientId == 16 || AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientId == 17)
+                 { 
+                  <Text>UpgradePremiumPat();</Text>
+                 }
+                 else
+                 {
+                     //  <Text>window.location = '@Url.Action("PaymentTransfer", "Home")';</Text>
+                    <Text>UpgradePremiumdialgue(); </Text>
+                     
+                 }
+                
+
+            }
+            if (upgrade == "True") {
+                //alert(upgrade);
+                 @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientId == 16 || AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientId == 17)
+                 { 
+                  <Text>UpgradePremiumPat();</Text>
+                 }
+            }
+            // alert(returnurl);
+           // document.location = '@Url.Action("UpgradePremium", "Home")' + "/?upgrade=" + upgrade + "&returnurl=" + returnurl;
+            //, new { upgrade = true ,returnurl= returnurl}
+        }
+
+        function SwitchAccount(id) {
+            document.location = '@Url.Action("AccountLinkChage", "Home")' + "/?id=" + id;
+        }
+       
+
+    </script>
+
+
+    <title>@ViewBag.Title</title>
+    @RenderSection("Scripts", false)
+</head>
+<body onmousedown="mouseDownSetFlag();" onload="MM_preloadImages('Content/img/tabLatest/message_tab_over.png','Content/img/tabLatest/dashboard_tab.png','Content/img/tabLatest/patientinfo_tab.png','Content/img/tabLatest/problem_tab.png','Content/img/tabLatest/medications_tab.png','Content/img/tabLatest/messages_tab.png','Content/img/tabLatest/appointment_tab.png','Content/img/tabLatest/summary_tab.png','Content/img/tabLatest/Documents_tab.png');">
+   <div id="AlreadyLog1" title="Another user is logged in">
+<div id="err-msg"></div>
+</div>
+     <input type="hidden" id="AccessId" value="@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientId" />
+    <div id="page_loader" style="display: none;">
+
+        <div id="apDiv1" align="center">
+            <table width="200" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td height="70px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <img src="Content/img/image_559926.gif" width="128" height="64" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;" height="70px;">Please wait ...</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="header" @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.UserLoginEx.StartsWith("R") && AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag == false)
+               {<text> style="height:120px;" </text> }>
+  <table border="0">
+    <tr>
+      <td ><img src="Content/img/AMR-2014-Patient-Portal-Logo.jpg" width="422" height="81" /></td>
+      <td >
+          @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.UserLoginEx.StartsWith("R"))
+               {
+          <div style="text-align: center;font-size:1.1em;color:#327098; padding-left:200px;">
+         
+          Welcome 
+           @{
+               if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.UserLoginEx.StartsWith("R"))
+               {
+                   AMR.Controllers.Controllers.Base.BaseController bc2 = new AMR.Controllers.Controllers.Base.BaseController();
+                   AMR.Models.PatientRepModel patRepresentatives = bc2.GetRepData();
+                             <b style="font-size:1.3em;font-weight:bold;color:#327098;">@patRepresentatives.FirstName @patRepresentatives.LastName</b><Text> representative for </Text>
+               <br />
+                        
+               }
+
+
+
+
+
+               if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName == "")
+               {
+                   AMR.Controllers.Controllers.Base.BaseController bc = new AMR.Controllers.Controllers.Base.BaseController();
+                   AMR.Core.Utilities.GlobalVar gv = bc.PopulatePatientOnLayoutMaster();
+                                        <b style="font-size:1.3em;font-weight:bold;color:#327098;">@gv.PatientName</b>
+               
+
+               }
+               else
+               {
+                                   <b id="PatNameBanner" style="font-size:1.3em;font-weight:bold;color:#327098;">@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName</b>
+               @*<div class="line-separator" style="height:1px; background:#717171; border-bottom:1px solid #313030;"></div>
+               *@
+           }
+              if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName.Length > 12)
+              {
+               <div class="line-separator" style="height:1px; color: #0C7802; border-bottom:2px solid ; margin-left:5%; width:350px;"></div>
+                    }
+              else
+              {
+                <div class="line-separator" style="height:1px; color: #0C7802; border-bottom:2px solid ; margin-left:5%; width:270px;"></div>
+               
+           }
+                                 }
+
+           You Have a  @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag == true)
+                       {<b style="color:#1E844E">Premium Account</b> }
+                       else
+                       {
+             <b style="color:#686868">Standard Account</b><br /> 
+               <img src="~/Content/img/Learn_Premium.jpg" style="cursor:pointer;" onclick="openMyWorkPlace(1);"/>
+                       }
+
+                                </div>
+               }
+          else
+          {
+          <div style="text-align: center;font-size:1.4em;color:#327098;@if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName.Length > 14)
+                                                                       {<text>padding-left:200px;</text>}
+                                                                       else
+                                                                       {<text>padding-left:300px;</text>}">
+         
+          Welcome 
+           @{
+                                                                       if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.UserLoginEx.StartsWith("R"))
+                                                                       {
+                                                                           AMR.Controllers.Controllers.Base.BaseController bc2 = new AMR.Controllers.Controllers.Base.BaseController();
+                                                                           AMR.Models.PatientRepModel patRepresentatives = bc2.GetRepData();
+                             <b style="font-size:1.5em;font-weight:bold;color:#327098;">@patRepresentatives.FirstName @patRepresentatives.LastName</b><Text> representative for </Text>
+
+                        
+                                                                       }
+
+
+
+
+
+                                                                       if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName == "")
+                                                                       {
+                                                                           AMR.Controllers.Controllers.Base.BaseController bc = new AMR.Controllers.Controllers.Base.BaseController();
+                                                                           AMR.Core.Utilities.GlobalVar gv = bc.PopulatePatientOnLayoutMaster();
+                                        <b style="font-size:1.5em;font-weight:bold;color:#327098;">@gv.PatientName</b>
+               
+
+                                                                       }
+                                                                       else
+                                                                       {
+                                   <b id="PatNameBanner" style="font-size:1.5em;font-weight:bold;color:#327098;">@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName</b>
+               @*<div class="line-separator" style="height:1px; background:#717171; border-bottom:1px solid #313030;"></div>
+               *@
+                                                                       }
+
+                                                                       if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName.Length > 14)
+                                                                       {
+               <div class="line-separator" style="height:1px; color: #0C7802; border-bottom:2px solid ; margin-left:5%; width:320px;"></div>
+                                                                       }
+                                                                       else
+                                                                       {
+                <div class="line-separator" style="height:1px; color: #0C7802; border-bottom:2px solid ; margin-left:5%; width:270px;"></div>
+               
+                                                                       }
+                                 }
+
+           You Have a  @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag == true)
+                       {<b style="color:#1E844E">Premium Account</b> }
+                       else
+                       {
+             <b style="color:#686868">Standard Account</b><br /> 
+               <img src="~/Content/img/Learn_Premium.jpg" style="margin-top:-16px;cursor:pointer;" onclick="openMyWorkPlace(1);"/>
+                       }
+
+                                </div>
+          }
+      </td>
+      <td ><img src="Content/img/logout_btn.jpg" width="109" height="38" onclick="createCookie('storagecookie', 'patient', 1);localStorage.quit = $.now();LogoutUser();" style="cursor:pointer;margin-left:100px;"/></td>
+    </tr>
+  </table>
+</div>
+<div class="wrapper" >
+    <div class="container" style="width: 1250px;">
+        @*<div class="masthead">
+           <div style="display:inline-block; width:80%">
+            <h4 class="text-muted" style="margin-top: -20px; padding: 0px;">
+                <img src="Content/img/amr.png" style="height: 125px;" />
+
+            </h4>
+           </div>
+    <div style="display:inline; float:right">
+                
+                <a href='@Url.RouteUrl("logout")'>Logout <img src="Content/img/logout.png" /></a>
+          </div>
+        </div>*@
+
+     @*   <div id="nav" class="horizontal-nav full-width horizontalNav-notprocessed">
+            <ul>
+                <li><a href='@Url.RouteUrl("index")'>Home</a></li>
+                <li><a href='@Url.RouteUrl("clinical-summary-index")'>Clinical Summary</a></li>
+                <li><a href='@Url.RouteUrl("message-index")'>Messages</a></li>
+                <li><a href='@Url.RouteUrl("appointment-index")'>Appointments</a></li>
+                <li><a href='@Url.RouteUrl("medication-index")'>Medications</a></li>
+                <li><a href='@Url.RouteUrl("referral-index")'>Referrals</a></li>
+                 <li><a href='@Url.RouteUrl("account-index")'>Account</a></li>
+            </ul>
+        </div>*@
+        @{
+            
+            AMR.Models.PatientRepModel patRep = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<AMR.Models.PatientRepModel>(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientRep);
+           //Session["PatRep"];
+          }  
+       @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag == true)
+       {
+        <div id="tabsbarPremium" style="position:relative">
+  <div id="mymarketplace"><div href="#" onmouseout="MM_swapImgRestore()" onclick="openMyWorkPlace(1);" onmouseover="MM_swapImage('Imagep1','','Content/img/mymarketplace_over.png',1)"><img src="Content/img/mymarketplace_tab.png" width="167" height="47" id="Imagep1" /></div></div>
+  <div id="managedoctors"><div onclick="chkLogin('@Url.RouteUrl("premium-manage-doctor-index")');" onmouseout="MM_swapImgRestore()"  onmouseover="MM_swapImage('Imagep2','','Content/img/managedoctor_over.png',1)"><img src="Content/img/managedoctor_tab.png" width="193" height="47" id="Imagep2" /></div></div>
+  <div id="emergencycontacts"><div onclick="  @if (patRep.EmergencyContact == true)
+                                              {<Text>  chkLogin('@Url.RouteUrl("premium-emergency-contact-index")'); </Text>}" onmouseout=" MM_swapImgRestore()" onmouseover="MM_swapImage('Imagep3','','Content/img/Emergencycontact_over.png',1)"><img  @if (patRep.EmergencyContact == true)
+                                                                                                                                                                                                                                                          {<Text> src="Content/img/Emergencycontact_tab.png" </Text> }
+                                                                                                                                                                                                                                                          else
+                                                                                                                                                                                                                                                          {<Text> src="Content/img/Emergencycontact_disabled.png" </Text> } width="233" height="47" id="Imagep3" /></div></div>
+  <div id="sharemyrecords"><div  onmouseout="MM_swapImgRestore()"  onclick="chkLogin('@Url.RouteUrl("premium-ShareMyRecords")');" onmouseover="MM_swapImage('Imagep4','','Content/img/sharemyrecords_over.png',1)"><img src="Content/img/sharemyrecords_tab.png" width="211" height="47" id="Imagep4" /></div></div>
+  <div id="medicalportfolio"><div onclick="chkLogin('@Url.RouteUrl("premium-medical-portfolio-index")');" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagep5','','Content/img/medicalportfolio_over.png',1)"><img src="Content/img/medicalportfolio_tab.png" width="201" height="47" id="Imagep5" /></div></div>
+  <div id="generaldocuments"><div onclick="chkLogin('@Url.RouteUrl("premium-general-document-index")');" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagep6','','Content/img/generaldocuments_over.png',1)"><img src="Content/img/generaldocuments_tab.png" width="220" height="47" id="Imagep6" /></div></div>
+</div>
+       }
+        <div id="tabsbar" style="position:relative" onclick="">
+        <div id="dasboard_tab"><div onclick="chkLogin('@Url.RouteUrl("index")');" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image1','','Content/img/tabLatest/dashboard_tab.png',1)"><img src="Content/img/tabLatest/dashboard.png" width="124" height="43" id="Image1" /></div></div>
+  
+            @*            <div id="home"><div onclick="location.href='@Url.RouteUrl("index")';" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image1','','Content/img/home_tab_over.png',1)"><img src="Content/img/home_tab.png" width="91" height="47" id="Image1" /></div></div>
+  *@
+              <div id="patientinfo_tab"><div onclick="chkLogin('@Url.RouteUrl("Patient-Info-Index")');" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image2','','Content/img/tabLatest/patientinfo_tab.png',1)"><img src="Content/img/tabLatest/patientinfo.png" width="153" height="43" id="Image2" /></div></div>
+                       @*<div id="Clinicalsumm"><div onclick="@if (patRep.ClinicalSummary == true)
+                                                            {<Text> location.href='@Url.RouteUrl("clinical-summary-index")'</Text>}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image2','','Content/img/clinicalsumm_tab_over.png',1)"><img @if (patRep.ClinicalSummary == true)
+                                                                                                                                                                                                                                                             {<Text> src="Content/img/clinicalsumm_tab.png" </Text> }
+                                                                                                                                                                                                                                                             else
+                                                                                                                                                                                                                                                             {<Text> src="Content/img/clinicalsumm_tab_disabled.png" </Text> }  width="206" height="47" id="Image2" /></div></div>*@
+
+             <div id="problems_tab"><div onclick="chkLogin('@Url.RouteUrl("ProblemsIndex")');" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image3','','Content/img/tabLatest/problems_tab.png',1)"><img src="Content/img/tabLatest/problems.png" width="137" height="43" id="Image3" /></div></div>
+        
+            <div id="medications_tab"><div onclick="@if (patRep.Medication == true)
+                                                    {<Text> chkLogin('@Url.RouteUrl("medication-index")');</Text>}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image4','','Content/img/tabLatest/medications_tab.png',1)"><img @if (patRep.Medication == true)
+                                                                                                                                                                                                                                                {<Text> src="Content/img/tabLatest/medications.png" </Text> }
+                                                                                                                                                                                                                                                else
+                                                                                                                                                                                                                                                {<Text> src="Content/img/tabLatest/disables/medications_disable.png" </Text> } width="158" height="43" id="Image4" /></div></div>        
+   @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.FacilitySelectId == 0 || (AMR.Core.Utilities.RequestHelper.MyGlobalVar.AppointmentMessageAvailable == false && AMR.Core.Utilities.RequestHelper.MyGlobalVar.GeneralMessageAvailable == false && AMR.Core.Utilities.RequestHelper.MyGlobalVar.MedicationMessageAvailable == false && AMR.Core.Utilities.RequestHelper.MyGlobalVar.ReferralMessageAvailable == false))
+   {                                                                
+  <div id="messages_tab"><div id="circle"  style="text-align:center;display:none;"></div>
+      <div onclick="
+      @if (patRep.Messaging == true)
+      {<Text> 
+ MessageTabOpenPage()</Text>}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image5','','Content/img/tabLatest/messages_withoutbubble_tab.png',1)"><img  @if (patRep.Messaging == true)
+                                                                                                                                                         {<Text>  src="Content/img/tabLatest/messages_withoutbubble.png" </Text> }
+                                                                                                                                                         else
+                                                                                                                                                         {<Text> src="Content/img/tabLatest/disables/messages_disable.png" </Text> }   width="152" height="43" id="Image5" /></div></div>
+   
+        <div id="Documents_tab"><div onclick="chkLogin('@Url.RouteUrl("Documents")');" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image8','','Content/img/tabLatest/Documents_tab.png',1)"><img src="Content/img/tabLatest/Documents.png" width="154" height="43" id="Image8" /></div></div>         
+   }
+   else
+   {
+   <div id="messages_tab"><div id="circle"  style="text-align:center;"></div>
+      <div onclick="
+      @if (patRep.Messaging == true)
+      {<Text> 
+ MessageTabOpenPage()</Text>}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image5','','Content/img/tabLatest/messages_tab.png',1)"><img  @if (patRep.Messaging == true)
+                                                                                                                                                         {<Text>  src="Content/img/tabLatest/messages.png" </Text> }
+                                                                                                                                                         else
+                                                                                                                                                         {<Text> src="Content/img/tabLatest/disables/messages_disable.png" </Text> }   width="152" height="43" id="Image5" /></div></div>
+                
+        <div id="Documents_tab"><div onclick="chkLogin('@Url.RouteUrl("Documents")');" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image8','','Content/img/tabLatest/Documents_tab.png',1)"><img src="Content/img/tabLatest/Documents.png" width="152" height="43" id="Image8" /></div></div>         
+  
+  
+   }
+  <div id="appointments_tab"><div onclick="@if (patRep.Appointment == true)
+                                           {<Text>  AppointmentTabOpenPage() </Text>}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image6','','Content/img/tabLatest/appointment_tab.png',1)"><img @if (patRep.Appointment == true)
+                                                                                                                                                                                                                   {<Text>  src="Content/img/tabLatest/appointment.png" </Text> }
+                                                                                                                                                                                                                   else
+                                                                                                                                                                                                                   {<Text>  src="Content/img/tabLatest/disables/appointment_disable.png" </Text> } width="174" height="43" id="Image6" /></div></div>
+  
+  
+  
+  
+  @*<div id="Refferals_tab"><div onclick="@if (patRep.Messaging == true)
+                                    {<Text> location.href='@Url.RouteUrl("message-index")?id=5'</Text>}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image7','','Content/img/ref_tab_over.png',1)"><img @if (patRep.Messaging == true)
+                                                                                                                                                                                                                        {<Text> src="Content/img/ref_tab.png" </Text> }
+                                                                                                                                                                                                                        else
+                                                                                                                                                                                                                        {<Text> src="Content/img/ref_tab_disabled.png" </Text> } width="131" height="47" id="Image7" /></div></div>*@
+                      <div id="summary_tab"><div onclick="chkLogin('@Url.RouteUrl("Summary-Clinical")');" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image7','','Content/img/tabLatest/summary_tab.png',1)"><img src="Content/img/tabLatest/summary.png" width="137" height="43" id="Image7" /></div></div>
+  
+  @*<div id="mypremiumservices_tab"><div onclick="openMyWorkPlace(1);"   onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image9','','Content/img/tabLatest/mypremiumservices_tab.png',1)"><img src="Content/img/tabLatest/mypremiumservices.png" width="235" height="43" id="Image9" /></div></div>*@
+
+ 
+</div>
+
+
+        
+        <div  class="@if (Request.RawUrl.Contains("clinical"))
+                     { <Text>main_div_clinical_summary</Text>}
+                     else if (Request.RawUrl.Contains("message"))
+                     { <Text>main_div_messages</Text>}
+                     else
+                     { <Text>main_div</Text>} ui-corner-all">
+            <div class="inside_div1">
+                <!-- Accordion -->
+                <div id="accordion" style="margin-top: -7px;">
+                    <h3>
+                        </h3>
+                    <div>
+                        <div style="@(Request.RawUrl.Contains("clinical") || Request.RawUrl.Contains("message") ? "height: 680px;" : "height: 680px;")">
+                            <div id="Blue_Panel">
+
+                                 @*<h1 style="font-size: 16px;">@gv.PatientName</h1>*@
+                                @{
+                                    if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.UserLoginEx.StartsWith("R"))
+                                    {
+                                        if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName == "")
+                                        {
+                                            AMR.Controllers.Controllers.Base.BaseController bc = new AMR.Controllers.Controllers.Base.BaseController();
+                                            AMR.Core.Utilities.GlobalVar gv = bc.PopulatePatientOnLayoutMaster();
+
+                                            AMR.Controllers.Controllers.Base.BaseController bc2 = new AMR.Controllers.Controllers.Base.BaseController();
+                                            AMR.Models.PatientRepModel patRepresentatives = bc2.GetRepData();
+                                        
+                                        <h1 style="font-size: 1.3em;font-weight:bold;color:White">@patRepresentatives.FirstName  @patRepresentatives.LastName <Text> representative for</Text> @gv.PatientName   </h1>
+                               
+
+
+                                        }
+                                        else
+                                        {
+                                            AMR.Controllers.Controllers.Base.BaseController bc2 = new AMR.Controllers.Controllers.Base.BaseController();
+                                            AMR.Models.PatientRepModel patRepresentatives = bc2.GetRepData();
+                                    <h1 style="font-size: 1.3em;font-weight:bold;color:White">@patRepresentatives.FirstName @patRepresentatives.LastName <Text> representative for</Text> @AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName</h1>
+                                        }
+                                    }
+                                    else
+                                    {  //in case of patient is not representative
+                                        if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName == "")
+                                        {
+                                            AMR.Controllers.Controllers.Base.BaseController bc = new AMR.Controllers.Controllers.Base.BaseController();
+                                            AMR.Core.Utilities.GlobalVar gv = bc.PopulatePatientOnLayoutMaster();
+                                        <h1 style="font-size: 1.3em;font-weight:bold;color:White">@gv.PatientName</h1>
+                               
+
+
+                                        }
+                                        else
+                                        {
+                                    <h1 style="font-size: 1.3em;font-weight:bold;color:White">@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName</h1>
+                                        }    //in case of patient is not representative
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                    
+                                 }
+
+                                <div id="PatientImg" >
+                                   <img src="data:image/png;base64,@Session["PatDisp"].ToString()" id="PatientImage" title="Upload Pateint Image" style="cursor:pointer;  border: 1px solid rgb(166, 201, 226); -moz-border-radius: 5px; width: 90%; -webkit-border-radius: 5px; border-radius: 5px; margin-bottom: 5px;height:140px;"  onclick="imageUpload();"/>
+                     </div>
+                                @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag == true)
+                                {
+                                 <div id="accordian" >
+                                       <ul>
+                                  <li id="sub">
+                                   <h3 id="head"><span class="icon-dashboard"></span><a id="switch" style="width:195px;font-size: 12px; font-weight:normal;">Switch Accounts</a></h3>
+                                      @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientId != '0')
+                                      {
+                                          AMR.Controllers.Controllers.Base.BaseController bc = new AMR.Controllers.Controllers.Base.BaseController();
+
+                                          AMR.Models.HomeViewModel model = new AMR.Models.HomeViewModel();
+                                          model = bc.MasterLayout();
+                                            @Html.Partial("_Index_Switch_Account", model.patientaccount)
+                                      }
+                                  </li>
+                                            </ul>
+                                                                        
+                                </div>
+                                }
+                                    <a id="btnAccountSetting" href='@Url.RouteUrl("account-index")' onclick="enabling_buttons();" style="width: 90%; font-size: 11px; font-weight: normal"> 
+                            Account Settings</a>
+                               
+                                <button id="btnViewMyHealthRecord"  onclick="location.href='@Url.RouteUrl("Summary-Clinical")';"  class="ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 11px; font-weight: normal" type="submit">
+                                    Clinical Summary</button>
+                                <button  id="btnDownloadAndTransmit"  @if (patRep.DownloadTransmit == false)
+                                                                      {<Text>style="width: 90%; font-size: 11px; font-weight:normal; color: rgb(220, 220, 220);" </Text>}
+                                                                      else
+                                                                      {<Text>id="addDownloadContinuity"  onclick="window.open('@Url.Action("CCDLocation", "Home")');" </Text> }   class="ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 11px; font-weight:normal;" type="submit">
+                                  View, Download & Transmit</button>
+                                 @*<button  @if(patRep.DownloadTransmit == false){<Text>style="width: 90%; font-size: 0.8em; font-weight: normal; color: rgb(220, 220, 220);" </Text>} else {<Text>onclick="clearFields();" id="addSendContinuity"  </Text> } class="ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                 <img src="Content/img/send_email.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;" >  Send Health Record </button>*@
+                                 
+                            
+                                  <div id='updgradeTest'><button id="UpgradePremium" class=" ui-button ui-widget ui-state-default ui-corner-all" onclick="enabling_buttons();UpgradePremium()" style="width: 90%; font-size: 11px; font-weight: normal;display:none;" type="submit">
+                                   Upgrade</button></div>
+                            </div>
+
+                            <div style="height: 2px;"></div>
+                            <div id="Green_Panel">
+                           
+                               <div style="background-image:url('Content/img/green_header.png'); z-index: 1; width:100%;"><img src="Content/img/green_header.png" width="215" height="33"></div>
+                                <button id = "btnDrugInformationCenter" class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(1);" style="width: 90%; font-size: 11px; font-weight: normal" type="submit">
+                                  Drug Information Center</button>
+                                <button id = "btnHealthInformationLibrary" class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(2);" style="width: 90%; font-size: 11px; font-weight: normal" type="submit">
+                                   Health Information Library</button>
+                                <button id = "btnICEProgram" class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(3);" style="width: 90%; font-size: 11px; font-weight: normal" type="submit">
+                                    ICE Program</button>
+                                 <button id = "btnLocatePharmacy" class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(4);" style="width: 90%; font-size: 11px; font-weight: normal" type="submit">
+                                   Locate a Pharmacy</button>
+                                <button  id = "btnMedicalBraceletes" class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(5);" style="width: 90%; font-size: 11px; font-weight: normal" type="submit">
+                                    Medical I.D. Bracelets</button>
+                                <button id = "btnMedicalIDCard" class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(6);" style="width: 90%; font-size: 11px; font-weight: normal" type="submit">
+                                    Medical I.D. Card</button>
+                                 <button id = "btnOnlineBloodLab" class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(7);"  style="width: 90%; font-size: 11px; font-weight: normal" type="submit">
+                                   Online Blood Lab</button>
+                                <button id = "btnDiscoundCards" class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(8);" style="width: 90%; font-size: 11px; font-weight: normal" type="submit">
+                                  Prescription Discount Cards</button>
+                                <button id = "btnMedicalPortfolio" class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(9);" style="width: 90%; font-size: 11px; font-weight: normal" type="submit">
+                                  Medical Portfolio</button>
+                                <button id = "btnShareMyRecord" class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(10);" style="width: 90%; font-size: 11px; font-weight: normal" type="submit">
+                                  Share My Records</button>
+
+                                
+
+                            </div>
+                            <div style="height: 50px;"></div>
+                        </div>
+                    </div>
+                   @* <h3>
+                        <img src="Content/img/Pratice-icon.png" style="padding-right: 5px;" />Premium Services</h3>*@
+                    <!--<div>
+                        <div style="@(Request.RawUrl.Contains("clinical") || Request.RawUrl.Contains("message") ? "height: 1083px;" : "height: 580px;")">
+                            <div id="Green_Panel">
+                               <div style="background-image:url('Content/img/green_header.png'); z-index: 1; width:100%;"><img src="Content/img/green_header.png" width="215" height="33"></div>
+                                <button class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(1);" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                  <img src="Content/img/account1.png" width="20px" style=" float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">Drug Information Center</button>
+                                <button class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(2);" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                   <img src="Content/img/chart1.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;"> Health Information Library</button>
+                                <button class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(3);" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                  <img src="Content/img/download1.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">  ICE Program</button>
+                                 <button class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(4);" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                   <img src="Content/img/upgrade.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">Locate a Pharmacy</button>
+                                <button class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(5);" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                     <img src="Content/img/account1.png" width="20px" style=" float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">Medical I.D. Bracelets</button>
+                                <button class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(6);" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    <img src="Content/img/chart1.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">Medical ID Card</button>
+                                 <button class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(7);"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    <img src="Content/img/download1.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">Online Blood Lab</button>
+                                <button class="ui-button ui-widget ui-state-default ui-corner-all " onclick="openMyWorkPlace(8);" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                   <img src="Content/img/upgrade.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">Prescription Discount Cards</button>
+                                @*<button class="disable_button ui-button ui-widget ui-state-default ui-corner-all "  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Discounts</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Contacts</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Doctors</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Medical Conditions</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Medical Reports</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Medications</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Surgeries</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Allergies</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Legal</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Insurance</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Professional Advisors</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Access ID Card</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Education</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Documents</button>
+                                <button class="disable_button ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                    My Family</button>*@
+                                
+
+                            </div>
+                        </div>
+                    </div>-->
+                    @*<h3>
+                        <img src="Content/img/Pratice-icon.png" style="padding-right: 5px;" />Practice Links</h3>
+                    <div>
+                        <div style="@(Request.RawUrl.Contains("clinical") || Request.RawUrl.Contains("message") ? "height: 1080px;" : "height: 620px;")">Phasellus mattis tincidunt nibh.</div>
+                    </div>*@
+                  @*  <h3>
+                        <img src="Content/img/Setting-icon.png" style="padding-right: 5px;" />Settings</h3>
+                    <div>
+                        <div style="@(Request.RawUrl.Contains("clinical") || Request.RawUrl.Contains("message") ? "height: 1080px;" : "height: 620px;")">
+
+                           
+                            <div id="nav_panel_widget">
+
+                                <h1 style="font-size: 16px">Widgets
+                                </h1>
+                                @if (ViewBag.DisableList != null)
+                                {
+                                    foreach (var names in ViewBag.DisableList)
+                                    {
+                                        if (names.Key == "appointmentWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="appointmentWidgetButton" onclick="show_widg1();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Appointment</button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_widg1();" class="disable_button1 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Appointment</button>
+                                            }
+                                        }
+                                        if (names.Key == "medicationWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="medicationWidgetButton" onclick="show_widg2();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Medication
+                                    </button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_widg2();" class="disable_button2 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Medication
+                                    </button>
+                                            }
+                                        }
+                                        if (names.Key == "labWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="labWidgetButton" onclick="show_widg3();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Lab Tests</button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_widg3();" class="disable_button3 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Lab Tests</button>
+                                            }
+                                        }
+
+                                        if (names.Key == "statementWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="statementWidgetButton" onclick="show_widg4();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Statements</button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_widg4();" class="disable_button4 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Statements</button>
+                                            }
+                                        }
+                                        if (names.Key == "PremiumWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="PremiumWidgetButton" onclick="show_widg5();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Premium Membership Program</button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_widg5();" class="disable_button5 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Premium Membership Program</button>
+                                            }
+                                        }
+                                        if (names.Key == "visitsWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="visitsWidgetButton" onclick="show_visitswidg();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Visits</button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_visitswidg();" class="disable_button6 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Visits</button>
+                                            }
+                                        }
+                                        if (names.Key == "vitalWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="vitalWidgetButton" onclick="show_vitalwidg();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Vitals
+                                    </button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_vitalwidg();" class="disable_button7 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Vitals
+                                    </button>       
+                                            }
+                                        }
+                                        if (names.Key == "socialhistWidget")
+                                        {
+
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="socialhistWidgetButton" onclick="show_socialhistwidg();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Social History</button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_socialhistwidg();" class="disable_button8 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Social History</button>
+                                            }
+                                        }
+                                        if (names.Key == "familyhistWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="familyhistWidgetButton" onclick="show_familyhistwidg();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Family History</button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_familyhistwidg();" class="disable_button9 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Family History</button>
+                                            }
+                                        }
+                                        if (names.Key == "PmedicalhistWidget")
+                                        {
+
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="PmedicalhistWidgetButton" onclick="show_Pmedicalhistwidg();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Medical History</button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_Pmedicalhistwidg();" class="disable_button10 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Medical History</button>
+                                            }
+                                        }
+                                        if (names.Key == "immunizWidget")
+                                        {
+
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="immunizWidgetButton" onclick="show_immunizwidg();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Immunizations</button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_immunizwidg();" class="disable_button11 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Immunizations</button>
+                                            }
+                                        }
+                                        if (names.Key == "probsWidget")
+                                        {
+
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="probsWidgetButton" onclick="show_probswidg();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Problems</button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_probswidg();" class="disable_button12 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Problems</button>
+                                            }
+                                        }
+                                        if (names.Key == "allergyWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="allergyWidgetButton" onclick="show_allergywidg();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Allergies</button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_allergywidg();" class="disable_button13 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Allergies</button>
+                                            }
+                                        }
+                                        if (names.Key == "pocWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                    <button id="pocWidgetButton" onclick="show_pocwidg();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Plan Of Care</button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_pocwidg();" class="disable_button14 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                        Plan Of Care</button>
+                                            }
+                                        }
+                                        if (names.Key == "insuranceWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                     <button id="insuranceWidgetButton" onclick="show_insurancewidg();" class="ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Insurance</button>
+                                            }
+                                            else
+                                            {
+                                    <button onclick="show_insurancewidg();" class="disable_button15 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Insurance</button>
+                                            }
+                                        }
+                                        if (names.Key == "documentsWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                      <button id="documentsWidgetButton" onclick="show_docewidg();" class="ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Documents</button>
+                                            }
+                                            else
+                                            {
+                                     <button onclick="show_docewidg();" class="disable_button16 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Documents</button>
+                                            }
+                                        }
+                                        if (names.Key == "ProceduresWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                      <button id="ProceduresWidgetButton" onclick="show_Procedurewidg();" class="ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Procedures</button>
+                                            }
+                                            else
+                                            {
+                                     <button onclick="show_Procedurewidg();" class="disable_button17 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Procedures</button>
+                                            }
+                                        }
+                                        if (names.Key == "ClinicalInstructionsWidget")
+                                        {
+                                            if (names.Value == 0)
+                                            {
+                                      <button id="ClinicalInstructionsWidgetButton" onclick="show_ClinicalInstructionsWidget();" class="ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Clinical Instructions</button>
+                                            }
+                                            else
+                                            {
+                                     <button onclick="show_ClinicalInstructionsWidget();" class="disable_button18 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Clinical Instructions</button>
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+
+                                <button onclick="show_widg1();" class="disable_button1 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Appointment</button>
+                                <button onclick="show_widg2();" class="disable_button2 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Medication
+                                </button>
+                                <button onclick="show_widg3();" class="disable_button3 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Lab Tests</button>
+                                <button onclick="show_widg4();" class="disable_button4 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Statements</button>
+                                <button onclick="show_widg5();" class="disable_button5 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Premium Membership Program</button>
+                                <button onclick="show_visitswidg();" class="disable_button6 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Visits</button>
+                                <button onclick="show_vitalwidg();" class="disable_button7 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Vitals
+                                </button>
+                                <button onclick="show_socialhistwidg();" class="disable_button8 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Social History</button>
+                                <button onclick="show_familyhistwidg();" class="disable_button9 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Family History</button>
+                                <button onclick="show_Pmedicalhistwidg();" class="disable_button10 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Medical History</button>
+                                <button onclick="show_immunizwidg();" class="disable_button11 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Immunizations</button>
+                                 <button onclick="show_probswidg();" class="disable_button12 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Problems</button>
+                                 <button onclick="show_allergywidg();" class="disable_button13 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Allergies</button>
+                                 <button onclick="show_pocwidg();" class="disable_button14 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Plan Of Care</button>
+                                  <button onclick="show_insurancewidg();" class="disable_button15 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Insurance</button>
+                                <button onclick="show_docewidg();" class="disable_button16 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Documents</button>
+                                <button onclick="show_Procedurewidg();" class="disable_button17 ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal"  type="submit">
+                                    Procedures</button>
+                        
+                                }
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+            <div class="inside_div2">
+                @RenderBody()
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- /container End -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+   @* <div style="width: 100%; height: 20px;">
+
+    </div>*@
+    <div style="width: 940px; height: 40px; margin: 0px auto; border-radius: 30px; background-color: #fff; margin-top: 20px; text-align:center;">
+            <p style="margin-left:40px; padding-top: 10px; font-family: Verdana, Geneva, sans-serif; font-size: 12px;">Copyright © 2005 -2014 Access My Records, Inc. - AMR Patient Portal Version 2.0 (@AMR.Core.Utilities.RequestHelper.MyGlobalVar.BuildNo) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="anc" onclick="javascript:window.open('../Content/Legal/PrivacyPolicy.html');">Privacy</span><strong>|</strong><span class="anc" onclick="javascript:window.open('../Content/Legal/Terms.html')">Terms</span></p>
+</div>
+    </div>
+    
+<!--pop up add profile image-->
+<div id="profileImage-form" title="Upload Patient Image">
+    
+    <table width="100%">
+        <tr>
+            <td valign="top"> @*<input  type="file" id="imageLoader" name="imageLoader"/>  *@
+              <div> <input id="fu-my-simple-upload" type="file" value="" name="MyFile"/> @*&nbsp;<a href="#" id="hl-start-upload">Start upload</a> *@</div>
+            </td>
+            <td>  
+                <div id="newCanvas">
+            <canvas  id = "mycanvas" style="cursor:pointer;  border: 1px solid rgb(166, 201, 226); -moz-border-radius: 5px;  -webkit-border-radius: 5px; border-radius: 5px; margin-bottom: 5px; position:relative;" width = "200" height = "200" 
+             align="right" > </canvas>
+                    </div>
+            </td>
+
+        </tr>
+
+    </table>
+
+
+</div>
+<!--End of popup add profile iamge-->
+
+
+
+
+<!--pop up of MyWorkPlace-->
+<div id="form-myWorkPlace" title="My Marketplace">
+     <iframe id="myWorkPlaceFrame" src="/Content/site/1.html" width="100%" height="400px" style="border-width:1px;"></iframe> 
+     
+</div>
+<!--End of popup of MyWorkPlace-->
+    
+    <!-----Pop Up for Premimum dialge-->
+
+<div id="form-Premiumdialge" title="Premium">
+     <iframe id="PremiumFrame" src="/Content/site/Premium.html" width="700px" height="630px" style="border-width:1px;"></iframe> 
+
+</div>
+
+
+<!--End of popup of MyWorkPlace-->
+    
+    
+<!--pop up add download Continuity-->
+
+
+<div id="form-addDownloadContinuity" title="View, Download & Transmit">
+    <div style="width:300px;  height:400px; position:relative; left:30px; ">
+        <table>
+         <tr>
+           @*<td width="100px">Location:</td> <td>  @Html.Action("FacilityPartialViewDownloadHealthRecord", "Home", new { @class = " txt  ui-corner-all bcom", style = "width:200px;", id = "cmbContinuityFacilityDownload", onchange = " DownloadHealthRecord(this.value,'location'); toggle_combobox_ForDownloadAndSend();" })   </td>
+       *@</tr>
+
+      <tr>
+            @*<td width="100px">Visit:</td> <td> <div id="layoutComboBoxPortlet">  @Html.Action("VisitPartialViewDownloadHealthRecord", "Home", new { @class = " txt  ui-corner-all bcom", style = "width:200px;", id = "cmbContinuityVisitsDownload", onchange = " DownloadHealthRecord(this.value,'visit'); toggle_combobox_ForDownloadAndSend();" }) </div></td>
+     *@ </tr>
+
+        </table>
+         <br />
+        <table>
+            <tr><td><p class="anc" onclick="DownloadContinuityCheck();">Select All</p></td><td width="10px;"></td><td><p class="anc" onclick="DownloadContinuityUncheck();">Clear</p></td></tr>
+       </table>
+       
+        
+             <div id="downloadContinuityCheckBoxContainer"style="width:100%; height:400px; border:1px solid black; ">
+         <table>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chkdownload" id="chkProblemDownload" /></td><td>Problems</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chkdownload"  id="chkAllergiesDownload" /></td><td>Allergies</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chkdownload"  id="chkImmumnizationDownload"/></td><td>Immunizations</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chkdownload"  id="chkMedicationsDownload"/></td><td>Medications</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chkdownload"  id="chkSocialHistoryDownload"/></td><td>Social History</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chkdownload"  id="chkVitalSignsDownload"/></td><td>Vital Signs</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chkdownload"  id="chkProceduresDownload"/></td><td>Procedures</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chkdownload"  id="chkLabsDownload"/></td><td>Labs</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chkdownload"  id="chkClinicalInstructionsDownload"/></td><td>Clinical Instructions</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chkdownload"  id="chkFutureAppointmentDownload"/></td><td>Future Appointment</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chkdownload"  id="chkRefferalsDownload"/></td><td>Referrals</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chkdownload"  id="chkScheduledTestsDownload"/></td><td>Scheduled Tests</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chkdownload"  id="chkDecisionAidsDownload"/></td><td>Decision Aids</td></tr>
+          
+         </table>
+     </div>
+
+
+    </div>
+    <div style="height:30px;"></div>
+
+</div>
+<!--pop up add download Continuity-->
+
+
+          
+<!--pop up add send Continuity-->
+
+
+<div id="form-addSendContinuity" title="Send Continuity of Care Document">
+    <div style="width:300px;  height:400px; position:relative; left:30px; ">
+        <table>
+             <tr>
+           <td width="100px">Email:</td> <td><input id="txtSendEmailCCD" type="text"  style="width:200px;" class="txt"/> </td>
+       </tr>
+              <tr>
+
+            @*<td width="100px">Location:</td> <td>  @Html.Action("FacilityPartialView", "Home", new { @class = " txt  ui-corner-all bcom", style = "width:200px;", id = "cmbContinuityVisitsSend", onchange = " SendHealthRecord(this.value,'location'); toggle_combobox_ForDownloadAndSend();" })</td>*@
+
+            
+
+      </tr>
+
+            <tr>
+           @*<td width="100px">Visit:</td> <td> <div id="layoutComboBoxPortletSendHealth">@Html.Action("VisitPartialView", "Home", new { @class = " txt  ui-corner-all bcom", style = "width:200px;", id = "cmbContinuityFacilitySend", onchange = " SendHealthRecord(this.value,'visit'); toggle_combobox_ForDownloadAndSend();" }) </div>  </td>
+      *@ </tr>
+
+        </table>
+         <br />
+        <table>
+            <tr><td><p class="anc" onclick="SendContinuityCheck(); ">Select All</p></td><td width="10px;"></td><td><p class="anc" onclick="SendContinuityUncheck();">Clear</p></td></tr>
+       </table>
+       
+        
+             <div id="sendContinuityCheckBoxContainer" style="width:100%; height:300px; border:1px solid black; ">
+         <table>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chksend" id="chkProblemSend" /></td><td>Problems</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chksend" id="chkAllergiesSend" /></td><td>Allergies</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chksend" id="chkImmumnizationSend"/></td><td>Immunizations</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chksend" id="chkMedicationsSend"/></td><td>Medications</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chksend" id="chkLabsSend"/></td><td>Labs</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chksend" id="chkClinicalInstructionsSend"/></td><td>Clinical Instructions</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chksend" id="chkFutureAppointmentSend"/></td><td>Future Appointment</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chksend" id="chkRefferalsSend"/></td><td>Referrals</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chksend" id="chkScheduledTestsSend"/></td><td>Scheduled Tests</td></tr>
+             <tr><td width="50px" align="center"><input type="checkbox" name="chksend" id="chkDecisionAidsSend"/></td><td>Decision Aids</td></tr>
+          
+         </table>
+     </div>
+
+
+    </div>
+    <div style="height:50px;"></div>
+
+</div>
+<!--pop up add send Continuity-->
+
+
+
+<div style="display:none;">
+    <iframe id="iframeCCDXML" onload="HideLoaderReportViewer();" src="" width="100%" height="100%" ></iframe>
+</div>
+<input type="hidden" id="hdAppointmentMessages"/>
+    <input type="hidden" id="hdGeneralMessages"/>
+    <input type="hidden" id="hdMedicationMessages"/>
+    <input type="hidden" id="hdReferralMessages"/>
+    <input type="hidden" id="hdTotalMessages"/>
+
+
+
+
+    <!-- Start Office Document Iframe Page -->
+<div id="divOfficeDocIframe" style="display:none;">
+    <iframe id="iframeViewAttachment" onload="HideLoaderReportViewer();" style="border: 0px;" src="" width="100%" height="100%"></iframe>
+</div>
+<!-- Start Office Document Iframe Page -->
+</body>
+    
+
+</html>
+
+

@@ -1,0 +1,748 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+    @Scripts.Render("~/Bundle/jquery")
+    @Styles.Render("~/Bundle/css")
+    <script type="text/javascript" src="@Url.Content("~/Content/js/CookieHandler.js")"></script>
+    <!-- Bootstrap core CSS -->
+ @*   <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+      <link href="@Url.Content("~/Content/css/fixed-header/960.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/fixed-header/defaultTheme.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/fixed-header/myTheme.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/justified-nav.css")" rel="stylesheet">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/themes/redmond/jquery-ui.css")" />
+    <link href="@Url.Content("~/Content/css/themes/redmond/jquery-ui-1.10.3.custom.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/table-style.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/navigation-bar.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/style-main.css")" rel="stylesheet">*@
+   
+  @*  <script src="@Url.Content("~/Content/css/ui/jquery.ui.core.js")"></script>
+	<script src="@Url.Content("~/Content/css/ui/jquery.ui.widget.js")"></script>
+	<script src="@Url.Content("~/Content/css/ui/jquery.ui.accordion.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-1.9.1.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-1.9.2.custom.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-ui.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.maskedinput-1.2.2.js")"></script>
+    <script src="@Url.Content("~/Content/js/validator.js")"></script>
+     <link href="@Url.Content("~/Content/css/jquery.treeview.css")" rel="stylesheet">
+    <script src="@Url.Content("~/Content/js/timeout-dialog.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.idle-timer.js")"></script>
+     <script src="@Url.Content("~/Content/js/jquery.fileupload.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.fileupload-ui.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.iframe-transport.js")"></script>
+      <script src="@Url.Content("~/Content/js/jquery.fixedheadertable.js")"></script>*@
+
+    <script>
+        $(window).on("storage", function (e) {
+            var event = e.originalEvent
+           
+            if (event.key == "quit") {
+                var x = readCookie('storagecookie')
+                if (x) {
+                    if (x == "provider") {
+                        eraseCookie('storagecookie');
+                        window.location.href = '@Url.RouteUrl("ProviderLogin")';
+                    }
+                }
+                
+                
+            }
+           // localStorage.quit = $.now()
+      })
+     
+	</script>
+    <script>
+
+        $(document).ready(function () {
+            
+          //  onPageLoad();
+        });
+
+        function deleteAllCookies() {
+            var cookies = document.cookie.split(";");
+
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            }
+        }
+        var isClose = false;
+        var keyboardevent = false;
+
+
+
+        window.onbeforeunload = function (e) {
+            // detectRefresh();
+
+            //if (self.close == true) {
+
+            //    console.log('self.close');
+            //    isClose = false;
+            //}
+            //else {
+            //    isClose = true;
+                //if (window.event) //for IE.
+                //{
+
+                //    if (window.event.clientX < 40 && window.event.clientY < 0 && keyboardevent == false) {
+                //        console.log('Window back button');
+                //        isClose = true;
+                //    }
+                //    else if (keyboardevent == false) {
+                //        console.log('Window refreshed');
+                //        isClose = true;
+                //    }
+
+                //}
+                //else { // FF and chrome
+
+                //    if (event.currentTarget.performance.navigation.type == 1 && keyboardevent == false) {
+                //        console.log('Window refreshed');
+                //        isClose = true;
+                //    }
+                //    if (event.currentTarget.performance.navigation.type == 2 && keyboardevent == false) {
+                //        console.log('Window back button');
+                //        isClose = true;
+                //    }
+
+                //}
+         //   }
+
+
+
+
+            if (!isClose) {
+               // deleteAllCookies();
+                return;
+            }
+            else {
+                isClose = false;
+                keyboardevent = false;
+                // return  "You are not closing";
+            }
+        }
+
+        //this code will handle the F5 or Ctrl+F5 key
+
+        // Collapse | Copy Code
+
+        //need to handle more cases like ctrl+R whose codes are not listed here
+        document.onkeydown = checkKeycode
+        function checkKeycode(e) {
+
+
+            if (!e) //Firefox and Safari gets argument directly.
+            {
+                e = window.event; // this is for IE
+            }
+
+            var keycode = e.keyCode ? e.keyCode : e.which;
+
+            if (keycode == 116) {
+                // for Ctrl +F5
+                isClose = true;
+                keyboardevent = true;
+            }
+            else if (keycode == 17) {
+                // for Ctrl + W
+                isClose = false;
+                keyboardevent = true;
+            }
+            else if (keycode == 115) {
+                // for Alt+ F4
+                isClose = false;
+                keyboardevent = true;
+            }
+            else if (keycode == 8) {
+                //back space
+                isClose = true;
+                keyboardevent = true;
+            }
+            else if (keycode == 82) {
+                // for Ctrl+ R
+                isClose = true;
+                keyboardevent = true;
+            }
+
+        }
+        function mouseDownSetFlag() {
+
+            isClose = true;
+        }
+        function doUnload() {
+            //if(!isClose)
+            //{
+            //    alert('window is closing');
+            //}
+        }
+</script>
+    <!-- Timeout script -- SJF 01/211/2014-->
+    <script>
+
+        $(function () {
+            var timeout = @System.Configuration.ConfigurationManager.AppSettings["InactivityTimeout"]
+               $(document).bind("idle.idleTimer", function () {
+                   // function you want to fire when the user goes idle
+                   createCookie('storagecookie', 'provider', 1);
+                   localStorage.quit = $.now();
+                   $.timeoutDialog({
+                       timeout: 1, countdown: 60,
+                       logout_redirect_url: '@Url.RouteUrl("logout", new { controller = "Home", action = "LogOffProviderPortal" })',
+                    restart_on_yes: true
+                });
+            });
+               $(document).bind("active.idleTimer", function () {
+                   // function you want to fire when the user becomes active again
+               });
+               $.idleTimer(timeout);
+           });
+
+    </script>
+
+    <!--Acccordian script start--->
+ @*   <script>
+        $(window).resize(function () {
+            $("#timeout-dialog").dialog("option", "position", "center");
+        });
+        $(function () {
+
+            $("#accordion").accordion({
+                heightStyle: "content"
+            });
+
+            $("#accordion").accordion();
+
+            var availableTags = [
+			"ActionScript",
+			"AppleScript",
+			"Asp",
+			"BASIC",
+			"C",
+			"C++",
+			"Clojure",
+			"COBOL",
+			"ColdFusion",
+			"Erlang",
+			"Fortran",
+			"Groovy",
+			"Haskell",
+			"Java",
+			"JavaScript",
+			"Lisp",
+			"Perl",
+			"PHP",
+			"Python",
+			"Ruby",
+			"Scala",
+			"Scheme"
+            ];
+            $("#autocomplete").autocomplete({
+                source: availableTags
+            });
+
+
+
+
+            $("#button").button();
+            $("#radioset").buttonset();
+
+
+
+            $("#tabs").tabs();
+
+            $("#txtPrefDateFrom").datepicker({
+                inline: true
+            });
+            $("#txtPrefDateFromRef").datepicker({
+                inline: true
+            });
+           
+        });
+
+        function clearFields() {
+
+            $(":input[type!='hidden']").val('');
+            $(':input').prop('checked', false);
+
+        }
+
+
+
+    </script>*@
+    <!-- Accordian script end-->
+
+
+
+
+    <script>
+        function getCookie(name) {
+            var dc = document.cookie;
+            var prefix = name + "=";
+            var begin = dc.indexOf("; " + prefix);
+            if (begin == -1) {
+                begin = dc.indexOf(prefix);
+                if (begin != 0) return null;
+            }
+            else {
+                begin += 2;
+                var end = document.cookie.indexOf(";", begin);
+                if (end == -1) {
+                    end = dc.length;
+                }
+            }
+            return unescape(dc.substring(begin + prefix.length, end));
+        }
+        function onPageLoad() {
+            //  alert(document.referrer);
+          
+            var myCookie = getCookie(".Provider");
+           // alert(myCookie);
+            if (myCookie != null) {
+              
+                if (document.referrer == '')// this means if blank then run the dialog box code
+                {
+                    // $('#err-msg').text("Another user is currently logged in and must be logged out to continue");
+                    // $("#AlreadyLog1").dialog("open");
+                    isClose = true;
+                    window.location.href = '@Url.RouteUrl("another-session")';
+                }
+
+
+            }
+
+        }
+
+        //$(document).ready(function () {
+
+        //    var c = document.getElementById("mycanvas");
+        //    var ctx = c.getContext("2d");
+        //    var imageLoader = document.getElementById('fu-my-simple-upload');
+        //    imageLoader.addEventListener('change', handleImage, false);
+
+
+
+        //    function handleImage(e) {
+        //        // alert('test');
+        //        var reader = new FileReader();
+        //        reader.onload = function (event) {
+        //            var img = new Image();
+        //            img.onload = function () {
+        //                //canvas.width = img.width;
+        //                //canvas.height = img.height;
+        //                ctx.drawImage(img, 0, 0, 200, 200);
+        //            }
+        //            img.src = event.target.result;
+        //        }
+        //        reader.readAsDataURL(e.target.files[0]);
+        //    }
+
+        //    initSimpleFileUpload();
+
+        //});
+
+        //function initSimpleFileUpload() {
+        //    'use strict';
+           
+        //    $('#fu-my-simple-upload').fileupload({
+        //        url: 'master-images-save',
+        //        dataType: 'json',
+        //        add: function (e, data) {
+
+        //            jqXHRData = data
+        //        },
+        //        done: function (event, data) {
+        //            $('#PatientImg').html(data.result.Imghtml);
+
+        //            HideLoader();
+        //        },
+        //        fail: function (event, data) {
+        //            if (data.files[0].error) {
+        //                alert(data.files[0].error);
+        //            }
+        //        }
+        //    });
+        //}
+
+        //function ShowLoader() {
+        //    var body_height = parseInt($('body').height());
+        //    $('#page_loader').css('height', body_height);
+        //    document.getElementById('page_loader').style.display = 'block';
+        //}
+        //function HideLoader() {
+        //    document.getElementById('page_loader').style.display = 'none';
+        //}
+        //function imageUpload() {
+
+        //    $("#profileImage-form").dialog("open");
+        //}
+        // start of add propfile image pop up script
+
+        $(function () {
+
+            tips = $(".validateTips");
+
+
+
+            $("#profileImage-form").dialog({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "blind",
+                    duration: 1000
+                },
+
+
+                width: 550,
+                modal: true,
+                buttons: {
+                    "Upload": function () {
+
+                        //var c = document.getElementById("mycanvas");
+                        //var ctx = c.getContext("2d");
+                        //var image = ctx.getImageData(0, 0, 200, 200);
+                        //var data = image.data;
+
+                        var bValid = true;
+
+
+                        if (bValid) {
+                            //ajax 
+                            try {
+
+                                if (jqXHRData) {
+                                    var isStartUpload = true;
+                                    var uploadFile = jqXHRData.files[0];
+                                    @*/\.(gif|jpg|jpeg|tiff|png)$/i*@
+                                    if (!(/\.(jpg)$/i).test(uploadFile.name)) {
+                                        alert('You must select an jpeg file only');
+                                        isStartUpload = false;
+                                        return false;
+                                    } else if (uploadFile.size > 4000000) { // 4mb
+                                        alert('Please upload a smaller image, max size is 4 MB');
+                                        isStartUpload = false;
+                                        return false;
+                                    }
+                                    if (isStartUpload) {
+                                    
+                                        jqXHRData.submit();
+                                    }
+                                }
+                                    //if (jqXHRData) {
+                                    //    jqXHRData.submit();
+                                    //}
+                                else {
+                                    return false;
+                                }
+                                //alert(data);
+                                //$.ajax({
+                                //    type: 'POST',
+                                //    url: 'master-images-save',
+                                //    data: {Image: data},
+                                //    dataType: 'json',
+                                //    success: function (response) {
+                                //        alert(response);
+
+
+
+
+                                //    },
+                                //    error: function (xhr, ajaxOptions, thrownError) {
+                                //        //if error
+
+                                //        alert('Error : ' + xhr.message);
+                                //        HideLoader();
+                                //    },
+                                //    complete: function (data) {
+                                //        // if completed
+                                //        HideLoader();
+
+                                //    },
+                                //    async: true,
+                                //    processData: false
+                                //});
+                            } catch (err) {
+
+                                if (err && err !== "") {
+                                    alert(err.message);
+                                    HideLoader();
+                                }
+                            }
+                            $(this).dialog("close");
+                            ShowLoader();
+
+
+                            //end ajax
+
+                        }
+                    },
+                    Close: function () {
+                        $(this).dialog("close");
+                    }
+                },
+                close: function () {
+
+                }
+            });
+
+        });
+
+        //- end of add profile image popup script
+
+     
+     
+
+    </script>
+
+   @* <script>
+        function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+function Logout() {
+
+    location.href = '/logout';
+
+}
+    </script>*@
+
+   @* <script>
+        //Added By Khusroo
+        $(document).ready(function () {
+            $.ajax({
+                dataType: "json",
+                type: 'GET',
+                url: 'Get-Messages-Counter',
+                success: function (data) {
+                    $('#circle').html(data.TotalMessages);
+                    $('#GeneralMessages').html("Inbox(<b style='font-size:14px;'>" + data.GeneralMessages + "</b>)");
+                    $('#AppointmentMessages').html("Appointment(<b style='font-size:14px;'>" + data.AppointmentMessages + "</b>)");
+                    $('#MedicationMessages').html("Medication Refill(<b style='font-size:14px;'>" + data.MedicationMessages + "</b>)");
+                    $('#ReferralMessages').html("Referral Requests(<b style='font-size:14px;'>" + data.ReferralMessages + "</b>)");
+}
+            });
+        });
+    </script>*@
+
+    <title>@ViewBag.Title</title>
+    @RenderSection("Scripts", false/*required*/)
+</head>
+<body onmousedown="mouseDownSetFlag();" onload="MM_preloadImages('Content/img/message_tab_over.png','Content/img/account_tab_over.png','Content/img/ReportNumeration_tab_over.png')">
+     
+     
+     
+      <div id="page_loader" style="display: none;">
+
+        <div id="apDiv1" align="center">
+            <table width="200" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td height="70px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <img src="Content/img/image_559926.gif" width="128" height="64" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;" height="70px;">Please wait ...</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="header">
+  <table width="100%" border="0">
+    <tr>
+      <td width="39%"><img src="Content/img/provider-logo.png"  /></td>
+       <td width="50%"><div style="text-align: center;font-size:1.4em;color:#327098;">Welcome 
+           @{
+                                    if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName == "")
+                                    {
+                                        AMR.Controllers.Controllers.Base.BaseController bc = new AMR.Controllers.Controllers.Base.BaseController();
+                                        AMR.Core.Utilities.GlobalVar gv = bc.PopulateProviderOnLayoutMaster();
+                                        <b style="font-size:1.5em;font-weight:bold;color:#327098;">@gv.PatientName</b>
+
+
+                                    }
+                                    else
+                                    {
+                                   <b style="font-size:1.5em;font-weight:bold;color:#327098;">@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName</b>
+                                    }
+                                 }
+          
+          </td>
+      <td width="11%" style="cursor:pointer;" ><img style="cursor:pointer;" src="Content/img/logout_btn.jpg" width="109" height="38" onclick="createCookie('storagecookie', 'provider', 1);localStorage.quit = $.now();Logout();"/></td>
+    </tr>
+  </table>
+</div>
+
+
+
+    <div class="container" style="width: 1250px;">
+     @*   <div class="masthead">
+           <div style="display:inline-block; width:80%">
+            <h4 class="text-muted" style="margin-top: -20px; padding: 0px;">
+                <img src="Content/img/amr.png" style="height: 125px;" />
+
+            </h4>
+           </div>
+    <div style="display:inline; float:right">
+                
+                <a href='@Url.RouteUrl("logout")'>Logout <img src="Content/img/logout.png" /></a>
+          </div>
+        </div>*@
+       @* <div id="nav" class="horizontal-nav full-width horizontalNav-notprocessed">
+            <ul>
+             
+                <li><a href='@Url.RouteUrl("index")'>Messages</a></li>
+                <li><a href='@Url.RouteUrl("account-index")'>Account</a></li>
+                 <li><a href='@Url.RouteUrl("report-index")'>Report Numeration</a></li>
+           
+            </ul>
+        </div> *@
+        <br />
+        <div id="tabsbar" >
+  <div id="home"><div  onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image0','','Content/img/newtabs/home_tab.png',1)"><img src="Content/img/newtabs/home.png" width="84" height="43" id="Image0" /></div></div>
+  <div id="msg"><div id="circle"  style="text-align:center;"></div><div onclick="location.href='@Url.RouteUrl("index")';" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image1','','Content/img/NewTabs/messages_tab.png',1)"><img src="Content/img/NewTabs/messages.png" width="152" height="43" id="Image1" /></div></div>
+  <div id="account"><div onclick="location.href='@Url.RouteUrl("account-index")';" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image2','','Content/img/NewTabs/account_tab.png',1)"><img src="Content/img/NewTabs/account.png" width="129" height="43" id="Image2" /></div></div>
+  <div id="rptNum"><div onclick="location.href='@Url.RouteUrl("report-index")';" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image3','','Content/img/newtabs/automatednumeratorrecordingreports_tab.png',1)"><img src="Content/img/newtabs/automatednumeratorrecordingreports.png" width="395" height="43" id="Image3" /></div></div>
+</div>
+        @*<br />
+        <br />*@
+        <div class="main_div ui-corner-all"
+            style="@if (Request.RawUrl.Contains("report"))
+                    { <Text>height:610px;</Text>}
+                  else if (Request.RawUrl.Contains("accounts"))
+                    { <Text>height:610px;</Text>}
+            else 
+                    { <Text>height:1280px;</Text>}">
+                   
+            <div class="inside_div1">
+                <!-- Accordion -->
+                <div id="accordion" style="margin-top: -7px;">
+                    <h3>
+                        <img src="Content/img/Setting-icon.png" style="padding-right: 5px;" />Settings</h3>
+                    <div >
+                        
+                        <div  style="@if (Request.RawUrl.Contains("report"))
+                    { <Text>  height:550px;</Text>}
+                  else if (Request.RawUrl.Contains("accounts"))
+                    { <Text> height:550px;</Text>}
+            else 
+                    { <Text>height:1210px;</Text>}">
+
+                            <div id="Blue_Panel">
+
+                                   @*<h1 style="font-size: 16px;">@gv.PatientName</h1>*@
+                                 @{
+                                    if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName == "")
+                                    {
+                                        AMR.Controllers.Controllers.Base.BaseController bc = new AMR.Controllers.Controllers.Base.BaseController();
+                                        AMR.Core.Utilities.GlobalVar gv = bc.PopulateProviderOnLayoutMaster();
+                                        <h1 style="font-size: 1.3em;font-weight:bold;color:White">@gv.PatientName</h1>
+                               
+
+
+                                    }
+                                    else
+                                    {
+                                    <h1 style="font-size: 1.3em;font-weight:bold;color:White">@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName</h1>
+                                    }
+                                 }
+
+                                <div id="PatientImg" >
+                                   <img src="@Url.Action("GetProviderImg", "Home", new { id = AMR.Core.Utilities.RequestHelper.MyGlobalVar.UserLogin})" id="PatientImage" title="Upload Pateint Image" style="cursor:pointer;  border: 1px solid rgb(166, 201, 226); -moz-border-radius: 5px; width: 90%; -webkit-border-radius: 5px; border-radius: 5px; margin-bottom: 5px;height:140px;"  onclick="imageUpload();"/>
+                     </div>
+                                    <a href='@Url.RouteUrl("account-index")' onclick="enabling_buttons();" style="width: 90%; font-size: 0.8em; font-weight: normal"> 
+                            <img src="Content/img/account1.png" width="20px" style=" float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">  View My Account </a>
+
+                                <button id="addSendContinuity" onclick="clearFields();" class="ui-button ui-widget ui-state-default ui-corner-all"  style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                   <img src="Content/img/chart1.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;"> View Health Record</button>
+                                <button id="addDownloadContinuity" onclick="clearFields();" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                 <img src="Content/img/download1.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">  Download Health Record </button>
+                                <button class=" ui-button ui-widget ui-state-default ui-corner-all" onclick="enabling_buttons();" style="width: 90%; font-size: 0.8em; font-weight: normal" type="submit">
+                                <img src="Content/img/upgrade.png" width="20px" style="float:left; margin-top: 0px; margin-left: -10px; margin-right: 10px;">    Upgrade</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="inside_div2">
+                @RenderBody()
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- /container End -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <div style="width: 940px; height: 40px; margin: 0px auto; border-radius: 30px; background-color: #fff; margin-top: 20px;">
+             
+            <p style="margin-left: 40px; padding-top: 10px; font-family: Verdana, Geneva, sans-serif; font-size: 12px;">Copyright © 2005 -2014 Access My Records, Inc. - AMR Patient Portal Version 2.0 (@AMR.Core.Utilities.RequestHelper.MyGlobalVar.BuildNo)</p>
+             
+        </div>
+    <div style="width: 100%; height: 20px;">
+    </div>
+
+
+    <!--pop up add profile image-->
+<div id="profileImage-form" title="Upload Patient Image">
+    
+    <table width="100%">
+        <tr>
+            <td valign="top"> @*<input  type="file" id="imageLoader" name="imageLoader"/>  *@
+              <div> <input id="fu-my-simple-upload" type="file" value="" name="MyFile"/> @*&nbsp;<a href="#" id="hl-start-upload">Start upload</a> *@</div>
+            </td>
+            <td>  
+            <canvas  id = "mycanvas" style="cursor:pointer;  border: 1px solid rgb(166, 201, 226); -moz-border-radius: 5px;  -webkit-border-radius: 5px; border-radius: 5px; margin-bottom: 5px; position:relative;" width = "200" height = "200" 
+             align="right" > </canvas>
+            </td>
+
+        </tr>
+
+    </table>
+
+
+</div>
+<!--End of popup add profile iamge-->
+
+
+
+
+
+</body>
+</html>

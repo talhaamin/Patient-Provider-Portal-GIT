@@ -1,0 +1,473 @@
+﻿@using AMR.Models;
+@model HomeViewModel
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+@*<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var medVal = null;
+        var pblmVal = null;
+        var allergyval = null;
+        var immunizationVal = null;
+        var socialVal = null;
+        var vitalVal = null;
+        var diagnosticVal = null;
+        var producedureVal = null;
+        var POCVal = null;
+        var ResVal = null;
+
+        medVal = $("#CCDMedicationHD").val();
+        medAdmVal = $("#CCDMedicationAdministeredHD").val();
+        pblmVal = $("#CCDProblemHD").val();
+        allergyval = $("#CCDAllergiesHD").val();
+        immunizationVal = $("#CCDImmunizationsHD").val();
+        socialVal = $("#CCDSocialHD").val();
+        vitalVal = $("#CCDVitalHD").val();
+        diagnosticVal = $("#CCDDiagnosticHD").val();
+        producedureVal = $("#CCDProcedureHD").val();
+        POCVal = $("#CCDPOCHD").val();
+        ResVal = $("#CCDReasonHD").val();
+
+        if (medVal != null) {
+            $("#CCDMedicationPortlet").html(medVal);
+            $('#Medications').show();
+        }
+        if (medAdmVal != null) {
+            $("#CCDMedicationAdministeredPortlet").html(medAdmVal);
+            $('#Administered').show();
+        }
+        if (pblmVal != null) {
+            $("#CCDProblemPortlet").html(pblmVal);
+            $('#Problems').show();
+        }
+        if (allergyval != null) {
+            $("#CCDAllergiesPortlet").html(allergyval);
+            $('#Allergies').show();
+        }
+        if (immunizationVal != null) {
+            $("#CCDImmunizationPortlet").html(immunizationVal);
+            $('#Immunizations').show();
+        }
+        if (socialVal != null) {
+            $("#CCDSocialPortlet").html(socialVal);
+            $('#Social').show();
+        }
+        if (vitalVal != null) {
+            $("#CCDVitalPortlet").html(vitalVal);
+            $('#Vital').show();
+        }
+        if (diagnosticVal != null) {
+            $("#CCDDiagnosticPortlet").html(diagnosticVal);
+            $('#Diagnostic').show();
+        }
+        if (producedureVal != null) {
+            $("#CCDProcedurePortlet").html(producedureVal);
+            $('#History').show();
+        }
+        if (POCVal != null) {
+            $("#CCDPOCPortlet").html(POCVal);
+            $('#Plan').show();
+        }
+        if (ResVal != null) {
+            $("#CCDReasonPortlet").html(ResVal);
+            $('#Reason').show();
+        }
+        CheckCustom();
+    });
+    function CheckCustom() {
+        if ($('Customize').val() == False) {
+            $('#Administered').show();
+            $('#Medications').show();
+            $('#Problems').show();
+            $('#Allergies').show();
+            $('#Immunizations').show();
+            $('#Social').show();
+            $('#History').show();
+            $('#Vital').show();
+            $('#Diagnostic').show();
+            $('#Plan').show();
+            $('#Reason').show();
+        }
+    }
+
+</script>*@
+<head>
+
+    <title>Patient CCD</title>
+
+</head>
+
+<body>
+    <div id="content" style="height: 100%; overflow: scroll;">
+
+        <div id="PatientSummary">
+
+            <table width="100%">
+
+                <tr>
+                    <td height="54" colspan="5" align="center">
+                        <h1><strong>View Continuity of Care Document</strong>
+
+                        </h1>
+                        <h2>Created On: @DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss tt")</h2>
+
+
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td width="153" height="28"><strong>Patient :</strong></td>
+                    <td width="269" height="28">@Model.PatientSummary.FirstName @Model.PatientSummary.LastName</td>
+                    <td width="4">&nbsp;</td>
+                    <td width="152" height="28"><strong>Access ID : </strong></td>
+                    <td width="370" height="28">@Model.PatientSummary.PatientId</td>
+                    <td width="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong>Address :</strong></td>
+                    <td>@Model.PatientSummary.PAddress<br>
+                        @Model.PatientSummary.City, @Model.PatientSummary.State @Model.PatientSummary.Zip<br>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td height="28"><strong>Work Phone :</strong></td>
+                    <td height="28">@Model.PatientSummary.WorkPhone</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    @if (Model.PatientCCDownload.Demographics == true)
+                    {   
+                        <td height="28"><strong>Birth Date :</strong></td>
+                        <td>@Model.PatientSummary.DOB</td>
+                        <td>&nbsp;</td>
+                    }
+                    <td><strong>Mobile Phone :</strong></td>
+                    <td>@Model.PatientSummary.MobilePhone</td>
+                    <td>&nbsp;</td>
+                </tr>
+                @if (Model.PatientCCDownload.Demographics == true)
+                {                
+                    <tr>
+                        <td height="28"><strong>Preferred Language :</strong></td>
+                        <td>@Model.PatientSummary.PreferredLanguage</td>
+                        <td>&nbsp;</td>
+                        <td><strong>Sex :</strong></td>
+                        <td>@Model.PatientSummary.Gender</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="28"><strong>Ethnicity :</strong></td>
+                        <td>@Model.PatientSummary.Ethnicity</td>
+                        <td>&nbsp;</td>
+                        <td><strong>Race :</strong></td>
+                        <td>@Model.PatientSummary.Race</td>
+                        <td>&nbsp;</td>
+                    </tr>@*
+    <tr>
+      <td height="28" ><strong>PCP :</strong></td>
+
+      <td>@Model.PatientSummary.PCP </td>
+      <td>&nbsp;</td>
+      <td >      <strong>Smoking Status :</strong></td>
+      <td>@Model.PatientSummary.SmokingStatus</td>
+      <td>&nbsp;</td>
+    </tr>*@
+                }
+                @if (Model.PatientCCDownload.Provider == true)
+                {
+                    <tr>
+                        <td height="28"><strong>Provider :</strong></td>
+                        <td>@Model.PatientVisitCCD.Title @Model.PatientVisitCCD.FirstName @Model.PatientVisitCCD.LastName </td>
+                        <td>&nbsp;</td>
+                        @*<td ><strong>Reason For Visit :</strong></td>
+      <td>@Model.PatientVisitCCD.VisitReason</td>
+      <td>&nbsp;</td>*@
+                    </tr>
+                    <tr>
+                        <td height="28"><strong>Practice Name :</strong></td>
+                        <td>@Model.PatientVisitCCD.FacilityName
+
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="28"><strong></strong></td>
+                        <td>@Model.PatientVisitCCD.Address1
+                            <br />
+                            @Model.PatientVisitCCD.City, @Model.PatientVisitCCD.State @Model.PatientVisitCCD.PostalCode
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="28"><strong>Practice Phone :</strong></td>
+                        <td>@Model.PatientVisitCCD.FacilityPhone
+                        </td>
+                        <td>&nbsp;</td>
+    </tr> 
+                }
+                      @if(Model.PatientCCDownload.Visit == true)
+                {
+                    <tr>
+                    <td height="28"><strong>Visit Date :</strong></td>
+                    <td>@Model.PatientVisitCCD.VisitDate
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                 <tr>
+                    <td height="28"><strong>Visit Location :</strong></td>
+                    <td>@Model.PatientVisitCCD.Address1
+                            <br />
+                            @Model.PatientVisitCCD.City, @Model.PatientVisitCCD.State @Model.PatientVisitCCD.PostalCode
+                       
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                }
+            </table>
+        </div>
+        <div>
+            <h3><a name="toc">Table of Contents</a></h3>
+            <input type="hidden" value="@Model.PatientCCDownload.Customize" id="Customize" />
+            <img id="loader" src="Content/img/login-loader.gif" alt="Loading..." style="display: none;">
+       @* @if(Model.PatientCCDownload.Customize == true){ *@
+             @if (Model.widgets != null && Model.widgets.Count() > 0)
+        {
+            
+          <ul>
+                @foreach (var item in Model.widgets)
+                {
+                    if (item.Id == "Reason For Visit/Chief Complaint" && item.WidgetHtml != "")
+                    {
+                   <li id="Reason"><a href="#widget_Reason">Reason For Visit/Chief Complaint</a></li>
+               
+                    }
+                    if (item.Id == "Medications Administered" && item.WidgetHtml != "")
+                    {
+                    <li id="Administered"><a href="#widget_MedicationsAdministered">Medications Administered During Visit</a></li>
+               
+                
+                    }
+                    if (item.Id == "Medications" && item.WidgetHtml != "")
+                    {
+                  <li id="Medications"><a href="#widget_Medications">Medications</a></li>
+              
+                    }
+
+                    if (item.Id == "Problems" && item.WidgetHtml != "")
+                    {
+                  <li id="Problems"><a href="#widget_Problems">Problems</a></li>
+               
+                    }
+                    if (item.Id == "Allergies, Adverse Reactions, Alerts" && item.WidgetHtml != "")
+                    {
+                    <li  id="Allergies"><a href="#widget_Allergies, Adverse Reactions, Alerts">Allergies, Adverse Reactions, Alerts</a></li>
+              
+                    }
+                    if (item.Id == "Immunizations" && item.WidgetHtml != "")
+                    {
+                 <li  id="Immunizations"><a href="#widget_Immunizations">Immunizations</a></li>
+             
+                    }
+                    if (item.Id == "Social History" && item.WidgetHtml != "")
+                    {
+                     <li id="Social"><a href="#widget_Social History">Social History</a></li>
+             
+                    }
+                    if ((item.Id == "Procedures" || item.Id == "Procedures") && item.WidgetHtml != "")
+                    {
+                     <li id="Procedures"><a href="#widget_Procedures">Procedures</a></li>
+              
+             
+                    }
+                    if (item.Id == "Vital Signs" && item.WidgetHtml != "")
+                    {
+                    <li id="Vital"><a href="#widget_Vital Signs">Vital Signs</a></li>
+             
+                    }
+                    if (item.Id == "Lab Tests" && item.WidgetHtml != "")
+                    {
+                      <li id="Lab"><a href="#widget_Lab Tests">Lab Tests</a></li>
+            
+                    }
+                    if (item.Id == "Care Plan" && item.WidgetHtml != "")
+                    {
+                        <li id="Plan"><a href="#widget_Plan Of Care">Care Plan</a></li>  
+               
+                    }
+                    if (item.Id == "Clinical Instructions" && item.WidgetHtml != "")
+                    {
+                        <li id="Clinical"><a href="#widget_Clinical Instructions">Clinical Instructions</a></li>  
+               
+                    }
+                }
+
+
+            </ul>
+        }
+       @* }
+        else{
+            <ul>
+                 <li><a href="#widget_Reason">Reason For Visit/Chief Complaint</a></li>
+                 <li><a href="#widget_MedicationsAdministered">Medications Administered During Visit</a></li>
+                 <li><a href="#widget_Medications">Medications</a></li>
+                <li><a href="#widget_Problems">Problems</a></li>
+                <li><a href="#widget_Allergies, Adverse Reactions, Alerts">Allergies, Adverse Reactions, Alerts</a></li>
+                <li><a href="#widget_Immunizations">Immunizations</a></li>                
+                <li><a href="#widget_Social History">Social History</a></li>
+                <li><a href="#widget_History of procedures">History of Procedures</a></li>
+                <li><a href="#widget_Vital Signs">Vital Signs</a></li>                
+                <li><a href="#widget_Diagnostic Test Results">Diagnostic Test Results</a></li>
+                <li><a href="#widget_Plan Of Care">Plan of Care</a></li>
+                <li><a href="#widget_Clinical Instructions">Clinical Instructions</a></li>
+            </ul>
+        }*@
+        </div>
+        @if (Model.widgets != null && Model.widgets.Count() > 0)
+        {
+            
+            <div id="widgets">
+                @foreach (var item in Model.widgets)
+                {
+                    if (item.Id == "Reason For Visit/Chief Complaint" && item.WidgetHtml != "")
+                    {
+                       // \\Chief Complaint
+                    <div class="uploadBox" id="widget_Reason">
+                        <h3><span style="font-weight: bold;">
+                            <a>Reason For Visit/Chief Complaint</a></span><a href="#toc" style="float: right;">Top</a></h3>
+                      @*  <input type="hidden" id="CCDReasonHD" value="@item.WidgetHtml" />
+                        <div class="widgetTable" id="CCDReasonPortlet">
+                        </div>*@
+                        @Html.Raw(item.WidgetHtml)
+                    </div>
+                    }
+                    if (item.Id == "Medications Administered" && item.WidgetHtml != "")
+                    {
+                    <div class="uploadBox" id="widget_MedicationsAdministered">
+                        <h3><span style="font-weight: bold;"><a>Medications Administered During Visit</a></span><a href="#toc" style="float: right;">Top</a></h3>
+                      @*  <input type="hidden" id="CCDMedicationAdministeredHD" value="@item.WidgetHtml" />
+                        <div id="CCDMedicationAdministeredPortlet" class="widgetTable">
+                        </div>*@
+                        @Html.Raw(item.WidgetHtml)
+                    </div> 
+                    }
+                    if (item.Id == "Medications" && item.WidgetHtml != "")
+                    {
+                    <div class="uploadBox" id="widget_Medications">
+                        <h3><span style="font-weight: bold;"><a>Medications</a></span><a href="#toc" style="float: right;">Top</a></h3>
+                        @*<input type="hidden" id="CCDMedicationHD" value="@item.WidgetHtml" />
+                        <div id="CCDMedicationPortlet" class="widgetTable">
+                        </div>*@
+                        @Html.Raw(item.WidgetHtml)
+                    </div> 
+                    }
+
+                    if (item.Id == "Problems" && item.WidgetHtml != "")
+                    {
+                    
+                    <div class="uploadBox" id="widget_Problems">
+                        <h3><span style="font-weight: bold;"><a>Problems</a></span><a href="#toc" style="float: right;">Top</a></h3>
+                       @* <input type="hidden" id="CCDProblemHD" value="@item.WidgetHtml" />
+                        <div id="CCDProblemPortlet" class="widgetTable">
+                        </div>*@
+                        @Html.Raw(item.WidgetHtml)
+                    </div>
+                    }
+                    if (item.Id == "Allergies, Adverse Reactions, Alerts" && item.WidgetHtml != "")
+                    {
+                    <div class="uploadBox" id="widget_Allergies, Adverse Reactions, Alerts">
+                        <h3><span style="font-weight: bold;"><a>Allergies, Adverse Reactions, Alerts</a></span><a href="#toc" style="float: right;">Top</a></h3>
+                       @* <input type="hidden" id="CCDAllergiesHD" value="@item.WidgetHtml" />
+                        <div id="CCDAllergiesPortlet" class="widgetTable">
+                        </div>*@
+                        @Html.Raw(item.WidgetHtml)
+                    </div>
+                    }
+                    if (item.Id == "Immunizations" && item.WidgetHtml != "")
+                    {
+                    <div class="uploadBox" id="widget_Immunizations">
+                        <h3><span style="font-weight: bold;"><a>Immunizations</a></span><a href="#toc" style="float: right;">Top</a></h3>
+                        @*<input type="hidden" id="CCDImmunizationsHD" value="@item.WidgetHtml" />
+                        <div id="CCDImmunizationPortlet" class="widgetTable">
+                        </div>*@
+                        @Html.Raw(item.WidgetHtml)
+                    </div>
+                    }
+                    if (item.Id == "Social History" && item.WidgetHtml != "")
+                    {
+                    <div class="uploadBox" id="widget_Social History">
+                        <h3><span style="font-weight: bold;"><a>Social History</a></span><a href="#toc" style="float: right;">Top</a></h3>
+                        @*<input type="hidden" id="CCDSocialHD" value="@item.WidgetHtml" />
+                        <div id="CCDSocialPortlet" class="widgetTable">
+                        </div>*@
+                        @Html.Raw(item.WidgetHtml)
+                        </div>
+                    }
+                    if ((item.Id == "Procedures" || item.Id == "Procedures") && item.WidgetHtml != "")
+                    {
+                    <div class="uploadBox" id="widget_Procedures">
+                        <h3><span style="font-weight: bold;"><a>Procedures</a></span><a href="#toc" style="float: right;">Top</a></h3>
+                        @*<input type="hidden" id="CCDProcedureHD" value="@item.WidgetHtml" />
+                        <div id="CCDProcedurePortlet" class="widgetTable">
+                        </div>*@
+                          @Html.Raw(item.WidgetHtml)
+                    </div>
+                    }
+                    if (item.Id == "Vital Signs" && item.WidgetHtml != "")
+                    {
+                    <div class="uploadBox" id="widget_Vital Signs">
+                        <h3><span style="font-weight: bold;"><a>Vital Signs</a></span><a href="#toc" style="float: right;">Top</a></h3>
+                        @*<input type="hidden" id="CCDVitalHD" value="@item.WidgetHtml" />
+                        <div id="CCDVitalPortlet" class="widgetTable">
+                        </div>*@
+                          @Html.Raw(item.WidgetHtml)
+                    </div>
+                    }
+                    if (item.Id == "Lab Tests" && item.WidgetHtml != "")
+                    {
+                    <div class="uploadBox" id="widget_Lab Tests">
+                        <h3><span style="font-weight: bold;"><a>Lab Tests</a></span><a href="#toc" style="float: right;">Top</a></h3>
+                        @*<input type="hidden" id="CCDDiagnosticHD" value="@item.WidgetHtml" />
+                        <div id="CCDDiagnosticPortlet" class="widgetTable">
+                        </div>*@
+                          @Html.Raw(item.WidgetHtml)
+                    </div>
+                    }
+                    if (item.Id == "Care Plan" && item.WidgetHtml != "")
+                    {
+                    <div class="uploadBox" id="widget_Plan Of Care">
+                        <h3><span style="font-weight: bold;"><a>Care Plan</a></span><a href="#toc" style="float: right;">Top</a></h3>
+                        @*<input type="hidden" id="CCDPOCHD" value="@item.WidgetHtml" />
+                        <div id="CCDPOCPortlet" class="widgetTable">
+                        </div>*@
+                          @Html.Raw(item.WidgetHtml)
+                    </div> 
+                    }
+                    if (item.Id == "Clinical Instructions" && item.WidgetHtml != "")
+                    {
+                    <div class="uploadBox" id="widget_Clinical Instructions">
+                        <h3><span style="font-weight: bold;"><a>Clinical Instructions</a></span><a href="#toc" style="float: right;">Top</a></h3>
+                        @*<input type="hidden" id="CCDPOCHD" value="@item.WidgetHtml" />
+                        <div id="CCDPOCPortlet" class="widgetTable">
+                        </div>*@
+                          @Html.Raw(item.WidgetHtml)
+                    </div> 
+                    }
+                }
+
+
+            </div>
+        }
+    </div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

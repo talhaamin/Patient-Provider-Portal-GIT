@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AMR.Models.PatientInsuranceModel>
+@using System.Web.Script.Serialization;
+<table class="box-table-a" id="tab-Insurance" summary="DownloadLEgalPlanOfCare">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col">Member Number</th>
+                                    <th scope="col">Plan Name</th>
+                                    <th scope="col">Group Number</th>
+                                 
+                               </tr>
+                            </thead>
+                             <tbody>
+                                    @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var item in Model)
+                                    {
+                        <tr class="@((counter % 2 == 1) ? "r0" : "r1")">
+                              <td>@item.MemberNumber</td>
+                              <td>@item.PlanName</td>
+                            <td>@item.GroupNumber</td>
+                           
+                  
+                                                  
+                   
+                        </tr>   counter++;}
+                                }
+                                   else
+                                {
+                                   <tr>
+                                <td width="200px;" colspan="3">No Information Available.</td>
+                            </tr>
+                                }
+
+                    </tbody>
+                            </table>

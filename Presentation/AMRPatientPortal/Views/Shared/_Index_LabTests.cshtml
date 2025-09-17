@@ -1,0 +1,76 @@
+﻿@model IEnumerable<AMR.Models.LabResultModel>
+
+<table class="box-table-a" id="tbl-LabTests" summary="LabTests">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Order Date</span></th>
+                            <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Test</span></th>
+                            <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Collection Date</span></th>
+                            @*<th scope="col">Result</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            int counter=0;
+                            
+                            foreach (var item in Model)
+                            {
+                                string CollectionDate = item.CollectionDate.Value.ToString() !=  "1/1/1900 00:00:00" ? item.CollectionDate.Value.ToShortDateString() : null;
+                                string OrderDate = item.OrderDate.Value.ToString() !=   "1/1/1900 00:00:00" ? item.OrderDate.Value.ToShortDateString() : null;
+                                string ReviewDate = item.ReviewDate.Value.ToString() != "1/1/1900 00:00:00"  ? item.ReviewDate.Value.ToShortDateString() : null;
+                                string ReportDate = item.ReportDate.ToString() != "1/1/1900 00:00:00"  ? item.ReportDate.ToShortDateString() : null;
+                                var ObjectOnTheFly = new
+                                {
+                                    FacilityName = item.FacilityName,
+                                    FacilityId = item.FacilityId,
+                                    VisitId = item.VisitId,
+                                    ProviderName = item.ProviderName,                                    
+                                    OrderDate = OrderDate,
+                                    CollectionDate = CollectionDate,
+                                    ReportDate = ReportDate,
+                                    ProviderId_Requested = item.ProviderId_Requested,                                    
+                                    ReviewDate = ReviewDate,                     
+                                    Requisiton = item.Requisiton,
+                                    Specimen = item.Specimen,
+                                    SpecimenSource = item.SpecimenSource,
+                                    Reviewer = item.Reviewer,
+                                    LabName = item.LabName
+
+                                };
+
+                                var jsonStr = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ObjectOnTheFly);
+                                <tr class="@((counter % 2 == 0) ? "r1" : "r0")" onclick="removing_lab_result_class();  viewLabResult(@(item.LabResultCntr)); ">
+                                    @if (item.OrderDate.ToString() == "1/1/1900 00:00:00" || item.OrderDate.ToString() == "1/1/1900 12:00:00 AM" || item.OrderDate.ToString() == "1/1/1900" )
+                                    {
+                                    <td style="vertical-align:middle" width="120px"><input type="hidden" id="hdlab-@item.LabResultCntr"  value="@jsonStr"/></td>
+                                    }
+                                    else{
+                                    <td style="vertical-align:middle" width="120px"><input type="hidden" id="hdlab-@item.LabResultCntr"  value="@jsonStr"/>@OrderDate </td>
+                                    }
+                                        <td style="vertical-align:middle" width="150px">@item.LabName</td>
+                                     @if (item.CollectionDate.ToString() == "1/1/1900 00:00:00" || item.CollectionDate.ToString() == "1/1/1900 12:00:00 AM" || item.CollectionDate.ToString() == "1/1/1900")
+                                    {
+                                    <td></td>
+                                     }
+                                     else
+                                     {
+                                     <td style="vertical-align:middle"> @item.CollectionDate.Value.ToShortDateString() </td>
+                                     }
+@*                                     <td>
+                                                            <img onmousemove="removing_lab_result_class();" onmouseover="removing_lab_result_class(); " onmousedown="removing_lab_result_class();" onclick="removing_lab_result_class();  viewLabResult(@(item.LabResultCntr)); " onmouseout="removing_lab_result_class();" onmouseup="removing_lab_result_class();" onfocus="removing_lab_result_class();"  src="Content/img/result.gif" />
+                                                         
+                                                        </td>*@
+                                </tr>
+                            
+                                counter++;
+                            }
+                        }
+                        else
+                        {
+                              <tr>
+                                <td style="vertical-align:middle" width="200px;">No Information Available.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>

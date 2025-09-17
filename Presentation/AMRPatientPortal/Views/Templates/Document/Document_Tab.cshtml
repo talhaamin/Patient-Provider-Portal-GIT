@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AMR.Models.MedicalPortfolioBaseModel>
+
+<table class="box-table-a" id="tbl-HealthCareDataExchange" summary="HealthCareDataExchange">
+
+                            <thead>
+                                <tr>
+                                 
+                                    <th scope="col"><div style="margin-left:3px;">Location</div></th>
+                                    <th scope="col"><div style="margin-left:3px;">Visit Date</div></th>
+                                    <th scope="col"><div style="margin-left:3px;">Document Date</div></th>
+                                    <th scope="col"><div style="margin-left:3px;">Document</div></th>
+                                @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true){    <th scope="col"><div style="margin-left:3px;">Status</div></th>
+                                 <th scope="col"><div style="margin-left:3px;">Permission</div></th>}
+                               </tr>
+                            </thead>
+                            <tbody id="tbodyVisitList">
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter=0;
+                                    bool flag=AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag;
+                                    string Ribbon="Menu";
+                                    foreach (var visit in Model)
+                                    {
+                                        <tr @((counter%2==0)? "class=d1" : "class=d0")>
+                                        
+                                          <td align="left" style="width:250px;">@visit.FacilityName</td>
+                                            @if(visit.VisitId == 0)
+                                            {
+                                            <td align="left" ></td>
+                                            }
+                                            else
+                                            {
+                                          <td align="left" >@visit.VisitDate.ToString("MM/dd/yyyy")</td>
+                                            }
+                                            @if(flag== false){
+                                          <td align="left" ><span style="margin-left:3px;">@visit.VisitDate.ToShortDateString()</span></td>}
+                                                  else{
+                                          <td align="left" ><span >@visit.VisitDate.ToShortDateString()</span></td>}
+                                              @*<td>@visit.DateCreated</td>*@
+                                             @if(flag== false){
+                                         <td align="left"><span style="margin-left:3px;" class="LinkHighlight hoverMe" onclick="ViewGDocumentAttachment('@(visit.DocumentCntr + "|" + visit.DocumentFormat+ "|" +visit.VisitId+"|"+visit.FacilityId+"|"+Ribbon)');">@((visit.DocumentDescription.Length>22)?visit.DocumentDescription.Substring(0,22) + "...":visit.DocumentDescription)</span></td>}
+                                             else{
+                                          <td align="left"><span  class="LinkHighlight hoverMe" onclick="ViewGDocumentAttachment('@(visit.DocumentCntr + "|" + visit.DocumentFormat+ "|" +visit.VisitId+"|"+visit.FacilityId+"|"+Ribbon)');">@((visit.DocumentDescription.Length>22)?visit.DocumentDescription.Substring(0,22) + "...":visit.DocumentDescription)</span></td>}
+
+                                         @if(flag ==true){ <td align="left">@((visit.Viewable)?"Shared":"Hidden")</td>
+                                          <td align="left"><span class="LinkHighlight hoverMe" onclick="shareHideVisit('@((visit.Viewable) ? ("0|" + visit.VisitId + "|" + visit.FacilityId+"|"+visit.DocumentCntr+"|"+visit.DocumentDescription+"|"+visit.Notes) : ("1|" + visit.VisitId + "|" + visit.FacilityId +"|"+visit.DocumentCntr+"|"+visit.DocumentDescription+"|"+visit.Notes))');"><img src='@((visit.Viewable)? "Content/img/hide.png" : "Content/img/share.png")'/>  @((visit.Viewable) ? "Hide" : "Share") </span></td>}
+                                        </tr>       
+                                        counter++;
+                                    }
+                                }
+                                else
+                                {
+                                    <tr ><td>No Information Available</td></tr>    
+                                }
+                                </tbody>
+</table>
+

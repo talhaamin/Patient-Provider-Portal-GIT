@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetProviderData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Parms" type="tns:ProviderParms" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProviderParms">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Option" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetProviderDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetProviderDataResult" type="tns:ProviderData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProviderData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="PracticeId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MiddleName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="License" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetProviderAdminData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Parms" type="tns:ProviderParms" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProviderAdminDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetProviderAdminDataResult" type="tns:ProviderAdminData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProviderAdminData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="PracticeId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="PracticeName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MiddleName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="License" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SaveProviderData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProviderData" type="tns:ProviderData" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveProviderDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SaveProviderDataResult" type="tns:ProviderResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProviderResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPracticeList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PracticeId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPracticeListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetPracticeListResult" type="tns:ProviderTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProviderTableData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dt">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="1" maxOccurs="1" name="count" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetFacilityList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CkFacilityId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetFacilityListResult" type="tns:ProviderTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityListForProviders">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityListForProvidersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetFacilityListForProvidersResult" type="tns:ProviderTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProvidersForPatientList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PatientId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProvidersForPatientListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetProvidersForPatientListResult" type="tns:ProviderTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPatientForProviderList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPatientForProviderListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetPatientForProviderListResult" type="tns:ProviderTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProviderImageData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Parms" type="tns:ProviderParms" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProviderImageDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetProviderImageDataResult" type="tns:ProviderImageData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProviderImageData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Image" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImageFormat" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SaveProvidermageData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ImageData" type="tns:ProviderImageData" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveProvidermageDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SaveProvidermageDataResult" type="tns:ProviderImageData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPatientProviderInfoList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CkPatientId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="CkFacilityId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPatientProviderInfoListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetPatientProviderInfoListResult" type="tns:ProviderTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProviderEmailSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EMail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProviderEmailSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProviderEmailSearchResult" type="tns:ProviderTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProviderSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Parms" type="tns:ProviderSearchParms" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProviderSearchParms">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="License" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EMail" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FacilityId" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EMRSystemId" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageNumber" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageSize" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalRecord" nillable="true" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ProviderSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProviderSearchResult" type="tns:ProviderTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActivateProvider">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActivateProviderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ActivateProviderResult" type="tns:ProviderResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeactivateProvider">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeactivateProviderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeactivateProviderResult" type="tns:ProviderResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeProviderEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeProviderEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChangeProviderEmailResult" type="tns:ProviderResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetProviderDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProviderData" />
+  </wsdl:message>
+  <wsdl:message name="GetProviderDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProviderDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProviderAdminDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProviderAdminData" />
+  </wsdl:message>
+  <wsdl:message name="GetProviderAdminDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProviderAdminDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveProviderDataSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveProviderData" />
+  </wsdl:message>
+  <wsdl:message name="SaveProviderDataSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveProviderDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPracticeListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPracticeList" />
+  </wsdl:message>
+  <wsdl:message name="GetPracticeListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPracticeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilityList" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilityListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityListForProvidersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilityListForProviders" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityListForProvidersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilityListForProvidersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProvidersForPatientListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProvidersForPatientList" />
+  </wsdl:message>
+  <wsdl:message name="GetProvidersForPatientListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProvidersForPatientListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientForProviderListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPatientForProviderList" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientForProviderListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPatientForProviderListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProviderImageDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProviderImageData" />
+  </wsdl:message>
+  <wsdl:message name="GetProviderImageDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProviderImageDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveProvidermageDataSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveProvidermageData" />
+  </wsdl:message>
+  <wsdl:message name="SaveProvidermageDataSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveProvidermageDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientProviderInfoListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPatientProviderInfoList" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientProviderInfoListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPatientProviderInfoListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProviderEmailSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:ProviderEmailSearch" />
+  </wsdl:message>
+  <wsdl:message name="ProviderEmailSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:ProviderEmailSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProviderSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:ProviderSearch" />
+  </wsdl:message>
+  <wsdl:message name="ProviderSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:ProviderSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActivateProviderSoapIn">
+    <wsdl:part name="parameters" element="tns:ActivateProvider" />
+  </wsdl:message>
+  <wsdl:message name="ActivateProviderSoapOut">
+    <wsdl:part name="parameters" element="tns:ActivateProviderResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeactivateProviderSoapIn">
+    <wsdl:part name="parameters" element="tns:DeactivateProvider" />
+  </wsdl:message>
+  <wsdl:message name="DeactivateProviderSoapOut">
+    <wsdl:part name="parameters" element="tns:DeactivateProviderResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeProviderEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeProviderEmail" />
+  </wsdl:message>
+  <wsdl:message name="ChangeProviderEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeProviderEmailResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ProviderWSSoap">
+    <wsdl:operation name="GetProviderData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Provider Data</wsdl:documentation>
+      <wsdl:input message="tns:GetProviderDataSoapIn" />
+      <wsdl:output message="tns:GetProviderDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProviderAdminData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Provider Admin Data</wsdl:documentation>
+      <wsdl:input message="tns:GetProviderAdminDataSoapIn" />
+      <wsdl:output message="tns:GetProviderAdminDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveProviderData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Save Provider Data</wsdl:documentation>
+      <wsdl:input message="tns:SaveProviderDataSoapIn" />
+      <wsdl:output message="tns:SaveProviderDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPracticeList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get List Of Providers For Practice</wsdl:documentation>
+      <wsdl:input message="tns:GetPracticeListSoapIn" />
+      <wsdl:output message="tns:GetPracticeListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get List Of Providers For Facility</wsdl:documentation>
+      <wsdl:input message="tns:GetFacilityListSoapIn" />
+      <wsdl:output message="tns:GetFacilityListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityListForProviders">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get List Of Facilities For Providers</wsdl:documentation>
+      <wsdl:input message="tns:GetFacilityListForProvidersSoapIn" />
+      <wsdl:output message="tns:GetFacilityListForProvidersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProvidersForPatientList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get List Of Providers For Patient</wsdl:documentation>
+      <wsdl:input message="tns:GetProvidersForPatientListSoapIn" />
+      <wsdl:output message="tns:GetProvidersForPatientListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientForProviderList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get List Of Providers For Patient</wsdl:documentation>
+      <wsdl:input message="tns:GetPatientForProviderListSoapIn" />
+      <wsdl:output message="tns:GetPatientForProviderListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProviderImageData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Provider Image</wsdl:documentation>
+      <wsdl:input message="tns:GetProviderImageDataSoapIn" />
+      <wsdl:output message="tns:GetProviderImageDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveProvidermageData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Save Provider Image</wsdl:documentation>
+      <wsdl:input message="tns:SaveProvidermageDataSoapIn" />
+      <wsdl:output message="tns:SaveProvidermageDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientProviderInfoList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get List Of Provider Information For Patient</wsdl:documentation>
+      <wsdl:input message="tns:GetPatientProviderInfoListSoapIn" />
+      <wsdl:output message="tns:GetPatientProviderInfoListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProviderEmailSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provider Email Search</wsdl:documentation>
+      <wsdl:input message="tns:ProviderEmailSearchSoapIn" />
+      <wsdl:output message="tns:ProviderEmailSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProviderSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provider Search</wsdl:documentation>
+      <wsdl:input message="tns:ProviderSearchSoapIn" />
+      <wsdl:output message="tns:ProviderSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActivateProvider">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Activate Provider</wsdl:documentation>
+      <wsdl:input message="tns:ActivateProviderSoapIn" />
+      <wsdl:output message="tns:ActivateProviderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateProvider">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deactivate Provider</wsdl:documentation>
+      <wsdl:input message="tns:DeactivateProviderSoapIn" />
+      <wsdl:output message="tns:DeactivateProviderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeProviderEmail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Change Provider Email</wsdl:documentation>
+      <wsdl:input message="tns:ChangeProviderEmailSoapIn" />
+      <wsdl:output message="tns:ChangeProviderEmailSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ProviderWSSoap" type="tns:ProviderWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetProviderData">
+      <soap:operation soapAction="http://tempuri.org/GetProviderData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProviderAdminData">
+      <soap:operation soapAction="http://tempuri.org/GetProviderAdminData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveProviderData">
+      <soap:operation soapAction="http://tempuri.org/SaveProviderData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPracticeList">
+      <soap:operation soapAction="http://tempuri.org/GetPracticeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityList">
+      <soap:operation soapAction="http://tempuri.org/GetFacilityList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityListForProviders">
+      <soap:operation soapAction="http://tempuri.org/GetFacilityListForProviders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProvidersForPatientList">
+      <soap:operation soapAction="http://tempuri.org/GetProvidersForPatientList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientForProviderList">
+      <soap:operation soapAction="http://tempuri.org/GetPatientForProviderList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProviderImageData">
+      <soap:operation soapAction="http://tempuri.org/GetProviderImageData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveProvidermageData">
+      <soap:operation soapAction="http://tempuri.org/SaveProvidermageData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientProviderInfoList">
+      <soap:operation soapAction="http://tempuri.org/GetPatientProviderInfoList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProviderEmailSearch">
+      <soap:operation soapAction="http://tempuri.org/ProviderEmailSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProviderSearch">
+      <soap:operation soapAction="http://tempuri.org/ProviderSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivateProvider">
+      <soap:operation soapAction="http://tempuri.org/ActivateProvider" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateProvider">
+      <soap:operation soapAction="http://tempuri.org/DeactivateProvider" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeProviderEmail">
+      <soap:operation soapAction="http://tempuri.org/ChangeProviderEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ProviderWSSoap12" type="tns:ProviderWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetProviderData">
+      <soap12:operation soapAction="http://tempuri.org/GetProviderData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProviderAdminData">
+      <soap12:operation soapAction="http://tempuri.org/GetProviderAdminData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveProviderData">
+      <soap12:operation soapAction="http://tempuri.org/SaveProviderData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPracticeList">
+      <soap12:operation soapAction="http://tempuri.org/GetPracticeList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityList">
+      <soap12:operation soapAction="http://tempuri.org/GetFacilityList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityListForProviders">
+      <soap12:operation soapAction="http://tempuri.org/GetFacilityListForProviders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProvidersForPatientList">
+      <soap12:operation soapAction="http://tempuri.org/GetProvidersForPatientList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientForProviderList">
+      <soap12:operation soapAction="http://tempuri.org/GetPatientForProviderList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProviderImageData">
+      <soap12:operation soapAction="http://tempuri.org/GetProviderImageData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveProvidermageData">
+      <soap12:operation soapAction="http://tempuri.org/SaveProvidermageData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientProviderInfoList">
+      <soap12:operation soapAction="http://tempuri.org/GetPatientProviderInfoList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProviderEmailSearch">
+      <soap12:operation soapAction="http://tempuri.org/ProviderEmailSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProviderSearch">
+      <soap12:operation soapAction="http://tempuri.org/ProviderSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivateProvider">
+      <soap12:operation soapAction="http://tempuri.org/ActivateProvider" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateProvider">
+      <soap12:operation soapAction="http://tempuri.org/DeactivateProvider" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeProviderEmail">
+      <soap12:operation soapAction="http://tempuri.org/ChangeProviderEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ProviderWS">
+    <wsdl:port name="ProviderWSSoap" binding="tns:ProviderWSSoap">
+      <soap:address location="http://localhost:61065/ProviderService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ProviderWSSoap12" binding="tns:ProviderWSSoap12">
+      <soap12:address location="http://localhost:61065/ProviderService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

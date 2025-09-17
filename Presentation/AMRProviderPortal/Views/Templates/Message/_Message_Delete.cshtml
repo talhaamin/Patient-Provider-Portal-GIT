@@ -1,0 +1,168 @@
+﻿@model IEnumerable<AMR.Models.ProviderMessageModel>
+<table class="box-table-a" id="tbl-MessageDelete" summary="Medications" >
+                    <thead>
+                        <tr>
+                            <th scope="col" style="margin-right: 10px;">
+                              @*  <input name="check" type="checkbox" class="CheckAll" onclick="checkAll('chk');" />*@
+                                  <input name="check" type="checkbox" class="CheckAll" id="chk_D" onclick="checkAll(this);" style="margin-left:6px;" />
+                            </th>
+                            @*<th scope="col">
+                                <div style="margin-left: 20px;">
+                                    <img src="Content/img/i.png" />
+                                </div>
+                            </th>*@
+                            <th scope="col">
+                                <div style="margin-left: 20px; ">
+                                    From
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left:20px; " >
+                                    Subject
+                                </div>
+                            </th>
+                              <th scope="col">
+                                <div style="margin-left:20px; " >
+                                    Received
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left:30px; ">
+                                    Status
+                                </div>
+                            </th>
+                            @*<th scope="col">
+                                <div style="margin-left: 49px; ">
+                                    Subject
+                                </div>
+                            </th>*@
+                             @*<th scope="col">
+                                <div style="margin-left: 50px; ">
+                                    Detail
+                                </div>
+                            </th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                          @if (Model != null && Model.Count()>0)
+                        {
+                            int counter = 0;
+                            string classrow = "";
+                            foreach (var item in Model)
+                        {
+                        
+                            //if (item.MessageType == "Billing Message" || item.MessageType == "General Inquiry")
+                            //{
+                                 if (item.MessageStatusId == 7)
+                                  {
+                                      System.Text.StringBuilder jsonString = new System.Text.StringBuilder();
+
+                                      jsonString.Append(" { ");
+                                      jsonString.Append("\"ID\": \"" + item.MessageDetailId + "\",");
+                                      jsonString.Append("\"FacilityName\":  \"" + item.FacilityName + "\",");
+                                      jsonString.Append("\"From\":  \"" + item.ProviderFrom + "\",");
+                                      // jsonString.Append("\"From\":  \"" + ((item.PatientMessageModel.CreatedByName != null && item.PatientMessageModel.CreatedByName.Length > 0) ? item.PatientMessageModel.CreatedByName : item.PatientMessageModel.ProviderName_From) + "\",");
+                                      jsonString.Append("\"To\":  \"" + item.ProviderTo + "\",");
+                                      jsonString.Append("\"MessageType\":  \"" + item.MessageType + "\",");
+                                      var Resinput = item.MessageResponse;
+                                      Resinput = Resinput.Replace("\'", "&#39;");
+                                      Resinput.Replace("\\\"", "&#39;");
+                                      Resinput = Resinput.Replace("\n", "\\n");
+                                      Resinput = Resinput.Replace("\\n", "<br>");
+                                   //   var Resoutput = Resinput.Replace("\'", "&#39;");
+                                     // Resoutput.Replace("\\\"", "&#39;");
+                                      jsonString.Append("\"MessageResponse\":  \"" + Resinput + "\",");
+                                      jsonString.Append("\"MessageId\":  \"" + item.MessageId + "\",");
+                                      jsonString.Append("\"ProviderIdFrom\":  \"" + item.ProviderId_From + "\",");
+                                      jsonString.Append("\"ProviderIdTo\":  \"" + item.ProviderId_To + "\",");
+                                      jsonString.Append("\"MessageTypeId\":  \"" + item.MessageTypeId + "\",");
+                                      jsonString.Append("\"FacilityId\":  \"" + item.FacilityId + "\",");
+                                      jsonString.Append("\"MessageUrgency\": \"" + item.MessageUrgency + "\",");
+                                      var Reqinput = item.MessageRequest;
+
+                                      Reqinput = Reqinput.Replace("\'", "&#39;");
+                                      Reqinput = Reqinput.Replace("\n", "\\n");
+                                      Reqinput = Reqinput.Replace("\\n", "<br>");
+                                      Reqinput.Replace("\\\"", "&#39;");
+                                    //  var Reqoutput = Reqinput.Replace("\'", "&#39;");
+                                     // var reqout2 = Reqoutput.Replace("\\\"", "&#39;");
+                                      jsonString.Append("\"MessageRequest\": \"" + Reqinput + "\",");
+                                      jsonString.Append("\"MessageRead\": \"" + item.MessageRead + "\",");
+                                      jsonString.Append("\"PatientName\": \"" + item.PatientName + "\",");
+                                      jsonString.Append("\"HeaderID\": \"" + item.MessageId + "\"");
+                                      jsonString.Append("}");
+                                      if (counter % 2 == 0)
+                                      {
+                                          classrow = "r0";
+                                      }
+                                      else
+                                      {
+                                          classrow = "r1";
+                                      }  
+                                     // if(item.ProviderId_From != "0")
+                                     //{
+                           <tr class="@classrow" id="MessageHeader-@item.MessageDetailId" onclick="ProviderinboxDetail(@item.MessageDetailId,'@classrow','D');">
+                                <td>
+                                    <input id="hdInboxDetailJson-@item.MessageDetailId.ToString()" type="hidden" value="@jsonString.ToString()"/>
+                                    <input type="hidden" id="@item.MessageId"    />
+                                    <input type="checkbox" id='chkD'  value="1" name="chk[]" class="@item.MessageId" style="margin-left:5px;" />
+                                </td>
+                                @*<td></td>*@
+                                <td>
+                                   <div style="margin-left: 20px;width:120px;color:#666699">
+                                         @*@if (item.ProviderId_From == "0")
+                                       {
+                                           @item.CreatedByName  
+                                       }
+                                       else
+                                       {
+                                       @item.ProviderName_From  
+                                       }*@
+                                       @item.PatientName 
+                                    </div>
+                                </td>
+                                <td>
+                                     <div style="margin-left: 20px;width:150px;color:#666699">
+                                       @* @if (item.ProviderId_To == "0")
+                                        {
+                                             @item.CreatedByName  
+                                        }
+                                        @item.ProviderName_To*@
+                                         @item.MessageType
+                                   </div>
+                                </td>
+                                 <td>
+                                   <div style="margin-left: 20px;width:170px;color:#666699">
+                                        
+                                    @item.DateCreated
+                                   </div>
+                                </td>
+                                <td>
+                                   <div style="margin-left: 30px;width:100px;color:#666699">
+                                         @item.MessageStatus
+                                    </div>
+                                </td>
+                                @*<td>
+                                   <div style="margin-left: 50px;width:110px;color:#666699">
+                                        @item.MessageType
+                                    </div>
+                                </td>*@
+                              
+                              @* <td>
+                                   <div style="margin-left: 60px;" > <img src="Content/img/details.png" onclick="inboxDetail(@item.MessageId,'D');"/>
+                                      
+                                    </div>
+                                </td>*@
+                            </tr>
+                                      counter++;
+                                      }
+                                  }
+                            }
+                       @*  }
+                       }*@
+                        else
+                        {
+                          <tr><td>No Information Available</td></tr>
+                        }
+                    </tbody>
+                </table>

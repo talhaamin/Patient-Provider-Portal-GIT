@@ -1,0 +1,111 @@
+﻿@model IEnumerable<AMR.Models.PatientMedicationModel> 
+<table class="box-table-a" id="tbl-CurrentMedication" summary="Medications">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">Medication Name</th>
+                            <th scope="col">Administered During Visit</th>
+                            <th scope="col">Quantity</th>
+                            
+                            <th scope="col">Refills</th>
+                            
+                           @* <th scope="col"  class="hidePastmedication">Edit</th>*@
+                            @*<th scope="col">Details</th>*@
+                          @*  <th  scope="col" class="hidePastmedication">Delete</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                      @if (Model != null && Model.Count()>0)
+                        {
+                            int counter = 0;
+
+                            foreach (var item in Model)
+                        {
+                                
+
+                            System.Text.StringBuilder jsonString = new System.Text.StringBuilder();
+
+                            var route = (item.Route != null) ? item.Route.ToString() : "";
+                                
+                                
+                            jsonString.Append(" { ");
+                            jsonString.Append("\"ID\": \"" + item.PatientMedicationCntr + "\",");
+                            jsonString.Append("\"MedicationName\": \"" + item.MedicationName + "\",");
+                            jsonString.Append("\"ExpireDate\":  \"" + item.ExpireDate.ToShortDateString() + "\",");
+                            jsonString.Append("\"Status\":  \"" + (item.Active ? "1" : "0") + "\",");
+                            jsonString.Append("\"Pharmacy\":  \"" + item.Pharmacy + "\",");
+                            jsonString.Append("\"Note\":  \"" + item.Note + "\",");
+                            jsonString.Append("\"Days\":  \"" + item.Days.ToString() + "\",");
+                            jsonString.Append("\"Quantity\": \"" + item.Quantity.ToString() + "\",");
+                            jsonString.Append("\"Refills\":  \"" + item.Refills + "\",");
+                            jsonString.Append("\"StartDate\":  \"" + item.StartDate.ToShortDateString() + "\",");
+                            jsonString.Append("\"Frequency\": \"" + item.Frequency.ToString() + "\",");
+                            jsonString.Append("\"Route\":  \"" + route + "\",");    
+                            jsonString.Append("\"Diagnosis\":  \"" + item.Diagnosis + "\",");
+                            jsonString.Append("\"Dose\":  \"" + item.Dose + "\",");
+                            jsonString.Append("\"DoseUnit\":  \"" + item.DoseUnit + "\",");
+                                
+                                jsonString.Append("\"duringvisit\":  \"" + item.duringvisit + "\"");
+
+                            jsonString.Append("}");
+                        
+                            
+                            <tr class="@((counter % 2 == 1) ? "r0" : "r1")" onclick="detailCurrentMedication(@(item.PatientMedicationCntr)); ">
+
+                                <td>
+                                    <input type="hidden" id="hdCurJson@(item.PatientMedicationCntr)" value=" @jsonString.ToString()" />@item.MedicationName</td>
+                                @if(item.duringvisit == true)
+                                {
+                                <td><input type="checkbox" checked="true" disabled/></td>
+                                }
+                                else
+                                {
+                                   <td><input type="checkbox" disabled/></td>
+                                }
+                                @if(item.Quantity ==0)
+                                {
+                                    <td></td>
+                                }
+                                else
+                                {
+                                <td>@item.Quantity</td>
+                                }
+                                 @if(item.Refills ==0)
+                                {
+                                    <td></td>
+                                }
+                                else
+                                {
+                                <td>@item.Refills</td>
+                                 }
+                                
+                              @*  <td align="center"  style="cursor: pointer; width: auto; height: 20px;" class="hidePastmedication">
+                                    <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();editCurrentMedication(@(item.PatientMedicationCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="edit-current-medication">
+                                        <img id="edt-cur-med" src="Content/img/edit.png" />
+                                        <span class="anc" style="padding-right: 10px;"></span>
+                                    </div>
+                                </td>*@
+                            @*    <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                    <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();detailCurrentMedication(@(item.PatientMedicationCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="detail-current-medication">
+                                        <img id="det-cur-med" src="Content/img/details.png" />
+                                        <span class="anc" style="padding-right: 4px;"></span>
+                                    </div>
+                                </td>*@
+                               @* <td align="center" style="cursor: pointer; width: auto; height: 20px;"  class="hidePastmedication">
+                                    <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();DeleteCurrentRecord(@(item.PatientMedicationCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="delete-current-medication">
+                                        <img id="del-cur-med" src="Content/img/delete.png" />
+                                        <span class="anc" style="padding-right: 4px;"></span>
+                                    </div>
+                                </td>*@
+
+                            </tr>
+                            counter++;
+                        }
+                        }
+                       else
+                        {
+                          <tr><td>No Information Available</td></tr>
+                        }
+                    </tbody>
+                </table>

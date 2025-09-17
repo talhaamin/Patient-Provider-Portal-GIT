@@ -1,0 +1,54 @@
+﻿@model IEnumerable<AMR.Models.ProviderInfoModel>
+@using System.Text;
+@using System.Web.Script.Serialization;
+
+<table class="box-table-a" id="tab-providers" summary="Provider Information">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" style="vertical-align:middle">Provider Name</th>
+                                                <th scope="col" style="vertical-align:middle">Practice Name</th>
+                                                @*<th scope="col">Practice Address</th>*@
+                                                <th scope="col" style="vertical-align:middle">Practice Phone</th>
+                                               @* <th scope="col" style="text-align:center;">Details</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null && Model.Count()>0)
+                                            {
+                                                int counter=0;
+                                                foreach (var item in Model)
+                                                {
+                                                    StringBuilder jsonStringProblem = new StringBuilder();
+
+                                                    AMR.Models.PatientModel patient = new AMR.Models.PatientModel();
+                                                    jsonStringProblem.Append(" { ");
+                                                   
+                                                    jsonStringProblem.Append("\"Name\": \"" + item.Name + "\",");
+                                                    jsonStringProblem.Append("\"Facilityid\": \"" + item.FacilityName + "\",");
+                                                    jsonStringProblem.Append("\"OfficePhone\": \"" + item.OfficePhone + "\",");
+                                                    jsonStringProblem.Append("\"Address\": \"" + item.Address + "\",");
+                                                           jsonStringProblem.Append("\"state\": \"" + item.CityStateZip + "\"");
+                                                    jsonStringProblem.Append("}");
+                                                   
+                                             
+                                                   
+                                                     <tr class="@((counter % 2 == 0) ? "r1" : "r0")" onclick="Openproviderdialge();">
+                                                        <td style="vertical-align:middle">@item.Name<input type="hidden" id="hdprovide" value="@jsonStringProblem.ToString()" /></td>
+                                                  
+                                                        <td style="vertical-align:middle">@item.FacilityName </td>
+                                                        @*<td>@item.</td>*@
+                                                        <td style="vertical-align:middle">@item.OfficePhone</td>
+
+                                                        @*<td align="center">  <img  onclick="visitDetails(@item.VisitID); "   src="Content/img/details.png" />  </td>*@
+                                                    </tr>
+                                                    counter++;
+                                                }
+                                            }
+                                            else
+                                            {
+                                              <tr class="r1">
+                                <td colspan="4" style="vertical-align:middle">No Information Available.</td>
+                            </tr>
+                                            }
+                                        </tbody>
+</table>

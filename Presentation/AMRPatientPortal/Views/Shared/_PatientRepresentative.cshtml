@@ -1,0 +1,74 @@
+﻿@model AMR.Models.PatientRepModel
+@using System.Text;
+@using System.Web.Script.Serialization;
+
+<table class="box-table-a" id="tab-providers" summary="Provider Information">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">First Name</th>
+                                                <th scope="col">Last Name</th>
+                                            
+                                                <th scope="col">Email</th>
+                                              
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @if (Model != null )
+                                            {
+                                                int counter=0;
+                                               
+                                                    StringBuilder jsonStringPatientRep = new StringBuilder();
+                                                    jsonStringPatientRep.Append(" { ");
+                                                    jsonStringPatientRep.Append("\"UserId\": \"" + Model.UserId + "\",");
+                                                    jsonStringPatientRep.Append("\"FirstName\": \"" + Model.FirstName + "\",");
+                                                    jsonStringPatientRep.Append("\"LastName\": \"" + Model.LastName + "\",");
+                                                    jsonStringPatientRep.Append("\"EMail\":  \"" + Model.EMail + "\",");
+                                                    jsonStringPatientRep.Append("\"Demographics\":  \"" + Model.Demographics + "\",");
+                                                    jsonStringPatientRep.Append("\"Allergy\":  \"" + Model.Allergy + "\",");
+                                                    jsonStringPatientRep.Append("\"FamilyHistory\":  \"" + Model.FamilyHistory + "\",");
+                                                    jsonStringPatientRep.Append("\"LabResult\":  \"" + Model.LabResults + "\",");
+                                                    jsonStringPatientRep.Append("\"MedicalHistory\":  \"" + Model.MedicalHistory + "\",");
+                                                    jsonStringPatientRep.Append("\"Medication\":  \"" + Model.Medication + "\",");
+                                                    jsonStringPatientRep.Append("\"Problem\":  \"" + Model.Problem + "\",");
+                                                    jsonStringPatientRep.Append("\"Emergency\":  \"" + Model.EmergencyContact + "\",");
+                                                    jsonStringPatientRep.Append("\"SocialHistory\":  \"" + Model.SocialHistory + "\",");
+                                                    jsonStringPatientRep.Append("\"SurgicalHistory\":  \"" + Model.SurgicalHistory + "\",");
+                                                    jsonStringPatientRep.Append("\"VitalSigns\":  \"" + Model.VitalSigns + "\",");
+                                                    jsonStringPatientRep.Append("\"Immunization\":  \"" + Model.Immunization + "\",");
+                                                    jsonStringPatientRep.Append("\"Organ\":  \"" + Model.Organ + "\",");
+                                                    jsonStringPatientRep.Append("\"ClinicalDocs\":  \"" + Model.ClinicalDoc + "\",");
+                                                    jsonStringPatientRep.Append("\"Insurance\":  \"" + Model.Insurance + "\",");
+                                                    jsonStringPatientRep.Append("\"ClinicalSummary\":  \"" + Model.ClinicalSummary + "\",");
+                                                    jsonStringPatientRep.Append("\"Appointment\":  \"" + Model.Appointment + "\",");
+                                                    jsonStringPatientRep.Append("\"Visit\":  \"" + Model.Visit + "\",");
+                                                    jsonStringPatientRep.Append("\"UploadDocs\":  \"" + Model.UploadDocs + "\",");
+                                                    jsonStringPatientRep.Append("\"PlaneOfCare\":  \"" + Model.PlanOfCare + "\",");
+                                                    jsonStringPatientRep.Append("\"Messaging\":  \"" + Model.Messaging + "\",");
+                                                    jsonStringPatientRep.Append("\"Download\":  \"" + Model.DownloadTransmit + "\",");
+                                                    jsonStringPatientRep.Append("\"Procedure\":  \"" + Model.Procedure + "\",");
+                                                    jsonStringPatientRep.Append("\"Enabled\":  \"" + Model.Enabled + "\",");
+                                                    jsonStringPatientRep.Append("\"Provider\":  \"" + Model.Provider + "\"");  //SJF Added 1/22/2015
+                                                    jsonStringPatientRep.Append("}"); 
+                                   
+                                             
+                                                   
+                                                     <tr class="@((counter % 2 == 0) ? "r1" : "r0")" >
+                                                        <td>@Model.FirstName <input type="hidden" id="patrepid" value="@jsonStringPatientRep.ToString()" /></td>
+                                                  
+                                                        <td>@Model.LastName </td>
+                                                 
+                                                        <td>@Model.EMail</td>
+                                                      
+                                                    </tr>
+                                                    counter++;
+                                                }
+                                            
+                                            else
+                                            {
+                                              <tr class="r1">
+                                <td colspan="3">No Information Available.</td>
+                            </tr>
+                                            }
+                                        </tbody>
+</table>

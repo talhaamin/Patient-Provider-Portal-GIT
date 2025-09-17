@@ -1,0 +1,303 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@using System.Web.Script.Serialization;
+@using System.Web.Optimization;
+@model PremiumGeneralDocumentViewModel
+@{
+    ViewBag.Title = "General Document Index";
+    Layout = "~/Views/Shared/_LayoutMasterPage.cshtml";
+}
+@Styles.Render("~/GeneralDocIndex/css")
+
+
+@section Scripts
+{ 
+ 
+}
+
+ @{
+       AMR.Controllers.Controllers.Base.BaseController bc1 = new AMR.Controllers.Controllers.Base.BaseController();
+       AMR.Models.PatientRepModel patRep = bc1.GetRepData();
+          }  
+@if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.UserLoginEx.StartsWith("R")){
+if(patRep.UploadDocs == true ){
+<!-- Grid 1 : General Documents -->
+<div id="tab1" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 244px; left: 0px; margin-right:-15px; width: 98.5%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">General Documents
+                       
+                        <!-- first ICON -->
+                        <div onclick="ClearGDocFields(); OpenGeneralDocumentForm();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();"  onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/add.png" />
+                            <span class="anc" style="padding-right: 4px;">Add</span>
+                        </div>
+                        <!-- end of first icon-->
+                        
+                    </h5>
+                    <div id="GeneralDocuments-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 209px; overflow-x: auto;">
+                        @Html.Partial("~/Views/Templates/GeneralDocument/_GeneralDocument.cshtml",Model.GeneralDocuments)
+                    </div>
+                </div>
+            </div>  } }
+      else {
+    <!-- Grid 1 : General Documents -->
+<div id="tab1" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 244px; left: 0px; margin-right:-15px; width: 98.5%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">General Documents
+                       
+                        <!-- first ICON -->
+                        <div onclick="ClearGDocFields(); OpenGeneralDocumentForm();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();"  onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/add.png" />
+                            <span class="anc" style="padding-right: 4px;">Add</span>
+                        </div>
+                        <!-- end of first icon-->
+                        
+                    </h5>
+                    <div id="GeneralDocuments-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 209px; overflow-x: auto;">
+                        @Html.Partial("~/Views/Templates/GeneralDocument/_GeneralDocument.cshtml",Model.GeneralDocuments)
+                    </div>
+                </div>
+            </div>
+}
+<!-- Grid 2 : Insurance Policies -->
+<div id="tabs2" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 244px; left: 0px; margin-right:-15px; width: 98.5%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">Insurance Policies
+                        
+                        <!-- first ICON -->
+                        <div  onclick="removing_class(); clearFields(); OpenInsurancePolicyForm();"onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/add.png" />
+                            <span class="anc" style="padding-right: 4px;">Add</span>
+                        </div>
+                        <!-- end of first icon-->
+                    </h5>
+                    <div id="InsurancePolicy-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 209px; overflow-x: auto;">
+                         @Html.Partial("~/Views/Templates/GeneralDocument/_InsurancePolicy.cshtml",Model.InsurancePolicies)
+                    </div>
+                </div>
+            </div>
+<!-- Grid 3 : Professional Advisors -->
+<div id="tabs3" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 244px; left: 0px; margin-right:-15px; width: 98.5%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">Professional Advisors
+                        
+                        <!-- first ICON -->
+                        <div  onclick="removing_class(); clearFields(); OpenProfessionalAdvisorForm();"onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/add.png" />
+                            <span class="anc" style="padding-right: 4px;">Add</span>
+                        </div>
+                        <!-- end of first icon-->
+
+                    </h5>
+                    <div id="ProfessionalAdvisor-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 209px; overflow-x:auto;">
+                        @Html.Partial("~/Views/Templates/GeneralDocument/_ProfessionalAdvisor.cshtml",Model.ProfessionalAdvisors)
+                    </div>
+                </div>
+            </div>
+
+
+<!--Pop up Start : General Document -->
+<div id="form-save-general-document" title="General Document" style="overflow:hidden;">
+    <center>  <span   class="validateTips"></span></center>
+    <table cellpadding="3">
+        <tr>
+            <td >Select a Document:</td>
+            <td >
+                <input id="file_upload" type="file" value="" name="file_upload" style="display:none;"/>
+                <p style="margin:0px; padding:0px;">
+                    <input type="button" value="Browse..." id="btnBrowseFile" style="margin-top:-15px; display:inline-block; width:100px;" />
+                    <label id="fileName" style="margin-top:-15px; display:inline-block; margin-left:10px; width:215px;"></label>
+                </p>
+                
+            </td>
+        </tr>
+        <tr>
+            <td><span class="star">*</span>Document Name: </td>
+            <td><input type="text" id="txtGDDocumentDescription" width="100px;" class="txt"/></td>
+        </tr>
+        <tr>
+            <td>Comments: </td>
+            <td><textarea id="txtGDNotes" style="width:200px; height:100px;" class="txt"></textarea></td>
+        </tr>
+        <tr>
+            <td>Viewable: </td>
+            <td><input type="checkbox" id="chkGDViewable" /></td>
+        </tr>
+    </table>
+</div>
+<input type="hidden" id="hdnGeneralDocumentData" name="hdnGeneralDocumentData" value=""/>
+<!--Pop up End   : General Document -->
+
+<!--Pop up Start : Edit General Document -->
+<div id="form-edit-general-document" title="Edit Patient General Document" style="overflow:hidden;">
+    <center>  <span   class="validateTips"></span></center>
+    <table cellpadding="3">
+        <tr>
+            <td>Document Name: </td>
+            <td><input type="text" id="txtGDEditDocumentDescription" width="50px;" class="txt"/></td>
+        </tr>
+        <tr>
+            <td>Comments: </td>
+            <td><textarea id="txtGDEditNotes" style="width:200px; height:70px;" class="txt"></textarea></td>
+        </tr>
+        <tr>
+            <td>Viewable: </td>
+            <td><input type="checkbox" id="chkGDEditViewable" /></td>
+        </tr>
+    </table>
+</div>
+<input type="hidden" id="hdnGeneralDocumentId" name="hdnGeneralDocumentId" value=""/>
+<!--Pop up End   : Edit General Document -->
+
+<!--Pop up Start : Insurance Policy -->
+<div id="form-save-insurance-policy" title="Insurance Policy" style="overflow:hidden;">
+   <center>  <span   class="validateTips"></span></center>
+    <table cellpadding="3">
+        
+        <tr>
+            <td>Insurance Type :</td>
+            <td>    
+                 @Html.DropDownList("cmbIPInsuranceTypes", Model.PolicyTypes.ToPolicyTypeModelSelectList(), new { id = "cmbIPInsuranceTypes", @class = "txt", onChange="ShowTextBoxITOther();"})
+            </td>
+        </tr>
+        <tr id="showOther1">
+            <td>Other:</td>
+            <td><input type="text" id="txtITOther" disabled="disabled"  class="txt"/></td>
+        </tr>
+        <tr>
+            <td><span class="star">*</span>Company: </td>
+            <td><input type="text" id="txtIPCompany"  class="txt"/></td>
+        </tr>
+        <tr>
+            <td><span class="star">*</span>Policy: </td>
+            <td><input type="text" id="txtIPPolicyNo"  class="txt"/></td>
+        </tr>
+        <tr>
+            <td>Group: </td>
+            <td><input type="text" id="txtIPGroupNo"  class="txt"/></td>
+        </tr>
+        <tr>
+            <td>Plan:</td>
+            <td><input type="text" id="txtIPPlanNo"  class="txt"/></td>
+        </tr>
+        <tr>
+            <td>Agent: </td>
+            <td><input type="text" id="txtIPAgent" style="width:170px;" class="txt"/></td>
+        </tr>
+        <tr>
+            <td><span class="star">*</span>Phone: </td>
+            <td><input type="text" id="txtIPPhone" style="width:130px;"  class="txt"/></td>
+        </tr>
+        <tr>
+            <td>Fax: </td>
+            <td><input type="text" id="txtIPFax"  style="width:130px;" class="txt"/></td>
+        </tr>
+        <tr>
+            <td>Notes: </td>
+            <td><textarea id="txtIPNotes" style="width:200px; height:70px;" class="txt"></textarea></td>
+        </tr>
+    </table>
+</div>
+<input type="hidden" id="hdnPatientPolicyId" name="hdnPatientPolicyId" value=""/>
+<!--Pop up End   : Insurance Policy -->
+
+<!--Pop up Start : Professional Advisor -->
+<div id="form-save-professional-advisor" title="Patient Professional Advisor" style="overflow:hidden;">
+    <center>  <span   class="validateTips"></span></center>
+    <table cellpadding="3">
+        <tr>
+            <td class=".palabel" align="right">Type:</td>
+            <td>
+                @Html.DropDownList("cmbPAAdvisorTypes", Model.AdvisorTypes.ToAdvisorTypeModelSelectList(), new { id = "cmbPAAdvisorTypes", @class="txt patextbox", onChange="ShowTextBoxPAOther();"})
+            </td>
+        </tr>
+        <tr id="showOther">
+            <td class=".palabel" align="right">Other:</td>
+            <td ><input type="text" id="txtPAOther" disabled="disabled" class="txt patextbox" /></td>
+        </tr>
+        <tr>
+            <td class=".palabel" align="right"><span class="star">*</span>Advisor’s Name: </td>
+            <td><input type="text" id="txtPAAdvisorName" class="txt patextbox"/></td>
+        </tr>
+        <tr>
+            <td class=".palabel" align="right">Agent:</td>
+            <td ><input type="text" id="txtPAAgent" class="txt patextbox" /></td>
+        </tr>
+        <tr>
+            <td class=".palabel" align="right"><span class="star">*</span>Address 1: </td>
+            <td><input type="text" id="txtPAAddress1" class="txt patextbox"/></td>
+        </tr>
+        <tr>
+            <td align="right">Address 2: </td>
+            <td><input type="text" id="txtPAAddress2" class="txt patextbox"/></td>
+        </tr>
+        <tr>
+            <td class=".palabel" align="right"><span class="star">*</span>City :</td>
+            <td>
+                <input type="text" id="txtPACity" style="width:170px;" class="txt patextbox" />
+            </td>
+        </tr>
+        <tr>
+            <td class=".palabel" align="right"><span class="star">*</span>State :</td>
+            <td>
+                  @Html.DropDownList("cmbPAStates", Model.States.ToStatesModelSelectList(), new { id = "cmbPAStates", @class="txt patextbox", style="width:170px;" })
+            </td>
+        </tr>
+        <tr>
+            <td class=".palabel" align="right"><span class="star">*</span>Zip Code :</td>
+            <td>
+                <input type="text" id="txtPAZip" class="txt patextbox" style="width:80px;"/>
+            </td>
+        </tr>
+        <tr>
+            <td class=".palabel" align="right"><span class="star">*</span>Country :</td>
+            <td>
+                 @Html.DropDownList("cmbPACountry", Model.Country.ToCountryModelSelectList(), new { id = "cmbPACountry", @class="txt patextbox" })
+            </td>
+        </tr>
+        <tr>
+            <td class=".palabel" align="right"><span class="star">*</span>Office Phone:</td>
+            <td>
+                <input type="text" id="txtPAOfficephone"class="txt patextbox" style="width:130px;"/>
+            </td>
+        </tr>
+        <tr>
+            <td class=".palabel" align="right">Cell Phone:</td>
+            <td>
+                <input type="text" id="txtPACellphone" class="txt patextbox" style="width:130px;"/>
+              </td>
+        </tr>
+        <tr>
+            <td class=".palabel" align="right">Fax:</td>
+            <td>
+                <input type="text" id="txtPAFax" class="txt patextbox" style="width:130px;"/>
+            </td>
+        </tr>
+        <tr>
+            <td class=".palabel" align="right">Email:</td>
+            <td>
+                <input type="text" id="txtPAEmail" class="txt patextbox" />
+            </td>
+        </tr>
+        <tr>
+            <td class=".palabel" align="right">Notes: </td>
+            <td><textarea id="txtPANotes" style="width:200px; height:60px;" class="txt"></textarea></td>
+        </tr>
+    </table>
+</div>
+<input type="hidden" id="hdnPatientAdvisorId" name="hdnPatientAdvisorId" value=""/>
+<!--Pop up End   : Professional Advisor -->
+
+<!-- Start Office Document Iframe Page -->
+<div id="divOfficeDocIframe" style="display:none;">
+    <iframe id="iframeViewAttachment" onload="HideLoaderReportViewer();" style="border: 0px;" src="" width="100%" height="100%"></iframe>
+</div>
+<!-- Start Office Document Iframe Page -->
+
+
+@Scripts.Render("~/GeneralDocIndex/jquery")

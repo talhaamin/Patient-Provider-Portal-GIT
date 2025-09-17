@@ -1,0 +1,22 @@
+﻿@model IEnumerable<AMR.Models.ProviderModel>
+
+
+<select class = "txt  ui-corner-all bcom" style = "width:405px; margin-left:120px;" id = "cmbAppointmentDoctor">
+@if (Model != null)
+{
+    foreach (AMR.Models.ProviderModel item in Model)
+    {
+    <option value="@item.ProviderId.ToString()">
+        @item.FullName.ToString()
+    </option>
+
+    }
+}
+else
+{
+    <option value="-1">
+      -- Select --
+    </option>
+}
+    
+</select>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SecureMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Parms" type="tns:SecureMessageParms" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SecureMessageParms">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastCheckTD" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SecureMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SecureMessageResult" type="tns:SecureMessageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SecureMessageResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastCheckTD" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="dtMessages">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="PatientLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Parms" type="tns:LoginLogParms" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LoginLogParms">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastCheckTD" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="PatientLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PatientLoginResult" type="tns:LoginLogResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LoginLogResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastCheckTD" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="dtLogins">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SecureMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:SecureMessage" />
+  </wsdl:message>
+  <wsdl:message name="SecureMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:SecureMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="PatientLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:PatientLogin" />
+  </wsdl:message>
+  <wsdl:message name="PatientLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:PatientLoginResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ReportWSSoap">
+    <wsdl:operation name="SecureMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Secure Message</wsdl:documentation>
+      <wsdl:input message="tns:SecureMessageSoapIn" />
+      <wsdl:output message="tns:SecureMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PatientLogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Patient Login</wsdl:documentation>
+      <wsdl:input message="tns:PatientLoginSoapIn" />
+      <wsdl:output message="tns:PatientLoginSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ReportWSSoap" type="tns:ReportWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SecureMessage">
+      <soap:operation soapAction="http://tempuri.org/SecureMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PatientLogin">
+      <soap:operation soapAction="http://tempuri.org/PatientLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ReportWSSoap12" type="tns:ReportWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SecureMessage">
+      <soap12:operation soapAction="http://tempuri.org/SecureMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PatientLogin">
+      <soap12:operation soapAction="http://tempuri.org/PatientLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ReportWS">
+    <wsdl:port name="ReportWSSoap" binding="tns:ReportWSSoap">
+      <soap:address location="http://www.accessmyrecordsportal.com/QAIntegrationWS/ReportService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ReportWSSoap12" binding="tns:ReportWSSoap12">
+      <soap12:address location="http://www.accessmyrecordsportal.com/QAIntegrationWS/ReportService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

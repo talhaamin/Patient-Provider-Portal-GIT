@@ -1,0 +1,2059 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AMRModelStoreContainer" CdmEntityContainer="AMREntities">
+    <EntitySetMapping Name="C_BloodType">
+      <EntityTypeMapping TypeName="AMRModel.C_BloodType">
+        <MappingFragment StoreEntitySet="C_BloodType">
+          <ScalarProperty Name="BloodTypeId" ColumnName="BloodTypeId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_Ethnicity">
+      <EntityTypeMapping TypeName="AMRModel.C_Ethnicity">
+        <MappingFragment StoreEntitySet="C_Ethnicity">
+          <ScalarProperty Name="EthnicityId" ColumnName="EthnicityId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_Gender">
+      <EntityTypeMapping TypeName="AMRModel.C_Gender">
+        <MappingFragment StoreEntitySet="C_Gender">
+          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_MaritalStatus">
+      <EntityTypeMapping TypeName="AMRModel.C_MaritalStatus">
+        <MappingFragment StoreEntitySet="C_MaritalStatus">
+          <ScalarProperty Name="MaritalStatusId" ColumnName="MaritalStatusId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_Race">
+      <EntityTypeMapping TypeName="AMRModel.C_Race">
+        <MappingFragment StoreEntitySet="C_Race">
+          <ScalarProperty Name="RaceId" ColumnName="RaceId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_Religion">
+      <EntityTypeMapping TypeName="AMRModel.C_Religion">
+        <MappingFragment StoreEntitySet="C_Religion">
+          <ScalarProperty Name="ReligionId" ColumnName="ReligionId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_AuditAction">
+      <EntityTypeMapping TypeName="AMRModel.C_AuditAction">
+        <MappingFragment StoreEntitySet="C_AuditAction">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AuditActionId" ColumnName="AuditActionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_DocumentType">
+      <EntityTypeMapping TypeName="AMRModel.C_DocumentType">
+        <MappingFragment StoreEntitySet="C_DocumentType">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DocumentTypeId" ColumnName="DocumentTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientDocumentAudits">
+      <EntityTypeMapping TypeName="AMRModel.PatientDocumentAudit">
+        <MappingFragment StoreEntitySet="PatientDocumentAudit">
+          <ScalarProperty Name="AuditActionId" ColumnName="AuditActionId" />
+          <ScalarProperty Name="TDStamp" ColumnName="TDStamp" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DocumentTypeId" ColumnName="DocumentTypeId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="DocCntr" ColumnName="DocCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="AuditId" ColumnName="AuditId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_FacilityTypes">
+      <EntityTypeMapping TypeName="AMRModel.C_FacilityTypes">
+        <MappingFragment StoreEntitySet="C_FacilityTypes">
+          <ScalarProperty Name="FacilityType" ColumnName="FacilityType" />
+          <ScalarProperty Name="FacilityTypeId" ColumnName="FacilityTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Practices">
+      <EntityTypeMapping TypeName="AMRModel.Practice">
+        <MappingFragment StoreEntitySet="Practice">
+          <ScalarProperty Name="DateDeactivated" ColumnName="DateDeactivated" />
+          <ScalarProperty Name="UserId_Deactivated" ColumnName="UserId_Deactivated" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="PracticeName" ColumnName="PracticeName" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="PracticeId" ColumnName="PracticeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientFacilityLinks">
+      <EntityTypeMapping TypeName="AMRModel.PatientFacilityLink">
+        <MappingFragment StoreEntitySet="PatientFacilityLink">
+          <ScalarProperty Name="DataAdded" ColumnName="DataAdded" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_UserRole">
+      <EntityTypeMapping TypeName="AMRModel.C_UserRole">
+        <MappingFragment StoreEntitySet="C_UserRole">
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProviderFacilityLinks">
+      <EntityTypeMapping TypeName="AMRModel.ProviderFacilityLink">
+        <MappingFragment StoreEntitySet="ProviderFacilityLink">
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="FacilityProviderId" ColumnName="FacilityProviderId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tokens">
+      <EntityTypeMapping TypeName="AMRModel.Token">
+        <MappingFragment StoreEntitySet="Token">
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="TokenId" ColumnName="TokenId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_SmokingStatus">
+      <EntityTypeMapping TypeName="AMRModel.C_SmokingStatus">
+        <MappingFragment StoreEntitySet="C_SmokingStatus">
+          <ScalarProperty Name="SNOMED" ColumnName="SNOMED" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="SmokingStatusId" ColumnName="SmokingStatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientOrgans">
+      <EntityTypeMapping TypeName="AMRModel.PatientOrgan">
+        <MappingFragment StoreEntitySet="PatientOrgan">
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="ConnectiveTissue" ColumnName="ConnectiveTissue" />
+          <ScalarProperty Name="HeartValves" ColumnName="HeartValves" />
+          <ScalarProperty Name="BoneMarrow" ColumnName="BoneMarrow" />
+          <ScalarProperty Name="Skin" ColumnName="Skin" />
+          <ScalarProperty Name="Cornea" ColumnName="Cornea" />
+          <ScalarProperty Name="Intestines" ColumnName="Intestines" />
+          <ScalarProperty Name="Kidneys" ColumnName="Kidneys" />
+          <ScalarProperty Name="Lungs" ColumnName="Lungs" />
+          <ScalarProperty Name="Pancreas" ColumnName="Pancreas" />
+          <ScalarProperty Name="Liver" ColumnName="Liver" />
+          <ScalarProperty Name="Heart" ColumnName="Heart" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_ConditionStatus">
+      <EntityTypeMapping TypeName="AMRModel.C_ConditionStatus">
+        <MappingFragment StoreEntitySet="C_ConditionStatus">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="ConditionStatusId" ColumnName="ConditionStatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_CodeSystem">
+      <EntityTypeMapping TypeName="AMRModel.C_CodeSystem">
+        <MappingFragment StoreEntitySet="C_CodeSystem">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="CodeSystemId" ColumnName="CodeSystemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_MessagePeriod">
+      <EntityTypeMapping TypeName="AMRModel.C_MessagePeriod">
+        <MappingFragment StoreEntitySet="C_MessagePeriod">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="MessagePeriodId" ColumnName="MessagePeriodId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_MessageResponseType">
+      <EntityTypeMapping TypeName="AMRModel.C_MessageResponseType">
+        <MappingFragment StoreEntitySet="C_MessageResponseType">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="MessageResponseTypeId" ColumnName="MessageResponseTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_MessageStatus">
+      <EntityTypeMapping TypeName="AMRModel.C_MessageStatus">
+        <MappingFragment StoreEntitySet="C_MessageStatus">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="MessageStatusId" ColumnName="MessageStatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="AMRModel.Message">
+        <MappingFragment StoreEntitySet="Message">
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="MessageStatusId" ColumnName="MessageStatusId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="MessageTypeId" ColumnName="MessageTypeId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwFacilitiesForPatients">
+      <EntityTypeMapping TypeName="AMRModel.vwFacilitiesForPatient">
+        <MappingFragment StoreEntitySet="vwFacilitiesForPatient">
+          <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwProvidersForFacilities">
+      <EntityTypeMapping TypeName="AMRModel.vwProvidersForFacility">
+        <MappingFragment StoreEntitySet="vwProvidersForFacility">
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientMatches">
+      <EntityTypeMapping TypeName="AMRModel.PatientMatch">
+        <MappingFragment StoreEntitySet="PatientMatch">
+          <ScalarProperty Name="LastSoundex" ColumnName="LastSoundex" />
+          <ScalarProperty Name="FirstSoundex" ColumnName="FirstSoundex" />
+          <ScalarProperty Name="PhoneClean" ColumnName="PhoneClean" />
+          <ScalarProperty Name="PostalClean" ColumnName="PostalClean" />
+          <ScalarProperty Name="StateClean" ColumnName="StateClean" />
+          <ScalarProperty Name="CityClean" ColumnName="CityClean" />
+          <ScalarProperty Name="AddressClean" ColumnName="AddressClean" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+          <ScalarProperty Name="LastClean" ColumnName="LastClean" />
+          <ScalarProperty Name="FirstClean" ColumnName="FirstClean" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AttachmentMessages">
+      <EntityTypeMapping TypeName="AMRModel.AttachmentMessage">
+        <MappingFragment StoreEntitySet="AttachmentMessage">
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="DocumentFormat" ColumnName="DocumentFormat" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FileDirectory" ColumnName="FileDirectory" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+          <ScalarProperty Name="MessageAttachmentId" ColumnName="MessageAttachmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConfigAttachments">
+      <EntityTypeMapping TypeName="AMRModel.ConfigAttachment">
+        <MappingFragment StoreEntitySet="ConfigAttachment">
+          <ScalarProperty Name="CurrentFolderDocCntr" ColumnName="CurrentFolderDocCntr" />
+          <ScalarProperty Name="AttachmentFolderCntr" ColumnName="AttachmentFolderCntr" />
+          <ScalarProperty Name="AttachmentLocation" ColumnName="AttachmentLocation" />
+          <ScalarProperty Name="ConfigAttachmentId" ColumnName="ConfigAttachmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwPatientSearches">
+      <EntityTypeMapping TypeName="AMRModel.vwPatientSearch">
+        <MappingFragment StoreEntitySet="vwPatientSearch">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="PAddress" ColumnName="PAddress" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="PRank" ColumnName="PRank" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Organizations">
+      <EntityTypeMapping TypeName="AMRModel.Organization">
+        <MappingFragment StoreEntitySet="Organization">
+          <ScalarProperty Name="DateDeactivated" ColumnName="DateDeactivated" />
+          <ScalarProperty Name="UserId_Deactivated" ColumnName="UserId_Deactivated" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_Relationship">
+      <EntityTypeMapping TypeName="AMRModel.C_Relationship">
+        <MappingFragment StoreEntitySet="C_Relationship">
+          <ScalarProperty Name="SNOMED" ColumnName="SNOMED" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="RelationshipId" ColumnName="RelationshipId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientAccountLinks">
+      <EntityTypeMapping TypeName="AMRModel.PatientAccountLink">
+        <MappingFragment StoreEntitySet="PatientAccountLink">
+          <ScalarProperty Name="DateApproved" ColumnName="DateApproved" />
+          <ScalarProperty Name="PatientId_Linked" ColumnName="PatientId_Linked" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_SecurityQuestion">
+      <EntityTypeMapping TypeName="AMRModel.C_SecurityQuestion">
+        <MappingFragment StoreEntitySet="C_SecurityQuestion">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="SecurityQuestionId" ColumnName="SecurityQuestionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_InstructionType">
+      <EntityTypeMapping TypeName="AMRModel.C_InstructionType">
+        <MappingFragment StoreEntitySet="C_InstructionType">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="InstructionTypeId" ColumnName="InstructionTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_Problem">
+      <EntityTypeMapping TypeName="AMRModel.C_Problem">
+        <MappingFragment StoreEntitySet="C_Problem">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="ProblemId" ColumnName="ProblemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_AccessStatus">
+      <EntityTypeMapping TypeName="AMRModel.C_AccessStatus">
+        <MappingFragment StoreEntitySet="C_AccessStatus">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="AccessStatusId" ColumnName="AccessStatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLoginAudits">
+      <EntityTypeMapping TypeName="AMRModel.UserLoginAudit">
+        <MappingFragment StoreEntitySet="UserLoginAudit">
+          <ScalarProperty Name="AccessStatusId" ColumnName="AccessStatusId" />
+          <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+          <ScalarProperty Name="LoginType" ColumnName="LoginType" />
+          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+          <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageAudits">
+      <EntityTypeMapping TypeName="AMRModel.MessageAudit">
+        <MappingFragment StoreEntitySet="MessageAudit">
+          <ScalarProperty Name="TDStamp" ColumnName="TDStamp" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="MessageStatusId" ColumnName="MessageStatusId" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+          <ScalarProperty Name="AuditId" ColumnName="AuditId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientProviderLinks">
+      <EntityTypeMapping TypeName="AMRModel.PatientProviderLink">
+        <MappingFragment StoreEntitySet="PatientProviderLink">
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="PCP" ColumnName="PCP" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientMedicalHists">
+      <EntityTypeMapping TypeName="AMRModel.PatientMedicalHist">
+        <MappingFragment StoreEntitySet="PatientMedicalHist">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="OnKeys" ColumnName="OnKeys" />
+          <ScalarProperty Name="OnCard" ColumnName="OnCard" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="DateOfOccurance" ColumnName="DateOfOccurance" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PatMedicalHistCntr" ColumnName="PatMedicalHistCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_Medication">
+      <EntityTypeMapping TypeName="AMRModel.C_Medication">
+        <MappingFragment StoreEntitySet="C_Medication">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RxNormId" ColumnName="RxNormId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientAllergies">
+      <EntityTypeMapping TypeName="AMRModel.PatientAllergy">
+        <MappingFragment StoreEntitySet="PatientAllergy">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="OnKeys" ColumnName="OnKeys" />
+          <ScalarProperty Name="OnCard" ColumnName="OnCard" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="ConditionStatusId" ColumnName="ConditionStatusId" />
+          <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+          <ScalarProperty Name="Reaction" ColumnName="Reaction" />
+          <ScalarProperty Name="CodeSystemId_Reaction" ColumnName="CodeSystemId_Reaction" />
+          <ScalarProperty Name="CodeValue_Reaction" ColumnName="CodeValue_Reaction" />
+          <ScalarProperty Name="AllergenType" ColumnName="AllergenType" />
+          <ScalarProperty Name="Allergen" ColumnName="Allergen" />
+          <ScalarProperty Name="CodeSystemId_Allergen" ColumnName="CodeSystemId_Allergen" />
+          <ScalarProperty Name="CodeValue_Allergen" ColumnName="CodeValue_Allergen" />
+          <ScalarProperty Name="PatientAllergyCntr" ColumnName="PatientAllergyCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientInsurances">
+      <EntityTypeMapping TypeName="AMRModel.PatientInsurance">
+        <MappingFragment StoreEntitySet="PatientInsurance">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+          <ScalarProperty Name="Subscriber" ColumnName="Subscriber" />
+          <ScalarProperty Name="GroupNumber" ColumnName="GroupNumber" />
+          <ScalarProperty Name="MemberNumber" ColumnName="MemberNumber" />
+          <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+          <ScalarProperty Name="PatientInsuranceId" ColumnName="PatientInsuranceId" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientProcedures">
+      <EntityTypeMapping TypeName="AMRModel.PatientProcedure">
+        <MappingFragment StoreEntitySet="PatientProcedure">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="ServiceDate" ColumnName="ServiceDate" />
+          <ScalarProperty Name="ServiceLocation" ColumnName="ServiceLocation" />
+          <ScalarProperty Name="PerformedBy" ColumnName="PerformedBy" />
+          <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+          <ScalarProperty Name="CodeSystemId" ColumnName="CodeSystemId" />
+          <ScalarProperty Name="CodeValue" ColumnName="CodeValue" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PatProcedureCntr" ColumnName="PatProcedureCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_Vaccine">
+      <EntityTypeMapping TypeName="AMRModel.C_Vaccine">
+        <MappingFragment StoreEntitySet="C_Vaccine">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CVX_Code" ColumnName="CVX_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientSocialHists">
+      <EntityTypeMapping TypeName="AMRModel.PatientSocialHist">
+        <MappingFragment StoreEntitySet="PatientSocialHist">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+          <ScalarProperty Name="CodeSystemId" ColumnName="CodeSystemId" />
+          <ScalarProperty Name="CodeValue" ColumnName="CodeValue" />
+          <ScalarProperty Name="Qualifier" ColumnName="Qualifier" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PatSocialHistCntr" ColumnName="PatSocialHistCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientSurgicalHists">
+      <EntityTypeMapping TypeName="AMRModel.PatientSurgicalHist">
+        <MappingFragment StoreEntitySet="PatientSurgicalHist">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="ServiceDate" ColumnName="ServiceDate" />
+          <ScalarProperty Name="ServiceLocation" ColumnName="ServiceLocation" />
+          <ScalarProperty Name="PerformedBy" ColumnName="PerformedBy" />
+          <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+          <ScalarProperty Name="CodeSystemId" ColumnName="CodeSystemId" />
+          <ScalarProperty Name="CodeValue" ColumnName="CodeValue" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PatSurgicalHistCntr" ColumnName="PatSurgicalHistCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientClinicalDocuments">
+      <EntityTypeMapping TypeName="AMRModel.PatientClinicalDocument">
+        <MappingFragment StoreEntitySet="PatientClinicalDocument">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Viewable" ColumnName="Viewable" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="StorageLocation" ColumnName="StorageLocation" />
+          <ScalarProperty Name="DocumentFormat" ColumnName="DocumentFormat" />
+          <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+          <ScalarProperty Name="DocumentDescription" ColumnName="DocumentDescription" />
+          <ScalarProperty Name="DocumentCntr" ColumnName="DocumentCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_Country">
+      <EntityTypeMapping TypeName="AMRModel.C_Country">
+        <MappingFragment StoreEntitySet="C_Country">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_Frequency">
+      <EntityTypeMapping TypeName="AMRModel.C_Frequency">
+        <MappingFragment StoreEntitySet="C_Frequency">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="FrequencyId" ColumnName="FrequencyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_RouteOfAdministration">
+      <EntityTypeMapping TypeName="AMRModel.C_RouteOfAdministration">
+        <MappingFragment StoreEntitySet="C_RouteOfAdministration">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_State">
+      <EntityTypeMapping TypeName="AMRModel.C_State">
+        <MappingFragment StoreEntitySet="C_State">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_Social">
+      <EntityTypeMapping TypeName="AMRModel.C_Social">
+        <MappingFragment StoreEntitySet="C_Social">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="SNOMED_Social" ColumnName="SNOMED_Social" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientVitalSigns">
+      <EntityTypeMapping TypeName="AMRModel.PatientVitalSign">
+        <MappingFragment StoreEntitySet="PatientVitalSign">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="Respiration" ColumnName="Respiration" />
+          <ScalarProperty Name="Pulse" ColumnName="Pulse" />
+          <ScalarProperty Name="Diastolic" ColumnName="Diastolic" />
+          <ScalarProperty Name="Systolic" ColumnName="Systolic" />
+          <ScalarProperty Name="BloodPressurePosn" ColumnName="BloodPressurePosn" />
+          <ScalarProperty Name="WeightLb" ColumnName="WeightLb" />
+          <ScalarProperty Name="HeightIn" ColumnName="HeightIn" />
+          <ScalarProperty Name="VitalDate" ColumnName="VitalDate" />
+          <ScalarProperty Name="PatientVitalCntr" ColumnName="PatientVitalCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_MessageType">
+      <EntityTypeMapping TypeName="AMRModel.C_MessageType">
+        <MappingFragment StoreEntitySet="C_MessageType">
+          <ScalarProperty Name="General" ColumnName="General" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="MessageTypeId" ColumnName="MessageTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwPatientsForFacilities">
+      <EntityTypeMapping TypeName="AMRModel.vwPatientsForFacility">
+        <MappingFragment StoreEntitySet="vwPatientsForFacility">
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_PreferredLanguage">
+      <EntityTypeMapping TypeName="AMRModel.C_PreferredLanguage">
+        <MappingFragment StoreEntitySet="C_PreferredLanguage">
+          <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+          <ScalarProperty Name="ISO639_2" ColumnName="ISO639_2" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="PreferredLanguageId" ColumnName="PreferredLanguageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientLabResultTests">
+      <EntityTypeMapping TypeName="AMRModel.PatientLabResultTest">
+        <MappingFragment StoreEntitySet="PatientLabResultTest">
+          <ScalarProperty Name="ResultStatus" ColumnName="ResultStatus" />
+          <ScalarProperty Name="Abnormal" ColumnName="Abnormal" />
+          <ScalarProperty Name="Units" ColumnName="Units" />
+          <ScalarProperty Name="RefRange" ColumnName="RefRange" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="Component" ColumnName="Component" />
+          <ScalarProperty Name="CodeSystemId" ColumnName="CodeSystemId" />
+          <ScalarProperty Name="CodeValue" ColumnName="CodeValue" />
+          <ScalarProperty Name="TestCntr" ColumnName="TestCntr" />
+          <ScalarProperty Name="LabResultCntr" ColumnName="LabResultCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientImmunizations">
+      <EntityTypeMapping TypeName="AMRModel.PatientImmunization">
+        <MappingFragment StoreEntitySet="PatientImmunization">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+          <ScalarProperty Name="LotNumber" ColumnName="LotNumber" />
+          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="Site" ColumnName="Site" />
+          <ScalarProperty Name="Route" ColumnName="Route" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Vaccine" ColumnName="Vaccine" />
+          <ScalarProperty Name="CodeSystemId" ColumnName="CodeSystemId" />
+          <ScalarProperty Name="CodeValue" ColumnName="CodeValue" />
+          <ScalarProperty Name="ImmunizationTime" ColumnName="ImmunizationTime" />
+          <ScalarProperty Name="ImmunizationDate" ColumnName="ImmunizationDate" />
+          <ScalarProperty Name="PatientImmunizationCntr" ColumnName="PatientImmunizationCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientFamilyHists">
+      <EntityTypeMapping TypeName="AMRModel.PatientFamilyHist">
+        <MappingFragment StoreEntitySet="PatientFamilyHist">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="DiseasedAge" ColumnName="DiseasedAge" />
+          <ScalarProperty Name="Diseased" ColumnName="Diseased" />
+          <ScalarProperty Name="AgeAtOnset" ColumnName="AgeAtOnset" />
+          <ScalarProperty Name="ConditionStatusId" ColumnName="ConditionStatusId" />
+          <ScalarProperty Name="CodeSystemId" ColumnName="CodeSystemId" />
+          <ScalarProperty Name="CodeValue" ColumnName="CodeValue" />
+          <ScalarProperty Name="Qualifier" ColumnName="Qualifier" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RelationshipId" ColumnName="RelationshipId" />
+          <ScalarProperty Name="PatFamilyHistCntr" ColumnName="PatFamilyHistCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientProblems">
+      <EntityTypeMapping TypeName="AMRModel.PatientProblem">
+        <MappingFragment StoreEntitySet="PatientProblem">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="ConditionStatusId" ColumnName="ConditionStatusId" />
+          <ScalarProperty Name="LastChangeDate" ColumnName="LastChangeDate" />
+          <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+          <ScalarProperty Name="Condition" ColumnName="Condition" />
+          <ScalarProperty Name="CodeSystemId" ColumnName="CodeSystemId" />
+          <ScalarProperty Name="CodeValue" ColumnName="CodeValue" />
+          <ScalarProperty Name="PatientProblemCntr" ColumnName="PatientProblemCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_DoctorType">
+      <EntityTypeMapping TypeName="AMRModel.C_DoctorType">
+        <MappingFragment StoreEntitySet="C_DoctorType">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="DoctorTypeId" ColumnName="DoctorTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientCareDocuments">
+      <EntityTypeMapping TypeName="AMRModel.PatientCareDocument">
+        <MappingFragment StoreEntitySet="PatientCareDocument">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Viewable" ColumnName="Viewable" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="StorageLocation" ColumnName="StorageLocation" />
+          <ScalarProperty Name="DocumentFormat" ColumnName="DocumentFormat" />
+          <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+          <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+          <ScalarProperty Name="DocumentDescription" ColumnName="DocumentDescription" />
+          <ScalarProperty Name="DocumentCntr" ColumnName="DocumentCntr" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientDocuments">
+      <EntityTypeMapping TypeName="AMRModel.PatientDocument">
+        <MappingFragment StoreEntitySet="PatientDocument">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Viewable" ColumnName="Viewable" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="StorageLocation" ColumnName="StorageLocation" />
+          <ScalarProperty Name="DocumentFormat" ColumnName="DocumentFormat" />
+          <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+          <ScalarProperty Name="DocumentDescription" ColumnName="DocumentDescription" />
+          <ScalarProperty Name="DocumentCntr" ColumnName="DocumentCntr" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientMedicalDocuments">
+      <EntityTypeMapping TypeName="AMRModel.PatientMedicalDocument">
+        <MappingFragment StoreEntitySet="PatientMedicalDocument">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Viewable" ColumnName="Viewable" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="StorageLocation" ColumnName="StorageLocation" />
+          <ScalarProperty Name="DocumentFormat" ColumnName="DocumentFormat" />
+          <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+          <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+          <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+          <ScalarProperty Name="DocumentDescription" ColumnName="DocumentDescription" />
+          <ScalarProperty Name="DocumentCntr" ColumnName="DocumentCntr" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_Advisor">
+      <EntityTypeMapping TypeName="AMRModel.C_Advisor">
+        <MappingFragment StoreEntitySet="C_Advisor">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="AdvisorId" ColumnName="AdvisorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientAdvisors">
+      <EntityTypeMapping TypeName="AMRModel.PatientAdvisor">
+        <MappingFragment StoreEntitySet="PatientAdvisor">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="EMail" ColumnName="EMail" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="WorkPhone" ColumnName="WorkPhone" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="ContactAgent" ColumnName="ContactAgent" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AdvisorDesc" ColumnName="AdvisorDesc" />
+          <ScalarProperty Name="AdvisorId" ColumnName="AdvisorId" />
+          <ScalarProperty Name="PatientAdvisorId" ColumnName="PatientAdvisorId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientDoctors">
+      <EntityTypeMapping TypeName="AMRModel.PatientDoctor">
+        <MappingFragment StoreEntitySet="PatientDoctor">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="OnCard" ColumnName="OnCard" />
+          <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="WorkPhone" ColumnName="WorkPhone" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DoctorTypeId" ColumnName="DoctorTypeId" />
+          <ScalarProperty Name="PatientDoctorId" ColumnName="PatientDoctorId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientInsurancePlans">
+      <EntityTypeMapping TypeName="AMRModel.PatientInsurancePlan">
+        <MappingFragment StoreEntitySet="PatientInsurancePlan">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="AgentName" ColumnName="AgentName" />
+          <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
+          <ScalarProperty Name="PolicyNo" ColumnName="PolicyNo" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="InsuranceDesc" ColumnName="InsuranceDesc" />
+          <ScalarProperty Name="InsuranceId" ColumnName="InsuranceId" />
+          <ScalarProperty Name="PatientInsuranceId" ColumnName="PatientInsuranceId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProviderWebSettings">
+      <EntityTypeMapping TypeName="AMRModel.ProviderWebSetting">
+        <MappingFragment StoreEntitySet="ProviderWebSettings">
+          <ScalarProperty Name="PictureLocation" ColumnName="PictureLocation" />
+          <ScalarProperty Name="EmailNotifyNewMessage" ColumnName="EmailNotifyNewMessage" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_DocUploadType">
+      <EntityTypeMapping TypeName="AMRModel.C_DocUploadType">
+        <MappingFragment StoreEntitySet="C_DocUploadType">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DocUploadTypeId" ColumnName="DocUploadTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_PolicyType">
+      <EntityTypeMapping TypeName="AMRModel.C_PolicyType">
+        <MappingFragment StoreEntitySet="C_PolicyType">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="PolicyTypeId" ColumnName="PolicyTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientPolicies">
+      <EntityTypeMapping TypeName="AMRModel.PatientPolicy">
+        <MappingFragment StoreEntitySet="PatientPolicy">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="AgentFax" ColumnName="AgentFax" />
+          <ScalarProperty Name="AgentPhone" ColumnName="AgentPhone" />
+          <ScalarProperty Name="Agent" ColumnName="Agent" />
+          <ScalarProperty Name="PlanNumber" ColumnName="PlanNumber" />
+          <ScalarProperty Name="GroupNumber" ColumnName="GroupNumber" />
+          <ScalarProperty Name="PolicyNo" ColumnName="PolicyNo" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="PolicyTypeName" ColumnName="PolicyTypeName" />
+          <ScalarProperty Name="PolicyTypeId" ColumnName="PolicyTypeId" />
+          <ScalarProperty Name="PatientPolicyId" ColumnName="PatientPolicyId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientEmergencies">
+      <EntityTypeMapping TypeName="AMRModel.PatientEmergency">
+        <MappingFragment StoreEntitySet="PatientEmergency">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="FacilityId_Created" ColumnName="FacilityId_Created" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="OnCard" ColumnName="OnCard" />
+          <ScalarProperty Name="RelationshipId" ColumnName="RelationshipId" />
+          <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="WorkPhone" ColumnName="WorkPhone" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PatientEmergencyId" ColumnName="PatientEmergencyId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwMessageUnreads">
+      <EntityTypeMapping TypeName="AMRModel.vwMessageUnread">
+        <MappingFragment StoreEntitySet="vwMessageUnread">
+          <ScalarProperty Name="General" ColumnName="General" />
+          <ScalarProperty Name="Referral" ColumnName="Referral" />
+          <ScalarProperty Name="Appointment" ColumnName="Appointment" />
+          <ScalarProperty Name="Medication" ColumnName="Medication" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BillPayments">
+      <EntityTypeMapping TypeName="AMRModel.BillPayment">
+        <MappingFragment StoreEntitySet="BillPayment">
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="AccountHolderName" ColumnName="AccountHolderName" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="NoOfPayments" ColumnName="NoOfPayments" />
+          <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+          <ScalarProperty Name="PaymentFrequency" ColumnName="PaymentFrequency" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+          <ScalarProperty Name="RecurrId" ColumnName="RecurrId" />
+          <ScalarProperty Name="CustId" ColumnName="CustId" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+          <ScalarProperty Name="BillRateId" ColumnName="BillRateId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="BillPaymentId" ColumnName="BillPaymentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BillRates">
+      <EntityTypeMapping TypeName="AMRModel.BillRate">
+        <MappingFragment StoreEntitySet="BillRate">
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="FreeMonths" ColumnName="FreeMonths" />
+          <ScalarProperty Name="Residual" ColumnName="Residual" />
+          <ScalarProperty Name="Renewal" ColumnName="Renewal" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="IsFree" ColumnName="IsFree" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="PromoCode" ColumnName="PromoCode" />
+          <ScalarProperty Name="BillRateId" ColumnName="BillRateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwMessageUnreadProvs">
+      <EntityTypeMapping TypeName="AMRModel.vwMessageUnreadProv">
+        <MappingFragment StoreEntitySet="vwMessageUnreadProv">
+          <ScalarProperty Name="General" ColumnName="General" />
+          <ScalarProperty Name="Referral" ColumnName="Referral" />
+          <ScalarProperty Name="Appointment" ColumnName="Appointment" />
+          <ScalarProperty Name="Medication" ColumnName="Medication" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Providers">
+      <EntityTypeMapping TypeName="AMRModel.Provider">
+        <MappingFragment StoreEntitySet="Provider">
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="DateDeactivated" ColumnName="DateDeactivated" />
+          <ScalarProperty Name="UserId_Deactivated" ColumnName="UserId_Deactivated" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="License" ColumnName="License" />
+          <ScalarProperty Name="DEA" ColumnName="DEA" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PracticeId" ColumnName="PracticeId" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwCCDAuditLogs">
+      <EntityTypeMapping TypeName="AMRModel.vwCCDAuditLog">
+        <MappingFragment StoreEntitySet="vwCCDAuditLog">
+          <ScalarProperty Name="TDStamp" ColumnName="TDStamp" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Method" ColumnName="Method" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="AuditId" ColumnName="AuditId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwRptPatientLogins">
+      <EntityTypeMapping TypeName="AMRModel.vwRptPatientLogin">
+        <MappingFragment StoreEntitySet="vwRptPatientLogin">
+          <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwRptSecureMessages">
+      <EntityTypeMapping TypeName="AMRModel.vwRptSecureMessage">
+        <MappingFragment StoreEntitySet="vwRptSecureMessage">
+          <ScalarProperty Name="License" ColumnName="License" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ProviderId_To" ColumnName="ProviderId_To" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="MessageDetailId" ColumnName="MessageDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwVisitCCDs">
+      <EntityTypeMapping TypeName="AMRModel.vwVisitCCD">
+        <MappingFragment StoreEntitySet="vwVisitCCD">
+          <ScalarProperty Name="VisitDate" ColumnName="VisitDate" />
+          <ScalarProperty Name="VisitReason" ColumnName="VisitReason" />
+          <ScalarProperty Name="FacilityFax" ColumnName="FacilityFax" />
+          <ScalarProperty Name="FacilityPhone" ColumnName="FacilityPhone" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+          <ScalarProperty Name="FacilityType" ColumnName="FacilityType" />
+          <ScalarProperty Name="FacilityTypeId" ColumnName="FacilityTypeId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="License" ColumnName="License" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwPatientFacilityOptions">
+      <EntityTypeMapping TypeName="AMRModel.vwPatientFacilityOption">
+        <MappingFragment StoreEntitySet="vwPatientFacilityOptions">
+          <ScalarProperty Name="OnlineBillPayment" ColumnName="OnlineBillPayment" />
+          <ScalarProperty Name="PremiumAvailable" ColumnName="PremiumAvailable" />
+          <ScalarProperty Name="ReferralMessageAvailable" ColumnName="ReferralMessageAvailable" />
+          <ScalarProperty Name="MedicationMessageAvailable" ColumnName="MedicationMessageAvailable" />
+          <ScalarProperty Name="AppointmentMessageAvailable" ColumnName="AppointmentMessageAvailable" />
+          <ScalarProperty Name="GeneralMessageAvailable" ColumnName="GeneralMessageAvailable" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientShares">
+      <EntityTypeMapping TypeName="AMRModel.PatientShare">
+        <MappingFragment StoreEntitySet="PatientShare">
+          <ScalarProperty Name="ClinicalInstructions" ColumnName="ClinicalInstructions" />
+          <ScalarProperty Name="PlanOfCare" ColumnName="PlanOfCare" />
+          <ScalarProperty Name="UploadDocs" ColumnName="UploadDocs" />
+          <ScalarProperty Name="Visit" ColumnName="Visit" />
+          <ScalarProperty Name="Appointment" ColumnName="Appointment" />
+          <ScalarProperty Name="EmergencyContact" ColumnName="EmergencyContact" />
+          <ScalarProperty Name="Insurance" ColumnName="Insurance" />
+          <ScalarProperty Name="ClinicalDoc" ColumnName="ClinicalDoc" />
+          <ScalarProperty Name="Organ" ColumnName="Organ" />
+          <ScalarProperty Name="Immunization" ColumnName="Immunization" />
+          <ScalarProperty Name="VitalSigns" ColumnName="VitalSigns" />
+          <ScalarProperty Name="SurgicalHistory" ColumnName="SurgicalHistory" />
+          <ScalarProperty Name="SocialHistory" ColumnName="SocialHistory" />
+          <ScalarProperty Name="Procedure" ColumnName="Procedure" />
+          <ScalarProperty Name="Problem" ColumnName="Problem" />
+          <ScalarProperty Name="Medication" ColumnName="Medication" />
+          <ScalarProperty Name="MedicalHistory" ColumnName="MedicalHistory" />
+          <ScalarProperty Name="LabResults" ColumnName="LabResults" />
+          <ScalarProperty Name="FamilyHistory" ColumnName="FamilyHistory" />
+          <ScalarProperty Name="Allergy" ColumnName="Allergy" />
+          <ScalarProperty Name="Demographics" ColumnName="Demographics" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientPlanOfCares">
+      <EntityTypeMapping TypeName="AMRModel.PatientPlanOfCare">
+        <MappingFragment StoreEntitySet="PatientPlanOfCare">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="AppointmentDateTime" ColumnName="AppointmentDateTime" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Goal" ColumnName="Goal" />
+          <ScalarProperty Name="Instruction" ColumnName="Instruction" />
+          <ScalarProperty Name="CodeSystemId" ColumnName="CodeSystemId" />
+          <ScalarProperty Name="CodeValue" ColumnName="CodeValue" />
+          <ScalarProperty Name="InstructionTypeId" ColumnName="InstructionTypeId" />
+          <ScalarProperty Name="PlanCntr" ColumnName="PlanCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientNotes">
+      <EntityTypeMapping TypeName="AMRModel.PatientNote">
+        <MappingFragment StoreEntitySet="PatientNote">
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_ActivityLevel">
+      <EntityTypeMapping TypeName="AMRModel.C_ActivityLevel">
+        <MappingFragment StoreEntitySet="C_ActivityLevel">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="ActivityLevelId" ColumnName="ActivityLevelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_AlcoholFrequency">
+      <EntityTypeMapping TypeName="AMRModel.C_AlcoholFrequency">
+        <MappingFragment StoreEntitySet="C_AlcoholFrequency">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="AlcoholFrequencyId" ColumnName="AlcoholFrequencyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_EducationLevel">
+      <EntityTypeMapping TypeName="AMRModel.C_EducationLevel">
+        <MappingFragment StoreEntitySet="C_EducationLevel">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="EducationLevelId" ColumnName="EducationLevelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_ExerciseFrequency">
+      <EntityTypeMapping TypeName="AMRModel.C_ExerciseFrequency">
+        <MappingFragment StoreEntitySet="C_ExerciseFrequency">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="ExerciseFrequencyId" ColumnName="ExerciseFrequencyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientSocialSelves">
+      <EntityTypeMapping TypeName="AMRModel.PatientSocialSelf">
+        <MappingFragment StoreEntitySet="PatientSocialSelf">
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="SmokingSecondHand" ColumnName="SmokingSecondHand" />
+          <ScalarProperty Name="SmokingQuitDate" ColumnName="SmokingQuitDate" />
+          <ScalarProperty Name="SmokingQuitAttempts" ColumnName="SmokingQuitAttempts" />
+          <ScalarProperty Name="SmokingYears" ColumnName="SmokingYears" />
+          <ScalarProperty Name="SmokingType" ColumnName="SmokingType" />
+          <ScalarProperty Name="SmokingDailyAmount" ColumnName="SmokingDailyAmount" />
+          <ScalarProperty Name="SmokingStatusId" ColumnName="SmokingStatusId" />
+          <ScalarProperty Name="AlcoholFamilyHist" ColumnName="AlcoholFamilyHist" />
+          <ScalarProperty Name="AlcoholStartAge" ColumnName="AlcoholStartAge" />
+          <ScalarProperty Name="AlcoholType" ColumnName="AlcoholType" />
+          <ScalarProperty Name="AlcoholLastUse" ColumnName="AlcoholLastUse" />
+          <ScalarProperty Name="AlcoholFrequencyId" ColumnName="AlcoholFrequencyId" />
+          <ScalarProperty Name="AlcoholUser" ColumnName="AlcoholUser" />
+          <ScalarProperty Name="Activity3" ColumnName="Activity3" />
+          <ScalarProperty Name="Activity2" ColumnName="Activity2" />
+          <ScalarProperty Name="Activity1" ColumnName="Activity1" />
+          <ScalarProperty Name="ActivityLevelId" ColumnName="ActivityLevelId" />
+          <ScalarProperty Name="ExerciseAmount" ColumnName="ExerciseAmount" />
+          <ScalarProperty Name="ExerciseFrequencyId" ColumnName="ExerciseFrequencyId" />
+          <ScalarProperty Name="ExerciseMember" ColumnName="ExerciseMember" />
+          <ScalarProperty Name="CaffeineAmount" ColumnName="CaffeineAmount" />
+          <ScalarProperty Name="CaffieneType" ColumnName="CaffieneType" />
+          <ScalarProperty Name="CaffeineUser" ColumnName="CaffeineUser" />
+          <ScalarProperty Name="ChildrenDaughter" ColumnName="ChildrenDaughter" />
+          <ScalarProperty Name="ChildrenSon" ColumnName="ChildrenSon" />
+          <ScalarProperty Name="Retired" ColumnName="Retired" />
+          <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+          <ScalarProperty Name="EducationLevelId" ColumnName="EducationLevelId" />
+          <ScalarProperty Name="Birthplace" ColumnName="Birthplace" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_ThirdParty">
+      <EntityTypeMapping TypeName="AMRModel.C_ThirdParty">
+        <MappingFragment StoreEntitySet="C_ThirdParty">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="ThirdPartyId" ColumnName="ThirdPartyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientWebSettings">
+      <EntityTypeMapping TypeName="AMRModel.PatientWebSetting">
+        <MappingFragment StoreEntitySet="PatientWebSetting">
+          <ScalarProperty Name="ProviderWidgetRight" ColumnName="ProviderWidgetRight" />
+          <ScalarProperty Name="ProviderWidgetLeft" ColumnName="ProviderWidgetLeft" />
+          <ScalarProperty Name="ClinicalInstructionsWidgetRight" ColumnName="ClinicalInstructionsWidgetRight" />
+          <ScalarProperty Name="ClinicalInstructionsWidgetLeft" ColumnName="ClinicalInstructionsWidgetLeft" />
+          <ScalarProperty Name="PlanOfCareWidgetRight" ColumnName="PlanOfCareWidgetRight" />
+          <ScalarProperty Name="PlanOfCareWidgetLeft" ColumnName="PlanOfCareWidgetLeft" />
+          <ScalarProperty Name="CellCarrier" ColumnName="CellCarrier" />
+          <ScalarProperty Name="TextNotifyNewMesssage" ColumnName="TextNotifyNewMesssage" />
+          <ScalarProperty Name="PictureLocation" ColumnName="PictureLocation" />
+          <ScalarProperty Name="EmailNotifyNewMessage" ColumnName="EmailNotifyNewMessage" />
+          <ScalarProperty Name="DocumentWidgetRight" ColumnName="DocumentWidgetRight" />
+          <ScalarProperty Name="DocumentWidgetLeft" ColumnName="DocumentWidgetLeft" />
+          <ScalarProperty Name="StatementWidgetRight" ColumnName="StatementWidgetRight" />
+          <ScalarProperty Name="StatementWidgetLeft" ColumnName="StatementWidgetLeft" />
+          <ScalarProperty Name="PremiumWidgetRight" ColumnName="PremiumWidgetRight" />
+          <ScalarProperty Name="PremiumWidgetLeft" ColumnName="PremiumWidgetLeft" />
+          <ScalarProperty Name="VitalSignsWidgetRight" ColumnName="VitalSignsWidgetRight" />
+          <ScalarProperty Name="VitalSignsWidgetLeft" ColumnName="VitalSignsWidgetLeft" />
+          <ScalarProperty Name="SocialWidgetRight" ColumnName="SocialWidgetRight" />
+          <ScalarProperty Name="SocialWidgetLeft" ColumnName="SocialWidgetLeft" />
+          <ScalarProperty Name="ProcedureWidgetRight" ColumnName="ProcedureWidgetRight" />
+          <ScalarProperty Name="ProcedureWidgetLeft" ColumnName="ProcedureWidgetLeft" />
+          <ScalarProperty Name="ProblemWidgetRight" ColumnName="ProblemWidgetRight" />
+          <ScalarProperty Name="ProblemWidgetLeft" ColumnName="ProblemWidgetLeft" />
+          <ScalarProperty Name="PastMedicalWidgetRight" ColumnName="PastMedicalWidgetRight" />
+          <ScalarProperty Name="PastMedicalWidgetLeft" ColumnName="PastMedicalWidgetLeft" />
+          <ScalarProperty Name="MedicationWidgetRight" ColumnName="MedicationWidgetRight" />
+          <ScalarProperty Name="MedicationWidgetLeft" ColumnName="MedicationWidgetLeft" />
+          <ScalarProperty Name="LabTestWidgetRight" ColumnName="LabTestWidgetRight" />
+          <ScalarProperty Name="LabTestWidgetLeft" ColumnName="LabTestWidgetLeft" />
+          <ScalarProperty Name="InsuranceWidgetRight" ColumnName="InsuranceWidgetRight" />
+          <ScalarProperty Name="InsuranceWidgetLeft" ColumnName="InsuranceWidgetLeft" />
+          <ScalarProperty Name="ImmunizationWidgetRight" ColumnName="ImmunizationWidgetRight" />
+          <ScalarProperty Name="ImmunizationWidgetLeft" ColumnName="ImmunizationWidgetLeft" />
+          <ScalarProperty Name="FamilyWidgetRight" ColumnName="FamilyWidgetRight" />
+          <ScalarProperty Name="FamilyWidgetLeft" ColumnName="FamilyWidgetLeft" />
+          <ScalarProperty Name="AppointmentsWidgetRight" ColumnName="AppointmentsWidgetRight" />
+          <ScalarProperty Name="AppointmentsWidgetLeft" ColumnName="AppointmentsWidgetLeft" />
+          <ScalarProperty Name="AllergyWidgetRight" ColumnName="AllergyWidgetRight" />
+          <ScalarProperty Name="AllergyWidgetLeft" ColumnName="AllergyWidgetLeft" />
+          <ScalarProperty Name="VisitWidgetRight" ColumnName="VisitWidgetRight" />
+          <ScalarProperty Name="VisitWidgetLeft" ColumnName="VisitWidgetLeft" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configs">
+      <EntityTypeMapping TypeName="AMRModel.Config">
+        <MappingFragment StoreEntitySet="Config">
+          <ScalarProperty Name="SiteURL" ColumnName="SiteURL" />
+          <ScalarProperty Name="EmailFolder" ColumnName="EmailFolder" />
+          <ScalarProperty Name="SMSPassword" ColumnName="SMSPassword" />
+          <ScalarProperty Name="SMSUser" ColumnName="SMSUser" />
+          <ScalarProperty Name="SMSHost" ColumnName="SMSHost" />
+          <ScalarProperty Name="EmailActive" ColumnName="EmailActive" />
+          <ScalarProperty Name="EmailEnableSSL" ColumnName="EmailEnableSSL" />
+          <ScalarProperty Name="EmailPassword" ColumnName="EmailPassword" />
+          <ScalarProperty Name="EmailUser" ColumnName="EmailUser" />
+          <ScalarProperty Name="EmailHost" ColumnName="EmailHost" />
+          <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwPatientSummaries">
+      <EntityTypeMapping TypeName="AMRModel.vwPatientSummary">
+        <MappingFragment StoreEntitySet="vwPatientSummary">
+          <ScalarProperty Name="ConnectiveTissue" ColumnName="ConnectiveTissue" />
+          <ScalarProperty Name="HeartValves" ColumnName="HeartValves" />
+          <ScalarProperty Name="BoneMarrow" ColumnName="BoneMarrow" />
+          <ScalarProperty Name="Skin" ColumnName="Skin" />
+          <ScalarProperty Name="Cornea" ColumnName="Cornea" />
+          <ScalarProperty Name="Intestines" ColumnName="Intestines" />
+          <ScalarProperty Name="Kidneys" ColumnName="Kidneys" />
+          <ScalarProperty Name="Lungs" ColumnName="Lungs" />
+          <ScalarProperty Name="Pancreas" ColumnName="Pancreas" />
+          <ScalarProperty Name="Liver" ColumnName="Liver" />
+          <ScalarProperty Name="Heart" ColumnName="Heart" />
+          <ScalarProperty Name="MailCountryName" ColumnName="MailCountryName" />
+          <ScalarProperty Name="MailCountryCode" ColumnName="MailCountryCode" />
+          <ScalarProperty Name="MailZip" ColumnName="MailZip" />
+          <ScalarProperty Name="MailState" ColumnName="MailState" />
+          <ScalarProperty Name="MailCity" ColumnName="MailCity" />
+          <ScalarProperty Name="MailAddress" ColumnName="MailAddress" />
+          <ScalarProperty Name="PCP" ColumnName="PCP" />
+          <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+          <ScalarProperty Name="EmergencyRelationship" ColumnName="EmergencyRelationship" />
+          <ScalarProperty Name="EmergencyRelationshipId" ColumnName="EmergencyRelationshipId" />
+          <ScalarProperty Name="EmergencyWorkPhone" ColumnName="EmergencyWorkPhone" />
+          <ScalarProperty Name="EmergencyMobilePhone" ColumnName="EmergencyMobilePhone" />
+          <ScalarProperty Name="EmergencyHomePhone" ColumnName="EmergencyHomePhone" />
+          <ScalarProperty Name="EmergencyCountryName" ColumnName="EmergencyCountryName" />
+          <ScalarProperty Name="EmergencyCountryCode" ColumnName="EmergencyCountryCode" />
+          <ScalarProperty Name="EmergencyZip" ColumnName="EmergencyZip" />
+          <ScalarProperty Name="EmergencyState" ColumnName="EmergencyState" />
+          <ScalarProperty Name="EmergencyCity" ColumnName="EmergencyCity" />
+          <ScalarProperty Name="EmergencyAddress" ColumnName="EmergencyAddress" />
+          <ScalarProperty Name="EmergencyName" ColumnName="EmergencyName" />
+          <ScalarProperty Name="RelationshipId" ColumnName="RelationshipId" />
+          <ScalarProperty Name="PatientEmergencyId" ColumnName="PatientEmergencyId" />
+          <ScalarProperty Name="SmokingStatus" ColumnName="SmokingStatus" />
+          <ScalarProperty Name="SmokingStatusId" ColumnName="SmokingStatusId" />
+          <ScalarProperty Name="BloodType" ColumnName="BloodType" />
+          <ScalarProperty Name="BloodTypeId" ColumnName="BloodTypeId" />
+          <ScalarProperty Name="Ethnicity" ColumnName="Ethnicity" />
+          <ScalarProperty Name="EthnicityId" ColumnName="EthnicityId" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+          <ScalarProperty Name="Religion" ColumnName="Religion" />
+          <ScalarProperty Name="ReligionId" ColumnName="ReligionId" />
+          <ScalarProperty Name="Race" ColumnName="Race" />
+          <ScalarProperty Name="RaceId_White" ColumnName="RaceId_White" />
+          <ScalarProperty Name="RaceId_Hawaiian" ColumnName="RaceId_Hawaiian" />
+          <ScalarProperty Name="RaceId_Black" ColumnName="RaceId_Black" />
+          <ScalarProperty Name="RaceId_Asian" ColumnName="RaceId_Asian" />
+          <ScalarProperty Name="RaceId_Native" ColumnName="RaceId_Native" />
+          <ScalarProperty Name="RaceId_NotAnswer" ColumnName="RaceId_NotAnswer" />
+          <ScalarProperty Name="PreferredLanguage" ColumnName="PreferredLanguage" />
+          <ScalarProperty Name="PreferredLanguageId" ColumnName="PreferredLanguageId" />
+          <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+          <ScalarProperty Name="MaritalStatusId" ColumnName="MaritalStatusId" />
+          <ScalarProperty Name="OrganDoner" ColumnName="OrganDoner" />
+          <ScalarProperty Name="HairColor" ColumnName="HairColor" />
+          <ScalarProperty Name="EyeColor" ColumnName="EyeColor" />
+          <ScalarProperty Name="EMail" ColumnName="EMail" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="WorkPhone" ColumnName="WorkPhone" />
+          <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="HeightIn" ColumnName="HeightIn" />
+          <ScalarProperty Name="HeightFt" ColumnName="HeightFt" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="PAddress" ColumnName="PAddress" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Carriers">
+      <EntityTypeMapping TypeName="AMRModel.Carrier">
+        <MappingFragment StoreEntitySet="Carrier">
+          <ScalarProperty Name="CarrierName" ColumnName="CarrierName" />
+          <ScalarProperty Name="CarrierURL" ColumnName="CarrierURL" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwPatientVisitSummaries">
+      <EntityTypeMapping TypeName="AMRModel.vwPatientVisitSummary">
+        <MappingFragment StoreEntitySet="vwPatientVisitSummary">
+          <ScalarProperty Name="Viewable" ColumnName="Viewable" />
+          <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+          <ScalarProperty Name="VisitReason" ColumnName="VisitReason" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="VisitDate" ColumnName="VisitDate" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityCityStatePostal" ColumnName="FacilityCityStatePostal" />
+          <ScalarProperty Name="FacilityAddress" ColumnName="FacilityAddress" />
+          <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientMedications">
+      <EntityTypeMapping TypeName="AMRModel.PatientMedication">
+        <MappingFragment StoreEntitySet="PatientMedication">
+          <ScalarProperty Name="DuringVisit" ColumnName="DuringVisit" />
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Pharmacy" ColumnName="Pharmacy" />
+          <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+          <ScalarProperty Name="Sig" ColumnName="Sig" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+          <ScalarProperty Name="Refills" ColumnName="Refills" />
+          <ScalarProperty Name="DoseUnit" ColumnName="DoseUnit" />
+          <ScalarProperty Name="Dose" ColumnName="Dose" />
+          <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="MedicationName" ColumnName="MedicationName" />
+          <ScalarProperty Name="CodeSystemId" ColumnName="CodeSystemId" />
+          <ScalarProperty Name="CodeValue" ColumnName="CodeValue" />
+          <ScalarProperty Name="PatientMedicationCntr" ColumnName="PatientMedicationCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwMessageGetWaitings">
+      <EntityTypeMapping TypeName="AMRModel.vwMessageGetWaiting">
+        <MappingFragment StoreEntitySet="vwMessageGetWaiting">
+          <ScalarProperty Name="AppointmentEnd" ColumnName="AppointmentEnd" />
+          <ScalarProperty Name="AppointmentStart" ColumnName="AppointmentStart" />
+          <ScalarProperty Name="Pharmacy" ColumnName="Pharmacy" />
+          <ScalarProperty Name="Medication" ColumnName="Medication" />
+          <ScalarProperty Name="VisitUrgency" ColumnName="VisitUrgency" />
+          <ScalarProperty Name="VisitReason" ColumnName="VisitReason" />
+          <ScalarProperty Name="PreferredDay" ColumnName="PreferredDay" />
+          <ScalarProperty Name="PreferredTime" ColumnName="PreferredTime" />
+          <ScalarProperty Name="PreferredPeriod" ColumnName="PreferredPeriod" />
+          <ScalarProperty Name="PreferredResponseBy" ColumnName="PreferredResponseBy" />
+          <ScalarProperty Name="MessageRequest" ColumnName="MessageRequest" />
+          <ScalarProperty Name="ToProvider" ColumnName="ToProvider" />
+          <ScalarProperty Name="MessageTypeId" ColumnName="MessageTypeId" />
+          <ScalarProperty Name="AMRPatientId" ColumnName="AMRPatientId" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageDetails">
+      <EntityTypeMapping TypeName="AMRModel.MessageDetail">
+        <MappingFragment StoreEntitySet="MessageDetail">
+          <ScalarProperty Name="PharmacyPhone" ColumnName="PharmacyPhone" />
+          <ScalarProperty Name="MessageRead" ColumnName="MessageRead" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="AttachmentId" ColumnName="AttachmentId" />
+          <ScalarProperty Name="PharmacyAddress" ColumnName="PharmacyAddress" />
+          <ScalarProperty Name="PharmacyName" ColumnName="PharmacyName" />
+          <ScalarProperty Name="MedicationStatus" ColumnName="MedicationStatus" />
+          <ScalarProperty Name="NoOfRefills" ColumnName="NoOfRefills" />
+          <ScalarProperty Name="MedicationName" ColumnName="MedicationName" />
+          <ScalarProperty Name="MedicationNDC" ColumnName="MedicationNDC" />
+          <ScalarProperty Name="ProviderId_Appointment" ColumnName="ProviderId_Appointment" />
+          <ScalarProperty Name="AppointmentEnd" ColumnName="AppointmentEnd" />
+          <ScalarProperty Name="AppointmentStart" ColumnName="AppointmentStart" />
+          <ScalarProperty Name="MessageUrgency" ColumnName="MessageUrgency" />
+          <ScalarProperty Name="VisitReason" ColumnName="VisitReason" />
+          <ScalarProperty Name="PreferredWeekDay" ColumnName="PreferredWeekDay" />
+          <ScalarProperty Name="PreferredTime" ColumnName="PreferredTime" />
+          <ScalarProperty Name="PreferredPeriod" ColumnName="PreferredPeriod" />
+          <ScalarProperty Name="MessageResponseTypeId" ColumnName="MessageResponseTypeId" />
+          <ScalarProperty Name="MessageResponse" ColumnName="MessageResponse" />
+          <ScalarProperty Name="MessageRequest" ColumnName="MessageRequest" />
+          <ScalarProperty Name="ProviderId_From" ColumnName="ProviderId_From" />
+          <ScalarProperty Name="ProviderId_To" ColumnName="ProviderId_To" />
+          <ScalarProperty Name="MessageDetailId" ColumnName="MessageDetailId" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwMessageSummaries">
+      <EntityTypeMapping TypeName="AMRModel.vwMessageSummary">
+        <MappingFragment StoreEntitySet="vwMessageSummary">
+          <ScalarProperty Name="AttachmentId" ColumnName="AttachmentId" />
+          <ScalarProperty Name="PharmacyPhone" ColumnName="PharmacyPhone" />
+          <ScalarProperty Name="PharmacyAddress" ColumnName="PharmacyAddress" />
+          <ScalarProperty Name="MedicationStatus" ColumnName="MedicationStatus" />
+          <ScalarProperty Name="NoOfRefills" ColumnName="NoOfRefills" />
+          <ScalarProperty Name="MedicationNDC" ColumnName="MedicationNDC" />
+          <ScalarProperty Name="ProviderName_Appointment" ColumnName="ProviderName_Appointment" />
+          <ScalarProperty Name="ProviderId_Appointment" ColumnName="ProviderId_Appointment" />
+          <ScalarProperty Name="AppointmentEnd" ColumnName="AppointmentEnd" />
+          <ScalarProperty Name="AppointmentStart" ColumnName="AppointmentStart" />
+          <ScalarProperty Name="MessageResponseTypeId" ColumnName="MessageResponseTypeId" />
+          <ScalarProperty Name="MessageResponse" ColumnName="MessageResponse" />
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="ProviderName_From" ColumnName="ProviderName_From" />
+          <ScalarProperty Name="ProviderId_From" ColumnName="ProviderId_From" />
+          <ScalarProperty Name="ProviderName_To" ColumnName="ProviderName_To" />
+          <ScalarProperty Name="ProviderId_To" ColumnName="ProviderId_To" />
+          <ScalarProperty Name="PharmacyName" ColumnName="PharmacyName" />
+          <ScalarProperty Name="MedicationName" ColumnName="MedicationName" />
+          <ScalarProperty Name="VisitReason" ColumnName="VisitReason" />
+          <ScalarProperty Name="MessageUrgency" ColumnName="MessageUrgency" />
+          <ScalarProperty Name="PreferredWeekDay" ColumnName="PreferredWeekDay" />
+          <ScalarProperty Name="PreferredTime" ColumnName="PreferredTime" />
+          <ScalarProperty Name="PreferredPeriod" ColumnName="PreferredPeriod" />
+          <ScalarProperty Name="MessageRequest" ColumnName="MessageRequest" />
+          <ScalarProperty Name="MessageStatus" ColumnName="MessageStatus" />
+          <ScalarProperty Name="MessageStatusId" ColumnName="MessageStatusId" />
+          <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+          <ScalarProperty Name="MessageTypeId" ColumnName="MessageTypeId" />
+          <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientPharmacies">
+      <EntityTypeMapping TypeName="AMRModel.PatientPharmacy">
+        <MappingFragment StoreEntitySet="PatientPharmacy">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Preferred" ColumnName="Preferred" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="PharmacyName" ColumnName="PharmacyName" />
+          <ScalarProperty Name="PharmacyCntr" ColumnName="PharmacyCntr" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwMessageDetailReceiveds">
+      <EntityTypeMapping TypeName="AMRModel.vwMessageDetailReceived">
+        <MappingFragment StoreEntitySet="vwMessageDetailReceived">
+          <ScalarProperty Name="DocumentFormat" ColumnName="DocumentFormat" />
+          <ScalarProperty Name="MessageAttachmentId" ColumnName="MessageAttachmentId" />
+          <ScalarProperty Name="MessageRead" ColumnName="MessageRead" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="PharmacyPhone" ColumnName="PharmacyPhone" />
+          <ScalarProperty Name="PharmacyAddress" ColumnName="PharmacyAddress" />
+          <ScalarProperty Name="PharmacyName" ColumnName="PharmacyName" />
+          <ScalarProperty Name="MedicationStatus" ColumnName="MedicationStatus" />
+          <ScalarProperty Name="NoOfRefills" ColumnName="NoOfRefills" />
+          <ScalarProperty Name="MedicationName" ColumnName="MedicationName" />
+          <ScalarProperty Name="MedicationNDC" ColumnName="MedicationNDC" />
+          <ScalarProperty Name="ProviderAppointment" ColumnName="ProviderAppointment" />
+          <ScalarProperty Name="ProviderId_Appointment" ColumnName="ProviderId_Appointment" />
+          <ScalarProperty Name="AppointmentEnd" ColumnName="AppointmentEnd" />
+          <ScalarProperty Name="AppointmentStart" ColumnName="AppointmentStart" />
+          <ScalarProperty Name="MessageUrgency" ColumnName="MessageUrgency" />
+          <ScalarProperty Name="VisitReason" ColumnName="VisitReason" />
+          <ScalarProperty Name="PreferredWeekDay" ColumnName="PreferredWeekDay" />
+          <ScalarProperty Name="PreferredTime" ColumnName="PreferredTime" />
+          <ScalarProperty Name="PreferredPeriod" ColumnName="PreferredPeriod" />
+          <ScalarProperty Name="MessageResponseType" ColumnName="MessageResponseType" />
+          <ScalarProperty Name="MessageResponseTypeId" ColumnName="MessageResponseTypeId" />
+          <ScalarProperty Name="MessageResponse" ColumnName="MessageResponse" />
+          <ScalarProperty Name="MessageRequest" ColumnName="MessageRequest" />
+          <ScalarProperty Name="ProviderFrom" ColumnName="ProviderFrom" />
+          <ScalarProperty Name="ProviderId_From" ColumnName="ProviderId_From" />
+          <ScalarProperty Name="ProviderTo" ColumnName="ProviderTo" />
+          <ScalarProperty Name="ProviderId_To" ColumnName="ProviderId_To" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="MessageStatus" ColumnName="MessageStatus" />
+          <ScalarProperty Name="MessageStatusId" ColumnName="MessageStatusId" />
+          <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+          <ScalarProperty Name="MessageTypeId" ColumnName="MessageTypeId" />
+          <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="MessageDetailId" ColumnName="MessageDetailId" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwMessageDetailSents">
+      <EntityTypeMapping TypeName="AMRModel.vwMessageDetailSent">
+        <MappingFragment StoreEntitySet="vwMessageDetailSent">
+          <ScalarProperty Name="DocumentFormat" ColumnName="DocumentFormat" />
+          <ScalarProperty Name="MessageAttachmentId" ColumnName="MessageAttachmentId" />
+          <ScalarProperty Name="MessageRead" ColumnName="MessageRead" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="PharmacyPhone" ColumnName="PharmacyPhone" />
+          <ScalarProperty Name="PharmacyAddress" ColumnName="PharmacyAddress" />
+          <ScalarProperty Name="PharmacyName" ColumnName="PharmacyName" />
+          <ScalarProperty Name="MedicationStatus" ColumnName="MedicationStatus" />
+          <ScalarProperty Name="NoOfRefills" ColumnName="NoOfRefills" />
+          <ScalarProperty Name="MedicationName" ColumnName="MedicationName" />
+          <ScalarProperty Name="MedicationNDC" ColumnName="MedicationNDC" />
+          <ScalarProperty Name="ProviderAppointment" ColumnName="ProviderAppointment" />
+          <ScalarProperty Name="ProviderId_Appointment" ColumnName="ProviderId_Appointment" />
+          <ScalarProperty Name="AppointmentEnd" ColumnName="AppointmentEnd" />
+          <ScalarProperty Name="AppointmentStart" ColumnName="AppointmentStart" />
+          <ScalarProperty Name="MessageUrgency" ColumnName="MessageUrgency" />
+          <ScalarProperty Name="VisitReason" ColumnName="VisitReason" />
+          <ScalarProperty Name="PreferredWeekDay" ColumnName="PreferredWeekDay" />
+          <ScalarProperty Name="PreferredTime" ColumnName="PreferredTime" />
+          <ScalarProperty Name="PreferredPeriod" ColumnName="PreferredPeriod" />
+          <ScalarProperty Name="MessageResponseType" ColumnName="MessageResponseType" />
+          <ScalarProperty Name="MessageResponseTypeId" ColumnName="MessageResponseTypeId" />
+          <ScalarProperty Name="MessageResponse" ColumnName="MessageResponse" />
+          <ScalarProperty Name="MessageRequest" ColumnName="MessageRequest" />
+          <ScalarProperty Name="ProviderFrom" ColumnName="ProviderFrom" />
+          <ScalarProperty Name="ProviderId_From" ColumnName="ProviderId_From" />
+          <ScalarProperty Name="ProviderTo" ColumnName="ProviderTo" />
+          <ScalarProperty Name="ProviderId_To" ColumnName="ProviderId_To" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="MessageStatus" ColumnName="MessageStatus" />
+          <ScalarProperty Name="MessageStatusId" ColumnName="MessageStatusId" />
+          <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+          <ScalarProperty Name="MessageTypeId" ColumnName="MessageTypeId" />
+          <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="MessageDetailId" ColumnName="MessageDetailId" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="FindPatient" FunctionName="AMRModel.Store.FindPatient" />
+    <EntitySetMapping Name="vwMessageGetCancelleds">
+      <EntityTypeMapping TypeName="AMRModel.vwMessageGetCancelled">
+        <MappingFragment StoreEntitySet="vwMessageGetCancelled">
+          <ScalarProperty Name="MessageTypeId" ColumnName="MessageTypeId" />
+          <ScalarProperty Name="AMRPatientId" ColumnName="AMRPatientId" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DirectReceiveds">
+      <EntityTypeMapping TypeName="AMRModel.DirectReceived">
+        <MappingFragment StoreEntitySet="DirectReceived">
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="ToEmail" ColumnName="ToEmail" />
+          <ScalarProperty Name="FromEmail" ColumnName="FromEmail" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="DateProcessed" ColumnName="DateProcessed" />
+          <ScalarProperty Name="Processed" ColumnName="Processed" />
+          <ScalarProperty Name="DirectReceivedId" ColumnName="DirectReceivedId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwPatientDocumentsLists">
+      <EntityTypeMapping TypeName="AMRModel.vwPatientDocumentsList">
+        <MappingFragment StoreEntitySet="vwPatientDocumentsList">
+          <ScalarProperty Name="DocumentDescription" ColumnName="DocumentDescription" />
+          <ScalarProperty Name="DocType" ColumnName="DocType" />
+          <ScalarProperty Name="DocumentCntr" ColumnName="DocumentCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientLabResults">
+      <EntityTypeMapping TypeName="AMRModel.PatientLabResult">
+        <MappingFragment StoreEntitySet="PatientLabResult">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Reviewer" ColumnName="Reviewer" />
+          <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
+          <ScalarProperty Name="ReportDate" ColumnName="ReportDate" />
+          <ScalarProperty Name="SpecimenSource" ColumnName="SpecimenSource" />
+          <ScalarProperty Name="Specimen" ColumnName="Specimen" />
+          <ScalarProperty Name="Requisiton" ColumnName="Requisiton" />
+          <ScalarProperty Name="CollectionDate" ColumnName="CollectionDate" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="LabName" ColumnName="LabName" />
+          <ScalarProperty Name="CodeSystemId" ColumnName="CodeSystemId" />
+          <ScalarProperty Name="CodeValue" ColumnName="CodeValue" />
+          <ScalarProperty Name="ProviderId_Requested" ColumnName="ProviderId_Requested" />
+          <ScalarProperty Name="LabResultCntr" ColumnName="LabResultCntr" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_EMRSystem">
+      <EntityTypeMapping TypeName="AMRModel.C_EMRSystem">
+        <MappingFragment StoreEntitySet="C_EMRSystem">
+          <ScalarProperty Name="UseProviderPortal" ColumnName="UseProviderPortal" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="EMRSystemId" ColumnName="EMRSystemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="AMRModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="ResetPassword" ColumnName="ResetPassword" />
+          <ScalarProperty Name="SecurityAnswer2" ColumnName="SecurityAnswer2" />
+          <ScalarProperty Name="SecurityQuestionId2" ColumnName="SecurityQuestionId2" />
+          <ScalarProperty Name="SecurityAnswer" ColumnName="SecurityAnswer" />
+          <ScalarProperty Name="SecurityQuestionId" ColumnName="SecurityQuestionId" />
+          <ScalarProperty Name="Locked" ColumnName="Locked" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="FailedLoginCount" ColumnName="FailedLoginCount" />
+          <ScalarProperty Name="LastPasswordChange" ColumnName="LastPasswordChange" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="UserRoleLink" ColumnName="UserRoleLink" />
+          <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientVisits">
+      <EntityTypeMapping TypeName="AMRModel.PatientVisit">
+        <MappingFragment StoreEntitySet="PatientVisit">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="UserId_Deleted" ColumnName="UserId_Deleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="ClinicalSummary" ColumnName="ClinicalSummary" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Viewable" ColumnName="Viewable" />
+          <ScalarProperty Name="VisitReason" ColumnName="VisitReason" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="VisitDate" ColumnName="VisitDate" />
+          <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Patients">
+      <EntityTypeMapping TypeName="AMRModel.Patient">
+        <MappingFragment StoreEntitySet="Patient">
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="MergePatientId" ColumnName="MergePatientId" />
+          <ScalarProperty Name="AltId5_Key" ColumnName="AltId5_Key" />
+          <ScalarProperty Name="AltId5_Type" ColumnName="AltId5_Type" />
+          <ScalarProperty Name="AltId4_Key" ColumnName="AltId4_Key" />
+          <ScalarProperty Name="AltId4_Type" ColumnName="AltId4_Type" />
+          <ScalarProperty Name="AltId3_Key" ColumnName="AltId3_Key" />
+          <ScalarProperty Name="AltId3_Type" ColumnName="AltId3_Type" />
+          <ScalarProperty Name="AltId2_Key" ColumnName="AltId2_Key" />
+          <ScalarProperty Name="AltId2_Type" ColumnName="AltId2_Type" />
+          <ScalarProperty Name="AltId1_Key" ColumnName="AltId1_Key" />
+          <ScalarProperty Name="AltId1_Type" ColumnName="AltId1_Type" />
+          <ScalarProperty Name="MedicaidId" ColumnName="MedicaidId" />
+          <ScalarProperty Name="MedicaidState" ColumnName="MedicaidState" />
+          <ScalarProperty Name="MedicareId" ColumnName="MedicareId" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="EMRSystemId" ColumnName="EMRSystemId" />
+          <ScalarProperty Name="ThirdPartyId" ColumnName="ThirdPartyId" />
+          <ScalarProperty Name="SmokingDate" ColumnName="SmokingDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="PremiumExpireDate" ColumnName="PremiumExpireDate" />
+          <ScalarProperty Name="PremiumStartDate" ColumnName="PremiumStartDate" />
+          <ScalarProperty Name="PremiumFlag" ColumnName="PremiumFlag" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="FacilityId_Created" ColumnName="FacilityId_Created" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="SmokingStatusId" ColumnName="SmokingStatusId" />
+          <ScalarProperty Name="OrganDoner" ColumnName="OrganDoner" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Hair" ColumnName="Hair" />
+          <ScalarProperty Name="Eyes" ColumnName="Eyes" />
+          <ScalarProperty Name="HeightIn" ColumnName="HeightIn" />
+          <ScalarProperty Name="HeightFt" ColumnName="HeightFt" />
+          <ScalarProperty Name="BloodTypeId" ColumnName="BloodTypeId" />
+          <ScalarProperty Name="ReligionId" ColumnName="ReligionId" />
+          <ScalarProperty Name="MaritalStatusId" ColumnName="MaritalStatusId" />
+          <ScalarProperty Name="EthnicityId" ColumnName="EthnicityId" />
+          <ScalarProperty Name="RaceId_White" ColumnName="RaceId_White" />
+          <ScalarProperty Name="RaceId_Hawaiian" ColumnName="RaceId_Hawaiian" />
+          <ScalarProperty Name="RaceId_Black" ColumnName="RaceId_Black" />
+          <ScalarProperty Name="RaceId_Asian" ColumnName="RaceId_Asian" />
+          <ScalarProperty Name="RaceId_Native" ColumnName="RaceId_Native" />
+          <ScalarProperty Name="RaceId_NotAnswer" ColumnName="RaceId_NotAnswer" />
+          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+          <ScalarProperty Name="PreferredLanguageId" ColumnName="PreferredLanguageId" />
+          <ScalarProperty Name="EMail" ColumnName="EMail" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="WorkPhone" ColumnName="WorkPhone" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+          <ScalarProperty Name="SSN" ColumnName="SSN" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="MailCountryCode" ColumnName="MailCountryCode" />
+          <ScalarProperty Name="MailPostalCode" ColumnName="MailPostalCode" />
+          <ScalarProperty Name="MailState" ColumnName="MailState" />
+          <ScalarProperty Name="MailCity" ColumnName="MailCity" />
+          <ScalarProperty Name="MailAddress3" ColumnName="MailAddress3" />
+          <ScalarProperty Name="MailAddress2" ColumnName="MailAddress2" />
+          <ScalarProperty Name="MailAddress1" ColumnName="MailAddress1" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="County" ColumnName="County" />
+          <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
+          <ScalarProperty Name="CommunityName" ColumnName="CommunityName" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facilities">
+      <EntityTypeMapping TypeName="AMRModel.Facility">
+        <MappingFragment StoreEntitySet="Facility">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="DateDeactivated" ColumnName="DateDeactivated" />
+          <ScalarProperty Name="UserId_Deactivated" ColumnName="UserId_Deactivated" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="UserId_Modified" ColumnName="UserId_Modified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId_Created" ColumnName="UserId_Created" />
+          <ScalarProperty Name="OnlineBillPayment" ColumnName="OnlineBillPayment" />
+          <ScalarProperty Name="PremiumAvailable" ColumnName="PremiumAvailable" />
+          <ScalarProperty Name="ReferralMessageEmail" ColumnName="ReferralMessageEmail" />
+          <ScalarProperty Name="ReferralMessageNotify" ColumnName="ReferralMessageNotify" />
+          <ScalarProperty Name="ReferralMessageAvailable" ColumnName="ReferralMessageAvailable" />
+          <ScalarProperty Name="MedicationMessageEmail" ColumnName="MedicationMessageEmail" />
+          <ScalarProperty Name="MedicationMessageNotify" ColumnName="MedicationMessageNotify" />
+          <ScalarProperty Name="MedicationMessageAvailable" ColumnName="MedicationMessageAvailable" />
+          <ScalarProperty Name="AppointmentMessageEmail" ColumnName="AppointmentMessageEmail" />
+          <ScalarProperty Name="AppointmentMessageNotify" ColumnName="AppointmentMessageNotify" />
+          <ScalarProperty Name="AppointmentMessageAvailable" ColumnName="AppointmentMessageAvailable" />
+          <ScalarProperty Name="GeneralMessageEmail" ColumnName="GeneralMessageEmail" />
+          <ScalarProperty Name="GeneralMessageNotify" ColumnName="GeneralMessageNotify" />
+          <ScalarProperty Name="GeneralMessageAvailable" ColumnName="GeneralMessageAvailable" />
+          <ScalarProperty Name="BillFax" ColumnName="BillFax" />
+          <ScalarProperty Name="BillPhone" ColumnName="BillPhone" />
+          <ScalarProperty Name="BillCountryCode" ColumnName="BillCountryCode" />
+          <ScalarProperty Name="BillPostalCode" ColumnName="BillPostalCode" />
+          <ScalarProperty Name="BillState" ColumnName="BillState" />
+          <ScalarProperty Name="BillCity" ColumnName="BillCity" />
+          <ScalarProperty Name="BillAddress3" ColumnName="BillAddress3" />
+          <ScalarProperty Name="BillAddress2" ColumnName="BillAddress2" />
+          <ScalarProperty Name="BillAddress1" ColumnName="BillAddress1" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+          <ScalarProperty Name="FacilityTypeId" ColumnName="FacilityTypeId" />
+          <ScalarProperty Name="EMRSystemId" ColumnName="EMRSystemId" />
+          <ScalarProperty Name="PracticeId" ColumnName="PracticeId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientRepresentatives">
+      <EntityTypeMapping TypeName="AMRModel.PatientRepresentative">
+        <MappingFragment StoreEntitySet="PatientRepresentative">
+          <ScalarProperty Name="Provider" ColumnName="Provider" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="ClinicalSummary" ColumnName="ClinicalSummary" />
+          <ScalarProperty Name="DownloadTransmit" ColumnName="DownloadTransmit" />
+          <ScalarProperty Name="Messaging" ColumnName="Messaging" />
+          <ScalarProperty Name="PlanOfCare" ColumnName="PlanOfCare" />
+          <ScalarProperty Name="UploadDocs" ColumnName="UploadDocs" />
+          <ScalarProperty Name="Visit" ColumnName="Visit" />
+          <ScalarProperty Name="Appointment" ColumnName="Appointment" />
+          <ScalarProperty Name="EmergencyContact" ColumnName="EmergencyContact" />
+          <ScalarProperty Name="Insurance" ColumnName="Insurance" />
+          <ScalarProperty Name="ClinicalDoc" ColumnName="ClinicalDoc" />
+          <ScalarProperty Name="Organ" ColumnName="Organ" />
+          <ScalarProperty Name="Immunization" ColumnName="Immunization" />
+          <ScalarProperty Name="VitalSigns" ColumnName="VitalSigns" />
+          <ScalarProperty Name="SurgicalHistory" ColumnName="SurgicalHistory" />
+          <ScalarProperty Name="SocialHistory" ColumnName="SocialHistory" />
+          <ScalarProperty Name="Procedure" ColumnName="Procedure" />
+          <ScalarProperty Name="Problem" ColumnName="Problem" />
+          <ScalarProperty Name="Medication" ColumnName="Medication" />
+          <ScalarProperty Name="MedicalHistory" ColumnName="MedicalHistory" />
+          <ScalarProperty Name="LabResults" ColumnName="LabResults" />
+          <ScalarProperty Name="FamilyHistory" ColumnName="FamilyHistory" />
+          <ScalarProperty Name="Allergy" ColumnName="Allergy" />
+          <ScalarProperty Name="Demographics" ColumnName="Demographics" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

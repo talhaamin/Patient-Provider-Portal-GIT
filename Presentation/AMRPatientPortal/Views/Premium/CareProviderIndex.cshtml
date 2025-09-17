@@ -1,0 +1,563 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@using System.Web.Script.Serialization;
+
+@model PremiumViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <!-- Bootstrap core CSS -->
+    <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="@Url.Content("~/Content/css/justified-nav.css")" rel="stylesheet">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/themes/redmond/jquery-ui.css")" />
+   
+    <link href="@Url.Content("~/Content/css/themes/redmond/jquery-ui-1.10.3.custom.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/table-style.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/navigation-bar.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/style-main.css")" rel="stylesheet">
+     <link href="@Url.Content("~/Content/css/jquery-ui-timepicker-addon.css")" rel="stylesheet">
+
+
+      <script src="@Url.Content("~/Content/js/jquery-1.9.1.js")"></script>
+
+    <script src="@Url.Content("~/Content/css/ui/jquery.ui.core.js")"></script>
+	<script src="@Url.Content("~/Content/css/ui/jquery.ui.widget.js")"></script>
+	<script src="@Url.Content("~/Content/css/ui/jquery.ui.accordion.js")"></script>
+   
+    <script src="@Url.Content("~/Content/js/jquery-1.9.2.custom.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-ui.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.maskedinput-1.2.2.js")"></script>
+    <script src="@Url.Content("~/Content/js/validator.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.maskedinput.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-ui-timepicker-addon.js")"></script>
+        <script src="@Url.Content("~/Content/js/jquery.fileupload.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.fileupload-ui.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.iframe-transport.js")"></script>
+
+    <style>
+        #my-simple-upload {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    display: block;
+}
+    </style>
+
+    <script>
+
+
+        $(function () {
+            $("#button").button();
+            $("#radioset").buttonset();
+            $("#tabs").tabs();
+            // Hover states on the static widgets
+            $("#dialog-link, #icons li").hover(
+			function () {
+			    $(this).addClass("ui-state-hover");
+			},
+			function () {
+			    $(this).removeClass("ui-state-hover");
+			}
+		);
+        });
+
+        function clearFields() {
+
+            $(":input[type!='hidden']").val('');
+            $(':input').prop('checked', false);
+
+        }
+
+
+
+    </script>
+
+    <script>
+        // show buttons
+        function ShowLoader() {
+            var body_height = parseInt($('body').height());
+            $('#page_loader').css('height', body_height);
+            document.getElementById('page_loader').style.display = 'block';
+        }
+        function HideLoader() {
+            document.getElementById('page_loader').style.display = 'none';
+        }
+    </script>
+
+    <script>
+        $(function () {
+            $('#browse').click(function () {
+                if ($('#DocumentDescription').val() == '') {
+                    alert('Please Enter Document Description');
+                }
+                //else if ($('#DoctorName').val() == '') {
+                //    alert('Please Select Doctor Name');
+                //}
+                else if ($('#Notes').val() == '') {
+                    alert('Please Enter Notes');
+                }
+                else {
+                    $('#my-simple-upload').click();
+                }
+                });
+        });
+
+        var cancel_btn = $('<button/>')
+      .addClass('btn btn-warning cancel pull-right')
+      .html('<i class="icon-ban-circle icon-white"></i><span> Cancel')
+        var upload_btn = $('<button/>')
+            .addClass('btn btn-warning upload pull-right')
+            .html('<i class="icon-ban-circle icon-white"></i><span> Upload')
+        $('#submit').on('click', function () {
+            $('.upload').click() //click upload buttons and upload all files in the queue
+        })
+        $('#cancel').on('click', function () {
+            $('.cancel').click() //click cancel buttons and remove all files in the queue
+        })
+
+        function abortUpload(e) {
+
+            e.preventDefault();
+            var template = $(e.currentTarget).closest('.template-upload'),
+            data = template.data('data') || {}; // data, data , data (queue Monty Python skit)
+            alert(template.data);
+            // if (!data.jqXHR) {
+            data.errorThrown = 'abort';
+            this._trigger('fail', e, data);
+            // } else {
+            //  alert('else');
+            // data.jqXHR.abort();
+            // }
+        }
+        function initAttachFileUpload() {
+            'use strict';
+            
+            $('#my-simple-upload').bind('fileuploadsubmit', function (e, data) {
+                var inputs = data.context.find(':input');
+                if (inputs.filter('[required][value=""]').first().focus().length) {
+                    return false;
+                }
+                data.formData = inputs.serializeArray();
+                console.log(inputs.serializeArray());
+            });
+
+            var globalVariable = 0;
+            // my - simple - upload
+            $('#my-simple-upload').fileupload({
+                url: 'Care-Provider-Index',
+                dataType: 'json',
+                // autoUpload: false,
+                // singleFileUploads: false,
+                // replaceFileInput: false,
+                // formData: { FacilityId: $('#hdFacilityId').val() },
+                add: function (e, data) {
+                    console.log("Number of files: " + data.files.length);
+                    debugger;
+                    $.each(data.files, function (index, file) {
+                        //data.formData = { DocumentDescription: $('#DocumentDescription').val(), DoctorName: $('#DoctorName').val(), Notes: $('#Notes').val() }; // e.g. {id: 123}
+                        var DocumentDescription = $('#DocumentDescription').val();
+                        var DoctorName = $('#DoctorName option:selected').text();
+                        var Notes = $('#Notes').val();
+                        var newFileDiv = $("<div class='uploadBox' id='fileDiv_" + file.name + "' style='background-color:#F0F0F0;width:500px;'><div class='midEle' style='width=300px;'>" + file.name + "</div><div class='leftEle' style='width:300px;margin-top:-20px;margin-left:300px;'><input type='hidden' class='DocumentDescription' name='DocumentDescription' value=" + DocumentDescription + "><input type='hidden' class='DoctorName' name='DoctorName' value=" + DoctorName + "><input type='hidden' class='Notes' name='Notes' value=" + Notes + "><a href='#' id='link_" + index + "' class='removeFile' style='color:#D80D0D;'><img src='Content/img/hide.png'>Remove</a></div></div>");
+                        $('#uploadFilesBox').append(newFileDiv);
+                        $(".DocumentDescription:last").val(DocumentDescription);
+                        $(".DoctorName:last").val(DoctorName);
+                        $(".Notes:last").val(Notes);
+                        
+                       
+                        newFileDiv.find('a').on('click', { filename: file.name, files: data.files }, function (event) {
+                            event.preventDefault();
+                            var uploadFilesBox = $("#uploadFilesBox");
+                            var remDiv = $(document.getElementById("fileDiv_" + event.data.filename));
+                            remDiv.remove();
+                            data.files.length = 0;    //zero out the files array                                     
+                        });
+
+                        data.context = newFileDiv;
+                        var inputs = data.context.find(':input');
+                        console.log(inputs.serializeArray());
+                        $('#DocumentDescription').val('');
+                       // $('#DoctorName').val('');
+                        $('#Notes').val('');
+                    });
+
+                    $('#btnUploadAll')
+                    .click(function () {
+                        if (data.files.length > 0) {     //only submit if we have something to upload
+                            ShowLoader();
+                            //var value = $('#fileCount').val() 
+                            data.submit();
+                        }
+                    });
+                    //data.context = $('<div/>').appendTo('#FilesListThumb');
+                    //$.each(data.files, function (index, file) {
+                    //    globalVariable = globalVariable + 1;
+                    //    var node = $("<div><h6 fileId=" + globalVariable + " Name=" + file.name + ">" + file.name + "</h6></div>").addClass("thumbnail-ib");
+                    //    file.fileId = globalVariable; // Add the same id to the file
+                    //    node.appendTo(data.context);
+                    //    node.find("h6").click(function () {
+
+                    //        for (var i = 0; i < data.files.length; i++)
+                    //        {
+
+                    //            if (data.files[i].fileId == $(this).attr("fileId"))
+                    //            {
+                    //                alert(i);
+                    //                data.files.length = 0;
+                    //               // data.files.splice(i, 1);
+                    //                node.remove();
+                    //            }
+                    //        }
+
+                    //    });
+                    //});
+
+                    //var that = this;
+                    //var file = data.files[0];
+                    //var row = $('<tr class="template-upload" id="' + file.name + '"><td id="file-name">' + file.name + '</td><td id="file-size">' + file.size + '</td><td><div class="progress"><div class="bar" style="width:0%;"></div></div></td><td class="cancel"><button>Cancel</button></td></tr>');
+                    //row.appendTo('#files_list');
+
+                    //data.context = row;
+
+                    //var jqXHR = $.getJSON('/Care-Provider-Index', { file: file.name }, function (result) {
+                    //    var _file = result.file;
+                    //    data.uploadedBytes = _file && _file.size;
+                    //    $.blueimp.fileupload.prototype
+                    //        .options.add.call(that, e, data);
+                    //});
+
+                    //row.data('data', { jqXHR: jqXHR }).find('.cancel').click(_cancel);
+
+                    //data.context = row;
+                    //row.find('.cancel').click(abortUpload);
+                    //var xhr = data;
+                    //.submit();
+                    //data.context.data('data', { jqXHR: xhr }); // so much data...
+
+                    // var jqXHR = data;
+                    //.submit();
+                    // node = $(tmpl("template-upload", file)).appendTo('#fileupload');
+                    //row.find('.cancel').click(function (e) {
+                    // e.preventDefault();
+                    //  jqXHR.abort();
+                    // });
+
+
+                    ////jqXHRData = data
+                    //console.log(data);
+                    //$.each(data.files, function (index, file) {
+                    //    alert('test');
+                    //    var tr = document.createElement('tr');
+                    //    var td1 = document.createElement('td');
+                    //    var td2 = document.createElement('td');
+                    //    var td3 = document.createElement('td');
+                    //    var td4 = document.createElement('td');
+                    //    $(td1).append(file.name);
+                    //    $(td2).append(file.size);
+                    //    $(td3).append(cancel_btn.clone(true).data(data));
+                    //    $(td4).append(upload_btn.clone(true).data(data));
+                    //    $(tr).append(td1, td2, td3,td4);
+                    //    $('#files_list tbody').append(tr);
+
+                    //   // var size = $('#files_list tbody tr').size();
+                    //   // if (size < 1)
+                    //    //    $('#files_list').addClass('hide');
+                    //  //  else
+                    //    // $('#files_list').removeClass('hide');
+                    //    $('.upload').eq(-1).on('click', function () {//button to upload only this file
+                    //        data.submit();
+                    //    })
+                    //    $('.cancel').eq(-1).on('click', function () {
+                    //        $(this).parent().parent().remove()//or something like this, 
+                    //        //delete the whole <tr> 
+                    //        //and remove the file from the queue
+                    //    });
+                    //});
+
+                    //$('#btnUploadAll').click(function () {
+                    //    //data.context = $('<p/>').text('Uploading...').replaceAll($(this));
+                    //    data.submit();
+                    //    $('#files_list tbody').html('');
+                    //});
+                },
+                done: function (event, data) {
+
+                    $('#MessageHeaderGrid').html(data.result.Msghtml);
+
+                    var len = $(".uploadBox").length;
+                    //alert(len);
+                    var value = parseInt($('#fileCount').val());
+                    value += 1;
+                    //alert(value);
+                     $('#fileCount').val(value)
+                  //  alert($('#fileCount').val());
+                    if ($('#fileCount').val() == len) {
+                        // alert('test');
+                        HideLoader();
+                        $('#Logoutmessage').show();
+                        $('#UploadForm').hide();
+                        $('#fileCount').val(0);
+                        $('#uploadFilesBox').html('');
+                       var date = new Date();
+                        date.setDate(date.getDate() - 1);
+                       // alert(date);
+                        document.cookie = 'CareProvider' + '=;expires=' + date;
+                    }
+                    //if (data.result.isUploaded) {
+
+                    //}
+                    // else {
+
+                    // }
+                    //alert(data.result.message);
+
+
+
+
+                },
+                submit: function (e, data) {
+                   // var $this = $(this);
+
+                  //  data.formData = { DocumentDescription: $('#DocumentDescription').val(), DoctorName: $('#DoctorName').val(), Notes: $('#Notes').val() }; // e.g. {id: 123}
+                  //  $this.fileupload('send', data);
+
+                  //  return false;
+                },
+                fail: function (event, data) {
+                    if (data.files[0].error) {
+                        alert(data.files[0].error);
+                    }
+                }
+            });
+        }
+    </script>
+    
+
+    <script>
+        var jqXHR;
+        //jqXHRData;
+        $(document).ready(function () {
+            $('#Logoutmessage').hide();
+            initAttachFileUpload();
+        });
+        function StartUpload() {
+            //ShowLoader();
+            if (jqXHRData) {
+                alert('test');
+                //var isStartUpload = true;
+                //var uploadFile = jqXHRData.files[0];
+
+                //if (!(/\.(gif|jpg|jpeg|tiff|png|pdf)$/i).test(uploadFile.name)) {
+                //    alert('You must select an image file only');
+                //    isStartUpload = false;
+                //    return false;
+                //} else if (uploadFile.size > 4000000) { // 4mb
+                //    alert('Please upload a smaller image, max size is 4 MB');
+                //    isStartUpload = false;
+                //    return false;
+                //}
+                //if (isStartUpload) {
+                //    jqXHRData.submit();
+
+                //}
+            }
+        }
+    </script>
+    <script>
+        function showLogin() {
+            location.href = '@Url.RouteUrl("login", new { controller = "Home", action = "login" })'
+        }
+        function Logout() {
+            location.href = '@Url.RouteUrl("Care-Provider-login")'
+        }
+            </script>
+
+
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div id="page_loader" style="display: none;">
+
+        <div id="apDiv1" align="center">
+            <table width="200" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td height="70px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <img src="Content/img/image_559926.gif" width="128" height="64" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;" height="70px;">Please wait ...</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="header">
+  <table width="100%" border="0">
+    <tr>
+      <td width="39%"><img src="Content/img/AMR-2014-Patient-Portal-Logo.jpg" width="422" height="81" /></td>
+      <td width="50%">
+          @*<div style="text-align: center;font-size:1.4em;color:#327098;">Welcome 
+           @{
+                                    if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName == "")
+                                    {
+                                        AMR.Controllers.Controllers.Base.BaseController bc = new AMR.Controllers.Controllers.Base.BaseController();
+                                        AMR.Core.Utilities.GlobalVar gv = bc.PopulatePatientOnLayoutMaster();
+                                        <b style="font-size:1.5em;font-weight:bold;color:#327098;">@gv.PatientName</b>
+
+
+                                    }
+                                    else
+                                    {
+                                   <b style="font-size:1.5em;font-weight:bold;color:#327098;">@AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientName</b>
+                                    }
+                                 }
+          
+           <br/>You Have a  @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag == true){<b style="color:#1E844E">Premium</b> }
+          else
+          {
+             <b style="color:#686868">Standard</b>  
+          }
+          Account</div>
+          *@
+          </td>
+      <td width="11%"><img src="Content/img/logout_btn.jpg" width="109" height="38" onclick="Logout();" style="cursor:pointer"/></td>
+    </tr>
+  </table>
+</div>
+<div class="wrapper" >
+    <div class="container" style="width: 1200px;">
+        
+        <div style="margin-top:99px;" class="@if (Request.RawUrl.Contains("clinical"))
+                                             { <Text>main_div_clinical_summary</Text>}
+                                             else if (Request.RawUrl.Contains("message"))
+                                             { <Text>main_div_messages</Text>}
+                                             else
+                                             { <Text>main_div</Text>} ui-corner-all" id="UploadForm">
+            @*<div class="inside_div1">
+                <!-- Accordion -->
+                
+
+                 
+            </div>*@
+            <div class="inside_div2">
+               <h1>Care Provider Document Upload</h1>
+<p style="font-family:Verdana,Arial,Helvetica,sans-serif; font-size: 16px;">In this section Medical Care Provider have restricted access to a Patients PHR. This access will be limited to one specific function, 
+uploading of medical records, lab reports, x-rays and other medical related documents. Below you will be ability to add
+ multiple files at one time, preview/add/remove and enter notes for each uploaded document prior to final submission.</p>
+ <h5 style="font-family:Verdana,Arial,Helvetica,sans-serif; font-size: 16px; font-weight:bold;">Patient Document Upload</h5>
+  <p style="font-family:Verdana,Arial,Helvetica,sans-serif; font-size: 16px;"> Please name, browse, attach, and annotate each file. Once you have reviewed your attachments and notes you can
+   click on the upload documents button below. Your patient's records will now be added to their PHR account. 
+  An automated email will be sent to the patient making him/her aware or your submission. </p>
+                <table class="standardFont" width="100%">
+<TR><TD colspan="2"> 
+ 
+
+    
+<TR>
+<td colspan=2 align="left" style="font-family:Verdana,Arial,Helvetica,sans-serif; font-size: 16px;"><b>Patient:</b>&nbsp;<font color="red"><b>@Model.CareProvider.PatientFullName</b></font>&nbsp;&nbsp;&nbsp;<b>D.O.B:</b>&nbsp;<font color="red"><b>@Model.CareProvider.DOB.ToShortDateString()</b></font></td>
+</tr>
+</table>
+
+
+ 
+
+
+@*<form method="POST" action="Provider_Upload.cfm" name="UploadForm" enctype="multipart/form-data">*@
+<table style="font-family:Verdana,Arial,Helvetica,sans-serif; font-size: 15px;" class="standardFont" width="100%" >
+
+<tr>
+<td align="left"nowrap><b>Document Type</b></td>
+<td align="left"><input type="text" name="name" class="txt" id="DocumentDescription" style="font:capslock";></td>
+</tr>
+    <tr>
+<td align="left"nowrap><b>Physician</b></td>
+@*<td align="left"><input type="text" name="name" class="txt" id="DoctorName" style="font:capslock";>*@
+<td>     @Html.DropDownList("cmbDSpeciality", Model.PatientDoctor.ToPatientDoctorModelSelectList(), new { id = "DoctorName", @class = "txt",style="width:200px"})
+</td>
+</tr>
+
+	<tr>
+        <td ><b>Comments</b> </td>
+        <TD align="left"><textarea name="notes" rows="3" cols="30" id="Notes" class="txt" style="height:100px;"></textarea></td></tr>
+        <tr><td align="LEFT" width="170" style="font-family:Verdana,Arial,Helvetica,sans-serif; font-size: 15px;"><font size=5 color="red"><b>*</b></font><b>Select Document</b></td>
+        <td align="left">
+        <input id="my-simple-upload" type="file" value="" name="MyAttachFile"/><input type="button" value="Browse..." id="browse" /></td>
+        <td>
+            <span id="BrowseName" style="margin-left:-670px;" ></span></td></tr>
+    <tr>
+        <td colspan="2"></td>
+    </tr>
+<tr><td></td><td align="left">
+     <button class="ui-button ui-widget ui-state-default ui-corner-all " id="btnUploadAll"  style="font-weight:bold;width: 10%; font-size: 1.0em;margin-left:70px;height:30px;" type="submit" >
+                                   Upload</button>
+    <input type="hidden" id="fileCount" value="0"/>   
+    </td>
+
+</tr>
+	</table> 
+
+<div class="span7">
+    <div style="height:50px;">
+
+    </div>
+    
+<div id="uploadFilesBox"></div>
+        <table  id="files_list">
+           <tbody></tbody>
+        </table>
+    </div>
+
+            </div>
+        </div>
+
+    
+    
+    
+    
+    
+        <div class="main_div" id="Logoutmessage">
+            <h1>Care Provider Document Upload</h1>  
+	
+<table  width="100%">
+<tbody><tr><td colspan="2"> 
+	<font size="4">You have successfully uploaded your patient's medical files and logged out.</font>
+	<button onclick='showLogin();' class="ui-button ui-widget ui-state-default ui-corner-all " style="font-weight:bold;width: 10%; font-size: 1.0em;margin-left:70px;height:30px;">Log In</button>
+        </div>
+    </div>
+
+
+    
+
+    </div>
+    
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+

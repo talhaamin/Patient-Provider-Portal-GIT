@@ -1,0 +1,101 @@
+﻿@using AMR.Models;
+
+@model List<CCDActivityLogModel>
+@{
+    ViewBag.Title = "LOG";
+    
+}
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head >
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title </title>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/jquery-1.9.1.js")"></script>
+    <script  type="text/javascript"src="@Url.Content("~/Content/js/jquery-1.9.2.custom.js")"></script>
+        <link rel="stylesheet" href="@Url.Content("~/Content/css/themes/redmond/jquery-ui.css")" />
+    <link href="@Url.Content("~/Content/css/themes/redmond/jquery-ui-1.10.3.custom.css")" rel="stylesheet">
+                <script src="@Url.Content("~/Content/js/jquery-ui.js")"></script>
+                <script src="@Url.Content("~/Content/css/ui/jquery.ui.core.js")"></script>
+                <script src="@Url.Content("~/Content/js/timeout-dialog.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.idle-timer.js")"></script>
+    <style type="text/css">
+
+   
+        table {
+            border-collapse:collapse;
+        }
+
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var timeout = @System.Configuration.ConfigurationManager.AppSettings["InactivityTimeout"]
+            $(document).bind("idle.idleTimer", function () {
+                // function you want to fire when the user goes idle
+
+
+                var active = '@Session["LoginType"]';
+                console.log(active);
+                if (active == "Accessibility") {
+
+                    $.timeoutDialog({
+                        timeout: 1, countdown: 60,
+
+                        logout_redirect_url: '@Url.RouteUrl("logout", new { controller = "Home", action = "LogOff", CCDUrl = "CCD" })',
+
+                            restart_on_yes: true
+
+                        });
+                    }
+                    else {
+
+
+                        $.timeoutDialog({
+                            timeout: 1, countdown: 60,
+
+                            logout_redirect_url: 'window_close',
+                                @*'@Url.RouteUrl("logout", new { controller = "Home", action = "LogOff", CCDUrl = "" })',*@
+
+                       restart_on_yes: true
+
+                   });
+               }
+            });
+            $(document).bind("active.idleTimer", function () {
+                // function you want to fire when the user becomes active again
+            });
+            $.idleTimer(timeout);
+        });
+    </script>
+    </head>
+    <body>
+            <div style=" margin-left:10%; margin-right:10%;">
+                <div align="center"><h2>Patient Activity Log</h2>
+                    <h2>Generated on: @DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss tt")</h2>
+                    </div>
+                <div align="center">
+                   
+                    
+
+                <table  border="1"  width="90%" >
+                    <thead>
+                        <tr><td style=" text-align:center; width:30%; " >Name</td> <td  style=" text-align:center;width:30%;">Date and Time</td><td style=" text-align:center;width:30%;">Event</td></tr>
+                    </thead>
+                     @foreach(var item in Model)
+                    {
+                        
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.TDStamp</td>
+                        <td>@item.Method</td>
+                    </tr>
+                    
+                     }
+                    
+                </table>
+                    </div>
+            </div>
+    </body>
+
+</html>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<AMR.Models.ProcedureModel>
+@using System.Text;
+@using System.Web.Script.Serialization;
+<table class="box-table-a" id="tab-Procedure" summary="DownloadLEgalProcedure">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Comments</th>
+                                  <th scope="col" style="text-align:center;" class="showHideThis">Edit</th>
+                                    <th scope="col" style="text-align:center;">Details</th>
+                                  <th scope="col" style="text-align:center;" class="showHideThis">Delete</th>
+                                    
+                               </tr>
+                            </thead>
+                             <tbody>
+                                    @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var item in Model)
+                                    {
+                                        StringBuilder jsonStringAllergy = new StringBuilder();
+
+                                        jsonStringAllergy.Append(" { ");
+                                        jsonStringAllergy.Append("\"PatProcedureCntr\": \"" + item.PatProcedureCntr + "\",");
+                                        jsonStringAllergy.Append("\"Description\": \"" + item.Description + "\",");
+                                        jsonStringAllergy.Append("\"DateModified\":  \"" + item.DateModified.ToShortDateString() + "\",");
+                                        jsonStringAllergy.Append("\"Note\":  \"" + item.Note + "\"");
+                                        jsonStringAllergy.Append("}");
+                        <tr class="@((counter % 2 == 1) ? "r0" : "r1")">
+                              <td width ="200px">@item.Description</td>
+                           @* <td><span class="LinkHighlight hoverMe" onclick="ViewGDocumentAttachment('@(item.DocumentCntr + "|" + item.DocumentFormat)');"> @((item.DocumentDescription.Length > 22) ? item.DocumentDescription.Substring(0, 22) + "..." : item.DocumentDescription) </span></td>*@
+                            <td width="90px">@item.DateModified.ToShortDateString()</td>
+                            <td width="250px"><input type="hidden" id="@(item.PatProcedureCntr)" value="@jsonStringAllergy.ToString()" />@item.Note</td>
+                 <td style="text-align:center;" class="showHideThis"><img src="~/Content/img/edit.png" onclick="EditProcedure('@item.PatProcedureCntr');"/></td>
+                            <td style="text-align:center;"><img src="~/Content/img/details.png" onclick="detailsProcedure('@item.PatProcedureCntr');"/></td>                                      
+
+                          <td style="text-align:center;" class="showHideThis"><img src="~/Content/img/delete.png" onclick="DeleteProcedure('@item.PatProcedureCntr');"/></td>                                      
+
+                                                  
+                   
+                        </tr>   counter++;}
+                                }
+                                   else
+                                {
+                                   <tr>
+                                <td width="200px;">No Information Available.</td>
+                            </tr>
+                                }
+
+                    </tbody>
+                            </table>

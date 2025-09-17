@@ -1,0 +1,1921 @@
+﻿@{
+    ViewBag.Title = "Facility_Setup";
+    Layout = "~/Views/Shared/_LayoutMasterPage.cshtml";
+}
+
+<script>
+
+    $(document).ready(function () {
+        $("#IndexRemoveClass").removeClass("active");
+
+        $("#FaciltySetupRemoveClass").addClass("active");
+    });
+    function ClearOrganization() {
+        $("#OrgName").val("");
+        $("#OrgAddress1").val("");
+        $("#OrgAddress2").val("");
+        $("#OrgAddress3").val("");
+        $("#OrgCity").val("");
+        $("#cmbStates").val("AL");
+        $("#OrgPostalCode").val("");
+        $("#cmbCountry").val("USA");
+    }
+    function ClearPractice() {
+        $("#PracticeName").val("");
+        $("#PracticeAddress1").val("");
+        $("#PracticeAddress2").val("");
+        $("#PracticeAddress3").val("");
+        $("#PracticeCity").val("");
+        $("#PracticeStates").val("AL");
+        $("#PracticePostalCode").val("");
+        $("#PracticeCountry").val("USA");
+
+    }
+    function ClearFacility() {
+        $("#FacilityName").val("");
+        $("#FacilityAddress1").val("");
+        $("#FacilityAddress2").val("");
+        $("#FacilityAddress3").val("");
+        $("#FacilityCity").val("");
+        $("#FacilityStates").val("AL");
+        $("#FacilityPostalCode").val("");
+        $("#FacilityCountry").val("USA");
+        $("#Comment").val("");
+    }
+    $(function () {
+
+
+        $("#AddOrganization-Form").dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "blind",
+                duration: 1000
+            },
+
+
+            width: 600,
+            modal: true,
+            buttons: {
+                "Save": function () {
+                    var bValid = true;
+                    
+
+
+                    if (bValid) {
+                        //ajax 
+                        try {
+
+                            var requestData = {
+                                OrganizationId:$("#hdflagOrganization").val(),
+                            OrganizationName: $("#OrgName").val(),
+                            Address1:$("#OrgAddress1").val(),
+                            Address2:$("#OrgAddress2").val(),
+                            Address3: $("#OrgAddress3").val(),
+                            City:$("#OrgCity").val(),
+                            State: $("#cmbStates option:selected").val(),
+                            PostalCode: $("#OrgPostalCode").val(),
+                            CountryCode: $("#cmbCountry option:selected").val()
+
+                            };
+
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'Organization-Save-Data',
+                                data: JSON.stringify(requestData),
+                                dataType: 'json',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function (data) {
+                                    // if success
+                                    // alert("Success : " + data);
+                                    OranganizationSearch();
+
+                                    HideLoaderBig();
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    //if error
+
+                                    // alert('Error : ' + xhr.message);
+                                    var myCookie = getCookie(".Admin");
+
+                                    if (myCookie == null) {
+                                        // do cookie doesn't exist stuff;
+                                        alert('Not logged in. Please log in to continue');
+                                        window.location = '/Login'
+                                        //xhr.getResponseHeader('Location');
+                                    }
+                                    else {
+
+                                        alert('Error : ' + xhr.message);
+                                    }
+                                    HideLoader();
+                                },
+                                complete: function (data) {
+                                    // if completed
+                                    HideLoaderBig();
+
+                                },
+                                async: true,
+                                processData: false
+                            });
+                        } catch (err) {
+
+                            if (err && err !== "") {
+                                alert(err.message);
+                                HideLoaderBig();
+                            }
+                        }
+                        
+                        $(this).dialog("close");
+                        //ShowLoader();
+
+
+                        //                        end ajax
+
+
+
+                    }
+                },
+                Close: function () {
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+
+                $(this).dialog("close");
+            }
+        });
+        
+    });
+
+    $(function () {
+
+
+        $("#AddPractice-Form").dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "blind",
+                duration: 1000
+            },
+
+
+            width: 600,
+            modal: true,
+            buttons: {
+                "Save": function () {
+                    var bValid = true;
+
+                    ShowLoaderBig();
+
+                    if (bValid) {
+                        //ajax 
+                        try {
+
+                            var requestData = {
+                                PracticeId:$("#hdflagpractice").val(),
+                                OrganizationId: $("#hdorganizationId").val(),
+                                PracticeName: $("#PracticeName").val(),
+                                Address1: $("#PracticeAddress1").val(),
+                                Address2: $("#PracticeAddress2").val(),
+                                Address3: $("#PracticeAddress3").val(),
+                                City: $("#PracticeCity").val(),
+                                State: $("#PracticeStates option:selected").val(),
+                                PostalCode: $("#PracticePostalCode").val(),
+                                CountryCode: $("#PracticeCountry option:selected").val()
+
+                            };
+
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'Practice-Save-Data',
+                                data: JSON.stringify(requestData),
+                                dataType: 'json',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function (data) {
+                                    // if success
+                                    // alert("Success : " + data);
+
+                                    $("#Practice-Data").html(data);
+                                    HideLoaderBig();
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    //if error
+
+                                    //  alert('Error : ' + xhr.message);
+                                    var myCookie = getCookie(".Admin");
+
+                                    if (myCookie == null) {
+                                        // do cookie doesn't exist stuff;
+                                        alert('Not logged in. Please log in to continue');
+                                        window.location = '/Login'
+                                        //xhr.getResponseHeader('Location');
+                                    }
+                                    else {
+
+                                        alert('Error : ' + xhr.message);
+                                    }
+                                    HideLoaderBig();
+                                },
+                                complete: function (data) {
+                                    // if completed
+                                    HideLoaderBig();
+
+                                },
+                                async: true,
+                                processData: false
+                            });
+                        } catch (err) {
+
+                            if (err && err !== "") {
+                                alert(err.message);
+                                HideLoaderBig();
+                            }
+                        }
+
+                        $(this).dialog("close");
+                     //   ShowLoader();
+
+
+                        //                        end ajax
+
+
+
+                    }
+                },
+                Close: function () {
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+
+                $(this).dialog("close");
+            }
+        });
+
+    });
+    $(function () {
+
+
+        $("#AddFacility-Form").dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "blind",
+                duration: 1000
+            },
+
+
+            width: 600,
+            modal: true,
+            buttons: {
+                "Save": function () {
+                    var bValid = true;
+
+                    ShowLoaderBig();
+
+                    if (bValid) {
+                        //ajax 
+                        try {
+
+                            var requestData = {
+                                FacilityId:$("#hdflagfacility").val(),
+                                OrganizationId: $("#hdorganizationId").val(),
+                                PracticeId: $("#hdFacilityId").val(),
+                                PracticeName: $("#FacilityName").val(),
+                                Address1: $("#FacilityAddress1").val(),
+                                Address2: $("#FacilityAddress2").val(),
+                                Address3: $("#FacilityAddress3").val(),
+                                City: $("#FacilityCity").val(),
+                                State: $("#FacilityStates option:selected").val(),
+                                PostalCode: $("#FacilityPostalCode").val(),
+                                CountryCode: $("#FacilityCountry option:selected").val(),
+                                Comment: $("#Comment").val(),
+
+                            };
+
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'Facility-Save-Data',
+                                data: JSON.stringify(requestData),
+                                dataType: 'json',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function (data) {
+                                    // if success
+                                    // alert("Success : " + data);
+
+
+                                    $("#Facility-Data").html(data);
+                                    HideLoaderBig();
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    //if error
+
+                                    //  alert('Error : ' + xhr.message);
+                                    var myCookie = getCookie(".Admin");
+
+                                    if (myCookie == null) {
+                                        // do cookie doesn't exist stuff;
+                                        alert('Not logged in. Please log in to continue');
+                                        window.location = '/Login'
+                                        //xhr.getResponseHeader('Location');
+                                    }
+                                    else {
+
+                                        alert('Error : ' + xhr.message);
+                                    }
+                                    HideLoaderBig();
+                                },
+                                complete: function (data) {
+                                    // if completed
+                                    HideLoaderBig();
+
+                                },
+                                async: true,
+                                processData: false
+                            });
+                        } catch (err) {
+
+                            if (err && err !== "") {
+                                alert(err.message);
+                                HideLoader();
+                            }
+                        }
+
+                        $(this).dialog("close");
+                        //  ShowLoader();
+
+
+                        //                        end ajax
+
+
+
+                    }
+                },
+                Close: function () {
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+
+                $(this).dialog("close");
+            }
+        });
+
+    });
+    function OpenDialog() {
+        $("#organid").val("");
+        ClearOrganization();
+        $("#AddOrganization-Form").dialog('option', 'title', 'Add Organization');
+
+        $("#AddOrganization-Form").dialog("open");
+
+
+    }
+    function OpenPracticeDialog()
+    {
+        ClearPractice();
+        $("#AddPractice-Form").dialog('option', 'title', 'Add Practice');
+
+        $("#AddPractice-Form").dialog("open");
+    }
+    function OpenDialogFacility()
+    {
+        ClearFacility();
+        $("#AddFacility-Form").dialog('option', 'title', 'Add Facility');
+
+        $("#AddFacility-Form").dialog("open");
+
+    }
+   
+    $(document).ready(function () {
+        $("#Practice").css("display", "none");
+        $("#facility").css("display", "none");
+        $("#OrganizationData").css("display", "none");
+        $("#hdorganizationId").val("");
+        $("#hdFacilityId").val("");
+        $("#organid").val("");
+        
+    });
+    function OranganizationSearch() {
+
+        $("#Practice").css("display", "none");
+        $("#facility").css("display", "none");
+        $("#hdorganizationId").val("");
+        $("#hdFacilityId").val("");
+     //   $("#organid").val("");
+        ShowLoader();
+        var requestData = {
+            OrganizationName: $('#organid').val(),
+      
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'Admin/SearchOrangization',
+            data: JSON.stringify(requestData),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                // if success
+                // alert("Success : " + data);
+                HideLoader();
+                $("#OrganizationData").css("display", "block");
+
+                $("#Search-Organization").html(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //if error
+
+                //    alert('Error : ' + xhr.message);
+                var myCookie = getCookie(".Admin");
+
+                if (myCookie == null) {
+                    // do cookie doesn't exist stuff;
+                    alert('Not logged in. Please log in to continue');
+                    window.location = '/Login'
+                    //xhr.getResponseHeader('Location');
+                }
+                else {
+
+                    alert('Error : ' + xhr.message);
+                }
+                HideLoader();
+            },
+            complete: function (data) {
+                // if completed
+                HideLoader();
+
+            },
+            async: true,
+            processData: false
+        });
+    }
+
+    function OpenPractice(id) {
+        ShowLoaderBig();
+        $("#hdorganizationId").val(id);
+      
+      //  ShowLoader();
+        var requestData = {
+            PracticeId: id,
+
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'Admin/GetPracticeData',
+            data: JSON.stringify(requestData),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                // if success
+                // alert("Success : " + data);
+               
+                $("#Practice").css("display", "block");
+                $("#facility").css("display", "none");
+                $("#Practice-Data").html(data);
+                HideLoaderBig();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //if error
+
+                //alert('Error : ' + xhr.message);
+                var myCookie = getCookie(".Admin");
+
+                if (myCookie == null) {
+                    // do cookie doesn't exist stuff;
+                    alert('Not logged in. Please log in to continue');
+                    window.location = '/Login'
+                    //xhr.getResponseHeader('Location');
+                }
+                else {
+
+                    alert('Error : ' + xhr.message);
+                }
+                HideLoaderBig();
+            },
+            complete: function (data) {
+                // if completed
+                HideLoaderBig();
+
+            },
+            async: true,
+            processData: false
+        });
+    }
+
+    function OpenFacility(id) {
+        ShowLoaderBig();
+       // $("#Practice").css("display", "none");
+        $("#hdFacilityId").val(id);
+
+      //  ShowLoader();
+        var requestData = {
+            PracticeId: id,
+
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'Admin/GetFacilityData',
+            data: JSON.stringify(requestData),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                // if success
+                // alert("Success : " + data);
+              
+                $("#facility").css("display", "block");
+
+                $("#Facility-Data").html(data);
+                HideLoaderBig()
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //if error
+
+                //   alert('Error : ' + xhr.message);
+                var myCookie = getCookie(".Admin");
+
+                if (myCookie == null) {
+                    // do cookie doesn't exist stuff;
+                    alert('Not logged in. Please log in to continue');
+                    window.location = '/Login'
+                    //xhr.getResponseHeader('Location');
+                }
+                else {
+
+                    alert('Error : ' + xhr.message);
+                }
+                HideLoaderBig();
+            },
+            complete: function (data) {
+                // if completed
+                HideLoaderBig();
+
+            },
+            async: true,
+            processData: false
+        });
+    }
+
+    function EditFacility(id)
+    {
+         ClearFacility();
+       // alert(id);
+        var obj = jQuery.parseJSON($("#hdfacility-" + id).val());
+      //  alert("hi status" + obj.State);
+
+      //  alert("facility is " + obj.FacilityName);
+        $("#hdflagfacility").val(obj.ID);
+        $("#FacilityName").val(obj.FacilityName);
+       $("#FacilityAddress1").val(obj.Address1);
+       $("#FacilityAddress2").val(obj.Address2);
+        $("#FacilityAddress3").val(obj.Address3);
+        $("#FacilityCity").val(obj.City);
+        $("#Comment").val(obj.Comment);
+        if (obj.State != "" || obj.State != null) {
+            $("#FacilityStates").val(obj.State);
+        }
+        $("#FacilityPostalCode").val(obj.PostalCode);
+        if (obj.CountryCode != "" || obj.CountryCode != null) { $("#FacilityCountry").val(obj.CountryCode); }
+        
+        $("#AddFacility-Form").dialog('option', 'title', 'Edit Facility');
+        $("#AddFacility-Form").dialog("open");
+    }
+
+    function EditPractice(id)
+    {
+       
+       // alert(id);
+        var obj = jQuery.parseJSON($("#hdPractice-" + id).val());
+      //  alert("hi status" + obj.State);
+
+      //  alert("facility is " + obj.FacilityName);
+        $("#hdflagpractice").val(obj.PracticeId);
+        $("#PracticeName").val(obj.FacilityName);
+        $("#PracticeAddress1").val(obj.Address1);
+        $("#PracticeAddress2").val(obj.Address2);
+        $("#PracticeAddress3").val(obj.Address3);
+        $("#PracticeCity").val(obj.City);
+        if (obj.State != "" || obj.State != null) {
+            $("#PracticeStates").val(obj.State);
+        }
+        $("#PracticePostalCode").val(obj.PostalCode);
+        if (obj.CountryCode != "" || obj.CountryCode != null) { $("#PracticeCountry").val(obj.CountryCode); }
+
+        $("#AddPractice-Form").dialog('option', 'title', 'Edit Practice');
+        $("#AddPractice-Form").dialog("open");
+    }
+    function EditOrganizaiton(id)
+    {
+       
+
+        var obj = jQuery.parseJSON($("#hdOrganization-" + id).val());
+        //  alert("hi status" + obj.State);
+
+        //  alert("facility is " + obj.FacilityName);
+        $("#hdflagOrganization").val(obj.OrganizationId);
+        $("#OrgName").val(obj.OrganizationName);
+        $("#OrgAddress1").val(obj.Address1);
+        $("#OrgAddress2").val(obj.Address2);
+        $("#OrgAddress3").val(obj.Address3);
+        $("#OrgCity").val(obj.City);
+        if (obj.State != "" || obj.State != null) {
+            $("#cmbStates").val(obj.State);
+        }
+        $("#OrgPostalCode").val(obj.PostalCode);
+        if (obj.CountryCode != "" || obj.CountryCode != null) { $("#cmbCountry").val(obj.CountryCode); }
+
+     
+        $("#AddOrganization-Form").dialog('option', 'title', 'Edit Organization');
+
+        $("#AddOrganization-Form").dialog("open");
+    }
+    
+</script>
+
+
+<div> Organization : <input type="text" id="organid" style="width:250px;" /><button type="button" onclick="OranganizationSearch();" class="btn btn-info" style="margin-left:15px;"><span class="glyphicon glyphicon-search"></span> Search</button><img id="loader" src="Content/img/login-loader.gif" style="margin-left:30px;display:none;"></div>
+<br />
+<div id="OrganizationData">
+    <div id="addorganization" >
+          <div id="createOrganization" onclick="OpenDialog();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();"  " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                        <img src="Content/img/add.png" />
+                        <span class="anc" style="padding-right: 10px;">Add Organization</span>
+
+                    </div>
+        <br />
+    <div id="Search-Organization">
+
+                           </div>
+    </div>
+<br />
+<br />
+
+<div id="Practice" style="display:none;">
+    
+    <h3>Practice:</h3>
+            <div id="createaddPractice" onclick=" OpenPracticeDialog();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                        <img src="Content/img/add.png" />
+                        <span class="anc" style="padding-right: 10px;">Add Practice</span>
+
+                    </div>
+        <br />
+     <div id="addPractice"></div>
+    <div id="Practice-Data">
+
+    </div>
+
+</div>
+
+<br />
+<br />
+<div id="facility"  style="display:none;">
+   
+     <h3>Facility (Location):</h3>
+         <div id="createaddFacility" onclick="OpenDialogFacility();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                        <img src="Content/img/add.png" />
+                        <span class="anc" style="padding-right: 10px;">Add Facility</span>
+
+                    </div>
+        <br />
+    <div id="Facility-Data"></div>
+</div>
+
+@*<div id="AddFaciltySetup" onclick="OpenDialog();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();"  onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px; display:none;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+
+                </div>*@
+
+
+
+   <!---Pop up for Organizaiton-->
+<div id="AddOrganization-Form" title="Add Organization" style="display:none;">
+ <table width="100%">
+
+     
+     <tr>
+         <td align="right">Organization Name:</td>
+         <td>
+                <input id="OrgName" type="text" class="txt" style="width:350px;" /><input type="hidden" id="hdflagOrganization" value="0" /></td>
+     </tr>
+
+     <tr>
+            <td align="right">Address1:</td>
+            <td>
+                <input id="OrgAddress1" type="text" class="txt" style="width:350px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">Address2:</td>
+            <td>
+                <input id="OrgAddress2" type="text" class="txt" style="width:350px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">Address3:</td>
+            <td>
+                <input id="OrgAddress3" type="text" class="txt" style="width:350px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">City:</td>
+            <td>
+                <input id="OrgCity" type="text" class="txt" style="width:350px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">State:</td>
+            <td>
+                <select style="visibility: visible;" class="coms" name="state" id="cmbStates" tabindex="11">
+									
+										<option value="AL" selected="selected">AL</option>
+									
+										<option value="AK">AK</option>
+									
+										<option value="AS">AS</option>
+									
+										<option value="AZ">AZ</option>
+									
+										<option value="AR">AR</option>
+									
+										<option value="AA">AA</option>
+									
+										<option value="AE">AE</option>
+									
+										<option value="AP">AP</option>
+									
+										<option value="CA">CA</option>
+									
+										<option value="CO">CO</option>
+									
+										<option value="CT">CT</option>
+									
+										<option value="DE">DE</option>
+									
+										<option value="DC">DC</option>
+									
+										<option value="FL">FL</option>
+									
+										<option value="GA">GA</option>
+									
+										<option value="GU">GU</option>
+									
+										<option value="HI">HI</option>
+									
+										<option value="ID">ID</option>
+									
+										<option value="IL">IL</option>
+									
+										<option value="IN">IN</option>
+									
+										<option value="IA">IA</option>
+									
+										<option value="KS">KS</option>
+									
+										<option value="KY">KY</option>
+									
+										<option value="LA">LA</option>
+									
+										<option value="ME">ME</option>
+									
+										<option value="MH">MH</option>
+									
+										<option value="MD">MD</option>
+									
+										<option value="MA">MA</option>
+									
+										<option value="MI">MI</option>
+									
+										<option value="FM">FM</option>
+									
+										<option value="MN">MN</option>
+									
+										<option value="MS">MS</option>
+									
+										<option value="MO">MO</option>
+									
+										<option value="MT">MT</option>
+									
+										<option value="NE">NE</option>
+									
+										<option value="NV">NV</option>
+									
+										<option value="NH">NH</option>
+									
+										<option value="NJ">NJ</option>
+									
+										<option value="NM">NM</option>
+									
+										<option value="NY">NY</option>
+									
+										<option value="NC">NC</option>
+									
+										<option value="ND">ND</option>
+									
+										<option value="MP">MP</option>
+									
+										<option value="OH">OH</option>
+									
+										<option value="OK">OK</option>
+									
+										<option value="OR">OR</option>
+									
+										<option value="PW">PW</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PR">PR</option>
+									
+										<option value="RI">RI</option>
+									
+										<option value="SC">SC</option>
+									
+										<option value="TN">TN</option>
+									
+										<option value="TX">TX</option>
+									
+										<option value="UT">UT</option>
+									
+										<option value="VT">VT</option>
+									
+										<option value="VI">VI</option>
+									
+										<option value="VA">VA</option>
+									
+										<option value="WA">WA</option>
+									
+										<option value="WV">WV</option>
+									
+										<option value="WI">WI</option>
+									
+										<option value="WY">WY</option>
+									
+										<option value="SD">SD</option>
+									
+								</select>
+                @*<input id="" type="text" class="txt" style="width:350px;" />*@</td>
+        </tr>
+
+     <tr>
+            <td align="right">PostalCode:</td>
+            <td>
+                <input id="OrgPostalCode" type="text" class="txt" style="width:100px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">CountryCode:</td>
+            <td>
+                <div>
+                                <select name="Country" class="coms" id="cmbCountry" style="width:254px;" tabindex="9">
+																		<option selected="selected" value="USA">United States</option>
+									<option value="ALB">Albania</option>
+									<option value="DZA">Algeria</option>
+									<option value="WSM">American Samoa</option>
+									<option value="AND">Andorra</option>
+									<option value="AGO">Angola</option>
+									<option value="AIA">Anguilla</option>
+									<option value="ATA">Antarctica</option>
+									<option value="ATG">Antigua And Barbuda</option>
+									<option value="ARG">Argentina</option>
+									<option value="ARM">Armenia</option>
+									<option value="ABW">Aruba</option>
+									<option value="AUT">Austria</option>
+									<option value="AUT">Australia</option>
+									<option value="AZE">Azerbaijan</option>
+									<option value="BHS">Bahamas</option>
+									<option value="BHR">Bahrain</option>
+									<option value="BGD">Bangladesh</option>
+									<option value="BRB">Barbados</option>
+									<option value="BLR">Belarus</option>
+									<option value="BEL">Belgium</option>
+									<option value="BLZ">Belize</option>
+									<option value="BEN">Benin</option>
+									<option value="BMU">Bermuda</option>
+									<option value="BTN">Bhutan</option>
+									<option value="BOL">Bolivia</option>
+									<option value="BIH">Bosnia and Herzegovina</option>
+									<option value="BWA">Botswana</option>
+									<option value="BVT">Bouvet Island</option>
+									<option value="BRA">Brazil</option>
+									<option value="IOT">British Indian Ocean Territory</option>
+									<option value="BRN">Brunei Darussalam</option>
+									<option value="BGR">Bulgaria</option>
+									<option value="BFA">Burkina Faso</option>
+									<option value="BDI">Burundi</option>
+									<option value="KHM">Cambodia</option>
+									<option value="CMR">Cameroon</option>
+									<option value="CAN">Canada</option>
+									<option value="CPV">Cape Verde</option>
+									<option value="CYM">Cayman Islands</option>
+									<option value="CAF">Central African Republic</option>
+									<option value="TCD">Chad</option>
+									<option value="CHL">Chile</option>
+									<option value="CHN">China</option>
+									<option value="CXR">Christmas Island</option>
+									<option value="CCK">Cocos (Keeling) Islands</option>
+									<option value="COL">Colombia</option>
+									<option value="COM">Comoros</option>
+									<option value="COG">Congo</option>
+									<option value="COK">Cook Islands</option>
+									<option value="CRI">Costa Rica</option>
+									<option value="CIV">Cote d'Ivoire</option>
+									<option value="HRV">Croatia</option>
+									<option value="CZE">Czech Republic</option>
+									<option value="DNK">Denmark</option>
+									<option value="DJI">Djibouti</option>
+									<option value="DMA">Dominica</option>
+									<option value="DOM">Dominican Republic</option>
+									<option value="TMP">East Timor</option>
+									<option value="ECU">Ecuador</option>
+									<option value="EGY">Egypt</option>
+									<option value="SLV">El Salvador</option>
+									<option value="ENG">England</option>
+									<option value="GNQ">Equatorial Guinea</option>
+									<option value="ERI">Eritrea</option>
+									<option value="ESP">Espana</option>
+									<option value="EST">Estonia</option>
+									<option value="ETH">Ethiopia</option>
+									<option value="FLK">Falkland Islands</option>
+									<option value="FRO">Faroe Islands</option>
+									<option value="FJI">Fiji</option>
+									<option value="FIN">Finland</option>
+									<option value="FRA">France</option>
+									<option value="GUF">French Guiana</option>
+									<option value="PYF">French Polynesia</option>
+									<option value="ATF">French Southern Territories</option>
+									<option value="GAB">Gabon</option>
+									<option value="GMB">Gambia</option>
+									<option value="GEO">Georgia</option>
+									<option value="DEU">Germany</option>
+									<option value="GHA">Ghana</option>
+									<option value="GIB">Gibraltar</option>
+									<option value="GRC">Greece</option>
+									<option value="GRL">Greenland</option>
+									<option value="GRD">Grenada</option>
+									<option value="GLP">Guadeloupe</option>
+									<option value="GTM">Guatemala</option>
+									<option value="GIN">Guinea</option>
+									<option value="GNB">Guinea-Bissau</option>
+									<option value="GUY">Guyana</option>
+									<option value="HTI">Haiti</option>
+									<option value="HMD">Heard and Mc Donald Islands</option>
+									<option value="HND">Honduras</option>
+									<option value="HKG">Hong Kong</option>
+									<option value="HUN">Hungary</option>
+									<option value="IND">India</option>
+									<option value="IDN">Indonesia</option>
+									<option value="IRL">Ireland</option>
+									<option value="ISR">Israel</option>
+									<option value="ITA">Italy</option>
+									<option value="JAM">Jamaica</option>
+									<option value="JPN">Japan</option>
+									<option value="JOR">Jordan</option>
+									<option value="KAZ">Kazakhstan</option>
+									<option value="KEN">Kenya</option>
+									<option value="KIR">Kiribati</option>
+									<option value="KOR">Korea (North)</option>
+									<option value="KOR">Korea (South)</option>
+									<option value="KWT">Kuwait</option>
+									<option value="KGZ">Kyrgyzstan</option>
+									<option value="LVA">Latvia</option>
+									<option value="LBN">Lebanon</option>
+									<option value="LSO">Lesotho</option>
+									<option value="LBR">Liberia</option>
+									<option value="LIE">Liechtenstein</option>
+									<option value="LTU">Lithuania</option>
+									<option value="LUX">Luxembourg</option>
+									<option value="MAC">Macau</option>
+									<option value="MDG">Madagascar</option>
+									<option value="MWI">Malawi</option>
+									<option value="MDV">Maldives</option>
+									<option value="MLI">Mali</option>
+									<option value="MLT">Malta</option>
+									<option value="MTQ">Martinique</option>
+									<option value="MRT">Mauritania</option>
+									<option value="MUS">Mauritius</option>
+									<option value="MYT">Mayotte</option>
+									<option value="MEX">Mexico</option>
+									<option value="MDA">Moldova, Republic of</option>
+									<option value="MCO">Monaco</option>
+									<option value="MNG">Mongolia</option>
+									<option value="MSR">Montserrat</option>
+									<option value="MAR">Morocco</option>
+									<option value="MOZ">Mozambique</option>
+									<option value="MMR">Myanmar</option>
+									<option value="NAM">Namibia</option>
+									<option value="NRU">Nauru</option>
+									<option value="NPL">Nepal</option>
+									<option value="NLD">Netherlands</option>
+									<option value="ANT">Netherlands Antilles</option>
+									<option value="NCL">New Caledonia</option>
+									<option value="NZE">New Zealand</option>
+									<option value="NIC">Nicaragua</option>
+									<option value="NER">Niger</option>
+									<option value="NGA">Nigeria</option>
+									<option value="NIU">Niue</option>
+									<option value="NFK">Norfolk Island</option>
+									<option value="IRL">Northern Ireland</option>
+									<option value="NOR">Norway</option>
+									<option value="PAK">Pakistan</option>
+									<option value="PAN">Panama</option>
+									<option value="PNG">Papua New Guinea</option>
+									<option value="PRY">Paraguay</option>
+									<option value="PER">Peru</option>
+									<option value="PHL">Philippines</option>
+									<option value="PCN">Pitcairn</option>
+									<option value="POL">Poland</option>
+									<option value="PRT">Portugal</option>
+									<option value="QAT">Qatar</option>
+									<option value="REU">Reunion</option>
+									<option value="ROM">Romania</option>
+									<option value="RUS">Russia</option>
+									<option value="RUS">Russian Federation</option>
+									<option value="RWA">Rwanda</option>
+									<option value="KNA">Saint Kitts and Nevis</option>
+									<option value="LCA">Saint Lucia</option>
+									<option value="VCT">Saint Vincent and the Grenadines</option>
+									<option value="SMR">San Marino</option>
+									<option value="STP">Sao Tome and Principe</option>
+									<option value="SAU">Saudi Arabia</option>
+									<option value="SEN">Senegal</option>
+									<option value="SYC">Seychelles</option>
+									<option value="SLE">Sierra Leone</option>
+									<option value="SGP">Singapore</option>
+									<option value="SVK">Slovakia</option>
+									<option value="SVN">Slovenia</option>
+									<option value="SLB">Solomon Islands</option>
+									<option value="SOM">Somalia</option>
+									<option value="ESP">Spain</option>
+									<option value="LKA">Sri Lanka</option>
+									<option value="SHN">St. Helena</option>
+									<option value="SPM">St. Pierre and Miquelon</option>
+									<option value="SUR">Suriname</option>
+									<option value="SJM">Svalbard and Jan Mayen Islands</option>
+									<option value="SWZ">Swaziland</option>
+									<option value="SWE">Sweden</option>
+									<option value="CHE">Switzerland</option>
+									<option value="TWN">Taiwan</option>
+									<option value="TJK">Tajikistan</option>
+									<option value="TZA">Tanzania</option>
+									<option value="THA">Thailand</option>
+									<option value="TGO">Togo</option>
+									<option value="TKL">Tokelau</option>
+									<option value="TON">Tonga</option>
+									<option value="TTO">Trinidad and Tobago</option>
+									<option value="TUN">Tunisia</option>
+									<option value="TUR">Turkey</option>
+									<option value="TKM">Turkmenistan</option>
+									<option value="TCA">Turks and Caicos Islands</option>
+									<option value="TUV">Tuvalu</option>
+									<option value="UGA">Uganda</option>
+									<option value="UKR">Ukraine</option>
+									<option value="ARE">United Arab Emirates</option>
+									<option value="UK">United Kingdom</option>
+									<option value="URY">Uruguay</option>
+									<option value="UZB">Uzbekistan</option>
+									<option value="VUT">Vanuatu</option>
+									<option value="VAT">Vatican City State (Holy See)</option>
+									<option value="VEN">Venezuela</option>
+									<option value="VNM">Viet Nam</option>
+									<option value="VGB">Virgin Islands</option>
+									<option value="WLF">Wallis and Futuna Islands</option>
+									<option value="ESH">Western Sahara</option>
+									<option value="YEM">Yemen</option>
+									<option value="ZMB">Zambia</option>
+
+							</select>
+                              </div>
+                @*<input id="" type="text" class="txt" style="width:350px;" />*@</td>
+        </tr>
+ </table>
+</div>
+
+    <!-- end of Pop up->
+    
+   <!---Pop up for Practice-->
+    <div id="AddPractice-Form" title="Add Practice" style="display:none;">
+ <table width="90%">
+
+     
+     <tr>
+         <td align="right">Practice Name:</td>
+         <td>
+             <input type="hidden" id="hdorganizationId" value="" /> <input type="hidden"  id="hdflagpractice" value="0" /><input id="PracticeName" type="text" class="txt" style="width:350px;" /></td>
+     </tr>
+
+     <tr>
+            <td align="right">Address1:</td>
+            <td>
+                <input id="PracticeAddress1" type="text" class="txt" style="width:350px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">Address2:</td>
+            <td>
+                <input id="PracticeAddress2" type="text" class="txt" style="width:350px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">Address3:</td>
+            <td>
+                <input id="PracticeAddress3" type="text" class="txt" style="width:350px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">City:</td>
+            <td>
+                <input id="PracticeCity" type="text" class="txt" style="width:350px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">State:</td>
+            <td>
+                <select style="visibility: visible;" class="coms" name="state" id="PracticeStates" tabindex="11">
+									
+										<option value="AL">AL</option>
+									
+										<option value="AK">AK</option>
+									
+										<option value="AS">AS</option>
+									
+										<option value="AZ">AZ</option>
+									
+										<option value="AR">AR</option>
+									
+										<option value="AA">AA</option>
+									
+										<option value="AE">AE</option>
+									
+										<option value="AP">AP</option>
+									
+										<option value="CA">CA</option>
+									
+										<option value="CO">CO</option>
+									
+										<option value="CT">CT</option>
+									
+										<option value="DE">DE</option>
+									
+										<option value="DC">DC</option>
+									
+										<option value="FL">FL</option>
+									
+										<option value="GA">GA</option>
+									
+										<option value="GU">GU</option>
+									
+										<option value="HI">HI</option>
+									
+										<option value="ID">ID</option>
+									
+										<option value="IL">IL</option>
+									
+										<option value="IN">IN</option>
+									
+										<option value="IA">IA</option>
+									
+										<option value="KS">KS</option>
+									
+										<option value="KY">KY</option>
+									
+										<option value="LA">LA</option>
+									
+										<option value="ME">ME</option>
+									
+										<option value="MH">MH</option>
+									
+										<option value="MD">MD</option>
+									
+										<option value="MA">MA</option>
+									
+										<option value="MI">MI</option>
+									
+										<option value="FM">FM</option>
+									
+										<option value="MN">MN</option>
+									
+										<option value="MS">MS</option>
+									
+										<option value="MO">MO</option>
+									
+										<option value="MT">MT</option>
+									
+										<option value="NE">NE</option>
+									
+										<option value="NV">NV</option>
+									
+										<option value="NH">NH</option>
+									
+										<option value="NJ">NJ</option>
+									
+										<option value="NM">NM</option>
+									
+										<option value="NY">NY</option>
+									
+										<option value="NC">NC</option>
+									
+										<option value="ND">ND</option>
+									
+										<option value="MP">MP</option>
+									
+										<option value="OH">OH</option>
+									
+										<option value="OK">OK</option>
+									
+										<option value="OR">OR</option>
+									
+										<option value="PW">PW</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PR">PR</option>
+									
+										<option value="RI">RI</option>
+									
+										<option value="SC">SC</option>
+									
+										<option value="TN">TN</option>
+									
+										<option value="TX">TX</option>
+									
+										<option value="UT">UT</option>
+									
+										<option value="VT">VT</option>
+									
+										<option value="VI">VI</option>
+									
+										<option value="VA">VA</option>
+									
+										<option value="WA">WA</option>
+									
+										<option value="WV">WV</option>
+									
+										<option value="WI">WI</option>
+									
+										<option value="WY">WY</option>
+									
+										<option value="SD">SD</option>
+									
+								</select>
+                @*<input id="" type="text" class="txt" style="width:350px;" />*@</td>
+        </tr>
+
+     <tr>
+            <td align="right">PostalCode:</td>
+            <td>
+                <input id="PracticePostalCode" type="text" class="txt" style="width:100px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">CountryCode:</td>
+            <td>
+                <div>
+                                <select name="Country" class="coms" id="PracticeCountry" style="width:254px;" tabindex="9">
+																		<option selected="selected" value="USA">United States</option>
+									<option value="ALB">Albania</option>
+									<option value="DZA">Algeria</option>
+									<option value="WSM">American Samoa</option>
+									<option value="AND">Andorra</option>
+									<option value="AGO">Angola</option>
+									<option value="AIA">Anguilla</option>
+									<option value="ATA">Antarctica</option>
+									<option value="ATG">Antigua And Barbuda</option>
+									<option value="ARG">Argentina</option>
+									<option value="ARM">Armenia</option>
+									<option value="ABW">Aruba</option>
+									<option value="AUT">Austria</option>
+									<option value="AUT">Australia</option>
+									<option value="AZE">Azerbaijan</option>
+									<option value="BHS">Bahamas</option>
+									<option value="BHR">Bahrain</option>
+									<option value="BGD">Bangladesh</option>
+									<option value="BRB">Barbados</option>
+									<option value="BLR">Belarus</option>
+									<option value="BEL">Belgium</option>
+									<option value="BLZ">Belize</option>
+									<option value="BEN">Benin</option>
+									<option value="BMU">Bermuda</option>
+									<option value="BTN">Bhutan</option>
+									<option value="BOL">Bolivia</option>
+									<option value="BIH">Bosnia and Herzegovina</option>
+									<option value="BWA">Botswana</option>
+									<option value="BVT">Bouvet Island</option>
+									<option value="BRA">Brazil</option>
+									<option value="IOT">British Indian Ocean Territory</option>
+									<option value="BRN">Brunei Darussalam</option>
+									<option value="BGR">Bulgaria</option>
+									<option value="BFA">Burkina Faso</option>
+									<option value="BDI">Burundi</option>
+									<option value="KHM">Cambodia</option>
+									<option value="CMR">Cameroon</option>
+									<option value="CAN">Canada</option>
+									<option value="CPV">Cape Verde</option>
+									<option value="CYM">Cayman Islands</option>
+									<option value="CAF">Central African Republic</option>
+									<option value="TCD">Chad</option>
+									<option value="CHL">Chile</option>
+									<option value="CHN">China</option>
+									<option value="CXR">Christmas Island</option>
+									<option value="CCK">Cocos (Keeling) Islands</option>
+									<option value="COL">Colombia</option>
+									<option value="COM">Comoros</option>
+									<option value="COG">Congo</option>
+									<option value="COK">Cook Islands</option>
+									<option value="CRI">Costa Rica</option>
+									<option value="CIV">Cote d'Ivoire</option>
+									<option value="HRV">Croatia</option>
+									<option value="CZE">Czech Republic</option>
+									<option value="DNK">Denmark</option>
+									<option value="DJI">Djibouti</option>
+									<option value="DMA">Dominica</option>
+									<option value="DOM">Dominican Republic</option>
+									<option value="TMP">East Timor</option>
+									<option value="ECU">Ecuador</option>
+									<option value="EGY">Egypt</option>
+									<option value="SLV">El Salvador</option>
+									<option value="ENG">England</option>
+									<option value="GNQ">Equatorial Guinea</option>
+									<option value="ERI">Eritrea</option>
+									<option value="ESP">Espana</option>
+									<option value="EST">Estonia</option>
+									<option value="ETH">Ethiopia</option>
+									<option value="FLK">Falkland Islands</option>
+									<option value="FRO">Faroe Islands</option>
+									<option value="FJI">Fiji</option>
+									<option value="FIN">Finland</option>
+									<option value="FRA">France</option>
+									<option value="GUF">French Guiana</option>
+									<option value="PYF">French Polynesia</option>
+									<option value="ATF">French Southern Territories</option>
+									<option value="GAB">Gabon</option>
+									<option value="GMB">Gambia</option>
+									<option value="GEO">Georgia</option>
+									<option value="DEU">Germany</option>
+									<option value="GHA">Ghana</option>
+									<option value="GIB">Gibraltar</option>
+									<option value="GRC">Greece</option>
+									<option value="GRL">Greenland</option>
+									<option value="GRD">Grenada</option>
+									<option value="GLP">Guadeloupe</option>
+									<option value="GTM">Guatemala</option>
+									<option value="GIN">Guinea</option>
+									<option value="GNB">Guinea-Bissau</option>
+									<option value="GUY">Guyana</option>
+									<option value="HTI">Haiti</option>
+									<option value="HMD">Heard and Mc Donald Islands</option>
+									<option value="HND">Honduras</option>
+									<option value="HKG">Hong Kong</option>
+									<option value="HUN">Hungary</option>
+									<option value="IND">India</option>
+									<option value="IDN">Indonesia</option>
+									<option value="IRL">Ireland</option>
+									<option value="ISR">Israel</option>
+									<option value="ITA">Italy</option>
+									<option value="JAM">Jamaica</option>
+									<option value="JPN">Japan</option>
+									<option value="JOR">Jordan</option>
+									<option value="KAZ">Kazakhstan</option>
+									<option value="KEN">Kenya</option>
+									<option value="KIR">Kiribati</option>
+									<option value="KOR">Korea (North)</option>
+									<option value="KOR">Korea (South)</option>
+									<option value="KWT">Kuwait</option>
+									<option value="KGZ">Kyrgyzstan</option>
+									<option value="LVA">Latvia</option>
+									<option value="LBN">Lebanon</option>
+									<option value="LSO">Lesotho</option>
+									<option value="LBR">Liberia</option>
+									<option value="LIE">Liechtenstein</option>
+									<option value="LTU">Lithuania</option>
+									<option value="LUX">Luxembourg</option>
+									<option value="MAC">Macau</option>
+									<option value="MDG">Madagascar</option>
+									<option value="MWI">Malawi</option>
+									<option value="MDV">Maldives</option>
+									<option value="MLI">Mali</option>
+									<option value="MLT">Malta</option>
+									<option value="MTQ">Martinique</option>
+									<option value="MRT">Mauritania</option>
+									<option value="MUS">Mauritius</option>
+									<option value="MYT">Mayotte</option>
+									<option value="MEX">Mexico</option>
+									<option value="MDA">Moldova, Republic of</option>
+									<option value="MCO">Monaco</option>
+									<option value="MNG">Mongolia</option>
+									<option value="MSR">Montserrat</option>
+									<option value="MAR">Morocco</option>
+									<option value="MOZ">Mozambique</option>
+									<option value="MMR">Myanmar</option>
+									<option value="NAM">Namibia</option>
+									<option value="NRU">Nauru</option>
+									<option value="NPL">Nepal</option>
+									<option value="NLD">Netherlands</option>
+									<option value="ANT">Netherlands Antilles</option>
+									<option value="NCL">New Caledonia</option>
+									<option value="NZE">New Zealand</option>
+									<option value="NIC">Nicaragua</option>
+									<option value="NER">Niger</option>
+									<option value="NGA">Nigeria</option>
+									<option value="NIU">Niue</option>
+									<option value="NFK">Norfolk Island</option>
+									<option value="IRL">Northern Ireland</option>
+									<option value="NOR">Norway</option>
+									<option value="PAK">Pakistan</option>
+									<option value="PAN">Panama</option>
+									<option value="PNG">Papua New Guinea</option>
+									<option value="PRY">Paraguay</option>
+									<option value="PER">Peru</option>
+									<option value="PHL">Philippines</option>
+									<option value="PCN">Pitcairn</option>
+									<option value="POL">Poland</option>
+									<option value="PRT">Portugal</option>
+									<option value="QAT">Qatar</option>
+									<option value="REU">Reunion</option>
+									<option value="ROM">Romania</option>
+									<option value="RUS">Russia</option>
+									<option value="RUS">Russian Federation</option>
+									<option value="RWA">Rwanda</option>
+									<option value="KNA">Saint Kitts and Nevis</option>
+									<option value="LCA">Saint Lucia</option>
+									<option value="VCT">Saint Vincent and the Grenadines</option>
+									<option value="SMR">San Marino</option>
+									<option value="STP">Sao Tome and Principe</option>
+									<option value="SAU">Saudi Arabia</option>
+									<option value="SEN">Senegal</option>
+									<option value="SYC">Seychelles</option>
+									<option value="SLE">Sierra Leone</option>
+									<option value="SGP">Singapore</option>
+									<option value="SVK">Slovakia</option>
+									<option value="SVN">Slovenia</option>
+									<option value="SLB">Solomon Islands</option>
+									<option value="SOM">Somalia</option>
+									<option value="ESP">Spain</option>
+									<option value="LKA">Sri Lanka</option>
+									<option value="SHN">St. Helena</option>
+									<option value="SPM">St. Pierre and Miquelon</option>
+									<option value="SUR">Suriname</option>
+									<option value="SJM">Svalbard and Jan Mayen Islands</option>
+									<option value="SWZ">Swaziland</option>
+									<option value="SWE">Sweden</option>
+									<option value="CHE">Switzerland</option>
+									<option value="TWN">Taiwan</option>
+									<option value="TJK">Tajikistan</option>
+									<option value="TZA">Tanzania</option>
+									<option value="THA">Thailand</option>
+									<option value="TGO">Togo</option>
+									<option value="TKL">Tokelau</option>
+									<option value="TON">Tonga</option>
+									<option value="TTO">Trinidad and Tobago</option>
+									<option value="TUN">Tunisia</option>
+									<option value="TUR">Turkey</option>
+									<option value="TKM">Turkmenistan</option>
+									<option value="TCA">Turks and Caicos Islands</option>
+									<option value="TUV">Tuvalu</option>
+									<option value="UGA">Uganda</option>
+									<option value="UKR">Ukraine</option>
+									<option value="ARE">United Arab Emirates</option>
+									<option value="UK">United Kingdom</option>
+									<option value="URY">Uruguay</option>
+									<option value="UZB">Uzbekistan</option>
+									<option value="VUT">Vanuatu</option>
+									<option value="VAT">Vatican City State (Holy See)</option>
+									<option value="VEN">Venezuela</option>
+									<option value="VNM">Viet Nam</option>
+									<option value="VGB">Virgin Islands</option>
+									<option value="WLF">Wallis and Futuna Islands</option>
+									<option value="ESH">Western Sahara</option>
+									<option value="YEM">Yemen</option>
+									<option value="ZMB">Zambia</option>
+
+							</select>
+                              </div>
+                @*<input id="" type="text" class="txt" style="width:350px;" />*@</td>
+        </tr>
+ </table>
+</div>
+
+   
+    
+    <!---Pop up for Facility-->
+
+    <div id="AddFacility-Form" title="Add Facility" style="display:none;">
+ <table width="90%">
+
+     
+     <tr>
+         <td align="right">Facility Name:</td>
+         <td>
+             <input type="hidden" id="hdflagfacility" value="0" />
+             <input type="hidden" id="hdFacilityId" value="" />  <input id="FacilityName" type="text" class="txt" style="width:350px;" /></td>
+     </tr>
+
+     <tr>
+            <td align="right">Address1:</td>
+            <td>
+                <input id="FacilityAddress1" type="text" class="txt" style="width:350px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">Address2:</td>
+            <td>
+                <input id="FacilityAddress2" type="text" class="txt" style="width:350px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">Address3:</td>
+            <td>
+                <input id="FacilityAddress3" type="text" class="txt" style="width:350px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">City:</td>
+            <td>
+                <input id="FacilityCity" type="text" class="txt" style="width:350px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">State:</td>
+            <td>
+                <select style="visibility: visible;" class="coms" name="state" id="FacilityStates" tabindex="11">
+									
+										<option value="AL" selected="selected">AL</option>
+									
+										<option value="AK">AK</option>
+									
+										<option value="AS">AS</option>
+									
+										<option value="AZ">AZ</option>
+									
+										<option value="AR">AR</option>
+									
+										<option value="AA">AA</option>
+									
+										<option value="AE">AE</option>
+									
+										<option value="AP">AP</option>
+									
+										<option value="CA">CA</option>
+									
+										<option value="CO">CO</option>
+									
+										<option value="CT">CT</option>
+									
+										<option value="DE">DE</option>
+									
+										<option value="DC">DC</option>
+									
+										<option value="FL">FL</option>
+									
+										<option value="GA">GA</option>
+									
+										<option value="GU">GU</option>
+									
+										<option value="HI">HI</option>
+									
+										<option value="ID">ID</option>
+									
+										<option value="IL">IL</option>
+									
+										<option value="IN">IN</option>
+									
+										<option value="IA">IA</option>
+									
+										<option value="KS">KS</option>
+									
+										<option value="KY">KY</option>
+									
+										<option value="LA">LA</option>
+									
+										<option value="ME">ME</option>
+									
+										<option value="MH">MH</option>
+									
+										<option value="MD">MD</option>
+									
+										<option value="MA">MA</option>
+									
+										<option value="MI">MI</option>
+									
+										<option value="FM">FM</option>
+									
+										<option value="MN">MN</option>
+									
+										<option value="MS">MS</option>
+									
+										<option value="MO">MO</option>
+									
+										<option value="MT">MT</option>
+									
+										<option value="NE">NE</option>
+									
+										<option value="NV">NV</option>
+									
+										<option value="NH">NH</option>
+									
+										<option value="NJ">NJ</option>
+									
+										<option value="NM">NM</option>
+									
+										<option value="NY">NY</option>
+									
+										<option value="NC">NC</option>
+									
+										<option value="ND">ND</option>
+									
+										<option value="MP">MP</option>
+									
+										<option value="OH">OH</option>
+									
+										<option value="OK">OK</option>
+									
+										<option value="OR">OR</option>
+									
+										<option value="PW">PW</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PR">PR</option>
+									
+										<option value="RI">RI</option>
+									
+										<option value="SC">SC</option>
+									
+										<option value="TN">TN</option>
+									
+										<option value="TX">TX</option>
+									
+										<option value="UT">UT</option>
+									
+										<option value="VT">VT</option>
+									
+										<option value="VI">VI</option>
+									
+										<option value="VA">VA</option>
+									
+										<option value="WA">WA</option>
+									
+										<option value="WV">WV</option>
+									
+										<option value="WI">WI</option>
+									
+										<option value="WY">WY</option>
+									
+										<option value="SD">SD</option>
+									
+								</select>
+                </td>
+        </tr>
+
+     <tr>
+            <td align="right">PostalCode:</td>
+            <td>
+                <input id="FacilityPostalCode" type="text" class="txt" style="width:100px;" /></td>
+        </tr>
+
+     <tr>
+            <td align="right">CountryCode:</td>
+            <td>
+                <div>
+                                <select name="Country" class="coms" id="FacilityCountry" style="width:254px;" tabindex="9">
+																		<option selected="selected" value="USA">United States</option>
+									<option value="ALB">Albania</option>
+									<option value="DZA">Algeria</option>
+									<option value="WSM">American Samoa</option>
+									<option value="AND">Andorra</option>
+									<option value="AGO">Angola</option>
+									<option value="AIA">Anguilla</option>
+									<option value="ATA">Antarctica</option>
+									<option value="ATG">Antigua And Barbuda</option>
+									<option value="ARG">Argentina</option>
+									<option value="ARM">Armenia</option>
+									<option value="ABW">Aruba</option>
+									<option value="AUT">Austria</option>
+									<option value="AUT">Australia</option>
+									<option value="AZE">Azerbaijan</option>
+									<option value="BHS">Bahamas</option>
+									<option value="BHR">Bahrain</option>
+									<option value="BGD">Bangladesh</option>
+									<option value="BRB">Barbados</option>
+									<option value="BLR">Belarus</option>
+									<option value="BEL">Belgium</option>
+									<option value="BLZ">Belize</option>
+									<option value="BEN">Benin</option>
+									<option value="BMU">Bermuda</option>
+									<option value="BTN">Bhutan</option>
+									<option value="BOL">Bolivia</option>
+									<option value="BIH">Bosnia and Herzegovina</option>
+									<option value="BWA">Botswana</option>
+									<option value="BVT">Bouvet Island</option>
+									<option value="BRA">Brazil</option>
+									<option value="IOT">British Indian Ocean Territory</option>
+									<option value="BRN">Brunei Darussalam</option>
+									<option value="BGR">Bulgaria</option>
+									<option value="BFA">Burkina Faso</option>
+									<option value="BDI">Burundi</option>
+									<option value="KHM">Cambodia</option>
+									<option value="CMR">Cameroon</option>
+									<option value="CAN">Canada</option>
+									<option value="CPV">Cape Verde</option>
+									<option value="CYM">Cayman Islands</option>
+									<option value="CAF">Central African Republic</option>
+									<option value="TCD">Chad</option>
+									<option value="CHL">Chile</option>
+									<option value="CHN">China</option>
+									<option value="CXR">Christmas Island</option>
+									<option value="CCK">Cocos (Keeling) Islands</option>
+									<option value="COL">Colombia</option>
+									<option value="COM">Comoros</option>
+									<option value="COG">Congo</option>
+									<option value="COK">Cook Islands</option>
+									<option value="CRI">Costa Rica</option>
+									<option value="CIV">Cote d'Ivoire</option>
+									<option value="HRV">Croatia</option>
+									<option value="CZE">Czech Republic</option>
+									<option value="DNK">Denmark</option>
+									<option value="DJI">Djibouti</option>
+									<option value="DMA">Dominica</option>
+									<option value="DOM">Dominican Republic</option>
+									<option value="TMP">East Timor</option>
+									<option value="ECU">Ecuador</option>
+									<option value="EGY">Egypt</option>
+									<option value="SLV">El Salvador</option>
+									<option value="ENG">England</option>
+									<option value="GNQ">Equatorial Guinea</option>
+									<option value="ERI">Eritrea</option>
+									<option value="ESP">Espana</option>
+									<option value="EST">Estonia</option>
+									<option value="ETH">Ethiopia</option>
+									<option value="FLK">Falkland Islands</option>
+									<option value="FRO">Faroe Islands</option>
+									<option value="FJI">Fiji</option>
+									<option value="FIN">Finland</option>
+									<option value="FRA">France</option>
+									<option value="GUF">French Guiana</option>
+									<option value="PYF">French Polynesia</option>
+									<option value="ATF">French Southern Territories</option>
+									<option value="GAB">Gabon</option>
+									<option value="GMB">Gambia</option>
+									<option value="GEO">Georgia</option>
+									<option value="DEU">Germany</option>
+									<option value="GHA">Ghana</option>
+									<option value="GIB">Gibraltar</option>
+									<option value="GRC">Greece</option>
+									<option value="GRL">Greenland</option>
+									<option value="GRD">Grenada</option>
+									<option value="GLP">Guadeloupe</option>
+									<option value="GTM">Guatemala</option>
+									<option value="GIN">Guinea</option>
+									<option value="GNB">Guinea-Bissau</option>
+									<option value="GUY">Guyana</option>
+									<option value="HTI">Haiti</option>
+									<option value="HMD">Heard and Mc Donald Islands</option>
+									<option value="HND">Honduras</option>
+									<option value="HKG">Hong Kong</option>
+									<option value="HUN">Hungary</option>
+									<option value="IND">India</option>
+									<option value="IDN">Indonesia</option>
+									<option value="IRL">Ireland</option>
+									<option value="ISR">Israel</option>
+									<option value="ITA">Italy</option>
+									<option value="JAM">Jamaica</option>
+									<option value="JPN">Japan</option>
+									<option value="JOR">Jordan</option>
+									<option value="KAZ">Kazakhstan</option>
+									<option value="KEN">Kenya</option>
+									<option value="KIR">Kiribati</option>
+									<option value="KOR">Korea (North)</option>
+									<option value="KOR">Korea (South)</option>
+									<option value="KWT">Kuwait</option>
+									<option value="KGZ">Kyrgyzstan</option>
+									<option value="LVA">Latvia</option>
+									<option value="LBN">Lebanon</option>
+									<option value="LSO">Lesotho</option>
+									<option value="LBR">Liberia</option>
+									<option value="LIE">Liechtenstein</option>
+									<option value="LTU">Lithuania</option>
+									<option value="LUX">Luxembourg</option>
+									<option value="MAC">Macau</option>
+									<option value="MDG">Madagascar</option>
+									<option value="MWI">Malawi</option>
+									<option value="MDV">Maldives</option>
+									<option value="MLI">Mali</option>
+									<option value="MLT">Malta</option>
+									<option value="MTQ">Martinique</option>
+									<option value="MRT">Mauritania</option>
+									<option value="MUS">Mauritius</option>
+									<option value="MYT">Mayotte</option>
+									<option value="MEX">Mexico</option>
+									<option value="MDA">Moldova, Republic of</option>
+									<option value="MCO">Monaco</option>
+									<option value="MNG">Mongolia</option>
+									<option value="MSR">Montserrat</option>
+									<option value="MAR">Morocco</option>
+									<option value="MOZ">Mozambique</option>
+									<option value="MMR">Myanmar</option>
+									<option value="NAM">Namibia</option>
+									<option value="NRU">Nauru</option>
+									<option value="NPL">Nepal</option>
+									<option value="NLD">Netherlands</option>
+									<option value="ANT">Netherlands Antilles</option>
+									<option value="NCL">New Caledonia</option>
+									<option value="NZE">New Zealand</option>
+									<option value="NIC">Nicaragua</option>
+									<option value="NER">Niger</option>
+									<option value="NGA">Nigeria</option>
+									<option value="NIU">Niue</option>
+									<option value="NFK">Norfolk Island</option>
+									<option value="IRL">Northern Ireland</option>
+									<option value="NOR">Norway</option>
+									<option value="PAK">Pakistan</option>
+									<option value="PAN">Panama</option>
+									<option value="PNG">Papua New Guinea</option>
+									<option value="PRY">Paraguay</option>
+									<option value="PER">Peru</option>
+									<option value="PHL">Philippines</option>
+									<option value="PCN">Pitcairn</option>
+									<option value="POL">Poland</option>
+									<option value="PRT">Portugal</option>
+									<option value="QAT">Qatar</option>
+									<option value="REU">Reunion</option>
+									<option value="ROM">Romania</option>
+									<option value="RUS">Russia</option>
+									<option value="RUS">Russian Federation</option>
+									<option value="RWA">Rwanda</option>
+									<option value="KNA">Saint Kitts and Nevis</option>
+									<option value="LCA">Saint Lucia</option>
+									<option value="VCT">Saint Vincent and the Grenadines</option>
+									<option value="SMR">San Marino</option>
+									<option value="STP">Sao Tome and Principe</option>
+									<option value="SAU">Saudi Arabia</option>
+									<option value="SEN">Senegal</option>
+									<option value="SYC">Seychelles</option>
+									<option value="SLE">Sierra Leone</option>
+									<option value="SGP">Singapore</option>
+									<option value="SVK">Slovakia</option>
+									<option value="SVN">Slovenia</option>
+									<option value="SLB">Solomon Islands</option>
+									<option value="SOM">Somalia</option>
+									<option value="ESP">Spain</option>
+									<option value="LKA">Sri Lanka</option>
+									<option value="SHN">St. Helena</option>
+									<option value="SPM">St. Pierre and Miquelon</option>
+									<option value="SUR">Suriname</option>
+									<option value="SJM">Svalbard and Jan Mayen Islands</option>
+									<option value="SWZ">Swaziland</option>
+									<option value="SWE">Sweden</option>
+									<option value="CHE">Switzerland</option>
+									<option value="TWN">Taiwan</option>
+									<option value="TJK">Tajikistan</option>
+									<option value="TZA">Tanzania</option>
+									<option value="THA">Thailand</option>
+									<option value="TGO">Togo</option>
+									<option value="TKL">Tokelau</option>
+									<option value="TON">Tonga</option>
+									<option value="TTO">Trinidad and Tobago</option>
+									<option value="TUN">Tunisia</option>
+									<option value="TUR">Turkey</option>
+									<option value="TKM">Turkmenistan</option>
+									<option value="TCA">Turks and Caicos Islands</option>
+									<option value="TUV">Tuvalu</option>
+									<option value="UGA">Uganda</option>
+									<option value="UKR">Ukraine</option>
+									<option value="ARE">United Arab Emirates</option>
+									<option value="UK">United Kingdom</option>
+									<option value="URY">Uruguay</option>
+									<option value="UZB">Uzbekistan</option>
+									<option value="VUT">Vanuatu</option>
+									<option value="VAT">Vatican City State (Holy See)</option>
+									<option value="VEN">Venezuela</option>
+									<option value="VNM">Viet Nam</option>
+									<option value="VGB">Virgin Islands</option>
+									<option value="WLF">Wallis and Futuna Islands</option>
+									<option value="ESH">Western Sahara</option>
+									<option value="YEM">Yemen</option>
+									<option value="ZMB">Zambia</option>
+
+							</select>
+                              </div>
+               </td>
+        </tr>
+     <tr><td align="right">Note:</td><td> <textarea multiline="true" id="Comment"  class="txt" style="width:350px; height:100px;" ></textarea></td></tr>
+ </table>
+</div>
+ 

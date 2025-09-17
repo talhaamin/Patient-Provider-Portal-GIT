@@ -1,0 +1,100 @@
+﻿@model IEnumerable<AMR.Models.PatientVitalSignModel>
+@using System.Text;
+@using System.Web.Script.Serialization;
+
+
+<table class="box-table-a" id="tab-vitals" summary="Appointments">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Observation Date</th>
+                                                <th scope="col">Blood Pressure</th>
+                                                <th scope="col">Weight (lb)</th>
+                                                <th scope="col">Height</th>
+                                                <th scope="col">BMI</th>
+                                                <th scope="col" class="showHideThisVital" style="text-align:center;">Edit</th>
+                                                <th scope="col" style="text-align:center;">Details</th>
+                                                <th scope="col" class="showHideThisVital" style="text-align:center;">Delete</th>
+                                                 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null && Model.Count()>0)
+                                            {
+                                                int counter = 0;
+                                                foreach (var item in Model)
+                                                {
+                                                    string ht1 = "";
+                                                    string ht2 = "0";
+                                                    decimal feet = Math.Round(Convert.ToDecimal((item.HeightIn)) / 12, 1);
+                                                    string ftinch = AMR.Core.Utilities.utility.inchToFeetSeporate(item.HeightIn);
+                                                    string[] st_array = ftinch.Split('.');
+                                                    string height_string = String.Empty;
+                                                    if (st_array.Length > 1)
+                                                    {
+                                                        height_string = st_array[0] + "\' " + st_array[1] + "\"";
+                                                        ht1 = st_array[0];
+                                                        ht2 = st_array[1];
+
+                                                    }
+                                                    else if (st_array.Length == 1)
+                                                    {
+                                                        height_string = st_array[0] + "\' ";
+                                                        ht1 = st_array[0];
+                                                    }
+                                                    decimal calc = item.HeightIn * item.HeightIn;
+
+                                                    StringBuilder jsonStringVital = new StringBuilder();
+                                                    //var bPressure = item.BloodPressurePosn;
+                                                    //string[] bpressure_array = bPressure.ToString().Split('/');
+
+
+
+
+                                                    jsonStringVital.Append(" { ");
+                                                    jsonStringVital.Append("\"PatientVitalCntr\": \"" + item.PatientVitalCntr + "\",");
+                                                    jsonStringVital.Append("\"VitalDate\": \"" + item.VitalDate.ToShortDateString() + "\",");
+                                                   // if(bPressure != "")
+                                                   // {
+                                                    jsonStringVital.Append("\"BloodPressurePosn\":  \"" + item.Systolic + "\",");
+                                                    jsonStringVital.Append("\"BloodPressurePosn1\":  \"" + item.Diastolic + "\",");
+                                                   // }
+                                                    jsonStringVital.Append("\"WeightLb\":  \"" + item.WeightLb + "\",");
+                                                    jsonStringVital.Append("\"HeightIn\":  \"" + ht2 + "\",");
+                                                    jsonStringVital.Append("\"HeightFt\":  \"" + ht1 + "\",");
+                                                    jsonStringVital.Append("\"Systolic\":  \"" + item.Systolic + "\",");
+                                                    jsonStringVital.Append("\"Diastolic\":  \"" + item.Diastolic + "\",");
+                                                    jsonStringVital.Append("\"Temperature\":  \"" + item.Temperature + "\",");
+                                                    jsonStringVital.Append("\"Pulse\":  \"" + item.Pulse + "\",");
+                                                    jsonStringVital.Append("\"Respiration\":  \"" + (item.Respiration) + "\"");
+                                                    jsonStringVital.Append("}");
+                                                
+                                                    <tr class="@((counter % 2 == 0) ? "r1" : "r0")">
+                                                        <td><input type="hidden" id="HiddenVitals@(item.PatientVitalCntr)" value="@jsonStringVital.ToString()" />@item.VitalDate.ToShortDateString()</td>
+                                                        <td>@item.Systolic/@item.Diastolic</td>
+                                                        <td>@item.WeightLb.ToString()</td>
+                                                        <td>@AMR.Core.Utilities.utility.inchToFeet(item.HeightIn)</td>
+                                                        @if (calc != 0)
+                                                        {
+                                                            <td>@(Math.Round(Convert.ToDecimal((@item.WeightLb / (calc))) * 703, 1))  </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td>0 </td>
+                                                        }
+                                                        <td align="center" class="showHideThisVital">  <img onclick="vitalEdit(@item.PatientVitalCntr);"   src="Content/img/edit.png" /> </td>
+                                                        <td align="center">  <img  onclick="vitalDetails(@item.PatientVitalCntr); "   src="Content/img/details.png" />  </td>
+                                                        <td align="center" class="showHideThisVital">  <img  onclick="vitalDelete(@item.PatientVitalCntr); "   src="Content/img/delete.png" />  </td>
+                                                    </tr>
+                                                    counter++;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                <td width="200px;">No Information Available.</td>
+                            </tr>
+                                            }
+
+                                        </tbody>
+</table>
+

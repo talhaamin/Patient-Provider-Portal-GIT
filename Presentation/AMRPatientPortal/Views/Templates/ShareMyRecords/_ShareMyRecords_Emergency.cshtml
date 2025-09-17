@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AMR.Models.PatientEmergency>
+@using System.Web.Script.Serialization;
+
+ <table class="box-table-a"  id="tbl-SharedEmergency"summary="EmergencyContact">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Relationship</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Country</th>
+                                    <th scope="col">Home Phone</th>
+                                    <th scope="col">Work Phone</th>
+                               </tr>
+                            </thead>
+                               <tbody>
+                    @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var item in Model)
+                                    {
+                        <tr class="@((counter % 2 == 1) ? "r0" : "r1")">
+                         <td>@item.Name</td>
+                        <td>@item.Relationship</td>
+                        <td>@item.Address1</td>
+                        <td>@item.CountryCode</td>
+                        <td>@item.HomePhone</td>
+                        <td>@item.WorkPhone</td>
+                   
+                        </tr>   
+                                        counter++;
+                    }
+                                }
+                               else
+                        {
+                          <tr><td>No Information Available</td></tr>
+                        }
+
+                    </tbody>
+                            </table>   
+
+
+

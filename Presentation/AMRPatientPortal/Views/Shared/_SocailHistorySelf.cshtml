@@ -1,0 +1,88 @@
+﻿@using AMR.Models;
+@using System.Text;
+@model PatientSocialSelfDataModel
+
+<table class="box-table-a" id="tbl-socailHistoryself" summary="Statement">
+                   <thead>
+
+                   </thead>
+   
+                    <tbody>
+                       
+                    <tr class="r1">
+                            @{
+                                                    StringBuilder jsonarrayString = new StringBuilder();
+
+                                                    jsonarrayString.Append(" { ");
+                                                    jsonarrayString.Append("\"PatientId\": \"" + Model.PatientId + "\",");
+                                                    jsonarrayString.Append("\"Occupation\": \"" + Model.Occupation + "\",");
+                                                    jsonarrayString.Append("\"Birthplace\": \"" + Model.Birthplace + "\",");
+                                                    jsonarrayString.Append("\"EducationLevelId\": \"" + Model.EducationLevelId + "\",");
+                                                    jsonarrayString.Append("\"Retired\": \"" + Model.Retired + "\",");
+                                                    jsonarrayString.Append("\"ChildrenSon\": \"" + Model.ChildrenSon + "\",");
+                                                    jsonarrayString.Append("\"ChildrenDaughter\": \"" + Model.ChildrenDaughter + "\",");
+                                                    jsonarrayString.Append("\"CaffeineUser\": \"" + Model.CaffeineUser + "\",");
+                                                    jsonarrayString.Append("\"CaffieneType\": \"" + Model.CaffieneType + "\",");
+                                                    jsonarrayString.Append("\"CaffeineAmount\": \"" + Model.CaffeineAmount + "\",");
+                                                    jsonarrayString.Append("\"ExerciseMember\": \"" + Model.ExerciseMember + "\",");
+                                                    jsonarrayString.Append("\"ExerciseFrequencyId\": \"" + Model.ExerciseFrequencyId + "\",");
+                                                    jsonarrayString.Append("\"ExerciseAmount\": \"" + Model.ExerciseAmount + "\",");
+                                                    jsonarrayString.Append("\"ActivityLevelId\": \"" + Model.ActivityLevelId + "\",");
+                                                    jsonarrayString.Append("\"Activity1\": \"" + Model.Activity1 + "\",");
+                                                    jsonarrayString.Append("\"Activity2\": \"" + Model.Activity2 + "\",");
+                                                    jsonarrayString.Append("\"Activity3\": \"" + Model.Activity3 + "\",");
+                                                    jsonarrayString.Append("\"AlcoholUser\": \"" + Model.AlcoholUser + "\",");
+                                                    jsonarrayString.Append("\"AlcoholFrequencyId\": \"" + Model.AlcoholFrequencyId + "\",");
+                                                    jsonarrayString.Append("\"AlcoholLastUse\": \"" + Model.AlcoholLastUse.ToShortDateString() + "\",");
+                                                    jsonarrayString.Append("\"AlcoholType\": \"" + Model.AlcoholType + "\",");
+                                                    jsonarrayString.Append("\"AlcoholStartAge\": \"" + Model.AlcoholStartAge + "\",");
+                                                    jsonarrayString.Append("\"AlcoholFamilyHist\": \"" + Model.AlcoholFamilyHist + "\",");
+                                                    jsonarrayString.Append("\"SmokingStatusId\": \"" + Model.SmokingStatusId + "\",");
+                                                    jsonarrayString.Append("\"SmokingDailyAmount\": \"" + Model.SmokingDailyAmount + "\",");
+
+                                                    jsonarrayString.Append("\"SmokingType\": \"" + Model.SmokingType + "\",");
+                                                    jsonarrayString.Append("\"SmokingYears\": \"" + Model.SmokingYears + "\",");
+                                                    jsonarrayString.Append("\"SmokingQuitAttempts\": \"" + Model.SmokingQuitAttempts + "\",");
+                                                    jsonarrayString.Append("\"SmokingQuitDate\": \"" + Model.SmokingQuitDate.ToShortDateString() + "\",");
+                                                    jsonarrayString.Append("\"SmokingSecondHand\": \"" + Model.SmokingSecondHand + "\"");
+
+
+                                                    jsonarrayString.Append("}");
+
+                                                    int children = Model.ChildrenSon + Model.ChildrenDaughter;
+                                                    bool status = Model.AlcoholUser;
+                                                    
+           }
+                        <td><b>Birthplace:</b></td>
+                             <td>@Model.Birthplace <input type="hidden" value=" @jsonarrayString.ToString()" id="patiendsocialself" /></td>
+                            
+                    </tr>
+                     
+                          <tr class="r0">
+                        <td><b>Children:</b></td>
+                            @if(children ==0)
+                              {
+                                <td></td>
+                            }
+                              else
+                              {
+                             <td>@children</td>
+                            }
+                            
+                    </tr>
+                       
+                          <tr class="r1">
+                        <td><b>Tobacco:</b></td>
+                             <td>@Model.SmokingStatus</td>
+                            
+                    </tr>
+                        <tr class="r0">
+                             <td><b>Alcohol:</b></td>
+                             <td>@if (status == true) { <p>Yes</p>} else{<p>No</p>} </td>
+                             
+
+                        </tr>
+                          
+                    </tbody>
+     
+</table>

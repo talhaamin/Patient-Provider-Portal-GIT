@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="MessagePost">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="MessageData" type="tns:MessageData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MessageData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MessageId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageResponse" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AppointmentStart" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AppointmentEnd" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AppointmentProviderId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="MedicationNDC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MedicationName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NoOfRefills" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MedicationStatus" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PharmacyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PharmacyAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AttachmentName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Attachment" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="MessagePostResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MessagePostResult" type="tns:MessagePostResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MessagePostResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="NewMessagePost">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="MessageData" type="tns:NewMessageData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="NewMessageData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AMRPatientIds" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AMRProviderId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageRequest" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AttachmentName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Attachment" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="NewMessagePostResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NewMessagePostResult" type="tns:MessagePostResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MessageGetWaiting">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MessageGetWaitingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MessageGetWaitingResult" type="tns:MessageTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MessageTableData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dt">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="MessageGetCancelled">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MessageGetCancelledResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MessageGetCancelledResult" type="tns:MessageTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MessagePostReceived">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="MessageReceived" type="tns:MessageReceived" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MessageReceived">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="dt">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="MessagePostReceivedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MessagePostReceivedResult" type="tns:MessagePostResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MessagePostReceivedList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageReceivedList" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MessagePostReceivedListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MessagePostReceivedListResult" type="tns:MessagePostResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DirectReceivedPost">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DirectData" type="tns:DirectReceivedData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DirectReceivedData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DirectReceivedId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="Processed" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="DateProcessed" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PatientId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmailId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FromEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ToEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Body" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Attachment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DirectReceivedPostResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DirectReceivedPostResult" type="tns:DirectReceivedResp" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DirectReceivedResp">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DirectReceivedGetList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityIdSearch" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DirectReceivedGetListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DirectReceivedGetListResult" type="tns:MessageTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="MessagePostSoapIn">
+    <wsdl:part name="parameters" element="tns:MessagePost" />
+  </wsdl:message>
+  <wsdl:message name="MessagePostSoapOut">
+    <wsdl:part name="parameters" element="tns:MessagePostResponse" />
+  </wsdl:message>
+  <wsdl:message name="NewMessagePostSoapIn">
+    <wsdl:part name="parameters" element="tns:NewMessagePost" />
+  </wsdl:message>
+  <wsdl:message name="NewMessagePostSoapOut">
+    <wsdl:part name="parameters" element="tns:NewMessagePostResponse" />
+  </wsdl:message>
+  <wsdl:message name="MessageGetWaitingSoapIn">
+    <wsdl:part name="parameters" element="tns:MessageGetWaiting" />
+  </wsdl:message>
+  <wsdl:message name="MessageGetWaitingSoapOut">
+    <wsdl:part name="parameters" element="tns:MessageGetWaitingResponse" />
+  </wsdl:message>
+  <wsdl:message name="MessageGetCancelledSoapIn">
+    <wsdl:part name="parameters" element="tns:MessageGetCancelled" />
+  </wsdl:message>
+  <wsdl:message name="MessageGetCancelledSoapOut">
+    <wsdl:part name="parameters" element="tns:MessageGetCancelledResponse" />
+  </wsdl:message>
+  <wsdl:message name="MessagePostReceivedSoapIn">
+    <wsdl:part name="parameters" element="tns:MessagePostReceived" />
+  </wsdl:message>
+  <wsdl:message name="MessagePostReceivedSoapOut">
+    <wsdl:part name="parameters" element="tns:MessagePostReceivedResponse" />
+  </wsdl:message>
+  <wsdl:message name="MessagePostReceivedListSoapIn">
+    <wsdl:part name="parameters" element="tns:MessagePostReceivedList" />
+  </wsdl:message>
+  <wsdl:message name="MessagePostReceivedListSoapOut">
+    <wsdl:part name="parameters" element="tns:MessagePostReceivedListResponse" />
+  </wsdl:message>
+  <wsdl:message name="DirectReceivedPostSoapIn">
+    <wsdl:part name="parameters" element="tns:DirectReceivedPost" />
+  </wsdl:message>
+  <wsdl:message name="DirectReceivedPostSoapOut">
+    <wsdl:part name="parameters" element="tns:DirectReceivedPostResponse" />
+  </wsdl:message>
+  <wsdl:message name="DirectReceivedGetListSoapIn">
+    <wsdl:part name="parameters" element="tns:DirectReceivedGetList" />
+  </wsdl:message>
+  <wsdl:message name="DirectReceivedGetListSoapOut">
+    <wsdl:part name="parameters" element="tns:DirectReceivedGetListResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MessageWSSoap">
+    <wsdl:operation name="MessagePost">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Post Message Data</wsdl:documentation>
+      <wsdl:input message="tns:MessagePostSoapIn" />
+      <wsdl:output message="tns:MessagePostSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NewMessagePost">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Post New Message Data</wsdl:documentation>
+      <wsdl:input message="tns:NewMessagePostSoapIn" />
+      <wsdl:output message="tns:NewMessagePostSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MessageGetWaiting">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get List Of Waiting Messages</wsdl:documentation>
+      <wsdl:input message="tns:MessageGetWaitingSoapIn" />
+      <wsdl:output message="tns:MessageGetWaitingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MessageGetCancelled">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get List Of Cancelled Messages</wsdl:documentation>
+      <wsdl:input message="tns:MessageGetCancelledSoapIn" />
+      <wsdl:output message="tns:MessageGetCancelledSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MessagePostReceived">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update List Of Messages Received</wsdl:documentation>
+      <wsdl:input message="tns:MessagePostReceivedSoapIn" />
+      <wsdl:output message="tns:MessagePostReceivedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MessagePostReceivedList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update List Of Messages Received -CSV List</wsdl:documentation>
+      <wsdl:input message="tns:MessagePostReceivedListSoapIn" />
+      <wsdl:output message="tns:MessagePostReceivedListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DirectReceivedPost">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Post DirectReceived Data</wsdl:documentation>
+      <wsdl:input message="tns:DirectReceivedPostSoapIn" />
+      <wsdl:output message="tns:DirectReceivedPostSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DirectReceivedGetList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get List Of Direct Received Messages</wsdl:documentation>
+      <wsdl:input message="tns:DirectReceivedGetListSoapIn" />
+      <wsdl:output message="tns:DirectReceivedGetListSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MessageWSSoap" type="tns:MessageWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="MessagePost">
+      <soap:operation soapAction="http://tempuri.org/MessagePost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewMessagePost">
+      <soap:operation soapAction="http://tempuri.org/NewMessagePost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MessageGetWaiting">
+      <soap:operation soapAction="http://tempuri.org/MessageGetWaiting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MessageGetCancelled">
+      <soap:operation soapAction="http://tempuri.org/MessageGetCancelled" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MessagePostReceived">
+      <soap:operation soapAction="http://tempuri.org/MessagePostReceived" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MessagePostReceivedList">
+      <soap:operation soapAction="http://tempuri.org/MessagePostReceivedList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DirectReceivedPost">
+      <soap:operation soapAction="http://tempuri.org/DirectReceivedPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DirectReceivedGetList">
+      <soap:operation soapAction="http://tempuri.org/DirectReceivedGetList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MessageWSSoap12" type="tns:MessageWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="MessagePost">
+      <soap12:operation soapAction="http://tempuri.org/MessagePost" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewMessagePost">
+      <soap12:operation soapAction="http://tempuri.org/NewMessagePost" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MessageGetWaiting">
+      <soap12:operation soapAction="http://tempuri.org/MessageGetWaiting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MessageGetCancelled">
+      <soap12:operation soapAction="http://tempuri.org/MessageGetCancelled" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MessagePostReceived">
+      <soap12:operation soapAction="http://tempuri.org/MessagePostReceived" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MessagePostReceivedList">
+      <soap12:operation soapAction="http://tempuri.org/MessagePostReceivedList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DirectReceivedPost">
+      <soap12:operation soapAction="http://tempuri.org/DirectReceivedPost" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DirectReceivedGetList">
+      <soap12:operation soapAction="http://tempuri.org/DirectReceivedGetList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MessageWS">
+    <wsdl:port name="MessageWSSoap" binding="tns:MessageWSSoap">
+      <soap:address location="http://www.accessmyrecordsportal.com/QAIntegrationWS/MessageService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MessageWSSoap12" binding="tns:MessageWSSoap12">
+      <soap12:address location="http://www.accessmyrecordsportal.com/QAIntegrationWS/MessageService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

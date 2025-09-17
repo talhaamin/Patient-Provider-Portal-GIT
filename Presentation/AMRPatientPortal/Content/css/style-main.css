@@ -1,0 +1,890 @@
+﻿body {
+}
+        .demoHeaders
+        {
+            margin-top: 2em;
+        }
+
+        #progress_bar {
+    margin: 10px 0;
+    padding: 3px;
+    border: 1px solid #000;
+    font-size: 14px;
+    clear: both;
+    opacity: 0;
+    -moz-transition: opacity 1s linear;
+    -o-transition: opacity 1s linear;
+    -webkit-transition: opacity 1s linear;
+  }
+  #progress_bar.loading {
+    opacity: 1.0;
+  }
+  #progress_bar .percent {
+    background-color: #99ccff;
+    height: auto;
+    width: 0;
+  }
+
+.ui-autocomplete {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 1100;
+    max-height: 250px;
+    max-width: 700px;
+    overflow: auto;
+}
+        #dialog-link
+        {
+            padding: .4em 1em .4em 20px;
+            text-decoration: none;
+            position: relative;
+        }
+
+            #dialog-link span.ui-icon
+            {
+                margin: 0 5px 0 0;
+                position: absolute;
+                left: .2em;
+                top: 50%;
+                margin-top: -8px;
+            }
+
+        #icons
+        {
+            margin: 0;
+            padding: 0;
+        }
+
+            #icons li
+            {
+                margin: 2px;
+                position: relative;
+                padding: 4px 0;
+                cursor: pointer;
+                float: left;
+                list-style: none;
+            }
+
+            #icons span.ui-icon
+            {
+                float: left;
+                margin: 0 4px;
+            }
+
+        .fakewindowcontain .ui-widget-overlay
+        {
+            position: absolute;
+        }
+
+        .inside_div1
+        {
+            width: 21%;
+            position: relative;
+            height: 100%;
+            padding-right: -20px;
+            float: left;
+            top: 0.5%;
+            left: 0.5%;
+        }
+
+        .inside_div2
+        {
+            width: 79%;
+            display: block;
+            height: 100%;
+            position: relative;
+            float: left;
+            left: 1%;
+        }
+
+
+        .beer
+        {
+            cursor: pointer;
+            width: 24%;
+            margin-left: 3.5px;
+            margin-right: 1px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+
+        body
+        {
+            background-image: url(img/bg_patient.png);
+	background-repeat: repeat-x;
+	background-color: #232155;
+    padding: 0px;
+     background-size:100%;
+        }
+        /* Added by*/
+        .main_div
+        {
+            width: 100%;
+            height: 950px;
+            border: solid;
+            border-color: rgb(166, 201, 226);
+            border-width: 1px;
+            position: relative;
+            left: 4px;
+            background-color: white;
+        }
+		 .main_div_clinical_summary
+        {
+            width: 100%;
+            height: 1280px;
+            border: solid;
+            border-color: rgb(166, 201, 226);
+            border-width: 1px;
+            position: relative;
+            left: 4px;
+            background-color: white;
+        }
+		  .main_div_messages
+        {
+            width: 100%;
+            height: 1280px; /*make it 1280 only for clinical summary*/
+            border: solid;
+            border-color: rgb(166, 201, 226);
+            border-width: 1px;
+            position: relative;
+            left: 4px;
+            background-color: white;
+        }
+
+        .sidebar-content
+        {
+            padding: 10px 0px 6px 10px;
+            background: url("Content/img/sidebar.gif") no-repeat scroll 0% 0% transparent;
+            color: rgb(10, 67, 99);
+        }
+
+		 
+.column { width: 170px; float: left; padding-bottom: 50px;}
+.portlet {margin: 0 1em 0.5em 0;}
+.portlet-header { margin: 0.3em; padding-bottom: 4px; padding-left: 0.2em; }
+.portlet-header .ui-icon { float: right; }
+.portlet-content { padding: 0.4em; }
+.ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 50px !important; }
+.ui-sortable-placeholder * { visibility: hidden; }
+
+
+#apDiv1 {
+ position: absolute;
+ width: 300px;
+ height: 300px;
+ z-index: 1;
+ left: 50%;
+ top: 166px;
+ background-color: #FFFFFF;
+ border-radius: 8px;
+ 
+ margin-left: -150px;
+ margin-top:-150px;
+ top:50%;
+ font-family: Arial, Helvetica, sans-serif;
+ font-size:16px; font-weight:800;
+ box-shadow: 0px 0px 10px 12px #cccccc;
+}
+
+div#page_loader {
+  position: absolute;
+  top: 0;
+  bottom: 0%;
+  left: 0;
+  right: 0%;
+  background-color: black;
+  z-index: 99;
+  opacity:0.8;
+}
+
+        .disable_button
+        {
+        }
+
+
+	
+		
+		 .disable_button1
+		{
+        }
+		
+		.disable_button2
+		{
+        }
+		
+		.disable_button3
+		{
+        }
+		
+		.disable_button4
+		{
+        }
+		
+		.disable_button5
+		{
+        }
+
+		.table_brder
+		 {
+			 background-color:#f2f4ff;
+			 border:1px solid #deddfd;
+		 }
+		
+
+        #nav_panel,#nav_panel_widget
+        {
+            text-align: center;
+            /*width: 210px;*/
+            height: auto;
+            z-index: 1;
+            margin: 0px auto;
+            border: 1px solid #a2d8f7;
+            border-radius: 4px;
+            padding-bottom: 20px;
+            /* IE10 Consumer Preview */
+            background-image: -ms-radial-gradient(center, circle farthest-side, #FFFFFF 0%, #DDE4FF 100%);
+            /* Mozilla Firefox */
+            background-image: -moz-radial-gradient(center, circle farthest-side, #FFFFFF 0%, #DDE4FF 100%);
+            /* Opera */
+            background-image: -o-radial-gradient(center, circle farthest-side, #FFFFFF 0%, #DDE4FF 100%);
+            /* Webkit (Safari/Chrome 10) */
+            background-image: -webkit-gradient(radial, center center, 0, center center, 487, color-stop(0, #FFFFFF), color-stop(1, #DDE4FF));
+            /* Webkit (Chrome 11+) */
+            background-image: -webkit-radial-gradient(center, circle farthest-side, #FFFFFF 0%, #DDE4FF 100%);
+            /* W3C Markup, IE10 Release Preview */
+            background-image: radial-gradient(circle farthest-side at center, #FFFFFF 0%, #DDE4FF 100%);
+        }
+
+
+          #Blue_Panel
+        {
+            text-align: center;
+            /*width: 210px;*/
+            height: auto;
+            z-index: 1;
+            margin: 0px auto;   
+            border: 1px solid #a2d8f7;
+            border-radius: 4px;
+            padding-bottom: 20px;
+            /* IE10 Consumer Preview */
+            background-image: url('../img/bg_blue.png');
+            /* Mozilla Firefox */
+            background-image:url('../img/bg_blue.png');
+            /* Opera */
+            background-image: url('../img/bg_blue.png');
+            /* Webkit (Safari/Chrome 10) */
+            background-image: url('../img/bg_blue.png');
+            /* Webkit (Chrome 11+) */
+            background-image: url('../img/bg_blue.png');
+            /* W3C Markup, IE10 Release Preview */
+            background-image: url('../img/bg_blue.png');
+            background-repeat:repeat-x;
+            /*background-size:100%;*/
+        }
+
+
+      #Green_Panel
+        {
+            text-align: center;
+            /*width: 210px;*/
+            height: auto;
+            z-index: 1;
+            margin: 0px auto;
+            /*border: 1px solid #a2d8f7;*/
+            border-radius: 4px;
+            padding-bottom: 20px;
+            /* IE10 Consumer Preview */
+            background-image: url('../img/bg_green.png');
+            /* Mozilla Firefox */
+            background-image:url('../img/bg_green.png');
+            /* Opera */
+            background-image: url('../img/bg_green.png');
+            /* Webkit (Safari/Chrome 10) */
+            background-image: url('../img/bg_green.png');
+            /* Webkit (Chrome 11+) */
+            background-image: url('../img/bg_green.png');
+            /* W3C Markup, IE10 Release Preview */
+            background-image: url('../img/bg_green.png');
+            background-repeat:repeat-x;
+           /*background-size:100% 100%;*/ 
+        }
+
+
+
+
+        .anc_clin {
+        font-weight:normal;
+			font-size:small;
+        }
+        .anc
+        {
+            font-weight:normal;
+			font-size:small;
+            }
+
+
+        .anc:hover
+        {    
+            color: rgb(46, 110, 158);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+          .anc_home
+        {
+            font-weight:bold;
+			
+            }
+
+
+        .anc_home:hover
+        {   font-weight:bold; 
+            color: rgb(46, 110, 158);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+		/*For Home page*/
+
+		
+        label, input
+        {
+            display: block;
+        }
+
+            input.text
+            {
+                margin-bottom: 12px;
+                width: 95%;
+                padding: .2em;
+            }
+
+        fieldset
+        {
+            padding: 0;
+            border: 0;
+            margin-top: 25px;
+        }
+
+       
+
+        div#users-contain
+        {
+            width: 350px;
+            margin: 20px 0;
+        }
+
+            div#users-contain table
+            {
+                margin: 1em 0;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+                div#users-contain table td, div#users-contain table th
+                {
+                    border: 1px solid #eee;
+                    padding: .6em 10px;
+                    text-align: left;
+                }
+
+        .ui-dialog .ui-state-error
+        {
+            padding: .3em;
+        }
+
+        .validateTips
+        {
+            border: 1px solid transparent;
+            padding: 0.3em;
+        }
+    
+		
+		#cart
+        {
+            width: 100%;
+            height: 100%;
+            float: left;
+            margin-top: 0px;
+            padding-top: 1px;
+            padding-left: 1px;
+            padding-right: 1px;
+        }
+
+        #cart1
+        {
+            width: 100%;
+            height: 100%;
+            float: left;
+            margin-top: 0px;
+            padding-top: 1px;
+            padding-left: 1px;
+            padding-right: 1px;
+        }
+
+        #cart2
+        {
+            width: 100%;
+            height: 100%;
+            float: left;
+            margin-top: 0px;
+            padding-top: 1px;
+            padding-left: 1px;
+            padding-right: 1px;
+        }
+
+        #cart3
+        {
+            width: 100%;
+            height: 100%;
+            float: left;
+            margin-top: 0px;
+            padding-top: 1px;
+            padding-left: 1px;
+            padding-right: 1px;
+        }
+
+        #cart4
+        {
+            width: 100%;
+            height: 100%;
+            float: left;
+            margin-top: 0px;
+            padding-top: 1px;
+            padding-left: 1px;
+            padding-right: 1px;
+        }
+
+        #cart5
+        {
+            width: 100%;
+            height: 100%;
+            float: left;
+            margin-top: 0px;
+            padding-top: 1px;
+            padding-left: 1px;
+            padding-right: 1px;
+        }
+
+        .draggable
+        {
+            width: 70%;
+            height: 90px;
+            padding: 0.5em;
+            float: left;
+            margin: 0 10px 10px 0;
+        }
+
+        #draggable, #draggable2
+        {
+            margin-bottom: 20px;
+        }
+
+        #draggable
+        {
+            cursor: n-resize;
+        }
+
+        #draggable2
+        {
+            cursor: e-resize;
+        }
+
+        #containment-wrapper
+        {
+            width: 99%;
+            height: 98.5%;
+            border: 1px solid #ccc;
+            padding-left: 12px;
+            padding-bottom: 10px;
+            padding-right: 12px;
+            padding-top: 10px;
+        }
+
+        h3
+        {
+            clear: left;
+        }
+
+        #calendar
+        {
+            padding-top: 20px;
+            padding-left: 10px;
+        }
+
+        .demoHeaders
+        {
+            margin-top: 2em;
+        }
+
+        #dialog-link
+        {
+            padding: .4em 1em .4em 20px;
+            text-decoration: none;
+            position: relative;
+        }
+
+            #dialog-link span.ui-icon
+            {
+                margin: 0 5px 0 0;
+                position: absolute;
+                left: .2em;
+                top: 50%;
+                margin-top: -8px;
+            }
+    /*For Home page end*/
+
+
+    /*for Clinial summary page (specific for Demographics popup */
+
+   
+
+body { font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;  color:#003399; }
+
+.txt { width:200px; height:20px; border: 1px solid #a6c9e2; border-radius: 4px; background-color:#dde4ff; }
+input:focus:hover{
+    outline: none;
+    box-shadow: 0px 0px 5px #61C5FA;
+    
+    border-radius:4;
+
+    
+}
+tr { height:30px;}
+
+.comm { width:200px; height:25px; border: 1px solid #a6c9e2; border-radius: 4px; background-color:#dde4ff; }
+.coms { width:50px; height:25px; border: 1px solid #a6c9e2; border-radius: 4px; background-color:#dde4ff; }
+.com { width:100px; height:25px; border: 1px solid #a6c9e2; border-radius: 4px; background-color:#dde4ff; }
+.bcom { width:420px; height:25px; border: 1px solid #a6c9e2; border-radius: 4px; background-color:#dde4ff; }
+.btxt { width:420px; height:25px; border: 1px solid #a6c9e2; border-radius: 4px; background-color:#dde4ff; }
+.btxta { width:420px; height:100px; border: 1px solid #a6c9e2; border-radius: 4px; background-color:#dde4ff; }
+.star {color: red;}
+
+#Form {
+	position: absolute;
+	width: 657px;
+	height: auto;
+	z-index: 1;
+	left: 168px;
+	top: 638px;
+}
+#popupdiv {
+	position: absolute;
+	width: 973px;
+	height: 576px;
+	z-index: 2;
+	left: 0px;
+}
+
+  .header{ height:96px; background-color:#FFF; margin-top:0px; width:100%;
+		
+	}
+	.wrapper {
+	background-image: url('../img/bg_patient.png');
+	background-repeat: repeat-x;
+	background-color: #232155;
+	width:100%; 
+    height: 100%;
+    /*height:900px;*/
+    padding-top: 30px;
+}
+    #tabsbar {
+  background-image: url("../img/bg_tab.png");
+    border-radius: 4px;
+    height: 47px;
+    left: 50%;
+    margin-left: -610px;
+    position: absolute;
+    width: 1225px;
+    cursor:pointer;
+    z-index: 1;
+}
+    #tabsbarPremium {
+	position: absolute;
+	width: 1225px;
+	height: 47px;
+	z-index: 1;
+	margin-left: -610px;
+	left:50%;
+    cursor:pointer;
+	background-image:url("../img/bg_tabp.png");
+	border-radius:4px;
+}
+#home {
+	position: absolute;
+	width: 91px;
+	height: 47px;
+	z-index: 2;
+	left: 15px;
+}
+#Clinicalsumm {
+	position: absolute;
+	width: 200px;
+	height: 47px;
+	z-index: 3;
+	left: 83px;
+}
+#messages {
+	position: absolute;
+	width: 138px;
+	height: 47px;
+	z-index: 4;
+	left: 266px;
+}
+#appoint {
+	position: absolute;
+	width: 176px;
+	height: 47px;
+	z-index: 5;
+	left: 379px;
+}
+#Medications {
+	position: absolute;
+	width: 150px;
+	height: 47px;
+	z-index: 6;
+	left: 531px;
+}
+#Referrals {
+	position: absolute;
+	width: 138px;
+	height: 47px;
+	z-index: 7;
+	left: 657px;
+}
+#My {
+	position: absolute;
+	width: 200px;
+	height: 47px;
+	z-index: 8;
+	left: 771px;
+}
+
+#mymarketplace {
+	position: absolute;
+	width: 167px;
+	height: 47px;
+	z-index: 1;
+}
+#managedoctors {
+	position: absolute;
+	width: 193px;
+	height: 47px;
+	z-index: 2;
+	left: 143px;
+}
+#emergencycontacts {
+	position: absolute;
+	width: 200px;
+	height: 47px;
+	z-index: 3;
+	left: 312px;
+}
+#sharemyrecords {
+	position: absolute;
+	width: 200px;
+	height: 47px;
+	z-index: 4;
+	left: 521px;
+}
+#medicalportfolio {
+	position: absolute;
+	width: 200px;
+	height: 47px;
+	z-index: 5;
+	left: 708px;
+}
+#generaldocuments {
+	position: absolute;
+	width: 200px;
+	height: 47px;
+	z-index: 6;
+	left: 885px;
+}
+/*Added by talha*/
+ #circle {
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	z-index: 2;
+	left: 114px;
+	top: 12px;
+	background-color: #FFFFFF;
+	border-radius: 50%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	line-height: 18px; display:block; color:red; font-weight:bold; 
+    
+   
+}
+/*start of styles of clinicla summary page (specific for Personal info popup*/
+
+.txt { width:200px; height:25px; border: 1px solid #a6c9e2; border-radius: 4px; background-color:#dde4ff; }
+.combo { width:50px; height:20px; border: 1px solid #a6c9e2; border-radius: 4px; background-color:#dde4ff; }
+.combom { width:75px; height:20px; border: 1px solid #a6c9e2; border-radius: 4px; background-color:#dde4ff; }
+.txts { width:50px; height:20px; border: 1px solid #a6c9e2; border-radius: 4px; background-color:#dde4ff; }
+input:focus:hover{
+    outline: none;
+    box-shadow: 0px 0px 5px #61C5FA;
+    
+    border-radius:4;
+    
+}
+
+.star {color: red;}
+
+#Form {
+	position: absolute;
+	width: 700px;
+	height: 499px;
+	z-index: 1;
+	left: 243px;
+	top: 51px;
+}
+
+   .hoverMe:hover {
+        color: #E17009;
+        cursor: pointer;
+        text-decoration:none;
+    }
+    .LinkHighlight {
+        font-weight:bold; 
+        text-decoration:underline; 
+        cursor:pointer;
+    }
+
+    
+#dasboard_tab {
+	position: absolute;
+	width: 121px;
+	height: 43px;
+	z-index: 1;
+	left: 12px;
+	top: 2px;
+}
+#patientinfo_tab {
+	position: absolute;
+	width: 153px;
+	height: 43px;
+	z-index: 2;
+	left: 112px;
+	top: 2px;
+}
+#problems_tab {
+	position: absolute;
+	width: 137px;
+	height: 43px;
+	z-index: 3;
+	left: 241px;
+	top: 2px;
+}
+#medications_tab {
+	position: absolute;
+	width: 158px;
+	height: 43px;
+	z-index: 4;
+	left: 354px;
+	top: 2px;
+}
+#Documents_tab {
+	position: absolute;
+	width: 152px;
+	height: 43px;
+	z-index: 8;
+	left: 488px;
+	top: 2px;
+}
+#messages_tab {
+	position: absolute;
+	width: 152px;
+	height: 43px;
+	z-index: 5;
+	left: 616px;
+	top: 2px;
+}
+#appointments_tab {
+    position: absolute;
+	width: 174px;
+	height: 43px;
+	z-index: 6;
+	left: 744px;
+	top: 2px;
+}
+#summary_tab {
+	position: absolute;
+	width: 137px;
+	height: 43px;
+	z-index: 7;
+	left: 894px;
+	top: 2px;
+}
+#mypremiumservices_tab {
+	position: absolute;
+	width: 235px;
+	height: 43px;
+	z-index: 8;
+	left: 879px;
+	top: 2px;
+}
+        #accordian {
+	 
+	width: 190px;
+	margin-left: 5%;
+	color: white;
+    margin-top: -25px;
+    font-size:12px;
+   /* position: relative;*/
+   
+	
+	
+}
+/*heading styles*/
+#accordian h3 {
+	font-size: 12px;
+  
+	
+
+}
+
+#accordian h3 span {
+	font-size: 11px;
+	margin-right: 10px;
+    width:200px;
+
+}
+/*list items*/
+#accordian li {
+	list-style-type: none;
+    width: 210px;
+margin-left: -34%;
+font-size:12px;
+}
+/*links*/
+#accordian ul ul li a {
+	
+    	display: block;
+       width: 190px;
+margin-left: 13%;
+font-size: 11px;
+
+	
+}
+/*hover effect on links*/
+#accordian ul ul li a:hover {
+
+}
+/*Lets hide the non active LIs by default*/
+#accordian ul ul {
+	display: none;
+   
+}
+#accordian li.active ul {
+	display: block;
+     padding:0px;
+   
+}
+       
+        
+

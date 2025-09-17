@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AMR.Models.PatientDoctorModel>
+@using System.Web.Script.Serialization;
+
+
+<table class="box-table-a" id="tbl-ManageDoctors" summary="Appointments">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><div style="margin-left:2px;">Name</div></th>
+                                                <th scope="col"><div style="margin-left:4px;">Type</div></th>
+                                                <th scope="col"><div style="margin-left:5px;">Office Phone</div></th>
+                                                <th scope="col"><div style="margin-left:5px;">Primary</div></th>
+                                                <th scope="col"><div style="margin-left:26px;">Edit</div></th>
+                                                <th scope="col"><div style="margin-left:54px;">Details</div></th>
+                                                <th scope="col"><div style="margin-left:54px;">Delete</div></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null && Model.Count() > 0)
+                                            {
+                                                int counter=0;
+                                                foreach (var item in Model)
+                                                {
+
+                                                    var jsonStr = new JavaScriptSerializer().Serialize(item);
+                                                    <tr class="@((counter%2==0)?"r1":"r0")">
+                                                     
+                                                            <td><input type="hidden" id="@item.PatientDoctorId"  value="@jsonStr.Replace("\"PatientId\":0,", "").ToString()"/>
+                                                            @((item.Name.Length > 20) ? item.Name.Substring(0, 20) + "..." : item.Name)</td>
+                                                            <td>@item.DoctorTypeDesc</td>
+                                                            <td>@item.WorkPhone</td>
+                                                            <td>@((item.IsPrimary) ? "Yes" : "No")</td>
+                                                    
+                                                    
+                                                    
+                                                            <td align="center">
+                                                                <img onclick="editDoctor('@item.PatientDoctorId');" id="imgEditDoctor" src="@Url.Content("~/Content/img/edit.png")" />
+                                                            </td>
+
+                                                            <td align="center">
+                                                                <img onclick="detailsDoctor('@item.PatientDoctorId');" id="imgDetailsDoctor"  src="@Url.Content("~/Content/img/details.png")" />
+                                                            </td>
+
+                                                            <td align="center">
+                                                                <img onclick="deleteDoctor('@item.PatientDoctorId');" id="imgDeleteDoctor"  src="@Url.Content("~/Content/img/delete.png")" />
+                                                            </td>
+                                                    
+                                                    </tr>
+                                                    counter++;
+                                                }
+                                           }
+                                           else
+                                           {
+                                                <tr><td>No Information Available</td></tr>
+                                           }
+                                        </tbody>
+</table>
+

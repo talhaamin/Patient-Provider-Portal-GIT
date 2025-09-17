@@ -1,0 +1,181 @@
+﻿@model IEnumerable<AMR.Models.PatientMessageModel> 
+
+         <div id="MessageDetailGrid" name="MessageDetailGrid" style="border: 1px solid; border-color: rgb(166, 201, 226);  height: 190px; overflow-x: auto;" class="ui-corner-all">
+            <table id="box-table-a" summary="Medications">
+            <thead>
+            <tr>
+            <th style="vertical-align:middle;" scope="col"><div style="margin-left:0px;"></div></th>
+            
+            <th style="vertical-align:middle;" scope="col"> <div style="margin-left: 20px;">From</div></th>
+            <th style="vertical-align:middle;" scope="col"><div style="margin-left: 30px;">To</div></th>
+            <th style="vertical-align:middle;" scope="col"><div style="margin-left: 80px;">Priority</div></th>
+            <th style="vertical-align:middle;" scope="col"> <div style="margin-left: 60px;">Subject</div></th>
+            <th style="vertical-align:middle;" scope="col"> <div style="margin-left: 0px;">Attachments</div></th>
+            <th style="vertical-align:middle;" scope="col"> <div style="margin-left: -30px;">Detail</div></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in collection.Select((x, i) => new { PatientMessageModel = x, Index = i + 1 }))
+            {
+                if (item.PatientMessageModel.MessageType == "Billing Message" || item.PatientMessageModel.MessageType == "General Inquiry")
+                {
+
+                    StringBuilder jsonString = new StringBuilder();
+
+                    jsonString.Append(" { ");
+                    jsonString.Append("\"ID\": \"" + item.PatientMessageModel.MessageDetailId + "\",");
+                    jsonString.Append("\"FacilityName\":  \"" + item.PatientMessageModel.FacilityName + "\",");
+                    jsonString.Append("\"From\":  \"" + item.PatientMessageModel.ProviderName_From  + "\",");
+                   // jsonString.Append("\"From\":  \"" + ((item.PatientMessageModel.CreatedByName != null && item.PatientMessageModel.CreatedByName.Length > 0) ? item.PatientMessageModel.CreatedByName : item.PatientMessageModel.ProviderName_From) + "\",");
+                    jsonString.Append("\"To\":  \"" + item.PatientMessageModel.ProviderName_To + "\",");
+                    jsonString.Append("\"MessageType\":  \"" + item.PatientMessageModel.MessageType + "\",");
+                    jsonString.Append("\"MessageResponse\":  \"" + item.PatientMessageModel.MessageResponse + "\",");
+                    jsonString.Append("\"MessageId\":  \"" + item.PatientMessageModel.MessageId + "\",");
+                    jsonString.Append("\"ProviderIdFrom\":  \"" + item.PatientMessageModel.ProviderId_From + "\",");
+                    jsonString.Append("\"ProviderIdTo\":  \"" + item.PatientMessageModel.ProviderId_To + "\",");
+                    jsonString.Append("\"MessageTypeId\":  \"" + item.PatientMessageModel.MessageTypeId + "\",");
+                    jsonString.Append("\"FacilityId\":  \"" + item.PatientMessageModel.FacilityId + "\",");
+                    jsonString.Append("\"MessageUrgencyId\": \"" + item.PatientMessageModel.MessageUrgencyId + "\",");
+                    jsonString.Append("\"MessageRequest\": \"" + item.PatientMessageModel.MessageRequest + "\"");
+                    jsonString.Append("}");
+
+
+                    htmlString.Append("<tr class=\"" + ((item.Index % 2 == 1) ? "r0" : "r1") + "\" >");
+
+                    if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PortalType == "Provider")
+                    {
+                        if (Convert.ToInt64(item.PatientMessageModel.ProviderId_From) == AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientId) //we will replace 1 with loggedin userid soon, IN GLOBALVAR WE ASSIGNED LOGGED IN PROVIDERID IN CASE OF PROVIDER PORTAL AND pATIENTID IN CASE OF PATIENT PORTAL
+                        {
+                            htmlString.Append("<td style=\"vertical-align:middle;\"><input id=\"hdInboxDetailJson" + item.PatientMessageModel.MessageDetailId.ToString() + "\" type=\"hidden\" value='" + jsonString.ToString() + "'/> <div style=\"margin-left:0px;\">&nbsp;</div></td>");
+                        }
+                        else
+                        {
+                            htmlString.Append("<td style=\"vertical-align:middle;\"><input id=\"hdInboxDetailJson" + item.PatientMessageModel.MessageDetailId.ToString() + "\" type=\"hidden\" value='" + jsonString.ToString() + "'/> <div style=\"margin-left:0px;\"><img src=\"Content/img/reply.png\" style=\"margin-right: 50px; width:20px; height:20px; \"  onclick=\"messageInboxReply(" + item.PatientMessageModel.MessageDetailId + ");\"></div></td>");
+                        }
+                    }
+
+                    if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PortalType == "Patient")
+                    {
+                        if (item.PatientMessageModel.ProviderId_From == "0") //we will replace 1 with loggedin userid soon, IN GLOBALVAR WE ASSIGNED LOGGED IN PROVIDERID IN CASE OF PROVIDER PORTAL AND pATIENTID IN CASE OF PATIENT PORTAL
+                        {
+                            htmlString.Append("<td style=\"vertical-align:middle;\"><input id=\"hdInboxDetailJson" + item.PatientMessageModel.MessageDetailId.ToString() + "\" type=\"hidden\" value='" + jsonString.ToString() + "'/> <div style=\"margin-left:0px;\">&nbsp;</div></td>");
+                        }
+                        else
+                        {
+                            htmlString.Append("<td style=\"vertical-align:middle;\"><input id=\"hdInboxDetailJson" + item.PatientMessageModel.MessageDetailId.ToString() + "\" type=\"hidden\" value='" + jsonString.ToString() + "'/> <div style=\"margin-left:0px;\"><img src=\"Content/img/reply.png\" style=\"margin-right: 50px; width:20px; height:20px; \"  onclick=\"messageInboxReply(" + item.PatientMessageModel.MessageDetailId + ");\"></div></td>");
+                        }
+                    }
+                    //((item.PatientMessageModel.CreatedByName != null && item.PatientMessageModel.CreatedByName.Length > 0) ? item.PatientMessageModel.CreatedByName : item.PatientMessageModel.ProviderName_From)
+                    htmlString.Append("<td style=\"vertical-align:middle;\">  <div style=\"margin-left: 20px;\">" + item.PatientMessageModel.ProviderName_From + "</div></td>");//From
+                    htmlString.Append("<td style=\"vertical-align:middle;\"> <div style=\"margin-left: 30px;\">" + item.PatientMessageModel.ProviderName_To + "</div></td>");
+                    htmlString.Append("<td style=\"vertical-align:middle;\"> <div style=\"margin-left: 80px;\">" + item.PatientMessageModel.MessageUrgency + "</div></td>");
+                    htmlString.Append("<td style=\"vertical-align:middle;\"> <div style=\"margin-left: 60px;\">" + item.PatientMessageModel.MessageType + "</div></td>");//subject
+                    if (Convert.ToInt64(item.PatientMessageModel.AttachmentId) > 0)
+                    {
+
+                        htmlString.Append("<td style=\"vertical-align:middle;\"> <div style=\"margin-left: 0px;\"><img src=\"Content/img/attach.gif\" style=\"margin-right: 50px;\" onclick=\"messageAttachmentDetail('" + item.PatientMessageModel.AttachmentId + "|" + item.PatientMessageModel.DocumentFormat + "');\"></div></td>");
+                    }
+                    else
+                    {
+                        htmlString.Append("<td style=\"vertical-align:middle;\"> <div style=\"margin-left: 0px;\">&nbsp;</div></td>");
+                    }
+                    htmlString.Append("<td style=\"vertical-align:middle;\"><div style=\"margin-left: -30px;\"><img src=\"Content/img/details.png\" onclick=\"messageInboxDetail(" + item.PatientMessageModel.MessageDetailId + ");\"></div></td>");
+
+                    htmlString.Append("</tr>");
+                }
+            }
+            htmlString.Append("</tbody>");
+            htmlString.Append("</table>");
+            htmlString.Append("</div>");
+            return htmlString.ToString();
+
+                    }
+
+      public static string GetAppointmentDetailGridHtml(this List<PatientMessageModel> collection)
+      {
+          StringBuilder htmlString = new StringBuilder();
+          htmlString.Append("<div id=\"MessageDetailGrid\" name=\"MessageDetailGrid\" style=\"border: 1px solid; border-color: rgb(166, 201, 226);  height: 190px; overflow-x: auto;\" class=\"ui-corner-all\">");
+          htmlString.Append("<table id=\"box-table-a\" summary=\"Medications\">");
+          htmlString.Append("<thead>");
+          htmlString.Append("<tr>");
+          htmlString.Append("<th style=\"vertical-align:middle;\" scope=\"col\"><div style=\"margin-left:0px;\"></div></th>");
+
+          htmlString.Append("<th style=\"vertical-align:middle;\" scope=\"col\"> <div style=\"margin-left: 20px;\">From</div></th>");
+          htmlString.Append("<th style=\"vertical-align:middle;\" scope=\"col\"><div style=\"margin-left: 30px;\">To</div></th>");
+          htmlString.Append("<th style=\"vertical-align:middle;\" scope=\"col\"><div style=\"margin-left: 80px;\">Priority</div></th>");
+          htmlString.Append("<th style=\"vertical-align:middle;\" scope=\"col\"> <div style=\"margin-left: 60px;\">Subject</div></th>");
+          
+          htmlString.Append("<th style=\"vertical-align:middle;\" scope=\"col\"> <div style=\"margin-left: -30px;\">Detail</div></th>");
+          htmlString.Append("</tr>");
+          htmlString.Append("</thead>");
+          htmlString.Append("<tbody>");
+          foreach (var item in collection.Select((x, i) => new { PatientMessageModel = x, Index = i + 1 }))
+          {
+              if (item.PatientMessageModel.MessageType == "Appointment Request")
+              {
+
+                  StringBuilder jsonString = new StringBuilder();
+
+                  jsonString.Append(" { ");
+                  jsonString.Append("\"ID\": \"" + item.PatientMessageModel.MessageDetailId + "\",");
+                  jsonString.Append("\"FacilityName\":  \"" + item.PatientMessageModel.FacilityName + "\",");
+                  jsonString.Append("\"From\":  \"" + item.PatientMessageModel.ProviderName_From + "\",");
+                  // jsonString.Append("\"From\":  \"" + ((item.PatientMessageModel.CreatedByName != null && item.PatientMessageModel.CreatedByName.Length > 0) ? item.PatientMessageModel.CreatedByName : item.PatientMessageModel.ProviderName_From) + "\",");
+                  jsonString.Append("\"To\":  \"" + item.PatientMessageModel.ProviderName_To + "\",");
+                  jsonString.Append("\"MessageType\":  \"" + item.PatientMessageModel.MessageType + "\",");
+                  jsonString.Append("\"MessageResponse\":  \"" + item.PatientMessageModel.MessageResponse + "\",");
+                  jsonString.Append("\"MessageId\":  \"" + item.PatientMessageModel.MessageId + "\",");
+                  jsonString.Append("\"ProviderIdFrom\":  \"" + item.PatientMessageModel.ProviderId_From + "\",");
+                  jsonString.Append("\"ProviderIdTo\":  \"" + item.PatientMessageModel.ProviderId_To + "\",");
+                  jsonString.Append("\"MessageTypeId\":  \"" + item.PatientMessageModel.MessageTypeId + "\",");
+                  jsonString.Append("\"FacilityId\":  \"" + item.PatientMessageModel.FacilityId + "\",");
+                  jsonString.Append("\"MessageUrgencyId\": \"" + item.PatientMessageModel.MessageUrgencyId + "\",");
+                  jsonString.Append("\"MessageRequest\": \"" + item.PatientMessageModel.MessageRequest + "\",");
+                  jsonString.Append("\"PreferredPeriod\": \"" + item.PatientMessageModel.PreferredPeriod + "\",");
+                  jsonString.Append("\"MessageUrgency\": \"" + item.PatientMessageModel.MessageUrgency + "\",");
+                  jsonString.Append("\"PreferredWeekDay\": \"" + item.PatientMessageModel.PreferredWeekDay + "\",");
+                  jsonString.Append("\"AppointmentStart\": \"" + item.PatientMessageModel.AppointmentStart + "\",");
+                  jsonString.Append("\"PreferredTime\": \"" + item.PatientMessageModel.PreferredTime + "\",");
+                  jsonString.Append("\"VisitReason\": \"" + item.PatientMessageModel.VisitReason + "\"");
+                  jsonString.Append("}");
+
+
+                  htmlString.Append("<tr class=\"" + ((item.Index % 2 == 1) ? "r0" : "r1") + "\" >");
+
+                  if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PortalType == "Provider")
+                  {
+                      if (Convert.ToInt64(item.PatientMessageModel.ProviderId_From) == AMR.Core.Utilities.RequestHelper.MyGlobalVar.PatientId) //we will replace 1 with loggedin userid soon, IN GLOBALVAR WE ASSIGNED LOGGED IN PROVIDERID IN CASE OF PROVIDER PORTAL AND pATIENTID IN CASE OF PATIENT PORTAL
+                      {
+                          htmlString.Append("<td style=\"vertical-align:middle;\" ><input id=\"hdAppointmentDetailJson" + item.PatientMessageModel.MessageDetailId.ToString() + "\" type=\"hidden\" value='" + jsonString.ToString() + "'/> <div style=\"margin-left:0px;\">&nbsp;</div></td>");
+                      }
+                      else
+                      {
+                          htmlString.Append("<td style=\"vertical-align:middle;\"><input id=\"hdAppointmentDetailJson" + item.PatientMessageModel.MessageDetailId.ToString() + "\" type=\"hidden\" value='" + jsonString.ToString() + "'/> <div style=\"margin-left:0px;\"><img src=\"Content/img/reply.png\" style=\"margin-right: 50px; width:20px; height:20px; \"  onclick=\"AppointmentReply(" + item.PatientMessageModel.MessageDetailId + ");\"></div></td>");
+                      }
+                  }
+
+                  if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PortalType == "Patient")
+                  {
+                    //  if (item.PatientMessageModel.ProviderId_From == "0") //we will replace 1 with loggedin userid soon, IN GLOBALVAR WE ASSIGNED LOGGED IN PROVIDERID IN CASE OF PROVIDER PORTAL AND pATIENTID IN CASE OF PATIENT PORTAL
+                     // {
+                          htmlString.Append("<td style=\"vertical-align:middle;\"><input id=\"hdAppointmentDetailJson" + item.PatientMessageModel.MessageDetailId.ToString() + "\" type=\"hidden\" value='" + jsonString.ToString() + "'/> <div style=\"margin-left:0px;\">&nbsp;</div></td>");
+                    //  }
+                      //else
+                      //{
+                      //    htmlString.Append("<td style=\"vertical-align:middle;\"><input id=\"hdAppointmentDetailJson" + item.PatientMessageModel.MessageDetailId.ToString() + "\" type=\"hidden\" value='" + jsonString.ToString() + "'/> <div style=\"margin-left:0px;\"><img src=\"Content/img/reply.png\" style=\"margin-right: 50px; width:20px; height:20px; \"  onclick=\"AppointmentReply(" + item.PatientMessageModel.MessageDetailId + ");\"></div></td>");
+                      //}
+                  }
+                  //((item.PatientMessageModel.CreatedByName != null && item.PatientMessageModel.CreatedByName.Length > 0) ? item.PatientMessageModel.CreatedByName : item.PatientMessageModel.ProviderName_From)
+                  htmlString.Append("<td style=\"vertical-align:middle;\"> <div style=\"margin-left: 20px;\">" + item.PatientMessageModel.ProviderName_From + "</div></td>");//From
+                  htmlString.Append("<td style=\"vertical-align:middle;\"> <div style=\"margin-left: 30px;\">" + item.PatientMessageModel.ProviderName_To + "</div></td>");
+                  htmlString.Append("<td style=\"vertical-align:middle;\"> <div style=\"margin-left: 80px;\">" + item.PatientMessageModel.MessageUrgency + "</div></td>");
+                  htmlString.Append("<td style=\"vertical-align:middle;\"> <div style=\"margin-left: 60px;\">" + item.PatientMessageModel.MessageType + "</div></td>");//subject
+                  htmlString.Append("<td style=\"vertical-align:middle;\"><div style=\"margin-left: -30px;\"><img src=\"Content/img/details.png\" onclick=\"messageAppointmentDetail(" + item.PatientMessageModel.MessageDetailId + ");\"></div></td>");
+
+                  htmlString.Append("</tr>");
+              }
+          }
+          htmlString.Append("</tbody>");
+          htmlString.Append("</table>");
+          htmlString.Append("</div>");
+          return htmlString.ToString();

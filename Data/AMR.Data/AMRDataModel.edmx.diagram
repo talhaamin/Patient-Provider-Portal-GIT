@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8020b9e58cb84d488993c8ac6a73c307" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="AMRModel.C_BloodType" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMRModel.C_Ethnicity" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMRModel.C_Gender" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMRModel.C_MaritalStatus" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMRModel.C_Race" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMRModel.C_Religion" Width="1.5" PointX="4.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMRModel.C_AuditAction" Width="1.5" PointX="6.625" PointY="14" />
+        <EntityTypeShape EntityType="AMRModel.C_DocumentType" Width="1.5" PointX="6.625" PointY="15.625" />
+        <EntityTypeShape EntityType="AMRModel.PatientDocumentAudit" Width="1.5" PointX="4.875" PointY="15.75" />
+        <AssociationConnector Association="AMRModel.C_AuditAction_PatientlDocumentAudit_FK1" />
+        <AssociationConnector Association="AMRModel.C_DocumentType_PatientlDocumentAudit_FK1" />
+        <EntityTypeShape EntityType="AMRModel.C_FacilityTypes" Width="1.5" PointX="4.75" PointY="19.25" />
+        <EntityTypeShape EntityType="AMRModel.Practice" Width="1.5" PointX="0.625" PointY="27.625" />
+        <EntityTypeShape EntityType="AMRModel.PatientFacilityLink" Width="1.5" PointX="2.875" PointY="15.875" />
+        <EntityTypeShape EntityType="AMRModel.C_UserRole" Width="1.5" PointX="7" PointY="11.125" />
+        <EntityTypeShape EntityType="AMRModel.ProviderFacilityLink" Width="1.5" PointX="4.75" PointY="20.75" />
+        <EntityTypeShape EntityType="AMRModel.Token" Width="1.5" PointX="4.75" PointY="24.75" />
+        <EntityTypeShape EntityType="AMRModel.C_SmokingStatus" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AMRModel.PatientOrgan" Width="1.5" PointX="7.375" PointY="0.625" />
+        <EntityTypeShape EntityType="AMRModel.C_ConditionStatus" Width="1.5" PointX="17.5" PointY="0.75" />
+        <EntityTypeShape EntityType="AMRModel.C_CodeSystem" Width="1.5" PointX="17.5" PointY="2.125" />
+        <EntityTypeShape EntityType="AMRModel.C_MessagePeriod" Width="1.5" PointX="14.375" PointY="21.625" />
+        <EntityTypeShape EntityType="AMRModel.C_MessageResponseType" Width="1.5" PointX="14.375" PointY="19.75" />
+        <EntityTypeShape EntityType="AMRModel.C_MessageStatus" Width="1.5" PointX="10.25" PointY="18.625" />
+        <EntityTypeShape EntityType="AMRModel.Message" Width="1.5" PointX="12.25" PointY="16.875" />
+        <AssociationConnector Association="AMRModel.C_MessageStatus_Message_FK1" />
+        <EntityTypeShape EntityType="AMRModel.vwFacilitiesForPatient" Width="1.5" PointX="6.75" PointY="17.25" />
+        <EntityTypeShape EntityType="AMRModel.vwProvidersForFacility" Width="1.5" PointX="8.5" PointY="23.375" />
+        <EntityTypeShape EntityType="AMRModel.PatientMatch" Width="1.5" PointX="7.375" PointY="4.625" />
+        <EntityTypeShape EntityType="AMRModel.AttachmentMessage" Width="1.5" PointX="15.25" PointY="27.25" />
+        <EntityTypeShape EntityType="AMRModel.ConfigAttachment" Width="1.5" PointX="11.75" PointY="27.25" />
+        <EntityTypeShape EntityType="AMRModel.vwPatientSearch" Width="1.5" PointX="9.125" PointY="14.375" />
+        <EntityTypeShape EntityType="AMRModel.Organization" Width="1.5" PointX="0.625" PointY="23.5" />
+        <AssociationConnector Association="AMRModel.Organization_Practice_FK1" />
+        <EntityTypeShape EntityType="AMRModel.C_Relationship" Width="1.5" PointX="16.5" PointY="10.25" />
+        <EntityTypeShape EntityType="AMRModel.PatientAccountLink" Width="1.5" PointX="4.875" PointY="0.625" />
+        <EntityTypeShape EntityType="AMRModel.C_SecurityQuestion" Width="1.5" PointX="11" PointY="14.375" />
+        <EntityTypeShape EntityType="AMRModel.C_InstructionType" Width="1.5" PointX="20.25" PointY="11.625" />
+        <EntityTypeShape EntityType="AMRModel.C_Problem" Width="1.5" PointX="14.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AMRModel.C_AccessStatus" Width="1.5" PointX="14.25" PointY="23.25" />
+        <EntityTypeShape EntityType="AMRModel.UserLoginAudit" Width="1.5" PointX="14.25" PointY="25.125" />
+        <EntityTypeShape EntityType="AMRModel.MessageAudit" Width="1.5" PointX="14.25" PointY="16.875" />
+        <AssociationConnector Association="AMRModel.C_MessageStatus_MessageAudit_FK1" />
+        <AssociationConnector Association="AMRModel.Message_MessageAudit_FK1" />
+        <EntityTypeShape EntityType="AMRModel.PatientProviderLink" Width="1.5" PointX="2.625" PointY="18.25" />
+        <EntityTypeShape EntityType="AMRModel.PatientMedicalHist" Width="1.5" PointX="9.5" PointY="0.5" />
+        <EntityTypeShape EntityType="AMRModel.C_Medication" Width="1.5" PointX="14.75" PointY="6.25" />
+        <EntityTypeShape EntityType="AMRModel.PatientAllergy" Width="1.5" PointX="9.5" PointY="4.75" />
+        <EntityTypeShape EntityType="AMRModel.PatientInsurance" Width="1.5" PointX="18.375" PointY="4.875" />
+        <EntityTypeShape EntityType="AMRModel.PatientProcedure" Width="1.5" PointX="11.25" PointY="5" />
+        <EntityTypeShape EntityType="AMRModel.C_Vaccine" Width="1.5" PointX="20.25" PointY="9.75" />
+        <EntityTypeShape EntityType="AMRModel.PatientSocialHist" Width="1.5" PointX="8.875" PointY="10.25" />
+        <EntityTypeShape EntityType="AMRModel.PatientSurgicalHist" Width="1.5" PointX="10.875" PointY="10.25" />
+        <EntityTypeShape EntityType="AMRModel.PatientClinicalDocument" Width="1.5" PointX="13.5" PointY="27.25" />
+        <EntityTypeShape EntityType="AMRModel.C_Country" Width="1.5" PointX="22.375" PointY="4.875" />
+        <EntityTypeShape EntityType="AMRModel.C_Frequency" Width="1.5" PointX="22.375" PointY="6.5" />
+        <EntityTypeShape EntityType="AMRModel.C_RouteOfAdministration" Width="1.5" PointX="22.375" PointY="8" />
+        <EntityTypeShape EntityType="AMRModel.C_State" Width="1.5" PointX="24.375" PointY="4.875" />
+        <EntityTypeShape EntityType="AMRModel.C_Social" Width="1.5" PointX="24.375" PointY="6.5" />
+        <EntityTypeShape EntityType="AMRModel.PatientVitalSign" Width="1.5" PointX="12.875" PointY="10.25" />
+        <EntityTypeShape EntityType="AMRModel.C_MessageType" Width="1.5" PointX="10.25" PointY="16.875" />
+        <AssociationConnector Association="AMRModel.C_MessageType_Message_FK1" />
+        <EntityTypeShape EntityType="AMRModel.vwPatientsForFacility" Width="1.5" PointX="2.875" PointY="29.875" />
+        <EntityTypeShape EntityType="AMRModel.C_PreferredLanguage" Width="1.5" PointX="0.75" PointY="10.125" />
+        <EntityTypeShape EntityType="AMRModel.PatientLabResultTest" Width="1.5" PointX="14.875" PointY="0.5" />
+        <EntityTypeShape EntityType="AMRModel.PatientImmunization" Width="1.5" PointX="18.375" PointY="9.625" />
+        <EntityTypeShape EntityType="AMRModel.PatientFamilyHist" Width="1.5" PointX="11.25" PointY="0.5" />
+        <EntityTypeShape EntityType="AMRModel.PatientProblem" Width="1.5" PointX="13" PointY="4.75" />
+        <EntityTypeShape EntityType="AMRModel.C_DoctorType" Width="1.5" PointX="18.5" PointY="16.125" />
+        <EntityTypeShape EntityType="AMRModel.PatientCareDocument" Width="1.5" PointX="19.375" PointY="0.5" />
+        <EntityTypeShape EntityType="AMRModel.PatientDocument" Width="1.5" PointX="21.125" PointY="0.5" />
+        <EntityTypeShape EntityType="AMRModel.PatientMedicalDocument" Width="2" PointX="22.75" PointY="0.5" />
+        <EntityTypeShape EntityType="AMRModel.C_Advisor" Width="1.5" PointX="22.125" PointY="16.125" />
+        <EntityTypeShape EntityType="AMRModel.PatientAdvisor" Width="1.5" PointX="22.125" PointY="17.625" />
+        <EntityTypeShape EntityType="AMRModel.PatientDoctor" Width="1.5" PointX="18.5" PointY="17.625" />
+        <EntityTypeShape EntityType="AMRModel.PatientInsurancePlan" Width="1.5" PointX="20.25" PointY="17.625" />
+        <EntityTypeShape EntityType="AMRModel.ProviderWebSetting" Width="1.5" PointX="8.5" PointY="18.75" />
+        <EntityTypeShape EntityType="AMRModel.C_DocUploadType" Width="1.5" PointX="16.75" PointY="23.125" />
+        <EntityTypeShape EntityType="AMRModel.C_PolicyType" Width="1.5" PointX="17.375" PointY="26.5" />
+        <EntityTypeShape EntityType="AMRModel.PatientPolicy" Width="1.5" PointX="17.375" PointY="28" />
+        <EntityTypeShape EntityType="AMRModel.PatientEmergency" Width="1.5" PointX="14.75" PointY="9.875" />
+        <AssociationConnector Association="AMRModel.C_Relationship_PatientEmergency_FK1" />
+        <EntityTypeShape EntityType="AMRModel.vwMessageUnread" Width="1.5" PointX="13.75" PointY="32.375" />
+        <EntityTypeShape EntityType="AMRModel.BillPayment" Width="1.5" PointX="2.875" PointY="32.375" />
+        <EntityTypeShape EntityType="AMRModel.BillRate" Width="1.5" PointX="0.625" PointY="32.375" />
+        <AssociationConnector Association="AMRModel.FK_BillPayment_BillRate" />
+        <EntityTypeShape EntityType="AMRModel.vwMessageUnreadProv" Width="1.5" PointX="13.75" PointY="34.375" />
+        <EntityTypeShape EntityType="AMRModel.Provider" Width="1.5" PointX="6.625" PointY="20.75" />
+        <AssociationConnector Association="AMRModel.PatientProviderLink_Provider_FK1" />
+        <AssociationConnector Association="AMRModel.Practice_Provider_FK1" />
+        <AssociationConnector Association="AMRModel.FK_Provider_ProviderFacilityLink" />
+        <EntityTypeShape EntityType="AMRModel.vwCCDAuditLog" Width="1.5" PointX="0.625" PointY="35.875" />
+        <EntityTypeShape EntityType="AMRModel.vwRptPatientLogin" Width="1.5" PointX="0.875" PointY="39.25" />
+        <EntityTypeShape EntityType="AMRModel.vwRptSecureMessage" Width="1.5" PointX="3" PointY="39.25" />
+        <EntityTypeShape EntityType="AMRModel.vwVisitCCD" Width="1.5" PointX="5.375" PointY="32.375" />
+        <EntityTypeShape EntityType="AMRModel.vwPatientFacilityOption" Width="1.5" PointX="16.375" PointY="19.75" />
+        <EntityTypeShape EntityType="AMRModel.PatientShare" Width="1.5" PointX="4.875" PointY="2.375" />
+        <EntityTypeShape EntityType="AMRModel.PatientPlanOfCare" Width="1.5" PointX="22.375" PointY="9.625" />
+        <AssociationConnector Association="AMRModel.C_InstructionType_PatientPlanOfCare_FK1" />
+        <EntityTypeShape EntityType="AMRModel.PatientNote" Width="1.5" PointX="4.875" PointY="29.875" />
+        <EntityTypeShape EntityType="AMRModel.C_ActivityLevel" Width="1.5" PointX="24.375" PointY="9.5" />
+        <EntityTypeShape EntityType="AMRModel.C_AlcoholFrequency" Width="1.5" PointX="11.875" PointY="29.125" />
+        <EntityTypeShape EntityType="AMRModel.C_EducationLevel" Width="1.5" PointX="8.5" PointY="21.875" />
+        <EntityTypeShape EntityType="AMRModel.C_ExerciseFrequency" Width="1.5" PointX="6.875" PointY="12.75" />
+        <EntityTypeShape EntityType="AMRModel.PatientSocialSelf" Width="1.5" PointX="6.625" PointY="25.625" />
+        <EntityTypeShape EntityType="AMRModel.C_ThirdParty" Width="1.5" PointX="5" PointY="8" />
+        <EntityTypeShape EntityType="AMRModel.PatientWebSetting" Width="1.5" PointX="0.5" PointY="13.625" />
+        <EntityTypeShape EntityType="AMRModel.Config" Width="1.5" PointX="4.625" PointY="26.625" />
+        <EntityTypeShape EntityType="AMRModel.vwPatientSummary" Width="1.5" PointX="8.375" PointY="25.5" />
+        <EntityTypeShape EntityType="AMRModel.Carrier" Width="1.5" PointX="18" PointY="32.25" />
+        <EntityTypeShape EntityType="AMRModel.vwPatientVisitSummary" Width="1.5" PointX="10.375" PointY="22.125" />
+        <EntityTypeShape EntityType="AMRModel.PatientMedication" Width="1.5" PointX="16.5" PointY="12.375" />
+        <EntityTypeShape EntityType="AMRModel.vwMessageGetWaiting" Width="1.5" PointX="15.5" PointY="32" />
+        <EntityTypeShape EntityType="AMRModel.MessageDetail" Width="1.5" PointX="12.25" PointY="20.375" />
+        <AssociationConnector Association="AMRModel.C_MessageResponseType_MessageDetail_FK1" />
+        <AssociationConnector Association="AMRModel.Message_MessageDetail_FK1" />
+        <EntityTypeShape EntityType="AMRModel.vwMessageSummary" Width="1.5" PointX="10.625" PointY="32.5" />
+        <EntityTypeShape EntityType="AMRModel.PatientPharmacy" Width="1.5" PointX="16.625" PointY="4.875" />
+        <EntityTypeShape EntityType="AMRModel.vwMessageDetailReceived" Width="1.5" PointX="13.625" PointY="36.5" />
+        <EntityTypeShape EntityType="AMRModel.vwMessageDetailSent" Width="1.5" PointX="15.25" PointY="36.5" />
+        <EntityTypeShape EntityType="AMRModel.vwMessageGetCancelled" Width="1.5" PointX="8.25" PointY="41.75" />
+        <EntityTypeShape EntityType="AMRModel.DirectReceived" Width="1.5" PointX="5.375" PointY="39.125" />
+        <EntityTypeShape EntityType="AMRModel.vwPatientDocumentsList" Width="1.5" PointX="10.875" PointY="40.625" />
+        <EntityTypeShape EntityType="AMRModel.PatientLabResult" Width="1.5" PointX="13.125" PointY="0.5" />
+        <AssociationConnector Association="AMRModel.PatientLabResult_PatientLabResultsTest_FK1" />
+        <EntityTypeShape EntityType="AMRModel.C_EMRSystem" Width="1.5" PointX="4.5" PointY="23" />
+        <EntityTypeShape EntityType="AMRModel.User" Width="1.5" PointX="4.75" PointY="10.125" />
+        <AssociationConnector Association="AMRModel.C_UserRole_User_FK1" />
+        <EntityTypeShape EntityType="AMRModel.PatientVisit" Width="1.5" PointX="6.875" PointY="7.375" />
+        <EntityTypeShape EntityType="AMRModel.Patient" Width="1.5" PointX="2.875" PointY="0.5" />
+        <AssociationConnector Association="AMRModel.C_BloodType_Patient_FK1" />
+        <AssociationConnector Association="AMRModel.C_Ethnicity_Patient_FK1" />
+        <AssociationConnector Association="AMRModel.C_Gender_Patient_FK1" />
+        <AssociationConnector Association="AMRModel.C_MaritalStatus_Patient_FK1" />
+        <AssociationConnector Association="AMRModel.C_PreferredLanguage_Patient_FK1" />
+        <AssociationConnector Association="AMRModel.C_Religion_Patient_FK1" />
+        <AssociationConnector Association="AMRModel.C_SmokingStatus_Patient_FK1" />
+        <AssociationConnector Association="AMRModel.Patient_PatientAccountLink_FK1" />
+        <AssociationConnector Association="AMRModel.Patient_PatientCareDocument_FK1" />
+        <AssociationConnector Association="AMRModel.Patient_PatientDocument_FK1" />
+        <AssociationConnector Association="AMRModel.Patient_PatientEmergency_FK1" />
+        <AssociationConnector Association="AMRModel.Patient_PatientFacilityLink_FK1" />
+        <AssociationConnector Association="AMRModel.Patient_PatientMedicalDocument_FK1" />
+        <AssociationConnector Association="AMRModel.Patient_PatientOrgan_FK1" />
+        <AssociationConnector Association="AMRModel.Patient_PatientShare_FK1" />
+        <AssociationConnector Association="AMRModel.Patient_PatientVisit_FK1" />
+        <AssociationConnector Association="AMRModel.Patient_PatientWebSetting_FK1" />
+        <AssociationConnector Association="AMRModel.PatientProviderLink_Patient_FK1" />
+        <EntityTypeShape EntityType="AMRModel.Facility" Width="1.5" PointX="2.5" PointY="20.75" />
+        <AssociationConnector Association="AMRModel.Facility_PatientFacilityLink_FK1" />
+        <AssociationConnector Association="AMRModel.Facility_ProviderFacilityLink_FK1" />
+        <AssociationConnector Association="AMRModel.Practice_Facility_FK1" />
+        <EntityTypeShape EntityType="AMRModel.PatientRepresentative" Width="1.5" PointX="10.125" PointY="25.5" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

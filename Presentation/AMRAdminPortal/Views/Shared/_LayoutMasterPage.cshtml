@@ -1,0 +1,352 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AMR Admin Portal</title>
+    
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+   
+     @*   <link href="@Url.Content("~/Content/css/justified-nav.css")" rel="stylesheet">*@
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/themes/redmond/jquery-ui.css")" />
+   
+    <link href="@Url.Content("~/Content/css/themes/redmond/jquery-ui-1.10.3.custom.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/table-style.css")" rel="stylesheet">
+ @*   <link href="@Url.Content("~/Content/css/navigation-bar.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/style-main.css")" rel="stylesheet">
+     <link href="@Url.Content("~/Content/css/jquery-ui-timepicker-addon.css")" rel="stylesheet">*@
+@*        <link href="@Url.Content("~/Content/css/fixed-header/960.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/fixed-header/defaultTheme.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/fixed-header/myTheme.css")" rel="stylesheet" />
+    //Test*@
+    
+    
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/jquery.idle-timer.js")"></script>
+      <script type="text/javascript" src="@Url.Content("~/Content/js/timeout-dialog.js")"></script>
+      <script type="text/javascript" src="@Url.Content("~/Content/js/CookieHandler.js")"></script>
+
+  @*   <script src="~/Content/js/jquery.idle-timer.js"></script>
+    <script src="~/Content/js/timeout-dialog.js"></script>*@
+  <script>
+      $(window).on("storage", function (e) {
+          var event = e.originalEvent
+         
+          if (event.key == "quit") {
+              var x = readCookie('storagecookie')
+              if (x) {
+                  if (x == "admin") {
+                      eraseCookie('storagecookie');
+                      window.location.href = '@Url.RouteUrl("login")';
+                  }
+              }
+          }
+        
+  	    })
+    // localStorage.quit = $.now()
+	</script>
+      <script>
+        function deleteAllCookies() {
+            var cookies = document.cookie.split(";");
+
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            }
+        }
+        var isClose = false;
+        var keyboardevent = false;
+
+
+
+        window.onbeforeunload = function (e) {
+            // detectRefresh();
+
+            //if (self.close == true) {
+
+            //    console.log('self.close');
+            //    isClose = false;
+            //}
+            //else {
+            //    isClose = true;
+                //if (window.event) //for IE.
+                //{
+
+                //    if (window.event.clientX < 40 && window.event.clientY < 0 && keyboardevent == false) {
+                //        console.log('Window back button');
+                //        isClose = true;
+                //    }
+                //    else if (keyboardevent == false) {
+                //        console.log('Window refreshed');
+                //        isClose = true;
+                //    }
+
+                //}
+                //else { // FF and chrome
+
+                //    if (event.currentTarget.performance.navigation.type == 1 && keyboardevent == false) {
+                //        console.log('Window refreshed');
+                //        isClose = true;
+                //    }
+                //    if (event.currentTarget.performance.navigation.type == 2 && keyboardevent == false) {
+                //        console.log('Window back button');
+                //        isClose = true;
+                //    }
+
+                //}
+           // }
+
+
+
+
+            if (!isClose) {
+              //  deleteAllCookies();
+                return;
+            }
+            else {
+                isClose = false;
+                keyboardevent = false;
+                // return  "You are not closing";
+            }
+        }
+
+        //this code will handle the F5 or Ctrl+F5 key
+
+        // Collapse | Copy Code
+
+        //need to handle more cases like ctrl+R whose codes are not listed here
+        document.onkeydown = checkKeycode
+        function checkKeycode(e) {
+
+
+            if (!e) //Firefox and Safari gets argument directly.
+            {
+                e = window.event; // this is for IE
+            }
+
+            var keycode = e.keyCode ? e.keyCode : e.which;
+
+            if (keycode == 116) {
+                // for Ctrl +F5
+                isClose = true;
+                keyboardevent = true;
+            }
+            else if (keycode == 17) {
+                // for Ctrl + W
+                isClose = false;
+                keyboardevent = true;
+            }
+            else if (keycode == 115) {
+                // for Alt+ F4
+                isClose = false;
+                keyboardevent = true;
+            }
+            else if (keycode == 8) {
+                //back space
+                isClose = true;
+                keyboardevent = true;
+            }
+            else if (keycode == 82) {
+                // for Ctrl+ R
+                isClose = true;
+                keyboardevent = true;
+            }
+
+        }
+        function mouseDownSetFlag() {
+
+            isClose = true;
+        }
+        function doUnload() {
+            //if(!isClose)
+            //{
+            //    alert('window is closing');
+            //}
+        }
+        function getCookie(name) {
+            var dc = document.cookie;
+            var prefix = name + "=";
+            var begin = dc.indexOf("; " + prefix);
+            if (begin == -1) {
+                begin = dc.indexOf(prefix);
+                if (begin != 0) return null;
+            }
+            else {
+                begin += 2;
+                var end = document.cookie.indexOf(";", begin);
+                if (end == -1) {
+                    end = dc.length;
+                }
+            }
+            return unescape(dc.substring(begin + prefix.length, end));
+        }
+        function onPageLoad() {
+            //  alert(document.referrer);
+            var myCookie = getCookie(".Admin");
+
+            if (myCookie != null) {
+
+                if (document.referrer == '')// this means if blank then run the dialog box code
+                {
+                    // $('#err-msg').text("Another user is currently logged in and must be logged out to continue");
+                    // $("#AlreadyLog1").dialog("open");
+                    isClose = true;
+                    window.location.href = '@Url.RouteUrl("another-session")';
+                }
+
+
+            }
+
+        }
+          $(function () {
+              var timeout = @System.Configuration.ConfigurationManager.AppSettings["InactivityTimeout"]
+                $(document).bind("idle.idleTimer", function () {
+                    // function you want to fire when the user goes idle
+                    $.timeoutDialog({
+                        timeout: 1, countdown: 60,
+                        logout_redirect_url: '@Url.RouteUrl("LogOffAdminPortal", new { controller = "Admin", action = "LogOffAdminPortal" })',
+                    restart_on_yes: true
+                });
+            });
+                $(document).bind("active.idleTimer", function () {
+                    // function you want to fire when the user becomes active again
+                });
+                $.idleTimer(timeout);
+            });
+        $(document).ready(function () {
+           // onPageLoad();
+        });
+</script>
+<link rel="stylesheet" href="http://resources/demos/style.css">
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+    .main_div {
+    padding: 10px;
+    }
+    .main_heading {
+    margin-left: 20px;
+    }
+
+
+
+   #apDiv1 {
+ position: absolute;
+ width: 300px;
+ height: 300px;
+ z-index: 1;
+ left: 50%;
+ top: 166px;
+ background-color: #FFFFFF;
+ border-radius: 8px;
+ 
+ margin-left: -150px;
+ margin-top:-150px;
+ top:50%;
+ font-family: Arial, Helvetica, sans-serif;
+ font-size:16px; font-weight:800;
+ box-shadow: 0px 0px 10px 12px #cccccc;
+}
+
+
+     div#page_loader {
+  position: absolute;
+  top: 0;
+  bottom: 0%;
+  left: 0;
+  right: 0%;
+  background-color: black;
+  z-index: 99;
+  opacity:0.8;
+}
+</style>
+</head>
+<body onmousedown="mouseDownSetFlag();">
+     
+     
+     
+    <div class="main_div">
+         <div id="page_loader" style="display: none;">
+
+        <div id="apDiv1" align="center">
+            <table width="200" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td height="70px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <img src="Content/img/image_559926.gif" width="128" height="64" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;" height="70px;">Please wait ...</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <h1 class="main_heading" style="display:inline-block;margin-right:800px;">AMR Admin Utility</h1>
+        <button onclick="createCookie('storagecookie', 'admin', 1);localStorage.quit = $.now();Logout();" class="btn btn-warning" style="display:inline-block;"><span class="glyphicon glyphicon-log-out"></span> Log Out</button>
+        </div>
+    <div class="bs-example">
+	<ul class="nav nav-tabs">
+        <li id="IndexRemoveClass" class="active" style="cursor:pointer;"><a onclick="location.href='@Url.RouteUrl("Index")';">Patient Search</a></li>
+        <li id="IndexProviderClass" style="cursor:pointer;"><a onclick="location.href='@Url.RouteUrl("ProviderSearchIndex")';">Provider Search</a></li>
+        @*<li id="ReportIndexclass" style="cursor:pointer;"><a onclick="location.href='@Url.RouteUrl("report-index")';">Reporting</a></li>*@
+        <li><a href="#" style="cursor:pointer;">Marketing Email</a></li>
+        <li id="FaciltySetupRemoveClass" style="cursor:pointer;"><a onclick="location.href='@Url.RouteUrl("Facility-Setup")';">Facility Setup</a></li>
+          
+	</ul>
+</div>
+    <div class="main_div">
+        @RenderBody()
+    </div>
+    <script>
+        function ShowLoader() {
+           // alert('loader Insode');
+          //  document.getElementById('loader').style.display = 'block';
+            $('#loader').show();
+        }
+        function HideLoader() {
+
+            $('#loader').hide();
+           // document.getElementById('loader').style.display = 'none';
+        }
+
+        function ShowLoader1() {
+            // alert('loader Insode');
+            //  document.getElementById('loader').style.display = 'block';
+            $('#loader1').show();
+        }
+        function HideLoader1() {
+
+            $('#loader1').hide();
+            // document.getElementById('loader').style.display = 'none';
+        }
+
+        function ShowLoaderBig() {
+            var body_height = parseInt($('body').height());
+            $('#page_loader').css('height', body_height);
+            document.getElementById('page_loader').style.display = 'block';
+        }
+        function HideLoaderBig() {
+            document.getElementById('page_loader').style.display = 'none';
+        }
+        function Logout() {
+            window.location.href = '@Url.Action("Logout","Admin")';
+          }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1652 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@using System.Web.Optimization;
+@using AMR.Core.Utilities;
+@model ClinicalSummaryViewModel
+
+@{
+    ViewBag.Title = "PatientInfo";
+    Layout = "~/Views/Shared/_LayoutMasterPage.cshtml";
+    
+}
+
+@Styles.Render("~/Index/css")
+@section Scripts
+{ 
+   
+    <script>
+     
+
+        $(function() {
+            $( "#date" ).datepicker({
+                dateFormat: 'mm/dd/yy',
+                
+            });
+            $('#show-date-DemographicsDob').click(function () {
+                $('#txtdob').datepicker("show");
+            });
+        });
+        $(function(){
+            $("#Planneddt").datepicker({
+                dateFormat: 'mm/dd/yy'
+            });
+        });
+        $(function(){
+            $("#txtPlanneddt").datepicker({
+                dateFormat: 'mm/dd/yy'
+            });
+        });
+        function pop_up_print_clinicalsummary(status) {
+
+            var page1 = '';
+          
+            page1 = '@Url.Action("ClinicalSummaryPrint", "ClinicalSummary")';
+            $('#clinical-print').remove();
+            var $dialog = $('<div id="clinical-print" style="width:1000px;"></div>')
+                           .html('<div id="page_loader1" style="display: block;"><div id="apDiv1" align="center"><table width="200" border="0" cellspacing="0" cellpadding="0"><tr><td height="70px;">&nbsp;</td></tr><tr><td align="center"><img src="Content/img/image_559926.gif" width="128" height="64" /></td></tr><tr><td style="text-align: center;" height="70px;">Please wait ...</td></tr></table></div></div><iframe style="border: 0px; " src="' + page1 + '" width="100%" height="100%"></iframe>')
+                           .dialog({
+                               autoOpen: false,
+                               show: {
+                                   effect: "blind",
+                                   duration: 100
+                               },
+                               hide: {
+                                   effect: "blind",
+                                   duration: 100
+                               },
+                               modal: true,
+                               height: 600,
+                               width: 1050,
+                               title: "Print Clinical Summary"
+                           });
+            $dialog.dialog('open');
+
+        }
+
+
+        $(function() {
+            $( "#tabs" ).tabs();
+        });
+
+        
+        $(document).ready(function () 
+        {
+            
+           $('#tabs').tabs();
+            document.getElementById('tabs').style.display = 'block';
+            var model = '@Html.Raw(Json.Encode(Model.FacilityVisitSelect))';
+            // alert(model.facilitySelected);
+            //alert(model.facilityOptions);
+            // alert(model.visitSelected);
+            // alert(model.visitOptions);
+            if(model.facilitySelected != null && model.visitSelected != null)
+            {
+                //alert('inside!');
+                var VisitHome = document.getElementById('cmbVisitsHome');
+                VisitHome.innerHTML = model.visitOptions;
+                var FacilityHome = document.getElementById('cmbFacilityHome');
+           //     FacilityHome.innerHTML = model.facilityOptions;
+                $('#cmbFacilityHome').val(model.facilitySelected);
+                $('#cmbVisitsHome').val(model.visitSelected);
+
+                var VisitHome = document.getElementById('cmbVisitsGlobal');
+               // VisitHome.innerHTML = model.visitOptions;
+                var FacilityHome = document.getElementById('cmbFacilityGlobal');
+                FacilityHome.innerHTML = model.facilityOptions;
+                $('#cmbFacilityGlobal').val(model.facilitySelected);
+                $('#cmbVisitsGlobal').val(model.visitSelected);
+            }
+            if ($('#cmbFacilityHome option:selected').text() == 'Patient Entered') {
+
+                // $('#cmbVisitsHome').attr('disabled', true);
+                document.getElementById('cmbVisitsHome').disabled = true;
+                $('#createaddsocial,#createaddfamily,#createaddpast,#createaddPOC,#createaddProcedures,#createaddClinicalInstructions,#createaddallergies,#createaddimmunizations,#createaddvitals,#createaddproblems,#createaddmedications').css('display', 'block');
+              
+            }
+            else {
+                $('#createaddsocial,#createaddfamily,#createaddPOC,#createaddpast,#createaddPOC,#createaddProcedures,#createaddClinicalInstructions,#createaddallergies,#createaddimmunizations,#createaddvitals,#createaddproblems,#createaddmedications').css('display', 'none');
+          
+                //$('#cmbVisitsHome').attr('disabled', false);
+                document.getElementById('cmbVisitsHome').disabled = false;
+            }
+            var $tabs = $('#tabs').tabs();
+            var selected = $tabs.tabs('option', 'active');
+            $("#tabs").tabs({
+                activate: function (event, ui) {
+                    var selected = $tabs.tabs('option', 'active');
+                    //ui.newTab.context.id;
+                    switch (selected) {
+                        case 0:
+                            //alert('alert From Summary');
+                         
+
+                            var FacilityGlobal = document.getElementById('cmbFacilityGlobal');
+                            var facilityoptions = FacilityGlobal.innerHTML;
+                            var FacilityHome = document.getElementById('cmbFacilityHome');
+                            FacilityHome.innerHTML = facilityoptions;
+                            $('#cmbFacilityHome').val($('#cmbFacilityGlobal').val());
+
+                            var VisitGlobal = document.getElementById('cmbVisitsGlobal');
+                            var visitoptions = VisitGlobal.innerHTML;
+                            var VisitHome = document.getElementById('cmbVisitsHome');
+                            VisitHome.innerHTML = visitoptions;
+                            $('#cmbVisitsHome').val($('#cmbVisitsGlobal').val());
+
+                            if ($('#cmbFacilityHome option:selected').text() == 'Patient Entered') {
+                                $('#cmbVisitsHome').attr('disabled', true);
+                            }
+                            else {
+                                $('#cmbVisitsHome').attr('disabled', false);
+                            }
+                            var facilitySelected = $('#cmbFacilityHome option:selected').val();
+                            var visitSelected = $('#cmbVisitsHome option:selected').val();
+                            try {
+                                ShowLoader();
+                                //var IsPrimaryData =
+
+                                var facilityId = $('#cmbFacilityHome option:selected').val();
+                                var visitId = $('#cmbVisitsHome option:selected').val();
+                                if ($('#cmbVisitsGlobal option:selected').val() == null) {
+                                    visitId = 0;
+                                }
+                             
+                                var requestData = {
+
+                                    FacilityId: facilityId,
+                                    VisitId: visitId
+
+                                };
+
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: 'home-widgets-filter/?visitId=' + requestData.VisitId + '&facilityId=' + requestData.FacilityId,
+                                    dataType: 'json',
+                                    contentType: 'application/json; charset=utf-8',
+                                    success: function (data) {
+                                        // if success
+
+                                        $.each(data, function (index, item) {
+                                            //alert( "Item Index = " + index + "Id = " + item.Id + "Item WidgetHtml" + item.WidgetHtml);
+                                            $('#' + item.Id).empty();
+                                            $('#' + item.Id).html(item.WidgetHtml);
+                                        });
+
+                                        $("#tbl-Appointments").fixedHeaderTable();
+                                        $("#tbl-SocialHistory").fixedHeaderTable();
+                                        $("#tbl-LabTests").fixedHeaderTable();
+                                        $("#tbl-Statement").fixedHeaderTable();
+                                        $("#tbl-Visits").fixedHeaderTable();
+                                        $("#tbl-FamilyHistory").fixedHeaderTable();
+                                        $("#tbl-Medications").fixedHeaderTable();
+                                        $("#tbl-Allergies").fixedHeaderTable();
+                                        $("#tbl-Documents").fixedHeaderTable();
+                                        $("#tbl-Immunizations").fixedHeaderTable();
+                                        $("#tbl-Insurance").fixedHeaderTable();
+                                        $("#tbl-PastMedications").fixedHeaderTable();
+                                        $("#tbl-poc").fixedHeaderTable();
+                                        $("#tbl-Problems").fixedHeaderTable();
+                                        $("#tbl-VitalSigns").fixedHeaderTable();
+                                        $("#tbl-Procedure").fixedHeaderTable();
+                                        HideLoader();
+
+                                    },
+                                    error: function (xhr, ajaxOptions, thrownError) {
+                                        //if error
+                                        var myCookie = getCookie(".Patient");
+
+                                        if (myCookie == null) {
+                                            // do cookie doesn't exist stuff;
+                                            alert('Not logged in. Please log in to continue');
+                                            window.location = '/Login'
+                                            //xhr.getResponseHeader('Location');
+                                        }
+                                        else {
+
+                                            alert('Error : ' + xhr.message);
+                                        }
+                                        HideLoader();
+                                    },
+                                    complete: function (data) {
+                                        // if completed
+
+
+                                    },
+                                    async: false,
+                                    processData: false
+                                });
+                            } catch (err) {
+
+                                if (err && err !== "") {
+                                    alert(err.message);
+                                }
+                            }
+                            break;
+                      
+                      
+
+                  
+                     
+                    }
+                }
+            });
+            // var test = $('#social-portlet-tab').html();
+            //$('#family-portlet-tab').html(test);
+            //$("#family-portlet-tab #tab-SocialHistory").fixedHeaderTable();
+            // 
+            // 
+            // 
+            //
+
+            //$("#tab-FamilyHistory").fixedHeaderTable({ width: '840', height: '320' });
+            // 
+            //
+        });
+       
+    </script>
+
+    
+
+
+}
+
+
+<div id="containment-wrapper" style="border-bottom-style: none; border-top-style: none; border-right-style: none; border-left-width: 1px; border-left-color: rgb(166, 201, 226);">
+      @*<div id="Div2" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+
+                                <div id="combo-row" class="ui-widget-content" style="display:none;">
+                                    <ul>
+
+                                        <li class="col0">Location </li>
+                                        <li class="col1">
+                                          @Html.DropDownList("cmbFacilityGlobal", Model.Facilities.ToFacilityModelSelectList(), new { @class = "txt", style = "width:100%;", id = "cmbFacilityGlobal" })
+
+                                        </li>
+                                        <li class="col0">Visit Date</li>
+                                        <li class="col1">
+                                         <div id="homeComboBoxPortlet1">   @Html.DropDownList("cmbVisitsGlobal", Model.Visits.ToVisitModelSelectList(), new { @class = "txt", style = "width:100%;", id = "cmbVisitsGlobal" }) </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>*@
+   
+<div id="quicklinks" class="draggable ui-widget-content ui-corner-all" style="position: absolute; top: 20px; left: 3%; width: 94%; height: 70px;display:none;">
+        <div id="cart" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+               <input id="hdFlag" type="hidden" value=" " />
+            <div class="ui-widget-content" style="position: relative; top: 0px; border: none;">
+
+               @* <button    onclick="ControllMessageCompose();HidevaluecmbMessageType()"id="createmsg"  class="beer ui-button ui-widget ui-state-default ui-corner-all"  style="font-size: 0.9em; font-weight: normal" title="Send Message" type="submit">
+                    <img src="Content/img/2.png" />&nbsp;&nbsp;Compose Message</button>
+
+                <button   onclick="ControllAppointment();" id="createappbtn" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Appointment" type="submit">
+                    <img src="Content/img/3.png" style="margin-left:-7px;" />&nbsp;&nbsp;Appointment Request</button>
+
+
+                <button id="refillMEd"   onclick="RefillDialog(); ControllRefill();" role="button" aria-disabled="false" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal"  title="Refill Medication" type="submit">
+                    <img src="Content/img/4.png" />Refill Request</button>
+
+                <button  onclick="ControllReferall();" id="createreqbtn"  class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Referral" type="submit">
+                    <img src="Content/img/1.png" />&nbsp;&nbsp;Referral Request</button>*@
+                   @if (@AMR.Core.Utilities.RequestHelper.MyGlobalVar.GeneralMessageAvailable){
+                <button    onclick="ControllMessageCompose();HidevaluecmbMessageType()"id="createmsg"  class="beer ui-button ui-widget ui-state-default ui-corner-all"  style="font-size: 0.9em; font-weight: normal" title="Send Message" type="submit">
+                    <img src="Content/img/2.png" />&nbsp;&nbsp;Compose Message</button>
+                }
+                else
+                {
+                      <button    onclick="ControllMessageCompose();HidevaluecmbMessageType()"id="createmsg"  class="beer ui-button ui-widget ui-state-default ui-corner-all"  style="font-size: 0.9em; font-weight: normal" title="Send Message" disabled="disabled" type="submit">
+                    <img src="Content/img/2.png" />&nbsp;&nbsp;Compose Message</button>
+                }
+                @if (@AMR.Core.Utilities.RequestHelper.MyGlobalVar.AppointmentMessageAvailable)
+                {
+                <button   onclick="ControllAppointment();" id="createappbtn" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Appointment" type="submit">
+                    <img src="Content/img/3.png" style="margin-left:-7px;" />&nbsp;&nbsp;Appointment Request</button>
+                }
+                else
+                {
+                      <button   onclick="ControllAppointment();" id="createappbtn" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Appointment" disabled="disabled" type="submit">
+                    <img src="Content/img/3.png" style="margin-left:-7px;" />&nbsp;&nbsp;Appointment Request</button>
+                }
+
+                @if (@AMR.Core.Utilities.RequestHelper.MyGlobalVar.MedicationMessageAvailable)
+                {
+                <button id="refillMEd"   onclick="RefillDialog(); ControllRefill();" role="button" aria-disabled="false" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal"  title="Refill Medication" type="submit">
+                    <img src="Content/img/4.png" />Refill Request</button>
+                }
+                else
+                {
+                     <button id="refillMEd"   onclick="RefillDialog(); ControllRefill();" role="button" aria-disabled="false" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal"  title="Refill Medication" disabled="disabled" type="submit">
+                    <img src="Content/img/4.png" />Refill Request</button>
+                }
+              
+                  @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.ReferralMessageAvailable)
+                  {
+                <button    onclick="ControllReferall();" id="createreqbtn"  class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Referral" type="submit">
+                    <img src="Content/img/1.png" />&nbsp;&nbsp;Referral Request</button>
+                  }
+                  else
+                  {
+                     <button    onclick="ControllReferall();" id="createreqbtn"  class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Referral" disabled="disabled" type="submit">
+                    <img src="Content/img/1.png" />&nbsp;&nbsp;Referral Request</button>
+                  }
+            </div>
+        </div>
+    </div>
+    <div id="tabs" style="font-size: 12px; margin-top: 10px;display: none;">
+        @*<ul>
+            <li><a href="#tabs-1" style="width:100px; height: 30px;">
+                <p style="margin-top: -5px; margin-left:-10px;">Patient Info</p>
+            </a></li>
+            
+
+        </ul>*@
+        
+        <div id="tabs-1" style="height: 850px; overflow-y: hidden;">
+            <table width="100%;" cellspacing="100px" cellpadding="5px;">
+
+                <tr>
+                    <td colspan="2">
+                        <input id="hdFlag" type="hidden" value=" " />
+                        <!--Start of First Box -->
+                        <div id="acclink" style="position: absolute; top: 1px; left: 0px; right: 0px; height:190px;" class="ui-corner-all">
+                                <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                                    style="margin-top: -1px; font-weight: normal; padding: 3px;"><span style="font-weight:bold;">Patient Info</span>   
+                                   
+                                           </h5>
+                        <div id="ChartSummaryPartial" class="ui-widget-content" style="position: relative; top: -9px; border: none; overflow-y: auto; height:820px;">
+                               
+                                @if(RequestHelper.MyGlobalVar.PremiumFlag==true)
+                                {
+                                   @Html.Partial("~/Views/Templates/ClinicalSummary/_ChartSummaryPartial.cshtml",Model)
+                                }
+                                    else
+                                    {
+                                       @Html.Partial("~/Views/Templates/ClinicalSummary/_DemographicsPartial.cshtml", Model)
+                                }
+                                  
+                                </div>
+
+                             </div>
+                        @*<div id="ChartSummary" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 0px; height: 810px; left: 0px; width: 100%;">
+                            <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                                <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                                    style="margin-top: -1px; font-weight: bold; padding: 3px;">Chart Summary
+                                </h5>
+                                
+                            </div>
+                        </div>*@
+                        <!-- end of 1st box -->
+                    </td>
+                </tr>
+
+
+
+                <!--combo box-->
+               <tr id="tab-summary-location-visit-widget">
+                    <td colspan="2">
+                        <div id="Div1"  class="ui-widget-content ui-corner-all" style="display:none; position: relative; width: 100%; height: 35px;">
+                            <div id="Div2" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+
+                                <div id="combo-row" class="ui-widget-content">
+                                    <ul>
+
+                                        <li class="col0">Location </li>
+                                        <li class="col1">
+                                          @Html.DropDownList("cmbFacilityHome", Model.Facilities.ToFacilityModelSelectList(), new { @class = "txt", style = "width:100%;", id = "cmbFacilityHome", @onchange = " chartSummary(this.value,'location'); toggle_combobox(); " })
+
+                                        </li>
+                                        <li class="col0">Visit Date</li>
+                                        <li class="col1">
+                                         <div id="homeComboBoxPortlet">   @Html.DropDownList("cmbVisitsHome", Model.Visits.ToVisitModelSelectList(), new { @class = "txt", style = "width:100%;", id = "cmbVisitsHome", @onchange = " chartSummary(this.value,'visit'); toggle_combobox();" }) </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+          
+
+
+
+                
+            </table>
+
+
+
+
+
+
+
+
+        </div>
+        
+    </div>
+    <!-- end of total tabs -->
+
+
+
+</div>
+
+
+
+
+
+
+
+<!--pop up demographics-->
+<div id="demographics-form" title="Demographics">
+    <table width="100%" border="0">
+        <tr>
+            <td height="30" colspan="2">
+                <table width="891" border="0" align ="center">
+                    <tr>
+                        <td width="160" align="right"><span class="required" style="color:red;">*</span>Name :</td>
+                        <td width="100">
+                            <select name="namcom" id="cmbName" class="coms" style="width: 100%">
+                                <option value="Mr.">Mr.</option>
+                                <option value="Mrs.">Mrs.</option>
+                                <option value="Miss">Miss</option>
+                                <option value="Ms.">Ms.</option>
+                                <option value="Dr.">Dr.</option>
+                            </select></td>
+                        <td width="210">
+                            <input type="text" name="namtxt" id="txtFname" class="txt" /></td>
+                        <td width="210">
+                            <input type="text" name="namtxt" id="txtMname" class="txt" /></td>
+                        <td width="210">
+                            <input type="text" name="namtxt" id="txtLname" class="txt" /></td>
+                        <td width="10%">
+                            <select name="cmbSuffixName" class="coms" id="cmbSuffix" >
+									<option value="">---</option>
+									<option value="Jr.">Jr.</option>
+									<option value="Sr.">Sr.</option>
+									<option value="Esq">Esq</option>	
+									<option value="I">I</option>
+									<option value="II">II</option>
+									<option value="III">III</option>
+									<option value="IV">IV</option>
+									<option value="V">V</option>
+								</select>
+                    </td>
+                    </tr>
+                    <tr><td></td></tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="50%" height="218">
+                <table width="100%" border="0">
+                    <tr>
+                        <td width="35%" align="right">Sex :</td>
+                        <td width="1%">&nbsp;</td>
+                        <td width="65%">
+                            @*<select name="sexcombo" id="sexcombo" class="comm">
+                            </select>*@
+                            @Html.DropDownList("cmbGenderDialog", Model.Gender.ToGenderModelSelectList(), new { id = "cmbGenderDialog", @class = "txt" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Preferred Language :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            @* <select name="prelancombo" id="prelancombo" class="comm">
+                            </select>*@
+                            @Html.DropDownList("cmbPreferredLanguageDialog", Model.PreferredLanguage.ToPreferredLanguageModelSelectList(), new { id = "cmbPreferredLanguageDialog", @class = "txt" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Ethnicity :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            @Html.DropDownList("cmbEthnicityDialog", Model.Ethnicity.ToEthnicityModelSelectList(), new { id = "cmbEthnicityDialog", @class = "txt" })
+                        </td>
+                    </tr>
+                    <tr>
+                         <td>&nbsp;</td>
+                         <td>&nbsp;</td>
+                         <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="required" style="color:red;">*</span>Address Line 1:</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="addtxt" id="txtAdd" class="txt" style="width:250px" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Address Line 2 :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="add2txt" id="txtAdd2" class="txt" style="width:250px" /></td>
+                    </tr>
+
+                    <tr>
+                        <td align="right"><span class="required" style="color:red;">*</span>City :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="citycombo" id="txtCity" class="comm" style="width:150px"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="required" style="color:red;">*</span>State : </td>
+                        <td>&nbsp;</td>
+                        <td>
+                             @Html.DropDownList("cmbStates", Model.States.ToStatesModelSelectList(), new { id = "cmbStates", @class = "txt" })
+                         
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="required" style="color:red;">*</span>Zip Code : </td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="zipcodtxt" id="txtZipcode" class="txt" style="width:100px" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="required" style="color:red;">*</span>Country : </td>
+                        <td>&nbsp;</td>
+                        <td>
+                             @Html.DropDownList("cmbCountry", Model.Country.ToCountryModelSelectList(), new { id = "cmbCountry", @class = "txt" })
+                   
+                         
+
+                           </td>
+                    </tr>
+                    <tr>
+                         <td>&nbsp;</td>
+                         <td>&nbsp;</td>
+                         <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="required" style="color:red;">*</span>Home Phone :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="homphontxt" id="txthomphon" class="txt" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Cell Phone :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="cellphotxt" id="txtcellpho" class="txt" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Work Phone :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="worphotxt" id="txtworkpho" class="txt" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Fax :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="faxtxt" id="txtfax" class="txt" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="required" style="color:red;">*</span>Email :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="ematxt" id="txtemail" class="txt" style="width:280px;"/></td>
+                    </tr>
+
+                </table>
+            </td>
+            <td width="50%" valign="top">
+                <table width="90%" border="0">
+                    <tr>
+                        <td width="120" align="right"><span class="required" style="color:red;">*</span>Date of Birth :</td>
+                        <td width="10">&nbsp;</td>
+                        <td width="120">
+                            <input type="text" name="dobtxt" id="txtdob" class="txt" /></td>
+                        <td>    <img style="margin-top:-2px; cursor:pointer; margin-left:2px;" id="show-date-DemographicsDob" src="Content/img/calender.png"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Race :</td>
+                        <td>&nbsp;</td>
+                        <td><font color="grey">Select all that apply</font></td>
+                        </tr>
+                    <tr>
+                        <td></td>
+                        <td>&nbsp;</td>
+                        <td>
+                           @* @Html.DropDownList("cmbRaceDialog", Model.Race.ToRaceModelSelectList(), new {  id = "cmbRaceDialog", @class = "txt" })*@
+                
+                   
+                    
+                    <table cellspacing="0" cellpadding="0" border="0" width ="100%">
+                <tbody>
+                    <tr>
+                 
+                    
+     <td width="24">
+       <input type="checkbox" name="radio" id="rdrcprefno" value="radio" />                        
+    </td>         
+    <td width="400">Prefer not to answer</td>
+</tr>
+ <tr>
+    <td width="24">
+             <input type="checkbox" name="radio" id="rdrccnat" value="radio" />                  
+    </td>                   
+    <td width="400">American Indian or Alaska Native</td>
+ </tr>                  
+ <tr>                      
+    <td width="24">
+              <input type="checkbox" name="radio" id="rdrcasn" value="radio" />     
+          </td>
+       <td width="400">Asian</td>             
+    </td>
+ </tr>
+<tr>                           
+     <td width="24">
+                  <input type="checkbox" name="radio" id="rdrcblk" value="radio" />              
+    </td>   
+          <td width="400">Black or African American</td>
+          </tr>
+
+<tr>                           
+    <td width="24">
+              <input type="checkbox" name="radio" id="rdrchw" value="radio" />             
+    </td> 
+
+    <td width="400">Native Hawaiian or Other Pacific Islander</td>
+</tr>
+ <tr>
+          <td width="24">
+          <input type="checkbox" name="radio" id="rdrcwh" value="radio" /> 
+      
+                      
+     <td width="400">White</td>
+</tr>
+               
+ </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" Style="visibility:hidden">Smoking Status : </td>
+                        <td>&nbsp;</td>
+                        <td Style="visibility:hidden">
+                        @Html.DropDownList("cmbSmokingStatusDialog", Model.SmokingStatus.ToSmokingStatusModelSelectList(), new { id = "cmbSmokingStatusDialog", @class = "txt", style = "width:105%; padding:2px;" })
+                    </tr>
+                 @*   <tr>
+                         <td>&nbsp;</td>
+                         <td>&nbsp;</td>
+                         <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="right"><strong>Mailing address same like main address :</strong></td>
+                        <td>&nbsp;</td>
+                        <td align="left"> 
+                            <input type="checkbox" id="chkAdd" onclick="calling();" /></td>
+                        <td>&nbsp;</td>
+                        
+                    </tr>
+                    <tr>
+                        <td align="right">Address :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="reas_txt12" id="txtMAdd" class="txt" style="width:250px"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Address 2 :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="reas_txt13" id="txtMAdd2" class="txt" style="width:250px"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Country :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                              @Html.DropDownList("cmbMCountry", Model.Country.ToCountryModelSelectList(), new {  id = "cmbMCountry", @class = "txt" })
+                   
+                            </td>
+                    </tr>
+                    <tr>
+                        <td align="right">City :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="reas_txt14" id="txtMCity" class="txt" style="width:150px" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">States :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                              @Html.DropDownList("cmbMStates", Model.States.ToStatesModelSelectList(), new {  id = "cmbMStates", @class = "txt" })
+                         
+                            </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Zip Code:</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="reas_txt15" id="txtMZipcode" class="txt" style="width:100px" /></td>
+                    </tr>*@
+                </table>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+<!--End of popup demographics-->
+
+
+<!--pop up emergency-->
+<div id="emergency-form" title="Emergency Contacts">
+    <table width="699" height="366" border="0" cellpadding="0" cellspacing="2">
+        <tr>
+            <td width="220" height="36" align="right"><span class="required" style="color:red;">*</span>Contact's Name:</td>
+            <td width="14">&nbsp;</td>
+            <td colspan="2">
+                <label for="cname_txt"></label>
+                <input type="text" name="cname_txt" id="txtEname" class="txt" /></td>
+        </tr>
+        <tr>
+            <td align="right" height="36"><span class="required" style="color:red;">*</span>Address:</td>
+            <td align="right">&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="add_txt" id="txtEAdd" class="txt" /></td>
+        </tr>
+        <tr>
+            <td align="right" height="36">Country :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <label for="count_com"></label>
+                
+                     @Html.DropDownList("cmbECountry", Model.Country.ToCountryModelSelectList(), new { id = "cmbECountry", @class = "txt" })
+                   
+                </td>
+        </tr>
+        <tr>
+            <td align="right" height="35"><span class="star" style="color:red;">*</span>City :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="city_txt" id="txtECity" class="txt" /></td>
+        </tr>
+        <tr>
+            <td align="right" height="35"><span class="required" style="color:red;">*</span>State :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                
+                       @Html.DropDownList("cmbEStates", Model.States.ToStatesModelSelectList(), new { id = "cmbEStates", @class = "txt" })
+                         </td>
+        </tr>
+        <tr>
+            <td align="right" height="35"><span class="star" style="color:red;">*</span>Zip Code :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="zcode_txt" id="txtEZip" class="txt" /></td>
+        </tr>
+        <tr>
+            <td align="right" height="35"><span class="star" style="color:red;">*</span>Phone :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="phone_txt" id="txtEHomephone" class="txt" />
+                </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td colspan="2">(Area Code / Phone)</td>
+            </tr>
+        <tr>
+            <td align="right" height="35">Cell :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="cell_txt" id="txtEMobphone" class="txt" />
+                </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td colspan="2">(Area Code / Phone)</td>
+            </tr>
+        <tr>
+            <td align="right" height="35"><span class="required" style="color:red;">*</span>Relationship :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+               
+                @Html.DropDownList("cmbERel", Model.Relationships.ToRelationshipModelOnlyIDSelectList(), new { @class = "txt", style = "width:100%;", id = "cmbERel" }) </td>
+  
+            </td>
+        </tr>
+        <tr>
+            <td height="35">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td width="23">
+                <input type="checkbox" name="checkbox" id="chkIsPrimary" />
+                <label for="checkbox"></label>
+            </td>
+            <td width="432">Primary Contact</td>
+        </tr>
+
+        </tr>
+    </table>
+
+</div>
+<!--End of popup emergency-->
+
+
+<!--pop up Personal Information-->
+<div id="personal-form" title="Personal Information">
+    <table width="699" height="477" border="0" cellpadding="0" cellspacing="1" border="1">
+        <tr>
+            <td width="220" height="35" align="right" valign="middle">Height :</td>
+            <td width="14">&nbsp;</td>
+            <td>
+                <table width="451" border="0" cellpadding="0" cellspacing="0" style="margin-top:22px;">
+                    <tr>
+                        <td width="55">
+                            <select name="state_com2" id="cmbHeightFt" class="combo">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                            </select></td>
+                        <td width="18">ft</td>
+                        <td width="55">
+                            <select name="state_com3" id="cmbHeightIn" class="combo">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                            </select></td>
+                        <td width="25">in</td>
+                        <td align="right" height="35" width="60">Weight :</td>
+                        <td width="55" align="right">
+                            <input type="text" name="add_txt" id="txtWeight" class="txts" />
+                        </td>
+                        <td width="40">&nbsp; lbs</td>
+
+                        <td align="right" height="40" width="60">BMI :</td>
+                        <td width="55" align="right">
+                            <input type="text" name="add_bmi" id="txtBMI" class="txts" />
+                        </td>
+
+                    </tr>
+                </table>
+                <label for="cname_txt"></label>
+            </td>
+        </tr>
+
+        <tr>
+            <td align="right" width="85" height="35" valign="top">Hair Color :</td>
+            <td>&nbsp;</td>
+            <td>
+                <table width="302" border="0" cellpadding="0" cellspacing="0" style="margin-top:-7px;" >
+                    <tr>
+                        <td width="106">
+                            <select name="state_com4" id="cmbHair" class="combom">
+                                <option value="Black">Black</option>
+                                <option value="Brown">Brown</option>
+                                <option value="Blonde">Blonde</option>
+                                <option value="Grey">Grey</option>
+                                <option value="White">White</option>
+                                <option value="Bold">Bold</option>
+                            </select></td>
+                        <td width="90">Eye Color : </td>
+                        <td width="75">
+                            <select name="state_com4" id="cmbEye" class="combom">
+                                <option value="Black">Black</option>
+                                <option value="Blue">Blue</option>
+                                <option value="Green">Green</option>
+                                <option value="Brown">Brown</option>
+                            </select></td>
+                        <td width="51">&nbsp;</td>
+                    </tr>
+                </table>
+                <label for="count_com"></label>
+            </td>
+        </tr>
+        <tr>
+            <td height="35" align="right">Blood Type :</td>
+            <td>&nbsp;</td>
+            <td>
+                <table width="302" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="66">
+                            
+                              @Html.DropDownList("cmbBloodType", Model.BloodType.ToBloodTypeModelSelectList(), new { @class = "txt", style = "width:100%;", id = "cmbBloodType",value="" })
+
+                        </td>
+                        <td width="95" align="center">Religion : </td>
+                        <td width="125">
+                            
+
+                                @Html.DropDownList("cmbReligion", Model.Religion.ToReligionModelSelectList(), new { @class = "txt", style = "width:100%;", id = "cmbReligion", value=""})
+
+                        </td>
+                        <td width="1">&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td height="103" align="right">Comments :</td>
+            <td>&nbsp;</td>
+            <td>
+                <label for="textarea"></label>
+                <textarea name="textarea" id="txtComments" cols="45" rows="3" class="txts" style="width: 450px; height: 100px;"></textarea></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">Organ Donor :</td>
+            <td>&nbsp;</td>
+            <td>
+                <table width="314" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="29">
+                            <input type="radio" name="radio" id="rdyes" value="radio" style="margin-top:23px;"/>
+                            <label for="radio"></label>
+                        </td>
+                        <td width="51">Yes</td>
+                        <td width="25">
+                            <input type="radio" name="radio" id="rdNo" value="radio" /></td>
+                        <td width="209">No</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td height="35" align="right">Any Organ &amp; Tissue :</td>
+            <td>&nbsp;</td>
+            <td>
+                <table width="317" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="20">
+                            <input type="checkbox" name="radio" id="chkOrgYes" value="radio" /></td>
+                        <td width="900" align="right">Only Organs &amp; Tissue Listed</td>
+                        <td width="60" align="right">
+                            <input type="checkbox" name="radio" id="chkOrgNo" value="radio" /></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td height="22" align="right">Organs &amp; Tissues :</td>
+            <td>&nbsp;</td>
+            <td>
+                <table width="500" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="24">
+                            <input type="checkbox" name="eve_chk3" id="chkPan" /></td>
+                        <td width="176">Pancreas</td>
+
+                        <td width="24">
+                            <input type="checkbox" name="eve_chk9" id="chkBone" /></td>
+                        <td width="205">Bone Marrow</td>
+
+                        <td width="24">
+                            <input type="checkbox" name="eve_chk10" id="chkHeartVal" /></td>
+                        <td width="176">Heart Valves</td>
+
+                        <td width="24">
+                            <input type="checkbox" name="eve_chk4" id="chkLungs" /></td>
+                        <td width="176">Lungs</td>
+                    </tr>
+                    <tr>
+                        <td width="24">
+                            <input type="checkbox" name="eve_chk2" id="chkLiver" /></td>
+                        <td width="176">Liver</td>
+
+                        <td width="24">
+                            <input type="checkbox" name="eve_chk7" id="chkCornea" /></td>
+                        <td width="176">Cornea</td>
+
+                        <td width="22">
+                            <input type="checkbox" name="eve_chk8" id="chkSkin" /></td>
+                        <td width="176">Skin</td>
+
+                        <td width="24">
+                            <input type="checkbox" name="eve_chk11" id="chkTissue" /></td>
+                        <td width="300">Connective Tissues</td>
+                    </tr>
+
+                    <tr>
+                        <td width="24">
+                            <input type="checkbox" name="eve_chk" id="chkHeart" /></td>
+                        <td width="176">Heart</td>
+
+                        <td width="24">
+                            <input type="checkbox" name="eve_chk5" id="chkKidney" /></td>
+                        <td width="176">Kidneys</td>
+
+                        <td width="24">
+                            <input type="checkbox" name="eve_chk6" id="chkIntestine" /></td>
+                        <td width="176">Intestines</td>
+
+                        <td width="24"></td>
+                        <td width="176"></td>
+                    </tr>
+
+                </table>
+     </tr>
+        </table>
+
+</div>
+<!--End of popup Personal Information-->
+
+
+<!-- Start of pop ups of Add -->
+<div id="ComposeMessage" title="Compose Message" >
+        <input type="hidden" id="hdSentFlag" value=""/><input type="hidden" id="hdReplyMessageId" value=""/>
+        <input type="hidden" id="hdAttachmentName" value=""/>
+        <input type="hidden" id="hdAttachmentTest" value=""/>
+        <input type="hidden" id="hdFacilityId" value="test"/>
+        <input type="hidden" id="hdProviderId_To" value=""/>
+        <input type="hidden" id="hdMessageRequest" value=""/>
+        <input type="hidden" id="hdMessageTypeId" value=""/>
+        <input type="hidden" id="hdMessageUrgencyId" value=""/>
+        <input type="hidden" id="hdFlag" value=""/>
+    <div style="vertical-align:top;">
+        <table>
+            <tr>
+               
+                <td><input type="file" id="files" name="file" /><input id="my-simple-upload" type="file" value="" name="MyAttachFile" style="display:none;"/><input type="button" value="Browse..." id="browse" />@*<label id="BrowseName" style="margin-top:-20px;margin-left:100px"></label>*@</td>
+                <td><input type="hidden" id="ByteData" value="" "/></td>
+                <td><input type="hidden" id="FileBytes" value="" "/></td>
+                <td><label id="BrowseName" style="margin-top:-20px;margin-left:60px"></label><input type="button" id="btncancelupload" value="Cancel" style="display: inline-block;margin-top:-1px;height:28px;" /></td>
+            </tr>
+        </table>
+        <div id="progress_bar"><div class="percent">0%</div></div>
+         @* <img src="Content/img/attach.gif" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">
+       *@ 
+       </div>  <br>
+        <p>
+            @*Please note that you can expect to receive a response within 1 bussiness day*@
+        </p>
+        <div>
+            <table width="705" height="180" border="1" style="border-color: rgb(166, 201, 226);">
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Location:</b>
+                     
+                             @Html.DropDownList("cmbAppointmentFacility", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = " txt  ui-corner-all bcom", style = "width:400px; margin-left:33px;", id = "cmbAppointmentFacility", @onchange = "LoadFacilityProviderSendMessage();" })
+                                <span id="apDiv9" ><img id="loader1" src="Content/img/login-loader.gif"  style="margin-left:530px;  margin-top:-30px; display:none;" /></span>
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>To:</b>
+                              <div id="DivLoadFacilityProviderSendMessage" style="margin-top:-30px;">
+                             @Html.Partial("_FacilityProviderSendMessage", Model.Providers)
+                             @* @Html.DropDownList("cmbAppointmentDoctor", Model.Providers.ToProviderModelSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:405px; margin-left:72px;", id = "cmbAppointmentDoctor" })*@
+                                 </div>
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Subject:</b>
+                             @Html.DropDownList("cmbMessageType", Model.MessageType.ToMessageTypeModelSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:403px; margin-left:45px;", id = "cmbMessageType" })
+
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                           <b>Urgent:</b>
+                               <select id="cmbMessageUrgency" class="txt" style="width:90px; margin-left:47px;">
+                     
+                      
+                      <option value="false" selected="selected">No</option><option value="true">Yes</option>
+</select>  
+                          @*   @Html.DropDownList("cmbMessageUrgency", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:170px; margin-left:20px;", id = "cmbMessageUrgency" })*@
+                            @* <select style="margin-left: 0px; margin-top: -15px; width: 100px;" class="txt">
+                                <option>Arial</option>
+                            </select>
+                            <select style="margin-left: 0px; margin-top: -15px; width: 70px;" class="txt">
+                                <option>12</option>
+                            </select>
+                            <button>
+                                <img src="Content/img/bold.png" width="20px"></button>
+                            <button>
+                                <img src="Content/img/italic.png" width="20px"></button>
+                            <button>
+                                <img src="Content/img/underline.png" width="20px"></button>*@
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="150" colspan="2" bgcolor="#FFFFFF"> 
+                   <textarea id="txtMessageWrite" class="txt" rows="5" cols="45" style="height:150px; width:685px;" maxlength="256"> </textarea>
+                    </td>
+                </tr>
+                   <tr><td><div id="counter" style="text-align:right;"></div></td></tr>
+            </table>
+        </div>
+    </div>
+<div id="appbtn-form" title="Appointment Request">
+    <center>  <span   class="validateTips"></span></center>
+    <table width="100%" height="433" border="0
+        " cellpadding="0" cellspacing="2">
+        <tr>
+            <td width="250" height="35" align="right">Location :</td>
+            <td width="2">&nbsp;</td>
+            <td colspan="2">
+          
+                @Html.DropDownList("cmbAppointmentFacility1", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentFacility1", @onchange = "LoadFacityProvider();" })
+                <span id="apDiv9">
+
+    
+
+</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Provider :</td>
+            <td align="right">&nbsp;</td>
+            <td colspan="2">
+                <div id="DivFacityProvider">
+                @Html.Partial("_FacilityProvider", Model.Providers)
+                @*@Html.DropDownList("cmbAppointmentDoctor1", Model.Providers.ToProviderModelSelectList(), new { @class = " txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentDoctor1" })*@
+            </div>
+                    </td>
+        </tr>
+        <tr>
+              <td  ><div style="float:right;margin-Top:4px;">Urgent :</div></td>
+                    <td align="right">&nbsp;</td>
+                        <td  colspan="2">
+                            <select id="cmbMessageUrgency1" class="txt" style="width:90px">
+                     @* <option value="-1">--Select--</option>*@
+                      
+                      <option value="false" selected="selected">No</option><option value="true">Yes</option>
+</select>    
+                            @*<div style="margin-left:0px;">
+                              @Html.DropDownList("cmbMessageUrgency1", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:150px; ", id = "cmbMessageUrgency1" })
+                          </div>*@
+                        </td>
+        </tr>
+        <tr>
+            <td width="250"  align="right" style="padding-top:7px;" valign="Top">Preferred Time of Day :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="439" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                         <td >
+                            <input type="checkbox" name="mor_chk" id="chkmor" style=""/></td>
+                        <td width="50"><div style="margin-left:5px;margin-Top:4px;">Morning</div></td>
+                        <td width="21">
+                            <input type="checkbox" name="aft_chk" id="chkAft" style="margin-left:10px;"/></td>
+                        <td width="68"  ><div style="margin-left:5px;margin-Top:4px;">Afternoon</div></td>
+                        <td width="21">
+                            <input type="checkbox" name="eve_chk" id="chkeve" style="margin-left:10px;" /></td>
+                        <td width="84"  ><div style="margin-left:5px;margin-Top:4px;">Evening</div></td>
+                        <td width="61"  ><div style="margin-left:15px;margin-Top:4px;"></div></td>
+                        <td width="119">
+                            <div style="margin-left:3px;">
+                             @* @Html.DropDownList("cmbMessageUrgency1", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:150px; margin-left:20px;", id = "cmbMessageUrgency1" })*@
+                          </div>
+                        </td>
+                    </tr>
+                </table>
+                <label for="urg_com"></label>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" valign="Top" style="padding-top:7px;" align="right">Preferred Day :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="445" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                 <td >
+                            <input type="checkbox" name="mon_chk" id="chkmon" style="" /></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;">Monday</div></td>
+                        <td >
+                            <input type="checkbox" name="tue_chk" id="chktue" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;"">Tuesday</div></td>
+                        <td >
+                            <input type="checkbox" name="wed_chk" id="chkwed" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;"">Wednesday</div></td>
+                        <td >
+                            <input type="checkbox" name="thu_chk" id="chkthu" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;"">Thursday</div></td>
+                        
+                    </tr>
+                    <tr>
+<td >
+                            <input type="checkbox" name="fri_chk" id="chkfri" /></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;">Friday</div></td>
+                        <td >
+                            <input type="checkbox" name="fri_chk" id="chksat" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;">Saturday</div></td>
+                        <td >
+                            <input type="checkbox" name="fri_chk" id="chksun" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2x;margin-top:4px;">Sunday</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Date Range :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="367" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="118">
+                            <input type="text" name="pref_txt" id="txtPrefDateFrom" class="com" /></td>
+                        <td>    <img id="show-date-PreferedStart" src="Content/img/calender.png" style="margin-top:-3px; cursor:pointer; margin-left:-15px;"/></td>
+                        <td width="19">&nbsp;</td>
+                        <td width="19">&nbsp;</td>
+                        <td width="216">
+                            <input type="text" name="pref_txt" id="txtPrefDateTo" class="com" /></td>
+                        <td>    <img id="show-date-PreferredEnd" src="Content/img/calender.png" style="margin-top:-3px; cursor:pointer; margin-left:-105px;"/></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Time: </td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <select name="preft_com" id="cmbPreftime" class="com">
+                      <option value="-1">--select--</option>                    
+  <option value="7">7:00 am</option>
+  <option value="8">8:00 am</option>
+  <option value="9">9:00 am</option>
+  <option value="10">10:00 am</option>
+  <option value="11">11:00 am</option>
+  <option value="12">12:00 pm</option>
+  <option value="13">1:00 pm</option>
+  <option value="14">2:00 pm</option>
+  <option value="15">3:00 pm</option>
+  <option value="16">4:00 pm</option>
+  <option value="17">5:00 pm</option>
+  <option value="18">6:00 pm</option>
+ <option value="19">7:00 pm</option>
+  <option value="20">8:00 pm</option>
+                </select>
+                
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="33" align="right">Reason for Visit :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="reas_txt" id="txtReason" class="btxt" /></td>
+        </tr>
+        <tr>
+            <td width="250" align="right">Comments :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <textarea name="comm_txta" cols="45" rows="5" class="btxta" id="txtComment" maxlength="256"></textarea></td>
+        </tr>
+         <tr>
+            
+            <td colspan="3" align="right"><div id="appcount"></div></td>
+        </tr>
+
+
+    </table>
+
+</div>
+<div id="dialog-refill" title="Refill Request">
+    <center>  <span   class="validateTips"></span></center>
+    <table border="0" width="100%" height="300px">
+        <tr>
+            <td width="30%" height="40"><span class="form_text" style="color: #000066;">Location:</span></td>
+            <td>
+
+                  @Html.DropDownList("cmbAppointmentFacilityRefill", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentFacilityRefill", @onchange = "LoadFacityProviderRefil();LoadRefilmediaction();" })
+    
+
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Doctor: </td>
+            <td>
+                <div id="refildiv">
+                @Html.Partial("_CmbRefildoctorDropDown", Model.Providers)
+                    </div>
+
+           @*    @Html.DropDownList("cmbDoctor", Model.Providers.ToProviderModelSelectList(), new { @class = " txt  ui-corner-all", style = "width:200px;", id = "cmbDoctor" })*@
+
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" height="40"><span class="form_text" style="color: #000066;">Medication:</span></td>
+            <td>
+                <div id="refilmed">
+                @Html.Partial("_Index_RefillMedication", Model.Medications)
+                    </div>
+            </td>
+        </tr>
+
+
+        
+
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Number of Refills: </td>
+            <td>
+                <input type="text" name="txtCountRefills" id="txtCountRefills" class="txt ui-corner-all" />
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Pharmacy: </td>
+            <td>
+                <table>
+<tr><td>
+<div id="cmbPharmacy">
+
+          
+                 @Html.Action("RefillPharmacypartialview", "Home", new { @class = "txt  ui-corner-all", style = "width:200px;", id = "cmbRFPharmacy"  })
+              
+ </div>
+</td>
+<td><span><img  src="Content/img/add.png" />
+<span id="addPharmacy" class="anc" onclick="OpenPharmacyDialoge();" style="font-size: 13px; padding-right: 17px;">Add</span></span>
+</td>
+</tr>
+</table>
+               <div > </div> <div id="PharmAddress" style="color:red;"></div><div><input type="hidden" id="Phone" value="" /></div>
+            </td>
+            
+        </tr>
+
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Comments: </td>
+            <td>
+                <textarea multiline="true" style="height: 96px; width: 453px;" id="txtComments" rows="3" cols="5" class="txt  ui-corner-all" maxlength="256"></textarea>
+            </td>
+        </tr>
+           <tr>
+            
+            <td colspan="3" align="right"><div id="refillcount"></div></td>
+        </tr>
+
+
+    </table>
+
+</div>
+<div id="reqbtn-form" title="Referral Request">
+    <table width="100%" border="0" cellpadding="0" cellspacing="2">
+        <tr>
+            <td width="250" height="35" align="right">Location :</td>
+            <td width="2">&nbsp;</td>
+            <td width="571">
+               
+                   @Html.DropDownList("cmbAppointmentFacility3", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentFacility3", @onchange = "LoadFacilityProviderRequestRefferal();" })
+         <span id="apDiv9">
+
+    <img id="loader4" src="Content/img/login-loaderwhite.gif" style="margin-left: 420px; margin-top: -30px; display: none;"></img>
+
+</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="250" height="35" align="right">Send Request to :</td>
+            <td width="2">&nbsp;</td>
+            <td width="571">
+                
+                  <div id="DivFacilityProviderRequestRefferal">
+                @Html.Partial("_FacilityProviderRequestRefferal", Model.Providers)
+                
+            </div>
+                   @*@Html.DropDownList("cmbRProvider", Model.Providers.ToProviderModelSelectList(), new { @class = " txt  ui-corner-all bcom", style = "width:400px;", id = "cmbRProvider" })*@
+         </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Reason for Referral :</td>
+            <td align="right">&nbsp;</td>
+            <td>
+                <input type="text" name="reas_txt3" id="txtReqRes" class="btxt" /></td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Comments :</td>
+            <td>&nbsp;</td>
+            <td>
+                <textarea name="comm_txta2" cols="45" rows="5" class="btxta" id="txtRComm" maxlength="256"></textarea></td>
+        </tr>
+           <tr>
+            
+            <td colspan="3" align="right">
+                <div id="referallcount"></div>
+
+            </td>
+        </tr>
+       
+    </table>
+
+
+</div>
+<div id="dialog-pharmacy" title="Add a Pharmacy">
+           
+    <table border="0" width="100%">
+
+        <tr>
+            <td align="right" width="140px;"><span style="color:red;"  >*</span><span class="form_text"  >Pharmacy Name : </span></td>
+            <td>
+                <input type="hidden" id="txtPharmID" value="0" />
+                <input type="text" name="name" id="txtPharmacyName" class="txt ui-corner-all" style="width: 240px;"/>
+            </td>
+        </tr>
+           <tr>
+        <td align="right"><span style="color:red;"  >*</span><span class="form_text" >Address Line 1 : </span> </td>
+                <td>
+                <input type="text" name="name" id="txtPharmAddress1" style="width: 240px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><span class="form_text" >Address Line 2 : </span></td>
+           
+            <td>
+                <input type="text" name="name" id="txtPharmAddress2" style="width: 240px;" class="txt ui-corner-all" /></td>
+        </tr>
+            <tr>
+            <td align="right"><span style="color:red;"  >*</span><span class="form_text" >City : </span></td>
+           
+            <td>
+                <input type="text" name="name" id="txtPharmCity" class="txt ui-corner-all" width="150px;" /></td>
+          
+        </tr>
+
+            <tr>
+            <td align="right"><span style="color:red;"  >*</span><span class="form_text" >State : </span></td>
+           
+           <td>
+                @*<input type="text" name="name" id="txtPharmState" class="txt ui-corner-all" />*@
+               <select style="visibility: visible;" class="coms" name="state" id="cmbStates" tabindex="11">
+									
+										<option value="AL">AL</option>
+									
+										<option value="AK">AK</option>
+									
+										<option value="AS">AS</option>
+									
+										<option value="AZ">AZ</option>
+									
+										<option value="AR">AR</option>
+									
+										<option value="AA">AA</option>
+									
+										<option value="AE">AE</option>
+									
+										<option value="AP">AP</option>
+									
+										<option value="CA">CA</option>
+									
+										<option value="CO">CO</option>
+									
+										<option value="CT">CT</option>
+									
+										<option value="DE">DE</option>
+									
+										<option value="DC">DC</option>
+									
+										<option value="FL">FL</option>
+									
+										<option value="GA">GA</option>
+									
+										<option value="GU">GU</option>
+									
+										<option value="HI">HI</option>
+									
+										<option value="ID">ID</option>
+									
+										<option value="IL">IL</option>
+									
+										<option value="IN">IN</option>
+									
+										<option value="IA">IA</option>
+									
+										<option value="KS">KS</option>
+									
+										<option value="KY">KY</option>
+									
+										<option value="LA">LA</option>
+									
+										<option value="ME">ME</option>
+									
+										<option value="MH">MH</option>
+									
+										<option value="MD">MD</option>
+									
+										<option value="MA">MA</option>
+									
+										<option value="MI">MI</option>
+									
+										<option value="FM">FM</option>
+									
+										<option value="MN">MN</option>
+									
+										<option value="MS">MS</option>
+									
+										<option value="MO">MO</option>
+									
+										<option value="MT">MT</option>
+									
+										<option value="NE">NE</option>
+									
+										<option value="NV">NV</option>
+									
+										<option value="NH">NH</option>
+									
+										<option value="NJ">NJ</option>
+									
+										<option value="NM">NM</option>
+									
+										<option value="NY">NY</option>
+									
+										<option value="NC">NC</option>
+									
+										<option value="ND">ND</option>
+									
+										<option value="MP">MP</option>
+									
+										<option value="OH">OH</option>
+									
+										<option value="OK">OK</option>
+									
+										<option value="OR">OR</option>
+									
+										<option value="PW">PW</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PR">PR</option>
+									
+										<option value="RI">RI</option>
+									
+										<option value="SC">SC</option>
+									
+										<option value="TN">TN</option>
+									
+										<option value="TX">TX</option>
+									
+										<option value="UT">UT</option>
+									
+										<option value="VT">VT</option>
+									
+										<option value="VI">VI</option>
+									
+										<option value="VA">VA</option>
+									
+										<option value="WA">WA</option>
+									
+										<option value="WV">WV</option>
+									
+										<option value="WI">WI</option>
+									
+										<option value="WY">WY</option>
+									
+										<option value="SD">SD</option>
+									
+								</select>
+            </td>
+        </tr>
+
+        <tr>
+            <td align="right"><span style="color:red;"  >*</span><span class="form_text" >Zip Code : </span></td>
+           
+          <td>
+                <input type="text" name="name" id="txtPharmZipCode" class="txt ui-corner-all" style="width: 100px;" />
+            </td>
+        </tr>
+
+
+          <tr>
+            <td align="right"><span class="form_text" >Phone : </span></td>
+           
+          <td>
+                <input type="text" name="name" id="txtPhone" style="width: 190px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+           <tr>
+            <td align="right"><span class="form_text" >Website : </span></td>
+           
+          <td>
+       <input type="text" name="name" id="txtWebsite" style="width: 240px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+
+
+
+      
+        
+    </table>
+
+  
+    <table style="margin-top: -15px;">
+        <tr>
+          
+        </tr>
+        
+    </table>
+
+ 
+    <h3 style="margin-top: 25px; color: rgb(29, 89, 135); font-size: 22px;">Preferred Pharmacy</h3>
+    <table>
+        <tr>
+            <td width="30%"><span class="form_text">
+                <input name="chk" type="checkbox" value="" id="chkPref">
+            </span></td>
+            <td width="-20%"><span class="form_text" style="margin-left: -80px; color: #9B9B9B;">Would you like to make this your preferred pharmacy?</span> </td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+
+@Scripts.Render("~/ClinicalSummaryIndex/jquery")

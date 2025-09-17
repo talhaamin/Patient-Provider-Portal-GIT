@@ -1,0 +1,1284 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using AMR.Core.Utilities;
+@using System.Text;
+@model HomeViewModel
+@{
+    ViewBag.Title = "[Patient Portal] AccountIndex";
+    Layout = "~/Views/Shared/_LayoutMasterPage.cshtml";
+}
+<script src="~/Content/js/AccountIndex.js"></script>
+@section Scripts
+{
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tabs').tabs();
+        document.getElementById('tabs').style.display = 'block';
+        $("#tbl-LinkedAccount").fixedHeaderTable();
+        clearTextBox();
+
+    });
+    $(function () {
+        $("#accordionAccount").accordion({
+            heightStyle: "content"
+        });
+    });
+
+
+    function patientRepEdit() {
+
+        try {
+
+            var obj = jQuery.parseJSON($("#patrepid").val());
+            document.getElementById('chkDemographics').checked = true;
+            $('#txtFirstName').val(obj.FirstName);
+            $('#txtLastName').val(obj.LastName);
+            $('#txtEmail').val($.trim(obj.EMail));
+
+
+            if ($.trim(obj.Demographics) == 'True') { document.getElementById('chkDemographics').checked = true; } else { document.getElementById('chkDemographics').checked = false; }
+            if ($.trim(obj.Allergy) == 'True') { document.getElementById('chkAllergy').checked = true; } else { document.getElementById('chkAllergy').checked = false; }
+            if ($.trim(obj.FamilyHistory) == 'True') { document.getElementById('chkFamilyHistory').checked = true; } else { document.getElementById('chkFamilyHistory').checked = false; }
+            if ($.trim(obj.LabResult) == 'True') { document.getElementById('chkLabResult').checked = true; } else { document.getElementById('chkLabResult').checked = false; }
+            if ($.trim(obj.MedicalHistory) == 'True') { document.getElementById('chkMedicalHistory').checked = true; } else { document.getElementById('chkMedicalHistory').checked = false; }
+            if ($.trim(obj.Medication) == 'True') { document.getElementById('chkMedication').checked = true; } else { document.getElementById('chkMedication').checked = false; }
+            if ($.trim(obj.Problem) == 'True') { document.getElementById('chkProblem').checked = true; } else { document.getElementById('chkProblem').checked = false; }
+            if ($.trim(obj.Emergency) == 'True') { document.getElementById('chkEmergency').checked = true; } else { document.getElementById('chkEmergency').checked = false; }
+            if ($.trim(obj.SocialHistory) == 'True') { document.getElementById('chkSocialHistory').checked = true; } else { document.getElementById('chkSocialHistory').checked = false; }
+            if ($.trim(obj.SurgicalHistory) == 'True') { document.getElementById('chkSurgicalHistory').checked = true; } else { document.getElementById('chkSurgicalHistory').checked = false; }
+            if ($.trim(obj.VitalSigns) == 'True') { document.getElementById('chkVitalSign').checked = true; } else { document.getElementById('chkVitalSign').checked = false; }
+            if ($.trim(obj.Immunization) == 'True') { document.getElementById('chkImmunization').checked = true; } else { document.getElementById('chkImmunization').checked = false; }
+            if ($.trim(obj.Organ) == 'True') { document.getElementById('chkOrgan').checked = true; } else { document.getElementById('chkOrgan').checked = false; }
+            if ($.trim(obj.ClinicalDocs) == 'True') { document.getElementById('chkClinicalDocs').checked = true; } else { document.getElementById('chkClinicalDocs').checked = false; }
+            if ($.trim(obj.Insurance) == 'True') { document.getElementById('chkInsurance').checked = true; } else { document.getElementById('chkInsurance').checked = false; }
+            if ($.trim(obj.ClinicalSummary) == 'True') { document.getElementById('chkClinicalSummary').checked = true; } else { document.getElementById('chkClinicalSummary').checked = false; }
+            if ($.trim(obj.Appointment) == 'True') { document.getElementById('chkAppointment').checked = true; } else { document.getElementById('chkAppointment').checked = false; }
+            if ($.trim(obj.Visit) == 'True') { document.getElementById('chkVisit').checked = true; } else { document.getElementById('chkVisit').checked = false; }
+            if ($.trim(obj.UploadDocs) == 'True') { document.getElementById('chkUploadDocs').checked = true; } else { document.getElementById('chkUploadDocs').checked = false; }
+            if ($.trim(obj.PlaneOfCare) == 'True') { document.getElementById('chkPOC').checked = true; } else { document.getElementById('chkPOC').checked = false; }
+            if ($.trim(obj.Messaging) == 'True') { document.getElementById('chkMessaging').checked = true; } else { document.getElementById('chkMessaging').checked = false; }
+            if ($.trim(obj.Download) == 'True') { document.getElementById('chkDownload').checked = true; } else { document.getElementById('chkDownload').checked = false; }
+            if ($.trim(obj.Procedure) == 'True') { document.getElementById('chkProcedure').checked = true; } else { document.getElementById('chkProcedure').checked = false; }
+            if ($.trim(obj.Enabled) == 'True') { document.getElementById('chkEnabled').checked = true; } else { document.getElementById('chkEnabled').checked = false; }
+
+
+        } catch (e) {
+            alert(e.message);
+        }
+
+        $("#PatientRepresentative-form").dialog("open");
+
+
+
+    }
+
+
+
+
+    // start of change password pop up script
+
+    $(function () {
+
+        tips = $(".validateTips");
+
+
+
+        $("#changePassword-form").dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "blind",
+                duration: 1000
+            },
+
+
+            width: 750,
+            height:380,
+            modal: true,
+            buttons: {
+                "Save": function () {
+                    var bValid = true;
+                    //var flg = checkUrl($.trim($('#txtNewPassword').val()));
+                    //if (flg != true) {
+                    //    $("#msg").css("display", "block");
+
+                    //    bValid = false;
+                    //}
+
+
+                    if (!Reqvalue($.trim($('#txtOldPassword').val()), 'Old Password'))
+                    { return; }
+
+                    if (!Reqvalue($.trim($('#txtNewPassword').val()), 'New Password'))
+                    { return; }
+
+                    if ($.trim($('#txtNewPassword').val()) != $.trim($('#txtConfirmPassword').val())) {
+                        alert('Password and old password are not same');
+                        // $("#msg").css("display", "block");
+                        return false;
+                        bValid = false;
+                    }
+                    if (!PasswordValid($('#txtConfirmPassword').val())) {
+                        return;
+                    }
+
+                    if (bValid) {
+                        //ajax 
+                        try {
+                            var requestData = {
+                                Password: $.trim($('#txtOldPassword').val()),
+                                NewPassword: $.trim($('#txtNewPassword').val())
+
+                            };
+
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'account-password-change',
+                                data: JSON.stringify(requestData),
+                                dataType: 'json',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function (data) {
+                                    // if success
+                                    // alert("Success : " + data);
+                                    if (data != "") {
+                                        // alert(data);
+                                        alert("Invalid old password");
+                                    }
+                                    HideLoader();
+
+
+
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    //if error
+
+                                    alert('Error : ' + xhr.message);
+                                    HideLoader();
+                                },
+                                complete: function (data) {
+                                    // if completed
+                                    HideLoader();
+
+                                },
+                                async: true,
+                                processData: false
+                            });
+                        } catch (err) {
+
+                            if (err && err !== "") {
+                                alert(err.message);
+                                HideLoader();
+                            }
+                        }
+                        $(this).dialog("close");
+                        ShowLoader();
+                    }
+
+                    //                        end ajax
+                },
+                Close: function () {
+                  //  $("#msg").css("display", "none");
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+               // $("#msg").css("display", "none");
+
+            }
+        });
+
+    });
+
+    //- end of change password pop up script
+
+
+    // start of create Patient Representative pop up script
+
+    $(function () {
+
+        tips = $(".validateTips");
+
+
+
+        $("#PatientRepresentative-form").dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "blind",
+                duration: 1000
+            },
+
+
+            width: 550,
+            modal: true,
+            buttons: {
+                "Save": function () {
+
+                    var bValid = true;
+                    var boolDemographics;
+                    var boolAllergy;
+                    var boolFamilyHistory;
+                    var boolLabResult;
+                    var boolMedicalHistory;
+                    var boolMedication;
+                    var boolProblem;
+                    var boolProcedure;
+                    var boolSocialHistory;
+                    var boolSurgicalHistoyr;
+                    var boolVitalSign;
+                    var boolImmunization;
+                    var boolOrgan;
+                    var boolClinicalDocs;
+                    var boolInsurance;
+                    var boolEmergency;
+                    var boolAppointment;
+                    var boolVisit;
+                    var boolUploadDocs;
+                    var boolPOC;
+                    var boolMessaging;
+                    var boolDownload;
+                    var boolClinicalSummary;
+                    var boolEnabled;
+
+                    if (bValid) {
+                        //ajax 
+                        try {
+
+                            if ($('#chkDemographics').prop('checked')) { boolDemographics = true; } else { boolDemographics = false; }
+                            if ($('#chkAllergy').prop('checked')) { boolAllergy = true; } else { boolAllergy = false; }
+                            if ($('#chkFamilyHistory').prop('checked')) { boolFamilyHistory = true; } else { boolFamilyHistory = false; }
+                            if ($('#chkLabResult').prop('checked')) { boolLabResult = true; } else { boolLabResult = false; }
+                            if ($('#chkMedication').prop('checked')) { boolMedication = true; } else { boolMedication = false; }
+                            if ($('#chkProblem').prop('checked')) { boolProblem = true; } else { boolProblem = false; }
+                            if ($('#chkProcedure').prop('checked')) { boolProcedure = true; } else { boolProcedure = false; }
+                            if ($('#chkSocialHistory').prop('checked')) { boolSocialHistory = true; } else { boolSocialHistory = false; }
+                            if ($('#chkSurgicalHistory').prop('checked')) { boolSurgicalHistoyr = true; } else { boolSurgicalHistoyr = false; }
+                            if ($('#chkVitalSign').prop('checked')) { boolVitalSign = true; } else { boolVitalSign = false; }
+                            if ($('#chkImmunization').prop('checked')) { boolImmunization = true; } else { boolImmunization = false; }
+                            if ($('#chkOrgan').prop('checked')) { boolOrgan = true; } else { boolOrgan = false; }
+                            if ($('#chkClinicalDocs').prop('checked')) { boolClinicalDocs = true; } else { boolClinicalDocs = false; }
+                            if ($('#chkInsurance').prop('checked')) { boolInsurance = true; } else { boolInsurance = false; }
+                            if ($('#chkEmergency').prop('checked')) { boolEmergency = true; } else { boolEmergency = false; }
+                            if ($('#chkMedicalHistory').prop('checked')) { boolMedicalHistory = true; } else { boolMedicalHistory = false; }
+                            if ($('#chkAppointment').prop('checked')) { boolAppointment = true; } else { boolAppointment = false; }
+                            if ($('#chkVisit').prop('checked')) { boolVisit = true; } else { boolVisit = false; }
+                            if ($('#chkUploadDocs').prop('checked')) { boolUploadDocs = true; } else { boolUploadDocs = false; }
+                            if ($('#chkPOC').prop('checked')) { boolPOC = true; } else { boolPOC = false; }
+                            if ($('#chkMessaging').prop('checked')) { boolMessaging = true; } else { boolMessaging = false; }
+                            if ($('#chkDownload').prop('checked')) { boolDownload = true; } else { boolDownload = false; }
+
+                            if ($('#chkClinicalSummary').prop('checked')) { boolClinicalSummary = true; } else { boolClinicalSummary = false; }
+                            if ($('#chkEnabled').prop('checked')) { boolEnabled = true; } else { boolEnabled = false; }
+                            var requestData = {
+                                FirstName: $.trim($('#txtFirstName').val()),
+                                LastName: $.trim($('#txtLastName').val()),
+                                EMail: $.trim($('#txtEmail').val()),
+                                Demographics: boolDemographics,
+                                Allergy: boolAllergy,
+                                FamilyHistory: boolFamilyHistory,
+                                LabResults: boolLabResult,
+                                MedicalHistory: boolMedicalHistory,
+                                Medication: boolMedication,
+                                Problem: boolProblem,
+                                Procedure: boolProcedure,
+                                SocialHistory: boolSocialHistory,
+                                SurgicalHistory: boolSurgicalHistoyr,
+                                VitalSigns: boolVitalSign,
+                                Immunization: boolImmunization,
+                                Organ: boolOrgan,
+                                ClinicalDoc: boolClinicalDocs,
+                                Insurance: boolInsurance,
+                                EmergencyContact: boolEmergency,
+                                Appointment: boolAppointment,
+                                Visit: boolVisit,
+                                UploadDocs: boolUploadDocs,
+                                PlanOfCare: boolPOC,
+                                Messaging: boolMessaging,
+                                DownloadTransmit: boolDownload,
+                                ClinicalSummary: boolClinicalSummary,
+                                Enabled: boolEnabled
+                            };
+
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'account-patientrepresentative-save',
+                                data: JSON.stringify(requestData),
+                                dataType: 'json',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function (data) {
+                                    // if success
+                                    // alert("Success : " + data);
+                                    $("#patrep-portlet").html(data);
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    //if error
+
+                                    alert('Error : ' + xhr.message);
+                                    HideLoader();
+                                },
+                                complete: function (data) {
+                                    // if completed
+                                    HideLoader();
+
+                                },
+                                async: true,
+                                processData: false
+                            });
+                        } catch (err) {
+
+                            if (err && err !== "") {
+                                alert(err.message);
+                                HideLoader();
+                            }
+                        }
+                        $(this).dialog("close");
+                        ShowLoader();
+
+
+                        //                        end ajax
+                    }
+                },
+                Close: function () {
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+
+            }
+        });
+
+    });
+
+    // emd of create Patient Representative pop up script
+
+
+
+    $(function () {
+
+        tips = $(".validateTips");
+
+
+
+        $("#CheckPasswordEdit-form").dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "blind",
+                duration: 1000
+            },
+
+
+            width: 550,
+            modal: true,
+            buttons: {
+                "Authenticate": function () {
+
+                    var bValid = true;
+
+
+                    if (bValid) {
+                        //ajax 
+                        try {
+
+
+                            var requestData = {
+                                Password: $.trim($('#txtPasswordEdit').val()),
+
+                            };
+
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'password-check-edit',
+                                data: JSON.stringify(requestData),
+                                dataType: 'json',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function (data) {
+                                    // if success
+
+                                    if (data == "true") {
+                                        patientRepEdit();
+                                    }
+                                    else {
+                                        alert("Invalid Password");
+                                        // document.getElementById('error').innerHTML="Please Enter Correct Password";
+                                    }
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    //if error
+
+                                    alert('Error : ' + xhr.message);
+                                    HideLoader();
+                                },
+                                complete: function (data) {
+                                    // if completed
+                                    HideLoader();
+
+                                },
+                                async: true,
+                                processData: false
+                            });
+                        } catch (err) {
+
+                            if (err && err !== "") {
+                                alert(err.message);
+                                HideLoader();
+                            }
+                        }
+                        $(this).dialog("close");
+                        ShowLoader();
+
+
+                        //                        end ajax
+                    }
+                },
+                Close: function () {
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+
+            }
+        });
+
+    });
+
+
+
+
+
+    $(function () {
+
+        tips = $(".validateTips");
+
+
+
+        $("#CheckPassword-form").dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "blind",
+                duration: 1000
+            },
+
+
+            width: 550,
+            modal: true,
+            buttons: {
+                "Authenticate": function () {
+
+                    var bValid = true;
+
+
+                    if (bValid) {
+                        //ajax 
+                        try {
+
+
+                            var requestData = {
+                                Password: $.trim($('#txtPassword').val()),
+
+                            };
+
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'password-check',
+                                data: JSON.stringify(requestData),
+                                dataType: 'json',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function (data) {
+                                    // if success
+
+                                    if (data == "true") {
+                                        create_representative(); selectCheckBoxes();
+                                    }
+                                    else {
+                                        alert("Invalid Password");
+                                        // document.getElementById('error').innerHTML="Please Enter Correct Password";
+                                    }
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    //if error
+
+                                    alert('Error : ' + xhr.message);
+                                    HideLoader();
+                                },
+                                complete: function (data) {
+                                    // if completed
+                                    HideLoader();
+
+                                },
+                                async: true,
+                                processData: false
+                            });
+                        } catch (err) {
+
+                            if (err && err !== "") {
+                                alert(err.message);
+                                HideLoader();
+                            }
+                        }
+                        $(this).dialog("close");
+                        ShowLoader();
+
+
+                        //                        end ajax
+                    }
+                },
+                Close: function () {
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+
+            }
+        });
+
+    });
+
+    // end of check password js
+
+
+
+    function change_pass() {
+        $("#changePassword-form").dialog("open");
+    }
+
+    function Check_Password() {
+        $("#txtPassword").val('');
+        $("#CheckPassword-form").dialog("open");
+    }
+
+    function Check_Password_Edit() {
+        $("#txtPasswordEdit").val('');
+        $("#CheckPasswordEdit-form").dialog("open");
+    }
+
+    function create_representative() {
+        $("#PatientRepresentative-form").dialog("open");
+    }
+
+    function CreateChildPatient() {
+        $("#ChildPatient-form").dialog("open");
+    }
+
+    $(function () {
+
+        tips = $(".validateTips");
+
+
+
+        $("#ChildPatient-form").dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "blind",
+                duration: 1000
+            },
+
+
+            width: 650,
+            modal: true,
+            buttons: {
+                "Save": function () {
+                    var bValid = true;
+
+                    if (bValid) {
+
+
+
+                        try {
+                            var requestData = {
+                                PatientId: $.trim($('#txtpatrentcode').val()),
+                                PatientId_linked: $.trim($('#txtchildcode').val())
+                                //  LastName: $.trim($('#txtdepententName').val())
+
+                            };
+
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'Linked-Patient-Id-Save',
+                                data: JSON.stringify(requestData),
+                                dataType: 'json',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function (data) {
+                                    // if success
+
+                                    //  alert("Success : " + data);
+                                    if (data.message == false) {
+                                        alert("The Access Code was not Found");
+                                    }
+                                    $("#patient-portlet").html(data.html);
+                                    $("#tbl-LinkedAccount").fixedHeaderTable();
+
+                                    clearTextBox();
+
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    //if error
+
+                                    alert('Error : ' + xhr.message);
+                                    HideLoader();
+                                },
+                                complete: function (data) {
+                                    // if completed
+                                    HideLoader();
+
+                                },
+                                async: true,
+                                processData: false
+                            });
+
+
+                        } catch (err) {
+
+                            if (err && err !== "") {
+                                alert(err.message);
+                                HideLoader();
+                            }
+                        }
+                        $(this).dialog("close");
+                        ShowLoader();
+
+
+                        //                        end ajax
+                    }
+                },
+                Close: function () {
+                    $(this).dialog("close");
+                    clearTextBox();
+                }
+            },
+            close: function () {
+
+            }
+        });
+
+    });
+
+    function deleteLinkedAccount(PatiendId, Patient_linked) {
+
+        try {
+            var requestData = {
+                PatientId: PatiendId,
+                PatientId_linked: Patient_linked
+            };
+            ShowLoader();
+            $.ajax({
+                type: 'POST',
+                url: 'Account-Link-delete',
+                data: JSON.stringify(requestData),
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    // if success
+                    $("#patient-portlet").html(data);
+                    $("#tbl-LinkedAccount").fixedHeaderTable();
+
+                    // $("#divEmergencyContactList").html(data);
+                    //  $("#tbl-EmergencyContacts").fixedHeaderTable();
+                    HideLoader();
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //if error
+
+                    alert('Error : ' + xhr.message);
+                    HideLoader();
+                },
+                complete: function (data) {
+                    // if completed
+                    HideLoader();
+
+                },
+                async: true,
+                processData: false
+            });
+
+        }
+
+        catch (err) {
+
+            if (err && err !== "") {
+                alert(err.message);
+                HideLoader();
+            }
+        }
+    }
+
+
+
+    $(function () {
+        $("input[type=submit], a, button")
+        .button()
+        .click(function (event) {
+            // event.preventDefault();
+        });
+    });
+
+
+    $(document).ready(function () {
+
+        // Call horizontalNav on the navigations wrapping element
+        $('.full-width').horizontalNav({});
+        $("#tbl-LinkedAccount").fixedHeaderTable();
+        //   $('#txtpatrentcode').val("@RequestHelper.MyGlobalVar.PatientId");
+        clearTextBox();
+    });
+
+
+    function clearTextBox() {
+        //  $('#txtpatrentcode').val("");
+        $('#txtchildcode').val("");
+        $('#txtdepententName').val("");
+    }
+
+    function selectCheckBoxes() {
+        document.getElementById('chkDemographics').checked = true;
+        document.getElementById('chkAllergy').checked = true;
+        document.getElementById('chkFamilyHistory').checked = true;
+        document.getElementById('chkLabResult').checked = true;
+        document.getElementById('chkMedicalHistory').checked = true;
+        document.getElementById('chkMedication').checked = true;
+        document.getElementById('chkProblem').checked = true;
+        document.getElementById('chkEmergency').checked = true;
+        document.getElementById('chkSocialHistory').checked = true;
+        document.getElementById('chkSurgicalHistory').checked = true;
+        document.getElementById('chkVitalSign').checked = true;
+        document.getElementById('chkImmunization').checked = true;
+        document.getElementById('chkOrgan').checked = true;
+        document.getElementById('chkClinicalDocs').checked = true;
+        document.getElementById('chkInsurance').checked = true;
+        document.getElementById('chkClinicalSummary').checked = true;
+        document.getElementById('chkAppointment').checked = true;
+        document.getElementById('chkVisit').checked = true;
+        document.getElementById('chkUploadDocs').checked = true;
+        document.getElementById('chkPOC').checked = true;
+        document.getElementById('chkMessaging').checked = true;
+        document.getElementById('chkDownload').checked = true;
+        document.getElementById('chkProcedure').checked = true;
+        document.getElementById('chkEnabled').checked = true;
+
+
+    }
+</script>
+  
+
+}
+<div id="containment-wrapper" style="border-bottom-style: none; border-top-style: none; border-right-style: none; border-left-width: 1px; border-left-color: rgb(166, 201, 226);">
+
+
+ <!-- Tabs -->
+<div id="tabs" style="width:98%; font-size:12px; margin-top:5px; margin-right:4px; height:98.5%;display: none;">
+	<ul>
+		<li><a href="#tabs-1" style="height:30px;"><p style="margin-top: -5px; margin-left:-10px;">Account Settings</p></a></li>
+	  
+                                   @{
+                                    StringBuilder jsonStringPatientRep = new StringBuilder();
+                                    jsonStringPatientRep.Append(" { ");
+                                    jsonStringPatientRep.Append("\"UserId\": \"" + Model.PatientRepresentatives.UserId + "\",");
+                                    jsonStringPatientRep.Append("\"FirstName\": \"" + Model.PatientRepresentatives.FirstName + "\",");
+                                    jsonStringPatientRep.Append("\"LastName\": \"" + Model.PatientRepresentatives.LastName + "\",");
+                                    jsonStringPatientRep.Append("\"EMail\":  \"" + Model.PatientRepresentatives.EMail + "\",");
+                                    jsonStringPatientRep.Append("\"Demographics\":  \"" + Model.PatientRepresentatives.Demographics + "\",");
+                                    jsonStringPatientRep.Append("\"Allergy\":  \"" + Model.PatientRepresentatives.Allergy+ "\",");
+                                    jsonStringPatientRep.Append("\"FamilyHistory\":  \"" + Model.PatientRepresentatives.FamilyHistory + "\",");
+                                    jsonStringPatientRep.Append("\"LabResult\":  \"" + Model.PatientRepresentatives.LabResults+ "\","); 
+                                    jsonStringPatientRep.Append("\"MedicalHistory\":  \"" + Model.PatientRepresentatives.MedicalHistory + "\",");
+                                    jsonStringPatientRep.Append("\"Medication\":  \"" + Model.PatientRepresentatives.Medication+ "\","); 
+                                    jsonStringPatientRep.Append("\"Problem\":  \"" + Model.PatientRepresentatives.Problem + "\",");
+                                    jsonStringPatientRep.Append("\"Emergency\":  \"" + Model.PatientRepresentatives.EmergencyContact+ "\","); 
+                                    jsonStringPatientRep.Append("\"SocialHistory\":  \"" + Model.PatientRepresentatives.SocialHistory + "\",");
+                                    jsonStringPatientRep.Append("\"SurgicalHistory\":  \"" + Model.PatientRepresentatives.SurgicalHistory+ "\","); 
+                                    jsonStringPatientRep.Append("\"VitalSigns\":  \"" + Model.PatientRepresentatives.VitalSigns + "\",");
+                                    jsonStringPatientRep.Append("\"Immunization\":  \"" + Model.PatientRepresentatives.Immunization+ "\","); 
+                                    jsonStringPatientRep.Append("\"Organ\":  \"" + Model.PatientRepresentatives.Organ + "\",");
+                                    jsonStringPatientRep.Append("\"ClinicalDocs\":  \"" + Model.PatientRepresentatives.ClinicalDoc+ "\","); 
+                                    jsonStringPatientRep.Append("\"Insurance\":  \"" + Model.PatientRepresentatives.Insurance + "\",");
+                                    jsonStringPatientRep.Append("\"ClinicalSummary\":  \"" + Model.PatientRepresentatives.ClinicalSummary+ "\",");  
+                                    jsonStringPatientRep.Append("\"Appointment\":  \"" + Model.PatientRepresentatives.Appointment + "\",");
+                                    jsonStringPatientRep.Append("\"Visit\":  \"" + Model.PatientRepresentatives.Visit+ "\","); 
+                                    jsonStringPatientRep.Append("\"UploadDocs\":  \"" + Model.PatientRepresentatives.UploadDocs + "\",");
+                                    jsonStringPatientRep.Append("\"PlaneOfCare\":  \"" + Model.PatientRepresentatives.PlanOfCare+ "\","); 
+                                    jsonStringPatientRep.Append("\"Messaging\":  \"" + Model.PatientRepresentatives.Messaging + "\",");
+                                    jsonStringPatientRep.Append("\"Download\":  \"" + Model.PatientRepresentatives.DownloadTransmit+ "\",");
+                                    jsonStringPatientRep.Append("\"Procedure\":  \"" + Model.PatientRepresentatives.Procedure + "\",");
+                                    jsonStringPatientRep.Append("\"Enabled\":  \"" + Model.PatientRepresentatives.Enabled+ "\"");
+                                    jsonStringPatientRep.Append("}"); 
+                                    }
+	</ul> 
+	<div id="tabs-1">
+        @*<h4>Change Settings:</h4>*@
+      <div id="accordionAccount">
+              <h3>Settings</h3>
+<div>
+<span onclick="change_pass(); clearFields();" class="anc" style="padding-right: 4px; font-weight: bold;">Change Password</span>
+</div>
+<h3>Notifications</h3>
+<div>
+<p>
+Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+suscipit faucibus urna.
+</p>
+</div>
+<h3>Patient Representative</h3>
+<div>
+    @if (Convert.ToBoolean(HttpContext.Current.Session["loginRepFlag"])==false)
+        {
+   <span class="anc" style="padding-right: 4px; font-weight: bold;" onclick="Check_Password(); ">Create Patient Representative</span>
+     if(Model.PatientRepresentatives.Valid){
+           <span class="anc" style="padding-right: 4px; font-weight: bold;" onclick="Check_Password_Edit();">Edit</span>}    }
+          <!--Start of First Box -->
+                        <div id="#" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 0px; height:230px; left: 0px; width: 100%;">
+                            <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                                <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                                    style="margin-top: -1px; font-weight: normal; padding: 3px;"> <span style="font-weight: bold;" class="anc" onclick="MoveOn_allergies();">Patient Representative</span>
+                                           </h5>
+                                <div  id="patrep-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none; overflow-y: auto; height: 190px;">
+                                    <table class="box-table-a" summary="Appointments">
+                                        <thead>
+                                            <tr>
+                                                  <input type="hidden" id="patrepid" value="@jsonStringPatientRep.ToString()" />
+                                                <th scope="col">First Name</th>
+                                                <th scope="col">Last Name</th>
+                                                <th scope="col">Email:</th>
+                                               
+                                             
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                     <tbody>
+                                           
+                                                <tr class="r0" ">
+                                                    <td>@Model.PatientRepresentatives.FirstName</td>
+                                                    <td>@Model.PatientRepresentatives.LastName</td>
+                                                    <td>@Model.PatientRepresentatives.EMail</td>
+                                                   
+                                                </tr>
+                                          
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of 1st box -->
+
+              <!--Start of Second Box -->
+    
+</div>
+<h3>Linked Accounts</h3>
+<div>
+      @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag == true)
+                                {
+   <div id="link" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 0px;  left: 0px; width: 100%;height:192px;">
+                            <div id="acclink" style="position: absolute; top: 1px; left: 0px; right: 0px; height:190px;" class="ui-corner-all">
+                                <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                                    style="margin-top: -1px; font-weight: normal; padding: 3px;"> <span style="font-weight: bold;" class="anc" >  Linked Accounts</span>
+                                           </h5>
+                                    <span style="float:right;" class="anc" onclick="CreateChildPatient();"><img src="/Content/img/add.png"  />Add or Link a Family Member Account</span>
+<br /><br />
+                                <div  id="patient-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none; overflow-y: auto; height: 120px;">
+                                  @Html.Partial("_Index_AccountLink", Model.patientaccount)                                 
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of 2nd box -->
+         }
+</div>
+           <h3>Support Information</h3>
+<div>
+<p>
+Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+</p>
+                </div>
+          </div>
+
+        @*<span onclick="change_pass(); clearFields();" class="anc" style="padding-right: 4px; font-weight: bold;">Change Password</span> <br/>
+        @if (Convert.ToBoolean(HttpContext.Current.Session["loginRepFlag"])==false)
+        {
+       <span class="anc" style="padding-right: 4px; font-weight: bold;" onclick="Check_Password(); ">Create Patient Representative</span>
+     if(Model.PatientRepresentatives.Valid){
+           <span class="anc" style="padding-right: 4px; font-weight: bold;" onclick="Check_Password_Edit();">Edit</span>}    }
+          <!--Start of First Box -->
+                        <div id="#" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 0px; height:230px; left: 0px; width: 100%;">
+                            <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                                <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                                    style="margin-top: -1px; font-weight: normal; padding: 3px;"> <span style="font-weight: bold;" class="anc" onclick="MoveOn_allergies();">Patient Representative</span>
+                                           </h5>
+                                <div  id="patrep-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none; overflow-y: auto; height: 190px;">
+                                    <table class="box-table-a" summary="Appointments">
+                                        <thead>
+                                            <tr>
+                                                  <input type="hidden" id="patrepid" value="@jsonStringPatientRep.ToString()" />
+                                                <th scope="col">First Name</th>
+                                                <th scope="col">Last Name</th>
+                                                <th scope="col">Email:</th>
+                                               
+                                             
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                     <tbody>
+                                           
+                                                <tr class="r0" ">
+                                                    <td>@Model.PatientRepresentatives.FirstName</td>
+                                                    <td>@Model.PatientRepresentatives.LastName</td>
+                                                    <td>@Model.PatientRepresentatives.EMail</td>
+                                                   
+                                                </tr>
+                                          
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of 1st box -->
+
+              <!--Start of Second Box -->
+                      @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag == true)
+                                {
+   <div id="link" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 0px;  left: 0px; width: 100%;height:192px;">
+                            <div id="acclink" style="position: absolute; top: 1px; left: 0px; right: 0px; height:190px;" class="ui-corner-all">
+                                <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                                    style="margin-top: -1px; font-weight: normal; padding: 3px;"> <span style="font-weight: bold;" class="anc" >  Linked Accounts</span>
+                                           </h5>
+                                    <span style="float:right;" class="anc" onclick="CreateChildPatient();"><img src="/Content/img/add.png"  />Add or Link a Family Member Account</span>
+<br /><br />
+                                <div  id="patient-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none; overflow-y: auto; height: 120px;">
+                                  @Html.Partial("_Index_AccountLink", Model.patientaccount)                                 
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of 2nd box -->
+         }*@
+	</div>
+	
+</div>
+    </div>
+
+
+
+
+  
+
+       
+       
+   
+
+   
+<div id="CheckPassword-form" title="Authentication">
+    <table width="100%">
+        <tr>
+            <td >Password:</td>
+            <td>
+                <input type="password" id="txtPassword" class="txt"  />
+            </td>
+        </tr>
+        <tr><td><span id="error"></span></td></tr>
+    </table>
+</div>
+
+
+
+<div id="CheckPasswordEdit-form" title="Authentication">
+    <table width="100%">
+        <tr>
+            <td >Password:</td>
+            <td>
+                <input type="password" id="txtPasswordEdit" class="txt"  />
+            </td>
+        </tr>
+        <tr><td><span id="erroredit"></span></td></tr>
+    </table>
+</div>
+
+<!--start of popup of create patient Representative-->
+<div id="PatientRepresentative-form" title="Create Patient Representative">
+     <table width="100%" >
+       <tr>
+            <td >First Name:</td>
+            <td>
+                <input type="text" id="txtFirstName" class="txt"  />
+            </td>
+             <td>
+              <input type="checkbox" id="chkEnabled"  />
+          </td>
+            <td>
+               Enabled
+            </td>
+        </tr>
+        <tr>
+          <td >Last Name:</td>
+            <td colspan="3">
+                <input type="text"  id="txtLastName" class="txt"  /></td>
+              
+        </tr>
+        <tr>
+           <td >Email:</td>
+            <td colspan="3">
+                <input type="text"  id="txtEmail" class="txt"  />
+            </td>
+             
+        </tr>
+       
+    </table>
+     <table width="100%">
+       <tr>
+           
+            <td >
+                <input type="checkbox" id="chkDemographics" />
+            </td>
+            <td >Demographics</td>
+           
+            <td >
+                <input type="checkbox" id="chkSocialHistory"   />
+            </td>
+           <td >Social History</td>
+            
+            <td >
+                <input type="checkbox" id="chkAppointment"  />
+            </td>
+           <td >Appointment</td>
+        </tr>
+        <tr>
+             
+            <td>
+                <input type="checkbox" id="chkAllergy" />
+            </td>
+            <td  >Allergy</td>
+           
+            <td>
+                <input type="checkbox" id="chkSurgicalHistory"   />
+            </td>
+            <td >Surgical History</td>
+            
+            <td>
+                <input type="checkbox" id="chkVisit"  />
+            </td>
+            <td >Visit</td>
+        </tr>
+        <tr>
+           
+            <td>
+                <input type="checkbox" id="chkFamilyHistory"  />
+            </td>
+            <td >Family History</td>
+          
+            <td>
+                <input type="checkbox" id="chkVitalSign"   />
+            </td>
+            <td>Vital Signs</td>
+          
+            <td>
+                <input type="checkbox" id="chkUploadDocs"/>
+            </td>
+            <td >Upload Docs</td>
+        </tr>
+        <tr>
+           
+            <td>
+                <input type="checkbox" id="chkLabResult"   />
+            </td>
+            <td >Lab Result</td>
+         
+            <td>
+                <input type="checkbox" id="chkImmunization"  />
+            </td>
+             <td >Immunization</td>
+          
+            <td>
+                <input type="checkbox" id="chkPOC"  />
+            </td>
+            <td >Plan Of Care</td>
+        </tr>
+
+         <tr>
+           
+            <td>
+                <input type="checkbox" id="chkMedicalHistory" value="False" />
+            </td>
+             <td >Medical History</td>
+          
+            <td>
+                <input type="checkbox" id="chkOrgan" value="False"  />
+            </td>
+             <td >Organ</td>
+          
+            <td>
+                <input type="checkbox" id="chkMessaging"   />
+            </td>
+             <td >Messaging</td>
+        </tr>
+          <tr>
+           
+            <td>
+                <input type="checkbox" id="chkMedication"  />
+            </td>
+              <td >Medication</td>
+         
+            <td>
+                <input type="checkbox" id="chkClinicalDocs"  />
+            </td>
+               <td >Clinical Docs</td>
+          
+            <td>
+                <input type="checkbox" id="chkDownload"  />
+            </td>
+              <td>Download/Transmit</td>
+        </tr>
+          <tr>
+           
+            <td>
+                <input type="checkbox" id="chkProblem" />
+            </td>
+              <td>Problem</td>
+         
+            <td>
+                <input type="checkbox" id="chkInsurance"  />
+            </td>
+               <td>Insurance</td>
+         
+            <td>
+                <input type="checkbox" id="chkProcedure"  />
+            </td>
+               <td>Procedure</td>
+        </tr>
+         <tr>
+           
+            <td>
+                <input type="checkbox" id="chkEmergency"  />
+            </td>
+             <td>Emergency</td>
+          <td>
+               <input type="checkbox" id="chkClinicalSummary"  />
+          </td>
+            <td>
+              Clinical Summary
+            </td>
+        <td>     </td>
+             <td></td>
+        </tr>
+    </table>    
+</div>
+<!--End of popup of create patient Representative-->
+
+<!--start of popup of create child patient-->
+<div id="ChildPatient-form" title="Add an Account ">
+     <table width="100%" >
+       <tr>
+            <td align="right" style="width:20%;" >Please enter a Family Member Access Code: </td>
+            <td align="left" style="width:10%;" colspan="3" >
+                <input type="hidden" id="txtpatrentcode"  value="@RequestHelper.MyGlobalVar.PatientId" class="txt"  maxlength="3" style="width:65px; display:none;" />
+                
+          <input type="text" id="txtchildcode" class="txt" maxlength="30" style="width:100px;"  />
+
+          </td>
+          
+        </tr>
+        @*<tr>
+          <td align="right" style="width:10%;">Child or Dependent's Last Name:</td>
+            <td align="left" colspan="3">
+                <input type="text"  id="txtdepententName" class="txt"  /></td>
+              
+        </tr>*@
+        
+       
+    </table>
+     
+</div>
+<!--End of popup of create patient Representative-->
+
+<!--start of popup of create child patient-->
+
+<!--End of popup of create patient Representative-->
+
+
+<!--pop up  Change Password-->
+<div id="changePassword-form" title="Change Password">
+ 
+     <table width="100%">
+       <tr>
+            <td align="right">Old Password:</td>
+            <td>
+                <input type="password" id="txtOldPassword" class="txt" size="3" />
+            </td>
+         
+        </tr>
+        <tr>
+            <td align="right">New Password:</td>
+            <td colspan="2">
+                <input type="password"  id="txtNewPassword" class="txt" size="3" /></td>
+        </tr>
+        <tr>
+            <td align="right">Confirm Password:</td>
+            <td colspan="2">
+                <input type="password"  id="txtConfirmPassword" class="txt" size="3" />
+            </td>
+        </tr>
+         
+         <tr >
+            <td ></td>
+            
+             <td   colspan="2" style="margin-left:50px;">
+
+                 <h6 id="msg"  style=" color:red; top:110px;width:550px;margin-left: 80px; ">Password Requirements & Helpful Tips!
+                     <ul>
+                         <li>Passwords must be between 8 and 16 characters.</li>
+                         <li>Passwords must include any combination of the following 4 elements:</li>
+                         <ul>
+                         <li>
+                             Lowercase Letter(s) - Examples:  ‘a’, ‘b’, ‘ab’, ‘abc’, etc)
+                         </li>
+                         <li>
+                             Uppercase Letter(s) - Examples: ‘A’, ‘B’, or ‘AB, or ‘ABC’, etc.
+                         </li>
+                         <li>
+                             Number(s) - Examples: ‘1’, ‘2’ ‘3’ ‘4’ ‘5’ ‘6’ ‘7’ ‘8’ ‘9’ ‘0’, or ‘12’, or ‘123’, ‘1234’, etc.
+                         </li>
+                         <li>
+                             At least one of the following symbols: ‘@@’, ‘!’, ‘#’, ‘$’, ‘%’, ‘^’, ‘&’, ‘~’, ‘+’,‘?’, ‘*’, and or ‘.’
+                         </li>
+                         @*<li>
+                             At least one symbol  ("@@", #, %, $, ….)
+                         </li>*@
+                             </ul>
+                     </ul>
+                     <ul><li>If that’s a little confusing, here’s an Example:    ‘aB1@BCd&’</li></ul>
+                 </h6>
+             </td>
+
+         </tr>
+       
+    </table>
+       
+   
+
+   
+</div>
+<!--End of popup of Change Password-->

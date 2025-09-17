@@ -1,0 +1,61 @@
+﻿@model IEnumerable<AMR.Models.POCModel>
+@using System.Web.Script.Serialization;
+@using System.Text;
+<table class="box-table-a" id="tbl-ClinicalInstruction" summary="DownloadLEgalPlanOfCare">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Planned Date/Time</span></th>
+                                    <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Instructions</span></th>                              
+                                    
+                                    
+                                    
+                               </tr>
+                            </thead>
+                             <tbody>
+                                    @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var item in Model)
+                                    {
+                                        StringBuilder jsonStringClinicalInstruction = new StringBuilder();
+
+                                        jsonStringClinicalInstruction.Append(" { ");
+                                        jsonStringClinicalInstruction.Append("\"PlanCntr\": \"" + item.PlanCntr + "\",");
+                                        jsonStringClinicalInstruction.Append("\"InstructionTypeId\": \"" + item.InstructionTypeId + "\",");
+                                        jsonStringClinicalInstruction.Append("\"Note\":  \"" + item.Note + "\",");
+                                        jsonStringClinicalInstruction.Append("\"AppointmentDateTime\":  \"" + item.AppointmentDateTime + "\",");
+                                        jsonStringClinicalInstruction.Append("\"Instruction\":  \"" + item.Instruction + "\",");
+                                        jsonStringClinicalInstruction.Append("\"Goal\":  \"" + item.Goal + "\"");
+                                        jsonStringClinicalInstruction.Append("}");
+                        <tr class="@((counter % 2 == 1) ? "r0" : "r1")" onclick="OpenClinicalRecord(@item.PlanCntr);">
+                               @if (item.AppointmentDateTime.ToString() == "1/1/1900 00:00:00" || item.AppointmentDateTime.ToString() == "1/1/1900 12:00:00 AM")
+                                    {
+                                        <td width="135px" style="vertical-align:middle"><input type="hidden" id="hdClinical@(item.PlanCntr)" value="@jsonStringClinicalInstruction.ToString()" /></td>
+                                    }
+                                    else if (Convert.ToDateTime(item.AppointmentDateTime).ToShortTimeString() == "12:00 AM")
+                                    {
+                                        <td width="135px" style="vertical-align:middle"><input type="hidden" id="hdClinical@(item.PlanCntr)" value="@jsonStringClinicalInstruction.ToString()" />@Convert.ToDateTime(item.AppointmentDateTime).ToShortDateString()</td> 
+                                    }
+                                    else
+                                    {
+                                       <td  width="135px" style="vertical-align:middle"><input type="hidden" id="hdClinical@(item.PlanCntr)" value="@jsonStringClinicalInstruction.ToString()" />@item.AppointmentDateTime</td> 
+                                    } 
+                              
+                              <td  style="vertical-align:middle">@*<span class="LinkHighlight hoverMe" ></span>*@@item.Instruction</td>              
+                            
+                            
+                  
+                                                  
+                   
+                        </tr>   counter++;}
+                                }
+                                   else
+                                {
+                                   <tr>
+                                <td colspan="" style="vertical-align:middle">No Information Available.</td><td></td>
+                            </tr>
+                                }
+
+                    </tbody>
+                            </table>

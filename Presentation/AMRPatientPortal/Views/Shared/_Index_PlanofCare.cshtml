@@ -1,0 +1,62 @@
+﻿@model IEnumerable<AMR.Models.POCModel>
+@using System.Text;
+<table class="box-table-a" id="tbl-poc" summary="POC">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Type</span></th>
+                            <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Planned Date/Time</span></th>
+                            <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Instruction</span></th>
+                            
+                            
+                       </tr>
+                    </thead>
+                   <tbody>
+                        @if (Model !=null && Model.Count()>0)
+                        {
+                            int counter=0;
+                            foreach (var item in Model)
+                            {
+                                StringBuilder jsonStringPOC= new StringBuilder();
+
+                                jsonStringPOC.Append(" { ");
+                                jsonStringPOC.Append("\"PlanCntr\": \"" + item.PlanCntr + "\",");
+                                jsonStringPOC.Append("\"InstructionTypeId\": \"" + item.InstructionTypeId + "\",");
+                                jsonStringPOC.Append("\"Note\":  \"" + item.Note + "\",");
+                                jsonStringPOC.Append("\"AppointmentDateTime\":  \"" + item.AppointmentDateTime + "\",");
+                                jsonStringPOC.Append("\"Instruction\":  \"" + item.Instruction + "\",");
+                                jsonStringPOC.Append("\"Goal\":  \"" + item.Goal + "\"");
+                                
+                                jsonStringPOC.Append("}");
+                                
+                                
+                                <tr class="@((counter % 2 == 0) ? "r1" : "r0")"   onclick="OpenPocRecord(@item.PlanCntr);">
+                                <td style="vertical-align:middle" width="120px"><input type="hidden" id="hdPoc@(item.PlanCntr)" value="@jsonStringPOC.ToString()" />@item.InstructionType  </td>
+                                 @if (item.AppointmentDateTime.ToString() == "1/1/1900 00:00:00" || item.AppointmentDateTime.ToString() == "1/1/1900 12:00:00 AM")
+                                    {
+                                        <td style="vertical-align:middle" width="135px"></td>
+                                    }
+                                    else if (Convert.ToDateTime(item.AppointmentDateTime).ToShortTimeString() == "12:00 AM")
+                                    {
+                                        <td style="vertical-align:middle" width="135px">@Convert.ToDateTime(item.AppointmentDateTime).ToShortDateString()</td> 
+                                    }
+                                    else
+                                    {
+                                       <td style="vertical-align:middle" width="135px">@item.AppointmentDateTime</td> 
+                                    } 
+                                <td style="vertical-align:middle">@item.Instruction</td>                                
+                                
+                                </tr>   
+                                counter++;
+                            }
+                        }
+                        else
+                        {
+                             <tr>
+                                <td style="vertical-align:middle" width="200px;">No Information Available.</td>
+                                 <td></td> 
+                                          <td></td> <td></td>
+                            </tr>
+                        }
+                    </tbody>
+</table>
+

@@ -1,0 +1,2074 @@
+﻿ @using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@using System.Web.Optimization;
+@model MessageCenterModel
+
+@{
+    ViewBag.Title = "[Proivder Portal] Message Center";
+    Layout = "~/Views/Shared/_LayoutMasterPage.cshtml";
+}
+@Scripts.Render("~/ProviderMessage/jquery")
+<script src="~/Content/js/validator.js"></script>
+@Styles.Render("~/ProviderMessage/css")
+<style>
+    .tdhide {
+        visibility: hidden;
+    }
+
+    tr.selected {
+        background-color: #039;
+    }
+
+        tr.selected:hover td {
+            background: #039;
+        }
+</style>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+          
+            setTimeout(function () {
+
+                $("#cmbSecurityQuestion").val("1");
+                $("#cmbSecurityQuestion2").val("2");
+                var ResetPassword = "@AMR.Core.Utilities.RequestHelper.MyGlobalVar.ResetPasswordFlag";
+                //   alert(ResetPassword);
+               
+                var myJavaScripVar = "@AMR.Core.Utilities.RequestHelper.MyGlobalVar.FirstLogin";
+                //  alert(abc);
+                //   alert(myJavaScripVar);
+                if (myJavaScripVar == 'True') {
+                    $("#dialog-security").dialog("open");
+                }
+                else {
+
+                    if (ResetPassword == 'True') {
+                        $("#changePassword-form").dialog("open");
+                    }
+                }
+            }, 500);
+
+        });
+
+    </script>
+   <script>
+    
+       $(function () {
+
+           $('#browse').click(function () { $('#my-simple-upload').click(); });
+           $("#dialog-security").dialog({
+               autoOpen: false,
+               open: function (event, ui) { $(".ui-dialog-titlebar-close").hide(); },
+               closeOnEscape: false,
+               show: {
+                   effect: "blind",
+                   duration: 100
+               },
+               hide: {
+                   effect: "blind",
+                   duration: 100
+               },
+               height: 550,
+               width: 820,
+               modal: true,
+               buttons: {
+                   "Save": function () {
+                       // alert('test');
+                       //     chkAccess();
+                       var bValid = true;
+                       //allFields.removeClass("ui-state-error");
+                       if ($("#chkterms").prop('checked') == false) {
+                           alert('Please Agree on terms & conditions');
+                           return;
+                       }
+
+                       //            if (!Reqvalue($.trim($('#txtsecans').val()), 'Security Answer1'))
+
+                       if (!Reqvalue($.trim($('#txtsecans').val()), 'Security Answer 1'))
+                       { return; }
+
+                       if (($('#cmbSecurityQuestion option:selected').val()) == ($('#cmbSecurityQuestion2 option:selected').val())) {
+                           alert("Please select different question other than first");
+                           bValid = false;
+                           return;
+                       }
+                       if (!Reqvalue($.trim($('#securityans').val()), 'Security Answer2'))
+                       { return; }
+
+                       if (($('#cmbSecurityQuestion option:selected').val()) == ($('#cmbSecurityQuestion2 option:selected').val())) {
+                           alert("Security question 2 should be different than security question 1");
+                           bValid = false;
+                           return;
+                       }
+                       if (!Reqvalue($.trim($('#securityans').val()), 'Security Answer 2'))
+                       { return; }
+
+
+                  //     var flg = checkUrl($.trim($('#txtnpwd').val()));
+                  ////     alert(flg);
+                  //     if (flg != true) {
+                  //      //   $("#msgProvider").css("display", "block");
+
+                  //         bValid = false;
+                  //     }
+                       if (!Reqvalue($.trim($('#txtpwd').val()), 'Old Password'))
+                       { return; }
+
+                       if (!Reqvalue($.trim($('#txtnpwd').val()), 'New Password'))
+                       { return; }
+
+                       if ($('#txtnpwd').val() != $('#txtcpwd').val()) {
+                           alert('New password and confirm password are not the same');
+
+                         //  $("#msgProvider").css("display", "block");
+                          return false;
+                       }
+                       if (!PasswordValid($('#txtnpwd').val())) {
+                           return;
+                       }
+
+                       if (bValid) {
+                           // Save routine and call of Action
+                           //    alert('test');
+                           try {
+                               var requestData = {
+                                   SecurityQuestionId: $.trim($('#cmbSecurityQuestion option:selected').val()),
+                                   SecurityQuestionId2: $.trim($('#cmbSecurityQuestion2 option:selected').val()),
+                                   SecurityAnswer: $.trim($('#txtsecans').val()),
+                                   SecurityAnswer2: $.trim($('#securityans').val()),
+                                   Password: $.trim($('#txtpwd').val()),
+                                   NewPassword: $.trim($('#txtnpwd').val())
+                               };
+                               //debugger;
+                               $.ajax({
+                                   type: 'POST',
+                                   url: 'home-security-save',
+                                   data: JSON.stringify(requestData),
+                                   dataType: 'json',
+                                   contentType: 'application/json; charset=utf-8',
+                                   success: function (data) {
+
+                                       if (data == "Invalid password.") {
+                                           alert("Invalid old password");
+                                           $("#txtpwd").addClass("ui-state-error txt");
+                                           HideLoader();
+                                       }
+                                       else {
+                                           // if success
+                                           // alert("Success : " + data);
+                                           $("#dialog-security").dialog("close");
+                                           $("#txtpwd").removeClass("ui-state-error");
+
+                                           alert("Password and security settings have been changed successfully!");
+
+                                       }
+                                   },
+                                   error: function (xhr, ajaxOptions, thrownError) {
+                                       //if error
+                                       var myCookie = getCookie(".Patient");
+
+                                       if (myCookie == null) {
+                                           // do cookie doesn't exist stuff;
+                                           alert('Not logged in. Please log in to continue');
+                                           window.location = '/Login'
+                                           //xhr.getResponseHeader('Location');
+                                       }
+                                       else {
+
+                                           alert('Error : ' + xhr.message);
+                                       }
+                                       HideLoader();
+                                   },
+                                   complete: function (data) {
+                                       // if completed
+                                       HideLoader();
+
+                                   },
+                                   async: true,
+                                   processData: false
+                               });
+                           } catch (err) {
+
+                               if (err && err !== "") {
+                                   alert(err.message);
+                               }
+                           }
+                           //  $(this).dialog("close");
+                           ShowLoader();
+                       }
+
+                   },
+
+               },
+               close: function () {
+                   allFields.val("").removeClass("ui-state-error");
+                   $("#dialog-security").dialog("close");
+
+               }
+           });
+
+       });
+       $(function () {
+
+           tips = $(".validateTips");
+
+
+
+           $("#changePassword-form").dialog({
+               autoOpen: false,
+               open: function (event, ui) { $(".ui-dialog-titlebar-close").hide(); },
+               closeOnEscape: false,
+               show: {
+                   effect: "blind",
+                   duration: 100
+               },
+               hide: {
+                   effect: "blind",
+                   duration: 100
+               },
+
+
+               width: 750,
+               height: 380,
+               modal: true,
+               buttons: {
+                   "Save": function () {
+               //        chkAccess();
+                       var bValid = true;
+                       //var flg = checkUrl($.trim($('#txtNewPassword').val()));
+                       //if (flg != true) {
+                       ////    $("#Passwordmsg").css("display", "block");
+
+                       //    bValid = false;
+                       //}
+
+
+                       if (!Reqvalue($.trim($('#txtOldPassword').val()), 'Old Password'))
+                       { return; }
+
+                       if (!Reqvalue($.trim($('#txtNewPassword').val()), 'New Password'))
+                       { return; }
+
+                       if ($.trim($('#txtNewPassword').val()) != $.trim($('#txtConfirmPassword').val())) {
+                           alert('New password and confirm password are not the same');
+                         //  $("#Passwordmsg").css("display", "block");
+                           bValid = false;
+                       }
+                       if (!PasswordValid($('#txtNewPassword').val())) {
+                           return;
+                       }
+
+                       if (bValid) {
+                           //ajax 
+                           try {
+                               var requestData = {
+                                   Password: $.trim($('#txtOldPassword').val()),
+                                   NewPassword: $.trim($('#txtNewPassword').val())
+
+                               };
+
+
+                               $.ajax({
+                                   type: 'POST',
+                                   url: 'account-password-change',
+                                   data: JSON.stringify(requestData),
+                                   dataType: 'json',
+                                   contentType: 'application/json; charset=utf-8',
+                                   success: function (data) {
+
+                                       // if success
+                                       if (data == "Invalid password.") {
+                                           alert("Invalid old password");
+                                           $("#txtOldPassword").addClass("ui-state-error txt");
+                                           HideLoader();
+                                       }
+                                       else {
+                                           // alert("Success : " + data);
+                                           $("#txtOldPassword").removeClass("ui-state-error");
+                                           $("#changePassword-form").dialog("close");
+
+
+                                           //  Confirm();
+                                           HideLoader();
+                                           //   $(this).dialog("close");
+
+                                       }
+
+
+                                   },
+                                   error: function (xhr, ajaxOptions, thrownError) {
+                                       //if error
+                                       var myCookie = getCookie(".Patient");
+
+                                       if (myCookie == null) {
+                                           // do cookie doesn't exist stuff;
+                                           alert('Not logged in. Please log in to continue');
+                                           window.location = '/Login'
+                                           //xhr.getResponseHeader('Location');
+                                       }
+                                       else {
+
+                                           alert('Error : ' + xhr.message);
+                                       }
+                                       HideLoader();
+                                   },
+                                   complete: function (data) {
+                                       // if completed
+                                       HideLoader();
+
+                                   },
+                                   async: true,
+                                   processData: false
+                               });
+                           } catch (err) {
+
+                               if (err && err !== "") {
+                                   alert(err.message);
+                                   HideLoader();
+                               }
+                           }
+                           //   $(this).dialog("close");
+                           ShowLoader();
+                       }
+
+                       //                        end ajax
+                   },
+               
+               },
+               close: function () {
+               //    $("#Passwordmsg").css("display", "none");
+                   $("#txtOldPassword").removeClass("ui-state-error");
+               }
+           });
+
+       });
+
+       function messageAttachmentDetail(id) {
+
+
+           var requestURL = "";
+
+           //alert(id);
+           var docType = id.split('|')[1];
+           // alert(docType);
+
+           requestURL = '@Url.Action("MessageAttachment", "Message")' + "/?id=" + id.split('|')[0];
+
+            var isOfficeDocRequest = false;
+
+            switch (docType.toLowerCase()) {
+                case "doc":
+                    isOfficeDocRequest = true;
+                    break;
+
+                case "docx":
+                    isOfficeDocRequest = true;
+                    break;
+
+                case "xls":
+                    isOfficeDocRequest = true;
+                    break;
+
+                case "xlsx":
+                    isOfficeDocRequest = true;
+                    break;
+
+                default:
+                    isOfficeDocRequest = false;
+                    break;
+            }
+
+            if (isOfficeDocRequest) {
+
+
+                try {
+
+
+                    ShowLoaderReportViewer();
+
+                    $('#iframeViewAttachment').attr('src', requestURL);
+                    $('#iframeViewAttachment').load();
+
+                } catch (err) {
+
+                    if (err && err !== "") {
+                        alert(err.message);
+                        HideLoaderReportViewer();
+                    }
+                }
+
+
+
+            }
+            else {
+
+
+
+                $('#Signupdialog').remove();
+
+                // alert('test');
+                var $dialog = $('<div id="Signupdialog" style="width:500px;"></div>')
+                               .html('<div id="page_loader2" style="display: block;"><div id="apDiv1" align="center"><table width="200" border="0" cellspacing="0" cellpadding="0"><tr><td height="70px;">&nbsp;</td></tr><tr><td align="center"><img src="Content/img/image_559926.gif" width="128" height="64" /></td></tr><tr><td style="text-align: center;" height="70px;">Please wait ...</td></tr></table></div></div><iframe id="iframeViewDoctorAttachment" style="border: 0px; " src="' + requestURL + '" width="100%" height="100%" onload="processingComplete();"></iframe>')
+                               .dialog({
+                                   autoOpen: false,
+                                   show: {
+                                       effect: "blind",
+                                       duration: 1000
+                                   },
+                                   hide: {
+                                       effect: "blind",
+                                       duration: 1000
+                                   },
+                                   modal: true,
+                                   height: 600,
+                                   width: 800,
+                                   title: "View Attachment",
+                                   buttons: {
+
+                                       Close: function () {
+                                           $(this).dialog("close");
+                                       }
+                                   },
+                                   close: function () {
+
+                                   }
+                               });
+                $dialog.dialog('open');
+
+            }
+        }
+
+
+
+
+
+    </script>
+ 
+   <script>
+
+       $("#cmbAppointmentFacility").change(function () {
+           $('#PatName').hide();
+           $('#PatName').empty();
+           // document.getElementById("txtPatient").value = "";
+       });
+
+       $("#txtPatient").autocomplete({
+
+           select: function (event, ui) {
+               $("#hdPatientId").val(ui.item.data);
+               $("#PatName").text(ui.item.value);
+               $("#PatName").show();
+               //return false;
+           }
+       });
+
+       $("#txtPatient").autocomplete({
+           source: function (request, response) {
+               $.ajax({
+                   url: "message-Patientlist-get",
+                   type: "POST",
+                   dataType: "json",
+                   data: { term: request.term, FacilityId: $.trim($('#cmbAppointmentFacility  option:selected').val()) },
+                   success: function (data) {
+                       response($.map(data, function (item) {
+
+                           return { data: item.PatientId, value: item.Name };
+                       }))
+
+                   }
+               })
+           },
+           messages: {
+               noResults: "", results: ""
+           }
+       });
+
+
+    </script>
+  
+    
+     
+
+ 
+ 
+  }                                         
+
+<div id="containment-wrapper" style="border-bottom-style: none; border-top-style: none; border-right-style: none; border-left-width: 1px;width:960px; border-left-color: rgb(166, 201, 226);">
+   @* <button id="compose" style="padding-top: 0px; margin-top: -5px; font-size: 12px;"  onclick="Javascript:SentMessage('Compose');">
+        <img src="Content/img/meesage.png" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">Compose New Message</button>*@
+    
+    <div id="tabs" style="font-size: 12px; margin-top: 10px;display: none;">
+        <ul >
+            <li><a href="#tabs-1" style="height: 30px;" >
+                <p id="GeneralMessages" style="margin-top: -5px;">
+                    Inbox
+                </p>
+            </a></li>
+            <li><a href="#tabs-4" style="height: 30px;" >
+                <p id="AppointmentMessages" style="margin-top: -5px;">
+                    Appointment
+                </p>
+            </a></li>
+            <li style="margin-left:0px;"><a href="#tabs-5" style="height: 30px;" >
+                <p id="MedicationMessages" style="margin-top: -5px;">
+                    Refill Requests
+                </p>
+            </a></li>
+            <li><a href="#tabs-6" style="height: 30px;" >
+                <p id="ReferralMessages" style="margin-top: -5px;">
+                    Referral Requests
+                </p>
+            </a></li>
+                        <li style="margin-left:0px;"><a href="#tabs-2" style="height: 30px;">
+                <p   id="SentMessages" style="margin-top: -5px;" >
+                    Sent Items
+                </p>
+            </a></li>
+            <li><a href="#tabs-3" style="height: 30px;">
+                <p id="DeleteMessages" style="margin-top: -5px;"  >
+                    Deleted
+                </p>
+            </a></li>
+        </ul>
+        <div id="tabs-1">
+            <div id="ComposeMessage" title="Compose Message" >
+        <input type="hidden" id="hdSentFlag" value=""/><input type="hidden" id="hdReplyMessageId" value=""/>
+       <input type="hidden" id="hdAttachmentName" value=""/>
+        <input type="hidden" id="hdAttachmentTest" value=""/>
+        <input type="hidden" id="hdFacilityId" value="test"/>
+        <input type="hidden" id="hdCreatedByName" value=""/>
+        <input type="hidden" id="hdMessageRequest" value=""/>
+        <input type="hidden" id="hdMessageTypeId" value=""/>
+        <input type="hidden" id="hdMessageUrgencyId" value=""/>
+        <input type="hidden" id="hdFlag" value=""/>
+    <div style="vertical-align:top;">
+        <table>
+            <tr>
+               
+                <td><input type="file" id="files" name="file" /><input id="my-simple-upload" type="file" value="" name="MyAttachFile"/><input type="button" value="Browse..." id="browse" /><label id="BrowseName" style="margin-top:-20px;margin-left:100px"></label></td>
+                <td><input type="hidden" id="ByteData" value="" "/></td>
+                <td><input type="hidden" id="FileBytes" value="" "/></td>
+                <td><button type="button" onclick="clearAttach();" id="btncancelupload" >Cancel</button></td>
+            </tr>
+        </table>
+        <div id="progress_bar"><div class="percent">0%</div></div>
+         @* <img src="Content/img/attach.gif" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">
+       *@ 
+       </div>  <br>
+        <p>
+            @*Please note that you can expect to receive a response within 1 bussiness day*@
+        </p>
+        <div>
+            <table width="921" height="180" border="1" style="border-color: rgb(166, 201, 226);">
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Location:</b>
+                     
+                             @Html.DropDownList("cmbAppointmentFacility", Model.Facilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = " txt  ui-corner-all bcom", style = "width:400px; margin-left:33px;", id = "cmbAppointmentFacility" })
+         
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>To:</b>
+                           @* @Html.DropDownList("cmbPatient", Model.PatientList.ToPatientModelSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:405px; margin-left:72px;", id = "cmbPatient" })
+                          *@
+                            <input type="hidden" id="hdPatientId" />
+                            <input type="text" id="txtPatient" name="txtPatient" class="txt ui-corner-all" style="margin-left:110px;margin-top:-20px;"/>
+                             <div id="PatName" style="margin-left:320px;margin-top:-30px;color:white;display:none;"></div>
+                            </p>
+                        
+                            
+                         @* <div style="margin-left:110px;margin-top:-30px;color:red">
+                            
+                            </div>*@
+                             @* <div id="PatName" style="margin-left:320px;margin-top:-22px;color:red"></div>*@
+                        
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Subject:</b>
+                             @Html.DropDownList("cmbMessageType", Model.MessageType.ToMessageTypeModelSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:403px; margin-left:42px;", id = "cmbMessageType" })
+
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                           <b>Message priority:</b>
+                              <select id="cmbMessageUrgency" class="txt" style="width:90px">
+                                          
+                      <option value="false" selected="selected">No</option><option value="true">Yes</option>
+</select>
+                           @*  @Html.DropDownList("cmbMessageUrgency", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:150px; margin-left:20px;", id = "cmbMessageUrgency" })*@
+                            @* <select style="margin-left: 0px; margin-top: -15px; width: 100px;" class="txt">
+                                <option>Arial</option>
+                            </select>
+                            <select style="margin-left: 0px; margin-top: -15px; width: 70px;" class="txt">
+                                <option>12</option>
+                            </select>
+                            <button>
+                                <img src="Content/img/bold.png" width="20px"></button>
+                            <button>
+                                <img src="Content/img/italic.png" width="20px"></button>
+                            <button>
+                                <img src="Content/img/underline.png" width="20px"></button>*@
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="150" colspan="2" bgcolor="#FFFFFF"> 
+                   <textarea id="txtMessageWrite" class="txt" rows="5" cols="45" style="height:150px; width:660px;" maxlength="256"> </textarea>
+                    </td>
+                </tr>
+                  <tr><td><div id="counter" style="text-align:right;"></div></td></tr>
+            </table>
+        </div>
+    </div>
+    <div id="ReplyMessage" title="Reply Message" >
+        <input type="hidden" id="hdSentFlag1" value=""/><input type="hidden" id="hdReplyMessageId1" value=""/>
+
+    <div style="vertical-align:top;">
+        @*<table>
+            <tr>
+               
+                <td><input type="file" id="files" name="file" /></td>
+                <td><input type="hidden" id="ByteData" value="" "/></td>
+                <td><input type="hidden" id="FileBytes" value="" "/></td>
+                <td><button type="button" onclick="clearAttach();" id="btncancelupload" >Cancel</button></td>
+            </tr>
+        </table>*@
+        @*<div id="progress_bar"><div class="percent">0%</div></div>*@
+         @* <img src="Content/img/attach.gif" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">
+       *@ 
+       </div>  <br>
+        <p>
+            Please note that you can expect to receive a response within 1 bussiness day
+        </p>
+        <div>
+            <table width="921" height="180" border="1" style="border-color: rgb(166, 201, 226);">
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Location:</b>
+                     
+                             @Html.DropDownList("cmbAppointmentFacility1", Model.Facilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = " txt  ui-corner-all bcom", style = "width:400px; margin-left:33px;", id = "cmbAppointmentFacility1" })
+         
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>To:</b>
+                           @*   @Html.DropDownList("cmbPatient1", Model.PatientList.ToPatientModelSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:405px; margin-left:72px;", id = "cmbPatient1" })
+                           *@ <br />     
+                             <input type="text" id="txtPatient1" name="txtPatient1" class="txt ui-corner-all" style="margin-left:100px;margin-top:-20px;width:400px;"/>
+                     
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Subject:</b>
+                             @Html.DropDownList("cmbMessageType1", Model.MessageType.ToMessageTypeModelSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:403px; margin-left:42px;", id = "cmbMessageType1" })
+
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                           <b>Message priority:</b>
+                                              <select id="cmbMessageUrgency1" class="txt" style="width:90px">
+                                          
+                      <option value="false" selected="selected">No</option><option value="true">Yes</option>
+</select>    
+                            @* @Html.DropDownList("cmbMessageUrgency1", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:120px; margin-left:20px;", id = "cmbMessageUrgency1" })*@
+                             @*<select style="margin-left: 0px; margin-top: -15px; width: 100px;" class="txt">
+                                <option>Arial</option>
+                            </select>
+                            <select style="margin-left: 0px; margin-top: -15px; width: 70px;" class="txt">
+                                <option>12</option>
+                            </select>
+                            <button>
+                                <img src="Content/img/bold.png" width="20px"></button>
+                            <button>
+                                <img src="Content/img/italic.png" width="20px"></button>
+                            <button>
+                                <img src="Content/img/underline.png" width="20px"></button>*@
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="150" colspan="2" bgcolor="#FFFFFF"> 
+                   <textarea id="txtMessageWrite1" class="txt" rows="5" cols="45" style="height:150px; width:660px;" maxlength="256"> </textarea>
+                    </td>
+                </tr>
+                 <tr><td><div id="counter1" style="text-align:right;"></div></td></tr>
+            </table>
+        </div>
+    </div>
+    <div id="ReplyAttachMessage" title="Reply Message" >
+        
+
+    <div id="Detail">
+    
+    </div>
+      <div>
+            <table width="921" height="180" border="1" style="border-color: rgb(166, 201, 226);">
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Status:</b>
+                               @Html.DropDownList("cmbStatus", Model.MessageStatus.ToMessageStatusSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:120px; margin-left:10px;", id = "cmbStatus" })
+                         
+                            @*<select name="preft_com" id="cmbStatus" class="com" style="margin-left: 70px; margin-top: -20px;">
+                    <option value="0">Confirmed</option>
+  <option value="1">Cancelled</option>
+  <option value="2">Pending</option
+                </select>*@
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Date:</b>
+                     
+                             <input type="text" name="pref_txt" id="txtPrefDateFrom" class="com" style="margin-left: 70px; margin-top: -20px;width:120px;"/>
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Time:</b>  
+                          <select name="preft_com" id="cmbtime" class="txt  ui-corner-all bcom" style="width:120px; margin-left:25px;">
+                    @*<option value="12:00:00">12:00 am</option>*@
+  <option value="00:00:00">12:00 am</option>
+  <option value="01:00:00">1:00 am</option>
+  <option value="02:00:00">2:00 am</option>
+  <option value="03:00:00">3:00 am</option>
+  <option value="04:00:00">4:00 am</option>
+  <option value="05:00:00">5:00 am</option>
+  <option value="06:00:00">6:00 am</option>
+  <option value="07:00:00">7:00 am</option>
+  <option value="08:00:00">8:00 am</option>
+  <option value="09:00:00">9:00 am</option>
+  <option value="10:00:00">10:00 am</option>
+  <option value="11:00:00">11:00 am</option>
+  <option value="12:00:00">12:00 pm</option>
+  <option value="13:00:00">1:00 pm</option>
+  <option value="14:00:00">2:00 pm</option>
+  <option value="15:00:00">3:00 pm</option>
+  <option value="16:00:00">4:00 pm</option>
+  <option value="17:00:00">5:00 pm</option>
+  <option value="18:00:00">6:00 pm</option>
+  <option value="19:00:00">7:00 pm</option>
+  <option value="20:00:00">8:00 pm</option>
+  <option value="21:00:00">9:00 pm</option>
+  <option value="22:00:00">10:00 pm</option>
+  <option value="23:00:00">11:00 pm</option>
+                              
+                </select>
+                        </p>
+                    </td>
+                </tr>
+                         
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                           <b>Message Response:</b>
+                             <textarea id="txtMessageWrite2" class="txt" rows="5" cols="45" maxlength="256" style="height:150px; width:660px;" autofocus> </textarea>
+                  
+                          </p>
+                    </td>
+                </tr>
+                   <tr>
+            
+            <td colspan="3" align="right"><div id="Appcount"></div></td>
+        </tr>
+            </table>
+        </div>
+    </div>
+    <div id="ReplyRequestRefillMessage" title="Reply Message" >
+        
+        <div id="RefilDetail"></div>
+    
+      <div>
+            <table width="921" height="180" border="1" style="border-color: rgb(166, 201, 226);">
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Status:</b>
+                               @Html.DropDownList("cmbStatus1", Model.MessageStatus.ToMessageStatusSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:200px; margin-left:90px;", id = "cmbStatus1" })
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Medication Name:</b>
+                              <input type="text" name="txtMedicationName" id="txtMedicationName" class="txt ui-corner-all" style="margin-left:150px;margin-top:-20px;"/>  </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>No of Refills:</b>
+                     <input type="hidden" id="pharname" />
+                            <input type="hidden" id="pharadd" />
+                            <input type="hidden" id="pharphone" />
+                             <input type="text" name="txtCountRefills" id="txtCountRefills" class="txt ui-corner-all" style="margin-left:150px;margin-top:-20px;"/>
+                        </p>
+                    </td>
+                </tr>
+
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                           <b>Comments:</b>
+                             <textarea id="txtComments" class="txt" rows="5" cols="45" maxlength="256" style="height:150px; width:660px;" autofocus> </textarea>
+                  
+                          </p>
+                    </td>
+                </tr>
+                  <tr>
+            
+            <td colspan="3" align="right"><div id="refillcount"></div></td>
+        </tr>
+
+            </table>
+        </div>
+    </div>
+
+    <div id="ReplyRequestReferralMessage" title="Referral Request Response" >
+        
+
+        
+      <div>
+          <b>Reason for Referral:</b>&nbsp<b id="RplyReason"></b>
+          <br />
+          <b>Comments:</b>&nbsp<b id="RplyComment"></b>
+          <br />
+            <table border="1" style="border-color: rgb(166, 201, 226);">
+              @* <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Date:</b>
+                     
+                             <input type="text" name="pref_txt" id="txtPrefDateFromRef" class="com" style="margin-left: 70px; margin-top: -20px;width:120px;"/>
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Time:</b>  
+                          <select name="preft_com" id="cmbtimeRef" class="txt  ui-corner-all bcom" style="width:120px; margin-left:25px;">
+                    <option value="0">12:00 am</option>
+  <option value="1">1:00 am</option>
+  <option value="2">2:00 am</option>
+  <option value="3">3:00 am</option>
+  <option value="4">4:00 am</option>
+  <option value="5">5:00 am</option>
+  <option value="6">6:00 am</option>
+  <option value="7">7:00 am</option>
+  <option value="8">8:00 am</option>
+  <option value="9">9:00 am</option>
+  <option value="10">10:00 am</option>
+  <option value="11">11:00 am</option>
+  <option value="12">12:00 pm</option>
+  <option value="13">1:00 pm</option>
+  <option value="14">2:00 pm</option>
+  <option value="15">3:00 pm</option>
+  <option value="16">4:00 pm</option>
+  <option value="17">5:00 pm</option>
+  <option value="18">6:00 pm</option>
+  <option value="19">7:00 pm</option>
+  <option value="20">8:00 pm</option>
+  <option value="21">9:00 pm</option>
+  <option value="22">10:00 pm</option>
+  <option value="23">11:00 pm</option>
+                </select>
+                        </p>
+                    </td>
+                </tr>*@
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                           <b>Message Response:</b>
+                             <textarea id="txtMessageRef" class="txt" rows="5" cols="45" maxlength="256" style="height:150px; width:500px;" autofocus> </textarea>
+                  
+                          </p>
+                    </td>
+                </tr>
+                      <tr>
+            
+            <td colspan="3" align="right"><div id="referalcount"></div></td>
+        </tr>
+            </table>
+        </div>
+    </div>
+            <input id="hdReplyMessageDetailId" type="hidden" value="" />
+           @* <button onclick="Javascript:SentMessage('Reply');" >
+                <img src="Content/img/reply.png" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;" >Reply</button>*@
+             <input id="hdDeleteMessageId" type="hidden" value="" />
+                  <button id="compose" style="padding-top: 0px; margin-top: -5px; font-size: 12px;"  onclick="Javascript:SentMessage('Compose');">
+        <img src="Content/img/meesage.png" width="20px" style="margin-top: -5px; margin-left: -2px; margin-right: 10px;">Compose New Message</button> 
+             <button id="InboxDeleteMessage" class="DeleteMessage" name="Delete" style="margin-top:-5px; margin-left:5px;">
+                <img src="Content/img/delete.gif" width="20px" style="margin-top: -5px; margin-left: -2px; margin-right: 10px;">Delete</button>
+            
+            <!--Inbox 1st grid start here -->
+            <div id="MessageHeaderGrid" name="MessageHeaderGrid" style="margin-top: 20px; border: 1px solid; border-color: rgb(166, 201, 226); height: 190px; overflow-x: auto;"
+                class="ui-corner-all"  >
+                 @Html.Partial("~/Views/Templates/Message/_Message_Inbox.cshtml", Model.ProviderMessages)     
+            </div> 
+            <!--Inbox 1st grid end here -->
+
+            <!--Inbox 2nd grid start here -->
+            <div id="MessageDetailGrid" name="MessageDetailGrid" style="border: 1px solid; border-color: rgb(166, 201, 226); margin-top:10px;"
+                class="ui-corner-all">
+          
+            </div> 
+            <!--Inbox 2nd grid end here -->
+            <!-- Reply Part-->
+      
+            <!--End of reply part-->
+           <div id="detail-inbox-request">
+
+            </div> 
+        </div>
+        
+        <div id="tabs-4">
+            <button id="btnCancel" style="margin-top:-10px; margin-left:-10px;" onclick="fnOpenAppDialog();">
+                <img src="Content/img/cancel.png" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px; width:20px;">Cancel</button>
+            <!--Appointment request Grid start -->
+            <div id="AppointGrid" style="margin-top: 20px; border: 1px solid; border-color: rgb(166, 201, 226); height: 190px; overflow-x: auto;"
+                class="ui-corner-all">
+                @Html.Partial("~/Views/Templates/Message/_Message_Appointment.cshtml", Model.ProviderMessages) 
+                
+            </div>
+            <!-- Grid end appointment request-->
+            <!--Appointment 2nd grid start here -->
+            <div id="AppintmentDetailGrid" name="AppintmentDetailGrid" style="border: 1px solid; border-color: rgb(166, 201, 226); margin-top:10px;"
+                class="ui-corner-all">
+          
+            </div> 
+            <!--AppointmentDetail 2nd grid end here -->
+           <div id="detail-Appointment-Request">
+            </div>
+        </div>
+        <div id="tabs-5">
+            <button id="deleterefrill" style="margin-top:-10px; margin-left:-10px;">
+                <img src="Content/img/delete.gif" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">Delete</button>
+            <!--Refill request Grid start -->
+            <div id="MainRefillGrid" style="margin-top: 20px; border: 1px solid; border-color: rgb(166, 201, 226); height: 190px; overflow-x: auto;"
+                class="ui-corner-all">
+                 @Html.Partial("~/Views/Templates/Message/_Message_Refill.cshtml", Model.ProviderMessages) 
+                
+            </div>
+            <!-- Grid end refill request-->
+             <!--Medication Refill 2nd grid start here -->
+            <div id="RefillRequestDetailGrid" name="RefillRequestDetailGrid" style="border: 1px solid; border-color: rgb(166, 201, 226); margin-top:10px;"
+                class="ui-corner-all">
+          
+            </div> 
+            <!--Medication Refill 2nd grid end here -->
+            <div id="detail-refill-request">
+            </div>
+        </div>
+        <div id="tabs-6">
+           <button id="ReferralDelete" style="margin-top:-10px; margin-left:-10px;">
+                <img src="Content/img/delete.gif" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">Delete</button>
+            <!--Referral Request Grid start -->
+            <div id="MainReferralGrid" style="margin-top: 20px; border: 1px solid; border-color: rgb(166, 201, 226); height: 190px; overflow-x: auto;"
+                class="ui-corner-all">
+                @Html.Partial("~/Views/Templates/Message/_Message_Refferal.cshtml", Model.ProviderMessages)
+                
+            </div>
+            <!-- Grid end Referral Request-->
+            
+            <!--Medication Refill 2nd grid start here -->
+            <div id="ReferralRequestDetailGrid" name="ReferralRequestDetailGrid" style="border: 1px solid; border-color: rgb(166, 201, 226); margin-top:10px;"
+                class="ui-corner-all">
+          
+            </div> 
+            <!--Medication Refill 2nd grid end here -->
+            <div id="detail-Referral-Request">
+            </div>
+        </div>
+        <div id="tabs-2">
+            <button class="DeleteMessage" id="SentDeleteMessage" style="margin-top:-10px; margin-left:-10px;" >
+                <img src="Content/img/delete.gif" width="20px" style="margin-top: -5px; margin-left: -2px; margin-right: 10px;">Delete</button>
+            <!--sentitem Grid start -->
+            <div id="MessageSentHeaderGrid" style="margin-top: 20px; border: 1px solid; border-color: rgb(166, 201, 226); height: 190px; overflow-x: auto;"
+                class="ui-corner-all">
+                @Html.Partial("~/Views/Templates/Message/_Message_Sent.cshtml", Model.ProviderSentMessages)  
+                @*<table id="box-table-a" summary="Medications">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="margin-right: 10px;">
+                               <input name="check" type="checkbox" class="CheckAll" onclick="checkAll('chk1');"/>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    <img src="Content/img/i.png" />
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    From
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 30px;">
+                                    To
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 80px;">
+                                    Date
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 60px;">
+                                    Subject
+                                </div>
+                            </th>
+                            
+                            <th scope="col">
+                                <div style="margin-left: 90px; ">
+                                    Detail
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                        @foreach (var item in Model.Messages.Select((x, i) => new { PatientMessageModel = x, Index = i + 1 }))
+                        {
+                            if (item.PatientMessageModel.MessageType == "Billing Message" || item.PatientMessageModel.MessageType == "General Inquiry")
+                            {
+                           <tr class="@((item.Index % 2 == 1) ? "r1" : "r0")" >
+                                <td>
+                                   
+                                    <input type="checkbox" id="chk1" value="1" name="chk[]" />
+                                </td>
+                                <td></td>
+                                <td>
+                                   <div style="margin-left: 20px;">
+                                       @item.PatientMessageModel.CreatedByName  
+                                    </div>
+                                </td>
+                                <td>
+                                   <div style="margin-left: 30px;">
+                                        @item.PatientMessageModel.ProviderName_To
+                                   </div>
+                                </td>
+                                <td>
+                                   <div style="margin-left: 80px;">
+                                         @item.PatientMessageModel.MessageUrgency
+                                    </div>
+                                </td>
+                                <td>
+                                   <div style="margin-left: 60px;">
+                                        @item.PatientMessageModel.MessageType
+                                    </div>
+                                </td>
+
+                               <td>
+                                   <div style="margin-left: 88px;" > <img src="Content/img/details.png" onclick="sentDetail(@item.PatientMessageModel.MessageId);"/>
+                                      
+                                    </div>
+                                </td>
+                            </tr>
+                            }
+                        } 
+                    </tbody>
+                </table>*@
+            </div>
+            <!-- Grid end sentitem-->
+            <!-- Reply Part-->
+       <!--Inbox 2nd grid start here -->
+            <div id="MessageSentDetailGrid" name="MessageSentDetailGrid" style="border: 1px solid; border-color: rgb(166, 201, 226); margin-top:10px;"
+                class="ui-corner-all">
+          
+            </div> 
+            <!--Inbox 2nd grid end here -->
+            <!-- Reply Part-->
+      
+            <!--End of reply part-->
+            <div id="detail-sent-request">
+
+            </div>
+</div>
+
+        <div id="tabs-3">
+            @*<button style="margin-top:-10px; margin-left:-10px;">
+                <img src="Content/img/delete.gif" width="20px" style="margin-top: -5px; margin-left: -2px; margin-right: 10px;">Delete</button>
+            <button style="margin-top:-10px;">
+                <img src="Content/img/delete.gif" width="20px" style="margin-top: -5px; margin-left: -2px; margin-right: 10px;">Restore</button>*@
+            <!--deleted Grid start -->
+           
+            <div style="margin-top: 20px; border: 1px solid; border-color: rgb(166, 201, 226); height: 190px; overflow-x: auto;"
+                class="ui-corner-all">
+                 @Html.Partial("~/Views/Templates/Message/_Message_Delete.cshtml", Model.ProviderMessages)
+                @*<table id="box-table-a" summary="Medications">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="margin-right: 10px;">
+                          
+                                 <input name="check" type="checkbox" class="CheckAll" onclick="checkAll('chk2');"/>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    <img src="Content/img/i.png" />
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    From
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 30px;">
+                                    To
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 80px;">
+                                    Date
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 60px;">
+                                    Subject
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 40px;">
+                                    Detail
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Messages.Select((x, i) => new { PatientMessageModel = x, Index = i + 1 }))
+                        {
+                            if (item.PatientMessageModel.MessageStatusId == "7")
+                            {
+                           <tr class="@((item.Index % 2 == 1) ? "r1" : "r0")" >
+                            <td>
+                                   
+                                    <input type="checkbox" id="chk2" value="1" name="chk[]" />
+                            </td>
+                            <td></td>
+                            <td>
+                                <div style="margin-left: 20px;">
+                                       @item.PatientMessageModel.CreatedByName  
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 30px;">
+                                        @item.PatientMessageModel.ProviderName_To
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 80px;">
+                                         @item.PatientMessageModel.MessageUrgency
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 60px;">
+                                        @item.PatientMessageModel.MessageType
+                                    </div>
+                                </td>
+
+                               <td>
+                                   <div style="margin-left: 50px;" > <img src="Content/img/details.png" onclick="deleteDetail(@item.PatientMessageModel.MessageId);"/>
+                                      
+                                </div>
+                            </td>
+                        </tr>
+                            }
+                        } 
+                    </tbody>
+                </table>*@
+            </div>
+            <!-- Grid end deleted-->
+            <!-- Reply Part-->
+   <div id="MessageDeleteDetailGrid" name="MessageDeleteDetailGrid" style="border: 1px solid; border-color: rgb(166, 201, 226); margin-top:10px;"
+                class="ui-corner-all">
+            <!--End of reply part-->
+    
+        </div>
+            <div id="detail-delete-request">
+
+            </div>
+        
+    </div>
+</div>
+    </div>
+<!-- Start Office Document Iframe Page -->
+<div id="divOfficeDocIframe" style="display:none;">
+    <iframe id="iframeViewAttachment" onload="HideLoaderReportViewer();" style="border: 0px;" src="" width="100%" height="100%"></iframe>
+</div>
+<div id="dialog-security" title="Security Settings">
+    
+    <table width="100%"  border="0" cellpadding="0" cellspacing="2">
+        <tr>
+            <td width="250"  align="right">Security Question 1 :</td>
+            <td width="2">&nbsp;</td>
+            <td width="571">
+          
+                     @Html.DropDownList("cmbSecurityQuestion", Model.SecurityQuestion.ToSecurityQuestionModelSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:310px;", id = "cmbSecurityQuestion" })
+                       
+            
+                       </td>
+        </tr>
+        <tr>
+            <td align="right">Security Answer 1 :</td>
+            <td align="right">&nbsp;</td>
+            <td>
+                <input type="text" name="reas_txt3" id="txtsecans" class="btxt" style="width:200px;" /></td>
+        </tr>
+           <tr>
+            <td width="250"  align="right">Security Question 2 :</td>
+            <td width="2">&nbsp;</td>
+            <td width="571">
+          
+                     @Html.DropDownList("cmbSecurityQuestion2", Model.SecurityQuestion.ToSecurityQuestionModelSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:310px;", id = "cmbSecurityQuestion2" })
+                       
+            
+                       </td>
+        </tr>
+        <tr>
+            <td align="right">Security Answer 2 :</td>
+            <td align="right">&nbsp;</td>
+            <td>
+                <input type="text" name="reas_txt3" id="securityans" class="btxt" style="width:200px;" /></td>
+        </tr>
+        <tr>
+            <td align="right">Old Password :</td>
+            <td>&nbsp;</td>
+            <td>
+                <input type="password" name="reas_txt3" id="txtpwd" class="btxt" style="width:200px;"/></td>
+        </tr>
+        <tr>
+            <td align="right">New Password  :</td>
+            <td>&nbsp;</td>
+            <td>
+                <input type="password" name="reas_txt3" id="txtnpwd" class="btxt" style="width:200px;"/>
+            </td>
+        </tr>
+            <tr>
+            <td align="right">Confirm New Password :</td>
+            <td>&nbsp;</td>
+            <td>
+                <input type="password" name="reas_txt3" id="txtcpwd" class="btxt" style="width:200px;"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">@*<input id="chkterms" type="checkbox">*@</td>
+            <td>&nbsp;</td>
+            <td>
+                           <table>
+<tr>
+<td><input id="chkterms" type="checkbox"></td>
+<td style="padding-top:5px;"> I have read and agree to the
+                               <span onclick="javascript:window.open('../Content/Legal/PrivacyPolicy.html');"  style="color:blue;cursor:pointer;">Terms &amp; Conditions </span>
+                               </td>
+<tr>
+</table>
+                               
+                        </td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td align="left">
+                 <h6 id="msgProvider"  style=" color:red;  ">Password Requirements & Helpful Tips!
+                     <ul>
+                         <li>Passwords must be between 8 and 16 characters.</li>
+                         <li>Passwords must include any combination of the following 4 elements:</li>
+                         <ul>
+                         <li>
+                             Lowercase Letter(s) - Examples:  ‘a’, ‘b’, ‘ab’, ‘abc’, etc)
+                         </li>
+                         <li>
+                             Uppercase Letter(s) - Examples: ‘A’, ‘B’, or ‘AB, or ‘ABC’, etc.
+                         </li>
+                         <li>
+                             Number(s) - Examples: ‘1’, ‘2’ ‘3’ ‘4’ ‘5’ ‘6’ ‘7’ ‘8’ ‘9’ ‘0’, or ‘12’, or ‘123’, ‘1234’, etc.
+                         </li>
+                         <li>
+                             At least one of the following symbols: ‘@@’, ‘!’, ‘#’, ‘$’, ‘%’, ‘^’, ‘&’, ‘~’, ‘+’,‘?’, ‘*’, and or ‘.’
+                         </li>
+                         @*<li>
+                             At least one symbol  ("@@", #, %, $, ….)
+                         </li>*@
+                             </ul>
+                     </ul>
+                     <ul><li>If that’s a little confusing, here’s an Example:    ‘aB1@BCd&’</li></ul>
+                 </h6>
+               @* <h6 id="msgProvider" style=" color:red; ">Password must meet the following requirements:
+                     <ul>
+                          <li>
+                             At least 8 characters in length
+                         </li>
+                         <li>
+                             At least one Lower Case letter
+                         </li>
+                         <li>
+                             At least one Capital letter
+                         </li>
+                         <li>
+                             At least one number
+                         </li>
+                         <li>
+                             At least one symbol  ("@@", #, %, $, ….)
+                         </li>
+
+                     </ul>
+                 </h6>*@
+            </td>
+
+        </tr>
+    </table>
+
+</div>
+<div id="changePassword-form" title="Change Password">
+ 
+     <table width="100%">
+       <tr>
+            <td align="right">Old Password:</td>
+            <td>
+                <input type="password" id="txtOldPassword" class="txt" size="3" />
+            </td>
+         
+        </tr>
+        <tr>
+            <td align="right">New Password:</td>
+            <td colspan="2">
+                <input type="password"  id="txtNewPassword" class="txt" size="3" /></td>
+        </tr>
+        <tr>
+            <td align="right">Confirm New Password:</td>
+            <td colspan="2">
+                <input type="password"  id="txtConfirmPassword" class="txt" size="3" />
+            </td>
+        </tr>
+         <tr >
+             <td></td>
+             <td align="left" >
+                   <h6 id="msg"  style=" color:red; top:110px;width:550px;margin-left: 80px; ">Password Requirements & Helpful Tips!
+                     <ul>
+                         <li>Passwords must be between 8 and 16 characters.</li>
+                         <li>Passwords must include any combination of the following 4 elements:</li>
+                         <ul>
+                         <li>
+                             Lowercase Letter(s) - Examples:  ‘a’, ‘b’, ‘ab’, ‘abc’, etc)
+                         </li>
+                         <li>
+                             Uppercase Letter(s) - Examples: ‘A’, ‘B’, or ‘AB, or ‘ABC’, etc.
+                         </li>
+                         <li>
+                             Number(s) - Examples: ‘1’, ‘2’ ‘3’ ‘4’ ‘5’ ‘6’ ‘7’ ‘8’ ‘9’ ‘0’, or ‘12’, or ‘123’, ‘1234’, etc.
+                         </li>
+                         <li>
+                             At least one of the following symbols: ‘@@’, ‘!’, ‘#’, ‘$’, ‘%’, ‘^’, ‘&’, ‘~’, ‘+’,‘?’, ‘*’, and or ‘.’
+                         </li>
+                         @*<li>
+                             At least one symbol  ("@@", #, %, $, ….)
+                         </li>*@
+                             </ul>
+                     </ul>
+                     <ul><li>If that’s a little confusing, here’s an Example:    ‘aB1@BCd&’</li></ul>
+                 </h6>
+
+@*                 <h6 id="Passwordmsg" style=" color:red; ">Password must meet the following requirements:
+                     <ul>
+                          <li>
+                             At least 8 characters in length
+                         </li>
+                         <li>
+                             At least one Lower Case letter
+                         </li>
+                         <li>
+                             At least one Capital letter
+                         </li>
+                         <li>
+                             At least one number
+                         </li>
+                         <li>
+                             At least one symbol  ("@@", #, %, $, ….)
+                         </li>
+                     </ul>
+                 </h6>*@
+             </td>
+
+         </tr>
+       
+    </table>
+       
+   
+
+   
+</div>
+<div id="dialog-confirm">
+
+</div>
+<div id="dialog-confirmDeletetab">
+
+</div>
+<div id="dialog-Appointment">
+
+</div>
+<div id="dialog-confirmDeletetabrefil">
+
+</div>
+
+<div id="dialog-confirmDeletetabreferral">
+
+</div>
+
+
+<script>
+    function fnOpenInoboxDialog() {
+        //alert("hi");
+        $("#dialog-confirm").html("Are you sure you want to delete this record?");
+
+        // Define the Dialog and its properties.
+        $("#dialog-confirm").dialog({
+            resizable: false,
+            modal: true,
+            title: "Confirm",
+            height: 140,
+            width: 400,
+            buttons: {
+                "Yes": function () {
+                    $(this).dialog('close');
+                    deleteInboxRecord();
+                },
+                "No": function () {
+                    $(this).dialog('close');
+                    //callback(false);
+                }
+            }
+        });
+
+    }
+    function fnOpenDeletedDialog() {
+        $("#dialog-confirmDeletetab").html("Are you sure you want to delete this record?");
+
+        // Define the Dialog and its properties.
+        $("#dialog-confirmDeletetab").dialog({
+            resizable: false,
+            modal: true,
+            title: "Confirm",
+            height: 140,
+            width: 400,
+            buttons: {
+                "Yes": function () {
+                    $(this).dialog('close');
+                    deleteSentRecord();
+                },
+                "No": function () {
+                    $(this).dialog('close');
+                    //callback(false);
+                }
+            }
+        });
+
+    }
+    function fnOpenAppDialog() {
+        $("#dialog-confirmDeletetab").html("Are you sure you want to cancel the selected Appointments?");
+
+        // Define the Dialog and its properties.
+        $("#dialog-confirmDeletetab").dialog({
+            resizable: false,
+            modal: true,
+            title: "Confirm",
+            height: 140,
+            width: 500,
+            buttons: {
+                "Yes": function () {
+                    $(this).dialog('close');
+                    CancelApp();
+                },
+                "No": function () {
+                    $(this).dialog('close');
+                    //callback(false);
+                }
+            }
+        });
+
+    }
+    //$("#btnCancel").click(function (e) {
+    //    e.preventDefault();
+    //    var sList = "";
+    //    $('input[name="chk3[]"]').each(function () {
+    //        if (this.checked) {
+    //            sList += $(this).attr('class') + ",";
+    //        }
+
+    //    });
+    //    if (sList == '') {
+    //        alert("first select message before deleting ");
+    //    }
+    //    else {
+    //        //alert(sList);
+    //        //ajax call start for deleting inbox grid
+    //        ShowLoader();
+    //        try {
+
+    //            var requestData = {
+    //                DeletedMessageIDs: sList
+
+
+    //            };
+
+    //            $.ajax({
+    //                type: 'POST',
+    //                url: 'Appointment-Cancel',
+    //                data: JSON.stringify(requestData),
+    //                dataType: 'json',
+    //                contentType: 'application/json; charset=utf-8',
+    //                success: function (data) {
+    //                    // if success
+    //                    // alert("Success : " + data);
+    //                    $('#tabs-4 div:first').html(data);
+    //                    $('#tbl-MessageAppointment').fixedHeaderTable();
+
+    //                    HideLoader();
+
+    //                },
+    //                error: function (xhr, ajaxOptions, thrownError) {
+    //                    //if error
+
+    //                    alert('Error : ' + xhr.message);
+    //                    HideLoader();
+    //                },
+    //                complete: function (data) {
+    //                    // if completed
+    //                    HideLoader();
+
+    //                },
+    //                async: true,
+    //                processData: false
+    //            });
+
+    //        } catch (err) {
+
+    //            if (err && err !== "") {
+    //                alert(err.message);
+    //                HideLoader();
+    //            }
+    //        }
+
+
+    //        //ajax call end for deleting inbox 
+
+
+    //    }
+
+
+
+
+    //    }
+
+
+
+    //  );
+    function CancelApp() {
+        var sList = "";
+        $('input[name="chk3[]"]').each(function () {
+            if (this.checked) {
+                sList += $(this).attr('class') + ",";
+            }
+
+        });
+        if (sList == '') {
+            alert("first select message before deleting ");
+        }
+        else {
+            //  alert(sList);
+            //ajax call start for deleting inbox grid
+            ShowLoader();
+            try {
+                // alert(sList);
+                var requestData = {
+                    DeletedMessageIDs: sList
+
+
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'Appointment-Cancel-Provider',
+                    data: JSON.stringify(requestData),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        // if success
+                        alert(data.Message);
+                        // alert(sList);
+                        $('#tabs-4 div:first').html(data.html);
+                        $('#tbl-MessageAppointment').fixedHeaderTable();
+
+                        HideLoader();
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //if error
+
+                        alert('Error : ' + xhr.message);
+                        HideLoader();
+                    },
+                    complete: function (data) {
+                        // if completed
+                        HideLoader();
+
+                    },
+                    async: true,
+                    processData: false
+                });
+
+            } catch (err) {
+
+                if (err && err !== "") {
+                    alert(err.message);
+                    HideLoader();
+                }
+            }
+
+
+            //ajax call end for deleting inbox 
+
+
+        }
+    }
+
+    function deleteInboxRecord() {
+
+        var mesgType = "InboxMessage";
+        var sList = "";
+        $('input[name="chk[]"]').each(function () {
+            if (this.checked) {
+                sList += $(this).attr('class') + ",";
+            }
+
+        });
+        if (sList == '') {
+            alert("first select message before deleting ");
+        }
+        else {
+            //alert(sList);
+            //ajax call start for deleting inbox grid
+            ShowLoader();
+            try {
+                var requestData = {
+                    DeletedMessageIDs: sList,
+                    FacilityId: $.trim($('#cmbAppointmentFacility  option:selected').val()),
+                    ProviderId_To: $.trim($('#cmbAppointmentDoctor  option:selected').val()),
+                    MessageTypeId: $.trim($('#cmbMessageType  option:selected').val()),
+                    MessageUrgencyId: $.trim($('#cmbMessageUrgency  option:selected').val()),
+                    MessageType: mesgType
+
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'inboxs-delete',
+                    data: JSON.stringify(requestData),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        // if success
+                        alert(data.Message);
+
+
+                        //if (mesgType == "SentDeleteMessage") {
+                        //    $("#MessageSentHeaderGrid").html(data);
+                        //    $("#tbl-MessageSent").fixedHeaderTable();
+                        //}
+
+                        $("#MessageHeaderGrid").html(data.html);
+                        $("#tbl-messageInbox").fixedHeaderTable();
+
+                        HideLoader();
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //if error
+
+                        alert('Error : ' + xhr.message);
+                        HideLoader();
+                    },
+                    complete: function (data) {
+                        // if completed
+                        HideLoader();
+
+                    },
+                    async: true,
+                    processData: false
+                });
+
+            } catch (err) {
+
+                if (err && err !== "") {
+                    alert(err.message);
+                    HideLoader();
+                }
+            }
+
+
+            //ajax call end for deleting inbox 
+
+
+        }
+    }
+
+    function deleteSentRecord() {
+
+
+
+        var mesgType = "SentDeleteMessage";
+        var sList = "";
+        if (mesgType == "SentDeleteMessage") {
+            //alert('Sent');
+            $('input[name="chkS[]"]').each(function () {
+                if (this.checked) {
+                    sList += $(this).attr('class') + ",";
+                }
+
+            });
+        }
+
+
+        if (sList == '') {
+            alert("first select message before deleting ");
+        }
+        else {
+            //alert(sList);
+            //ajax call start for deleting inbox grid
+            ShowLoader();
+            try {
+                var requestData = {
+                    DeletedMessageIDs: sList,
+                    FacilityId: $.trim($('#cmbAppointmentFacility  option:selected').val()),
+                    ProviderId_To: $.trim($('#cmbAppointmentDoctor  option:selected').val()),
+                    MessageTypeId: $.trim($('#cmbMessageType  option:selected').val()),
+                    MessageUrgencyId: $.trim($('#cmbMessageUrgency  option:selected').val()),
+                    MessageType: mesgType
+
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'inboxs-delete',
+                    data: JSON.stringify(requestData),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        // if success
+                        alert(data.Message);
+
+
+
+                        $("#MessageSentHeaderGrid").html(data.html);
+                        $("#tbl-MessageSent").fixedHeaderTable();
+
+
+                        //  $("#MessageHeaderGrid").html(data);
+                        //  $("#tbl-messageInbox").fixedHeaderTable();
+
+                        HideLoader();
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //if error
+
+                        alert('Error : ' + xhr.message);
+                        HideLoader();
+                    },
+                    complete: function (data) {
+                        // if completed
+                        HideLoader();
+
+                    },
+                    async: true,
+                    processData: false
+                });
+
+            } catch (err) {
+
+                if (err && err !== "") {
+                    alert(err.message);
+                    HideLoader();
+                }
+            }
+
+
+            //ajax call end for deleting inbox 
+
+
+        }
+    }
+
+    function fnopenrefillDialog() {
+
+        $("#dialog-confirmDeletetabrefil").html("Are you sure you want to delete this message?");
+
+        // Define the Dialog and its properties.
+        $("#dialog-confirmDeletetabrefil").dialog({
+            resizable: false,
+            modal: true,
+            title: "Confirm",
+            height: 140,
+            width: 500,
+            buttons: {
+                "Yes": function () {
+                    $(this).dialog('close');
+                    DeleleRefillRecord();
+                },
+                "No": function () {
+                    $(this).dialog('close');
+                    //callback(false);
+                }
+            }
+        });
+
+
+    }
+
+    function fnopenreferralllDialog() {
+        $("#dialog-confirmDeletetabreferral").html("Are you sure you want to delete this message?");
+
+        // Define the Dialog and its properties.
+        $("#dialog-confirmDeletetabreferral").dialog({
+            resizable: false,
+            modal: true,
+            title: "Confirm",
+            height: 140,
+            width: 500,
+            buttons: {
+                "Yes": function () {
+                    $(this).dialog('close');
+                    DeleleReferrallRecord();
+                },
+                "No": function () {
+                    $(this).dialog('close');
+                    //callback(false);
+                }
+            }
+        });
+
+    }
+
+    function DeleleRefillRecord() {
+        var mesgType = "RefillDeleteMessage";
+        var sList = "";
+        if (mesgType == "RefillDeleteMessage") {
+            //   alert('Sent');
+            $('input[name="chkR[]"]').each(function () {
+                if (this.checked) {
+                    sList += $(this).attr('class') + ",";
+                }
+
+            });
+        }
+
+
+        if (sList == '') {
+            alert("first select message before deleting ");
+        }
+        else {
+            //alert(sList);
+            //ajax call start for deleting inbox grid
+            ShowLoader();
+            try {
+                var requestData = {
+                    DeletedMessageIDs: sList,
+                    //  FacilityId: $.trim($('#cmbAppointmentFacility  option:selected').val()),
+                    //  ProviderId_To: $.trim($('#cmbAppointmentDoctor  option:selected').val()),
+                    //   MessageTypeId: $.trim($('#cmbMessageType  option:selected').val()),
+                    //  MessageUrgencyId: $.trim($('#cmbMessageUrgency  option:selected').val()),
+                    MessageType: mesgType
+
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'inboxs-delete',
+                    data: JSON.stringify(requestData),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        // if success
+                        alert(data.Message);
+
+
+                        $('#tabs-5 div:first').html(data.html);
+
+                        // $("#MessageSentHeaderGrid").html(data);
+                        //   $("#tbl-MessageSent").fixedHeaderTable();
+                        $("#detail-refill-request").html("");
+                        $("#tbl-MessageRefill").fixedHeaderTable();
+
+
+
+                        //  $("#MessageHeaderGrid").html(data);
+                        //  $("#tbl-messageInbox").fixedHeaderTable();
+
+                        HideLoader();
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //if error
+                        var myCookie = getCookie(".Patient");
+
+                        if (myCookie == null) {
+                            // do cookie doesn't exist stuff;
+                            window.location = '/Login'
+                            //xhr.getResponseHeader('Location');
+                        }
+                        else {
+
+                            alert('Error : ' + xhr.message);
+                        }
+                        HideLoader();
+                    },
+                    complete: function (data) {
+                        // if completed
+                        HideLoader();
+
+                    },
+                    async: true,
+                    processData: false
+                });
+
+            } catch (err) {
+
+                if (err && err !== "") {
+                    alert(err.message);
+                    HideLoader();
+                }
+            }
+
+
+            //ajax call end for deleting inbox 
+
+
+        }
+    }
+    function DeleleReferrallRecord() {
+        var mesgType = "ReferrallDeleteMessage";
+        var sList = "";
+        if (mesgType == "ReferrallDeleteMessage") {
+            //   alert('Sent');
+            $('input[name="chkReferal[]"]').each(function () {
+                if (this.checked) {
+                    sList += $(this).attr('class') + ",";
+                }
+
+            });
+        }
+
+
+        if (sList == '') {
+            alert("first select message before deleting ");
+        }
+        else {
+            //alert(sList);
+            //ajax call start for deleting inbox grid
+            ShowLoader();
+            try {
+                var requestData = {
+                    DeletedMessageIDs: sList,
+                    FacilityId: $.trim($('#cmbAppointmentFacility  option:selected').val()),
+                    ProviderId_To: $.trim($('#cmbAppointmentDoctor  option:selected').val()),
+                    MessageTypeId: $.trim($('#cmbMessageType  option:selected').val()),
+                    MessageUrgencyId: $.trim($('#cmbMessageUrgency  option:selected').val()),
+                    MessageType: mesgType
+
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'inboxs-delete',
+                    data: JSON.stringify(requestData),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        // if success
+                        alert(data.Message);
+
+
+                        $('#tabs-6 div:first').html(data.html);
+
+                        // $("#MessageSentHeaderGrid").html(data);
+                        //   $("#tbl-MessageSent").fixedHeaderTable();
+                        $("#detail-Referral-Request").html("");
+                        $("#tbl-MessageReferral").fixedHeaderTable();
+
+
+
+                        //  $("#MessageHeaderGrid").html(data);
+                        //  $("#tbl-messageInbox").fixedHeaderTable();
+
+                        HideLoader();
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //if error
+                        var myCookie = getCookie(".Patient");
+
+                        if (myCookie == null) {
+                            // do cookie doesn't exist stuff;
+                            window.location = '/Login'
+                            //xhr.getResponseHeader('Location');
+                        }
+                        else {
+
+                            alert('Error : ' + xhr.message);
+                        }
+                        HideLoader();
+                    },
+                    complete: function (data) {
+                        // if completed
+                        HideLoader();
+
+                    },
+                    async: true,
+                    processData: false
+                });
+
+            } catch (err) {
+
+                if (err && err !== "") {
+                    alert(err.message);
+                    HideLoader();
+                }
+            }
+
+
+            //ajax call end for deleting inbox 
+
+
+        }
+    }
+    </script>
+<!-- Start Office Document Iframe Page -->
+    

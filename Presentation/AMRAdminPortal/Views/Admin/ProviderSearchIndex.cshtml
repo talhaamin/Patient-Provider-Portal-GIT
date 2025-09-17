@@ -1,0 +1,1755 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@model AdminViewModel
+
+@{
+    ViewBag.Title = "ProviderSearchIndex";
+    Layout = "~/Views/Shared/_LayoutMasterPage.cshtml";
+    
+}
+<script src="~/Content/js/validator.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#IndexRemoveClass,FaciltySetupRemoveClass").removeClass("active");
+
+        $("#IndexProviderClass").addClass("active");
+        $("#txtFacility").val("");
+        $("#searchLocation").val("");
+        $("#txtFacilityId").val("0");
+        $("#txtid").val("");
+        $("#txtFname").val("");
+        $("#txLname").val("");
+        $("#txtLicense").val("");
+        $("#txtHphone").val("");
+        $("#txtEmail").val("");
+        $("#cmbPartner").val("-1");
+
+
+        
+        
+
+        
+
+        
+
+        
+    });
+    $(document).ready(function () {
+        var page = 0;
+        $("#pageindex").change(function () {
+            page = $("#pageindex option:selected").val(); //alert(value);
+
+            var statusvalue = $("#cmbStates option:selected").val();
+            var Partner = $("#cmbPartner option:selected").val();
+            if (statusvalue == "-1") {
+                statusvalue = null;
+            }
+            var Countryvalue = $("#cmbCountryopt1 option:selected").val();
+            if (Countryvalue == "-1") {
+                Countryvalue = null;
+
+            }
+            if (Partner == "-1") {
+                //  alert(Partner);
+                Partner = null;
+            }
+
+            ///  alert("value of status is " + statusvalue);
+            var requestData = {
+                ProviderId: $('#txtid').val(),
+                FirstName: $('#txtFname').val(),
+                LastName: $('#txLname').val(),
+                Phone: $('#txtHphone').val(),
+                EMail: $('#txtEmail').val(),
+                License: $('#txtLicense').val(),
+                CountryCode: Countryvalue,
+                EMRSystemId: Partner,
+                PageNumber: page,
+                PageSize: 20,
+                TotalRecords: 0,
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'Admin/SearchProviders',
+                data: JSON.stringify(requestData),
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    // if success
+                    // alert("Success : " + data);
+                    // var myCookie = getCookie(".Admin");
+                    //alert(myCookie); if (data.error == "The access id was deleted") {
+                    if (data.error == "The access id was deleted") {
+                        alert("The access id was deleted");
+                        $("#Search-Patient").html(data.html);
+                        //HideLoader();
+                        HideLoaderBig();
+
+                    }
+                    else {
+                        var divident = 0;
+                        var remainder = 0;
+                        $("#Search-Patient").html(data.html);
+                        if (data.count > 20) {
+                            divident = data.count / 20;
+                            remainder = data.count % 20;
+                            //alert(divident);
+                            $("#pageindex").text("");
+                            $("#pageindextop").text("");
+
+                            if (remainder != 0) {
+                                divident = divident + 1;
+                            }
+
+                            $("#Paggination").css("display", "block");
+                            $("#Pagginationtop").css("display", "block");
+
+                            for (var i = 1; i <= divident; i++) {
+                                $("#pageindex").append("<option value=\"" + (i - 1) + "\">" + i + "</option>");
+                                $("#pageindextop").append("<option value=\"" + (i - 1) + "\">" + i + "</option>");
+
+                            }
+                        }
+                        else {
+                            $("#Paggination").css("display", "none");
+                            $("#Pagginationtop").css("display", "none");
+
+                            $("#pageindex").text("");
+                            $("#pageindextop").text("");
+
+
+                        }
+                        $("#pageindex").val(page);
+                        $("#pageindextop").val(page);
+
+                        HideLoaderBig();
+                        // HideLoader();
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //if error
+                    var myCookie = getCookie(".Admin");
+
+                    if (myCookie == null) {
+                        // do cookie doesn't exist stuff;
+                        alert('Not logged in. Please log in to continue');
+                        window.location = '/Login'
+                        //xhr.getResponseHeader('Location');
+                    }
+                    else {
+
+                        alert('Error : ' + xhr.message);
+                    }
+                    //alert('Error : ' + xhr.message);
+                    // HideLoader();
+                    HideLoaderBig();
+                },
+                complete: function (data) {
+                    // if completed
+                    HideLoader();
+
+                },
+                async: true,
+                processData: false
+            });
+        });
+        $("#pageindextop").change(function () {
+            ShowLoaderBig();
+            page = $("#pageindextop option:selected").val(); //alert(value);
+
+            var statusvalue = $("#cmbStates option:selected").val();
+            var Partner = $("#cmbPartner option:selected").val();
+            if (statusvalue == "-1") {
+                statusvalue = null;
+            }
+            var Countryvalue = $("#cmbCountryopt1 option:selected").val();
+            if (Countryvalue == "-1") {
+                Countryvalue = null;
+
+            }
+            if (Partner == "-1") {
+                //  alert(Partner);
+                Partner = null;
+            }
+
+            ///  alert("value of status is " + statusvalue);
+            var requestData = {
+                ProviderId: $('#txtid').val(),
+                FirstName: $('#txtFname').val(),
+                LastName: $('#txLname').val(),
+                Phone: $('#txtHphone').val(),
+                EMail: $('#txtEmail').val(),
+                License: $('#txtLicense').val(),
+                CountryCode: Countryvalue,
+                EMRSystemId: Partner,
+                PageNumber: page,
+                PageSize: 20,
+                TotalRecords: 0,
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'Admin/SearchProviders',
+                data: JSON.stringify(requestData),
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    // if success
+                    // alert("Success : " + data);
+                    // var myCookie = getCookie(".Admin");
+                    //alert(myCookie); if (data.error == "The access id was deleted") {
+                    if (data.error == "The access id was deleted") {
+                        alert("The access id was deleted");
+                        $("#Search-Patient").html(data.html);
+                        //HideLoader();
+                        HideLoaderBig();
+
+                    }
+                    else {
+                        var divident = 0;
+                        var remainder = 0;
+                        $("#Search-Patient").html(data.html);
+                        if (data.count > 20) {
+                            divident = data.count / 20;
+                            remainder = data.count % 20;
+                            //alert(divident);
+                            $("#pageindex").text("");
+                            $("#pageindextop").text("");
+                            if (remainder != 0) {
+                                divident = divident + 1;
+                            }
+
+                            $("#Paggination").css("display", "block");
+                            $("#Pagginationtop").css("display", "block");
+
+                            for (var i = 1; i <= divident; i++) {
+                                $("#pageindex").append("<option value=\"" + (i - 1) + "\">" + i + "</option>");
+                                $("#pageindextop").append("<option value=\"" + (i - 1) + "\">" + i + "</option>");
+
+                            }
+                        }
+                        else {
+                            $("#Paggination").css("display", "none");
+                            $("#Pagginationtop").css("display", "none");
+
+                            $("#pageindex").text("");
+                            $("#pageindextop").text("");
+
+
+                        }
+                        $("#pageindex").val(page);
+                        $("#pageindextop").val(page);
+
+                        HideLoaderBig();
+                        // HideLoader();
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //if error
+                    var myCookie = getCookie(".Admin");
+
+                    if (myCookie == null) {
+                        // do cookie doesn't exist stuff;
+                        alert('Not logged in. Please log in to continue');
+                        window.location = '/Login'
+                        //xhr.getResponseHeader('Location');
+                    }
+                    else {
+
+                        alert('Error : ' + xhr.message);
+                    }
+                    //alert('Error : ' + xhr.message);
+                    // HideLoader();
+                    HideLoaderBig();
+                },
+                complete: function (data) {
+                    // if completed
+                    HideLoader();
+
+                },
+                async: true,
+                processData: false
+            });
+        });
+
+    });
+    $(document).ready(function () {
+        var page = 0;
+
+        $("#FacilityindexBottom").change(function () {
+            // ShowLoaderBig();
+            $("#loader2").css("display", "block");
+            page = $("#FacilityindexBottom option:selected").val(); //alert(value);
+            var FacilityName = $("#searchLocation").val();
+
+            ///  alert("value of status is " + statusvalue);
+            var requestData = {
+                FacilityName: FacilityName,
+                PageNumber: page,
+                PageSize: 20,
+
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'Admin/SearchFacility',
+                data: JSON.stringify(requestData),
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    // if success
+                    // alert("Success : " + data);
+                    // var myCookie = getCookie(".Admin");
+                    //alert(myCookie); if (data.error == "The access id was deleted") {
+                    if (data.error == "The access id was deleted") {
+                        alert("The access id was deleted");
+                        $("#FacilityData").html(data.html);
+                        //HideLoader();
+                        //   HideLoaderBig();
+                        $("#loader2").css("display", "none");
+
+
+                    }
+                    else {
+
+                        var divident = 0;
+                        var remainder = 0;
+                        //   $("#Search-Patient").html(data.html);
+                        $("#FacilityData").html(data.html);
+                        if (data.count > 20) {
+                            flag = "True";
+                            divident = data.count / 20;
+                            remainder = data.count % 20;
+                            //alert(divident);
+                            $("#Facilityindextop").text("");
+                            $("#FacilityindexBottom").text("");
+
+                            if (remainder != 0) {
+                                divident = divident + 1;
+                            }
+
+                            $("#FacilityPagginationBottom").css("display", "block");
+                            $("#FacilityPagginationtop").css("display", "block");
+
+                            for (var i = 1; i <= divident; i++) {
+                                $("#FacilityindexBottom").append("<option value=\"" + (i - 1) + "\">" + i + "</option>");
+                                $("#Facilityindextop").append("<option value=\"" + (i - 1) + "\">" + i + "</option>");
+
+                            }
+                        }
+                        else {
+                            $("#FacilityPagginationBottom").css("display", "none");
+                            $("#FacilityPagginationtop").css("display", "none");
+
+                            $("#FacilityindexBottom").text("");
+                            $("#Facilityindextop").text("");
+
+
+                        }
+                        $("#FacilityindexBottom").val(page);
+                        $("#Facilityindextop").val(page);
+                        $("#loader2").css("display", "none");
+
+                       // HideLoaderBig();
+                        // HideLoader();
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //if error
+                    var myCookie = getCookie(".Admin");
+
+                    if (myCookie == null) {
+                        // do cookie doesn't exist stuff;
+                        alert('Not logged in. Please log in to continue');
+                        window.location = '/Login'
+                        //xhr.getResponseHeader('Location');
+                    }
+                    else {
+
+                        alert('Error : ' + xhr.message);
+                    }
+                    //alert('Error : ' + xhr.message);
+                    // HideLoader();
+                    // HideLoaderBig();
+                    $("#loader2").css("display", "none");
+
+                },
+                complete: function (data) {
+                    // if completed
+                    // HideLoader();
+                    $("#loader2").css("display", "none");
+
+
+                },
+                async: true,
+                processData: false
+            });
+        });
+        $("#Facilityindextop").change(function () {
+            //ShowLoader();
+            $("#loader2").css("display", "block");
+
+            page = $("#Facilityindextop option:selected").val(); //alert(value);
+
+            var FacilityName = $("#searchLocation").val();
+            var requestData = {
+                FacilityName: FacilityName,
+                PageNumber: page,
+                PageSize: 20,
+
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'Admin/SearchFacility',
+                data: JSON.stringify(requestData),
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    // if success
+                    // alert("Success : " + data);
+                    // var myCookie = getCookie(".Admin");
+                    //alert(myCookie); if (data.error == "The access id was deleted") {
+                    if (data.error == "The access id was deleted") {
+                        alert("The access id was deleted");
+                        $("#FacilityData").html(data.html);
+                        //HideLoader();
+                        //HideLoaderBig();
+                        $("#loader2").css("display", "none");
+
+
+                    }
+                    else {
+
+                        var divident = 0;
+                        var remainder = 0;
+                        //   $("#Search-Patient").html(data.html);
+                        $("#FacilityData").html(data.html);
+                        if (data.count > 20) {
+                            flag = "True";
+                            divident = data.count / 20;
+                            remainder = data.count % 20;
+                            //alert(divident);
+                            $("#Facilityindextop").text("");
+                            $("#FacilityindexBottom").text("");
+
+                            if (remainder != 0) {
+                                divident = divident + 1;
+                            }
+
+                            $("#FacilityPagginationBottom").css("display", "block");
+                            $("#FacilityPagginationtop").css("display", "block");
+
+                            for (var i = 1; i <= divident; i++) {
+                                $("#FacilityindexBottom").append("<option value=\"" + (i - 1) + "\">" + i + "</option>");
+                                $("#Facilityindextop").append("<option value=\"" + (i - 1) + "\">" + i + "</option>");
+
+                            }
+                        }
+                        else {
+                            $("#FacilityPagginationBottom").css("display", "none");
+                            $("#FacilityPagginationtop").css("display", "none");
+
+                            $("#FacilityindexBottom").text("");
+                            $("#Facilityindextop").text("");
+
+
+                        }
+                        $("#FacilityindexBottom").val(page);
+                        $("#Facilityindextop").val(page);
+
+                        //  HideLoaderBig();
+                        $("#loader2").css("display", "none");
+
+                        // HideLoader();
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //if error
+                    var myCookie = getCookie(".Admin");
+
+                    if (myCookie == null) {
+                        // do cookie doesn't exist stuff;
+                        alert('Not logged in. Please log in to continue');
+                        window.location = '/Login'
+                        //xhr.getResponseHeader('Location');
+                    }
+                    else {
+
+                        alert('Error : ' + xhr.message);
+                    }
+                    //alert('Error : ' + xhr.message);
+                    // HideLoader();
+                    //  HideLoaderBig();
+                    $("#loader2").css("display", "none");
+
+                },
+                complete: function (data) {
+                    // if completed
+                    //  HideLoader();
+                    $("#loader2").css("display", "none");
+
+
+                },
+                async: true,
+                processData: false
+            });
+        });
+
+    });
+    function PatientSearch() {
+        ShowLoader();
+        var statusvalue = $("#cmbStates option:selected").val();
+        var Partner = $("#cmbPartner option:selected").val();
+        var FacilityId = $('#txtFacilityId').val();
+        var Facility = $('#txtFacility').val();
+
+        if (statusvalue == "-1") {
+            statusvalue = null;
+        }
+        if (Facility == null || Facility =="")
+        {
+            FacilityId = null;
+        }
+        var Countryvalue = $("#cmbCountryopt1 option:selected").val();
+        if (Countryvalue == "-1") {
+            Countryvalue = null;
+
+        }
+        if (Partner == "-1") {
+            //  alert(Partner);
+            Partner = null;
+        }
+        if (FacilityId == "0")
+        {
+            FacilityId = null;
+        }
+
+        ///  alert("value of status is " + statusvalue);
+        var requestData = {
+            ProviderId: $('#txtid').val(),
+            FirstName: $('#txtFname').val(),
+            LastName: $('#txLname').val(),
+            Phone: $('#txtHphone').val(),
+            EMail: $('#txtEmail').val(),
+            License: $('#txtLicense').val(),
+            CountryCode: Countryvalue,
+            EMRSystemId: Partner,
+            PageNumber: 0,
+            PageSize: 20,
+            TotalRecords: 0,
+            FacilityId: FacilityId,
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'Admin/SearchProviders',
+            data: JSON.stringify(requestData),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                // if success
+                // alert("Success : " + data);
+                // var myCookie = getCookie(".Admin");
+                //alert(myCookie); if (data.error == "The access id was deleted") {
+                if (data.error == "The access id was deleted") {
+                    alert("The access id was deleted");
+                    $("#Search-Patient").html(data.html);
+                    HideLoader();
+
+                }
+                else {
+                    var divident = 0;
+                    var remainder = 0;
+                    $("#Search-Patient").html(data.html);
+                    if (data.count > 20) {
+                        flag = "True";
+                        divident = data.count / 20;
+                        remainder = data.count % 20;
+                        //alert(divident);
+                        $("#pageindex").text("");
+                        $("#pageindextop").text("");
+
+                        if (remainder != 0) {
+                            divident = divident + 1;
+                        }
+
+                        $("#Paggination").css("display", "block");
+                        $("#Pagginationtop").css("display", "block");
+
+                        for (var i = 1; i <= divident; i++) {
+                            $("#pageindex").append("<option value=\"" + (i - 1) + "\">" + i + "</option>");
+                            $("#pageindextop").append("<option value=\"" + (i - 1) + "\">" + i + "</option>");
+
+                        }
+                    }
+                    else {
+                        $("#Paggination").css("display", "none");
+                        $("#Pagginationtop").css("display", "none");
+
+                        $("#pageindex").text("");
+                        $("#pageindextop").text("");
+
+
+                    }
+                    /* if (data.count > 20) {
+                         divident = data.count / 20;
+                         remainder = data.count % 20;
+                         //alert(divident);
+                         $("#pageindex").text("");
+                         if (remainder != 0) {
+                             divident = divident + 1;
+                         }
+ 
+                         $("#Paggination").css("display", "block");
+                         for (var i = 1; i <= divident; i++) {
+                             $("#pageindex").append("<option value=\"" + (i - 1) + "\">" + i + "</option>");
+                         }
+                     }
+                     else {
+                         $("#Paggination").css("display", "none");
+                         $("#pageindex").text("");
+ 
+                     }*/
+                    HideLoader();
+                }
+                
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //if error
+                var myCookie = getCookie(".Admin");
+
+                if (myCookie == null) {
+                    // do cookie doesn't exist stuff;
+                    alert('Not logged in. Please log in to continue');
+                    window.location = '/Login'
+                    //xhr.getResponseHeader('Location');
+                }
+                else {
+
+                    alert('Error : ' + xhr.message);
+                }
+                //alert('Error : ' + xhr.message);
+                HideLoader();
+            },
+            complete: function (data) {
+                // if completed
+                HideLoader();
+
+            },
+            async: true,
+            processData: false
+        });
+    }
+    function ShowProviderData(id) {
+        try {
+        //    alert(id);
+
+            ShowLoaderBig();
+            var obj2 = jQuery.parseJSON($('#' + id).val());
+            var requestData = {
+                ProviderId: obj2.ProviderId,
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'Admin/GetProviderData',
+                data: JSON.stringify(requestData),
+                dataType: 'json',
+                //dataType: 'text',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    // if success
+                    //  alert(data);
+                    $('#First-Div').hide();
+                    $('#Patient-Data').show();
+
+                    //var obj = jQuery.parseJSON($('#' + id).val());
+                    var obj = $.parseJSON(data);
+                    $('#lbl-id').text(obj.ProviderId);
+                    $('#lbl-pwd').text(obj.Password);
+                    $('#lbl-Name').text(obj.Name);
+                    $('#Active').text(obj.Active);
+                 //   $('#lbl-Name').text(obj.FirstName);
+
+                  //  $('#lbl-pwd').text(obj.Password);
+                   // $('#lbl-Adr').text(obj.Address);
+                   // $('#lbl-Adr3').text(obj.Address2);
+                  //  $('#lbl-Adr2').text(obj.CityStateZip);
+                 //   if (obj.RepresentativePwd != null) {
+                   //     $('#lbl-cpwd').text(obj.RepresentativePwd);
+                   // } else { $('#lbl-cpwd').text(""); }
+                  /*  if (obj.PremiumFlag) {
+                        EnableControll();
+
+
+                        $('#lbl-act-typ').text('Premium');
+                    }
+                    else {
+                        // $("#RenewAccount").setAttribute('disabled', false);
+
+                        DisableControll();
+
+                        $('#lbl-act-typ').text('Standard');
+                    }*/
+                   /* if (obj.ClientNote == true) {
+                        // $("#clientNote").text = "Client Notes*"
+                        document.getElementById("clientNote").innerHTML = "Client Notes*"
+
+                    }
+                    else {
+                        document.getElementById("clientNote").innerHTML = "Client Notes"
+
+
+                    }*/
+                   // $('#lbl-Rdate').text(obj.PremiumExpireDate);
+                   $('#lbl-email').text(obj.EMail);
+                    
+                   //  $('#lbl-Practice').innerHTML(body);
+                  //  $('#txtThirdPartyID').text(obj.ThirdPartyId);
+                    // $('#lbl-party').text(obj.ThirdPartyName);
+                   if (obj.Practices != null) {
+                       var mystring = obj.Practices;
+                       var ResultPractice = "<table><tr>";
+                       var td = "<td>";
+                       var value = "";
+                       var html = "";
+                       var result = mystring.split(",");
+
+                       var body = document.getElementById("myTable");
+                       var body1 = document.getElementById("myTable1");
+
+
+                       //tbl = document.createElement('table');
+                       //  tbl.style.width = '100px';
+                       //  tbl.style.border = "1px solid black";
+                       //  alert(result.length);
+                       for (var i = 0; i < result.length - 1; i++) {
+                           var tr = body.insertRow();
+                           var tr1 = body1.insertRow();
+
+                           // for (var j = 0; j < 2; j++) {
+
+                           var td = tr1.insertCell(0);
+                           var td1 = tr.insertCell(0);
+                           var td2 = tr.insertCell(1);
+                           td.appendChild(document.createTextNode('Practice ' + (i + 1)));
+                           td1.appendChild(document.createTextNode(result[i]));
+                           // td1.css("margin-left", "25px");
+                           //.addClass = 'Practice';
+                           //  td2.appendChild(document.createTextNode('Address'));
+
+                           td1.style.border = "2"
+                           // td.appendChild(document.createTextNode(result[]));
+                           //  td.style.border = "";
+
+                           //  }
+
+                       }
+
+                       body1.appendChild(tr1);
+                       body.appendChild(tr);
+                   }
+                    HideLoaderBig();
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //if error
+                    var myCookie = getCookie(".Admin");
+
+                    if (myCookie == null) {
+                        // do cookie doesn't exist stuff;
+                        alert('Not logged in. Please log in to continue');
+                        window.location = '/Login'
+                        //xhr.getResponseHeader('Location');
+                    }
+                    else {
+
+                        alert('Error : ' + xhr.message);
+                    }
+                    HideLoaderBig();
+                },
+                complete: function (data) {
+                    // if completed
+                    HideLoaderBig();
+
+                },
+                async: true,
+                processData: false
+            });
+        }
+        catch (err) {
+
+            if (err && err !== "") {
+                alert(err.message);
+            }
+        }
+        //alert(obj.Address1);
+    }
+    function BackSearch() {
+        $('#First-Div').show();
+        $('#Patient-Data').hide();
+        var myTable = document.getElementById('myTable');
+        var myTable1 = document.getElementById('myTable1');
+        myTable.innerHTML = "";
+        myTable1.innerHTML = "";
+    }
+    function ChangeEmail() {
+        $("#ChangeEmail-form").dialog("open");
+        var Email = $('#lbl-email').text();
+        $('#changeemail').val(Email);
+
+    }
+    function ResetChangePassword() {
+        $("#dialog-confirm").html("The password will be reset and a new temporary password will be sent to the provider.");
+
+        // Define the Dialog and its properties.
+        $("#dialog-confirm").dialog({
+            resizable: false,
+            modal: true,
+            title: "Confirm",
+            height: 140,
+            width: 750,
+            buttons: {
+                "Confirm": function () {
+                    $(this).dialog('close');
+                    ChangePassword();
+                },
+                "Cancel": function () {
+                    $(this).dialog('close');
+                    //callback(false);
+                }
+            }
+        });
+
+
+    }
+
+    function ChangePassword() {
+        ShowLoaderBig();
+        try {
+            var patientid = $('#lbl-id').text();
+
+            var requestData = {
+                PatientId: patientid,
+
+
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'Admin/ChangeProviderPasswordAdmin',
+                data: JSON.stringify(requestData),
+                dataType: 'json',
+                //dataType: 'text',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    // if success
+                    // alert("Success : " + data);
+                    alert(data);
+
+                    // $("#patient-notes").html(data);
+                    //  $('#txtPatNote').val('');
+                    HideLoaderBig();
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+
+                    //alert('Error : ' + xhr.message);
+                    var myCookie = getCookie(".Admin");
+
+                    if (myCookie == null) {
+                        // do cookie doesn't exist stuff;
+                        alert('Not logged in. Please log in to continue');
+                        window.location = '/Login'
+                        //xhr.getResponseHeader('Location');
+                    }
+                    else {
+
+                        alert('Error : ' + xhr.message);
+                    }
+
+                    HideLoaderBig();
+                },
+                complete: function (data) {
+                    // if completed
+                    HideLoaderBig();
+
+                },
+                async: true,
+                processData: false
+            });
+        }
+        catch (err) {
+            if (err && err !== "") {
+                alert(err.message);
+                HideLoaderBig();
+            }
+        }
+    }
+
+    function ResetLockedAccount() {
+        ShowLoaderBig();
+        var patientid = $('#lbl-id').text();
+
+        try {
+            var requestData = {
+                PatientId: patientid,
+                Password: $('#lbl-pwd').text()
+            };
+
+
+            $.ajax({
+                type: 'POST',
+                url: 'Admin/ResetLockedAccountProvider',
+                data: JSON.stringify(requestData),
+                dataType: 'json',
+                //dataType: 'text',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    // if success
+
+                    HideLoaderBig();
+                    alert(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //if error
+
+                    // alert('Error : ' + xhr.message);
+                    var myCookie = getCookie(".Admin");
+
+                    if (myCookie == null) {
+                        // do cookie doesn't exist stuff;
+                        alert('Not logged in. Please log in to continue');
+                        window.location = '/Login'
+                        //xhr.getResponseHeader('Location');
+                    }
+                    else {
+
+                        alert('Error : ' + xhr.message);
+                    }
+                    HideLoaderBig();
+                },
+                complete: function (data) {
+                    // if completed
+                    HideLoaderBig();
+
+                },
+                async: true,
+                processData: false
+            });
+
+
+        } catch (err) {
+
+            if (err && err !== "") {
+                alert(err.message);
+                HideLoaderBig();
+            }
+        }
+    }
+    function ActivateDeactivatePatient() {
+        if ($("#Active").text() == "true") {
+            $("#rdAct").prop('checked', true);
+        }
+        else {
+            $("#rdDact").prop('checked', true);
+
+        }
+        $("#Activate-Decativate-form").dialog("open");
+    };
+    $(function () {
+
+        $("#Activate-Decativate-form").dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "blind",
+                duration: 1000
+            },
+
+
+            width: 650,
+            modal: true,
+            buttons: {
+                "Save": function () {
+                    ShowLoaderBig();
+                    var bValid = true;
+
+                    if (bValid) {
+
+                        var ProviderId = $('#lbl-id').text();
+
+                        try {
+                            var requestData = {
+                                ProviderId: ProviderId,
+                                Activate: $('#rdAct').prop('checked'),
+                                Deactivate: $('#rdDact').prop('checked')
+
+                            };
+                            var activrd = $('#rdAct').prop('checked');
+
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'Admin/ActivateDecativateProvider',
+                                data: JSON.stringify(requestData),
+                                dataType: 'json',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function (data) {
+                                    // if success
+                                    if (activrd == true) {
+                                        $("#Active").text("true")
+                                    }
+                                    else {
+                                        $("#Active").text("false")
+                                    }
+                                    var msg = data;
+                                    alert(msg);
+                                    HideLoaderBig();
+                                    clearTextBox();
+
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    //if error
+
+                                    //    alert('Error : ' + xhr.message);
+                                    var myCookie = getCookie(".Admin");
+
+                                    if (myCookie == null) {
+                                        // do cookie doesn't exist stuff;
+                                        alert('Not logged in. Please log in to continue');
+                                        window.location = '/Login'
+                                        //xhr.getResponseHeader('Location');
+                                    }
+                                    else {
+
+                                        alert('Error : ' + xhr.message);
+                                    }
+                                    HideLoaderBig();
+                                },
+                                complete: function (data) {
+                                    // if completed
+                                    HideLoaderBig();
+
+                                },
+                                async: true,
+                                processData: false
+                            });
+
+
+                        } catch (err) {
+
+                            if (err && err !== "") {
+                                alert(err.message);
+                                HideLoaderBig();
+                            }
+                        }
+                        $(this).dialog("close");
+                        ShowLoaderBig();
+
+
+                        //                        end ajax
+                    }
+                },
+                Close: function () {
+                    $(this).dialog("close");
+                    clearTextBox();
+                }
+            },
+            close: function () {
+
+            }
+        });
+        $("#ChangeEmail-form").dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "blind",
+                duration: 1000
+            },
+
+
+            width: 650,
+            modal: true,
+            buttons: {
+                "Save": function () {
+
+                    var bValid = true;
+                    var ProviderId = $('#lbl-id').text();
+                    var changeEmail = $('#changeemail').val();
+                    if (!checkEmail(changeEmail)) {
+                        bValid = false;
+                    }
+
+                    if (bValid) {
+
+                        ShowLoaderBig();
+                        try {
+                            var requestData = {
+                                ProviderId: ProviderId,
+                                Email: $.trim($('#changeemail').val())
+                                //  LastName: $.trim($('#txtdepententName').val())
+
+                            };
+
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'Admin/ChangeEmailProvider',
+                                data: JSON.stringify(requestData),
+                                dataType: 'json',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function (data) {
+
+                                    if (data == "Email Changed Successfully") {
+                                        $('#lbl-email').text(changeEmail);
+                                    }
+                                    alert(data);
+                                    //$("#patient-portlet").html(data.html);
+                                    //$("#tbl-LinkedAccount").fixedHeaderTable();
+                                    HideLoaderBig();
+                                    clearTextBox();
+
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    //if error
+
+                                    //      alert('Error : ' + xhr.message);
+                                    var myCookie = getCookie(".Admin");
+
+                                    if (myCookie == null) {
+                                        // do cookie doesn't exist stuff;
+                                        alert('Not logged in. Please log in to continue');
+                                        window.location = '/Login'
+                                        //xhr.getResponseHeader('Location');
+                                    }
+                                    else {
+
+                                        alert('Error : ' + xhr.message);
+                                    }
+
+                                    HideLoaderBig();
+                                },
+                                complete: function (data) {
+                                    // if completed
+                                    HideLoaderBig();
+
+                                },
+                                async: true,
+                                processData: false
+                            });
+
+
+                        } catch (err) {
+
+                            if (err && err !== "") {
+                                alert(err.message);
+                                HideLoaderBig();
+                            }
+                        }
+                        $(this).dialog("close");
+                        ShowLoaderBig();
+
+
+                        //                        end ajax
+                    }
+                },
+                Close: function () {
+                    $(this).dialog("close");
+                    clearTextBox();
+                }
+            },
+            close: function () {
+
+            }
+        });
+
+        $("#FacilityData-form").dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "blind",
+                duration: 1000
+            },
+
+
+            height: 500,
+            width: 750,
+            modal: true,
+            buttons: {
+                
+                Close: function () {
+                    $(this).dialog("close");
+                    $("#searchLocation").val("");
+                }
+            },
+            close: function () {
+                $("#searchLocation").val("");
+
+            }
+        });
+    });
+
+    function OpenLocation()
+    {
+        $("#ClearData").html("No Information found");
+
+        $("#FacilityPagginationtop").css("display", "none");
+        $("#FacilityPagginationBottom").css("display", "none");
+        $('#FacilityData-form').dialog("open");
+    }
+
+
+    function ShowFacilityData(Id,FacilityName)
+    {
+    //    alert(Id);
+        $("#txtFacility").val(FacilityName);
+        $("#txtFacilityId").val(Id);
+        $("#FacilityData-form").dialog("close");
+    }
+
+    function FacilitySearch() {
+        // ShowLoader();
+        $("#loader2").css("display", "block");
+        var FacilityName = $("#searchLocation").val();
+        var requestData = {
+            FacilityName: FacilityName,
+            PageNumber: 0,
+            PageSize: 20,
+
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'Admin/SearchFacility',
+            data: JSON.stringify(requestData),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                // if success
+                // alert("Success : " + data);
+                // var myCookie = getCookie(".Admin");
+                //alert(myCookie); if (data.error == "The access id was deleted") {
+                if (data.error == "The access id was deleted") {
+                    alert("The access id was deleted");
+                    //   $("#Search-Patient").html(data.html);
+                    $("#FacilityData").html(data.html);
+                    $("#loader2").css("display", "none");
+
+                    //HideLoader();
+
+                }
+                else {
+                    var divident = 0;
+                    var remainder = 0;
+                    //   $("#Search-Patient").html(data.html);
+                    $("#FacilityData").html(data.html);
+                    if (data.count > 20) {
+                        flag = "True";
+                        divident = data.count / 20;
+                        remainder = data.count % 20;
+                        //alert(divident);
+                        $("#Facilityindextop").text("");
+                        $("#FacilityindexBottom").text("");
+
+                        if (remainder != 0) {
+                            divident = divident + 1;
+                        }
+
+                        $("#FacilityPagginationBottom").css("display", "block");
+                        $("#FacilityPagginationtop").css("display", "block");
+
+                        for (var i = 1; i <= divident; i++) {
+                            $("#FacilityindexBottom").append("<option value=\"" + (i - 1) + "\">" + i + "</option>");
+                            $("#Facilityindextop").append("<option value=\"" + (i - 1) + "\">" + i + "</option>");
+
+                        }
+                    }
+                    else {
+                        $("#FacilityPagginationBottom").css("display", "none");
+                        $("#FacilityPagginationtop").css("display", "none");
+
+                        $("#pageindex").text("");
+                        $("#pageindextop").text("");
+
+
+                    }
+                    $("#loader2").css("display", "none");
+
+                    // HideLoader();
+                }
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //if error
+                var myCookie = getCookie(".Admin");
+
+                if (myCookie == null) {
+                    // do cookie doesn't exist stuff;
+                    alert('Not logged in. Please log in to continue');
+                    window.location = '/Login'
+                    //xhr.getResponseHeader('Location');
+                }
+                else {
+
+                    alert('Error : ' + xhr.message);
+                }
+                //alert('Error : ' + xhr.message);
+                $("#loader2").css("display", "none");
+
+                HideLoader();
+            },
+            complete: function (data) {
+                $("#loader2").css("display", "none");
+
+                // if completed
+                HideLoader();
+
+            },
+            async: true,
+            processData: false
+        });
+
+
+    }
+</script>
+<div id="Provider-Div">
+    <div id="First-Div">
+         @*<button onclick="Logout();" class="btn btn-warning" style="float:right;"><span class="glyphicon glyphicon-circle-arrow-left"></span> Logout</button>*@
+<table width="40%">
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            Provider ID
+        </td>
+        <td>
+            <input type="text" id="txtid" class="anc" style="width:250px" />
+        </td>
+    </tr>
+        <tr>
+        <td>
+            First Name
+        </td>
+        <td>
+            <input type="text" id="txtFname" class="anc" style="width:250px" />
+        </td>
+    </tr>
+      <tr>
+        <td>
+            Last Name
+        </td>
+        <td>
+            <input type="text" id="txLname" class="anc" style="width:250px" />
+        </td>
+    </tr>
+     
+      
+       <tr>
+        <td>
+             License
+        </td>
+        <td>
+            <input type="text" id="txtLicense" class="anc" style="width:250px" />
+        </td>
+    </tr>
+      <tr>
+        <td>
+             Phone
+        </td>
+        <td>
+            <input type="text" id="txtHphone" class="anc" style="width:250px" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Email
+        </td>
+        <td>
+            <input type="text" id="txtEmail" class="anc" style="width:250px" />
+        </td>
+    </tr>
+    <tr>
+          <td>
+            Location 
+        </td>
+        <td>
+            <input type="text" id="txtFacility" class="anc" style="width:250px" /><input type="hidden"  id="txtFacilityId"/><img src="~/Content/img/zoom_in.png" style="height:32px;cursor:pointer;" onclick="OpenLocation();" />
+              </td>
+    </tr>
+    <tr>
+
+           <td>
+            Partner
+        </td>
+        <td>
+                @Html.DropDownList("cmbPartner", Model.Partner.ToPartnerModelSelectList(), new { id = "cmbPartner", @class="txt", style = "width:200px",  })
+
+           
+        </td>
+    </tr>
+       
+    <tr>
+        <td>
+
+        </td>
+        <td height="80px">
+            <span style="height:500px;">    <button type="button" onclick="PatientSearch();" class="btn btn-info"><span class="glyphicon glyphicon-search"></span> Search</button>
+                <img id="loader" src="Content/img/login-loader.gif" style="margin-left:30px;display:none;">
+        </span>
+        </td>
+    </tr>
+</table>
+      <div align="right" id="Pagginationtop" style="display:none;">
+           Page: <select class="coms"  id="pageindextop" style="width:70px;">
+                </select>
+           
+        </div> 
+<div id="Search-Patient">
+</div>
+           <div align="right" id="Paggination" style="display:none;">
+           Page: <select class="coms"  id="pageindex" style="width:70px;">
+                </select>
+
+        </div>
+    
+        
+        
+</div>
+
+    <div id="Patient-Data" style="display:none;">
+    <button onclick="BackSearch();" class="btn btn-warning" style="float:right;"><span class="glyphicon glyphicon-circle-arrow-left"></span> Previous Search</button>
+    <table width="80%" >
+            <tr>
+        <td>
+        <table width="80%" >
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            Provider ID 
+        </td>
+        <td>
+            <label id="lbl-id"></label>
+        </td>
+     @*    <td>
+            Care Provider Password
+        </td>
+        <td>
+            <label id="lbl-cpwd"></label>
+        </td>*@
+    </tr>
+        <tr>
+        <td>
+            Name
+        </td>
+        <td>
+            <label id="lbl-Name"></label>
+        </td>
+            <td>
+          
+        </td>
+        <td>
+            <label id="Active" style="display:none;"></label>
+        </td>
+          <td></td>
+    </tr>
+      <tr>
+        <td>
+           Account Password
+        </td>
+        <td>
+            <label id="lbl-pwd"></label>
+        </td>
+          <td></td>
+    </tr>
+     @* <tr>
+        <td>
+            Address
+        </td>
+        <td>
+            <label id="lbl-Adr"></label>           
+        </td>
+          <td></td>
+    </tr>
+     <tr>
+        <td>
+            
+        </td>
+        <td>            
+            <label id="lbl-Adr3"></label>  
+            
+        </td>
+          <td></td>
+    </tr>
+            <tr>
+        <td>
+            
+        </td>
+        <td>           
+            <label id="lbl-Adr2"></label>
+        </td>
+          <td></td>
+    </tr>
+      <tr>
+        <td>
+            Account Type
+        </td>
+        <td>
+                   <label id="lbl-act-typ"></label>
+								                          
+        </td>
+          <td></td>
+    </tr>*@
+     
+      <tr>
+        <td>
+            Email 
+        </td>
+        <td>
+            <label id="lbl-email"></label>        </td>
+          <td> <span style="height:500px;display:none;">    <button type="button" onclick="SendEmail();" class="btn btn-info">Compose Email</button></td>
+    </tr>
+            <tr><td valign="Top" >Location:  <table id="myTable1" width="80%" style="display:none;"  >
+
+    </table>
+                    
+                 </td>
+                 <td>
+                 <div id="lbl-Practice" >
+                      <table id="myTable" width="80%" style="font-weight: bold;"  >
+
+    </table>
+
+                 </div></td>
+      
+    </tr>
+  @*    <tr>
+        <td>
+            Partner
+        </td>
+        <td>
+           <label id="lbl-partner"></label>
+        </td>
+          <td></td>
+    </tr>
+             <tr><td valign="Top" >Practice:
+                    <table id="myTable1" width="80%" style="display:none;"  >
+
+    </table>
+                 </td>
+                 <td>
+                 <div id="lbl-Practice" >
+                      <table id="myTable" width="80%" style="font-weight: bold;"  >
+
+    </table>
+
+                 </div></td>
+      
+    </tr>*@
+   
+    
+</table></td>
+        
+    </tr>
+</table>
+
+
+<table width="50%" style="margin-top:40px;">
+
+    <tr>
+   <td><span style="height:500px;">   <button type="button"  class="btn btn-info" style="width:170px;" onclick="ResetLockedAccount();">Reset Locked Account</button>   </span></td>
+    <td><span style="height:500px;">   <button type="button"  class="btn btn-info" style="width:170px;" onclick="ChangeEmail();">Change Email</button></span></td>
+    <td><span style="height:500px;">  <button type="button"  class="btn btn-info" onclick="ActivateDeactivatePatient();" style="width:167px;">Activate/Deactivate</button>  </span></td>
+         <td><span style="height:500px;">    <button  type="button"  class="btn btn-info" style="width:195px;" onclick="ResetChangePassword();">Change Password</button></span></td>
+       <td><span style="height:500px;">    <button type="button"  class="btn btn-info" onclick="DeleteConfrimationCurrentUser();"disabled="disabled" style="width:175px;display:none;">Delete Patient</button></span></td>
+   
+       </tr>
+    <tr style="display:none;">   
+    <td><span style="height:500px;">    <button id="UpdateRenewelDate" type="button"    class="btn btn-info" style="width:167px;"  onclick="UpdateRenewelDate();" disabled="disabled">Update Renewel Date</button></span></td>
+    <td><span style="height:500px;">  <button type="button" onclick="PatientPortal();"  class="btn btn-info" style="width:167px;" disabled="disabled">Log in as Patient</button></span></td>
+     <td><span style="height:500px;">  <button id="PrintWelcomeScreen" type="button"  style="width:170px;" class="btn btn-info" disabled="disabled">Print Welcome Screen</button>   </span></td>
+      <td><span style="height:500px;">    <button type="button"  class="btn btn-info" onclick="RestSecurityQuestion();" style="width:195px;" disabled="disabled">Change Security Questions</button></span></td>
+        <td><span style="height:500px;">    <button id="UpgradeDowngrade" type="button"   class="btn btn-info" style="width:175px;" onclick="UpgradeDowngrade();"disabled="disabled">Upgrade/Downgrade</button></span></td>
+       </tr>
+    <tr style="display:none;">
+   <td><span style="height:500px;"><button id="FamilyLinkId" type="button"  class="btn btn-info" style="width:170px;" onclick="CreateFamilyLinks();" disabled="disabled">Family Links</button>    </span></td>
+    <td><span style="height:500px;">    <button id="RenewAccount" type="button"   class="btn btn-info" style="width:170px;" onclick="RenewPatient();" disabled="disabled">Renew Account</button></span></td>
+    <td><span style="height:500px;">    <button id="clientNote" type="button"  class="btn btn-info" style="width:170px;" onclick="clientNotesform();"disabled="disabled">Client Notes</button></span></td>
+      <td><span style="height:500px;">    <button type="button"  class="btn btn-info" style="width:195px;" onclick="DocumentData();"disabled="disabled">Documents</button></span></td>
+      <td><span style="height:500px;">    <button type="button"  class="btn btn-info" style="width:175px;" onclick="DeleteVisitPop();"disabled="disabled">Delete a Visit</button></span></td>
+
+       </tr>
+  
+</table>
+    </div>
+    
+    <div id="dialog-confirm">
+
+</div>
+
+    <!--popup for Email Change -->
+    
+
+    
+    <div id="ChangeEmail-form" title="Edit Email ">
+     <table width="80%" >
+       <tr>
+            <td align="right" style="width:20%;" >Email: </td>
+            <td align="left" style="width:10%;" colspan="3" >
+               
+          <input type="text" id="changeemail" class="txt" maxlength="60" style="width:250px;"  />
+
+          </td>
+          
+        </tr>
+        
+        
+       
+    </table>
+     
+</div>
+    <!--end popup for Email change-->
+    <div id="Activate-Decativate-form" title="Activate/Deactivate Patient">
+     <table width="100%" >
+       <tr>
+            <td style="width:5%;" ><input id="rdAct" checked="checked" type="radio" name="patradio" value="Activate"></td>
+          <td>Activate</td>
+        </tr>
+               <tr>
+            <td style="width:5%;" ><input id="rdDact" type="radio" name="patradio" value="Deactivate"></td>
+          <td>Deactivate</td>
+        </tr>
+        
+       
+    </table>
+     
+</div>
+
+     <div  id="FacilityData-form" title="Location Lookup">
+         <table>
+             <tr><td>Enter Location Name</td><td><input type="text" id="searchLocation" style="width:256px;" /></td> <td ><span style="height:500px;">    <button type="button" onclick="FacilitySearch();" class="btn btn-info"><span class="glyphicon glyphicon-search"></span> Search</button>
+        </span>
+        </td><td><img id="loader2" src="Content/img/login-loader.gif" style="margin-left:30px;display:none;"></td></tr>
+             <tr></tr>
+            
+         </table>
+               <div align="right" id="FacilityPagginationtop" style="display:none;">
+           Page: <select class="coms"  id="Facilityindextop" style="width:70px;">
+                </select>
+
+        </div> 
+        <div id="FacilityData" style="margin-top:0px;">
+            <table class="table">
+                <thead>
+                      <tr>
+
+              <th>Location ID</th>
+                <th>Location Name</th>
+               
+                
+            </tr>
+
+                </thead>
+                <tbody id="ClearData">
+             
+                </tbody>
+            </table>
+        </div>
+               <div align="right" id="FacilityPagginationBottom" style="display:none;">
+           Page: <select class="coms"  id="FacilityindexBottom" style="width:70px;">
+                </select>
+
+        </div> 
+       
+    </div>
+
+    @*<div id="ChildPatient-form" title="Add an Account ">
+     <table width="100%" >
+       <tr>
+            <td align="right" style="width:20%;" >Please enter a Family Member Access Code: </td>
+            <td align="left" style="width:10%;" colspan="3" >
+                <input type="hidden" id="txtpatrentcode"  value="" class="txt"  maxlength="3" style="width:65px; display:none;" />
+                
+          <input type="text" id="txtchildcode" class="txt" maxlength="30" style="width:100px;"  />
+
+          </td>
+          
+        </tr>
+        
+        
+       
+    </table>
+     
+</div>*@
+
+  @*  <div  id="PatientDocument-form" title="Documents">
+        <div id="documentdata">
+
+        </div>
+        <div id="documentdata1">
+
+        </div>
+
+
+    </div>
+
+     <div  id="PatientVisit-form" title="Visits">
+        <div id="VisitData">
+
+        </div>
+       
+
+
+    </div>*@
+
+
+
+    <!-- popup for activate/deactivated patient -->
+    @*<div id="Activate-Decativate-form" title="Activate/Deactivate Patient">
+     <table width="100%" >
+       <tr>
+            <td style="width:5%;" ><input id="rdAct" checked="checked" type="radio" name="patradio" value="Activate"></td>
+          <td>Activate</td>
+        </tr>
+               <tr>
+            <td style="width:5%;" ><input id="rdDact" type="radio" name="patradio" value="Deactivate"></td>
+          <td>Deactivate</td>
+        </tr>
+        
+       
+    </table>
+     
+</div>*@
+
+    <!-- popup for client notes -->
+    
+
+    @*<div id="UpdateRenewelDate-form" title="Update Renewel Date ">
+     <table width="100%" >
+       <tr>
+            <td align="right" style="width:20%;" >Update Date: </td>
+            <td align="left" style="width:10%;" colspan="3" >
+                <input type="hidden" id="txtUpdateDatehid"  value="" class="txt"  maxlength="3" style="width:65px; display:none;" />
+                
+          <input type="text" id="txtUpdateDate" class="txt" maxlength="30" style="width:100px;"  />
+
+          </td>
+          
+        </tr>
+        
+        
+       
+    </table>
+     
+</div>*@
+    </div>
+

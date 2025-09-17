@@ -1,0 +1,190 @@
+﻿@{
+    ViewBag.Title = "VIEW";
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    
+<title>VIEW</title>
+  
+    <script type="text/javascript" src="@Url.Content("~/Content/js/jquery-1.9.1.js")"></script>
+    <script  type="text/javascript"src="@Url.Content("~/Content/js/jquery-1.9.2.custom.js")"></script>
+        <link rel="stylesheet" href="@Url.Content("~/Content/css/themes/redmond/jquery-ui.css")" />
+    <link href="@Url.Content("~/Content/css/themes/redmond/jquery-ui-1.10.3.custom.css")" rel="stylesheet">
+                <script src="@Url.Content("~/Content/js/jquery-ui.js")"></script>
+                <script src="@Url.Content("~/Content/css/ui/jquery.ui.core.js")"></script>
+                <script src="@Url.Content("~/Content/js/timeout-dialog.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.idle-timer.js")"></script>
+    <script type="text/javascript">
+        
+        $(function () {
+            var timeout = @System.Configuration.ConfigurationManager.AppSettings["InactivityTimeout"]
+           $(document).bind("idle.idleTimer", function () {
+               // function you want to fire when the user goes idle
+
+
+               var active = '@Session["LoginType"]';
+               console.log(active);
+               if (active == "Accessibility") {
+
+                   $.timeoutDialog({
+                       timeout: 1, countdown: 60,
+
+                       logout_redirect_url: '@Url.RouteUrl("logout", new { controller = "Home", action = "LogOff", CCDUrl = "CCD" })',
+
+                            restart_on_yes: true
+
+                        });
+                    }
+                    else {
+
+
+                        $.timeoutDialog({
+                            timeout: 1, countdown: 60,
+
+                            logout_redirect_url:'window_close',
+                                @*'@Url.RouteUrl("logout", new { controller = "Home", action = "LogOff", CCDUrl = "" })',*@
+
+                       restart_on_yes: true
+
+                   });
+               }
+           });
+           $(document).bind("active.idleTimer", function () {
+               // function you want to fire when the user becomes active again
+           });
+           $.idleTimer(timeout);
+        });
+
+        $(document).ready(function () {
+            function ShowLoader() {
+
+                $('#loader').css("display", "block")
+            }
+            function HideLoader() {
+
+                $('#loader').css("display", "none")
+            }
+            $(window).resize(function () {
+                var height = $(this).height() - $("#header").height()
+                $('#content').height(height);
+            });
+            $(window).resize();
+            //alert('test');
+            //Test Comment
+            ShowLoader();
+            $('#loader').css("display", "block");
+            $.ajax({
+                dataType: "json",
+                type: 'GET',
+                cache: false,
+                url: 'Get-CCD-Data',
+                success: function (data) {
+
+                    $.each(data, function (index, item) {
+                        
+
+                        if (item.Id == "patientSummary") {
+                            $('#PatientSummary').append(item.WidgetHtml);
+
+                        }
+                        else {
+                            if (item.WidgetHtml != '') {
+
+                               // if (item.Id != 'Reason For Visit') {
+
+                                    if (item.Id == 'Medications Administered') {
+                                        var newDiv = $("<div class='uploadBox' id='widget_" + item.Id + "'><h3><span style='font-weight:bold;'><a>" + item.Id + " During Visit</a></span><a href='#toc' style='float:right;'>Top</a></h3><div class='widgetTable'></div></div>");
+                                        var content = item.Id;
+                                        var spl = content.split(" ");
+                                        $('#' + spl[1]).show();
+                                       // alert(item.Id);
+                                        $('#widgets').append(newDiv);
+                                        //alert(item.WidgetHtml);
+
+                                        $('.widgetTable:last').append(item.WidgetHtml);
+                                        $('.widgetTable:last table').attr("summary", item.Id);
+                                    }
+                                    else {
+                                        var newDiv = $("<div class='uploadBox' id='widget_" + item.Id + "'><h3><span style='font-weight:bold;'><a>" + item.Id + "</a></span><a href='#toc' style='float:right;'>Top</a></h3><div class='widgetTable'></div></div>");
+                                        var content = item.Id;
+                                        var spl = content.split(" ");
+                                        var spl1 = spl[0].split(",");
+                                        $('#' + spl1[0]).show();
+                                      //  alert(item.Id);
+                                        $('#widgets').append(newDiv);
+                                        //alert(item.WidgetHtml);
+
+                                        $('.widgetTable:last').append(item.WidgetHtml);
+                                        $('.widgetTable:last table').attr("summary", item.Id);
+                                    }
+                               // }
+                            }
+                        }
+                       
+
+                    });
+                    HideLoader();
+                    //CheckCustom();
+                }
+            });
+        });
+
+        function CheckCustom() {
+            var customize = '@Request.QueryString["Customize"]';
+          //  alert(customize)
+            if (customize == 'False')
+            {
+                $('#Administered').show();
+                $('#Medications').show();
+                $('#Problems').show();
+                $('#Allergies').show();
+                $('#Immunizations').show();
+                $('#Social').show();
+                $('#Procedures').show();
+                $('#Vital').show();
+                $('#Lab').show();
+                $('#Care').show();
+                $('#Clinical').show();
+            }
+        }
+
+        
+    </script>
+    
+</head>
+<body>
+     <input type="hidden" value="@ViewData["Customize"]" id="Customize" />
+    <div id="content" style="height: 360px; overflow: scroll;">
+       
+        <div id="PatientSummary"></div>
+        <div id="Contents">
+            <h3><a name="toc">Table of Contents</a></h3>
+            <img id="loader" src="Content/img/login-loader.gif" alt="Loading..." style="display: none;" />
+            <ul>
+                <li style="display: none" id="Reason"><a href="#widget_Reason For Visit/Chief Complaint">Reason For Visit/Chief Complaint</a></li>
+                <li style="display: none" id="Administered"><a href="#widget_Medications Administered">Medications Administered During Visit</a></li>
+                <li style="display: none" id="Medications"><a href="#widget_Medications">Medications</a></li>
+                <li style="display: none" id="Problems"><a href="#widget_Problems">Problems</a></li>
+                <li style="display: none" id="Allergies"><a href="#widget_Allergies, Adverse Reactions, Alerts">Allergies, Adverse Reactions, Alerts</a></li>
+                <li style="display: none" id="Immunizations"><a href="#widget_Immunizations">Immunizations</a></li>
+                <li style="display: none" id="Social"><a href="#widget_Social History">Social History</a></li>
+                <li style="display: none" id="Procedures"><a href="#widget_Procedures">Procedures</a></li>
+                <li style="display: none" id="Vital"><a href="#widget_Vital Signs">Vital Signs</a></li>
+                <li style="display: none" id="Lab"><a href="#widget_Lab Tests">Lab Tests</a></li>
+                <li style="display: none" id="Care"><a href="#widget_Care Plan">Care Plan</a></li>
+               <li style="display: none" id="Clinical"><a href="#widget_Clinical Instructions">Clinical Instructions</a></li>
+            </ul>
+        </div>
+        <div id="widgets">
+        </div>
+    </div>
+
+
+   
+
+</body>
+</html>
+
+
+

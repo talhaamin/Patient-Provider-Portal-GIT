@@ -1,0 +1,1055 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{747E7368-6430-4A46-BF1E-F1034DB31B83}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Testing</RootNamespace>
+    <AssemblyName>Testing</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmAdvisor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdvisor.Designer.cs">
+      <DependentUpon>frmAdvisor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBill.Designer.cs">
+      <DependentUpon>frmBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBillRate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBillRate.Designer.cs">
+      <DependentUpon>frmBillRate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCareProvider.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCareProvider.Designer.cs">
+      <DependentUpon>frmCareProvider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCCDDirect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCCDDirect.Designer.cs">
+      <DependentUpon>frmCCDDirect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCCDGenerate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCCDGenerate.Designer.cs">
+      <DependentUpon>frmCCDGenerate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDirectImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDirectImport.Designer.cs">
+      <DependentUpon>frmDirectImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDoctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDoctor.Designer.cs">
+      <DependentUpon>frmDoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmISCCDUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmISCCDUpload.Designer.cs">
+      <DependentUpon>frmISCCDUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAuthentication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAuthentication.Designer.cs">
+      <DependentUpon>frmAuthentication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDocument.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDocument.Designer.cs">
+      <DependentUpon>frmDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEmail.Designer.cs">
+      <DependentUpon>frmEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmergency.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEmergency.Designer.cs">
+      <DependentUpon>frmEmergency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFacility.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFacility.Designer.cs">
+      <DependentUpon>frmFacility.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmISAuthenticate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmISAuthenticate.Designer.cs">
+      <DependentUpon>frmISAuthenticate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmISDocument.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmISDocument.Designer.cs">
+      <DependentUpon>frmISDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmISIntegration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmISIntegration.Designer.cs">
+      <DependentUpon>frmISIntegration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmISLab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmISLab.Designer.cs">
+      <DependentUpon>frmISLab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmISMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmISMessage.Designer.cs">
+      <DependentUpon>frmISMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmISPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmISPatient.Designer.cs">
+      <DependentUpon>frmISPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmISProvider.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmISProvider.Designer.cs">
+      <DependentUpon>frmISProvider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmISSendCDA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmISSendCDA.Designer.cs">
+      <DependentUpon>frmISSendCDA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmISVisitUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmISVisitUpload.Designer.cs">
+      <DependentUpon>frmISVisitUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLab.Designer.cs">
+      <DependentUpon>frmLab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMedicalPortfolio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMedicalPortfolio.Designer.cs">
+      <DependentUpon>frmMedicalPortfolio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMessage.Designer.cs">
+      <DependentUpon>frmMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOrganization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOrganization.Designer.cs">
+      <DependentUpon>frmOrganization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatient.Designer.cs">
+      <DependentUpon>frmPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatientData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatientData.Designer.cs">
+      <DependentUpon>frmPatientData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatientLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatientLogin.Designer.cs">
+      <DependentUpon>frmPatientLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPractice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPractice.Designer.cs">
+      <DependentUpon>frmPractice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProvider.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProvider.Designer.cs">
+      <DependentUpon>frmProvider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReporting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReporting.Designer.cs">
+      <DependentUpon>frmReporting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSocialSelf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSocialSelf.Designer.cs">
+      <DependentUpon>frmSocialSelf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalVar.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web References\AuthenticationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ConfigService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\DirectService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ISAuthenticationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ISConfigService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ISDirectService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ISMessageService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ISPatientService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ISProviderService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ISReportService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\MessageService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PatientDocumentService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PatientService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ProviderService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frmAdvisor.resx">
+      <DependentUpon>frmAdvisor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBill.resx">
+      <DependentUpon>frmBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBillRate.resx">
+      <DependentUpon>frmBillRate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCareProvider.resx">
+      <DependentUpon>frmCareProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCCDDirect.resx">
+      <DependentUpon>frmCCDDirect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCCDGenerate.resx">
+      <DependentUpon>frmCCDGenerate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDirectImport.resx">
+      <DependentUpon>frmDirectImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDoctor.resx">
+      <DependentUpon>frmDoctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmISCCDUpload.resx">
+      <DependentUpon>frmISCCDUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAuthentication.resx">
+      <DependentUpon>frmAuthentication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDocument.resx">
+      <DependentUpon>frmDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEmail.resx">
+      <DependentUpon>frmEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEmergency.resx">
+      <DependentUpon>frmEmergency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFacility.resx">
+      <DependentUpon>frmFacility.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmISAuthenticate.resx">
+      <DependentUpon>frmISAuthenticate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmISDocument.resx">
+      <DependentUpon>frmISDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmISIntegration.resx">
+      <DependentUpon>frmISIntegration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmISLab.resx">
+      <DependentUpon>frmISLab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmISMessage.resx">
+      <DependentUpon>frmISMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmISPatient.resx">
+      <DependentUpon>frmISPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmISProvider.resx">
+      <DependentUpon>frmISProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmISSendCDA.resx">
+      <DependentUpon>frmISSendCDA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmISVisitUpload.resx">
+      <DependentUpon>frmISVisitUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLab.resx">
+      <DependentUpon>frmLab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMedicalPortfolio.resx">
+      <DependentUpon>frmMedicalPortfolio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMessage.resx">
+      <DependentUpon>frmMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOrganization.resx">
+      <DependentUpon>frmOrganization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatient.resx">
+      <DependentUpon>frmPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatientData.resx">
+      <DependentUpon>frmPatientData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatientLogin.resx">
+      <DependentUpon>frmPatientLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPractice.resx">
+      <DependentUpon>frmPractice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProvider.resx">
+      <DependentUpon>frmProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReporting.resx">
+      <DependentUpon>frmReporting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSocialSelf.resx">
+      <DependentUpon>frmSocialSelf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Web References\AuthenticationService\AuthenticationResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AuthenticationService\AuthenticationService.wsdl" />
+    <None Include="Web References\AuthenticationService\PatientLoginData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AuthenticationService\PatientSecurityData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AuthenticationService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\AuthenticationService\UserData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ConfigService\CodeTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ConfigService\CodeTableValue.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ConfigService\ConfigService.wsdl" />
+    <None Include="Web References\ConfigService\FacilityData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ConfigService\FacilitySetupResp.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ConfigService\FacilityTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ConfigService\OrganizationData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ConfigService\OrganizationTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ConfigService\PracticeData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ConfigService\PracticeTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ConfigService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\DirectService\DirectResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\DirectService\DirectService.wsdl" />
+    <None Include="Web References\DirectService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ISAuthenticationService\AuthenticationResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ISAuthenticationService\AuthenticationService.wsdl" />
+    <None Include="Web References\ISAuthenticationService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ISConfigService\ConfigService.wsdl" />
+    <None Include="Web References\ISConfigService\FacilitySetupResp.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ISConfigService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ISDirectService\DirectResp.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ISDirectService\DirectService.wsdl" />
+    <None Include="Web References\ISDirectService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ISMessageService\DirectReceivedResp.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ISMessageService\MessagePostResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ISMessageService\MessageService.wsdl" />
+    <None Include="Web References\ISMessageService\MessageTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ISMessageService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ISPatientService\CCDPostResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ISPatientService\DocumentPostResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ISPatientService\LabPostResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ISPatientService\PatientResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ISPatientService\PatientService.wsdl" />
+    <None Include="Web References\ISPatientService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ISPatientService\VisitPostResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ISProviderService\ProviderResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ISProviderService\ProviderService.wsdl" />
+    <None Include="Web References\ISProviderService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ISReportService\LoginLogResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ISReportService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ISReportService\ReportService.wsdl" />
+    <None Include="Web References\ISReportService\SecureMessageResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\MessageService\CodeTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\MessageService\EmailMessageData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\MessageService\MessageAttachmentData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\MessageService\MessageData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\MessageService\MessageService.wsdl" />
+    <None Include="Web References\MessageService\MessageTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\MessageService\MessageUnread.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\MessageService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PatientDocumentService\CCDPostResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\MedicalPortfolioData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientAdvisorData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientAllergyData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientCareDocumentData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientCCDResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientCCDTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientClinicalDocumentData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientDocTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientDoctorData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientDocumentData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientDocumentResp.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientDocumentService.wsdl" />
+    <None Include="Web References\PatientDocumentService\PatientEmergencyData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientFamilyHistData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientImmunizationData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientInsuranceData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientLabResultData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientMedicalDocumentData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientMedicalHistData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientMedicalTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientMedicationData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientNoteData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientPharmacyData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientPlanOfCareData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientPolicyData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientProblemData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientProcedureData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientSocialHistData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientSocialSelfData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientSummaryTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientSurgicalHistData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientVisitCCD.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\PatientVitalSignData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientDocumentService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PatientService\BillPaymentData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\BillPaymentTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\BillRateData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\BillRateTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\CareProviderData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientAccountLinkData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientAdmin.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientFacilityOptionsData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientFacilityTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientImageData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientOrganData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientRepData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientResp.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientService.wsdl" />
+    <None Include="Web References\PatientService\PatientShareData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientShareResp.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientSummaryData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientVisitData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientVisitTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\PatientWebSettingData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PatientService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ProviderService\ProviderData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ProviderService\ProviderImageData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ProviderService\ProviderResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ProviderService\ProviderService.wsdl" />
+    <None Include="Web References\ProviderService\ProviderTableData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ProviderService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:61065/ConfigService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ConfigService\</RelPath>
+      <UpdateFromURL>http://localhost:61065/ConfigService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_ConfigService_ConfigWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www.accessmyrecordsportal.com/QAIntegrationWS/AuthenticationService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ISAuthenticationService\</RelPath>
+      <UpdateFromURL>http://www.accessmyrecordsportal.com/QAIntegrationWS/AuthenticationService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_ISAuthenticationService_AuthenticationWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://www.amrportal.com/IntegrationWS/ConfigService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ISConfigService\</RelPath>
+      <UpdateFromURL>https://www.amrportal.com/IntegrationWS/ConfigService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_ISConfigService_ConfigWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:63407/DirectService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ISDirectService\</RelPath>
+      <UpdateFromURL>http://localhost:63407/DirectService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_ISDirectService_Direct_x002B_WS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www.accessmyrecordsportal.com/QAIntegrationWS/MessageService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ISMessageService\</RelPath>
+      <UpdateFromURL>http://www.accessmyrecordsportal.com/QAIntegrationWS/MessageService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_ISMessageService_MessageWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:61065/DirectService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\DirectService\</RelPath>
+      <UpdateFromURL>http://localhost:61065/DirectService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_DirectService_DirectWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:61065/AuthenticationService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\AuthenticationService\</RelPath>
+      <UpdateFromURL>http://localhost:61065/AuthenticationService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_AuthenticationService_AuthenticationWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:61065/MessageService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\MessageService\</RelPath>
+      <UpdateFromURL>http://localhost:61065/MessageService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_MessageService_MessageWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:61065/PatientDocumentService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PatientDocumentService\</RelPath>
+      <UpdateFromURL>http://localhost:61065/PatientDocumentService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_PatientDocumentService_PatientDocumentWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:61065/PatientService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PatientService\</RelPath>
+      <UpdateFromURL>http://localhost:61065/PatientService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_PatientService_PatientWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:61065/ProviderService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ProviderService\</RelPath>
+      <UpdateFromURL>http://localhost:61065/ProviderService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_ProviderService_ProviderWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www.accessmyrecordsportal.com/QAIntegrationWS/PatientService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ISPatientService\</RelPath>
+      <UpdateFromURL>http://www.accessmyrecordsportal.com/QAIntegrationWS/PatientService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_ISPatientService_PatientWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://www.amrportal.com/IntegrationWS/ProviderService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ISProviderService\</RelPath>
+      <UpdateFromURL>https://www.amrportal.com/IntegrationWS/ProviderService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_ISProviderService_ProviderWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www.accessmyrecordsportal.com/QAIntegrationWS/ReportService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ISReportService\</RelPath>
+      <UpdateFromURL>http://www.accessmyrecordsportal.com/QAIntegrationWS/ReportService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Testing_ISReportService_ReportWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\PatientDocumentService\PatientDocumentService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\AMR.Data\AMR.Data.csproj">
+      <Project>{ee22f6ac-120e-489f-b830-678984e47e73}</Project>
+      <Name>AMR.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Integration\AMR.IntegrationService\AMR.IntegrationService\AMR.IntegrationService.csproj">
+      <Project>{2e03cb60-3d22-44d7-a786-6f1187d1609a}</Project>
+      <Name>AMR.IntegrationService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\PatientService\PatientService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\AuthenticationService\AuthenticationService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ProviderService\ProviderService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\MessageService\MessageService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\DirectService\DirectService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADODB">
+      <Guid>{B691E011-1797-432E-907A-4D8C69339129}</Guid>
+      <VersionMajor>6</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CDO">
+      <Guid>{CD000000-8B95-11D1-82DB-00C04FB1625D}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ConfigService\ConfigService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ISAuthenticationService\AuthenticationService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ISConfigService\ConfigService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ISDirectService\DirectService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ISMessageService\MessageService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ISProviderService\ProviderService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ISReportService\ReportService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ISPatientService\PatientService.disco" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

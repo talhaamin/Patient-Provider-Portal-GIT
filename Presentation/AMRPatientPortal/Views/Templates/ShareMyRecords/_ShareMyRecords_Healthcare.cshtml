@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AMR.Models.VisitModel>
+@using System.Web.Script.Serialization;
+<table class="box-table-a" id="tbl-SharedHealthRecord" summary="HealthCareDataExchange">
+                            <thead>
+                                <tr>
+                                    <!--<th scope="col" style="margin-right: 10px;">
+                                        <input name="check" type="checkbox" class="CheckAll" id="chk_1" onclick="checkAll(this);" />
+                                    </th>-->
+                                    <th scope="col">Visit Date</th>
+                                    <th scope="col">Facility</th>
+                                    <th scope="col">Physician</th>
+                                    <th scope="col">Visit Reason</th>
+                                 
+                               </tr>
+                            </thead>
+                               <tbody>
+                    @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var item in Model)
+                                    {
+                        <tr class="@((counter % 2 == 1) ? "r0" : "r1")">
+                            <td><span  class="LinkHighlight hoverMe" onclick="ViewVisitRecord('@item.VisitID','@item.FacilityId');">@item.VisitDate.ToString("MM/dd/yyyy")</span></td>
+                        <td>@item.FacilityName</td>
+                             <td>@item.ProviderName</td>
+                        <td>@item.VisitReason</td>
+                             
+                   
+                        </tr>   
+                                        counter++;
+                                    }
+                                }
+                                   else
+                        {
+                          <tr><td>No Information Available</td></tr>
+                        }
+
+                    </tbody>
+
+                            </table>

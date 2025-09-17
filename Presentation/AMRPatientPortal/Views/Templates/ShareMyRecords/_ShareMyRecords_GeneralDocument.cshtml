@@ -1,0 +1,36 @@
+﻿@model IEnumerable<AMR.Models.PatientMedicalDocumentModel>
+@using System.Web.Script.Serialization;
+<table class="box-table-a" id="tbl-SharedDocuments" summary="DownloadLEgalDocuments">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Document Description</th>
+                                    <th scope="col">Notes</th>
+                                  
+                                    
+                               </tr>
+                            </thead>
+                             <tbody>
+                                    @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var item in Model)
+                                    {
+                        <tr class="@((counter % 2 == 1) ? "r0" : "r1")">
+                              <td>@item.DateCreated.ToShortDateString()</td>
+                            <td><span class="LinkHighlight hoverMe" onclick="ViewGDocumentAttachment('@(item.DocumentCntr + "|" + item.DocumentFormat)');"> @((item.DocumentDescription.Length > 22) ? item.DocumentDescription.Substring(0, 22) + "..." : item.DocumentDescription) </span></td>
+                           @* <td><span class="LinkHighlight hoverMe" >@item.Document.DocumentDescription</span></td>*@
+                            <td>@item.Notes</td>
+                 
+                                                  
+                   
+                        </tr>   counter++;}
+                                }
+                               else
+                        {
+                          <tr><td>No Information Available</td></tr>
+                        }
+
+                    </tbody>
+                            </table>

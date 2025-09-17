@@ -1,0 +1,593 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@using System.Web.Optimization;
+
+@model PremiumViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutMasterPage.cshtml";
+}
+
+
+@Styles.Render("~/ShareMyRecIndex/css")
+@section Scripts
+{
+  
+ 
+ 
+
+ 
+
+
+
+    <script>
+       
+        function ViewVisitRecord(visitId,facilityId) {
+
+            chkAccess();
+            var page1 = '';
+
+            //alert(visitId);
+
+            page1 = "@Url.Action("ClinicalSummaryPrint", "ClinicalSummary")" + "/?visitId=" + visitId + "&facilityId=" + facilityId;
+
+            $('#clinical-print').remove();
+            var $dialog = $('<div id="clinical-print" style="width:1000px;"></div>')
+                           .html('<div id="page_loader1" style="display: block;"><div id="apDiv1" align="center"><table width="200" border="0" cellspacing="0" cellpadding="0"><tr><td height="70px;">&nbsp;</td></tr><tr><td align="center"><img src="Content/img/image_559926.gif" width="128" height="64" /></td></tr><tr><td style="text-align: center;" height="70px;">Please wait ...</td></tr></table></div></div><iframe id="iframeVisitReport" onload="processingComplete();" style="border: 0px; " src="' + page1 + '" width="100%" height="100%"></iframe>')
+                           .dialog({
+                               autoOpen: false,
+                               show: {
+                                   effect: "blind",
+                                   duration: 100
+                               },
+                               hide: {
+                                   effect: "blind",
+                                   duration: 100
+                               },
+                               modal: true,
+                               height: 600,
+                               width: 1050,
+                               title: "Print Clinical Summary"
+                           });
+            $dialog.dialog('open');
+        }
+      
+    </script>
+    }
+
+<div id="containment-wrapper" style="border-bottom-style: none; border-top-style: none; border-right-style: none; border-left-width: 1px; border-left-color: rgb(166, 201, 226);">
+
+    <input type="hidden" id="ProviderPassword" value='@Model.CareProvider.Password'/>
+ <!-- Tabs -->
+<div id="tabs" style="font-size: 12px; margin-top: 10px; height:98.5%; width:98%;display: none;">
+        <ul>
+            <li><a href="#tabs-1" style="height: 30px;">
+                <p style="margin-top: -5px;">
+                    Set Passcode
+                </p>
+            </a></li>
+            <li><a href="#tabs-2" style="height: 30px;">
+                <p style="margin-top: -5px;" onclick="checkProviderLabel();">
+                   Provider Label
+                </p>
+            </a></li>
+            <li><a href="#tabs-3" style="height: 30px;">
+                <p style="margin-top: -5px;" onclick="checkMedical();">
+                    Medical Summary
+                </p>
+            </a></li>
+            <li><a href="#tabs-4" style="height: 30px;">
+                <p style="margin-top: -5px;">
+                   ICE Program
+                </p>
+            </a></li>
+             <li><a href="#tabs-5" style="height: 30px;">
+                <p style="margin-top: -5px;">
+                   AMR Portal App
+                </p>
+            </a></li>
+        </ul>
+        <div id="tabs-1">
+            <div id="#" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 0px; height:230px; left: 0px; width: 100%;">
+                
+               <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                                <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                                    style="margin-top: -1px; font-weight: normal; padding: 3px;"> <span style="font-weight: bold; text-align:center;" class="anc" onclick="MoveOn_allergies();">PROVIDER PASS CODE</span>
+                                           </h5>
+                                <div  id="patrep-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none; overflow-y: auto; height: 190px;">
+                                    	
+                                       <p style="font-weight:bold;text-align:center;font-size:20px;">Create or Change your Care Provider Pass Code</p> 
+                                   
+                                        <p style="font-size:16px;">Here you can create or change your Care Provider Pass Code. Please remember to give your
+                                         Doctor or Care Provider your new labels containing your new Pass Code.
+                                            </p>
+                                    <table>
+                                        <tr>
+                                            <td style="width:150px;"></td>
+                                            <td>
+                                                 <b>Create Pass Code:</b>
+                                            </td>
+                                            <td>
+                                                <INPUT type="text" name="passcode1" maxlength="44" value="" class="txt">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:150px;"></td>
+                                            <td>
+                                                <b>Confirm Code:</b>
+                                            </td>
+                                            <td>
+                                                 <INPUT type="text" id="passcode2" maxlength="44" value="" class="txt">
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                <button class="ui-button ui-widget ui-state-default ui-corner-all "  style="font-weight:bold;width: 10%; font-size: 1.0em;margin-left:300px;" type="submit" onclick="SavePassCode();">
+                                   Submit</button>
+                                
+                            
+                                      
+                           
+                                
+                               
+                                 
+                                </div>
+                            </div>   
+                     </div> 
+        </div>
+        <div id="tabs-2">
+         
+            <div id="#" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 0px; height:570px; left: 0px; width: 100%;">
+                
+               <div id="ProviderLabel" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                   
+                                <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                                    style="margin-top: -1px; font-weight: normal; padding: 3px;"> <span style="font-weight: bold; text-align:center;" class="anc" >PROVIDER LABEL</span>
+                                           </h5>
+                                <div  id="ProviderLabelShow" class="ui-widget-content" style="position: relative; top: -9px; border: none; overflow-y: auto; height: 530px;">
+                                    	
+                                   <div id="sample2">
+<center><font size=5><b>Care Provider Label Info</b></font></center>
+Below is a label template that you can copy & paste to a word document which you can print using your label option. We recommend using Avery Label 5163 (2"x 4") size label. 
+You can print this information and give it to your Doctor or Care Provider to have it affixed to your chart at their office for their reference.
+
+
+<br><br>
+ <table>
+     <tr>
+         <td style="width:150px;"></td>
+         <td style="width:400px;">
+             <center>
+
+	<div id="container1">
+		<br>
+			<strong>Care Provider AMR Label</strong>
+			<br><br>
+		
+			<strong>Name:</strong> @Model.CareProvider.PatientFullName
+			<br>
+			<strong>AccessID Code:</strong> @Model.CareProvider.PatientId
+			<br>
+			<strong>Care Provider Pass Code:</strong> <span id="careProviderPassword">@Model.CareProvider.Password </span>
+			<br><br>
+			Visit:<strong> www.amrpatientportal.com</strong><br>
+			Click on Medical Care Provider Login<br>
+			Enter information above<br><br>
+		
+	</div>
+ 	<div class="li">
+		&nbsp;
+	</div>
+	</center>
+         </td>
+     </tr>
+ </table>
+
+
+	
+	<div class="li">
+      <center><span id="sampleID"  style="margin-left:-200px;">Email Label To:</span>&nbsp;<input type="Text" name="emailto" id="emailto" maxlength="50" size="50" class="txt" style="margin-top:-25px;margin-left:150px;"></center>
+	</div>
+	 	<div class="li">
+		&nbsp;
+	</div>   	
+    <div class="li">
+      <center>
+            <button class="ui-button ui-widget ui-state-default ui-corner-all "  style="font-weight:bold;width: 10%; font-size: 1.0em;" type="submit" onclick="SendEmail();">Email</button>
+          <!--input type="submit" value="Email" onclick="return Validate()" name="RB3" /-->
+
+      </center>
+        
+   	</div>
+	
+</div>
+                                
+                            
+                                      
+                           
+                                
+                               
+                                 
+                                </div>
+                   <div id="ProviderLabelHide">
+                    Please Add Passcode
+                </div>
+                            </div>   
+                
+                     </div>
+           
+</div>
+
+       <div id="tabs-3">
+           <div style="background-image:url('Content/img/medicalSummaryHeader.png'); width:100%; height:148px;">
+             <div  style="width:100%; height:80px; position:relative; top:60px; left:25px;">  <h1>Personal Information for @Model.PatientSummary.FirstName @Model.PatientSummary.LastName</h1></div>
+           </div>
+
+           <div id="top" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 0px; height:500px; overflow:auto; left: 0px; width: 100%;">
+           <!--sidebar buttons start-->
+                  <div>
+              <button onclick="location.href='#1'" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 30%;  font-weight: normal"  type="submit">
+                                    Member Information</button> <br />
+               <button onclick="location.href='#2'" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 30%; margin-top:5px; font-weight: normal">
+                                    Emergency Contact
+                                </button> <br />
+               <button onclick="location.href='#3'" class="ui-button ui-widget ui-state-default ui-corner-all" style="width: 30%; margin-top:5px; font-weight: normal" >
+                                    HealthCare Data Exchange</button> <br />
+               <button onclick="location.href='#4'" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 30%;  margin-top:5px; font-weight: normal"  >
+                                    Doctor's Uploaded Documents</button><br />
+               <button onclick="location.href='#5'" class="ui-button ui-widget ui-state-default ui-corner-all" style="width: 30%; margin-top:5px; font-weight: normal"  >
+                                    Medical Documents</button> <br />
+                <button onclick="location.href='#6'" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 30%; margin-top:5px; font-weight: normal"  >
+                                   Allergies By Patient</button><br />
+                <button onclick="location.href='#7'" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 30%; margin-top:5px; font-weight: normal"  >
+                                    Medications By Patients
+                                </button><br />
+                <button onclick="location.href='#8'" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 30%; margin-top:5px; font-weight: normal"  >
+                                    Problems list By Patient</button><br />
+               <button onclick="location.href='#9'" class="ui-button ui-widget ui-state-default ui-corner-all" style="width: 30%;  margin-top:5px; font-weight: normal" >
+                                    Insurance Information</button><br />
+                <button onclick="location.href='#10'" class=" ui-button ui-widget ui-state-default ui-corner-all" style="width: 30%; margin-top:5px; font-weight: normal">
+                                    General Documents</button>
+                  </div>
+          <!--sidebar buttons end-->
+<!--1st grid start-->
+               <div id="1" class="draggable ui-widget-content ui-corner-all" style="position: relative; float:right; top: 5px; height: 313px;  margin-left:70px; margin-top:-320px; width: 68%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">Member Information
+                        
+                         <!-- first ICON -->
+                        <div onclick="location.href='#1'" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/top.png" />
+                            <span class="anc" style="padding-right: 4px;">Return To Top</span>
+                        </div>
+                        <!-- end of first icon-->
+                        
+
+
+
+                    </h5>
+                    <div id="Member-Information-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 280px; overflow:auto;">
+                          @Html.Partial("~/Views/Templates/ShareMyRecords/_ShareMyRecords_Member.cshtml", Model.PatientSummary)
+                        <div style="float:right; margin-top:-380px; margin-right:20px;">
+						
+							<img id="summImg" src="Content/img/GenericPerson.png" class="ui-corner-all" width="150" height="150" border="1">					
+                            
+                   </div>
+                    </div>
+                </div>
+            </div>   
+
+               
+
+<!--1st grid end-->
+
+<!--2nd grid start-->
+                  
+
+               <div id="2" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 130px; left: 0px; margin-right:-15px; width:100%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">Emergency Contact Information
+                        
+                         <!-- first ICON -->
+                        <div onclick="location.href='#1'" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/top.png" />
+                            <span class="anc" style="padding-right: 4px;">Return To Top</span>
+                        </div>
+                        <!-- end of first icon-->
+                        
+
+
+
+                    </h5>
+                    <div id="Emergency-ContactInfo-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 95px; overflow:auto;">
+                       @Html.Partial("~/Views/Templates/ShareMyRecords/_ShareMyRecords_Emergency.cshtml", Model.Emergencies)
+                    </div>
+                </div>
+            </div>
+<!--2nd grid end-->
+
+<!--3rd grid start-->
+               <div id="3" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 130px; left: 0px; margin-right:30px; width: 100%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">HealthCare Data Exchange
+                        
+                         <!-- first ICON -->
+                        <div onclick="location.href='#1'" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/top.png" />
+                            <span class="anc" style="padding-right: 4px;">Return To Top</span>
+                        </div>
+                        <!-- end of first icon-->
+                        
+
+
+
+                    </h5>
+                    <div id="HealthCare-DataExchange-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 95px; overflow:auto;">
+                        @Html.Partial("~/Views/Templates/ShareMyRecords/_ShareMyRecords_Healthcare.cshtml", Model.Visits)
+                    </div>
+                </div>
+            </div>
+                  
+
+<!--3rd grid end-->
+
+<!--4th grid start-->
+                  <div id="4" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 130px; left: 0px; margin-right:-15px; width: 100%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">Doctor's Uploaded Documents
+                        
+                         <!-- first ICON -->
+                        <div onclick="location.href='#1'" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/top.png" />
+                            <span class="anc" style="padding-right: 4px;">Return To Top</span>
+                        </div>
+                        <!-- end of first icon-->
+                        
+
+
+
+                    </h5>
+                    <div id="EHR-PatientPortalRecords-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 95px; overflow:auto;">
+                      @Html.Partial("~/Views/Templates/ShareMyRecords/_ShareMyRecords_DocotorUploadDocs.cshtml", Model.DoctorUploads)
+                          </div>
+                </div>
+            </div>
+
+<!--4th grid end-->
+
+<!--5th grid start-->
+               <div id="5" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 130px; left: 0px; margin-right:-15px; width: 100%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">Medical Documents
+                        
+                         <!-- first ICON -->
+                        <div onclick="location.href='#1'" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/top.png" />
+                            <span class="anc" style="padding-right: 4px;">Return To Top</span>
+                        </div>
+                        <!-- end of first icon-->
+                        
+
+
+
+                    </h5>
+                    <div id="Download-MyMedicalRecords-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 95px; overflow:auto;">
+                       @Html.Partial("~/Views/Templates/ShareMyRecords/_ShareMyRecords_PatientMedicalDocument.cshtml", Model.PatientUploads)
+                            
+                    </div>
+                </div>
+            </div>
+                  
+
+<!--5th grid end-->
+
+<!--6th grid start-->
+               <div id="6" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 130px; left: 0px; margin-right:-15px; width:100%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">Allergies By Patient
+                        
+                         <!-- first ICON -->
+                        <div onclick="location.href='#1'" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/top.png" />
+                            <span class="anc" style="padding-right: 4px;">Return To Top</span>
+                        </div>
+                        <!-- end of first icon-->
+                        
+
+
+
+                    </h5>
+                    <div id="Allergies-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 95px; overflow:auto;">
+                       @Html.Partial("~/Views/Templates/ShareMyRecords/_ShareMyRecords_Allergies.cshtml", Model.Allergies)
+                          </div>
+                </div>
+            </div>   
+
+<!--6th grid end-->
+
+<!--7th grid start-->
+               <div id="7" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 130px; left: 0px; margin-right:-15px; width:100%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">Medications By Patients
+                        
+                         <!-- first ICON -->
+                        <div onclick="location.href='#1'" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/top.png" />
+                            <span class="anc" style="padding-right: 4px;">Return To Top</span>
+                        </div>
+                        <!-- end of first icon-->
+                        
+
+
+
+                    </h5>
+                    <div id="Medications-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 95px; overflow:auto;">
+                       @Html.Partial("~/Views/Templates/ShareMyRecords/_ShareMyRecords_Medications.cshtml", Model.Medications)
+                          </div>
+                </div>
+            </div>   
+
+<!--7th grid end-->
+
+<!--8th grid start-->
+               <div id="8" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 130px; left: 0px; margin-right:-15px; width:100%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">Problem List by Patient
+                        
+                         <!-- first ICON -->
+                        <div onclick="location.href='#1'" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/top.png" />
+                            <span class="anc" style="padding-right: 4px;">Return To Top</span>
+                        </div>
+                        <!-- end of first icon-->
+                        
+
+
+
+                    </h5>
+                    <div id="MedicalConditions-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 95px; overflow:auto;">
+                        @Html.Partial("~/Views/Templates/ShareMyRecords/_ShareMyRecords_Problems.cshtml", Model.Problems)
+                          </div>
+                </div>
+            </div>   
+
+<!--8th grid end-->
+
+<!--9th grid start-->
+                  
+
+               <div id="9" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 130px; left: 0px; margin-right:-15px; width:100%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">Insurance Information
+                        
+                         <!-- first ICON -->
+                        <div onclick="location.href='#1'" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/top.png" />
+                            <span class="anc" style="padding-right: 4px;">Return To Top</span>
+                        </div>
+                        <!-- end of first icon-->
+                        
+
+
+
+                    </h5>
+                    <div id="InsuranceInformation-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 95px; overflow:auto;">
+                       @Html.Partial("~/Views/Templates/ShareMyRecords/_ShareMyRecords_Policy.cshtml", Model.Policies)
+                          </div>
+                </div>
+            </div>
+<!--9th grid end-->
+
+ <!--10th grid start-->
+               <div id="10" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 130px; left: 0px; margin-right:-15px; width: 100%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">General Documents
+                        
+                         <!-- first ICON -->
+                        <div onclick="location.href='#1'" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/top.png" />
+                            <span class="anc" style="padding-right: 4px;">Return To Top</span>
+                        </div>
+                        <!-- end of first icon-->
+                        
+
+
+
+                    </h5>
+                    <div id="Download-LegalDocuments-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 95px; overflow:auto;">
+                       @Html.Partial("~/Views/Templates/ShareMyRecords/_ShareMyRecords_GeneralDocument.cshtml", Model.Documents)
+                           </div>
+                </div>
+            </div>
+                  
+
+<!--10th grid end-->
+
+
+
+            <p>Please be advised that the information contained on this "Emergency Medical Report" has been provided to you by AccessMyRecords.comSM and created by the member or their authorized representative.</p>
+            <p>By accessing this report you acknowledge that you have received notice from the AMR member or his or her representative (i) that the member authorizes you to access, view and print the member's data; or (ii) if the member is unconscious and without an authorized representative, you understand that the AMR member has acknowledged in the website's Terms and Conditions that when the member joined the AMR service; consented to receive an AccessID Card enabling emergency personnel to access the member's Emergency Medical Report.</p>
+           <p>AMR has not created this information or obtained it from any physician's or hospital's records. We have not imported the data from any 3rd party database.</p>
+           <p>The AMR member is the only source and owner of this information and has the sole responsibility for it being current, accurate and complete.</p>
+        
+<!--14th grid start-->
+               <div id="14" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 5px; height: 340px; left: 0px; margin-right:-15px; width: 100%;">
+                <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">Disclaimer
+                        
+                         <!-- first ICON -->
+                        <div onclick="location.href='#1'" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                            <img src="Content/img/top.png" />
+                            <span class="anc" style="padding-right: 4px;">Return To Top</span>
+                        </div>
+                        <!-- end of first icon-->
+                        
+
+
+
+                    </h5>
+                    <div id="Disclaimer-portlet" class="ui-widget-content" style="position: relative; top: -9px; border: none;  height: 300px; overflow:auto;">
+                       <p>
+                       
+ACCESSMYRECORDS.COM NOR ANY OF ITS AFFILIATES, DIRECTORS, OFFICERS, EMPLOYEES, SHAREHOLDERS, REPRESENTATIVES, OR AGENTS MAKE ANY REPRESENTATIONS OR WARRANTIES AS TO THE ACCURACY OR COMPLETENESS OF ANY OF THE INFORMATION CONTAINED HEREIN, INCLUDING, WITHOUT LIMITATION, ANY MEDICAL HISTORY INFORMATION, AND ANY OF AMR AFFILIATES, DIRECTORS, OFFICERS, EMPLOYEES, SHAREHOLDERS, REPRESENTATIVES, AGENTS SHALL NOT HAVE ANY LIABILITY TO YOU OR ANY THIRD PARTY AS A RESULT OF YOUR USE OF SUCH INFORMATION.
+                       </p>
+
+                        <p>NOTWITHSTANDING ANY OTHER TERM HEREOF, IN NO EVENT SHALL EITHER AMR OR YOU (THE EMERGENCY PERSONNEL) (AMR AND EMERGENCY PERSONNEL ARE SOMETIMES REFERRED TO HEREINAFTER AS "PARTY" INDIVIDUALLY AND "PARTIES" COLLECTIVELY) BE LIABLE TO THE OTHER OR TO ANY OTHER PERSON OR FIRM FOR ANY INCORRECT, INCIDENTAL, CONSEQUENTIAL, EXEMPLARY OR PUNITIVE DAMAGES BASED ON LOSS OF PROFITS OR LOSS OF BUSINESS</p>
+                         
+                        <p>ARISING OUT OF OR RELATED TO THEIR OBLIGATIONS, THE PERFORMANCE THEREOF, THE USE OR PRODUCTS PROMISED OR SERVICES DELIVERED PURSUANT HERETO, AND/OR ANY PARTY'S ALLEGED BREACH OF THEIR OBLIGATIONS, WHETHER OR NOT EITHER PARTY IS INFORMED, KNEW OR SHOULD HAVE KNOWN OF THE POSSIBILITY OF SUCH DAMAGES IN ADVANCE.</p>  
+                    </div>
+                </div>
+            </div>   
+
+<!--14th grid end-->  
+               
+                </div>
+     
+           
+        
+           
+   
+        
+        
+    </div>
+    <div id="tabs-4">
+              
+           <div id="#" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 0px; height:370px; left: 0px; width: 100%;">
+                
+               <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;height:350px;" class="ui-corner-all">
+                                
+                               <img id="summImg" src="Content/img/AMRIceProgramSetup.jpg" class="ui-corner-all" width="100%" height="100%" border="1"> 
+                            </div>   
+                     </div>
+           
+        </div>
+    <div id="tabs-5">
+               <div id="#" class="draggable ui-widget-content ui-corner-all" style="position: relative; top: 0px; height:230px; left: 0px; width: 100%;">
+                
+               <div id="cart1" style="position: absolute; top: 1px; left: 0px; right: 0px;height:220px;" class="ui-corner-all">
+                                
+                               <img id="AppImg" src="Content/img/AMRPortalAppSetup.jpg" class="ui-corner-all" width="100%" height="100%" border="1"> 
+                            </div>   
+                     </div>
+               </div>
+    </div>
+
+<!-- Start Office Document Iframe Page -->
+<div id="divOfficeDocIframe" style="display:none;">
+    <iframe id="iframeViewAttachment" onload="HideLoaderReportViewer();" style="border: 0px;" src="" width="100%" height="100%"></iframe>
+</div>
+<!-- Start Office Document Iframe Page -->
+
+
+    @Scripts.Render("~/ShareMyRecIndex/jquery")

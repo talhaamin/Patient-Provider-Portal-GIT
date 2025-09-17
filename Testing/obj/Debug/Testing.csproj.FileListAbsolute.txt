@@ -1,0 +1,96 @@
+C:\SourceControl\AMRPortal\trunk\Testing\bin\Debug\Testing.exe.config
+C:\SourceControl\AMRPortal\trunk\Testing\bin\Debug\Testing.exe
+C:\SourceControl\AMRPortal\trunk\Testing\bin\Debug\Testing.pdb
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.csprojResolveAssemblyReference.cache
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.Form1.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.Properties.Resources.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.csproj.GenerateResource.Cache
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.exe
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.pdb
+C:\SourceControl\AMRPortal\trunk\Testing\bin\Debug\AMR.Data.dll
+C:\SourceControl\AMRPortal\trunk\Testing\bin\Debug\EntityFramework.dll
+C:\SourceControl\AMRPortal\trunk\Testing\bin\Debug\AMR.Data.pdb
+C:\SourceControl\AMRPortal\trunk\Testing\bin\Debug\EntityFramework.xml
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmPatientData.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmLab.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmPatient.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmISPatient.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmISProvider.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmISAuthenticate.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmAuthentication.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmProvider.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmISVisitUpload.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmMessage.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmISMessage.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmISDocument.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmISLab.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmPractice.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmOrganization.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmFacility.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmEmergency.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmDocument.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmEmail.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmISCCDUpload.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmPatientLogin.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmCCDGenerate.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmCCDDirect.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmAdvisor.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmDoctor.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmCareProvider.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmMedicalPortfolio.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmBillRate.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmBill.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmReporting.resources
+C:\SourceControl\AMRPortal\trunk\Testing\bin\Debug\AMR.IntegrationService.dll
+C:\SourceControl\AMRPortal\trunk\Testing\bin\Debug\AMR.IntegrationService.pdb
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmSocialSelf.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmISIntegration.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Interop.ADODB.dll
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Interop.CDO.dll
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.csproj.ResolveComReference.cache
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmDirectImport.resources
+C:\SourceControl\AMRPortal\trunk\Testing\obj\Debug\Testing.frmISSendCDA.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.csprojResolveAssemblyReference.cache
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Interop.ADODB.dll
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Interop.CDO.dll
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.csproj.ResolveComReference.cache
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmAdvisor.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmBill.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmBillRate.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmCareProvider.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmCCDDirect.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmCCDGenerate.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmDirectImport.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmDoctor.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmISCCDUpload.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.Form1.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmAuthentication.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmDocument.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmEmail.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmEmergency.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmFacility.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmISAuthenticate.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmISDocument.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmISIntegration.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmISLab.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmISMessage.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmISPatient.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmISProvider.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmISSendCDA.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmISVisitUpload.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmLab.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmMedicalPortfolio.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmMessage.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmOrganization.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmPatient.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmPatientData.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmPatientLogin.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmPractice.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmProvider.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmReporting.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.frmSocialSelf.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.Properties.Resources.resources
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.csproj.GenerateResource.Cache
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.exe
+E:\ANEEL APP\AMR Portal\trunk\Testing\obj\Debug\Testing.pdb
+E:\ANEEL APP\AMR Portal\trunk\Testing\bin\Debug\Testing.exe.config

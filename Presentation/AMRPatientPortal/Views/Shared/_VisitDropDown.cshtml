@@ -1,0 +1,60 @@
+﻿@using AMR.Models;
+@model GeneralViewModel
+
+@{
+    Layout= null;
+}
+
+
+<select  class=" txt ui-corner-all bcom"  style="width:200px;"  id="cmbContinuityVisitsSend" onchange = " SendHealthRecord(this.value,'visit'); toggle_combobox();" >
+
+@foreach (var item in Model.Visits)
+{
+    <option value="@item.Value">@item.Text</option>     
+}
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

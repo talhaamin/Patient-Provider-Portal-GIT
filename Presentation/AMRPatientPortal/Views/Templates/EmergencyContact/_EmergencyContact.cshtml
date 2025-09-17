@@ -1,0 +1,77 @@
+﻿@model IEnumerable<AMR.Models.PatientEmergencyModel>
+@using System.Web.Script.Serialization;
+
+<table class="box-table-a" id="tbl-EmergencyContacts" summary="Appointments">
+                            <thead>
+                                <tr>
+                                    <th scope="col"><div style="margin-left:2px;">Name</div></th>
+                                    <th scope="col"><div style="margin-left:1px;">Mobile No</div></th>                                    
+                                    <th scope="col"><div style="margin-left:3px;">Email</div></th>                                   
+                                    <th scope="col"><div style="margin-left:24px;">Edit</div></th>
+                                    <th scope="col" ><div style="margin-left:72px;">Details</div></th>
+                                    <th scope="col"><div style="margin-left:72px;">Delete</div></th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var item in Model)
+                                    {
+
+                                        var jsonStr = new JavaScriptSerializer().Serialize(item);
+                                                
+                                    <tr class="@((counter % 2 == 0) ? "r1" : "r0")">
+                                        <td>
+                                        <input type="hidden" id="@item.PatientEmergencyId"  value="@jsonStr.Replace("\"PatientId\":0,", "").ToString()"/>
+                                            @((item.FirstName.Length > 18) ? item.FirstName.Substring(0, 18) + "..." : item.FirstName)
+                                       </td>
+                                        <td>@item.MobilePhone</td>                                        
+                                        <td>@item.Email</td>
+                                        
+                                <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                    <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();"onclick="editEmergencyContact('@item.PatientEmergencyId');" onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="edit-current-medication">
+                                        <img id="imgEditEmergencyContact" src="Content/img/edit.png" />
+                                        <span class="anc" style="padding-right: 10px;"></span>
+                                    </div>
+                                </td>
+                                <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                    <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="detailsEmergencyContact('@item.PatientEmergencyId');" onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="detail-current-medication">
+                                        <img id="imgDetailsEmergencyContact" src="Content/img/details.png" />
+                                        <span class="anc" style="padding-right: 4px;"></span>
+                                    </div>
+                                </td>
+                                <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                    <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="deleteEmergencyContact('@item.PatientEmergencyId');" onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="delete-current-medication">
+                                        <img id="imgDeleteEmergencyContact" src="Content/img/delete.png" />
+                                        <span class="anc" style="padding-right: 4px;"></span>
+                                    </div>
+                                </td>
+
+                                   @*     <td >
+                                            <img onclick="editEmergencyContact('@item.PatientEmergencyId');" id="imgEditEmergencyContact" src="@Url.Content("~/Content/img/edit.png")" />
+                                        </td>
+
+                                        <td >
+                                            <img onclick="detailsEmergencyContact('@item.PatientEmergencyId');" id="imgDetailsEmergencyContact"  src="@Url.Content("~/Content/img/details.png")" />
+                                        </td>
+
+                                        <td>
+                                            <img onclick="deleteEmergencyContact('@item.PatientEmergencyId');" id="imgDeleteEmergencyContact"  src="@Url.Content("~/Content/img/delete.png")" />
+                                        </td>*@
+
+                                    </tr>
+                                                
+                                        counter++;
+                                    }
+                                }
+                                else
+                                {
+                                    <tr><td>No Information Available</td></tr>
+                                }
+                            </tbody>
+</table>
+
+
+

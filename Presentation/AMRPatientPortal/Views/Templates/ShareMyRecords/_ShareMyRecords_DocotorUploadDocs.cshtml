@@ -1,0 +1,38 @@
+﻿@model IEnumerable<AMR.Models.DoctorUploadModel>
+@using System.Web.Script.Serialization;
+<table class="box-table-a" id="tbl-SharedUploadDocs" summary="Dr'sRecords">
+                            <thead>
+                                <tr>
+                                    <!---<th scope="col" style="margin-right: 10px;">
+                                        <input name="check" type="checkbox" class="CheckAll" id="chk_2" onclick="checkAll(this);" />
+                                    </th>-->
+                                    <th scope="col">Upload Date</th>
+                                    <th scope="col">Physician</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Comments</th>
+                                   
+                               </tr>
+                            </thead>
+                          <tbody>
+                    @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var item in Model)
+                                    {
+                        <tr class="@((counter % 2 == 1) ? "r0" : "r1")">
+                            <td>@item.DateCreated.ToShortDateString()</td>
+                            <td>@item.DoctorName</td>
+                            <td><span class="LinkHighlight hoverMe" onclick="ViewDoctorAttachment('@(@item.DocumentCntr+"|"+@item.DocumentFormat)');"> @((@item.DocumentDescription.Length >22)?@item.DocumentDescription.Substring(0,22) + "..." : @item.DocumentDescription) </span></td>
+                             <td>@item.Notes</td>
+                   
+                        </tr>   
+                                        counter++;
+                                    }
+                                }
+                              else
+                        {
+                          <tr><td>No Information Available</td></tr>
+                        }
+
+                    </tbody>
+                            </table>

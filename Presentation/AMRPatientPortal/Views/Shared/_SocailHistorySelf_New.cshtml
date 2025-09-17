@@ -1,0 +1,116 @@
+﻿@model AMR.Models.HomeViewModel
+<div id="SocailHistorySelf" class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+            <div class="portlet-header ui-widget-header ui-corner-all">
+
+             <span id="MySocialHistory" class="anc_home" onclick="MySocialHistory_move(true);">Social History </span> 
+                <!-- start of icons -->
+              @*<div onclick="socialhistwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                        <img src="Content/img/hide.png" />
+                        <span class="anc" style="padding-right: 2px;">Hide</span>
+                    </div>*@
+                    <span id="App-SocialHistory">
+                         @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag == true)
+                    {
+                        <div id="App-ShareHideSocialHistory" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.SocialHistory) ? "ShareHide_Socialhistory(false)" : "ShareHide_Socialhistory(true)")';>
+                            <span class="anc" style="padding-right: 2px; font-weight: normal;">
+                                <img src='@((Model.PatientShare.SocialHistory) ? "Content/img/share.png" : "Content/img/share.png")'/>
+                                @((Model.PatientShare.SocialHistory) ? "UnShare" : "Share") </span>
+                        </div>
+                         }
+                    </span>
+                <!-- start of icons -->
+          
+             
+                 <div id="EditcalInstructions" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;">
+                                        <img src="Content/img/edit.png" />
+                                        <span class="anc" style="padding-right: 10px;" onclick="EditcalInstructions();">Edit</span>
+                                    </div>
+        
+
+        </div>
+                <div id="SocialHistorySelf-portlet" class="portlet-content" style="position: relative;  border: none; overflow-y: auto; height: 190px;">
+                <table class="box-table-a" id="tbl-socailHistoryself" summary="Statement">
+                   <thead>
+
+                   </thead>
+   
+                    <tbody>
+                       
+                    <tr class="r1">
+                            @{
+                                                    System.Text.StringBuilder jsonarrayString = new System.Text.StringBuilder();
+
+                                                    jsonarrayString.Append(" { ");
+                                                    jsonarrayString.Append("\"PatientId\": \"" + Model.PatientSocialSelf.PatientId + "\",");
+                                                    jsonarrayString.Append("\"Occupation\": \"" + Model.PatientSocialSelf.Occupation + "\",");
+                                                    jsonarrayString.Append("\"Birthplace\": \"" + Model.PatientSocialSelf.Birthplace + "\",");
+                                                    jsonarrayString.Append("\"EducationLevelId\": \"" + Model.PatientSocialSelf.EducationLevelId + "\",");
+                                                    jsonarrayString.Append("\"Retired\": \"" + Model.PatientSocialSelf.Retired + "\",");
+                                                    jsonarrayString.Append("\"ChildrenSon\": \"" + Model.PatientSocialSelf.ChildrenSon + "\",");
+                                                    jsonarrayString.Append("\"ChildrenDaughter\": \"" + Model.PatientSocialSelf.ChildrenDaughter + "\",");
+                                                    jsonarrayString.Append("\"CaffeineUser\": \"" + Model.PatientSocialSelf.CaffeineUser + "\",");
+                                                    jsonarrayString.Append("\"CaffieneType\": \"" + Model.PatientSocialSelf.CaffieneType + "\",");
+                                                    jsonarrayString.Append("\"CaffeineAmount\": \"" + Model.PatientSocialSelf.CaffeineAmount + "\",");
+                                                    jsonarrayString.Append("\"ExerciseMember\": \"" + Model.PatientSocialSelf.ExerciseMember + "\",");
+                                                    jsonarrayString.Append("\"ExerciseFrequencyId\": \"" + Model.PatientSocialSelf.ExerciseFrequencyId + "\",");
+                                                    jsonarrayString.Append("\"ExerciseAmount\": \"" + Model.PatientSocialSelf.ExerciseAmount + "\",");
+                                                    jsonarrayString.Append("\"ActivityLevelId\": \"" + Model.PatientSocialSelf.ActivityLevelId + "\",");
+                                                    jsonarrayString.Append("\"Activity1\": \"" + Model.PatientSocialSelf.Activity1 + "\",");
+                                                    jsonarrayString.Append("\"Activity2\": \"" + Model.PatientSocialSelf.Activity2 + "\",");
+                                                    jsonarrayString.Append("\"Activity3\": \"" + Model.PatientSocialSelf.Activity3 + "\",");
+                                                    jsonarrayString.Append("\"AlcoholUser\": \"" + Model.PatientSocialSelf.AlcoholUser + "\",");
+                                                    jsonarrayString.Append("\"AlcoholFrequencyId\": \"" + Model.PatientSocialSelf.AlcoholFrequencyId + "\",");
+                                                    jsonarrayString.Append("\"AlcoholLastUse\": \"" + Model.PatientSocialSelf.AlcoholLastUse.ToShortDateString() + "\",");
+                                                    jsonarrayString.Append("\"AlcoholType\": \"" + Model.PatientSocialSelf.AlcoholType + "\",");
+                                                    jsonarrayString.Append("\"AlcoholStartAge\": \"" + Model.PatientSocialSelf.AlcoholStartAge + "\",");
+                                                    jsonarrayString.Append("\"AlcoholFamilyHist\": \"" + Model.PatientSocialSelf.AlcoholFamilyHist + "\",");
+                                                    jsonarrayString.Append("\"SmokingStatusId\": \"" + Model.PatientSocialSelf.SmokingStatusId + "\",");
+                                                    jsonarrayString.Append("\"SmokingDailyAmount\": \"" + Model.PatientSocialSelf.SmokingDailyAmount + "\",");
+
+                                                    jsonarrayString.Append("\"SmokingType\": \"" + Model.PatientSocialSelf.SmokingType + "\",");
+                                                    jsonarrayString.Append("\"SmokingYears\": \"" + Model.PatientSocialSelf.SmokingYears + "\",");
+                                                    jsonarrayString.Append("\"SmokingQuitAttempts\": \"" + Model.PatientSocialSelf.SmokingQuitAttempts + "\",");
+                                                    jsonarrayString.Append("\"SmokingQuitDate\": \"" + Model.PatientSocialSelf.SmokingQuitDate.ToShortDateString() + "\",");
+                                                    jsonarrayString.Append("\"SmokingSecondHand\": \"" + Model.PatientSocialSelf.SmokingSecondHand + "\"");
+
+
+                                                    jsonarrayString.Append("}");
+                                                    int children = Model.PatientSocialSelf.ChildrenSon + Model.PatientSocialSelf.ChildrenDaughter;
+
+                                                    bool status = Model.PatientSocialSelf.AlcoholUser;
+           }
+                        <td><b>Birthplace:</b></td>
+                             <td>@Model.PatientSocialSelf.Birthplace <input type="hidden" value=" @jsonarrayString.ToString()" id="patiendsocialself" /></td>
+                            
+                    </tr>
+                     
+                          <tr class="r0">
+                        <td><b>Children:</b></td>
+                              @if(children ==0)
+                              {
+                                <td></td>
+                            }
+                              else
+                              {
+                             <td>@children</td>
+                            }
+                            
+                    </tr>
+                       
+                          <tr class="r1">
+                        <td><b>Tobacco:</b></td>
+                             <td>@Model.PatientSocialSelf.SmokingStatus</td>
+                            
+                    </tr>
+                        <tr class="r0">
+                             <td><b>Alcohol:</b></td>
+                             <td>@if (status == true) { <p>Yes</p>} else{<p>No</p>} </td>
+                             
+
+                        </tr>
+                          
+                    </tbody>
+     
+</table>
+            </div>
+        </div>

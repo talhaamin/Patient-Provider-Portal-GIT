@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AMR.Models.PatientMedicationModel>
+@using System.Text;
+<table class="box-table-a" id="tbl-Medications" summary="Medications">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Name</span></th>
+                            <th scope="col" style="vertical-align:middle"><span style="margin-left:-25px;">Expiration</span></th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model!= null && Model.Count() > 0)
+                        {
+                            int counter=0;
+                            foreach (var item in Model)
+                            {
+                                StringBuilder jsonStringMedication = new StringBuilder();
+
+                                jsonStringMedication.Append(" { ");
+                                jsonStringMedication.Append("\"PatientMedicationCntr\": \"" + item.PatientMedicationCntr + "\",");
+                                jsonStringMedication.Append("\"MedicationName\": \"" + item.MedicationName + "\",");
+                                jsonStringMedication.Append("\"StartDate\":  \"" + item.StartDate.ToShortDateString() + "\",");
+                                jsonStringMedication.Append("\"Route\":  \"" + item.Route + "\",");
+                                jsonStringMedication.Append("\"Frequency\":  \"" + item.Frequency + "\",");
+                                jsonStringMedication.Append("\"ExpireDate\":  \"" + item.ExpireDate.ToShortDateString() + "\",");
+                                
+                                jsonStringMedication.Append("\"Status\": \"" + item.Status + "\",");
+                                jsonStringMedication.Append("\"Pharmacy\": \"" + item.Pharmacy + "\",");
+                                jsonStringMedication.Append("\"Note\":  \"" + item.Note + "\",");
+                                jsonStringMedication.Append("\"Days\":  \"" + item.Days + "\",");
+                                jsonStringMedication.Append("\"Quantity\":  \"" + item.Quantity + "\",");
+                                jsonStringMedication.Append("\"Refills\":  \"" + item.Refills + "\",");
+                                jsonStringMedication.Append("\"duringvisit\":  \"" + item.duringvisit + "\",");
+                                jsonStringMedication.Append("\"Dose\":  \"" + item.Dose + "\",");
+                                jsonStringMedication.Append("\"DoseUnit\":  \"" + item.DoseUnit + "\",");
+                                jsonStringMedication.Append("\"Diagnosis\":  \"" + item.Diagnosis + "\"");
+
+                                jsonStringMedication.Append("}");
+                                
+                                
+                                
+                                <tr class="@((counter % 2 == 0) ? "r1" : "r0")" onclick="OpenMedicationRecord(@item.PatientMedicationCntr);">
+                                    <td style="vertical-align:middle"><input type="hidden" id="hdMedication-@(item.PatientMedicationCntr)" value="@jsonStringMedication.ToString()" />@item.MedicationName</td>
+                                    @if (item.ExpireDate.ToString() == "1/1/1900 00:00:00" || item.ExpireDate.ToString() == "1/1/1900 12:00:00 AM")
+                                    {
+                                    <td style="vertical-align:middle"></td>
+                                    }
+                                    else{
+                                    <td style="vertical-align:middle"><span style="margin-left:-25px;">@item.ExpireDate.ToShortDateString()</span></td>
+                                    }                                   
+                                </tr>
+                                counter++;
+                            }
+                        }
+                        else
+                        {
+                              <tr>
+                                <td width="200px;" style="vertical-align:middle">No Information Available.</td>
+                                  <td style="vertical-align:middle"></td>
+                                  <td style="vertical-align:middle"></td>
+                                  <td style="vertical-align:middle"></td>
+                            </tr>
+                        }
+                    </tbody>
+</table>
+

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<AMR.Models.PatientMedicalDocumentModel>
+@using System.Web.Script.Serialization;
+<table class="box-table-a" id="tbl-Documents" summary="DownloadLEgalDocuments">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col" style="vertical-align:middle"> <span style="margin-left:2px;">Date</span></th>
+                                    <th scope="col" style="vertical-align:middle">Document</th>
+                                                                
+                               </tr>
+                            </thead>
+                             <tbody>
+                                    @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                        string Ribbon="";
+                                    foreach (var item in Model)
+                                    {
+                        <tr class="@((counter % 2 == 1) ? "d0" : "d1")">
+                              <td style="vertical-align:middle">@item.DateCreated.ToShortDateString()</td>
+                            <td style="vertical-align:middle"><span class="LinkHighlight hoverMe" onclick="ViewGDocumentAttachment('@(item.DocumentCntr + "|" + item.DocumentFormat+ "|" +item.VisitId+"|"+item.FacilityId+"|"+Ribbon)');"> @((item.DocumentDescription.Length > 22) ? item.DocumentDescription.Substring(0, 22) + "..." : item.DocumentDescription) </span></td>
+                            @*<td style="vertical-align:middle"><span class="LinkHighlight hoverMe" >@item.DocumentDescription</span></td>*@
+                                                                            
+                   
+                        </tr>   counter++;}
+                                }
+                                   else
+                                {
+                                     <tr>
+                                <td style="vertical-align:middle">No Information Available</td> 
+                                          <td style="vertical-align:middle"></td> 
+                                          <td style="vertical-align:middle"></td> <td style="vertical-align:middle"></td> 
+                            </tr>
+                                   @* @Html.Partial("_NoRecordFound",3) *@
+                                }
+
+                    </tbody>
+                            </table>

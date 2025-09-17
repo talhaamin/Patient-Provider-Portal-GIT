@@ -1,0 +1,31 @@
+D:\Projects\AMR\Source\SVN\AMRPortal\trunk\Data\AMR.Data\bin\Debug\AMR.Data.dll.config
+D:\Projects\AMR\Source\SVN\AMRPortal\trunk\Data\AMR.Data\bin\Debug\AMR.Data.dll
+D:\Projects\AMR\Source\SVN\AMRPortal\trunk\Data\AMR.Data\bin\Debug\AMR.Data.pdb
+D:\Projects\AMR\Source\SVN\AMRPortal\trunk\Data\AMR.Data\bin\Debug\EntityFramework.dll
+D:\Projects\AMR\Source\SVN\AMRPortal\trunk\Data\AMR.Data\bin\Debug\EntityFramework.xml
+D:\Projects\AMR\Source\SVN\AMRPortal\trunk\Data\AMR.Data\obj\Debug\AMR.Data.dll
+D:\Projects\AMR\Source\SVN\AMRPortal\trunk\Data\AMR.Data\obj\Debug\AMR.Data.pdb
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\bin\Debug\AMR.Data.dll.config
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\bin\Debug\AMR.Data.dll
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\bin\Debug\AMR.Data.pdb
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\bin\Debug\EntityFramework.dll
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\bin\Debug\EntityFramework.xml
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\obj\Debug\AMR.Data.dll
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\obj\Debug\AMR.Data.pdb
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\obj\Debug\AMR.Data.csprojResolveAssemblyReference.cache
+F:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\bin\Debug\AMR.Data.dll.config
+F:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\bin\Debug\AMR.Data.dll
+F:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\bin\Debug\AMR.Data.pdb
+F:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\bin\Debug\EntityFramework.dll
+F:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\bin\Debug\EntityFramework.xml
+F:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\obj\Debug\AMR.Data.csprojResolveAssemblyReference.cache
+F:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\obj\Debug\AMR.Data.dll
+F:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\obj\Debug\AMR.Data.pdb
+E:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\bin\Debug\AMR.Data.dll.config
+E:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\bin\Debug\AMR.Data.dll
+E:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\bin\Debug\AMR.Data.pdb
+E:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\bin\Debug\EntityFramework.dll
+E:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\bin\Debug\EntityFramework.xml
+E:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\obj\Debug\AMR.Data.csprojResolveAssemblyReference.cache
+E:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\obj\Debug\AMR.Data.dll
+E:\ANEEL APP\AMR Portal\trunk\Data\AMR.Data\obj\Debug\AMR.Data.pdb

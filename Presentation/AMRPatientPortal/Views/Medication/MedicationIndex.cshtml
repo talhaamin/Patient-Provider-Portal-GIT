@@ -1,0 +1,1818 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@model MedicationViewModel
+@using System.Web.Optimization;
+@{
+    ViewBag.Title = "[Patient Portal] Medications";
+    Layout = "~/Views/Shared/_LayoutMasterPage.cshtml";
+}
+
+@*<link href="~/Content/css/bootstrap.min-combo.css" rel="stylesheet" />*@
+		<link href="~/Content/css/jquery.editable-combo.min.css" rel="stylesheet" />
+		
+@section Scripts
+{
+    <script src="~/Content/js/jquery.editable-combo.js"></script>
+    <!-- applying script for modal pop up of medication-->
+    <script>
+      
+        $(document).ready(function () {
+           
+            $('#tabs').tabs();
+            document.getElementById('tabs').style.display = 'block';
+            var model = @Html.Raw(Json.Encode(Model.FacilityVisitSelect));
+            //alert(model.facilitySelected);
+            //alert(model.facilityOptions);
+            //alert(model.visitSelected);
+            //alert(model.visitOptions);
+            if(model.facilityOptions != null && model.visitOptions != null)
+            {
+                
+                var VisitHome = document.getElementById('cmbVisitsHome');
+                VisitHome.innerHTML = model.visitOptions;
+                var FacilityHome = document.getElementById('cmbFacilityHome');
+                FacilityHome.innerHTML = model.facilityOptions;
+                $('#cmbFacilityHome').val(model.facilitySelected);
+                $('#cmbVisitsHome').val(model.visitSelected);
+            }
+            else{
+                
+                $('#cmbFacilityHome').val(model.facilitySelected);
+                $('#cmbVisitsHome').val(model.visitSelected);
+            }
+            if ($('#cmbFacilityHome option:selected').text() == 'Patient Entered') {
+                $('#cmbVisitsHome').text("");
+                $('#cmbVisitsHome').attr('disabled', true);
+            }
+            else {
+                $('#cmbVisitsHome').attr('disabled', false);
+            }
+           
+            $("#tbl-CurrentMedication").fixedHeaderTable();
+            $("#tbl-Pharmacies").fixedHeaderTable();
+            $("#txtPharmZipCodemed").mask("99999");
+            var $tabs = $('#tabs').tabs();
+            $("#tabs").tabs({
+                activate: function (event, ui) {
+                    var selected = $tabs.tabs('option', 'active');
+                    //ui.newTab.context.id;
+                    switch (selected) {
+                        case 0:
+                                                  
+                            onloadcurrent();
+                           
+                            break;
+                        case 1:
+                           
+                            
+                            onloadpass();
+                                                
+
+                            break;
+                    }
+                }
+            });
+        
+        });
+       
+        function pop_up_print_medication(status) {
+            var page = $("#hdURL").val();
+            chkAccess();
+            var page1 = '';
+            var facilityId = $('#cmbFacilityHome').val();
+            var visitId = $("#cmbVisitsHome option:selected").val();
+            if(visitId ==null)
+            {
+                visitId=0;
+            }
+            //    alert(visitId);
+            if (status == '1') {
+                page1 = "@Url.Action("MedicationPrint", "Medication")" + "/?visitId=" + visitId + "&facilityId=" + facilityId+ "&status=" + status;
+            }
+            else {
+                page1 = "@Url.Action("MedicationPrint", "Medication")" + "/?visitId=" + visitId + "&facilityId=" + facilityId+ "&status=" + status;
+            }
+            $('#medical-print').remove();
+            var $dialog = $('<div id="medical-print" style="width:1000px;"></div>')
+                           .html('<div id="page_loader1" style="display: block;"><div id="apDiv1" align="center"><table width="200" border="0" cellspacing="0" cellpadding="0"><tr><td height="70px;">&nbsp;</td></tr><tr><td align="center"><img src="Content/img/image_559926.gif" width="128" height="64" /></td></tr><tr><td style="text-align: center;" height="70px;">Please wait ...</td></tr></table></div></div><iframe style="border: 0px; " src="' + page1 + '" width="100%" height="100%"></iframe>')
+                           .dialog({
+                               autoOpen: false,
+                               show: {
+                                   effect: "blind",
+                                   duration: 100
+                               },
+                               hide: {
+                                   effect: "blind",
+                                   duration: 100
+                               },
+                               modal: true,
+                               height: 600,
+                               width: 1050,
+                               title: "Print Medication"
+                           });
+            $dialog.dialog('open');
+
+        }
+  
+    </script>
+  
+}
+
+
+
+
+<!--starting moving div1 -->
+<div id="containment-wrapper" style="border-bottom-style: none; border-top-style: none; border-right-style: none; border-left-width: 1px; border-left-color: rgb(166, 201, 226);">
+
+    @* <div style="background-color: #FFFFC6; height: 80px; margin-top: -10px; border: 1px solid #FFFF5B;">
+        <p style="padding-top: 6px; padding-left: 10px;">
+            It is important to know that the medications listed here are your prescribed medications,which 
+may or may not be the medication you are actually taking (for example generic medications).It is also important
+to update these medications if there are any inaccuracies or if you are taking a different medication than what 
+was prescribed.
+        </p>
+    </div>*@
+
+    <div id="quicklinks" class="draggable ui-widget-content ui-corner-all" style="position: absolute; top: 20px; left: 3%; width: 94%; height: 70px;display:none;">
+        <div id="cart" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+               <input id="hdFlag" type="hidden" value=" " />
+            <div class="ui-widget-content" style="position: relative; top: 0px; border: none;">
+
+              @*  <button   onclick="ControllMessageCompose();HidevaluecmbMessageType()"id="createmsg"  class="beer ui-button ui-widget ui-state-default ui-corner-all"  style="font-size: 0.9em; font-weight: normal" title="Send Message" type="submit">
+                    <img src="Content/img/2.png" />&nbsp;&nbsp;Compose Message</button>
+
+                <button   onclick="ControllAppointment();" id="createappbtn"  class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Appointment" type="submit">
+                    <img src="Content/img/3.png" style="margin-left:-7px;" />&nbsp;&nbsp;Appointment Request</button>
+
+
+                <button id="refillMEd"  onclick="RefillDialog(); ControllRefill();" role="button" aria-disabled="false" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal"  title="Refill Medication" type="submit">
+                    <img src="Content/img/4.png" />Refill Request</button>
+
+                <button    onclick="ControllReferall();" id="createreqbtn" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Referral" type="submit">
+                    <img src="Content/img/1.png" />&nbsp;&nbsp;Referral Request</button>*@
+                   @if (@AMR.Core.Utilities.RequestHelper.MyGlobalVar.GeneralMessageAvailable){
+                <button    onclick="ControllMessageCompose();HidevaluecmbMessageType()"id="createmsg"  class="beer ui-button ui-widget ui-state-default ui-corner-all"  style="font-size: 0.9em; font-weight: normal" title="Send Message" type="submit">
+                    <img src="Content/img/2.png" />&nbsp;&nbsp;Compose Message</button>
+                }
+                else
+                {
+                      <button    onclick="ControllMessageCompose();HidevaluecmbMessageType()"id="createmsg"  class="beer ui-button ui-widget ui-state-default ui-corner-all"  style="font-size: 0.9em; font-weight: normal" title="Send Message" disabled="disabled" type="submit">
+                    <img src="Content/img/2.png" />&nbsp;&nbsp;Compose Message</button>
+                }
+                @if (@AMR.Core.Utilities.RequestHelper.MyGlobalVar.AppointmentMessageAvailable)
+                {
+                <button   onclick="ControllAppointment();" id="createappbtn" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Appointment" type="submit">
+                    <img src="Content/img/3.png" style="margin-left:-7px;" />&nbsp;&nbsp;Appointment Request</button>
+                }
+                else
+                {
+                      <button   onclick="ControllAppointment();" id="createappbtn" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Appointment" disabled="disabled" type="submit">
+                    <img src="Content/img/3.png" style="margin-left:-7px;" />&nbsp;&nbsp;Appointment Request</button>
+                }
+
+                @if (@AMR.Core.Utilities.RequestHelper.MyGlobalVar.MedicationMessageAvailable)
+                {
+                <button id="refillMEd"   onclick="RefillDialog(); ControllRefill();" role="button" aria-disabled="false" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal"  title="Refill Medication" type="submit">
+                    <img src="Content/img/4.png" />Refill Request</button>
+                }
+                else
+                {
+                     <button id="refillMEd"   onclick="RefillDialog(); ControllRefill();" role="button" aria-disabled="false" class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal"  title="Refill Medication" disabled="disabled" type="submit">
+                    <img src="Content/img/4.png" />Refill Request</button>
+                }
+              
+                  @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.ReferralMessageAvailable)
+                  {
+                <button    onclick="ControllReferall();" id="createreqbtn"  class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Referral" type="submit">
+                    <img src="Content/img/1.png" />&nbsp;&nbsp;Referral Request</button>
+                  }
+                  else
+                  {
+                     <button    onclick="ControllReferall();" id="createreqbtn"  class="beer ui-button ui-widget ui-state-default ui-corner-all" style="font-size: 0.9em; font-weight: normal" title="Request Referral" disabled="disabled" type="submit">
+                    <img src="Content/img/1.png" />&nbsp;&nbsp;Referral Request</button>
+                  }
+            </div>
+        </div>
+    </div>
+    <div id="Div1" class="draggable ui-widget-content ui-corner-all" style="position: absolute; top: 5px; left: 3%; width: 94%; height: 35px;">
+        <div id="Div2" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+
+            <div id="combo-row" class="ui-widget-content">
+                <ul>
+
+                    <li class="col0"><p style="margin-top:3px;margin-left:10px;">Location</p> </li>
+                    <li class="col1">
+                        @Html.DropDownList("cmbFacilityHome", Model.Facilities.ToFacilityModelSelectList(), new { @class = "txt", style = "width:100%;", id = "cmbFacilityHome", @onchange = "medicationFilterNew(this.value,'location'); toggle_combobox(); " })
+
+                    </li>
+                    <li class="col0"><p style="margin-top:3px;margin-left:10px;">Visit Date</p></li>
+                    <li class="col1">
+                        <div id="homeComboBoxPortlet">
+                        @Html.DropDownList("cmbVisitsHome", Model.Visits.ToVisitModelSelectList(), new { @class = "txt", style = "width:100%;", id = "cmbVisitsHome", @onchange = "medicationFilterNew(this.value,'visit'); toggle_combobox() ;" })</div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="MedIndex">
+    <div id="tabs" style="font-size: 12px; margin-top: 40px;display: none;">
+        <ul>
+            <li><a href="#tabs-1" style="height: 30px;">
+                <p style="margin-top: -5px;">Current Medications</p>
+            </a></li>
+            <li><a href="#tabs-2" style="height: 30px;">
+                <p style="margin-top: -5px;">Past Medications</p>
+            </a></li>
+        </ul>
+
+        <input type="hidden" id="hdURL" value='@(Request.Url.Scheme + "://" + Request.Url.Host + ":" + Request.Url.Port + "/")medications-print' />
+
+        <div id="tabs-1" style="height: 210px;">
+            <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();pop_up_print_medication('1');" onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px; margin-top: -10px;">
+                <img src="Content/img/print.png" />
+                <span class="anc" style="padding-right: 4px;">Print</span>
+            </div>
+
+
+            <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();clearCurrentDialog(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="createPresentMedication" style="cursor: pointer; float: right; width: auto; height: 20px; margin-top: -10px;">
+                <img src="Content/img/add.png" />
+                <span class="anc" style="padding-right: 4px;">Add</span>
+            </div>
+
+
+
+            <!--table div start from here-->
+            <div id="current-med-grid" style="margin-top: 20px; height: 170px; overflow-y: auto; border: 1px solid; border-color: rgb(166, 201, 226); margin-left: -5px; margin-right: -5px;" class="ui-corner-all">
+                @Html.Partial("~/Views/Templates/Medication/_Medication_Current.cshtml", Model.ActiveMedications) 
+                 @*<table id="box-table-a" summary="Medications">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">Medicine Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Expire Date</th>
+                            <th scope="col">Refills</th>
+                            <th scope="col">Pharmacy</th>
+                            <th scope="col">Notes</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Details</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.ActiveMedications.Select((x, i) => new { PatientMedicationModel = x, Index = i + 1 }))
+                        {
+
+
+                            StringBuilder jsonString = new StringBuilder();
+
+                            jsonString.Append(" { ");
+                            jsonString.Append("\"ID\": \"" + item.PatientMedicationModel.PatientMedicationCntr + "\",");
+                            jsonString.Append("\"MedicationName\": \"" + item.PatientMedicationModel.MedicationName + "\",");
+                            jsonString.Append("\"ExpireDate\":  \"" + item.PatientMedicationModel.ExpireDate.ToShortDateString() + "\",");
+                            jsonString.Append("\"Status\":  \"" + (item.PatientMedicationModel.Active ? "1" : "0") + "\",");
+                            jsonString.Append("\"Pharmacy\":  \"" + item.PatientMedicationModel.Pharmacy + "\",");
+                            jsonString.Append("\"Note\":  \"" + item.PatientMedicationModel.Note + "\",");
+                            jsonString.Append("\"Days\":  \"" + item.PatientMedicationModel.Days.ToString() + "\",");
+                            jsonString.Append("\"Quantity\": \"" + item.PatientMedicationModel.Quantity.ToString() + "\",");
+                            jsonString.Append("\"Refills\":  \"" + item.PatientMedicationModel.Refills + "\",");
+                            jsonString.Append("\"Diagnosis\":  \"" + item.PatientMedicationModel.Diagnosis + "\"");
+
+                            jsonString.Append("}");
+                        
+                            
+                            <tr class="@((item.Index % 2 == 1) ? "r0" : "r1")">
+
+                                <td>
+                                    <input type="hidden" id="hdCurJson@(item.PatientMedicationModel.PatientMedicationCntr)" value=" @jsonString.ToString()" />@item.PatientMedicationModel.MedicationName</td>
+                                <td>@item.PatientMedicationModel.Quantity</td>
+                                <td>@item.PatientMedicationModel.ExpireDate.ToShortDateString()</td>
+                                <td>@item.PatientMedicationModel.Refills</td>
+                                <td>@item.PatientMedicationModel.Pharmacy</td>
+                                <td>@item.PatientMedicationModel.Note</td>
+                                <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                    <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();editCurrentMedication(@(item.PatientMedicationModel.PatientMedicationCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="edit-current-medication">
+                                        <img id="edt-cur-med" src="Content/img/edit.png" />
+                                        <span class="anc" style="padding-right: 10px;"></span>
+                                    </div>
+                                </td>
+                                <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                    <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();detailCurrentMedication(@(item.PatientMedicationModel.PatientMedicationCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="detail-current-medication">
+                                        <img id="det-cur-med" src="Content/img/details.png" />
+                                        <span class="anc" style="padding-right: 4px;"></span>
+                                    </div>
+                                </td>
+                                <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                    <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();deleteCurrentMedication(@(item.PatientMedicationModel.PatientMedicationCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="delete-current-medication">
+                                        <img id="del-cur-med" src="Content/img/delete.png" />
+                                        <span class="anc" style="padding-right: 4px;"></span>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>*@
+            </div>
+            <!--TABKE div end here -->
+
+
+        </div>
+
+        <div id="tabs-2" style="height: 210px;">
+            <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();pop_up_print_medication('0'); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px; margin-top: -10px;">
+                <img src="Content/img/print.png" />
+                <span class="anc" style="padding-right: 4px;">Print</span>
+            </div>
+            <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();clearPastDialog(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="createPastMedication" style="cursor: pointer; float: right; width: auto; height: 20px; margin-top: -10px;">
+                <img src="Content/img/add.png" />
+                <span class="anc" style="padding-right: 4px;">Add</span>
+            </div>
+
+
+
+            <!--table div start here-->
+            <div id="past-med-grid" style="margin-top: 20px; height: 170px; overflow-y: auto; border: 1px solid; border-color: rgb(166, 201, 226); margin-left: -5px; margin-right: -5px;" class="ui-corner-all">
+             @Html.Partial("~/Views/Templates/Medication/_Medication_Past.cshtml", Model.InActiveMedications)
+                   @*<table id="box-table-a" summary="Medications">
+                    <thead>
+                        <tr>
+                            <th scope="col">Medicine Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Expire Date</th>
+                            <th scope="col">Refills</th>
+                            <th scope="col">Pharmacy</th>
+                            <th scope="col">Notes</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Details</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.InActiveMedications.Select((x, i) => new { PatientMedicationModel = x, Index = i + 1 }))
+                        {
+
+                            StringBuilder jsonString = new StringBuilder();
+
+                            jsonString.Append(" { ");
+                            jsonString.Append("\"ID\": \"" + item.PatientMedicationModel.PatientMedicationCntr + "\",");
+                            jsonString.Append("\"MedicationName\": \"" + item.PatientMedicationModel.MedicationName + "\",");
+                            jsonString.Append("\"ExpireDate\":  \"" + item.PatientMedicationModel.ExpireDate.ToShortDateString() + "\",");
+                            jsonString.Append("\"Status\":  \"" + (item.PatientMedicationModel.Active ? "1" : "0") + "\",");
+                            jsonString.Append("\"Pharmacy\":  \"" + item.PatientMedicationModel.Pharmacy + "\",");
+                            jsonString.Append("\"Note\":  \"" + item.PatientMedicationModel.Note + "\",");
+                            jsonString.Append("\"Days\":  \"" + item.PatientMedicationModel.Days.ToString() + "\",");
+                            jsonString.Append("\"Quantity\": \"" + item.PatientMedicationModel.Quantity.ToString() + "\",");
+                            jsonString.Append("\"Refills\":  \"" + item.PatientMedicationModel.Refills + "\",");
+                            jsonString.Append("\"Diagnosis\":  \"" + item.PatientMedicationModel.Diagnosis + "\"");
+
+
+                            jsonString.Append("}");
+                        
+                           
+                            
+                            <tr class="@((item.Index % 2 == 1) ? "r0" : "r1")">
+                                <td>
+                                    <input type="hidden" id="hdPasJson@(item.PatientMedicationModel.PatientMedicationCntr)" value=" @jsonString.ToString()" />@item.PatientMedicationModel.MedicationName</td>
+                                <td>@item.PatientMedicationModel.Quantity</td>
+                                <td>@item.PatientMedicationModel.ExpireDate.ToShortDateString()</td>
+                                <td>@item.PatientMedicationModel.Refills</td>
+                                <td>@item.PatientMedicationModel.Pharmacy</td>
+                                <td>@item.PatientMedicationModel.Note</td>
+
+                                <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                    <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();editPastMedication(@(item.PatientMedicationModel.PatientMedicationCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="edit-past-medication">
+                                        <img id="edt-pas-med" src="Content/img/edit.png" />
+                                        <span class="anc" style="padding-right: 10px;"></span>
+                                    </div>
+                                </td>
+                                <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                    <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();detailPastMedication(@(item.PatientMedicationModel.PatientMedicationCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="detail-past-medication">
+                                        <img id="det-pas-med" src="Content/img/details.png" />
+                                        <span class="anc" style="padding-right: 4px;"></span>
+                                    </div>
+                                </td>
+                                <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                    <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();deletePastMedication(@(item.PatientMedicationModel.PatientMedicationCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="delete-past-medication">
+                                        <img id="del-pas-med" src="Content/img/delete.png" />
+                                        <span class="anc" style="padding-right: 4px;"></span>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>*@
+            </div>
+            <!--TABle div end here-->
+        </div>
+
+
+    </div>
+        </div>
+    <!--tabs end -->
+
+    <!--Start of Third Box -->
+  
+    <div id="med-div" class="draggable ui-widget-content ui-corner-all" style="position: absolute; top: 310px; height: 160px; left: 1%; width: 96.88%;">
+        <div id="cart2" style="position: absolute; top: 1px; left: 0px; right: 0px;" class="ui-corner-all">
+            <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                style="margin-top: -1px; font-weight: bold; padding: 3px;">Pharmacies</h5>
+
+            <div class="ui-widget-content" style="position: relative; top: -9px; border: none; height: 130px;">
+                <table style="width: 100%">
+                    <tr>
+                        <td>
+                            <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();clearPharmacyDialog(); "
+                                onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="add-pharmacy" style="cursor: pointer; float: right; width: auto; height: 10px; margin-top: -15px;">
+                                <img src="Content/img/add.png" />
+                                <span class="anc" style="font-size: 13px; padding-right: 17px;">Add</span>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!--Table div start--->
+
+                    <!--<div style="margin-top:20px; padding:15px 15px;" class="ui-corner-all">-->
+                    <tr>
+                        <td>
+                            <div id="pharmacy-grid" style="height: 100px; overflow-y: auto; margin-top: -5px; padding: -2px -2px -2px -2px; margin-left: 10px; margin-right: 10px; border: 1px solid; border-color: rgb(166, 201, 226);" class="ui-corner-all">
+                               @Html.Partial("~/Views/Templates/Medication/_Medication_Pharmacy.cshtml", Model.Pharmacies)
+                                 @*<table id="box-table-a" summary="Pharmacies">
+
+                                    <tr>
+
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">State</th>
+                                        <th scope="col">Zip code</th>
+                                        <th scope="col">Note</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Details</th>
+                                        <th scope="col">Delete</th>
+
+                                    </tr>
+
+                                    @foreach (var item in Model.Pharmacies.Select((x, i) => new { PatientPharmacyModel = x, Index = i + 1 }))
+                                    {
+                                        if (item.PatientPharmacyModel.PharmacyName == "--Select--")
+                                        {
+                                        }
+                                        else
+                                        {
+                                            StringBuilder jsonString = new StringBuilder();
+
+                                            jsonString.Append(" { ");
+                                            jsonString.Append("\"ID\": \"" + item.PatientPharmacyModel.PharmacyCntr + "\",");
+                                            jsonString.Append("\"PharmacyName\": \"" + item.PatientPharmacyModel.PharmacyName + "\",");
+                                            jsonString.Append("\"Address1\":  \"" + item.PatientPharmacyModel.Address1 + "\",");
+                                            jsonString.Append("\"Address2\":  \"" + item.PatientPharmacyModel.Address2 + "\",");
+                                            jsonString.Append("\"City\":  \"" + (item.PatientPharmacyModel.City) + "\",");
+                                            jsonString.Append("\"State\":  \"" + item.PatientPharmacyModel.State + "\",");
+                                            jsonString.Append("\"ZipCode\":  \"" + item.PatientPharmacyModel.PostalCode + "\",");
+                                            jsonString.Append("\"Preferred\":  \"" + item.PatientPharmacyModel.Preferred + "\",");
+                                            jsonString.Append("\"Note\":  \"" + item.PatientPharmacyModel.Note + "\"");
+
+                                            jsonString.Append("}");
+                             
+                                        <tr class="@((item.Index % 2 == 1) ? "r0" : "r1")">
+                                            <td>
+                                                <input type="hidden" id="hdPharmJson@(item.PatientPharmacyModel.PharmacyCntr)" value=" @jsonString.ToString()" />@item.PatientPharmacyModel.PharmacyName</td>
+                                            <td>@(item.PatientPharmacyModel.Address1 + " " + item.PatientPharmacyModel.Address2)</td>
+                                            <td>@(item.PatientPharmacyModel.City)</td>
+                                            <td>@(item.PatientPharmacyModel.State)</td>
+                                            <td>@(item.PatientPharmacyModel.PostalCode)</td>
+                                            <td>@(item.PatientPharmacyModel.Note)</td>
+
+                                            <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();editPharmacy(@(item.PatientPharmacyModel.PharmacyCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="edit-pharmacy">
+                                                    <img id="edt-pharm" src="Content/img/edit.png" />
+                                                    <span class="anc" style="padding-right: 10px;"></span>
+                                                </div>
+                                            </td>
+                                            <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();detailPharmacy(@(item.PatientPharmacyModel.PharmacyCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="detail-pharmacy">
+                                                    <img id="det-pharm" src="Content/img/details.png" />
+                                                    <span class="anc" style="padding-right: 4px;"></span>
+                                                </div>
+                                            </td>
+                                            <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();deletePharmacy(@(item.PatientPharmacyModel.PharmacyCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="delete-pharmacy">
+                                                    <img id="del-pharm" src="Content/img/delete.png" />
+                                                    <span class="anc" style="padding-right: 4px;"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        }
+                                    }
+
+                                </table>*@
+
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- end of 3rd box -->
+
+
+            <!--start of 4th box-->
+            
+            <!--main div end-->
+            <!-- Site footer -->
+            <!--    <div class="footer">
+        <p>&copy; Company 2013</p>-->
+        </div>
+
+        <!-- /container End -->
+        <!-- Bootstrap core JavaScript
+            
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+
+    </div>
+    
+    @*<div id="med-div2" class="draggable ui-widget-content ui-corner-all" style="position: absolute; top: 165px; height: 270px; left: 0%; width: 99.88%;">*@
+      @if (AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag == true)
+      {
+                <div id="cart2Find" class="ui-corner-all" style="margin-top:500px; margin-left:5px; width:940px; height:350px; position: absolute; top: 1px; left: 0px; right: 0px; border:1px solid rgb(166, 201, 226);">
+                    <h5 class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+                        style="margin-top: -1px; font-weight: bold; padding: 3px;">Find Pharmacies</h5>
+
+                    <div class="ui-widget-content" style="position: relative; top: -9px; border: none; overflow-y: auto; height: 280px;">
+
+                      
+                        <div style="margin-top: 5px; padding: 15px 15px;">
+                            <table>
+
+                                <tr>
+                                    <td>
+                                        <label style="color: rgb(29, 89, 135);">Search Term: </label>
+                                    </td>
+                                    <td>
+                                        <input class="text ui-widget-content ui-corner-all" name="search" type="text" style="margin-left: 10px;">
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <p style="margin-top: 15px; margin-left: 95px; color: #9B9B9B;">
+                                i.e. Walgreens or CVS
+                            </p>
+
+
+                            <table style="margin-top: 20px;">
+                                <tr>
+                                    <td>
+                                        <label style="color: rgb(29, 89, 135);">Location: </label>
+                                    </td>
+                                    <td>
+                                        <input class="text ui-widget-content ui-corner-all" name="location" type="text" style="margin-left: 40px;">
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <p style="margin-left: 95px; color: #9B9B9B;">By default we use your Zip Code on file. You may enter in anything you want here.</p>
+                            <button style="padding-top: 0px; font-size: 12px; margin-left: 100px;">
+                                <img src="Content/img/search.png" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">Search Pharmacies</button>
+                            <div>
+                                <!--Table div end -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end of 4th box -->
+
+                </div>
+      }
+                <!-- End Of div2-->
+           @* </div>*@
+    <div style="width: 100%; height: 20px;">
+    </div>
+</div>
+<div id="dialog-form3" title="Medication Details">
+    <table cellpadding="3">
+        <tr>
+            <td rowspan="3">
+                <img src="#" width="70px" height="70px" border="1" />
+            </td>
+            <td colspan="2"><span style="color: orange;">Panadol2 </span></td>
+        </tr>
+        <tr>
+            <td>Start Date: </td>
+            <td><i>10/1/2013</i> </td>
+        </tr>
+        <tr>
+            <td>End Date: </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Instructions:</td>
+            <td><i>Take Everyday</i></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Quantity:</td>
+            <td><i>10</i> </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Refills: </td>
+            <td><i>1</i></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Type: </td>
+            <td><i>OTC</i> </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Source: </td>
+            <td><i>Patient Entered</i></td>
+        </tr>
+
+
+    </table>
+
+</div>
+<!--end of modal popup-->
+
+<!--pop up pharmacies-->
+<div id="dialog-pharmacy1" title="Add Pharmacy">
+        <div id="showHidePharm" style="float:right;"><img src="Content/img/edit.png" /> <span class="anc" style=" font-weight: bold;" onclick="EditPharamcy();">Edit</span>
+<img src="Content/img/delete.png" /><span id="deletePharmacy"  class="anc" style=" font-weight: bold;" >Delete</span></div>
+
+    <table border="0" width="100%">
+
+        <tr>
+            <td align="right" width="140px;"><span style="color:red;"  >*</span><span class="form_text"  >Pharmacy Name : </span></td>
+            <td>
+                <input type="hidden" id="txtPharmID" value="0" />
+                <input type="text" name="name" id="txtPharmacyNamemed" class="txt ui-corner-all" style="width: 240px;"/>
+            </td>
+        </tr>
+           <tr>
+        <td align="right"><span style="color:red;"  >*</span><span class="form_text" >Address Line 1 : </span> </td>
+                <td>
+                <input type="text" name="name" id="txtPharmAddress1med" style="width: 240px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><span class="form_text" >Address Line 2 : </span></td>
+           
+            <td>
+                <input type="text" name="name" id="txtPharmAddress2med" style="width: 240px;" class="txt ui-corner-all" /></td>
+        </tr>
+            <tr>
+            <td align="right"><span style="color:red;"  >*</span><span class="form_text" >City : </span></td>
+           
+            <td>
+                <input type="text" name="name" id="txtPharmCitymed" class="txt ui-corner-all" width="150px;" /></td>
+          
+        </tr>
+
+            <tr>
+            <td align="right"><span style="color:red;"  >*</span><span class="form_text" >State : </span></td>
+           
+           <td>
+                @*<input type="text" name="name" id="txtPharmState" class="txt ui-corner-all" />*@
+               <select style="visibility: visible;" class="coms" name="state" id="cmbStatesmed" tabindex="11">
+									
+										<option value="AL">AL</option>
+									
+										<option value="AK">AK</option>
+									
+										<option value="AS">AS</option>
+									
+										<option value="AZ">AZ</option>
+									
+										<option value="AR">AR</option>
+									
+										<option value="AA">AA</option>
+									
+										<option value="AE">AE</option>
+									
+										<option value="AP">AP</option>
+									
+										<option value="CA">CA</option>
+									
+										<option value="CO">CO</option>
+									
+										<option value="CT">CT</option>
+									
+										<option value="DE">DE</option>
+									
+										<option value="DC">DC</option>
+									
+										<option value="FL">FL</option>
+									
+										<option value="GA">GA</option>
+									
+										<option value="GU">GU</option>
+									
+										<option value="HI">HI</option>
+									
+										<option value="ID">ID</option>
+									
+										<option value="IL">IL</option>
+									
+										<option value="IN">IN</option>
+									
+										<option value="IA">IA</option>
+									
+										<option value="KS">KS</option>
+									
+										<option value="KY">KY</option>
+									
+										<option value="LA">LA</option>
+									
+										<option value="ME">ME</option>
+									
+										<option value="MH">MH</option>
+									
+										<option value="MD">MD</option>
+									
+										<option value="MA">MA</option>
+									
+										<option value="MI">MI</option>
+									
+										<option value="FM">FM</option>
+									
+										<option value="MN">MN</option>
+									
+										<option value="MS">MS</option>
+									
+										<option value="MO">MO</option>
+									
+										<option value="MT">MT</option>
+									
+										<option value="NE">NE</option>
+									
+										<option value="NV">NV</option>
+									
+										<option value="NH">NH</option>
+									
+										<option value="NJ">NJ</option>
+									
+										<option value="NM">NM</option>
+									
+										<option value="NY">NY</option>
+									
+										<option value="NC">NC</option>
+									
+										<option value="ND">ND</option>
+									
+										<option value="MP">MP</option>
+									
+										<option value="OH">OH</option>
+									
+										<option value="OK">OK</option>
+									
+										<option value="OR">OR</option>
+									
+										<option value="PW">PW</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PR">PR</option>
+									
+										<option value="RI">RI</option>
+									
+										<option value="SC">SC</option>
+									
+										<option value="TN">TN</option>
+									
+										<option value="TX">TX</option>
+									
+										<option value="UT">UT</option>
+									
+										<option value="VT">VT</option>
+									
+										<option value="VI">VI</option>
+									
+										<option value="VA">VA</option>
+									
+										<option value="WA">WA</option>
+									
+										<option value="WV">WV</option>
+									
+										<option value="WI">WI</option>
+									
+										<option value="WY">WY</option>
+									
+										<option value="SD">SD</option>
+									
+								</select>
+            </td>
+        </tr>
+
+        <tr>
+            <td align="right"><span style="color:red;"  >*</span><span class="form_text" >Zip Code : </span></td>
+           
+          <td>
+                <input type="text" name="name" id="txtPharmZipCodemed" class="txt ui-corner-all" style="width: 100px;" />
+            </td>
+        </tr>
+
+
+          <tr>
+            <td align="right"><span class="form_text" >Phone : </span></td>
+           
+          <td>
+                <input type="text" name="name" id="txtPhonemed" style="width: 190px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+           <tr>
+            <td align="right"><span class="form_text" >Website : </span></td>
+           
+          <td>
+       <input type="text" name="name" id="txtWebsitephar" style="width: 240px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+
+
+
+      
+        
+    </table>
+
+  
+    <table style="margin-top: -15px;">
+        <tr>
+          
+        </tr>
+        
+    </table>
+
+  @*  <hr style="margin-top: 10px;">*@
+
+    @*<table style="margin-top: -15px;">
+
+        <tr>
+            <td width="30%"><span class="form_text" style="color: #000066;">City:</span> </td>
+            <td width="30%"><span class="form_text" style="color: #000066;">State/Province: </span></td>
+            <td width="30%"><span class="form_text" style="color: #000066;">Zip/PostalCode:</span></td>
+        </tr>
+        <tr>
+         <td>
+                <input type="text" name="name" id="txtPharmCity" class="txt ui-corner-all" /></td>
+            <td>
+                <input type="text" name="name" id="txtPharmState" class="txt ui-corner-all" />
+            </td>
+            <td>
+                <input type="text" name="name" id="txtPharmZipCode" class="txt ui-corner-all" />
+            </td>
+        </tr>
+    </table>*@
+  @*  <hr style="margin-top: 10px;">
+    <h3 style="margin-top: -15px; color: rgb(29, 89, 135); font-size: 22px;">Contact</h3>
+    <p style="margin-top: -10px; color: #9B9B9B;"><i>The Following fields are optional</i></p>
+    <hr style="margin-top: 10px;">*@
+    @*<table style="margin-top: -15px;">
+
+        <tr>
+            <td width="30%"><span class="form_text" style="color: #000066;">Phone: </span></td>
+            <td width="60%"><span class="form_text" style="color: #000066;">Website:</span> </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="name" id="txtPhone" style="width: 190px;" class="txt ui-corner-all" />
+            </td>
+            <td>
+                <input type="text" name="name" id="txtWebsite" style="width: 370px;" class="txt ui-corner-all" /></td>
+        </tr>
+    </table>*@
+    @*<hr style="margin-top: 10px;">*@
+    <h3 style="margin-top: 25px; color: rgb(29, 89, 135); font-size: 22px;">Preferred Pharmacy</h3>
+    <table>
+        <tr>
+            <td width="30%"><span class="form_text">
+                <input name="chk" type="checkbox" value="" id="chkPrefmed">
+            </span></td>
+            <td width="-20%"><span class="form_text" style="margin-left: -80px; color: #9B9B9B;">Would you like to make this your preferred pharmacy?</span> </td>
+        </tr>
+    </table>
+</div>
+<!--End of popup pharmacies-->
+
+<!--popup up modal medication-->
+
+<div id="dialog-formCurrent" title="Add Medication">
+    <center>  <span   class="validateTips" style="padding:-10px;"></span></center>
+    <div class="hidePastmedication"><div style="margin-top:3px;margin-right:25px;"><img src="Content/img/edit.png" style="margin-left:520px;"/> <span class="anc" style=" font-weight: bold;" onclick="EditCurrentMedication();">Edit</span></div>
+<div style="margin-top:-23px;float:right;"><img src="Content/img/delete.png" style="margin-left:440px;"/><span id="deleteCurrentMedication"  class="anc" style=" font-weight: bold;" >Delete</span></div></div>
+    <table border="0" width="100%" height="44">
+        <tr>
+            <td width="30%" height="40"><span class="form_text" style="color: #000066;">Medication Name:</span></td>
+            <td>
+                <input type="hidden" id="txtMedID" value="0" />
+                <input type="text" name="txtMedicationName" id="txtMedicationName" class="txt ui-corner-all" style="margin-left:0px; width: 400px"/>
+            </td>
+        </tr>
+        <tr>
+        <td width="31%" class="form_text" style="color: #000066;">Administered During Visit:
+                
+            </td>
+            <td>
+                <input type="checkbox" id="chkMedicationAdministered"  name="visitchk" style="margin-left:1px; margin-top:1px;"/>
+            </td>
+
+        </tr>
+    </table>
+    <p style="margin-top: -12px; color: #9B9B9B; font-size: 15px;">&nbsp;</p>
+    
+    <table border="0" width="100%" height="300px">
+         <tr><td class="form_text" style="color: #000066;">Taken Currently:</td>
+            @*<td colspan="2" style="width: 500px; height: 50px; color: #000066;" class="form_text">Are you currently taking this medication? 
+                    </td>*@
+            <td><select style="width: 60px;" id="cmbTakingMedicine" name="cambTakingMedicine" class="txt ui-corner-all">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select></td>
+        </tr>
+        <tr>
+            <td width="31%" class="form_text" style="color: #000066;">Start Date: </td>
+            <td>
+                <input type="text" name="datepicker" id="dtStartDate" class="txt ui-corner-all"></td>
+            <td>    <img id="show-date-CurrStartDate" src="Content/img/calender.png" style="margin-top:-5px; cursor:pointer; margin-left:-250px;"/></td>
+
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Expiration Date: </td>
+            <td>
+                <input type="text" name="datepicker" id="datepicker" class="txt ui-corner-all"></td>
+            <td>    <img id="show-date-CurrEndDate" src="Content/img/calender.png" style="margin-top:-5px; cursor:pointer; margin-left:-250px;"/></td>
+
+        </tr>
+        
+
+        <tr style="display:none;">
+            <td width="30%" class="form_text" style="color: #000066;">Pharmacy: </td>
+            <td>
+                <div id="divPharmacy">
+                    @Html.DropDownList("txtPharmacy", Model.Pharmacies.ToPharmacyModelSelectList(), new { @class = "txt  ui-corner-all", style = "width:200px; padding:2px;", id = "txtPharmacy" })
+                </div>
+            </td>
+        </tr>
+        
+        @*<tr>
+            <td width="30%" class="form_text" style="color: #000066;">Days:</td>
+            <td>
+                <input type="text" name="txtDays" id="txtDays" style="width: 150px;" class="txt ui-corner-all" />
+            </td>
+        </tr>*@
+        <tr>
+           <td colspan="2">
+  <div style="margin-left:-2px">
+    <table>
+      <tbody><tr>
+        <td>
+          </td><td class="form_text" style="color: #000066;">Dose:</td>
+            <td>
+                <input type="text" class="txt ui-corner-all" style="width: 150px;margin-left:160px" id="txtDose" name="txtDose">
+            </td>
+            <td class="form_text" style="color: #000066;">&nbsp&nbsp&nbsp&nbsp Unit:</td>
+            <td>
+                <input type="text" name="txtDoseUnit" id="txtDoseUnit" style="width: 150px;margin-left:20px" class="txt ui-corner-all">
+            </td>
+        
+      </tr>
+    </tbody></table></div>
+  </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Frequency: </td>
+            <td>
+                <input type="text" name="txtDiagnosis" id="txtFrequency" class="txt ui-corner-all" />
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Route: </td>
+            <td>
+@*                <input type="text" name="txtDiagnosis" id="txtRoute" class="txt ui-corner-all" />*@
+               
+                    <div class="row-fluid">
+					<div class="span4"></div>
+					<div class="span7">
+                         @Html.DropDownList("txtRoute", Model.RoutesAdministration.ToRoutesOfAdministrationModelSelectList(), new { @class = "txt", style = "width:380px;", id = "txtRoute" })
+					</div>
+				</div>
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Quantity: </td>
+            <td>
+                <input type="text" name="txtQty" id="txtQty" style="width: 150px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Refills: </td>
+            <td>
+                <input type="text" name="txtRefills" id="txtRefills" class="txt ui-corner-all" />
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Diagnosis: </td>
+            <td>
+                <input type="text" name="txtDiagnosis" id="txtDiagnosis" class="txt ui-corner-all" />
+            </td>
+        </tr>
+            
+          <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Instructions: </td>
+            <td>
+                <textarea type="text" name="txtInstruction" id="txtInstructions" style="width: 380px; height: 100px;" class="txt ui-corner-all" ></textarea>
+            </td>
+        </tr>
+        <tr>
+       
+        
+
+    </table>
+
+</div>
+<!-- end of modal popup medication-->
+
+<!--popup up modal medication-->
+
+<div id="dialog-form1" title="Add Medication">
+    <center>  <span   class="validateTips" style="padding:-10px;"></span></center>
+     <div class="hidePastmedication"><div style="margin-top:3px;margin-right:25px;"><img src="Content/img/edit.png" style="margin-left:520px;"/> <span class="anc" style=" font-weight: bold;" onclick="EditPastMedication();">Edit</span></div>
+<div style="margin-top:-23px;float:right;"><img src="Content/img/delete.png" style="margin-left:440px;"/><span id="deletePastMedication"  class="anc" style=" font-weight: bold;" >Delete</span></div></div>
+    <table border="0" width="100%" height="44">
+        <tr>
+            <td width="30%" height="40"><span class="form_text" style="color: #000066;">Medication Name:</span></td>
+            <td align="left">
+                <input type="hidden" id="txtMedID1" value="0" />
+                <input type="text" name="txtMedicationName1" id="txtMedicationName1" class="txt ui-corner-all" style="margin-left:0px; width: 400px"/>
+            </td>
+        </tr>
+        <tr>
+        <td width="31%" class="form_text" style="color: #000066;">Administered During Visit: 
+                
+            </td>
+            <td align="left">
+                <input type="checkbox" id="DuringVist1"  name="visitchk" />
+            </td>
+        </tr>
+    </table>
+    <p style="margin-top: -12px; color: #9B9B9B; font-size: 15px;">&nbsp;</p>
+    
+    <table border="0" width="100%" height="300px">
+        <tr><td class="form_text" style="color: #000066;">Taken Currently:</td>
+            @*<td colspan="2" style="width: 500px; height: 50px; color: #000066;" class="form_text">Are you currently taking this medication? 
+                    </td>*@
+            <td><select style="width: 60px;" id="cmbTakingMedicine1" name="cambTakingMedicine" class="txt ui-corner-all">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select></td>
+        </tr>
+        <tr>
+         <td width="31%" class="form_text" style="color: #000066;">Start Date: </td>
+            <td>
+                <input type="text" name="datepicker" id="dtStartDatepst" class="txt ui-corner-all"></td>
+            
+<td>    <img id="show-date-PastStartDate" src="Content/img/calender.png" style="margin-top:-5px; cursor:pointer; margin-left:-250px;"/></td>
+
+        </tr>
+        
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Expiration Date: </td>
+            <td>
+                <input type="test" name="datepicker1" id="datepicker1" class="txt ui-corner-all"></td>
+            <td>    <img id="show-date-PastEndDate" src="Content/img/calender.png" style="margin-top:-5px; cursor:pointer; margin-left:-250px;"/></td>
+
+        </tr>
+        
+        <tr style="display:none;">
+            <td width="30%" class="form_text" style="color: #000066;">Pharmacy: </td>
+            <td>
+                <div id="DivPharmacy1">
+                    @Html.DropDownList("txtPharmacy1", Model.Pharmacies.ToPharmacyModelSelectList(), new { @class = "txt  ui-corner-all", style = "width:200px;padding:2px;", id = "txtPharmacy1" })
+                </div>
+            </td>
+        </tr>
+        
+        @*<tr>
+            <td width="30%" class="form_text" style="color: #000066;">Days:</td>
+            <td>
+                <input type="text" name="txtDays1" id="txtDays1" style="width: 150px;" class="txt ui-corner-all" />
+            </td>
+        </tr>*@
+        <tr>
+           <td colspan="2">
+  <div style="margin-left:-2px">
+    <table>
+      <tbody><tr>
+        <td>
+          </td><td class="form_text" style="color: #000066;">Dose:</td>
+            <td>
+                <input type="text" class="txt ui-corner-all" style="width: 150px;margin-left:160px" id="txtDose1" name="txtDose">
+            </td>
+            <td class="form_text" style="color: #000066;">&nbsp&nbsp&nbsp&nbsp Unit:</td>
+            <td>
+                <input type="text" name="txtDoseUnit" id="txtDoseUnit1" style="width: 150px;margin-left:20px" class="txt ui-corner-all">
+            </td>
+        
+      </tr>
+    </tbody></table></div>
+  </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Frequency: </td>
+            <td>
+                <input type="text" name="txtDiagnosis" id="txtFrequencypst" class="txt ui-corner-all" />
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Route: </td>
+            <td>
+                @*<input type="text" name="txtDiagnosis" id="txtRoutepst" class="txt ui-corner-all" />*@
+                <div class="row-fluid">
+					<div class="span4"></div>
+					<div class="span7">
+                         @Html.DropDownList("txtRoutepst", Model.RoutesAdministration.ToRoutesOfAdministrationModelSelectList(), new { @class = "txt", style = "width:380px;", id = "txtRoutepst" })
+					</div>
+				</div>
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Quantity: </td>
+            <td>
+                <input type="text" name="txtQty1" id="txtQty1" style="width: 150px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Refills: </td>
+            <td>
+                <input type="text" name="txtRefills1" id="txtRefills1" class="txt ui-corner-all" />
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Diagnosis: </td>
+            <td>
+                <input type="text" name="txtDiagnosis1" id="txtDiagnosis1" class="txt ui-corner-all" />
+            </td>
+        </tr>
+            
+          
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Instructions: </td>
+            <td>
+                <textarea type="text" name="txtInstruction1" id="txtInstructions1" class="txt ui-corner-all" style="width: 380px; height: 100px;"></textarea>
+            </td>
+        </tr>
+        
+        
+
+    </table>
+
+</div>
+<div id="ComposeMessage" title="Compose Message" >
+        <input type="hidden" id="hdSentFlag" value=""/><input type="hidden" id="hdReplyMessageId" value=""/>
+        <input type="hidden" id="hdAttachmentName" value=""/>
+        <input type="hidden" id="hdAttachmentTest" value=""/>
+        <input type="hidden" id="hdFacilityId" value="test"/>
+        <input type="hidden" id="hdProviderId_To" value=""/>
+        <input type="hidden" id="hdMessageRequest" value=""/>
+        <input type="hidden" id="hdMessageTypeId" value=""/>
+        <input type="hidden" id="hdMessageUrgencyId" value=""/>
+        <input type="hidden" id="hdFlag" value=""/>
+    <div style="vertical-align:top;">
+        <table>
+            <tr>
+               
+                <td><input type="file" id="files" name="file" /><input id="my-simple-upload" type="file" value="" name="MyAttachFile" style="display:none;"/><input type="button" value="Browse..." id="browse" />@*<label id="BrowseName" style="margin-top:-20px;margin-left:100px"></label>*@</td>
+                <td><input type="hidden" id="ByteData" value="" "/></td>
+                <td><input type="hidden" id="FileBytes" value="" "/></td>
+                <td><label id="BrowseName" style="margin-top:-20px;margin-left:60px"></label><input type="button" id="btncancelupload" value="Cancel" style="display: inline-block;margin-top:-1px;height:28px;" /></td>
+            </tr>
+        </table>
+        <div id="progress_bar"><div class="percent">0%</div></div>
+         @* <img src="Content/img/attach.gif" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">
+       *@ 
+       </div>  <br>
+        <p>
+            @*Please note that you can expect to receive a response within 1 bussiness day*@
+        </p>
+        <div>
+            <table width="705" height="180" border="1" style="border-color: rgb(166, 201, 226);">
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Location:</b>
+                     
+                             @Html.DropDownList("cmbAppointmentFacility", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = " txt  ui-corner-all bcom", style = "width:400px; margin-left:33px;", id = "cmbAppointmentFacility", @onchange = "LoadFacilityProviderSendMessage();" })
+                                <span id="apDiv9" ><img id="loader1" src="Content/img/login-loader.gif"  style="margin-left:530px;  margin-top:-30px; display:none;" /></span>
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>To:</b>
+                              <div id="DivLoadFacilityProviderSendMessage" style="margin-top:-30px;">
+                             @Html.Partial("_FacilityProviderSendMessage", Model.Providers)
+                             @* @Html.DropDownList("cmbAppointmentDoctor", Model.Providers.ToProviderModelSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:405px; margin-left:72px;", id = "cmbAppointmentDoctor" })*@
+                                 </div>
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Subject:</b>
+                             @Html.DropDownList("cmbMessageType", Model.MessageType.ToMessageTypeModelSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:403px; margin-left:45px;", id = "cmbMessageType" })
+
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                           <b>Urgent:</b>
+                              
+                            <select id="cmbMessageUrgency" class="txt" style="width:90px; margin-left:47px;">
+                     
+                      
+                      <option value="false" selected="selected">No</option><option value="true">Yes</option>
+</select>    
+                            @*<div style="margin-left:0px;">
+                              @Html.DropDownList("cmbMessageUrgency1", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:150px; ", id = "cmbMessageUrgency1" })
+                          </div>*@
+                        </td>
+
+                          @*   @Html.DropDownList("cmbMessageUrgency", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:170px; margin-left:20px;", id = "cmbMessageUrgency" })*@
+                            @* <select style="margin-left: 0px; margin-top: -15px; width: 100px;" class="txt">
+                                <option>Arial</option>
+                            </select>
+                            <select style="margin-left: 0px; margin-top: -15px; width: 70px;" class="txt">
+                                <option>12</option>
+                            </select>
+                            <button>
+                                <img src="Content/img/bold.png" width="20px"></button>
+                            <button>
+                                <img src="Content/img/italic.png" width="20px"></button>
+                            <button>
+                                <img src="Content/img/underline.png" width="20px"></button>*@
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="150" colspan="2" bgcolor="#FFFFFF"> 
+                   <textarea id="txtMessageWrite" class="txt" rows="5" cols="45" style="height:150px; width:685px;" maxlength="256"> </textarea>
+                    </td>
+                </tr>
+                   <tr><td><div id="counter" style="text-align:right;"></div></td></tr>
+            </table>
+        </div>
+    </div>
+<div id="appbtn-form" title="Appointment Request">
+    <center>  <span   class="validateTips"></span></center>
+    <table width="100%" height="433" border="0
+        " cellpadding="0" cellspacing="2">
+        <tr>
+            <td width="250" height="35" align="right">Location :</td>
+            <td width="2">&nbsp;</td>
+            <td colspan="2">
+          
+                @Html.DropDownList("cmbAppointmentFacility1", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentFacility1", @onchange = "LoadFacityProvider();" })
+                <span id="apDiv9">
+
+    
+
+</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Provider :</td>
+            <td align="right">&nbsp;</td>
+            <td colspan="2">
+                <div id="DivFacityProvider">
+                @Html.Partial("_FacilityProvider", Model.Providers)
+                @*@Html.DropDownList("cmbAppointmentDoctor1", Model.Providers.ToProviderModelSelectList(), new { @class = " txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentDoctor1" })*@
+            </div>
+                    </td>
+        </tr>
+        <tr>
+              <td  ><div style="float:right;margin-Top:4px;">Urgent :</div></td>
+                    <td align="right">&nbsp;</td>
+                        <td  colspan="2">
+                            <select id="cmbMessageUrgency1" class="txt" style="width:90px">
+                     @* <option value="-1">--Select--</option>*@
+                      
+                      <option value="false" selected="selected">No</option><option value="true">Yes</option>
+</select>    
+                            @*<div style="margin-left:0px;">
+                              @Html.DropDownList("cmbMessageUrgency1", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:150px; ", id = "cmbMessageUrgency1" })
+                          </div>*@
+                        </td>
+        </tr>
+        <tr>
+            <td width="250"  align="right" style="padding-top:7px;" valign="Top">Preferred Time of Day :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="439" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                         <td >
+                            <input type="checkbox" name="mor_chk" id="chkmor" style=""/></td>
+                        <td width="50"><div style="margin-left:5px;margin-Top:4px;">Morning</div></td>
+                        <td width="21">
+                            <input type="checkbox" name="aft_chk" id="chkAft" style="margin-left:10px;"/></td>
+                        <td width="68"  ><div style="margin-left:5px;margin-Top:4px;">Afternoon</div></td>
+                        <td width="21">
+                            <input type="checkbox" name="eve_chk" id="chkeve" style="margin-left:10px;" /></td>
+                        <td width="84"  ><div style="margin-left:5px;margin-Top:4px;">Evening</div></td>
+                        <td width="61"  ><div style="margin-left:15px;margin-Top:4px;"></div></td>
+                        <td width="119">
+                            <div style="margin-left:3px;">
+                             @* @Html.DropDownList("cmbMessageUrgency1", Model.MessageUrgencyType.ToMessageUrgencySelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:150px; margin-left:20px;", id = "cmbMessageUrgency1" })*@
+                          </div>
+                        </td>
+                    </tr>
+                </table>
+                <label for="urg_com"></label>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" valign="Top" style="padding-top:7px;" align="right">Preferred Day :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="445" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                 <td >
+                            <input type="checkbox" name="mon_chk" id="chkmon" style="" /></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;">Monday</div></td>
+                        <td >
+                            <input type="checkbox" name="tue_chk" id="chktue" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;"">Tuesday</div></td>
+                        <td >
+                            <input type="checkbox" name="wed_chk" id="chkwed" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;"">Wednesday</div></td>
+                        <td >
+                            <input type="checkbox" name="thu_chk" id="chkthu" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;"">Thursday</div></td>
+                        
+                    </tr>
+                    <tr>
+<td >
+                            <input type="checkbox" name="fri_chk" id="chkfri" /></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;">Friday</div></td>
+                        <td >
+                            <input type="checkbox" name="fri_chk" id="chksat" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2px;margin-top:4px;">Saturday</div></td>
+                        <td >
+                            <input type="checkbox" name="fri_chk" id="chksun" style="margin-left:10px;"/></td>
+                        <td ><div style="margin-left:2x;margin-top:4px;">Sunday</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Date Range :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <table width="367" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="118">
+                            <input type="text" name="pref_txt" id="txtPrefDateFrom" class="com" /></td>
+                        <td>    <img id="show-date-PreferedStart" src="Content/img/calender.png" style="margin-top:-3px; cursor:pointer; margin-left:-15px;"/></td>
+                        <td width="19">&nbsp;</td>
+                        <td width="19">&nbsp;</td>
+                        <td width="216">
+                            <input type="text" name="pref_txt" id="txtPrefDateTo" class="com" /></td>
+                        <td>    <img id="show-date-PreferredEnd" src="Content/img/calender.png" style="margin-top:-3px; cursor:pointer; margin-left:-105px;"/></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Preferred Time: </td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <select name="preft_com" id="cmbPreftime" class="com">
+                      <option value="-1">--select--</option>                    
+  <option value="7">7:00 am</option>
+  <option value="8">8:00 am</option>
+  <option value="9">9:00 am</option>
+  <option value="10">10:00 am</option>
+  <option value="11">11:00 am</option>
+  <option value="12">12:00 pm</option>
+  <option value="13">1:00 pm</option>
+  <option value="14">2:00 pm</option>
+  <option value="15">3:00 pm</option>
+  <option value="16">4:00 pm</option>
+  <option value="17">5:00 pm</option>
+  <option value="18">6:00 pm</option>
+ <option value="19">7:00 pm</option>
+  <option value="20">8:00 pm</option>
+                </select>
+                
+            </td>
+        </tr>
+        <tr>
+            <td width="250" height="33" align="right">Reason for Visit :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="text" name="reas_txt" id="txtReason" class="btxt" /></td>
+        </tr>
+        <tr>
+            <td width="250" align="right">Comments :</td>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <textarea name="comm_txta" cols="45" rows="5" class="btxta" id="txtComment" maxlength="256"></textarea></td>
+        </tr>
+          <tr>
+            
+            <td colspan="3" align="right"><div id="appcount"></div></td>
+        </tr>
+
+
+    </table>
+
+</div>
+<div id="dialog-refill" title="Refill Request">
+    <center>  <span   class="validateTips"></span></center>
+    <table border="0" width="100%" height="300px">
+        <tr>
+            <td width="30%" height="40"><span class="form_text" style="color: #000066;">Location:</span></td>
+            <td>
+
+                  @Html.DropDownList("cmbAppointmentFacilityRefill", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentFacilityRefill", @onchange = "LoadFacityProviderRefil();LoadRefilmediaction();" })
+    
+
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Doctor: </td>
+            <td>
+                <div id="refildiv">
+                @Html.Partial("_CmbRefildoctorDropDown", Model.Providers)
+                    </div>
+
+           @*    @Html.DropDownList("cmbDoctor", Model.Providers.ToProviderModelSelectList(), new { @class = " txt  ui-corner-all", style = "width:200px;", id = "cmbDoctor" })*@
+
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" height="40"><span class="form_text" style="color: #000066;">Medication:</span></td>
+            <td>
+                <div id="refilmed">
+                @Html.Partial("_Index_RefillMedication", Model.Medications)
+                    </div>
+            </td>
+        </tr>
+
+
+        
+
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Number of Refills: </td>
+            <td>
+                <input type="text" name="txtCountRefills" id="txtCountRefills" class="txt ui-corner-all" />
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Pharmacy: </td>
+            <td>
+                <table>
+<tr><td>
+<div id="cmbPharmacy">
+
+          
+                 @Html.Action("RefillPharmacypartialview", "Home", new { @class = "txt  ui-corner-all", style = "width:200px;", id = "cmbRFPharmacy" })
+              
+ </div>
+</td>
+<td><span><img  src="Content/img/add.png" />
+<span id="addPharmacy" class="anc" onclick="OpenPharmacyDialoge();" style="font-size: 13px; padding-right: 17px;">Add</span></span>
+</td>
+</tr>
+</table>
+               <div > </div> <div id="PharmAddress" style="color:red;"></div><div><input type="hidden" id="Phone" value="" /></div>
+            </td>
+            
+        </tr>
+
+        <tr>
+            <td width="30%" class="form_text" style="color: #000066;">Comments: </td>
+            <td>
+                <textarea multiline="true" style="height: 96px; width: 453px;" id="txtComments" rows="3" cols="5" class="txt  ui-corner-all" maxlength="256"></textarea>
+            </td>
+        </tr>
+             <tr>
+            
+            <td colspan="3" align="right"><div id="refillcount"></div></td>
+        </tr>
+
+
+
+    </table>
+
+</div>
+<div id="reqbtn-form" title="Referral Request">
+    <table width="100%" border="0" cellpadding="0" cellspacing="2">
+        <tr>
+            <td width="250" height="35" align="right">Location :</td>
+            <td width="2">&nbsp;</td>
+            <td width="571">
+               
+                   @Html.DropDownList("cmbAppointmentFacility3", Model.MessageFacilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = "txt  ui-corner-all bcom", style = "width:400px;", id = "cmbAppointmentFacility3", @onchange = "LoadFacilityProviderRequestRefferal();" })
+         <span id="apDiv9">
+
+    <img id="loader4" src="Content/img/login-loaderwhite.gif" style="margin-left: 420px; margin-top: -30px; display: none;"></img>
+
+</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="250" height="35" align="right">Send Request to :</td>
+            <td width="2">&nbsp;</td>
+            <td width="571">
+                
+                  <div id="DivFacilityProviderRequestRefferal">
+                @Html.Partial("_FacilityProviderRequestRefferal", Model.Providers)
+                
+            </div>
+                   @*@Html.DropDownList("cmbRProvider", Model.Providers.ToProviderModelSelectList(), new { @class = " txt  ui-corner-all bcom", style = "width:400px;", id = "cmbRProvider" })*@
+         </td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Reason for Referral :</td>
+            <td align="right">&nbsp;</td>
+            <td>
+                <input type="text" name="reas_txt3" id="txtReqRes" class="btxt" /></td>
+        </tr>
+        <tr>
+            <td width="250" height="35" align="right">Comments :</td>
+            <td>&nbsp;</td>
+            <td>
+                <textarea name="comm_txta2" cols="45" rows="5" class="btxta" id="txtRComm" maxlength="256"></textarea></td>
+        </tr>
+          <tr>
+            
+            <td colspan="3" align="right">
+                <div id="referallcount"></div>
+
+            </td>
+        </tr>
+       
+    </table>
+
+
+</div>
+<div id="dialog-pharmacy" title="Add Pharmacy">
+           
+    <table border="0" width="100%">
+
+        <tr>
+            <td align="right" width="140px;"><span style="color:red;"  >*</span><span class="form_text"  >Pharmacy Name : </span></td>
+            <td>
+                <input type="hidden" id="txtPharmID" value="0" />
+                <input type="text" name="name" id="txtPharmacyName" class="txt ui-corner-all" style="width: 240px;"/>
+            </td>
+        </tr>
+           <tr>
+        <td align="right"><span style="color:red;"  >*</span><span class="form_text" >Address Line 1 : </span> </td>
+                <td>
+                <input type="text" name="name" id="txtPharmAddress1" style="width: 240px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><span class="form_text" >Address Line 2 : </span></td>
+           
+            <td>
+                <input type="text" name="name" id="txtPharmAddress2" style="width: 240px;" class="txt ui-corner-all" /></td>
+        </tr>
+            <tr>
+            <td align="right"><span style="color:red;"  >*</span><span class="form_text" >City : </span></td>
+           
+            <td>
+                <input type="text" name="name" id="txtPharmCity" class="txt ui-corner-all" width="150px;" /></td>
+          
+        </tr>
+
+            <tr>
+            <td align="right"><span style="color:red;"  >*</span><span class="form_text" >State : </span></td>
+           
+           <td>
+                @*<input type="text" name="name" id="txtPharmState" class="txt ui-corner-all" />*@
+               <select style="visibility: visible;" class="coms" name="state" id="cmbStates" tabindex="11">
+									
+										<option value="AL">AL</option>
+									
+										<option value="AK">AK</option>
+									
+										<option value="AS">AS</option>
+									
+										<option value="AZ">AZ</option>
+									
+										<option value="AR">AR</option>
+									
+										<option value="AA">AA</option>
+									
+										<option value="AE">AE</option>
+									
+										<option value="AP">AP</option>
+									
+										<option value="CA">CA</option>
+									
+										<option value="CO">CO</option>
+									
+										<option value="CT">CT</option>
+									
+										<option value="DE">DE</option>
+									
+										<option value="DC">DC</option>
+									
+										<option value="FL">FL</option>
+									
+										<option value="GA">GA</option>
+									
+										<option value="GU">GU</option>
+									
+										<option value="HI">HI</option>
+									
+										<option value="ID">ID</option>
+									
+										<option value="IL">IL</option>
+									
+										<option value="IN">IN</option>
+									
+										<option value="IA">IA</option>
+									
+										<option value="KS">KS</option>
+									
+										<option value="KY">KY</option>
+									
+										<option value="LA">LA</option>
+									
+										<option value="ME">ME</option>
+									
+										<option value="MH">MH</option>
+									
+										<option value="MD">MD</option>
+									
+										<option value="MA">MA</option>
+									
+										<option value="MI">MI</option>
+									
+										<option value="FM">FM</option>
+									
+										<option value="MN">MN</option>
+									
+										<option value="MS">MS</option>
+									
+										<option value="MO">MO</option>
+									
+										<option value="MT">MT</option>
+									
+										<option value="NE">NE</option>
+									
+										<option value="NV">NV</option>
+									
+										<option value="NH">NH</option>
+									
+										<option value="NJ">NJ</option>
+									
+										<option value="NM">NM</option>
+									
+										<option value="NY">NY</option>
+									
+										<option value="NC">NC</option>
+									
+										<option value="ND">ND</option>
+									
+										<option value="MP">MP</option>
+									
+										<option value="OH">OH</option>
+									
+										<option value="OK">OK</option>
+									
+										<option value="OR">OR</option>
+									
+										<option value="PW">PW</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PR">PR</option>
+									
+										<option value="RI">RI</option>
+									
+										<option value="SC">SC</option>
+									
+										<option value="TN">TN</option>
+									
+										<option value="TX">TX</option>
+									
+										<option value="UT">UT</option>
+									
+										<option value="VT">VT</option>
+									
+										<option value="VI">VI</option>
+									
+										<option value="VA">VA</option>
+									
+										<option value="WA">WA</option>
+									
+										<option value="WV">WV</option>
+									
+										<option value="WI">WI</option>
+									
+										<option value="WY">WY</option>
+									
+										<option value="SD">SD</option>
+									
+								</select>
+            </td>
+        </tr>
+
+        <tr>
+            <td align="right"><span style="color:red;"  >*</span><span class="form_text" >Zip Code : </span></td>
+           
+          <td>
+                <input type="text" name="name" id="txtPharmZipCode" class="txt ui-corner-all" style="width: 100px;" />
+            </td>
+        </tr>
+
+
+          <tr>
+            <td align="right"><span class="form_text" >Phone : </span></td>
+           
+          <td>
+                <input type="text" name="name" id="txtPhone" style="width: 190px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+           <tr>
+            <td align="right"><span class="form_text" >Website : </span></td>
+           
+          <td>
+       <input type="text" name="name" id="txtWebsite" style="width: 240px;" class="txt ui-corner-all" />
+            </td>
+        </tr>
+
+
+
+      
+        
+    </table>
+
+  
+    <table style="margin-top: -15px;">
+        <tr>
+          
+        </tr>
+        
+    </table>
+
+ 
+    <h3 style="margin-top: 25px; color: rgb(29, 89, 135); font-size: 22px;">Preferred Pharmacy</h3>
+    <table>
+        <tr>
+            <td width="30%"><span class="form_text">
+                <input name="chk" type="checkbox" value="" id="chkPref">
+            </span></td>
+            <td width="-20%"><span class="form_text" style="margin-left: -80px; color: #9B9B9B;">Would you like to make this your preferred pharmacy?</span> </td>
+        </tr>
+    </table>
+</div>
+
+<div id="dialog-confirm">
+
+</div>
+<!-- end of modal popup medication-->
+
+
+@*<script src="http://code.jquery.com/jquery-latest.min.js"></script>*@
+		<script>
+		    window.onload = function () {
+		        
+		        $('#txtRoute').editableSelect({ effects: 'slide' 
+		        
+		        
+		        });
+		        $('#txtRoutepst').editableSelect({ effects: 'slide' 
+		        
+		        
+		        });
+		        $('#txtRoute').css( "background-color", "#DDE4FF" );
+		        $('#txtRoutepst').css( "background-color", "#DDE4FF" );
+		        $('#onselect').editableSelect({
+		            onSelect: function (element) {
+		                $('#afterSelect').html($(this).val());
+		            }
+		        });
+
+		        
+		    }
+		</script>
+
+@Scripts.Render("~/MedicationIndex/jquery")

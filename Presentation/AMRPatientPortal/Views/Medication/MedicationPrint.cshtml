@@ -1,0 +1,181 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@model MedicationViewModel
+@{
+    ViewBag.Title = "[Patient Portal] Print-Medications";
+    Layout = null;
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <script>
+
+         function HideLoader() {
+            
+             window.parent.document.getElementById('page_loader1').style.display = 'none';
+         }
+         function ShowLoader() {
+             parent.document.getElementById('page_loader1').style.display = 'block';
+         }
+
+        
+    </script>
+    <style type="text/css">
+        #Report
+        {
+            position: absolute;
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            width: 960px;
+            height: 907px;
+            z-index: 1;
+            left: 50%;
+            top: 9px;
+            margin-left: -480px;
+        }
+
+        /*#apDiv1
+        {
+            position: absolute;
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            width: 817px;
+            height: auto;
+            z-index: 2;
+            left: 159px;
+            top: 100px;
+        }*/
+    </style>
+
+   
+    <title>@ViewBag.Title</title>
+</head>
+    
+<body onload="HideLoader();">
+   
+    <div id="Report">
+        <table width="960" border="0" cellspacing="2" cellpadding="0">
+            <tr>
+                <td colspan="3">
+                    <img src="Content/img/amr.png" width="300" height="100" /></td>
+                <td colspan="3" align="right"><button onclick="window.print();" > Print</button></td>
+            </tr>
+            <tr>
+                <td height="54" colspan="5" align="center">
+                    <h1><strong>Medication List</strong><br />
+                    </h1>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td width="153" height="28"><strong>Patient :</strong></td>
+                <td width="269" height="28">@(Model.PatientSummary.LastName + " " + Model.PatientSummary.FirstName) </td>
+                <td width="4">&nbsp;</td>
+                <td width="152" height="28"><strong>Access ID :</strong></td>
+                <td width="370" height="28">@Model.PatientSummary.PatientId</td>
+                <td width="2">&nbsp;</td>
+            </tr>
+            <tr>
+                <td height="28"><strong>Address :</strong></td>
+                <td>@Model.PatientSummary.PAddress</td>
+                <td>&nbsp;</td>
+                <td height="28"><strong>Work Phone :</strong></td>
+                <td height="28">@Model.PatientSummary.WorkPhone</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td height="28"><strong>Birth Date :</strong></td>
+                <td>@Model.PatientSummary.DOB</td>
+                <td>&nbsp;</td>
+                <td><strong>Mobile Phone :</strong></td>
+                <td>@Model.PatientSummary.MobilePhone</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td height="28"><strong>Preferred Language :</strong></td>
+                <td>@Model.PatientSummary.PreferredLanguage</td>
+                <td>&nbsp;</td>
+                <td><strong>Sex :</strong></td>
+                <td>@Model.PatientSummary.Gender</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td height="28"><strong>Ethnicity :</strong></td>
+                <td>@Model.PatientSummary.Ethnicity</td>
+                <td>&nbsp;</td>
+                <td><strong>Race :</strong></td>
+                <td>@Model.PatientSummary.Race</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td height="28"><strong>PCP :</strong></td>
+                <td></td>
+                <td>&nbsp;</td>
+                <td><strong>Smoking Status :</strong></td>
+                <td>@Model.PatientSummary.SmokingStatus</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td height="28"><strong>Practice Name :</strong></td>
+                <td></td>
+                <td>&nbsp;</td>
+                <td><strong>Emergency Contact :</strong></td>
+                @if(Model.PatientSummary.EmergencyRelationship  == null ||  Model.PatientSummary.EmergencyRelationship  == ""){
+                <td>@(Model.PatientSummary.EmergencyName + " " + Model.PatientSummary.HomePhone) </td>}
+                else
+                {<td>@(Model.PatientSummary.EmergencyName + " (" + Model.PatientSummary.EmergencyRelationship + ") " + Model.PatientSummary.HomePhone) </td>}
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td height="32">&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td height="39">
+                    <h2>Medications</h2>
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td height="155" colspan="5">
+                    <table width="960" border="1" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="214" align="center"><strong>Name</strong></td>
+                            <td width="100" align="center"><strong>Quantity </strong></td>
+                            <td width="99" align="center"><strong>Refills</strong></td>
+                            <td width="215" align="center"><strong>Provider</strong></td>
+                            <td width="157" align="center"><strong>Pharmacy</strong></td>
+                            <td width="161" align="center"><strong>Status</strong></td>
+                        </tr>
+                        @foreach (var item in Model.Medications.Select((x, i) => new { PatientMedicationModel = x, Index = i + 1 }))
+                        {
+                            <tr>
+                                <td height="28">@item.PatientMedicationModel.MedicationName</td>
+                                <td>@item.PatientMedicationModel.Quantity</td>
+                                <td>@item.PatientMedicationModel.Refills</td>
+                                <td></td>
+                                <td>@item.PatientMedicationModel.Pharmacy</td>
+                                <td>@((item.PatientMedicationModel.Active) ? "Active" : "In Active")</td>
+                            </tr>
+                        }
+                    </table>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+    </div>
+   
+</body>
+</html>

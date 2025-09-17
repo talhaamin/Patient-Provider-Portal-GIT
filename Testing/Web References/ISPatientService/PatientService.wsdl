@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Integration Patient Web Service</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CreateAMRPatient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PatientData" type="tns:PatientData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PatientData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AMRPatientId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Salutation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MiddleName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Postal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HomePhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MobilePhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WorkPhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EMail" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DOB" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="SSN" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PreferredLanguageId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="GenderId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RaceId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EthnicityId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaritalStatusId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SmokingStatusId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MedicareId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MedicaidState" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MedicaidId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AltId1_Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AltId1_Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AltId2_Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AltId2_Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AltId3_Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AltId3_Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AltId4_Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AltId4_Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AltId5_Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AltId5_Key" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateAMRPatientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateAMRPatientResult" type="tns:PatientResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PatientResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AMRPatientId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="WelcomeLetter" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="VisitPost">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="VisitData" type="tns:VisitPostData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="VisitPostData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="VisitId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AMRPatientId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="VisitDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="VisitReason" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Insurance">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="ProblemList">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="Medication">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="Allergy">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="VitalSign">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="FamilyHistory">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="SocialHistory">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="MedicalHistory">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="Procedure">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="Immunization">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="PlanOfCare">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="VisitPostResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="VisitPostResult" type="tns:VisitPostResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="VisitPostResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="VisitPostXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="VisitDataXML" type="tns:VisitPostDataXML" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="VisitPostDataXML">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="VisitId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AMRPatientId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="VisitDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="VisitReason" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Insurance" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProblemList" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Medication" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Allergy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VitalSign" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FamilyHistory" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SocialHistory" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MedicalHistory" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Procedure" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Immunization" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PlanOfCare" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="VisitPostXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="VisitPostXMLResult" type="tns:VisitPostResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DocumentPost">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DocData" type="tns:DocumentData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DocumentData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="VisitId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AMRPatientId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreated" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentFormat" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentImage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DocumentPostResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DocumentPostResult" type="tns:DocumentPostResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DocumentPostResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="LabPost">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="LabData" type="tns:LabData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LabData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="VisitId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AMRPatientId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="LabName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CollectionDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Requisition" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Specimen" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecimenSource" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReportDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReviewDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reviewer" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Test">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="LabPostResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LabPostResult" type="tns:LabPostResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LabPostResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="LabPostXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="LabDataXML" type="tns:LabDataXML" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LabDataXML">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="VisitId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AMRPatientId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="LabName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CollectionDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Requisition" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Specimen" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecimenSource" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReportDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReviewDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reviewer" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Test" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="LabPostXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LabPostXMLResult" type="tns:LabPostResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CCDPost">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CCDData" type="tns:CCDPostData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CCDPostData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="VisitId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AMRPatientId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="VisitDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="VisitReason" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Document" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CCDPostResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CCDPostResult" type="tns:CCDPostResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CCDPostResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateAMRPatientSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateAMRPatient" />
+  </wsdl:message>
+  <wsdl:message name="CreateAMRPatientSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateAMRPatientResponse" />
+  </wsdl:message>
+  <wsdl:message name="VisitPostSoapIn">
+    <wsdl:part name="parameters" element="tns:VisitPost" />
+  </wsdl:message>
+  <wsdl:message name="VisitPostSoapOut">
+    <wsdl:part name="parameters" element="tns:VisitPostResponse" />
+  </wsdl:message>
+  <wsdl:message name="VisitPostXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:VisitPostXML" />
+  </wsdl:message>
+  <wsdl:message name="VisitPostXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:VisitPostXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="DocumentPostSoapIn">
+    <wsdl:part name="parameters" element="tns:DocumentPost" />
+  </wsdl:message>
+  <wsdl:message name="DocumentPostSoapOut">
+    <wsdl:part name="parameters" element="tns:DocumentPostResponse" />
+  </wsdl:message>
+  <wsdl:message name="LabPostSoapIn">
+    <wsdl:part name="parameters" element="tns:LabPost" />
+  </wsdl:message>
+  <wsdl:message name="LabPostSoapOut">
+    <wsdl:part name="parameters" element="tns:LabPostResponse" />
+  </wsdl:message>
+  <wsdl:message name="LabPostXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:LabPostXML" />
+  </wsdl:message>
+  <wsdl:message name="LabPostXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:LabPostXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="CCDPostSoapIn">
+    <wsdl:part name="parameters" element="tns:CCDPost" />
+  </wsdl:message>
+  <wsdl:message name="CCDPostSoapOut">
+    <wsdl:part name="parameters" element="tns:CCDPostResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PatientWSSoap">
+    <wsdl:operation name="CreateAMRPatient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Create AMR Patient</wsdl:documentation>
+      <wsdl:input message="tns:CreateAMRPatientSoapIn" />
+      <wsdl:output message="tns:CreateAMRPatientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VisitPost">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Post Visit Data</wsdl:documentation>
+      <wsdl:input message="tns:VisitPostSoapIn" />
+      <wsdl:output message="tns:VisitPostSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VisitPostXML">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Post Visit Data XML</wsdl:documentation>
+      <wsdl:input message="tns:VisitPostXMLSoapIn" />
+      <wsdl:output message="tns:VisitPostXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DocumentPost">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Post Document</wsdl:documentation>
+      <wsdl:input message="tns:DocumentPostSoapIn" />
+      <wsdl:output message="tns:DocumentPostSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LabPost">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Post Lab</wsdl:documentation>
+      <wsdl:input message="tns:LabPostSoapIn" />
+      <wsdl:output message="tns:LabPostSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LabPostXML">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Post Lab XML</wsdl:documentation>
+      <wsdl:input message="tns:LabPostXMLSoapIn" />
+      <wsdl:output message="tns:LabPostXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CCDPost">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Post CCD Data</wsdl:documentation>
+      <wsdl:input message="tns:CCDPostSoapIn" />
+      <wsdl:output message="tns:CCDPostSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PatientWSSoap" type="tns:PatientWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateAMRPatient">
+      <soap:operation soapAction="http://tempuri.org/CreateAMRPatient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VisitPost">
+      <soap:operation soapAction="http://tempuri.org/VisitPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VisitPostXML">
+      <soap:operation soapAction="http://tempuri.org/VisitPostXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DocumentPost">
+      <soap:operation soapAction="http://tempuri.org/DocumentPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LabPost">
+      <soap:operation soapAction="http://tempuri.org/LabPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LabPostXML">
+      <soap:operation soapAction="http://tempuri.org/LabPostXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CCDPost">
+      <soap:operation soapAction="http://tempuri.org/CCDPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PatientWSSoap12" type="tns:PatientWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateAMRPatient">
+      <soap12:operation soapAction="http://tempuri.org/CreateAMRPatient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VisitPost">
+      <soap12:operation soapAction="http://tempuri.org/VisitPost" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VisitPostXML">
+      <soap12:operation soapAction="http://tempuri.org/VisitPostXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DocumentPost">
+      <soap12:operation soapAction="http://tempuri.org/DocumentPost" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LabPost">
+      <soap12:operation soapAction="http://tempuri.org/LabPost" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LabPostXML">
+      <soap12:operation soapAction="http://tempuri.org/LabPostXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CCDPost">
+      <soap12:operation soapAction="http://tempuri.org/CCDPost" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PatientWS">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Integration Patient Web Service</wsdl:documentation>
+    <wsdl:port name="PatientWSSoap" binding="tns:PatientWSSoap">
+      <soap:address location="http://www.accessmyrecordsportal.com/QAIntegrationWS/PatientService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PatientWSSoap12" binding="tns:PatientWSSoap12">
+      <soap12:address location="http://www.accessmyrecordsportal.com/QAIntegrationWS/PatientService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

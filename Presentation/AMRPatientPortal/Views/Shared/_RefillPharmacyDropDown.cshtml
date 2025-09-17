@@ -1,0 +1,20 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@model HomeViewModel
+
+@{
+    Layout= null;
+}
+  @Html.DropDownList("cmbRFPharmacy", Model.PharmciesForRefill.ToPharmacyModelForRefillSelectList(), new { @class = "txt  ui-corner-all", style = "width:200px;", id = "cmbRFPharmacy" })
+              
+@*<select  class=" txt  ui-corner-all "  style = "width:200px;"  id = "cmbRFPharmacy">
+
+@if (Model.PharmciesForRefill !=null)
+{
+     <option value="-1">--Select--</option>
+    foreach (var item in Model.PharmciesForRefill)
+    {
+        <option value="@item.PharmacyCntr">@item.PharmacyName</option>     
+    }
+}
+</select>*@

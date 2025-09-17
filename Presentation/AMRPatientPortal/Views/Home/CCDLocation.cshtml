@@ -1,0 +1,110 @@
+﻿@using AMR.Models
+
+@using AMR.Core.Extensions;
+@{
+    ViewBag.Title = null;
+}
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head >
+    <meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8" />
+    
+        <title>LOCATION</title>
+           <script src="@Url.Content("~/Content/js/jquery-1.9.1.js")"></script>
+<script src="@Url.Content("~/Content/js/jquery-1.9.2.custom.js")"></script>             
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/themes/redmond/jquery-ui.css")" />
+    <link href="@Url.Content("~/Content/css/themes/redmond/jquery-ui-1.10.3.custom.css")" rel="stylesheet">
+                <script src="@Url.Content("~/Content/js/jquery-ui.js")"></script>
+                <script src="@Url.Content("~/Content/css/ui/jquery.ui.core.js")"></script>
+                <script src="@Url.Content("~/Content/js/validator.js")"></script>
+                <script src="@Url.Content("~/Content/js/timeout-dialog.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.idle-timer.js")"></script>
+        <script>
+            $(document).ready(function () {
+                document.getElementById('cmbContinuityFacilityDownload').selectedIndex = 1;
+            });
+            $(function () {
+                var timeout = @System.Configuration.ConfigurationManager.AppSettings["InactivityTimeout"]
+                $(document).bind("idle.idleTimer", function () {
+                    // function you want to fire when the user goes idle
+                
+                  
+                    var active = '@Session["LoginType"]';
+                    console.log(active);
+                    if (active == "Accessibility") {
+                        
+                        $.timeoutDialog({
+                            timeout: 1, countdown: 60,
+
+                            logout_redirect_url:'@Url.RouteUrl("logout", new { controller = "Home", action = "LogOff", CCDUrl = "CCD" })',
+
+                       restart_on_yes: true
+
+                   });
+               }
+               else {
+                  
+
+                   $.timeoutDialog({
+                       timeout: 1, countdown: 60,
+
+                       logout_redirect_url: 'window_close',
+
+                       restart_on_yes: true
+
+                   });
+               }
+           });
+
+                 $(document).bind("active.idleTimer", function () {
+                     // function you want to fire when the user becomes active again
+                 });
+                 $.idleTimer(timeout);
+             });
+            function SendLocation() {
+
+             
+                var location = $('#cmbContinuityFacilityDownload option:selected').val();
+                window.location.href = '@Url.Action("CCDView", "Home")' + "/?Location=" + location;
+                
+            }
+
+        </script>
+    </head>
+    <body>
+        <div id="content" style="  margin-right:10%; margin-top:10%;">
+            <table  align="center">
+                <tr align="left"><td colspan="2"><h2>Please Select a Location:</h2></td> <td></td></tr>
+                <tr><td></td><td></td></tr>
+                <tr><td></td><td></td></tr>
+                <tr><td></td><td></td></tr>
+
+                <tr>
+                    <td></td>
+                    <td align="right"><label for="cmbContinuityFacilityDownload">Location:</label></td>
+                    <td>@Html.Action("FacilityPartialViewDownloadHealthRecord", "Home", new { @class = " txt  ui-corner-all bcom", style = "width:200px;", id = "cmbContinuityFacilityDownload" })  </td>
+
+                </tr>
+                <tr><td></td><td></td></tr>
+                <tr><td></td><td></td></tr>
+                <tr><td></td><td></td></tr>
+                <tr><td></td><td></td></tr>
+                <tr><td></td><td></td></tr>
+                <tr><td></td><td></td></tr>
+                <tr>
+                     <td></td>
+                    <td  colspan="2" align="right"><button id ="next" style="width:25%;" onclick="SendLocation();">Next</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                        <button id="showActiviyLog"  style="width:25%;" onclick="window.open('@Url.Action("CCDActivityLog", "Home")')">Activity Log</button>
+                    </td>
+
+                </tr>
+
+
+            </table>
+        </div>
+    </body>
+
+</html>

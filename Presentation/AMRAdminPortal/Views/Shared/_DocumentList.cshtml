@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AMR.Models.DocumentModelForAdmin>
+@using System.Web.Script.Serialization;
+<table class="box-table-a" id="tbl-Documents" summary="DownloadLEgalDocuments">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col" style="vertical-align:middle"> <span style="margin-left:2px;">Doc Type</span></th>
+                                    <th scope="col" style="vertical-align:middle">Document</th>
+                                    <th scope="col" style="vertical-align:middle;text-align:center;">Delete</th>
+                                   
+                                                                
+                               </tr>
+                            </thead>
+                             <tbody>
+                                    @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                        string Ribbon="";
+                                    foreach (var item in Model)
+                                    {
+                        <tr class="@((counter % 2 == 1) ? "d0" : "d1")">
+                              <td style="vertical-align:middle;padding-left: 4px;">@item.DocType</td>
+                            <td style="vertical-align:middle;;padding-left:2.5px;"> @((item.DocumentDescription.Length > 22) ? item.DocumentDescription.Substring(0, 22) + "..." : item.DocumentDescription) </td>
+                              <td align="center" style="vertical-align:middle">
+                                                                <img onclick="DeleteConfrimation('@item.DocumentCntr','@item.DocType','@item.FacilityId','@item.VisitId');" id="imgDeleteDoctor"  src="@Url.Content("~/Content/img/delete.png")" />
+                                                            </td>
+                            @*<td style="vertical-align:middle"><span class="LinkHighlight hoverMe" >@item.DocumentDescription</span></td>*@
+                                                                            
+                   
+                        </tr>   counter++;}
+                                }
+                                   else
+                                {
+                                     <tr>
+                                <td style="vertical-align:middle">No Information Available</td> 
+                                          <td style="vertical-align:middle"></td> 
+                                          <td style="vertical-align:middle"></td> <td style="vertical-align:middle"></td> 
+                            </tr>
+                                   @* @Html.Partial("_NoRecordFound",3) *@
+                                }
+
+                    </tbody>
+                            </table>

@@ -1,0 +1,497 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EE22F6AC-120E-489F-B830-678984E47E73}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AMR.Data</RootNamespace>
+    <AssemblyName>AMR.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Address.cs">
+      <DependentUpon>DirectDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AMRDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AMRDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AMRDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AMRDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AMRDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AttachmentMessage.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BillPayment.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BillRate.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Carrier.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ccd.cs" />
+    <Compile Include="clsCCDImport.cs" />
+    <Compile Include="clsCCDGenerate.cs" />
+    <Compile Include="clsCDAGenerate.cs" />
+    <Compile Include="clsCreateDocument.cs" />
+    <Compile Include="clsDirectImport.cs" />
+    <Compile Include="clsEmail.cs" />
+    <Compile Include="clsEncryption.cs" />
+    <Compile Include="clsTableConverter.cs" />
+    <Compile Include="clsToken.cs" />
+    <Compile Include="Config.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigAttachment.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_AccessStatus.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_ActivityLevel.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_Advisor.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_AlcoholFrequency.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_AuditAction.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_BloodType.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_CodeSystem.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_ConditionStatus.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_Country.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_DoctorType.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_DocumentType.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_DocUploadType.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_EducationLevel.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_EMRSystem.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_Ethnicity.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_ExerciseFrequency.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_FacilityTypes.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_Frequency.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_Gender.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_InstructionType.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_MaritalStatus.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_Medication.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_MessagePeriod.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_MessageResponseType.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_MessageStatus.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_MessageType.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_PolicyType.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_PreferredLanguage.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_Problem.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_Race.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_Relationship.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_Religion.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_RouteOfAdministration.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_SecurityQuestion.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_SmokingStatus.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_Social.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_State.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_ThirdParty.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_UserRole.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_Vaccine.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DirectDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DirectDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DirectDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DirectDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DirectDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DirectDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DirectReceived.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailReader.cs" />
+    <Compile Include="Facility.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FileHelper.cs" />
+    <Compile Include="FindPatient_Result.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Message.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MessageAudit.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MessageDetail.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Patient.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientAccountLink.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientAdvisor.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientAllergy.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientCareDocument.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientClinicalDocument.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientDoctor.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientDocument.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientDocumentAudit.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientEmergency.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientFacilityLink.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientFamilyHist.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientImmunization.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientInsurance.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientInsurancePlan.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientLabResult.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientLabResultTest.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientMatch.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientMedicalDocument.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientMedicalHist.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientMedication.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientNote.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientOrgan.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientPharmacy.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientPlanOfCare.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientPolicy.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientProblem.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientProcedure.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientProviderLink.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientRepresentative.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientShare.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientSocialHist.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientSocialSelf.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientSurgicalHist.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientVisit.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientVitalSign.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientWebSetting.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Practice.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProviderFacilityLink.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProviderWebSetting.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Token.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserLoginAudit.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwCCDAuditLog.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwFacilitiesForPatient.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwMessageDetailReceived.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwMessageDetailSent.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwMessageGetCancelled.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwMessageGetWaiting.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwMessageSummary.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwMessageUnread.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwMessageUnreadProv.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwPatientDocumentsList.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwPatientFacilityOption.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwPatientSearch.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwPatientsForFacility.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwPatientSummary.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwPatientVisitSummary.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwProvidersForFacility.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwRptPatientLogin.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwRptSecureMessage.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwVisitCCD.cs">
+      <DependentUpon>AMRDataModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="AMRDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AMRDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="AMRDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AMRDataModel.edmx</DependentUpon>
+      <LastGenOutput>AMRDataModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="AMRDataModel.edmx.diagram">
+      <DependentUpon>AMRDataModel.edmx</DependentUpon>
+    </None>
+    <None Include="AMRDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AMRDataModel.edmx</DependentUpon>
+      <LastGenOutput>AMRDataModel.cs</LastGenOutput>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="DirectDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DirectDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DirectDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DirectDataModel.edmx</DependentUpon>
+      <LastGenOutput>DirectDataModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="DirectDataModel.edmx.diagram">
+      <DependentUpon>DirectDataModel.edmx</DependentUpon>
+    </None>
+    <None Include="DirectDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DirectDataModel.edmx</DependentUpon>
+      <LastGenOutput>DirectDataModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

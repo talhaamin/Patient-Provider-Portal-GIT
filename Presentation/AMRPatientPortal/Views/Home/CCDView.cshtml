@@ -1,0 +1,760 @@
+﻿@using AMR.Models
+
+@using AMR.Core.Extensions;
+
+@{
+
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+            <head>
+    <meta name="viewport" content="width=device-width"   />
+    <title>VDT</title>
+                 <script src="@Url.Content("~/Content/js/jquery-1.9.1.js")"></script>
+<script src="@Url.Content("~/Content/js/jquery-1.9.2.custom.js")"></script>             
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/themes/redmond/jquery-ui.css")" />
+    <link href="@Url.Content("~/Content/css/themes/redmond/jquery-ui-1.10.3.custom.css")" rel="stylesheet">
+                <script src="@Url.Content("~/Content/js/jquery-ui.js")"></script>
+                <script src="@Url.Content("~/Content/css/ui/jquery.ui.core.js")"></script>
+                <script src="@Url.Content("~/Content/js/validator.js")"></script>
+                <script src="@Url.Content("~/Content/js/timeout-dialog.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.idle-timer.js")"></script>
+                <style type="text/css">
+                    .space {
+                        padding-bottom: 1em;
+                    }
+
+                    tr.noBorder td {
+                        border: 0;
+                    }
+                </style>
+<script type="text/javascript">
+    $(function () {
+        var timeout = @System.Configuration.ConfigurationManager.AppSettings["InactivityTimeout"]
+               $(document).bind("idle.idleTimer", function () {
+                   // function you want to fire when the user goes idle
+
+
+                   var active = '@Session["LoginType"]';
+               console.log(active);
+               if (active == "Accessibility") {
+
+                   $.timeoutDialog({
+                       timeout: 1, countdown: 60,
+
+                       logout_redirect_url: '@Url.RouteUrl("logout", new { controller = "Home", action = "LogOff", CCDUrl = "CCD" })',
+
+                       restart_on_yes: true
+
+                   });
+               }
+               else {
+
+
+                   $.timeoutDialog({
+                       timeout: 1, countdown: 60,
+
+                       logout_redirect_url: 'window_close',
+                           @*'@Url.RouteUrl("logout", new { controller = "Home", action = "LogOff", CCDUrl = "" })',*@
+
+                            restart_on_yes: true
+
+                        });
+                    }
+           });
+                $(document).bind("active.idleTimer", function () {
+                    // function you want to fire when the user becomes active again
+                });
+                $.idleTimer(timeout);
+            });
+    function ShowLoader() {
+        // alert("Loader");
+        // $('#loader').css("display", "block");
+        document.getElementById('loader').style.display = 'block';
+    }
+    function HideLoader() {
+
+        $('#loader').css("display", "none")
+    }
+
+    function HideLoaderReportViewer() {
+        setTimeout(function () {
+            //   $('#page_loader1').css('display', 'none');
+            //   $('#page_loader1').hide();
+            document.getElementById('loaderDl').style.display = 'none';
+
+            //HideLoader();
+        }, 10000);
+    }
+    function Customize() {
+       // alert('Test');
+        var facilityId = '@Request.QueryString["Location"]';
+        var visitID = $.trim($('#cmbContinuityVisitsDownload option:selected').val());
+        var requestURL = '@Url.Action("CustomizeCCD")' + '?Location=' + facilityId + '&Visit=' + visitID;// 'index-patient-CCD/?healthRecordData=' + str;
+      //  alert(requestURL);
+        window.open(requestURL);
+    }
+    function ViewCCD(view, download) {
+        //  alert('View');
+
+        var bValid = true;
+        var boolProblems =true;
+        var boolAllergies = true;
+        var boolImmunizations = true;
+        var boolMedications = true;
+        var boolLabs = true;
+        var boolClinicalInstructions = true;
+        var boolFutureAppointments = true;
+        var boolReferrals = true;
+        var boolScheduledTests = true;
+        var boolDecisionAids = true;
+        var boolSocialHistory = true;
+        var boolVitalSigns = true;
+        var boolProcedures = true;
+        try {
+            //var checked = $('input[name="CheckBox"]:checked');
+            //if (checked.length === 0) {
+            //    alert("Please select any option");
+            //    bValid = false;
+            //    return false;
+            //}
+            var facilityId = '@Request.QueryString["Location"]'
+          //  alert(facilityId);
+         //   var facilityId = $.trim($('#cmbContinuityFacilityDownload option:selected').val());
+            var visitID = $.trim($('#cmbContinuityVisitsDownload option:selected').val());
+            //if (facilityId == 0) {
+            //    visitID = 0;
+            //}
+
+            //if ($('#chkProblemDownload').prop('checked')) { boolProblems = true; } else { boolProblems = false; }
+            //if ($('#chkAllergiesDownload').prop('checked')) { boolAllergies = true; } else { boolAllergies = false; }
+            //if ($('#chkImmumnizationDownload').prop('checked')) { boolImmunizations = true; } else { boolImmunizations = false; }
+            //if ($('#chkMedicationsDownload').prop('checked')) { boolMedications = true; } else { boolMedications = false; }
+            //if ($('#chkLabsDownload').prop('checked')) { boolLabs = true; } else { boolLabs = false; }
+            //if ($('#chkClinicalInstructionsDownload').prop('checked')) { boolClinicalInstructions = true; } else { boolClinicalInstructions = false; }
+            //if ($('#chkFutureAppointmentDownload').prop('checked')) { boolFutureAppointments = true; } else { boolFutureAppointments = false; }
+            //if ($('#chkRefferalsDownload').prop('checked')) { boolReferrals = true; } else { boolReferrals = false; }
+            //if ($('#chkScheduledTestsDownload').prop('checked')) { boolScheduledTests = true; } else { boolScheduledTests = false; }
+            //if ($('#chkDecisionAidsDownload').prop('checked')) { boolDecisionAids = true; } else { boolDecisionAids = false; }
+            //if ($('#chkSocialHistoryDownload').prop('checked')) { boolSocialHistory = true; } else { boolSocialHistory = false; }
+            //if ($('#chkVitalSignsDownload').prop('checked')) { boolVitalSigns = true; } else { boolVitalSigns = false; }
+            //if ($('#chkProceduresDownload').prop('checked')) { boolProcedures = true; } else { boolProcedures = false; }
+            //alert($.trim($('#cmbContinuityVisitsSend option:selected').val()));
+
+            var requestData = {
+                VisitID: visitID,
+                FacilityId: facilityId,
+                Problems: boolProblems,
+                Allergies: boolAllergies,
+                Immunizations: boolImmunizations,
+                Medications: boolMedications,
+                Labs: boolLabs,
+                ClinicalInstructions: boolClinicalInstructions,
+                FutureAppointments: boolFutureAppointments,
+                Referrals: boolReferrals,
+                ScheduledTests: boolScheduledTests,
+                DecisionAids: boolDecisionAids,
+                SocialHistory: boolSocialHistory,
+                VitalSigns: boolVitalSigns,
+                Procedures: boolProcedures,
+                View: view,
+                Download: download,
+                Demographics: true,
+                Provider: true,
+                Visit: true
+            };
+
+            // requestData.items.push
+            var str = JSON.stringify(requestData);
+
+
+            if (view == true) {
+               
+                var requestURL = '@Url.Action("GetCCDRun")'+'?healthRecordData=' + str;// 'index-patient-CCD/?healthRecordData=' + str;
+               // alert(requestURL);
+                window.open(requestURL);
+            }
+            else if (download == true) {
+                document.getElementById('loaderDl').style.display = 'block';
+//                $.get('CCDHtmlDownload/?healthRecordData=' + str,
+//    function (data, textStatus, jqXHR) { /* don't think anything needs to be done */ }
+//).error(alert('Download failed'));
+                //$.ajax({
+                //    type: 'POST',
+                //    url: 'CCDHtmlDownload',
+                //    data: JSON.stringify(requestData),
+                //    dataType: 'json',
+                //    contentType: 'application/json; charset=utf-8',
+                //    success: function (data) {
+                //        // if success
+
+                //        $("#layoutComboBoxPortlet").html(data);
+                //        id = $('#cmbContinuityVisitsDownload option:selected').val();
+                //    },
+                //    error: function (xhr, ajaxOptions, thrownError) {
+                //        //if error
+
+                //        alert('Error : ' + xhr.message);
+                //        // HideLoader();
+                //    },
+                //    complete: function (data) {
+                //        // if completed
+                //        HideLoader();
+
+                //    },
+                //    async: false,
+                //    processData: false
+                //});
+                
+                //var requestURL = 'CCDHtmlDownload/?healthRecordData=' + str;
+                //$('#iframeCCDHTML').attr('src', requestURL);
+                //$('#iframeCCDHTML').load();
+                 
+                location.href = '@Url.Action("CCDHtmlDownload")' + '?healthRecordData=' + str;
+                var requestURL = '@Url.Action("GetCCDDataXML")' + '?healthRecordData=' + str;
+                $('#iframeCCDXML').attr('src', requestURL);
+                $('#iframeCCDXML').load();
+                HideLoaderReportViewer();
+            }
+
+
+        } catch (err) {
+
+            if (err && err !== "") {
+
+                alert(err.message);
+
+            }
+        }
+    }
+
+
+    $(document).ready(function () {
+        //Default all check boxes to checked -- Ahmed Saidi
+        document.getElementById('chkProblemDownload').checked = true;
+        document.getElementById('chkSocialHistoryDownload').checked = true;
+        document.getElementById('chkAllergiesDownload').checked = true;
+        document.getElementById('chkVitalSignsDownload').checked = true;
+        document.getElementById('chkImmumnizationDownload').checked = true;
+        document.getElementById('chkProceduresDownload').checked = true;
+        document.getElementById('chkMedicationsDownload').checked = true;
+        document.getElementById('chkRefferalsDownload').checked = true;
+        document.getElementById('chkLabsDownload').checked = true;
+        document.getElementById('chkScheduledTestsDownload').checked = true;
+        document.getElementById('chkClinicalInstructionsDownload').checked = true;
+        document.getElementById('chkDecisionAidsDownload').checked = true;
+        document.getElementById('chkFutureAppointmentDownload').checked = true;
+
+        if ($('#cmbContinuityFacilityDownload :selected').text() != 'Patient Entered') {
+
+            $('#cmbContinuityVisitsDownload').attr('disabled', false);
+            $('#createPresentMedication,#createaddproblems,#addvitalscreation,#createaddimmunizations,#createaddallergies,#addvitalscreation,#createaddpast,#createaddfamily,#createaddappointments,#createaddsocial').css('display', 'none');
+
+        }
+
+        else {
+
+            $('#cmbContinuityVisitsDownload').text("");
+            $('#cmbContinuityVisitsDownload').attr('disabled', true);
+            //$('#cmbVisitsHome').val(0);
+            // $('#createPresentMedication,#createaddstatements,#createaddproblems,#addvitalscreation,#createaddimmunizations,#createaddallergies,#addvitalscreation,#createaddpast,#createaddfamily,#createaddappointments,#createaddsocial').css('display', 'block');
+        }
+        $('#checkall').click(function () {
+
+            var text = $(this).text();
+            //alert(text);
+            if (text == "Select All") {
+
+                $('.chk').each(function () { //loop through each checkbox
+
+                    this.checked = true; //select all checkboxes with class "checkbox1"
+
+                });
+
+            }
+
+        });
+
+        $('#clearall').click(function () {
+
+            var text = $(this).text();
+
+            if (text == 'Clear All') {
+
+                $('.chk').each(function () {
+
+                    this.checked = false;
+
+                });
+
+            }
+
+        });
+
+    });
+
+    function DownloadHealthRecord(id, flag) {
+
+
+        if (flag == 'visit')
+        { sec_arg = $('#cmbContinuityFacilityDownload option:selected').val(); }
+        else if (flag == 'location') {
+            sec_arg = id;
+            id = $('#cmbContinuityVisitsDownload option:selected').val();
+        }
+
+        if (flag == 'location') {
+
+            //filling dropdown start 
+            try {
+                ShowLoader();
+                //var IsPrimaryData =
+
+                var requestData = {
+
+                    facilityId: sec_arg,
+                    ExtensionToggleFunct: " toggle_combobox_ForDownloadAndSend();",
+                    ExtensionFilterFunct: "DownloadHealthRecord(this.value,'visit');",
+                    ExtensionIdName: "cmbContinuityVisitsDownload",
+                    visitId: id
+
+                };
+                // 
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'downloadhealthrecords-visit-dropdown',
+                    data: JSON.stringify(requestData),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        // if success
+
+                        $("#layoutComboBoxPortlet").html(data);
+                        id = $('#cmbContinuityVisitsDownload option:selected').val();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //if error
+
+                        alert('Error : ' + xhr.message);
+                        // HideLoader();
+                    },
+                    complete: function (data) {
+                        // if completed
+                        HideLoader();
+
+                    },
+                    async: false,
+                    processData: false
+                });
+                if ($('#cmbContinuityFacilityDownload :selected').text() == 'Patient Entered') {
+
+                    $('#cmbContinuityVisitsDownload').text("");
+                    $('#cmbContinuityVisitsDownload').attr('disabled', true);
+                }
+            } catch (err) {
+
+                if (err && err !== "") {
+                    alert(err.message);
+                }
+            }
+            //filling visit drop down end
+        }
+
+    }
+
+    function toggle_combobox_ForDownloadAndSend() {
+
+        if ($('#cmbContinuityFacilityDownload :selected').text() != 'Patient Entered') {
+
+            $('#cmbContinuityVisitsDownload').attr('disabled', false);
+            $('#createPresentMedication,#createaddproblems,#addvitalscreation,#createaddimmunizations,#createaddallergies,#addvitalscreation,#createaddpast,#createaddfamily,#createaddappointments,#createaddsocial').css('display', 'none');
+
+        }
+
+        else {
+            alert('else cond for download record');
+            $('#cmbContinuityVisitsDownload').text("");
+            $('#cmbContinuityVisitsDownload').attr('disabled', true);
+            //$('#cmbVisitsHome').val(0);
+            // $('#createPresentMedication,#createaddstatements,#createaddproblems,#addvitalscreation,#createaddimmunizations,#createaddallergies,#addvitalscreation,#createaddpast,#createaddfamily,#createaddappointments,#createaddsocial').css('display', 'block');
+        }
+
+
+
+
+
+    }
+
+
+
+    function SendCCD() {
+        var bValid = true;
+        var chkemail = $.trim($('#txtEmailCCD').val());
+        var valid = checkEmail(chkemail)
+        if (valid == false) {
+            //alert("Please Enter Email Address");
+            bValid = false;
+        }
+
+        var boolProblems;
+        var boolAllergies;
+        var boolImmunizations;
+        var boolMedications;
+        var boolLabs;
+        var boolClinicalInstructions;
+        var boolFutureAppointments;
+        var boolReferrals;
+        var boolScheduledTests;
+        var boolDecisionAids;
+        var boolSocialHistory;
+        var boolVitalSigns;
+        var boolProcedures;
+        if (bValid) {
+            try {
+                //var checked = $('input[name="chksend"]:checked');
+                //if (checked.length === 0) {
+                //    alert("Please select atleast one checkbox");
+                //    bValid = false;
+                //    return false;
+                //}
+                var facilityId = '@Request.QueryString["Location"]'
+                //alert(facilityId);
+                 var visitID = $.trim($('#cmbContinuityVisitsDownload option:selected').val());
+
+                if ($('#chkProblemDownload').prop('checked')) { boolProblems = true; } else { boolProblems = false; }
+                if ($('#chkAllergiesDownload').prop('checked')) { boolAllergies = true; } else { boolAllergies = false; }
+                if ($('#chkImmumnizationDownload').prop('checked')) { boolImmunizations = true; } else { boolImmunizations = false; }
+                if ($('#chkMedicationsDownload').prop('checked')) { boolMedications = true; } else { boolMedications = false; }
+                if ($('#chkLabsDownload').prop('checked')) { boolLabs = true; } else { boolLabs = false; }
+                if ($('#chkSocialHistoryDownload').prop('checked')) { boolSocialHistory = true; } else { boolSocialHistory = false; }
+                if ($('#chkVitalSignsDownload').prop('checked')) { boolVitalSigns = true; } else { boolVitalSigns = false; }
+                if ($('#chkProceduresDownload').prop('checked')) { boolProcedures = true; } else { boolProcedures = false; }
+                //if ($('#chkPOC').prop('checked')) {
+                //    boolDecisionAids = true;
+                //    boolScheduledTests = true;
+                //    boolReferrals = true;
+                //    boolClinicalInstructions = true;
+                //    boolFutureAppointments = true;
+                //}
+                //else {
+                //    boolDecisionAids = false;
+                //    boolScheduledTests = false;
+                //    boolReferrals = false;
+                //    boolClinicalInstructions = false;
+                //    boolFutureAppointments = false;
+
+                //}
+                var HTMl = false;
+                var XML = false;
+                if (document.getElementById('CCDHTMLradio').checked) {
+                    HTMl = true;
+                }
+                if (document.getElementById('CCDXMLradio').checked) {
+                    XML = true;
+                }
+
+               // alert(CCDHTML);
+               // alert(facilityId);
+                var requestData = {
+                    VisitID: visitID,
+                    FacilityId: facilityId,
+                    EmailID: $.trim($('#txtEmailCCD').val()),
+                    Demographics: true,
+                    Provider: true,
+                    Visit: true,
+                    CCDHTML: HTMl,
+                    CCDXML: XML
+                    //Problems: boolProblems,
+                    //Allergies: boolAllergies,
+                    //Immunizations: boolImmunizations,
+                    //Medications: boolMedications,
+                    //Labs: boolLabs,
+                    //ClinicalInstructions: boolClinicalInstructions,
+                    //FutureAppointments: boolFutureAppointments,
+                    //Referrals: boolReferrals,
+                    //ScheduledTests: boolScheduledTests,
+                    //DecisionAids: boolDecisionAids,
+                    //SocialHistory: boolSocialHistory,
+                    //VitalSigns: boolVitalSigns,
+                    //Procedures: boolProcedures
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: '/index-patient-CCD-Send',
+                    data: JSON.stringify(requestData),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        // if success
+
+                         alert(data);
+
+
+
+                        //   $("#vital-portlet").html(data[0]);
+
+
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //if error
+
+                        alert('Error : ' + xhr.message);
+                        HideLoader();
+                    },
+                    complete: function (data) {
+                        // if completed
+                        HideLoader();
+
+                    },
+                    async: true,
+                    processData: false
+                });
+            } catch (err) {
+
+                if (err && err !== "") {
+                    alert(err.message);
+                    HideLoader();
+                }
+            }
+        }
+    }
+
+    // start of send continuity pop up script
+
+
+
+    // end of send continuity pop up script
+    //tday = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+    //tmonth = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+
+    //function GetClock() {
+    //    d = new Date();
+    //    nday = d.getDay();
+    //    nmonth = d.getMonth();
+    //    ndate = d.getDate();
+    //    nyear = d.getYear();
+    //    nhour = d.getHours();
+    //    nmin = d.getMinutes();
+    //    nsec = d.getSeconds();
+
+    //    if (nyear < 1000) nyear = nyear + 1900;
+
+    //    if (nhour == 0) { ap = " AM"; nhour = 12; }
+    //    else if (nhour <= 11) { ap = " AM"; }
+    //    else if (nhour == 12) { ap = " PM"; }
+    //    else if (nhour >= 13) { ap = " PM"; nhour -= 12; }
+
+    //    if (nmin <= 9) { nmin = "0" + nmin; }
+    //    if (nsec <= 9) { nsec = "0" + nsec; }
+
+
+    //    document.getElementById('clockbox').innerHTML = "" + tday[nday] + ", " + tmonth[nmonth] + " " + ndate + ", " + nyear + " " + nhour + ":" + nmin + ":" + nsec + ap + "";
+    //    setTimeout("GetClock()", 1000);
+    //}
+    //window.onload = GetClock;
+
+   
+
+
+
+var currenttime = '@System.DateTime.Now'
+  
+  
+  
+    var montharray=new Array("January","February","March","April","May","June","July","August","September","October","November","December")
+    var serverdate=new Date(currenttime)
+    
+    function padlength(what){
+        var output=(what.toString().length==1)? "0"+what : what
+        return output
+    }
+    var ap = "";
+    var nhours = serverdate.getHours();
+    if (nhours >= 12 && nhours <= 24)
+    {
+        nhours = nhours % 12;
+        ap =" PM"
+
+    }
+   else  if (nhours >= 0 && nhours <12) {
+        nhours = nhours % 12;
+        ap = " AM"
+
+    }
+
+    //padlength(nhours)
+
+    function displaytime(){
+        serverdate.setSeconds(serverdate.getSeconds() + 1)
+        var datestring=montharray[serverdate.getMonth()]+" "+padlength(serverdate.getDate())+", "+serverdate.getFullYear()
+        var timestring =  padlength(serverdate.getHours()) + ":" + padlength(serverdate.getMinutes()) + ":" + padlength(serverdate.getSeconds());
+       
+        document.getElementById("clockbox").innerHTML = datestring + " " + timestring  //+ " " + ap d.toString("MM/dd/yyyy hh:mm tt")
+    }
+    
+    window.onload = function () {
+       
+        setInterval("displaytime()", 1000)
+    }
+  
+
+
+
+
+
+
+
+</script>
+
+</head>
+
+<body>
+    <div style=" margin-left:10%; margin-right:10%;">
+<div id="clockbox" align="right"></div>
+<div id="header">
+
+<p style="text-align:center;font-size:24px;font-weight:bold;">View, Download and Transmit</p>
+    
+
+    
+    <div>
+       <table align="center" >
+               
+           @*  <tr>
+           <td width="100px" class="space"><label for="cmbContinuityFacilityDownload">Location:</label></td> <td>  @Html.Action("FacilityPartialViewDownloadHealthRecord", "Home", new { @class = " txt  ui-corner-all bcom", style = "width:200px;", id = "cmbContinuityFacilityDownload", onchange = " DownloadHealthRecord(this.value,'location'); toggle_combobox_ForDownloadAndSend();" })   </td><td rowspan="2"><img id="loader"   src="https://www.amrportal.com/PatientPortal/Content/img/login-loader.gif" alt="Loading Please wait"  style="display: none;" longdesc="chart.html"  /></td>
+       </tr>*@
+<tr>
+      <td width="100px" ><label for="cmbContinuityVisitsDownload">Visit:</label></td> <td> <div id="layoutComboBoxPortlet">  @Html.Action("VisitPartialViewCCD", "Home", new { @class = " txt  ui-corner-all bcom", style = "width:200px;", id = "cmbContinuityVisitsDownload" }) </div></td>
+      </tr>
+                
+            </table>    
+
+         
+        </div>
+
+
+</div>
+
+
+        
+     
+ @*   <div>
+
+    <a href="#" id ="checkall">Select All</a> | <a href="#" id ="clearall">Clear All</a>
+
+     <table border="1"    style=" width:100%"; padding:0;>
+
+        <tr class="noBorder">
+            <td><input class="chk" name="CheckBox" type="checkbox" id="chkMedicationsDownload"  title="Medications">Medications</td>
+                   
+            <td><input class="chk" name="CheckBox" type="checkbox" id="chkLabsDownload"  title="Labs">Diagnostic Test Results</td>        
+        </tr>
+
+        <tr class="noBorder">
+            <td><input class="chk" name="CheckBox" type="checkbox" id="chkProblemDownload"    title="Problems">Problems</td>           
+
+            <td><input class="chk" name="CheckBox" type="checkbox" id="chkClinicalInstructionsDownload"  title="Clinical Instructions">Clinical Instructions</td>
+            </tr>
+
+        <tr class="noBorder">
+            <td><input class="chk" name="CheckBox" type="checkbox" id="chkAllergiesDownload"  title="Allergies">Allergies, Adverse Reactions, Alerts</td>
+            
+            <td><input class="chk" name="CheckBox" type="checkbox" id="chkFutureAppointmentDownload"  title="Future Appointments">Future Appointments</td>          
+
+        </tr>
+
+         <tr class="noBorder">
+             <td><input class="chk" name="CheckBox" type="checkbox" id="chkImmumnizationDownload"  title="Immunizations">Immunizations</td>
+             <td><input class="chk" name="CheckBox" type="checkbox" id="chkRefferalsDownload"  title="Refferals">Referrals to Other Providers</td>
+                          
+            </tr>
+
+        <tr class="noBorder">
+            <td><input class="chk" name="CheckBox" type="checkbox" id="chkSocialHistoryDownload"   title="Social History">Social History</td>
+             <td><input class="chk" name="CheckBox" type="checkbox" id="chkScheduledTestsDownload"  title="Scheduled Test">Future Scheduled Tests</td>              
+       
+@*            <td><input class="chk" name="CheckBox" type="checkbox" id="chkPOC"  title="Plan Of Care">Plan Of Care</td>
+            <td></td>
+            
+            
+        </tr>
+
+        <tr class="noBorder">
+            <td><input class="chk" name="CheckBox" type ="checkbox" id="chkProceduresDownload"  title="Procedure">History of Procedures</td>           
+
+            <td><input class="chk" name="CheckBox" type="checkbox" id="chkDecisionAidsDownload"  title="Decision Aids">Recommended Patient Decision Aids</td>
+
+        </tr >
+
+        <tr class="noBorder">
+
+            <td><input class="chk" name="CheckBox" type="checkbox" id="chkVitalSignsDownload"  title="Vital Signs">Vital Signs</td>
+
+            <td></td>
+
+        </tr>
+
+            </table>
+
+        </div>*@
+        
+        @*<h3>If you want to transmit the document please enter a valid Email then click on Transmit button below :</h3>*@
+
+        <div style="width:300px; height:50px; position:relative; left:30px; ">
+
+
+
+<br />
+
+</div>
+        <table width ="1000"><tr>
+        <td><button id="showView" onclick="ViewCCD(true,false);" style="width:170px;">View</button></td>
+
+    <td><button id="DownloadContinuity" onclick="ViewCCD(false,true);" style="width:170px;">Download</button></td>
+
+    <td><button id="addSendContinuity" onclick="SendCCD();" style="width:170px;">Transmit</button></td>
+
+    @*<button id="showActiviyLog"  style="width:15%;" onclick="window.open('@Url.Action("CCDActivityLog", "Home")')">Activity Log</button*@
+        <td><button id="showActiviyLog"  style="width:170px;" onclick="Customize();">Customize</button>
+        <img id="loaderDl"   src="Content/img/login-loader.gif" alt="Loading Please wait"  style="display: none;margin-left:250px;" longdesc="chart.html"  />
+            </td>
+        </tr>
+            </table>
+
+        <table width="1000" style="margin-left:500px;">
+
+            <tr>
+
+            <td><label for="txtEmailCCD" >Enter Direct Email Address:</label> </td> </tr>
+            <tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+               <tr> <td><input id="txtEmailCCD" name="txtEmailCCD" type="text" style="width:200px;" class="txt"  tabindex="1"/> </td></tr>
+             <tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+            <tr><td>Select Type of CCD:</td></tr> 
+            <tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>    
+            <tr><td><input type="radio"name="ccd" id="CCDHTMLradio" value="CCDHTML" checked="checked"><label for="CCDHTMLradio">CCD (Human-Readable)</label></td></tr>
+             <tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>    
+            <tr><td><input type="radio" name="ccd" id="CCDXMLradio" value="CCDXML"><label for="CCDXMLradio">CCD (CCDA XML)</label></td>
+          </tr>
+
+</table>
+        <br />
+        <br />
+        
+        <div style="display: none;">
+        <iframe id="iframeCCDXML" onload="HideLoader();" src="" width="100%" height="100%" title="CCD Download"></iframe>
+            <iframe id="iframeCCDHTML" onload="HideLoader();" src="" width="100%" height="100%" title="CCD Download"></iframe>
+    </div>
+        </div>
+    
+    
+   
+    </body>
+
+</html>

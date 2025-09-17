@@ -1,0 +1,1858 @@
+﻿@model AMR.Models.HomeViewModel
+@{     
+    int counter = 0;
+    
+    <div id="firstcolumn" class="column" style="position: absolute; top: 0px; left: 0%; width: 50%; top: 0px;">
+        @foreach (var PatientWeb in Model.PatientWebSetting.Where(x => x.PatientWebSettingId == 1))
+        {
+            foreach (var setting in PatientWeb.widgetname)
+            {
+                switch (PatientWeb.widgetname[counter].ToString())
+                {
+                    case "allergyWidget":
+                        if (Model.PatientRepresentatives.Allergy == true)
+                        {
+            <!-- Start of Vitals Wigets-->
+             <div id="allergywidg" class="portlet">
+            <div class="portlet-header" style="padding: 1.5px; ">
+                <span id="allergy" class="anc_home" onclick="allergy_move(true);">  Allergies </span>
+                <!-- start of icons -->
+                <!-- First ICON -->
+                  @*<div onclick="allergywidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <span id="App-Allergies" >
+                    @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHideAllergies" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.Allergy) ? "ShareHide_Allergies(false)" : "ShareHide_Allergies(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Allergy)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Allergy) ? "UnShare" : "Share") </span>
+                     </div> 
+                    }
+                    </span> 
+
+             
+                <!-- end of First icon-->
+
+                 @*
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->*@
+
+
+                <!-- third ICON -->
+                <div id="createaddallergies" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+
+                </div>
+                <!-- end of third icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="allergies-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+               @* @Html.Partial("_Index_Allergies", Model.Allergies)*@
+            </div>
+        </div>
+
+            <!--End of allergies Widgets -->
+                        }
+                        break;
+                    case "appointmentWidget":
+                        if (Model.PatientRepresentatives.Appointment == true)
+                        {
+             <div id="widg1" class="portlet" style="display:none;" >
+            <div class="portlet-header " >
+               <span id="Appointment" class="anc_home" onclick="appointment_move(true);"> Appointments </span>
+                <!--starting icons-->
+                <!-- First ICON -->
+                @*<div id="App-ShareHides">*@
+                @*<div onclick="hide_widg1(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px; font-weight: normal;">Hide</span>
+                </div>*@
+                <span id="App-Section">
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHide" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.Appointment) ? "ShareHide_widg1(false)" : "ShareHide_widg1(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Appointment)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Appointment) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span>  
+                @*   </div>  *@        
+              
+                <!-- end of First icon-->
+                 @* 
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px; font-weight: normal;">Share</span>
+                </div>
+                <!-- end of second icon-->*@
+
+
+                <!-- third ICON -->
+                <div id="createaddappointments" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+
+                <!-- ending icons -->
+
+
+            </div>
+            <div id="Appointment-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_Appointment", Model.Messages) *@
+            </div>
+        </div>
+                        }
+                        break;
+                    case "labWidget":
+            <!--start of lab widget-->
+                        if (Model.PatientRepresentatives.LabResults == true)
+                        {
+             <div id="widg3" class="portlet">
+            <div class="portlet-header">
+                <span id="Labtest"  class="anc_home" onclick="lab_move(true);">Lab Tests </span> 
+                <!-- start of icons -->
+                 <!-- First ICON -->
+                @*<div onclick="hide_widg3(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                 <span id="Lab-Section" >
+                       @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="Lab-ShareHide" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.LabResults) ? "ShareHide_widg3(false)" : "ShareHide_widg3(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.LabResults)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.LabResults) ? "UnShare" : "Share") </span>
+                     </div>
+                       }
+                    </span>  
+               
+
+                @*
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->*@
+
+
+              @*  <!-- third ICON -->
+                <div id="createaddlab" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 4px;">Add</span>
+                </div>
+                <!-- end of third icon-->*@
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="lab-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_LabTests", Model.LabResults)*@
+            </div>
+        </div>
+                        }
+            <!-- end of lab widget-->
+                        break;
+                    case "visitsWidget":
+                        if (Model.PatientRepresentatives.Visit == true)
+                        {
+            <!-- Start of Visits Wigets-->
+                <div id="visitswidg" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+                <span id="VisitMove" class="anc_home" onclick="visit_move(true);">Visit Info</span>
+                <!-- start of icons -->
+                <!-- First ICON -->
+                
+                @*<div onclick="visitswidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <span id="App-Visits" >
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHideVisits" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.Visit) ? "ShareHide_Visits(false)" : "ShareHide_Visits(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Visit)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Visit) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span> 
+                <!-- end of First icon-->
+
+                @*
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                *@<!-- end of second icon-->
+
+
+
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="Visits-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+               @* @Html.Partial("_Index_Visits", Model.Visits)*@
+            </div>
+        </div>
+                        }
+            <!--End of Visits Widgets -->
+                        break;
+                    case "medicationWidget":
+            <!-- start of medication widget-->
+                        if (Model.PatientRepresentatives.Medication == true)
+                        {
+               <div id="widg2" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+               <span id="Medicatons" class="anc_home" onclick="medication_move(true);"> Medications </span>
+                <!-- starting icons -->
+                <!-- First ICON -->
+                @*<div onclick="hide_widg2(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-Medications">
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHideMedications" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.Medication) ? "ShareHide_Medication(false)" : "ShareHide_Medication(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Medication)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Medication) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span> 
+              
+
+ @* 
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>*@
+                <!-- end of second icon-->
+
+
+                <!-- THird Icon -->
+                <div id="createPresentMedication" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right:10px;">Add</span>
+                </div>
+                <!-- End of Third Icon -->
+                <!-- end of icons-->
+
+
+
+            </div>
+            <div id="medications-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_Medication", Model.Medications)*@
+            </div>
+        </div>
+                        }
+            <!-- end of medication widget-->
+                        break;
+                    case "probsWidget":
+                        if (Model.PatientRepresentatives.Problem == true)
+                        {
+            <!-- Start of Problems Wigets-->
+            <div id="probswidg" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+               <span id="problem" class="anc_home" onclick="problem_move(true);">  Problems </span>
+                     <!-- First ICON -->
+                @*<div onclick="probswidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-Problems">
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHideProblems" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.Problem) ? "ShareHide_Problems(false)" : "ShareHide_Problems(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Problem)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Problem) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span> 
+                <!-- start of icons -->
+           
+
+                @*
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+
+                <!-- end of second icon-->*@
+
+
+                <!-- third ICON -->
+                <div id="createaddproblems" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="problem-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_Problems", Model.Problems)*@
+            </div>
+        </div>
+                        }
+            <!--End of Problems Widgets -->
+                        break;
+                    case "vitalWidget":
+                        if (Model.PatientRepresentatives.VitalSigns == true)
+                        {
+            <!-- Start of Vitals Wigets-->
+            <div id="vitalwidg" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+                <span id="vitalsmove" class="anc_home" onclick="vital_move(true);">  Vitals </span>
+                <!-- start of icons -->
+                 <!-- First ICON -->
+                @*<div onclick="vitalwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-Vitals" >
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHideVitals" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.VitalSigns) ? "ShareHide_Vitals(false)" : "ShareHide_Vitals(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.VitalSigns)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.VitalSigns) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span> 
+              
+
+                 @*
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->*@
+
+
+                <!-- third ICON -->
+                <div id="addvitalscreation" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="vital-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_VitalSign", Model.VitalSigns)*@
+            </div>
+        </div>
+                        }
+            <!--End of vitals Widgets -->
+
+                        break;
+                    case "pocWidget":
+                        if (Model.PatientRepresentatives.PlanOfCare == true)
+                        {
+            <!-- Start of POC widther-->       
+              <div id="pocwidg" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+              <span id="PlanOfCare" class="anc_home"  onclick="PlanOfCare_Move(true);">   Care Plan </span>
+                 <!-- First ICON -->
+               @*<div onclick="pocwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-POC">
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHidePOC" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.PlanOfCare) ? "ShareHide_POC(false)" : "ShareHide_POC(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.PlanOfCare)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.PlanOfCare) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span> 
+                  <div id="createaddPOC" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                                        <img src="Content/img/add.png" />
+                                        <span class="anc" style="padding-right: 10px;">Add</span>
+            </div>
+            </div>
+                 <!-- start of icons -->
+               
+
+@* 
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>*@
+                <!-- end of second icon-->
+                <!- end of icons-->
+            
+            <div id="poc-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+               @* @Html.Partial("_Index_PlanofCare", Model.Pocs)*@
+            </div>
+        </div>
+
+                        }
+            <!-- end of POC widget-->
+                        break;
+                        @*
+                    case "PremiumWidget":
+            <div id="PremiumWidget" class="portlet">
+                <div class="portlet-header">
+                    Premium Member Program
+                <!-- First ICON -->
+                    <div onclick="hide_widg5(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                        <img src="Content/img/hide.png" />
+                        <span class="anc" style="padding-right: 2px;">Hide</span>
+                    </div>
+                    <!-- end of First icon-->
+
+                </div>
+                <div class="portlet-content" style="height: 403px; overflow-y: scroll; position: relative; width: 98%;">
+
+
+
+                    <!--div1 upper start -->
+                    <div>
+                        <!-- start of div1 left -->
+                        <div style="float: left; width: 30%; position: relative;">
+                            <img class="ui-corner-all" src="Content/img/in-case-of-emergency.gif" style="float: left; width: 80px; height: 80px; position: relative; margin-top: 10px; left: 5px;" />
+                        </div>
+                        <!--end of div1 left-->
+                        <!--Start of div1 right-->
+                        <div style="width: 70%; position: absolute; left: 30%;">
+                            <h5 style="color: rgb(46, 110, 158); position: relative; margin-left: 5px;"><b><span class="anc">ICE Program </span></b></h5>
+                            <p style="position: relative; color: rgb(46, 110, 158); margin-left: 5px; font-size: 12px;">Tue,29 OCT 2013 22:05:44 +0100 </p>
+                            <p style="position: relative; margin-left: 5px; font-size: 13px;">This technology now gives doctors and emergency responders access to view vital medical information from a smartphone.</p>
+
+                        </div>
+                        <!-- end of divf right -->
+                    </div>
+                    <!--div 1 upper  end-->
+
+
+
+                    <!--div 2 upper-->
+                    <div style="position: relative; top: 170px;">
+                        <!-- start of div2 left -->
+                        <div style="float: left; width: 30%; position: absolute;">
+                            <img class="ui-corner-all" src="Content/img/online-lab-member.jpg" style="float: left; width: 80px; height: 80px; position: relative; margin-top: 10px; left: 5px;" />
+                        </div>
+                        <!-- end of div2 left -->
+                        <!-- Start tof div2 right -->
+                        <div style="width: 70%; position: absolute; left: 30%;">
+                            <h5 onclick="pop_up_online();" href="javascript:;" style="color: rgb(46, 110, 158); position: relative; margin-left: 5px;"><b><span class="anc">Online Blood Lab</span> </b></h5>
+                            <p style="color: rgb(46, 110, 158); position: relative; margin-left: 5px; font-size: 12px;">Tue,29 OCT 2013 22:05:44 +0100 </p>
+                            <p style="position: relative; margin-left: 5px; font-size: 13px;">
+                                <span style="color: orange;">Get 15% Off Blood Lab Testing as 
+       and Access My Records Member! </span>A basic blood test can play an important role in your overall health maintenance.
+                            </p>
+                        </div>
+                        <!-- end of div2 right -->
+                    </div>
+                    <!-- div 2 upper end -->
+
+
+                    <!--div 3 upper start -->
+                    <div style="position: relative; top: 360px;">
+                        <!-- start of div2 left -->
+                        <div style="float: left; width: 30%; position: absolute;">
+                            <img class="ui-corner-all" src="Content/img/health-information-library2.gif" style="float: left; width: 80px; height: 80px; position: relative; margin-top: 10px; left: 5px;" />
+                        </div>
+                        <!-- end of div2 left -->
+                        <!-- Start tof div2 right -->
+                        <div style="width: 70%; position: absolute; left: 30%;">
+                            <h5 onclick="pop_up_library();" href="javascript:;" style="color: rgb(46, 110, 158); position: relative; margin-left: 5px;"><b><span class="anc">Health Information Library
+                            </span></b></h5>
+                            <p style="color: rgb(46, 110, 158); position: relative; margin-left: 5px; font-size: 12px;">Tue,29 OCT 2013 22:05:44 +0100 </p>
+                            <p style="position: relative; margin-left: 5px; font-size: 13px;">
+                                View interactive tutorials of common health related questions.
+                                       Educate yourself about your health and learn the symptoms of specific medical conditions
+                            </p>
+                        </div>
+                        <!-- end of div2 right -->
+                    </div>
+                    <!-- div 3 upper  end-->
+                </div>
+            </div>
+                        break;
+                        *@
+                    case "socialhistWidget":
+                    <div id="SocialHist-Div">
+                        @if (Model.PatientRepresentatives.SocialHistory == true)
+                        {
+            <!-- Start of Social History Wigets-->
+            
+                            <div id="socialhistLatestwidg" class="portlet">
+                <div class="portlet-header" style="padding:1.5px;">
+                    <span id="SocailMove" class="anc_home" onclick="socialLatest_move(true);">Social History </span>
+            <span id="App-SocialHistory" >
+                          @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                        <div id="App-ShareHideSocialHistory" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.SocialHistory) ? "ShareHide_Socialhistory(false)" : "ShareHide_Socialhistory(true)")';>
+                            <span class="anc" style="padding-right: 10px; font-weight: normal;">
+                                <img  style="margin-top: 1px;" src='@((Model.PatientShare.SocialHistory) ? "Content/img/share.png" : "Content/img/share.png")'/>
+                                @((Model.PatientShare.SocialHistory) ? "UnShare" : "Share") </span>
+                        </div>
+                          }
+                    </span>
+                    <div id="EditcalInstructions" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                                        <img src="Content/img/edit.png" />
+                                        <span class="anc" style="padding-right: 10px;" onclick="EditcalInstructions();">Edit</span>
+                                    </div>
+      </div>
+                                <div id="SocialHistoryLatest-portlet" class="portlet-content disabled" style="position: relative;  border: none; overflow-y: auto; height: 190px;">
+               @* @Html.Partial("_SocailHistorySelf",Model.PatientSocialSelf)*@
+            </div>
+                                </div>
+                        }
+                        </div>
+                        break;
+                    case "statementWidget":
+             <div id="widg4" class="portlet">
+            <div class="portlet-header">
+               <span id="statement" class="anc_home" onclick="Statements_Move(true);"> Statements</span>
+                <!-- start of icons-->
+                <!-- First ICON -->
+                @*<div onclick="hide_widg4(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+
+
+                <!-- second ICON -->
+                  @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="statementdshare" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 10px;">Share</span>
+                </div>
+                  }
+                <!-- end of second icon-->
+
+
+                <!-- third ICON -->
+                <div id="createaddstatements" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+                <!-- end of icons -->
+            </div>
+            <div id="statement_portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+                @Html.Partial("_Index_Statements")
+            </div>
+        </div>
+                        break;
+                    case "familyhistWidget":
+                        if (Model.PatientRepresentatives.FamilyHistory == true)
+                        {
+            <!-- Start of Family History Wigets-->
+                   <div id="familyhistwidg" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+            <span id="Familyhis" class="anc_home" onclick="family_move(true);">      Family History </span>
+                 <!-- First ICON -->
+   @*<div onclick="familyhistwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-familyhistwidg" >
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHidefamilyhist" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.FamilyHistory) ? "ShareHide_Familyhist(false)" : "ShareHide_Familyhist(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.FamilyHistory)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.FamilyHistory) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span> 
+                <!-- start of icons -->
+               
+
+                             @*
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>*@
+                <!-- end of second icon-->
+
+
+                <!-- third ICON -->
+                <div id="createaddfamily" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="family-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_FamilyHistory", Model.FamilyHistories)*@
+            </div>
+        </div>
+                        }
+            <!--End of  Family Widgets -->
+                        break;
+                    case "PmedicalhistWidget":
+                        if (Model.PatientRepresentatives.MedicalHistory == true)
+                        {
+            <!-- Start of Past Medical History Wigets-->
+              <div id="Pmedicalhistwidg" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+               <span id="pastmedication" class="anc_home" onclick="past_move(true);">   Medical History </span>
+                <!-- start of icons -->
+                <!-- First ICON -->
+                @*<div onclick="Pmedicalhistwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-PastMedicalHistory" >
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHidePastMedicalHistory" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.MedicalHistory) ? "ShareHide_PastMedicalHistory(false)" : "ShareHide_PastMedicalHistory(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.MedicalHistory)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.MedicalHistory) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span> 
+             @*   
+
+
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->*@
+
+
+                <!-- third ICON -->
+                <div id="createaddpast" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right:10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="pasthistory-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+               @* @Html.Partial("_Index_MedicalHistory", Model.MedicalHistories)*@
+            </div>
+        </div>
+                        }
+            <!--End of Past MEdical History Widgets -->
+                        break;
+                    case "immunizWidget":
+                        if (Model.PatientRepresentatives.Immunization == true)
+                        {
+            <!-- Start of Immunizations Wigets-->
+              <div id="immunizwidg" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+             <span id="immunization" class="anc_home" onclick="immunization_move(true);">      Immunizations </span> 
+                <!-- First ICON -->
+                @*<div onclick="immunizwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-Immunization" >
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHideImmunization" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.Immunization) ? "ShareHide_Immunization(false)" : "ShareHide_Immunization(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Immunization)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Immunization) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span> 
+                <!-- start of icons -->
+               @* 
+
+
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->*@
+
+
+                <!-- third ICON -->
+                <div id="createaddimmunizations" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="immunization-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_Immunization", Model.Immunizations)*@
+            </div>
+        </div>
+
+                        }
+            <!--End of Immunizations Widgets -->
+                        break;
+                        case "insuranceWidget":
+                        if (Model.PatientRepresentatives.Insurance == true)
+        {
+        <!-- Start of Insurance Wigets-->
+        <div id="Insurancewidg" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+             <span id="Insurance" class="anc_home" onclick="insurance_move(true);">      Insurance on File </span> 
+                <!-- start of icons -->
+                <!-- First ICON -->
+                @*<div onclick="insurancewidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-Insurance">
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHideInsurance" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.Insurance) ? "ShareHide_Insurance(false)" : "ShareHide_Insurance(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Insurance)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Insurance) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span> 
+                @*
+
+
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>*@
+                <!-- end of second icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="Insurance-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+               @* @Html.Partial("_Index_Insurance", Model.Insurance)*@
+            </div>
+        </div>
+
+        }
+                        break;
+                        case "documentsWidget":
+                        if (Model.PatientRepresentatives.UploadDocs == true)
+         {
+        <!-- Start of Insurance Wigets-->
+        <div id="Documentswidg" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+             <span id="documents" class="anc_home" onclick="documents_move(true);">      Documents </span> 
+                <!-- start of icons -->
+                <!-- First ICON -->
+                @*<div onclick="documentwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-Documents" >
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHideDocuments" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.ClinicalDoc) ? "ShareHide_Documents(false)" : "ShareHide_Documents(true)")';>
+                <span class="anc" style="padding-right:10px; font-weight: normal;" ><img src='@((Model.PatientShare.ClinicalDoc)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.ClinicalDoc) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span> 
+                @*
+
+
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>*@
+                <!-- end of second icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="Documents-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+             @*   @Html.Partial("_Index_Documents", Model.Documents)*@
+            </div>
+        </div>
+
+         }
+                        break;
+                        case "ProceduresWidget":
+                        if (Model.PatientRepresentatives.Procedure == true)
+         {
+        <!-- Start of Procedure Wigets-->
+        <div id="Procedureswidg" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+             <span id="Procedures" class="anc_home" onclick="Proceduers_move(true);">      Procedures </span> 
+                <!-- start of icons -->
+                @*<div onclick="Procedurewidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                 <span id="App-Procedures" >
+                       @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHideProcedures" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.Procedure) ? "ShareHide_Procedures(false)" : "ShareHide_Procedures(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Procedure)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Procedure) ? "UnShare" : "Share") </span>
+                     </div> 
+                       }
+                    </span> 
+                   <div id="createaddProcedures" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields();" onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                                         
+                            <img src="Content/img/add.png" />
+                                        <span  class="anc" style="padding-right: 10px;">Add</span>
+                                        </div>
+
+                <!-- First ICON -->
+               @* 
+                <!-- end of First icon-->
+
+
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->
+                *@
+                <!-- end of icons -->
+
+        </div>
+            <div id="Procedure-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_Procedures", Model.Procedures)*@
+            </div>
+        </div>
+
+         }
+
+                        break;
+                        case "ClinicalInstructionsWidget":
+                     
+         if (Model.PatientRepresentatives.PlanOfCare == true)
+         {
+        <!-- Start of ClinInstruction Wigets-->
+            <div id="ClinicalInstructionsWidget" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+             <span id="clinicalinstruction"  class="anc_home" onclick="ClinicalInstructions_move(true);">      Clinical Instructions </span> 
+                <!-- start of icons -->
+                @*<div onclick="ClinInstructionWidgetHide(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                 <span id="App-ClinicalInstructions" >
+                       @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHideClinicalInstructions" style="cursor: pointer; float: right; width: auto; height: 20px; " onclick='@((Model.PatientShare.ClinicalDoc) ? "ShareHide_ClinicalInstructions(false);" : "ShareHide_ClinicalInstructions(true);")'>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img  style="margin-top: -3px;" src='@((Model.PatientShare.ClinicalDoc)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.ClinicalDoc) ? "UnShare" : "Share") </span>
+                     </div> 
+                       }
+                    </span> 
+                    <div id="createaddClinicalInstructions" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                                        <img src="Content/img/add.png" />
+                                        <span class="anc" style="padding-right: 10px;">Add</span>
+                                    </div>
+                <!-- First ICON -->
+               @* 
+                <!-- end of First icon-->
+
+
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->
+                *@
+                <!-- end of icons -->
+
+        </div>
+            <div id="ClinicalInstructions-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+               @* @Html.Partial("_Index_ClinicalInstructions", Model.ClinicalInstructions)*@
+            </div>
+        </div>
+         }
+
+
+        <!--End of clinical Instruction Widgets -->
+   
+                        break;
+                        case "ProviderWidget":
+                        if (Model.PatientRepresentatives.Provider == true)
+                        { 
+                        <div id="ProviderWidget" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+             <span id="Provider"  class="anc_home" onclick="providers_move(true);">      Provider Info </span> 
+                <!-- start of icons -->
+                @*<div onclick="ClinInstructionWidgetHide(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+               @*  <span id="App-Provider" >
+                       @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHideProvider" style="cursor: pointer; float: right; width: auto; height: 20px; " onclick='@((Model.PatientShare.ClinicalDoc) ? "ShareHide_ClinicalInstructions(false);" : "ShareHide_ClinicalInstructions(true);")'>
+                <span class="anc" style="padding-right: 2px; font-weight: normal;" ><img src='@((Model.PatientShare.ClinicalDoc)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.ClinicalDoc) ? "UnShare" : "Share") </span>
+                     </div> 
+                       }
+                    </span> 
+        *@
+             
+
+        </div>
+            <div id="ProviderWidget-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_Provider", Model.ProivderInfo)*@
+            </div>
+        </div>
+                            
+                        }
+                        break;
+                }
+                counter++;
+            }
+        }
+        
+        <div id="hidden-widgets">
+        @foreach (var names in ViewBag.DisableLeftList)
+        {
+            if (names == "allergyWidget") 
+            {
+             if (Model.PatientRepresentatives.Allergy == true)
+                        {
+            <!-- Start of Vitals Wigets-->
+             <div id="allergywidg" class="portlet" style="display: none">
+            <div class="portlet-header" style="padding: 1.5px;">
+                <span id="allergy" class="anc_home" onclick="allergy_move(true);">  Allergies </span>
+                <!-- start of icons -->
+                <!-- First ICON -->
+                  @*<div onclick="allergywidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <span id="App-Allergies" >
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHideAllergies" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.Allergy) ? "ShareHide_Allergies(false)" : "ShareHide_Allergies(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Allergy)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Allergy) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span> 
+
+             
+                <!-- end of First icon-->
+
+                 @*
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->*@
+
+
+                <!-- third ICON -->
+                <div id="createaddallergies" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+
+                </div>
+                <!-- end of third icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="allergies-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+           @*     @Html.Partial("_Index_Allergies", Model.Allergies)*@
+            </div>
+        </div>
+
+            <!--End of allergies Widgets -->
+                        }
+            }
+            if (names == "appointmentWidget")
+            {
+                if (Model.PatientRepresentatives.Appointment == true)
+                {
+            <div id="widg1" class="portlet" style="display: none">
+            <div class="portlet-header " >
+               <span id="Appointment" class="anc_home" onclick="appointment_move(true);"> Appointment </span>
+                <!--starting icons-->
+                <!-- First ICON -->
+                @*<div id="App-ShareHides">*@
+                @*<div onclick="hide_widg1(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px; font-weight: normal;">Hide</span>
+                </div>*@
+                <span id="App-Section" >
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHide" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.Appointment) ? "ShareHide_widg1(false)" : "ShareHide_widg1(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Appointment)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Appointment) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span>  
+                @*   </div>  *@        
+              
+                <!-- end of First icon-->
+                 @* 
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px; font-weight: normal;">Share</span>
+                </div>
+                <!-- end of second icon-->*@
+
+
+                <!-- third ICON -->
+                <div id="createaddappointments" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+
+                <!-- ending icons -->
+
+
+            </div>
+            <div id="Appointment-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+             @*   @Html.Partial("_Index_Appointment", Model.Messages) *@
+            </div>
+        </div>
+                }
+            }
+            if (names == "labWidget")
+            {
+                if (Model.PatientRepresentatives.LabResults == true)
+                        {
+             <div id="widg3" class="portlet" style="display: none">
+            <div class="portlet-header">
+                <span id="Labtest" class="anc_home" onclick="lab_move(true);">Lab Tests </span> 
+                <!-- start of icons -->
+                 <!-- First ICON -->
+                @*<div onclick="hide_widg3(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                 <span id="Lab-Section">
+                       @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="Lab-ShareHide" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.LabResults) ? "ShareHide_widg3(false)" : "ShareHide_widg3(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.LabResults)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.LabResults) ? "UnShare" : "Share") </span>
+                     </div>
+                       }
+                    </span>  
+               
+
+                @*
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->*@
+
+
+              @*  <!-- third ICON -->
+                <div id="createaddlab" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 4px;">Add</span>
+                </div>
+                <!-- end of third icon-->*@
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="lab-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+               @* @Html.Partial("_Index_LabTests", Model.LabResults)*@
+            </div>
+        </div>
+                        }
+            }
+            if (names == "medicationWidget")
+            {
+                if (Model.PatientRepresentatives.Medication == true)
+                {
+            <div id="widg2" class="portlet" style="display: none">
+            <div class="portlet-header" style="padding:1.5px;">
+               <span id="Medicatons" class="anc_home" onclick="medication_move(true);"> Medications </span>
+                <!-- starting icons -->
+                <!-- First ICON -->
+                @*<div onclick="hide_widg2(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-Medications" >
+                      @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="App-ShareHideMedications" style="cursor: pointer; float: right; width: auto; height: 20px;" onclick='@((Model.PatientShare.Medication) ? "ShareHide_Medication(false)" : "ShareHide_Medication(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img  style="margin-top: -4px;" src='@((Model.PatientShare.Medication)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Medication) ? "UnShare" : "Share") </span>
+                     </div> 
+                      }
+                    </span> 
+              
+
+ @* 
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>*@
+                <!-- end of second icon-->
+
+
+                <!-- THird Icon -->
+                <div id="createPresentMedication" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- End of Third Icon -->
+                <!-- end of icons-->
+
+
+
+            </div>
+            <div id="medications-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+            @*    @Html.Partial("_Index_Medication", Model.Medications)*@
+            </div>
+        </div>
+                }
+            }
+            if (names == "statementWidget")
+            {
+            <div id="widg4" class="portlet" style="display: none">
+            <div class="portlet-header">
+                <span id="statement" class="anc_home" onclick="Statements_Move(true);"> Statements</span>
+                <!-- start of icons-->
+                <!-- First ICON -->
+                @*<div onclick="hide_widg4(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+
+
+                <!-- second ICON -->
+                  @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true)
+                    {
+                <div id="statementdshare"onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 10px;">Share</span>
+                </div>
+                  }
+                <!-- end of second icon-->
+
+
+                <!-- third ICON -->
+                <div id="createaddstatements" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+                <!-- end of icons -->
+            </div>
+            <div id="statement_portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+                @Html.Partial("_Index_Statements")
+            </div>
+        </div>
+            }
+            if (names== "PremiumWidget")
+            {
+            <div id="PremiumWidget" class="portlet" style="display: none">
+                <div class="portlet-header">
+                    Premium Member Program
+                <!-- First ICON -->
+                    @*<div onclick="hide_widg5(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                        <img src="Content/img/hide.png" />
+                        <span class="anc" style="padding-right: 2px;">Hide</span>
+                    </div>*@
+                    <!-- end of First icon-->
+
+                </div>
+                <div class="portlet-content" style="height: 403px; overflow-y: scroll; position: relative; width: 98%;">
+
+
+
+                    <!--div1 upper start -->
+                    <div>
+                        <!-- start of div1 left -->
+                        <div style="float: left; width: 30%; position: relative;">
+                            <img class="ui-corner-all" src="Content/img/in-case-of-emergency.gif" style="float: left; width: 80px; height: 80px; position: relative; margin-top: 10px; left: 5px;" />
+                        </div>
+                        <!--end of div1 left-->
+                        <!--Start of div1 right-->
+                        <div style="width: 70%; position: absolute; left: 30%;">
+                            <h5 style="color: rgb(46, 110, 158); position: relative; margin-left: 5px;"><b><span class="anc">ICE Program </span></b></h5>
+                            <p style="position: relative; color: rgb(46, 110, 158); margin-left: 5px; font-size: 12px;">Tue,29 OCT 2013 22:05:44 +0100 </p>
+                            <p style="position: relative; margin-left: 5px; font-size: 13px;">This technology now gives doctors and emergency responders access to view vital medical information from a smartphone.</p>
+
+                        </div>
+                        <!-- end of divf right -->
+                    </div>
+                    <!--div 1 upper  end-->
+
+
+
+                    <!--div 2 upper-->
+                    <div style="position: relative; top: 170px;">
+                        <!-- start of div2 left -->
+                        <div style="float: left; width: 30%; position: absolute;">
+                            <img class="ui-corner-all" src="Content/img/online-lab-member.jpg" style="float: left; width: 80px; height: 80px; position: relative; margin-top: 10px; left: 5px;" />
+                        </div>
+                        <!-- end of div2 left -->
+                        <!-- Start tof div2 right -->
+                        <div style="width: 70%; position: absolute; left: 30%;">
+                            <h5 onclick="pop_up_online();" href="javascript:;" style="color: rgb(46, 110, 158); position: relative; margin-left: 5px;"><b><span class="anc">Online Blood Lab</span> </b></h5>
+                            <p style="color: rgb(46, 110, 158); position: relative; margin-left: 5px; font-size: 12px;">Tue,29 OCT 2013 22:05:44 +0100 </p>
+                            <p style="position: relative; margin-left: 5px; font-size: 13px;">
+                                <span style="color: orange;">Get 15% Off Blood Lab Testing as 
+       and Access My Records Member! </span>A basic blood test can play an important role in your overall health maintenance.
+                            </p>
+                        </div>
+                        <!-- end of div2 right -->
+                    </div>
+                    <!-- div 2 upper end -->
+
+
+                    <!--div 3 upper start -->
+                    <div style="position: relative; top: 360px;">
+                        <!-- start of div2 left -->
+                        <div style="float: left; width: 30%; position: absolute;">
+                            <img class="ui-corner-all" src="Content/img/health-information-library2.gif" style="float: left; width: 80px; height: 80px; position: relative; margin-top: 10px; left: 5px;" />
+                        </div>
+                        <!-- end of div2 left -->
+                        <!-- Start tof div2 right -->
+                        <div style="width: 70%; position: absolute; left: 30%;">
+                            <h5 onclick="pop_up_library();" href="javascript:;" style="color: rgb(46, 110, 158); position: relative; margin-left: 5px;"><b><span class="anc">Health Information Library
+                            </span></b></h5>
+                            <p style="color: rgb(46, 110, 158); position: relative; margin-left: 5px; font-size: 12px;">Tue,29 OCT 2013 22:05:44 +0100 </p>
+                            <p style="position: relative; margin-left: 5px; font-size: 13px;">
+                                View interactive tutorials of common health related questions.
+                                       Educate yourself about your health and learn the symptoms of specific medical conditions
+                            </p>
+                        </div>
+                        <!-- end of div2 right -->
+                    </div>
+                    <!-- div 3 upper  end-->
+                </div>
+            </div>
+            }
+            if (names == "visitsWidget")
+            {
+                if (Model.PatientRepresentatives.Visit == true)
+                {
+            <!-- Start of Visits Wigets-->
+            <div id="visitswidg" class="portlet" style="display: none">
+            <div class="portlet-header" style="padding:1.5px;">
+                <span id="VisitMove" class="anc_home" onclick="visit_move(true);">Visit Info</span>
+                <!-- start of icons -->
+                <!-- First ICON -->
+                
+                @*<div onclick="visitswidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <span id="App-Visits" >
+                <div id="App-ShareHideVisits" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.Visit) ? "ShareHide_Visits(false)" : "ShareHide_Visits(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Visit)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Visit) ? "UnShare" : "Share") </span>
+                     </div> 
+                    </span> 
+                <!-- end of First icon-->
+
+                @*
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                *@<!-- end of second icon-->
+
+
+
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="Visits-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+             @*   @Html.Partial("_Index_Visits", Model.Visits)*@
+            </div>
+        </div>
+                }
+            }
+            if (names == "vitalWidget")
+            {
+                if (Model.PatientRepresentatives.VitalSigns == true)
+                {
+            <!-- Start of Vitals Wigets-->
+            <div id="vitalwidg" class="portlet" style="display: none">
+            <div class="portlet-header" style="padding:1.5px;">
+                <span id="vitalsmove" class="anc_home" onclick="vital_move(true);">  Vitals </span>
+                <!-- start of icons -->
+                 <!-- First ICON -->
+                @*<div onclick="vitalwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-Vitals" >
+                <div id="App-ShareHideVitals" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.VitalSigns) ? "ShareHide_Vitals(false)" : "ShareHide_Vitals(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.VitalSigns)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.VitalSigns) ? "UnShare" : "Share") </span>
+                     </div> 
+                    </span> 
+              
+
+                 @*
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->*@
+
+
+                <!-- third ICON -->
+                <div id="addvitalscreation" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="vital-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_VitalSign", Model.VitalSigns)*@
+            </div>
+        </div>
+                }
+            }
+            if (names == "socialhistWidget")
+            {
+                if (Model.PatientRepresentatives.SocialHistory == true)
+                {
+                    AMR.Models.FacilityVisitSelectModel smodel = new AMR.Models.FacilityVisitSelectModel();
+                    smodel = (AMR.Models.FacilityVisitSelectModel)Session["OptionSelected"];
+                    if (smodel == null)
+                    { 
+                        <div id="SocailHistorySelf" class="portlet">
+            <div class="portlet-header">
+             <span id="MySocialHistory" class="anc_home" onclick="MySocialHistory_move(true);">Social History </span> 
+                @*<div onclick="socialhistwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                        <img src="Content/img/hide.png" />
+                        <span class="anc" style="padding-right: 2px;">Hide</span>
+                    </div>*@
+                    <span id="App-SocialHistory" >
+                        <div id="App-ShareHideSocialHistory" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.SocialHistory) ? "ShareHide_Socialhistory(false)" : "ShareHide_Socialhistory(true)")';>
+                            <span class="anc" style="padding-right:10px; font-weight: normal;">
+                                <img src='@((Model.PatientShare.SocialHistory) ? "Content/img/share.png" : "Content/img/share.png")'/>
+                                @((Model.PatientShare.SocialHistory) ? "UnShare" : "Share") </span>
+                        </div>
+                    </span>
+                <!-- start of icons -->
+          
+             
+                 <div id="EditcalInstructions" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                                        <img src="Content/img/add.png" />
+                                        <span class="anc" style="padding-right: 10px;" onclick="EditcalInstructions();">Edit</span>
+                                    </div>
+        
+
+        </div>
+                <div id="SocialHistorySelf-portlet" class="portlet-content" style="position: relative;  border: none; overflow-y: auto; height: 190px;">
+            @*    @Html.Partial("_SocailHistorySelf",Model.PatientSocialSelf)*@
+            </div>
+        </div>
+                    }
+                    else{
+                        
+                        if(smodel.facilitySelected =="0")
+                        {
+                            <div id="SocailHistorySelf" class="portlet">
+            <div class="portlet-header">
+                 <span id="MySocialHistory" class="anc_home" onclick="MySocialHistory_move(true);"> Social History </span> 
+                @*<div onclick="socialhistwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                        <img src="Content/img/hide.png" />
+                        <span class="anc" style="padding-right: 2px;">Hide</span>
+                    </div>*@
+                    <span id="App-SocialHistory" >
+                        <div id="App-ShareHideSocialHistory" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.SocialHistory) ? "ShareHide_Socialhistory(false)" : "ShareHide_Socialhistory(true)")';>
+                            <span class="anc" style="padding-right: 10px; font-weight: normal;">
+                                <img src='@((Model.PatientShare.SocialHistory) ? "Content/img/share.png" : "Content/img/share.png")'/>
+                                @((Model.PatientShare.SocialHistory) ? "UnShare" : "Share") </span>
+                        </div>
+                    </span>
+                <!-- start of icons -->
+          
+             
+                 <div id="EditcalInstructions" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                                        <img src="Content/img/add.png" />
+                                        <span class="anc" style="padding-right: 10px;" onclick="EditcalInstructions();">Edit</span>
+                                    </div>
+        
+
+        </div>
+                <div id="SocialHistorySelf-portlet" class="portlet-content" style="position: relative;  border: none; overflow-y: auto; height: 190px;">
+              @*  @Html.Partial("_SocailHistorySelf",Model.PatientSocialSelf)*@
+            </div>
+        </div>
+                        }
+       
+                            else{
+            
+            <div id="socialhistwidg" class="portlet" style="display: none">
+            <div class="portlet-header" style="padding:1.5px;">
+               <span id="SocailMove"  class="anc_home" onclick="social_move(true);">   Social History </span>
+                 @*<div onclick="socialhistwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <span id="App-SocialHistory" >
+                <div id="App-ShareHideSocialHistory" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.SocialHistory) ? "ShareHide_Socialhistory(false)" : "ShareHide_Socialhistory(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img  style="margin-top: -4px;" src='@((Model.PatientShare.SocialHistory)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.SocialHistory) ? "UnShare" : "Share") </span>
+                     </div> 
+                    </span> 
+                <!-- start of icons -->
+                <!-- First ICON -->
+               
+                <!-- end of First icon-->
+
+                @*
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->
+
+                 *@
+                <!-- third ICON -->
+                <div id="createaddsocial" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="social-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_SocialHistory", Model.SocialHistories)*@
+
+            </div>
+        </div>
+        }
+            
+                         }
+                }
+            }
+            if (names == "familyhistWidget")
+            {
+                if (Model.PatientRepresentatives.FamilyHistory == true)
+                {
+            <!-- Start of Family History Wigets-->
+            <div id="familyhistwidg" class="portlet" style="display: none">
+            <div class="portlet-header" style="padding:1.5px;">
+            <span id="Familyhis" class="anc_home" onclick="family_move(true);">      Family History </span>
+                 <!-- First ICON -->
+   @*<div onclick="familyhistwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-familyhistwidg" >
+                <div id="App-ShareHidefamilyhist" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.FamilyHistory) ? "ShareHide_Familyhist(false)" : "ShareHide_Familyhist(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img  style="margin-top: -4px;" src='@((Model.PatientShare.FamilyHistory)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.FamilyHistory) ? "UnShare" : "Share") </span>
+                     </div> 
+                    </span> 
+                <!-- start of icons -->
+               
+
+                             @*
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>*@
+                <!-- end of second icon-->
+
+
+                <!-- third ICON -->
+                <div id="createaddfamily" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="family-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+             @*   @Html.Partial("_Index_FamilyHistory", Model.FamilyHistories)*@
+            </div>
+        </div>
+                }
+            }
+            if (names == "immunizWidget")
+            {
+                if (Model.PatientRepresentatives.Immunization == true)
+                {
+            <!-- Start of Immunizations Wigets-->
+            <div id="immunizwidg" class="portlet" style="display: none">
+            <div class="portlet-header" style="padding:1.5px;">
+             <span id="immunization" class="anc_home" onclick="immunization_move(true);">      Immunizations </span> 
+                <!-- First ICON -->
+                @*<div onclick="immunizwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-Immunization" >
+                <div id="App-ShareHideImmunization" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.Immunization) ? "ShareHide_Immunization(false)" : "ShareHide_Immunization(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Immunization)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Immunization) ? "UnShare" : "Share") </span>
+                     </div> 
+                    </span> 
+                <!-- start of icons -->
+               @* 
+
+
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->*@
+
+
+                <!-- third ICON -->
+                <div id="createaddimmunizations" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="immunization-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+            @*    @Html.Partial("_Index_Immunization", Model.Immunizations)*@
+            </div>
+        </div>
+                }
+            }
+            if (names == "probsWidget")
+            {
+                if (Model.PatientRepresentatives.Problem == true)
+                {
+            <!-- Start of Problems Wigets-->
+            <div id="probswidg" class="portlet" style="display: none">
+            <div class="portlet-header" style="padding:1.5px;">
+               <span id="problem" class="anc_home" onclick="problem_move(true);">  Problems </span>
+                     <!-- First ICON -->
+                @*<div onclick="probswidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-Problems" >
+                <div id="App-ShareHideProblems" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.Problem) ? "ShareHide_Problems(false)" : "ShareHide_Problems(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Problem)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Problem) ? "UnShare" : "Share") </span>
+                     </div> 
+                    </span> 
+                <!-- start of icons -->
+           
+
+                @*
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+
+                <!-- end of second icon-->*@
+
+
+                <!-- third ICON -->
+                <div id="createaddproblems" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right:10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="problem-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_Problems", Model.Problems)*@
+            </div>
+        </div>
+                }
+            <!--End of Problems Widgets -->
+            }
+            if (names == "pocWidget")
+            {
+                if (Model.PatientRepresentatives.PlanOfCare == true)
+                {
+            <!-- Start of POC widther-->
+            <div id="pocwidg" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+                 <span class="anc_home" onclick="POC_move();">  Care Plan </span>
+                 <!-- First ICON -->
+               @*<div onclick="pocwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-POC" >
+                <div id="App-ShareHidePOC" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.PlanOfCare) ? "ShareHide_POC(false)" : "ShareHide_POC(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img  style="margin-top: -4px;" src='@((Model.PatientShare.PlanOfCare)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.PlanOfCare) ? "UnShare" : "Share") </span>
+                     </div> 
+                    </span> 
+            </div>
+                 <!-- start of icons -->
+               
+
+@* 
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>*@
+                <!-- end of second icon-->
+                <!- end of icons-->
+            
+            <div id="poc-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+               @* @Html.Partial("_Index_PlanofCare", Model.Pocs)*@
+            </div>
+        </div>
+                }
+            }
+            if (names == "PmedicalhistWidget")
+            {
+                if (Model.PatientRepresentatives.MedicalHistory == true)
+                {
+            <!-- Start of POC widther-->
+            <div id="Pmedicalhistwidg" class="portlet" style="display: none">
+            <div class="portlet-header" style="padding:1.5px;">
+               <span id="pastmedication" class="anc_home" onclick="past_move(true);">   Past Medical History </span>
+                <!-- start of icons -->
+                <!-- First ICON -->
+                @*<div onclick="Pmedicalhistwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-PastMedicalHistory" >
+                <div id="App-ShareHidePastMedicalHistory" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.MedicalHistory) ? "ShareHide_PastMedicalHistory(false)" : "ShareHide_PastMedicalHistory(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.MedicalHistory)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.MedicalHistory) ? "UnShare" : "Share") </span>
+                     </div> 
+                    </span> 
+             @*   
+
+
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->*@
+
+
+                <!-- third ICON -->
+                <div id="createaddpast" onclick="clearFields();" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/add.png" />
+                    <span class="anc" style="padding-right: 10px;">Add</span>
+                </div>
+                <!-- end of third icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="pasthistory-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_MedicalHistory", Model.MedicalHistories)*@
+            </div>
+        </div>
+                }
+            }
+            if (names == "insuranceWidget")
+            {
+                if (Model.PatientRepresentatives.Insurance == true)
+                {
+            <!-- Start of POC widther-->
+            <div id="Insurancewidg" class="portlet" style="display: none">
+            <div class="portlet-header" style="padding:1.5px;">
+             <span id="Insurance" class="anc_home" onclick="insurance_move(true);">      Insurance </span> 
+                <!-- start of icons -->
+                <!-- First ICON -->
+                @*<div onclick="insurancewidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-Insurance" >
+                <div id="App-ShareHideInsurance" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.Insurance) ? "ShareHide_Insurance(false)" : "ShareHide_Insurance(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Insurance)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Insurance) ? "UnShare" : "Share") </span>
+                     </div> 
+                    </span> 
+                @*
+
+
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>*@
+                <!-- end of second icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="Insurance-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+        @*        @Html.Partial("_Index_Insurance", Model.Insurance)*@
+            </div>
+        </div>
+                }
+            }
+            if (names == "documentsWidget")
+            {
+                if (Model.PatientRepresentatives.UploadDocs == true)
+                {
+            <!-- Start of POC widther-->
+            <div id="Documentswidg" class="portlet" style="display: none">
+            <div class="portlet-header" style="padding:1.5px;">
+             <span id="documents" class="anc_home" onclick="documents_move(true);">      Documents </span> 
+                <!-- start of icons -->
+                <!-- First ICON -->
+                @*<div onclick="documentwidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                <!-- end of First icon-->
+                <span id="App-Documents" >
+                <div id="App-ShareHideDocuments" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.ClinicalDoc) ? "ShareHide_Documents(false)" : "ShareHide_Documents(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.ClinicalDoc)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.ClinicalDoc) ? "UnShare" : "Share") </span>
+                     </div> 
+                    </span> 
+                @*
+
+
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>*@
+                <!-- end of second icon-->
+
+                <!-- end of icons -->
+
+            </div>
+            <div id="Documents-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+             @*   @Html.Partial("_Index_Documents", Model.Documents) *@
+            </div>
+        </div>
+                }
+            }
+            if (names == "ProceduresWidget")
+            {
+                if (Model.PatientRepresentatives.Procedure == true)
+                {
+            <!-- Start of POC widther-->
+                <div id="Procedureswidg" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+             <span id="Procedures" class="anc_home" onclick="Proceduers_move(true);">      Procedures </span> 
+                <!-- start of icons -->
+                @*<div onclick="Procedurewidg(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                 <span id="App-Procedures" >
+                <div id="App-ShareHideProcedures" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.Procedure) ? "ShareHide_Procedures(false)" : "ShareHide_Procedures(true)")';>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img src='@((Model.PatientShare.Procedure)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.Procedure) ? "UnShare" : "Share") </span>
+                     </div> 
+                    </span> 
+                        <div id="createaddProcedures" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); clearFields();" onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                                         
+                            <img src="Content/img/add.png" />
+                                        <span  class="anc" style="padding-right: 10px;">Add</span>
+                                        </div>
+                <!-- First ICON -->
+               @* 
+                <!-- end of First icon-->
+
+
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->
+                *@
+                <!-- end of icons -->
+
+        </div>
+            <div id="Procedure-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+              @*  @Html.Partial("_Index_Procedures", Model.Procedures)*@
+            </div>
+        </div>
+                }
+            }
+            if (names == "ClinicalInstructionsWidget")
+            {
+               if (Model.PatientRepresentatives.PlanOfCare == true)
+         {
+        <!-- Start of ClinInstruction Wigets-->
+                <div id="ClinicalInstructionsWidget" class="portlet">
+            <div class="portlet-header" style="padding:1.5px;">
+             <span id="clinicalinstruction"  class="anc_home" onclick="ClinicalInstructions_move(true);">      Clinical Instructions </span> 
+                <!-- start of icons -->
+                @*<div onclick="ClinInstructionWidgetHide(); " onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/hide.png" />
+                    <span class="anc" style="padding-right: 2px;">Hide</span>
+                </div>*@
+                 <span id="App-ClinicalInstructions" >
+                <div id="App-ShareHideClinicalInstructions" style="cursor: pointer; float: right; width: auto; height: 20px;display:none;" onclick='@((Model.PatientShare.ClinicalDoc) ? "ShareHide_ClinicalInstructions(false);" : "ShareHide_ClinicalInstructions(true);")'>
+                <span class="anc" style="padding-right: 10px; font-weight: normal;" ><img  style="margin-top: -4px;" src='@((Model.PatientShare.ClinicalDoc)? "Content/img/share.png" : "Content/img/share.png" )'/>  @((Model.PatientShare.ClinicalDoc) ? "UnShare" : "Share") </span>
+                     </div> 
+                    </span> 
+                <!-- First ICON -->
+               @* 
+                <!-- end of First icon-->
+
+
+                <!-- second ICON -->
+                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1(); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" style="cursor: pointer; float: right; width: auto; height: 20px;">
+                    <img src="Content/img/share.png" />
+                    <span class="anc" style="padding-right: 2px;">Share</span>
+                </div>
+                <!-- end of second icon-->
+                *@
+                <!-- end of icons -->
+
+        </div>
+            <div id="ClinicalInstructions-portlet" class="portlet-content disabled" style="height: 190px; overflow-x: auto;">
+                @*@Html.Partial("_Index_ClinicalInstructions", Model.ClinicalInstructions)*@
+            </div>
+        </div>
+         }  
+            }
+        }
+</div>
+        
+    </div>
+    
+    @Html.Hidden("HighestCountHidden", counter)
+    <!-- end of First Column div -->
+}

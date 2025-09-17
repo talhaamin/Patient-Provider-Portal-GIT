@@ -1,0 +1,401 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using AMR.Core.Utilities;
+@using System.Text;
+@model HomeViewModel
+@{
+    ViewBag.Title = "[Provider Portal] Login";
+    Layout = null;
+    
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title </title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/themes/redmond/jquery-ui.css")" />
+    <link href="@Url.Content("~/Content/css/themes/redmond/jquery-ui-1.10.3.custom.css")" rel="stylesheet">
+   
+    <script src="@Url.Content("~/Content/css/ui/jquery.ui.core.js")"></script>
+	<script src="@Url.Content("~/Content/css/ui/jquery.ui.widget.js")"></script>
+	<script src="@Url.Content("~/Content/css/ui/jquery.ui.accordion.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-1.9.1.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-1.9.2.custom.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-ui.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.maskedinput-1.2.2.js")"></script>
+    <script src="@Url.Content("~/Content/js/validator.js")"></script>
+     <link href="~/Content/css/table-style.css" rel="stylesheet" />
+    <link href="~/Content/css/login.css" rel="stylesheet" />
+    <style type="text/css">
+
+      
+       
+</style>
+    <script lang="JavaScript" type="text/javascript">
+
+
+        function isEmpty(field, strng) {
+            var error = "";
+            if (strng.length == 0) {
+                error = "Please enter a value for " + field + ".\n";
+            }
+            return error;
+        }
+
+        function validatepass1() {
+            ShowLoader();
+            var why = "";
+
+            why += isEmpty('UserLogin', form2.userlogin.value);
+            why += isEmpty('Password', form2.password.value);
+
+            if (why != "") {
+                alert(why);
+                HideLoader();
+                return false;
+            }
+           
+            return true;
+        }
+
+        function ShowLoader() {
+            
+            document.getElementById('loader').style.display = 'block';
+           
+        }
+        function HideLoader() {
+            
+           
+            document.getElementById('loader').style.display = 'none';
+        }
+
+        function ShowLoader1() {
+            var body_height = parseInt($('body').height());
+            $('#page_loader1').css('height', 'auto');
+            document.getElementById('page_loader1').style.display = 'block';
+        }
+        function HideLoader1() {
+            document.getElementById('page_loader1').style.display = 'none';
+        }
+
+     
+
+
+        function OpenSignup() {
+           
+            var page1 = '';
+          
+                page1 = '@Url.Action("SignUp", "Home")';
+         
+            $('#Signupdialog').remove();
+         
+
+            var $dialog = $('<div id="Signupdialog" style="width:500px;"></div>')
+                           .html('<iframe style="border: 0px; " src="' + page1 + '" width="100%" height="100%"></iframe>')
+                           .dialog({
+                               autoOpen: false,
+                               show: {
+                                   effect: "blind",
+                                   duration: 1000
+                               },
+                               hide: {
+                                   effect: "blind",
+                                   duration: 1000
+                               },
+                               modal: true,
+                               height: 600,
+                               width: 800,
+                               title: "Provider Portal Registration",
+                               buttons: {
+                                   "Register": function () {
+
+
+
+                                       //ShowLoader1();
+                                      
+                                       // Save routine and call of Action
+
+                                       var bValid = true;
+                                       if (!Reqvalue($.trim($('iframe').contents().find('#txtFname').val()), 'First Name')) {
+                                           return;
+                                       }
+                                       if (!Reqvalue($.trim($('iframe').contents().find('#txtAdd').val()), 'Address')) {
+                                           return;
+                                       }
+                                       if (!Reqvalue($.trim($('iframe').contents().find('#txtCity').val()), 'City')) {
+                                           return;
+                                       }
+                                       if (!Reqvalue($.trim($('iframe').contents().find('#txtZipcode').val()), 'Zip Code')) {
+                                           return;
+                                       }
+                                        if (!checkEmail($.trim($('iframe').contents().find('#txtemail').val()))) {
+                                           return;
+                                       }
+                                        if ($.trim($('iframe').contents().find('#txtemail').val()) != $.trim($('iframe').contents().find('#txtconemail').val())) {
+                                            alert('Please Enter Corrrect Email Address in confirm email')
+                                            return;
+                                        }
+                                        if ($('iframe').contents().find('#chkterms').prop('checked') == false) {
+                                            alert('Please Accept Terms & Conditions');
+                                            return
+                                        }
+
+                                        
+                                       
+                                       
+                                       if (bValid) {
+                                           // Save routine and call of Action
+                                           
+                                           try {
+                                               var requestData = {
+                                                   Title: $.trim($('iframe').contents().find('#cmbName').val()),
+                                                   FirstName: $.trim($('iframe').contents().find('#txtFname').val()),
+                                                   MiddleName:  $.trim($('iframe').contents().find('#txtMname').val()),
+                                                   LastName:  $.trim($('iframe').contents().find('#txtLname').val()),
+                                                   Address1:  $.trim($('iframe').contents().find('#txtAdd').val()),
+                                                   Address2:  $.trim($('iframe').contents().find('#txtAdd2').val()),
+                                                   County: $.trim($('iframe').contents().find('#cmbCountry option:selected').text()),
+                                                   State: $.trim($('iframe').contents().find('#cmbStates option:selected').text()),
+                                                   City:  $.trim($('iframe').contents().find('#txtCity').val()),
+                                                   Zip: $.trim($('iframe').contents().find('#txtZipcode').val()),
+                                                   HomePhone:  $.trim($('iframe').contents().find('#txthomphon').val()),
+                                                   EMail: $.trim($('iframe').contents().find('#txtemail').val()),
+                                                   //$.trim($('#txtPharmacy option:selected').text()),
+                                               };
+
+                                               $.ajax({
+                                                   type: 'POST',
+                                                   url: 'provider-signup',
+                                                   data: JSON.stringify(requestData),
+                                                   dataType: 'json',
+                                                   contentType: 'application/json; charset=utf-8',
+                                                   success: function (data) {
+                                                       // if success
+
+                                                      // $("#current-med-grid").html(data);
+
+                                                   },
+                                                   error: function (xhr, ajaxOptions, thrownError) {
+                                                       //if error
+
+                                                       alert('Error : ' + xhr.message);
+                                                   },
+                                                   complete: function (data) {
+                                                       // if completed
+                                                       HideLoader1();
+
+                                                   },
+                                                   async: true,
+                                                   processData: false
+                                               });
+                                           }
+
+                                           catch (err) {
+
+                                               if (err && err !== "") {
+                                                   alert(err.message);
+                                                   HideLoader1();
+                                               }
+                                           }
+                                           $(this).dialog("close");
+                                           ShowLoader1();
+                                       }
+
+                                   },
+                                   Close: function () {
+                                       $(this).dialog("close");
+                                   }
+                               },
+                               close: function () {
+                                  
+                               }
+                           });
+            $dialog.dialog('open');
+
+           
+           //   $("#dialog-SignUp").dialog("open");
+        }
+
+       
+        
+
+        function ForgotPassword() {
+
+            var page1 = '';
+
+            page1 = '@Url.Action("ForgotPasswordProvider", "Home")';
+           
+            $('#Forgotpassworddialog').remove();
+
+
+            var $dialog = $('<div id="Forgotpassworddialog" style="width:500px;"></div>')
+                           .html('<iframe style="border: 0px; " src="' + page1 + '" width="100%" height="100%"></iframe>')
+                           .dialog({
+                               autoOpen: false,
+                               show: {
+                                   effect: "blind",
+                                   duration: 1000
+                               },
+                               hide: {
+                                   effect: "blind",
+                                   duration: 1000
+                               },
+                               modal: true,
+                               height: 450,
+                               width: 600,
+                               title: "Forgot Password",
+                               buttons: {
+                                    Close: function () {
+                                       $(this).dialog("close");
+                                   }
+                               },
+                               
+                           });
+            $dialog.dialog('open');
+
+
+            //   $("#dialog-SignUp").dialog("open");
+        }
+      
+        
+        
+        
+    </script>
+
+ 
+
+</head>
+     
+<body>
+    
+    <div id="page_loader1" style="display: none;">
+
+        <div id="apDiv" align="center">
+            <table width="200" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td height="70px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <img src="Content/img/image_559926.gif" width="128" height="64" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;" height="70px;">Thank You !
+                    you will be receiving an email shortly, please click on the link to complete registration process</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+   
+    <div id="wrapper" style="height:700px">
+        <div id="apDiv1">
+            <img src="Content/img/provider-logo.png"  style="margin-left:30px;" />
+            <div id="apDiv7" style="margin-top:-30px;">Welcome to your portal services!</div>
+            <div id="apDiv8" style="margin-top:-28px;">Provided to you by Access My Records, Inc.</div>
+        </div>
+        <div style="width: 940px; height: 620px; margin: 0px auto;">
+            <div id="Box_1" style="margin-left: 30%;margin-top: 3%;">
+                <div id="tabl">
+                    <form method="post" action='@Url.RouteUrl("ProviderLogin")' name="form2" autocomplete="off">
+                        <table width="294" height="189" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td colspan="2">
+                                    <h3>Provider Login</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Access ID Code:</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <label for="textfield"></label>
+                                    <input class="tb7" name="userlogin" type="text" id="userlogin" size="60" maxlength="60" />
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Password:</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input class="tb7" name="password" type="password" id="password" size="32" maxlength="32" /></td>
+                            </tr>
+                            <tr>
+                                <td height="6" colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td width="123" height="41">
+                                    <input  type="submit" name="Submit" value="" onclick="return validatepass1()" />
+                                    
+                                </td>
+                                <td width="171"><a href="#" onclick="ForgotPassword();">Forgot password?</a></td>
+                            </tr>
+                           
+                            <tr>
+                                <td height="4" colspan="2">
+                                    @{
+                                        if (Model != null)
+                                        {
+                                        @Model.CurrentUser.ErrorMessage
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+
+
+                <div id="apDiv2">
+                    <img src="Content/img/register (1).png" width="64" height="64" />
+                </div>
+                <div id="apDiv9" style="padding:12px;margin-top:-1px;">
+
+                    <img id="loader" src="Content/img/login-loader.gif"  style="display:none;" />
+                </div>
+                <div id="apDiv6">
+                    <table width="333" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="206">
+                               @* <h4>New Members Signup</h4>
+                                <input type="hidden" id="hdURL" value='@(Request.Url.Scheme +  "://" + Request.Url.Host + ":" + Request.Url.Port + "/")SignUp' />*@
+                            </td>
+                            <td width="11">&nbsp;</td>
+                            <td width="116">@*<a href="#">
+                                <img style="border-style: none;" src="Content/img/startnow_btn.png" width="115" height="35" id="SignUp" onclick="OpenSignup();"/></a>*@</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+            
+
+        </div>
+        <div style="width: 940px; height: 40px; margin: 0px auto; border-radius: 30px; background-color: #fff; margin-top: 20px;">
+             @{
+               AMR.Core.Utilities.GlobalVar gv = new GlobalVar();
+               }
+            <p style="margin-left: 40px; padding-top: 10px; font-family: Verdana, Geneva, sans-serif; font-size: 12px;">Copyright © 2005 -2014 Access My Records, Inc. - AMR Patient Portal Version 2.0 (@gv.BuildNo)</p>
+             
+        </div>
+
+    </div>
+
+
+    
+    <script type="text/javascript">
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-26323561-2', 'auto');
+        ga('send', 'pageview');
+</script>
+</body>
+</html>
+

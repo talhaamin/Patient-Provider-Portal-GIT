@@ -1,0 +1,48 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Testing.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Testing_PatientDocumentService_PatientDocumentWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:61065/PatientDocumentService.asmx</Value>
+    </Setting>
+    <Setting Name="Testing_PatientService_PatientWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:61065/PatientService.asmx</Value>
+    </Setting>
+    <Setting Name="Testing_AuthenticationService_AuthenticationWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:61065/AuthenticationService.asmx</Value>
+    </Setting>
+    <Setting Name="Testing_ProviderService_ProviderWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:61065/ProviderService.asmx</Value>
+    </Setting>
+    <Setting Name="Testing_MessageService_MessageWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:61065/MessageService.asmx</Value>
+    </Setting>
+    <Setting Name="Testing_DirectService_DirectWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:61065/DirectService.asmx</Value>
+    </Setting>
+    <Setting Name="Testing_ConfigService_ConfigWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:61065/ConfigService.asmx</Value>
+    </Setting>
+    <Setting Name="Testing_ISAuthenticationService_AuthenticationWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.accessmyrecordsportal.com/QAIntegrationWS/AuthenticationService.asmx</Value>
+    </Setting>
+    <Setting Name="Testing_ISConfigService_ConfigWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:63407/ConfigService.asmx</Value>
+    </Setting>
+    <Setting Name="Testing_ISDirectService_Direct_x002B_WS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:63407/DirectService.asmx</Value>
+    </Setting>
+    <Setting Name="Testing_ISMessageService_MessageWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.accessmyrecordsportal.com/QAIntegrationWS/MessageService.asmx</Value>
+    </Setting>
+    <Setting Name="Testing_ISReportService_ReportWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.accessmyrecordsportal.com/QAIntegrationWS/ReportService.asmx</Value>
+    </Setting>
+    <Setting Name="Testing_ISPatientService_PatientWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.accessmyrecordsportal.com/QAIntegrationWS/PatientService.asmx</Value>
+    </Setting>
+    <Setting Name="Testing_ISProviderService_ProviderWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:63407/ProviderService.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

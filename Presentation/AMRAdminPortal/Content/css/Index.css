@@ -1,0 +1,11 @@
+﻿  .create_link:hover {
+            text-decoration-color: blue;
+            text-decoration: dashed;
+        }
+
+#my-simple-upload {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    display: block;
+}

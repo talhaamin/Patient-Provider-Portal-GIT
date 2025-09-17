@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{11DC3941-DC60-4D46-89A0-FF420F3CB516}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AMR.Controllers</RootNamespace>
+    <AssemblyName>AMR.Controllers</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Presentation\AMRPatientPortal\bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminControllerFactory.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ClinicalSummaryController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MedicationController.cs" />
+    <Compile Include="Controllers\PremiumController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="AuthenticationExtensions\Authentication.cs" />
+    <Compile Include="CustomActionFilter\AnotherSessionRedirectionFilter.cs" />
+    <Compile Include="CustomActionFilter\AdminAnotherSessionRedirectionFilter.cs" />
+    <Compile Include="CustomActionFilter\FilterManager.cs" />
+    <Compile Include="PatientControllerFactory.cs" />
+    <Compile Include="Controllers\Base\BaseController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderControllerFactory.cs" />
+    <Compile Include="Routing\RoutingManager.cs" />
+    <Compile Include="Service References\DataAuthenticationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DataDirectService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DataMessageService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DataPatientConfigService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DataPatientDocumentService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DataPatientService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DataProviderService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\DataSources\AMR.Core.DataAuthenticationService.AuthenticationResponse.datasource" />
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.AuthenticateCareProviderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.AuthenticateInterfaceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.AuthenticateMedicalSummaryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.AuthenticatePatientInterfaceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.AuthenticationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.ChangePasswordResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.ChangePatientPasswordAdminResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.ChangeProviderPasswordAdminResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.ChangeSecurityQuestionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.GetPatientLastLoginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.GetPatientSecurityInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.GetSecurityQuestionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.GetUserTypeLinkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.LogoutUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.PatientLoginData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.PatientSecurityData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.ResetLockedAccountResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.ResetPasswordResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AMR.Controllers.DataAuthenticationService.UserData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAuthenticationService\AuthenticationService.wsdl" />
+    <None Include="Service References\DataDirectService\AMR.Controllers.DataDirectService.DirectResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataDirectService\AMR.Controllers.DataDirectService.SendDirectEmailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataDirectService\AMR.Controllers.DataDirectService.ValidateEmailAddressResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataDirectService\DirectService.wsdl" />
+    <None Include="Service References\DataMessageService\AMR.Controllers.DataMessageService.CodeTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataMessageService\AMR.Controllers.DataMessageService.EmailMessageData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataMessageService\AMR.Controllers.DataMessageService.MessageAttachmentData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataMessageService\AMR.Controllers.DataMessageService.MessageData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataMessageService\AMR.Controllers.DataMessageService.MessageTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataMessageService\AMR.Controllers.DataMessageService.MessageUnread.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataMessageService\MessageService.wsdl" />
+    <None Include="Service References\DataPatientConfigService\AMR.Controllers.DataPatientConfigService.CodeTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientConfigService\AMR.Controllers.DataPatientConfigService.CodeTableValue.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientConfigService\AMR.Controllers.DataPatientConfigService.FacilityData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientConfigService\AMR.Controllers.DataPatientConfigService.FacilitySetupResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientConfigService\AMR.Controllers.DataPatientConfigService.FacilityTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientConfigService\AMR.Controllers.DataPatientConfigService.OrganizationData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientConfigService\AMR.Controllers.DataPatientConfigService.OrganizationTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientConfigService\AMR.Controllers.DataPatientConfigService.PracticeData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientConfigService\AMR.Controllers.DataPatientConfigService.PracticeTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientConfigService\ConfigService.wsdl" />
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.CCDPostResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.MedicalPortfolioData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientAdvisorData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientAllergyData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientCareDocumentData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientCCDResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientCCDTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientClinicalDocumentData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientClinicalDocumentDataApp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientDocTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientDoctorData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientDocumentData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientDocumentResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientEmergencyData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientFamilyHistData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientImmunizationData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientInsuranceData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientLabResultData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientMedicalDocumentData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientMedicalHistData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientMedicalTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientMedicationData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientNoteData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientPharmacyData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientPlanOfCareData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientPolicyData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientProblemData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientProcedureData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientSocialHistData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientSocialSelfData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientSummaryTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientSurgicalHistData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientVisitCCD.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\AMR.Controllers.DataPatientDocumentService.PatientVitalSignData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientDocumentService\PatientDocumentService.wsdl" />
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.BillPaymentData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.BillPaymentTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.BillRateData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.BillRateTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.CareProviderData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientAccountLinkData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientAdmin.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientFacilityOptionsData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientFacilityTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientImageData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientOrganData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientPartnerTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientRepData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientShareData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientShareResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientSummaryData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientVisitData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientVisitTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\AMR.Controllers.DataPatientService.PatientWebSettingData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataPatientService\PatientService.wsdl" />
+    <None Include="Service References\DataProviderService\AMR.Controllers.DataProviderService.ProviderAdminData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataProviderService\AMR.Controllers.DataProviderService.ProviderData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataProviderService\AMR.Controllers.DataProviderService.ProviderImageData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataProviderService\AMR.Controllers.DataProviderService.ProviderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataProviderService\AMR.Controllers.DataProviderService.ProviderTableData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataProviderService\ProviderService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AMR.Core\AMR.Core.csproj">
+      <Project>{e778f762-2d8a-4d50-8bed-6c9e57647892}</Project>
+      <Name>AMR.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AMR.Models\AMR.Models.csproj">
+      <Project>{3efd479e-fa9b-42a5-bcd5-3487fce76f98}</Project>
+      <Name>AMR.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DataAuthenticationService\" />
+    <WCFMetadataStorage Include="Service References\DataDirectService\" />
+    <WCFMetadataStorage Include="Service References\DataMessageService\" />
+    <WCFMetadataStorage Include="Service References\DataPatientConfigService\" />
+    <WCFMetadataStorage Include="Service References\DataPatientDocumentService\" />
+    <WCFMetadataStorage Include="Service References\DataPatientService\" />
+    <WCFMetadataStorage Include="Service References\DataProviderService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataDirectService\DirectService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataDirectService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataDirectService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataDirectService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataMessageService\MessageService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataMessageService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataMessageService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataMessageService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataAuthenticationService\AuthenticationService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataAuthenticationService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataAuthenticationService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataAuthenticationService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataProviderService\ProviderService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataProviderService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataProviderService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataProviderService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataPatientConfigService\ConfigService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataPatientConfigService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataPatientConfigService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataPatientConfigService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataPatientService\PatientService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataPatientService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataPatientService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataPatientService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataPatientDocumentService\PatientDocumentService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataPatientDocumentService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataPatientDocumentService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataPatientDocumentService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

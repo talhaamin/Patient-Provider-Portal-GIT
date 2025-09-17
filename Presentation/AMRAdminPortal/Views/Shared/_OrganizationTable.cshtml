@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AMR.Models.OrangizationModel>
+
+
+<table class="table">
+
+        <thead>
+
+            <tr>
+
+                 <th>Organization ID</th>
+                <th>Organization Name</th>
+                <th>Address</th>
+                <th>Edit</th>
+                
+            </tr>
+
+        </thead>
+
+        <tbody>
+            @if(Model != null && Model.Count() > 0)
+            {
+                int counter=0;
+                foreach (var item in Model)
+                {
+                    System.Text.StringBuilder jsonString = new System.Text.StringBuilder();
+
+                    jsonString.Append(" { ");
+                    jsonString.Append("\"OrganizationId\": \"" + item.OrganizationId + "\",");
+                    jsonString.Append("\"OrganizationName\":  \"" + item.OrganizationName + "\",");
+                    jsonString.Append("\"Address1\":  \"" + item.Address1 + "\",");
+                    jsonString.Append("\"Address2\":  \"" + item.Address2 + "\",");
+                    jsonString.Append("\"Address3\":  \"" + item.Address3 + "\",");
+                    jsonString.Append("\"City\":  \"" + item.City + "\",");
+                    jsonString.Append("\"State\":  \"" + item.State + "\",");
+                    jsonString.Append("\"PostalCode\":  \"" + item.PostalCode + "\",");
+                    jsonString.Append("\"CountryCode\": \"" + item.CountryCode + "\"");
+                    jsonString.Append("}");
+            <tr style="cursor:pointer;" onclick="OpenPractice(@item.OrganizationId);">
+                <td><a style="cursor:pointer;" onclick="OpenPractice(@item.OrganizationId);">@item.OrganizationId</a></td>
+                <td>@item.OrganizationName <input type="hidden" id="hdOrganization-@item.OrganizationId" value="@jsonString.ToString()" /></td>
+                      @if(item.Address1 =="" && item.State =="" && item.City =="" && item.PostalCode =="")
+                {
+                    <td></td>
+                }
+                else
+                {
+                   <td>@item.Address1 ,@item.City ,@item.State ,@item.PostalCode</td>
+                }
+                <td><img src="Content/img/Edit.png" style="margin-right: 50px;  height:20px;cursor:pointer; " onclick="EditOrganizaiton(@item.OrganizationId);"></td>
+
+                
+            </tr>
+                    counter++;
+                }
+            }
+             else
+            {
+            <tr>
+                <td colspan="3">No Information Found</td>
+            </tr>
+            }
+        </tbody>
+
+    </table>

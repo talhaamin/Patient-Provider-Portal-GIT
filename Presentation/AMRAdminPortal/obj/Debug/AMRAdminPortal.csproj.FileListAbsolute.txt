@@ -1,0 +1,102 @@
+F:\aneel\Presentation\AMRAdminPortal\bin\AMRAdminPortal.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\AMRAdminPortal.pdb
+F:\aneel\Presentation\AMRAdminPortal\bin\AMR.Controllers.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\AMR.Core.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\AMR.Models.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\Microsoft.Web.Infrastructure.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\Newtonsoft.Json.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Net.Http.Formatting.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.Helpers.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.Http.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.Http.WebHost.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.Mvc.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.Razor.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.WebPages.Deployment.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.WebPages.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.WebPages.Razor.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\HtmlAgilityPack.dll
+F:\aneel\Presentation\AMRAdminPortal\bin\AMR.Controllers.pdb
+F:\aneel\Presentation\AMRAdminPortal\bin\AMR.Core.pdb
+F:\aneel\Presentation\AMRAdminPortal\bin\AMR.Models.pdb
+F:\aneel\Presentation\AMRAdminPortal\bin\Newtonsoft.Json.xml
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Net.Http.Formatting.xml
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.Helpers.xml
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.Http.xml
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.Http.WebHost.xml
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.Mvc.xml
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.Razor.xml
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.WebPages.xml
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.WebPages.Deployment.xml
+F:\aneel\Presentation\AMRAdminPortal\bin\System.Web.WebPages.Razor.xml
+F:\aneel\Presentation\AMRAdminPortal\bin\HtmlAgilityPack.pdb
+F:\aneel\Presentation\AMRAdminPortal\bin\HtmlAgilityPack.xml
+F:\aneel\Presentation\AMRAdminPortal\obj\Debug\AMRAdminPortal.csprojResolveAssemblyReference.cache
+F:\aneel\Presentation\AMRAdminPortal\obj\Debug\AMRAdminPortal.dll
+F:\aneel\Presentation\AMRAdminPortal\obj\Debug\AMRAdminPortal.pdb
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\AMRAdminPortal.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\AMRAdminPortal.pdb
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\AMR.Controllers.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\AMR.Core.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\AMR.Models.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\Microsoft.Web.Infrastructure.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\Newtonsoft.Json.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Helpers.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Mvc.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Razor.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\System.Web.WebPages.Deployment.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\System.Web.WebPages.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\System.Web.WebPages.Razor.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\HtmlAgilityPack.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\AMR.Controllers.pdb
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\AMR.Core.pdb
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\AMR.Models.pdb
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\Newtonsoft.Json.xml
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Helpers.xml
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Mvc.xml
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Razor.xml
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\System.Web.WebPages.xml
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\System.Web.WebPages.Deployment.xml
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\System.Web.WebPages.Razor.xml
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\HtmlAgilityPack.pdb
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\bin\HtmlAgilityPack.xml
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\obj\Debug\AMRAdminPortal.csprojResolveAssemblyReference.cache
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\obj\Debug\AMRAdminPortal.dll
+C:\SourceControl\AMRPortal\trunk\Presentation\AMRAdminPortal\obj\Debug\AMRAdminPortal.pdb
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\AMRAdminPortal.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\AMRAdminPortal.pdb
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\AMR.Controllers.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\AMR.Core.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\AMR.Models.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\Microsoft.Web.Infrastructure.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\Newtonsoft.Json.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Net.Http.Formatting.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Helpers.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Http.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Http.WebHost.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Mvc.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Razor.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.WebPages.Deployment.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.WebPages.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.WebPages.Razor.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\HtmlAgilityPack.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\AMR.Controllers.pdb
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\Newtonsoft.Json.xml
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Net.Http.Formatting.xml
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Helpers.xml
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Http.xml
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Http.WebHost.xml
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Mvc.xml
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.Razor.xml
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.WebPages.xml
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.WebPages.Deployment.xml
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\System.Web.WebPages.Razor.xml
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\HtmlAgilityPack.pdb
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\HtmlAgilityPack.xml
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\obj\Debug\AMRAdminPortal.csprojResolveAssemblyReference.cache
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\obj\Debug\AMRAdminPortal.dll
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\obj\Debug\AMRAdminPortal.pdb
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\AMR.Core.pdb
+F:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\bin\AMR.Models.pdb
+E:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\obj\Debug\AMRAdminPortal.csprojResolveAssemblyReference.cache
+E:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\obj\Debug\AMRAdminPortal.dll
+E:\ANEEL APP\AMR Portal\trunk\Presentation\AMRAdminPortal\obj\Debug\AMRAdminPortal.pdb

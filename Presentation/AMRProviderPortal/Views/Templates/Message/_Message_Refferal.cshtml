@@ -1,0 +1,197 @@
+﻿@model IEnumerable<AMR.Models.ProviderMessageModel>
+<table class="box-table-a" id="tbl-MessageReferral" summary="Medications">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="margin-right: 10px;">
+                                @*<input name="check" type="checkbox" class="CheckAll" onclick="checkAll('chk5');"/>*@
+                                  <input name="check" type="checkbox" class="CheckAll" id="chk_R" onclick="checkAll(this);" style="margin-left:6px;" />
+                            </th>
+                            <th scope="col">
+                                 <div style="margin-left:10px; " >
+                                    From
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: -130px;">
+                                    Subject
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    Received
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 10px;">
+                                    Status
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: -10px;">
+                                    Reply
+                                </div>
+                            </th>
+@*                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    Message
+                                </div>
+                            </th>*@
+                             @*<th scope="col">
+                                
+                                    Details
+                               
+                            </th>*@
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                          @if (Model != null && Model.Count()>0)
+                        {
+                            int counter = 0;
+                            string classrow = "";
+                            foreach (var item in Model)
+                        {
+                            if (item.MessageType == "Referral Message" && item.MessageStatusId != 7)
+                            {
+                                System.Text.StringBuilder jsonString = new System.Text.StringBuilder();
+
+                                jsonString.Append(" { ");
+                                jsonString.Append("\"ID\": \"" + item.MessageDetailId + "\",");
+                                jsonString.Append("\"FacilityName\":  \"" + item.FacilityName + "\",");
+                                jsonString.Append("\"From\":  \"" + item.ProviderFrom + "\",");
+                                // jsonString.Append("\"From\":  \"" + ((item.PatientMessageModel.CreatedByName != null && item.PatientMessageModel.CreatedByName.Length > 0) ? item.PatientMessageModel.CreatedByName : item.PatientMessageModel.ProviderName_From) + "\",");
+                                jsonString.Append("\"To\":  \"" + item.ProviderTo + "\",");
+                                jsonString.Append("\"MessageType\":  \"" + item.MessageType + "\",");
+                               
+                                var Resinput = item.MessageResponse;
+                                Resinput = Resinput.Replace("\'", "&#39;");
+                                Resinput.Replace("\\\"", "&#39;");
+                                Resinput = Resinput.Replace("\n", "\\n");
+                                Resinput = Resinput.Replace("\\n", "<br>");
+                                
+                               // var Resoutput = Resinput.Replace("\'", "&#39;");
+                              //  Resoutput.Replace("\\\"", "&#39;");
+                                jsonString.Append("\"MessageResponse\":  \"" + Resinput + "\",");
+                                jsonString.Append("\"MessageId\":  \"" + item.MessageId + "\",");
+                                jsonString.Append("\"ProviderIdFrom\":  \"" + item.ProviderId_From + "\",");
+                                jsonString.Append("\"ProviderIdTo\":  \"" + item.ProviderId_To + "\",");
+                                jsonString.Append("\"MessageTypeId\":  \"" + item.MessageTypeId + "\",");
+                                jsonString.Append("\"FacilityId\":  \"" + item.FacilityId + "\",");
+                                jsonString.Append("\"MessageUrgencyId\": \"" + item.MessageUrgency + "\",");
+                              
+                                var Reqinput = item.MessageRequest;
+                                Reqinput = Reqinput.Replace("\'", "&#39;");
+                                Reqinput = Reqinput.Replace("\n", "\\n");
+                                Reqinput = Reqinput.Replace("\\n", "<br>");
+                                Reqinput.Replace("\\\"", "&#39;");
+                                
+                               // var Reqoutput = Reqinput.Replace("\'", "&#39;");
+                               // Reqoutput.Replace("\\\"", "&#39;");
+                                jsonString.Append("\"MessageRequest\": \"" + Reqinput + "\",");
+                                jsonString.Append("\"PreferredPeriod\": \"" + item.PreferredPeriod + "\",");
+                                jsonString.Append("\"MessageUrgency\": \"" + item.MessageUrgency + "\",");
+                                jsonString.Append("\"PreferredWeekDay\": \"" + item.PreferredWeekDay + "\",");
+                                jsonString.Append("\"AppointmentStart\": \"" + item.AppointmentStart + "\",");
+                                jsonString.Append("\"PreferredTime\": \"" + item.PreferredTime + "\",");
+                                jsonString.Append("\"MedicationName\": \"" + item.MedicationName + "\",");
+                                jsonString.Append("\"PharmacyName\": \"" + item.PharmacyName + "\",");
+                                jsonString.Append("\"PharmacyAddress\": \"" + item.PharmacyAddress + "\",");
+                                jsonString.Append("\"NoOfRefills\": \"" + item.NoOfRefills.ToString() + "\",");
+                                var Visinput = item.VisitReason;
+                                Visinput = Visinput.Replace("\'", "&#39;");
+                                Visinput = Visinput.Replace("\n", "\\n");
+                                Visinput = Visinput.Replace("\\n", "<br>");
+                                Visinput.Replace("\\\"", "&#39;");
+                              //  var Visoutput = Visinput.Replace("\'", "&#39;");
+                             //   Visoutput.Replace("\\\"", "&#39;");
+                                jsonString.Append("\"VisitReason\": \"" + Visinput + "\",");
+                                jsonString.Append("\"MessageRead\": \"" + item.MessageRead + "\",");
+                                jsonString.Append("\"PatientName\": \"" + item.PatientName + "\",");
+                                jsonString.Append("\"HeaderID\": \"" + item.MessageId + "\"");
+                                jsonString.Append("}");
+                                if (counter % 2 == 0)
+                                {
+                                    classrow = "r0";
+                                }
+                                else
+                                {
+                                    classrow = "r1";
+                                }   
+                            <tr class="@classrow" id="ReferralMessageHeader-@item.MessageDetailId" onclick="ProviderReferralRequestDetail(@item.MessageDetailId,'@classrow');">
+                                <td>
+                                     <input id="hdReferralDetailJson-@item.MessageDetailId.ToString()" type="hidden" value="@jsonString.ToString()"/>
+                                    <input type="checkbox" id='chkR'  value="1" name="chkReferal[]" class="@item.MessageId"  style="margin-left:5px;" />
+                                   @*<input type="checkbox" id="chk5" value="1" name="chk[]" />*@
+                                </td>
+                                <td>
+                                    <div style="margin-left: 10px;width:170px;color:@if (item.MessageRead == false)
+                                                                             {
+                                                                                <text>orange; font-weight:bold; </text>}
+                                                                                    else
+                                                                                    {<text>#666699</text>}">
+                                        
+                                    @item.PatientName
+                                   </div>
+                                </td>
+                                <td>
+                                    <div style="margin-left: -130px;width:120px;color:@if (item.MessageRead == false)
+                                                                                   {
+                                                                                 <text>orange; font-weight:bold; </text>}
+                                                                                   else
+                                                                                   {<text>#666699</text>}">
+                                        @item.MessageType
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="margin-left: 20px;width:170px;color:@if (item.MessageRead == false)
+                                                                                    {
+                                                                               <text>orange; font-weight:bold; </text>}
+                                                                                    else
+                                                                                    {<text>#666699</text>}">
+                                          @*@item.FacilityName*@
+                                         @item.DateCreated
+                                    </div>
+                                </td>
+
+                                <td>
+                                         <div style="margin-left: 10px;width:120px;color:@if (item.MessageRead == false)
+                                                                                         {
+                                                                                 <text>orange; font-weight:bold; </text>}
+                                                                                         else
+                                                                                         {<text>#666699</text>}">
+                                        @item.MessageStatus
+                                    </div>
+                                </td>
+                                <td>
+                                        <div style="margin-left:-10px;width:50px;color:@if (item.MessageRead == false)
+                                                                                     {
+                                                                                 <text>orange; font-weight:bold; </text>}
+                                                                                     else
+                                                                                     {<text>#666699</text>}">
+                                        <img src="Content/img/reply.png" style="margin-right: 50px; width:20px; height:20px;cursor:pointer; " onclick="ReferralReply(@item.MessageDetailId);">
+                                    </div>
+                                </td>
+                                @*<td>
+                                          <div style="margin-left: 20px;width:120px;color:@if (item.MessageUnRead > 0)
+                                                                                          {
+                                                                                 <text>orange; font-weight:bold; </text>}
+                                                                                          else
+                                                                                          {<text>#666699</text>}">
+                                            
+                                         @((item.MessageRequest.Length > 15) ? item.MessageRequest.Substring(0, 15) + "..." : item.MessageRequest)
+                                    </div>
+                                </td>*@
+                                @*<td>
+                                       <img src="Content/img/details.png" onclick="ReferralRequestDetail(@item.MessageId);"/>
+                                </td>*@
+                            </tr>
+                                                                                          counter++;
+                            }
+                        }
+                        }
+                          else
+                          {
+                          <tr><td>No Information Available</td></tr>
+                        }
+                    </tbody>
+                </table>

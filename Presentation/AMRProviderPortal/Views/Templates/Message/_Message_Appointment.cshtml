@@ -1,0 +1,199 @@
+﻿@model IEnumerable<AMR.Models.ProviderMessageModel>
+<table class="box-table-a" id="tbl-MessageAppointment" summary="AppointmentsGrid">
+                    <thead>
+                       
+                                  <th scope="col" >
+                            @*   <input name="check" type="checkbox" class="CheckAll" onclick="checkAll('chk3');"/>*@
+                                        <input style="margin-left:6px;" name="check" type="checkbox" class="CheckAll" id="chk_A" onclick="checkAll(this);" />
+                               
+                            </th>
+                            <th scope="col">
+                                <div>
+                                    From
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div>
+                                    Subject
+                                </div>
+                            </th>
+                            <th scope="col">
+                             <div>
+                                    Received
+                              </div>
+                            </th>
+                            <th scope="col" >
+                               <div>
+                                    Status
+                                </div>
+                            </th>
+                            <th scope="col" >
+                                <div>
+                                    Reply
+                                </div>
+                            </th>
+                            @*  <th scope="col">
+                                <div>
+                                    Status
+                                </div>
+                            </th>*@
+                            @*<th scope="col">
+                                
+                                    Details
+                               
+                            </th>*@
+                        
+                    </thead>
+                    <tbody>
+                         @if (Model != null && Model.Count()>0)
+                        {
+                            int counter = 0;
+                            string classrow = "";
+                            foreach (var item in Model)
+                        {
+                            if (item.MessageType == "Appointment Request" && item.MessageStatusId != 7)
+                            {
+                                System.Text.StringBuilder jsonString = new System.Text.StringBuilder();
+
+
+                                jsonString.Append(" { ");
+                                jsonString.Append("\"ID\": \"" + item.MessageDetailId + "\",");
+                                jsonString.Append("\"FacilityName\":  \"" + item.FacilityName + "\",");
+                                jsonString.Append("\"From\":  \"" + item.ProviderFrom + "\",");
+                                // jsonString.Append("\"From\":  \"" + ((item.PatientMessageModel.CreatedByName != null && item.PatientMessageModel.CreatedByName.Length > 0) ? item.PatientMessageModel.CreatedByName : item.PatientMessageModel.ProviderName_From) + "\",");
+                                jsonString.Append("\"To\":  \"" + item.ProviderTo + "\",");
+                                jsonString.Append("\"MessageType\":  \"" + item.MessageType + "\",");
+                                var Resinput = item.MessageResponse;
+                                Resinput = Resinput.Replace("\'", "&#39;");
+                                Resinput.Replace("\\\"", "&#39;");
+                                Resinput = Resinput.Replace("\n", "\\n");
+                                Resinput = Resinput.Replace("\\n", "<br>");
+                             //   var Resoutput = Resinput.Replace("\'", "&#39;");
+                                //Resoutput.Replace("\\\"", "&#34;");
+                                jsonString.Append("\"MessageResponse\":  \"" + Resinput + "\",");
+                                jsonString.Append("\"MessageId\":  \"" + item.MessageId + "\",");
+                                jsonString.Append("\"ProviderIdFrom\":  \"" + item.ProviderId_From + "\",");
+                                jsonString.Append("\"ProviderIdTo\":  \"" + item.ProviderId_To + "\",");
+                                jsonString.Append("\"MessageTypeId\":  \"" + item.MessageTypeId + "\",");
+                                jsonString.Append("\"FacilityId\":  \"" + item.FacilityId + "\",");
+                                jsonString.Append("\"MessageUrgency\": \"" + item.MessageUrgency + "\",");
+                                var Reqinput = item.MessageRequest;
+                                Reqinput = Reqinput.Replace("\'", "&#39;");
+                                Reqinput = Reqinput.Replace("\n", "\\n");
+                                Reqinput = Reqinput.Replace("\\n", "<br>");
+                                Reqinput.Replace("\\\"", "&#39;");
+                              
+                              //  var Reqoutput = Reqinput.Replace("\'", "&#39;");
+                             //   Reqoutput.Replace("\\\"", "&#39;");
+                                jsonString.Append("\"MessageRequest\": \"" + Reqinput + "\",");
+                                jsonString.Append("\"PreferredPeriod\": \"" + item.PreferredPeriod + "\",");
+                                jsonString.Append("\"MessageUrgency\": \"" + item.MessageUrgency + "\",");
+                                jsonString.Append("\"PreferredWeekDay\": \"" + item.PreferredWeekDay + "\",");
+                                jsonString.Append("\"AppointmentStart\": \"" + Convert.ToDateTime(item.AppointmentStart).ToShortDateString() + "\",");
+                                jsonString.Append("\"AppointmentEnd\": \"" + Convert.ToDateTime(item.AppointmentEnd).ToShortDateString() + "\",");
+                                jsonString.Append("\"PreferredTime\": \"" + item.PreferredTime + "\",");
+                             
+                                var Visoutput = item.VisitReason;
+                                Visoutput = Visoutput.Replace("\'", "&#39;");
+                                Visoutput = Visoutput.Replace("\n", "\\n");
+                                Visoutput = Visoutput.Replace("\\n", "<br>");
+                                Visoutput.Replace("\\\"", "&#39;");
+                            //    var Visoutput = Visinput.Replace("\'", "&#39;");
+                               // Visoutput.Replace("\\\"", "&#39;");
+                                
+                                jsonString.Append("\"VisitReason\": \"" + Visoutput + "\",");
+                                jsonString.Append("\"MessageRead\": \"" + item.MessageRead + "\",");
+                                jsonString.Append("\"PatientName\": \"" + item.PatientName + "\",");
+                                jsonString.Append("\"HeaderID\": \"" + item.MessageId + "\"");
+                                jsonString.Append("}");
+                                if (counter % 2 == 0)
+                                {
+                                    classrow = "r0";
+                                }
+                                else
+                                {
+                                    classrow = "r1";
+                                }   
+                           <tr class="@classrow" id="AppointmentMessage-@item.MessageDetailId" onclick="ProviderAppointmentDetail(@item.MessageDetailId,'@classrow');">
+                         
+                           
+                        <td >
+                            <input id="hdAppointmentDetailJson-@item.MessageDetailId.ToString()" type="hidden" value="@jsonString.ToString()"/>
+                             <input style="margin-left:5px;" type="checkbox" id="chkA" value="1" name="chk3[]" class="@item.MessageId"/>
+                            
+                        </td>
+                                
+                        <td style="color:@if (item.MessageRead == false)
+                                                                             {
+                                                                                 <text>orange; font-weight:bold; </text>
+                                                                             }
+                                                                                                  else
+                                                                                                  {<text>#666699</text>}">
+                  
+                                        @*@Convert.ToDateTime(item.AppointmentStart)*@
+                            @item.PatientName
+                          
+                        </td>
+                        <td style="color:@if (item.MessageRead == false)
+                                                                             {
+                                                                                 <text>orange; font-weight:bold; </text>}
+                                                                                                  else
+                                                                                                  {<text>#666699</text>}">
+                                    
+                                        @item.MessageType
+                                    
+                                </td>
+
+                                <td style="color:@if (item.MessageRead == false)
+                                                                             {
+                                                                                <text>orange; font-weight:bold; </text>}
+                                                                                                  else
+                                                                                                  {<text>#666699</text>}">
+                          
+                                        @item.DateCreated
+                                        @*@item.VisitReason*@
+                           
+                        </td>
+                        <td style="color:@if (item.MessageRead == false)
+                                                                             {
+                                                                               <text>orange; font-weight:bold; </text>}
+                                                                                                  else
+                                                                                                  {<text>#666699</text>}">
+                           
+                                       @* @item.FacilityName*@
+                            @item.MessageStatus
+                           
+                        </td>
+                        <td style="color:@if (item.MessageRead == false)
+                                                                             {
+                                                                                 <text>orange; font-weight:bold; </text>}
+                                         else
+                                         {<text>#666699</text>}">
+                              
+                                       <img src="Content/img/reply.png" style="width:20px; height:20px;cursor:pointer; " onclick="AppointmentReply(@item.MessageDetailId);">
+                          
+                        </td>
+                                @*<td style="color:@if (item.MessageUnRead > 0)
+                                                 {
+                                                                               <text>orange; font-weight:bold; </text>}
+                                                 else
+                                                 {<text>#666699</text>}">
+                                   
+                                       @item.MessageStatus
+                        
+                        </td>*@
+                                @*<td>
+                                 
+                                       <img src="Content/img/details.png" onclick="AppointmentDetail(@item.MessageId);"/>
+                                </td>*@
+                    </tr>
+                                                 counter++;
+                            }
+                        }
+                        }
+                         else
+                         {
+                          <tr><td>No Information Available</td></tr>
+                        }
+                    </tbody>
+                </table>

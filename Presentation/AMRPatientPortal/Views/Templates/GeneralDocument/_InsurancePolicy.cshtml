@@ -1,0 +1,50 @@
+﻿@model IEnumerable<AMR.Models.InsurancePolicyModel>
+@using System.Web.Script.Serialization;
+
+<table class="box-table-a" id="tbl-InsurancePolicy" summary="GeneralDocuments">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Insurance Type</th>
+                                    <th scope="col">Company </th>
+                                    <th scope="col">Agent</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col" style="width:40px;">Edit</th>
+                                    <th scope="col" style="width:40px;">Delete</th>
+                               </tr>
+                            </thead>
+                            <tbody id="tbodyInsurancePolicyList">
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var policy in Model)
+                                    {
+                                        var jsonString = new JavaScriptSerializer().Serialize(policy);
+                                        
+                                        <tr @((counter % 2 == 0) ? "class=r1" : "class=r0")>
+                                            <td>
+                                                 <input type="hidden" id="@policy.PatientPolicyId" value="@jsonString"/>
+                                            </td>
+                                            <td>@((!string.IsNullOrEmpty(policy.PolicyTypeName))?policy.PolicyTypeName : policy.Value)</td>
+                                            <td>@policy.Company</td>
+                                            <td>@policy.Agent</td>
+                                            <td>@policy.AgentPhone</td>
+                                            <td align="center">
+                                                    <img onclick="OpenEditInsurancePolicyForm('@policy.PatientPolicyId');" id="imgEditInsurancePolicy"  src="@Url.Content("~/Content/img/edit.png")" />
+                                            </td>
+                                            <td align="center">
+                                                    <img onclick="deleteInsurancePolicy('@policy.PatientPolicyId');" id="imgDeleteInsurancePolicy"  src="@Url.Content("~/Content/img/delete.png")" />
+                                            </td>
+                                        </tr>
+                                        counter++;
+                                    }
+                                }
+                                else
+                                {
+                                    <tr><td></td><td style=" width: 200px;">No Information Available</td></tr>
+                                }        
+                            </tbody>
+</table>
+
+
+

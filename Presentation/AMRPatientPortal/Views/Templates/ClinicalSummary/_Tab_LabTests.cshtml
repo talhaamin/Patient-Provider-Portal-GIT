@@ -1,0 +1,106 @@
+﻿@model IEnumerable<AMR.Models.LabResultModel>
+@using System.Web.Script.Serialization;
+
+<table class="box-table-a" id="tab-Labtest" summary="Appointments">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Lab Name</th>
+                                                <th scope="col">Source</th>
+                                                <th scope="col">Provider</th>
+                                                <th scope="col">Order Date</th>
+                                                <th scope="col">Collection Date</th>
+                                                <th scope="col">Report Date</th>
+                                                <th scope="col">Review Date</th>
+                                                <th scope="col">Result</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null && Model.Count() > 0)
+                                            {
+                                                int counter=0;
+                                                foreach (var item in Model)
+                                                {
+                                                    @*
+                                                    StringBuilder jsonLabString = new StringBuilder();
+
+                                                    jsonLabString.Append("{");
+                                                    jsonLabString.Append("\"ID\": \"" + item.LabResultCntr + "\",");
+                                                    jsonLabString.Append("\"LabName\": \"" + item.LabName + "\",");
+                                                    jsonLabString.Append("\"CollectionDate\":  \"" + item.CollectionDate.ToShortDateString() + "\",");
+                                                    jsonLabString.Append("\"ReportDate\":  \"" + item.ReportDate.ToShortDateString() + "\",");
+                                                    jsonLabString.Append("\"ReviewDate\":  \"" + item.ReviewDate.ToShortDateString() + "\",");
+                                                    jsonLabString.Append("\"CollectionDate\":  \"" + item.CollectionDate.ToShortDateString() + "\",");
+                                                    jsonLabString.Append("\"OrderDate\": \"" + item.OrderDate.ToShortDateString() + "\",");
+                                                    jsonLabString.Append("\"PatientId\":  \"" + item.PatientId + "\",");
+                                                    jsonLabString.Append("\"Requisiton\":  \"" + item.Requisiton + "\",");
+                                                    jsonLabString.Append("\"Reviewer\":  \"" + item.Reviewer + "\",");
+                                                    jsonLabString.Append("\"Specimen\":  \"" + item.Specimen + "\",");
+                                                    jsonLabString.Append("\"Valid\":  \"" + item.Valid + "\",");
+                                                    jsonLabString.Append("\"VisitId\":  \"" + item.VisitId + "\",");
+                                                    jsonLabString.Append("\"SpecimenSource\":  \"" + item.SpecimenSource + "\",");
+                                                    jsonLabString.Append("\"ProviderId_Requested\":  \"" + item.ProviderId_Requested + "\",");
+                                                    jsonLabString.Append("\"PatientId\":  \"" + item.PatientId + "\",");
+                                                    jsonLabString.Append("\"FacilityId\":  \"" + item.FacilityId + "\",");
+                                                    jsonLabString.Append("\"Flag\":  \"" + item.Valid + "\"");
+                                                    jsonLabString.Append("}");
+                                                    *@
+                                                    
+                                                    //Due to date issue in JSON Serializer, we need to do one task extra...
+                                                    string CollectionDate = item.CollectionDate.HasValue ? item.CollectionDate.Value.ToShortDateString() : null;
+                                                    string OrderDate = item.OrderDate.HasValue ? item.OrderDate.Value.ToShortDateString() : null;
+                                                    string ReviewDate = item.ReviewDate.HasValue ? item.ReviewDate.Value.ToShortDateString() : null;
+                                                    var ObjectOnTheFly = new {
+                                                        FacilityId = item.FacilityId,
+                                                        VisitId   = item.VisitId,
+
+                                                        OrderDate = OrderDate,
+                                                        CollectionDate = CollectionDate,
+                                                        ReportDate = item.ReportDate.ToShortDateString(),
+                                                        ProviderId_Requested = item.ProviderId_Requested,
+                                                        ReviewDate = ReviewDate,
+                                                        
+                                                        Requisiton = item.Requisiton,
+                                                        Specimen = item.Specimen,
+                                                        SpecimenSource = item.SpecimenSource,
+                                                        Reviewer = item.Reviewer,
+                                                        LabName = item.LabName
+                                                        
+                                                    };
+
+                                                    var jsonStr = new JavaScriptSerializer().Serialize(ObjectOnTheFly);
+                                                   
+                                                        
+                                                    //DateTime? OrderDate = item.OrderDate.HasValue ? item.OrderDate.Value : item.OrderDate.GetValueOrDefault();
+                                                    
+                                                        //item.CollectionDate == null ? (DateTime?)null : Convert.ToDateTime(item.CollectionDate);
+                                                  
+                                                    //Model.EventType.HasValue ? Model.EventType.Value.ToShortDateString() : "No date planned"
+                                                    <tr class="@((counter % 2 == 0) ? "r1" : "r0")">
+
+                                                        <td><input type="hidden" id="hdlab-@item.LabResultCntr"  value="@jsonStr"/>@item.LabName</td>
+                                                        <td>@item.SpecimenSource</td>
+                                                        <td>@item.ProviderId_Requested</td>
+                                                        <td>@OrderDate</td>
+                                                        <td>@CollectionDate</td>
+                                                        <td>@item.ReportDate.ToShortDateString()</td>
+                                                        <td>@ReviewDate</td>
+
+                                                        <td>
+                                                            <img onmousemove="removing_lab_result_class();" onmouseover="removing_lab_result_class(); " onmousedown="removing_lab_result_class();" onclick="removing_lab_result_class();  viewLabResult(@(item.LabResultCntr)); " onmouseout="removing_lab_result_class();" onmouseup="removing_lab_result_class();" onfocus="removing_lab_result_class();"  src="Content/img/result.gif" />
+                                                        </td>
+
+                                                    </tr>
+                                                    counter++;
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                 <tr>
+                                <td width="200px;">No Information Available.</td>
+                            </tr>
+                                            }
+                                        </tbody>
+</table>
+

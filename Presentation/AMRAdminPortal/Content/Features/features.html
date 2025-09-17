@@ -1,0 +1,682 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>::: Patient Portal :::</title>
+    <link rel="stylesheet" href="../css/themes/redmond/jquery-ui.css" />
+    <link href="../css/themes/redmond/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+   
+    <script src="../css/ui/jquery.ui.core.js"></script>
+	<script src="../css/ui/jquery.ui.widget.js"></script>
+	<script src="../css/ui/jquery.ui.accordion.js"></script>
+    <script src="../js/jquery-1.9.1.js"></script>
+    <script src="../js/jquery-1.9.2.custom.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+
+   
+<style type="text/css">
+     div.ui-btn, input[type="submit"]
+{
+    border:0px solid red !important;
+    text-decoration:none !important;
+    font-family:helvetica !important;
+   width:105px;
+   height:32px;
+   cursor:pointer;
+    background:url(images/login_btn.png) repeat-x;
+}
+body{
+	margin: 0;
+	padding: 0;
+	font-family: 'Verdana', Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	background-image: url(images/wild_oliva.jpg);
+	background-repeat: no-repeat;
+	background-attachment:fixed;
+	background-size:100%;
+
+	
+	}
+
+
+#wrapper {
+	position: absolute;
+	width: 1000px;
+	height: 750px;
+	z-index: 1;
+	margin-left: -490px;
+	left: 50%;
+	border-radius: 25px;
+	border: 1px solid #a1a1a1;
+	background-image:url(images/b.png);
+	
+}
+#Box_1 {
+	position: absolute;
+	width: 40%;
+	height: 260px;
+	z-index: 1;
+	left: 2px;
+	top: 110px;
+	border-radius: 25px;
+	/*border: 1px solid #a1a1a1;*/
+	box-shadow: 5px 10px 5px #dcdcdc;
+	margin-left: 5%;
+	float: none; background-image:url(images/AMR-Portal.png);
+	
+}
+#Box_2 {
+	position: absolute;
+	width: 40%;
+	height: 260px;
+	z-index: 1;
+	left: 537px;
+	top: 111px;
+	border-radius: 25px;
+	/*border: 1px solid #a1a1a1;*/
+	box-shadow: 5px 10px 5px #dcdcdc;
+	margin-right: 5%;
+	float: none;
+	background-image: url(images/app1.png);
+}
+
+
+#Box_3 {
+	position: absolute;
+	width: 40%;
+	height: 260px;
+	z-index: 1;
+	left: 537px;
+	top: 400px;
+	border-radius: 25px;
+	/*border: 1px solid #a1a1a1;*/
+	box-shadow: 5px 10px 5px #dcdcdc;
+	margin-right: 5%;
+	float: none;
+	background-image: url(images/Market.png);
+}
+ #Box_4 {
+ position: absolute;
+ width: 40%;
+ height: 260px;
+ z-index: 1;
+ left: 51px;
+ top: 400px;
+ border-radius: 25px;
+ /*border: 1px solid #a1a1a1;*/
+ box-shadow: 5px 10px 5px #dcdcdc;
+ margin-right: 5%;
+ float: none;
+ background-image: url(images/video.jpg);
+}
+
+
+#Box_1:hover {
+    border: 2px solid #dcdcdc;
+	box-shadow: 5px 10px 5px #ccc;
+}
+
+#Box_2:hover {
+    border: 2px solid #dcdcdc;
+	box-shadow: 5px 10px 5px #ccc;
+}
+
+#Box_3:hover {
+    border: 2px solid #dcdcdc;
+	box-shadow: 5px 10px 5px #ccc;
+}
+
+#Box_4:hover {
+    border: 2px solid #dcdcdc;
+	box-shadow: 5px 10px 5px #ccc;
+}
+
+
+#apDiv1 {
+	position: absolute;
+	width: 1000px;
+	height: auto;
+	z-index: 2;
+	left: 0px;
+	top: 1px;
+	background-color: #fff;
+	-webkit-border-top-left-radius: 25px;
+-webkit-border-top-right-radius: 25px;
+-moz-border-radius-topleft: 25px;
+-moz-border-radius-topright: 25px;
+border-top-left-radius: 25px;
+border-top-right-radius: 25px;
+}
+#tabl {
+	position: absolute;
+	width: 296px;
+	height: auto;
+	z-index: 1;
+	left: 89px;
+	top: 1px;
+}
+.tb7 {
+	width: 236px;
+	color : #000;
+	height:15px;
+	border:1px solid #dcdcdc;
+	padding:4px 8px;
+	margin-bottom:0px;
+	border-radius: 10px;
+}
+
+#apDiv2 {
+	position: absolute;
+	width: 69px;
+	height: 62px;
+	z-index: 2;
+	left: 13px;
+	top: 16px;
+}
+#apDiv3 {
+	position: absolute;
+	width: 81px;
+	height: 79px;
+	z-index: 1;
+	left: 25px;
+	top: 25px;
+}
+#apDiv4 {
+	position: absolute;
+	width: 73px;
+	height: 73px;
+	z-index: 1;
+	left: 24px;
+	top: 15px;
+}
+#apDiv5 {
+	position: absolute;
+	width: auto;
+	height: 175px;
+	z-index: 2;
+	left: 103px;
+	top: 10px;
+}
+#apDiv6 {
+	position: absolute;
+	width: 327px;
+	height: auto;
+	z-index: 3;
+	left: 48px;
+	top: 211px;
+}
+#apDiv7 {
+    position: absolute;
+    width: 359px;
+    height: auto;
+    font-family: 'Verdana',Arial,Helvetica,sans-serif;
+    font-size: 20px;
+    z-index: 2;
+    left: 587px;
+    top: 20px;
+}
+#apDiv8 {
+    position: absolute;
+    width: 385px;
+    height: 24px;
+    font-family: 'Verdana',Arial,Helvetica,sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 15px;
+    z-index: 3;
+    left: 587px;
+    top: 50px;
+   }
+  .buttonStartOverHeight
+      {
+        height:38px;
+                        }
+
+
+</style>
+ <script lang="JavaScript" type="text/javascript">
+     function isEmpty(field, strng) {
+         var error = "";
+         if (strng.length == 0) {
+             error = "Please enter a value for " + field + ".\n";
+         }
+         return error;
+     }
+
+     function validatepass1() {
+         var why = "";
+
+         why += isEmpty('AccessID', form2.username.value);
+         why += isEmpty('Password', form2.password.value);
+
+         if (why != "") {
+             alert(why);
+             return false;
+         }
+         return true;
+     }
+</script>
+
+    <script lang="JavaScript" type="text/javascript">
+
+        // start of AMRportal pop up script
+        function openAMRPortal(id) {
+            $('.heading').remove();
+            var element = '<h5 class="heading" style="float:left; margin-bottom:-8px; margin-top:8px; margin-right:8px; "><b><span id="myWorkPlaceCounter" class="myWorkPlaceCounterClass">1</span> of 10</b></h5>';
+            $(".ui-dialog-buttonpane button:contains('Prev')").parent().parent().append(element);
+            $('#AMRportal').attr("src", "../PortalImages/" + id + ".html");
+            next = id;
+            $(".ui-dialog-buttonpane button:contains('Prev')").attr("disabled", true).addClass("ui-state-disabled");
+            $(".ui-dialog-buttonpane button:contains('Start Over')").text("Next");
+            $(".ui-dialog-buttonpane button:contains('Next')").css("height", "38px");
+            $(".ui-dialog-buttonpane button:contains('Next')").css("width", "80px");
+            $("#form-AMRPatientPortal").dialog("open");
+
+
+
+        }
+
+        var next;
+
+        $(function () {
+           
+           
+
+
+            tips = $(".validateTips");
+
+
+
+
+            $("#form-AMRPatientPortal").dialog({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "blind",
+                    duration: 1000
+                },
+
+
+                width: 850,
+                modal: true,
+                buttons: {
+                    "Prev": function () {
+                        $(".ui-dialog-buttonpane button:contains('Start Over')").text("Next");
+                        $(".ui-dialog-buttonpane button:contains('Next')").css("height", "38px");
+                        $(".ui-dialog-buttonpane button:contains('Next')").css("width", "80px");
+                        if (next > 1)
+                            next--;
+                        else
+                        {
+                        }
+                        $('#AMRportal').attr("src", "../PortalImages/" + next + ".html");
+                        $('.myWorkPlaceCounterClass').text(next);
+                        if (next == 1)
+                        { $(".ui-dialog-buttonpane button:contains('Prev')").attr("disabled", true).addClass("ui-state-disabled"); }
+                        if (next == 10) {
+                            $(".ui-dialog-buttonpane button:contains('Next')").text("Start Over");
+                            $(".ui-dialog-buttonpane button:contains('Start Over')").css("height", "38px");
+                            $(".ui-dialog-buttonpane button:contains('Start Over')").css("width", "100px");
+                        }
+
+                    },
+                    Next: function () {
+                        $(".ui-dialog-buttonpane button:contains('Start Over')").text("Next");
+                        $(".ui-dialog-buttonpane button:contains('Next')").css("height", "38px");
+                        $(".ui-dialog-buttonpane button:contains('Next')").css("width", "80px");
+                        $(".ui-dialog-buttonpane button:contains('Prev')").attr("disabled", false).removeClass("ui-state-disabled");
+                        if (next < 10)
+                            next++;
+                        else
+                        {  next = 1; }
+
+                        $('#AMRportal').attr("src", "../PortalImages/" + next + ".html");
+                        $('.myWorkPlaceCounterClass').text(next);
+                        if (next == 1)
+                        { $(".ui-dialog-buttonpane button:contains('Prev')").attr("disabled", true).addClass("ui-state-disabled"); }
+                        if (next == 10) {
+                            $(".ui-dialog-buttonpane button:contains('Next')").text("Start Over");
+                            $(".ui-dialog-buttonpane button:contains('Start Over')").css("height", "38px");
+                            $(".ui-dialog-buttonpane button:contains('Start Over')").css("width", "100px");
+                        }
+                    }
+                },
+
+            });
+            $("#addMyWorkPlace")
+            .button()
+            .click(function () {
+                $("#form-AMRPatientPortal").dialog("open");
+            });
+        });
+
+        //- end of AMRportal popup script
+
+
+
+        // start of AMRportal App up script
+        function openAMRPortalApp(id) {
+            $('.heading').remove();
+            var element = '<h5 class="heading" style="float:left; margin-bottom:-8px; margin-top:8px; margin-right:8px; "><b><span id="myWorkPlaceCounter" class="myWorkPlaceCounterClass">1</span> of 12</b></h5>';
+            $(".ui-dialog-buttonpane button:contains('Prev')").parent().parent().append(element);
+            
+            $('#PortalApp').attr("src", "../AppImages/" + id + ".png");
+            next = id;
+            $(".ui-dialog-buttonpane button:contains('Prev')").attr("disabled", true).addClass("ui-state-disabled");
+            $(".ui-dialog-buttonpane button:contains('Start Over')").text("Next");
+            $(".ui-dialog-buttonpane button:contains('Next')").css("height", "38px");
+            $(".ui-dialog-buttonpane button:contains('Next')").css("width", "80px");
+            $("#form-AMRPortalApp").dialog("open");
+
+
+
+        }
+
+        var next;
+
+        $(function () {
+
+            tips = $(".validateTips");
+
+
+
+
+            $("#form-AMRPortalApp").dialog({
+                 autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "blind",
+                    duration: 1000
+                },
+
+
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Prev": function () {
+                        $(".ui-dialog-buttonpane button:contains('Start Over')").text("Next");
+                        $(".ui-dialog-buttonpane button:contains('Next')").css("height", "38px");
+                        $(".ui-dialog-buttonpane button:contains('Next')").css("width", "80px");
+                        if (next > 1)
+                            next--;
+                        else
+                        {
+                            
+                           
+                           
+                        }
+                        $('#PortalApp').attr("src", "../AppImages/" + next + ".png");
+                        $('.myWorkPlaceCounterClass').text(next);
+                        if (next == 1)
+                        { $(".ui-dialog-buttonpane button:contains('Prev')").attr("disabled", true).addClass("ui-state-disabled"); }
+                        if (next == 12) {
+                            $(".ui-dialog-buttonpane button:contains('Next')").text("Start Over");
+                            $(".ui-dialog-buttonpane button:contains('Start Over')").css("height", "38px");
+                            $(".ui-dialog-buttonpane button:contains('Start Over')").css("width", "100px");
+
+                        }
+
+
+                    },
+                    Next: function () {
+                        $(".ui-dialog-buttonpane button:contains('Start Over')").text("Next");
+                        $(".ui-dialog-buttonpane button:contains('Next')").css("height", "38px");
+                        $(".ui-dialog-buttonpane button:contains('Next')").css("width", "80px");
+                        $(".ui-dialog-buttonpane button:contains('Prev')").attr("disabled", false).removeClass("ui-state-disabled");
+                        if (next < 12)
+                            next++;
+                        else
+                        {
+                             next = 1;
+                            
+                        }
+
+                        $('#PortalApp').attr("src", "../AppImages/" + next + ".png");
+                        $('.myWorkPlaceCounterClass').text(next);
+                        if (next == 1)
+                        { $(".ui-dialog-buttonpane button:contains('Prev')").attr("disabled", true).addClass("ui-state-disabled"); }
+                        if (next == 12) {
+                            $(".ui-dialog-buttonpane button:contains('Next')").text("Start Over");
+                            $(".ui-dialog-buttonpane button:contains('Start Over')").css("height", "38px");
+                            $(".ui-dialog-buttonpane button:contains('Start Over')").css("width", "100px");
+                        }
+
+
+
+                    }
+                },
+
+            });
+            $("#addMyWorkPlace")
+            .button()
+            .click(function () {
+                $("#form-AMRPortalApp").dialog("open");
+            });
+        });
+
+        //- end of AMRportal app popup script
+
+        // start of video popup script
+        function openmyVideo() {
+
+            
+
+            $("#form-myVideo").dialog("open");
+
+
+
+        }
+
+        var next;
+
+        $(function () {
+
+            tips = $(".validateTips");
+
+
+
+
+            $("#form-myVideo").dialog({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "blind",
+                    duration: 1000
+                },
+
+
+                width: 600,
+                height:500,
+                modal: true,
+                buttons: {
+                    "Close": function () {
+
+                        $(this).dialog("close");
+
+                    }
+                },
+
+            });
+            $("#addMyWorkPlace")
+            .button()
+            .click(function () {
+                $("#form-myVideo").dialog("open");
+            });
+        });
+
+        //- end of Video popup script
+
+
+
+
+
+
+
+
+
+
+
+        // start of myWorkPlace pop up script
+        function openMyWorkPlace(id) {
+            $('.heading').remove();
+            var element = '<h5 class="heading" style="float:left; margin-bottom:-8px; margin-top:8px; margin-right:8px; "><b><span id="myWorkPlaceCounter" class="myWorkPlaceCounterClass">1</span> of 10</b></h5>';
+            $(".ui-dialog-buttonpane button:contains('Prev')").parent().parent().append(element);
+           
+            $('#myWorkPlaceFrame').attr("src", "../site/" + id + ".html");
+            next = id;
+            $(".ui-dialog-buttonpane button:contains('Prev')").attr("disabled", true).addClass("ui-state-disabled");
+            $(".ui-dialog-buttonpane button:contains('Start Over')").text("Next");
+            $(".ui-dialog-buttonpane button:contains('Next')").css("height", "38px");
+            $(".ui-dialog-buttonpane button:contains('Next')").css("width", "80px");
+            $("#form-myWorkPlace").dialog("open");
+
+
+
+        }
+
+        var next;
+
+        $(function () {
+
+            tips = $(".validateTips");
+
+
+
+
+            $("#form-myWorkPlace").dialog({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "blind",
+                    duration: 1000
+                },
+
+
+                width: 900,
+                modal: true,
+                buttons: {
+                    "Prev": function () {
+                        $(".ui-dialog-buttonpane button:contains('Start Over')").text("Next");
+                        $(".ui-dialog-buttonpane button:contains('Next')").css("height", "38px");
+                        $(".ui-dialog-buttonpane button:contains('Next')").css("width", "80px");
+
+                        if (next > 1)
+                            next--;
+                        else
+                           
+                        $('#myWorkPlaceFrame').attr("src", "../site/" + next + ".html"); 
+                        $('.myWorkPlaceCounterClass').text(next);
+                        if (next == 1)
+                        { $(".ui-dialog-buttonpane button:contains('Prev')").attr("disabled", true).addClass("ui-state-disabled"); }
+
+                        if (next == 10) {
+                            $(".ui-dialog-buttonpane button:contains('Next')").text("Start Over");
+                            $(".ui-dialog-buttonpane button:contains('Start Over')").css("height", "38px");
+                            $(".ui-dialog-buttonpane button:contains('Start Over')").css("width", "100px");
+                        }
+
+
+                    },
+                    Next: function () {
+                        $(".ui-dialog-buttonpane button:contains('Start Over')").text("Next");
+                        $(".ui-dialog-buttonpane button:contains('Next')").css("height", "38px");
+                        $(".ui-dialog-buttonpane button:contains('Next')").css("width", "80px");
+
+                        $(".ui-dialog-buttonpane button:contains('Prev')").attr("disabled", false).removeClass("ui-state-disabled");
+                        if (next < 10)
+                            next++;
+                        else
+                        {  next = 1; }
+
+                        $('#myWorkPlaceFrame').attr("src", "../site/" + next + ".html");
+                        $('.myWorkPlaceCounterClass').text(next);
+                        if (next == 1)
+                        { $(".ui-dialog-buttonpane button:contains('Prev')").attr("disabled", true).addClass("ui-state-disabled"); }
+
+
+                        if (next == 10) {
+                            $(".ui-dialog-buttonpane button:contains('Next')").text("Start Over");
+                            $(".ui-dialog-buttonpane button:contains('Start Over')").css("height", "38px");
+                            $(".ui-dialog-buttonpane button:contains('Start Over')").css("width", "100px");
+                        }
+
+                    }
+                },
+
+            });
+            $("#addMyWorkPlace")
+            .button()
+            .click(function () {
+                $("#form-myWorkPlace").dialog("open");
+            });
+        });
+
+        //- end of myworkplace popup script
+		</script>
+</head>
+
+<body>
+<div id="wrapper">
+ <div id="apDiv1"><img src="images/amr.png" width="428" height="81" style="margin-left:30px"/>
+   <div id="apDiv7">Welcome to your portal services!</div>
+   <div id="apDiv8">Provided to you by Access My Records, Inc.</div>
+ </div>
+ <div style=" width:940px; height:800px; margin: 0px auto; ">
+ <div id="Box_1" onclick="openAMRPortal(1);" style="cursor:pointer;"></div>
+  <div id="Box_2" onclick="openAMRPortalApp(1);" style="cursor:pointer;"></div>
+<div id="Box_3"  onclick="openMyWorkPlace(1);" style="cursor:pointer;"></div>
+
+<div id="Box_4" align="center">
+    <iframe src="https://player.vimeo.com/video/87592320?title=0&amp;byline=0&amp;portrait=0" width="80%" height="250" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
+</div>
+<div style=" width:940px; height:40px; margin: 0px auto; border-radius:30px;  background-color:#fff; margin-top:680px;">
+<p style=" margin-left:40px; padding-top:10px; font-family:Verdana, Geneva, sans-serif; font-size:12px;">Copyright © 2005 -2014 Access My Records, Inc. - AMR Patient Portal Version 2.0</p>
+</div>
+
+</div>
+
+<br />
+
+ <!--pop up of AMRpatientPortal-->
+<div id="form-AMRPatientPortal" title="AMR PatientPortal">
+    
+   <div id="myAMRPatientPortal">
+     <iframe id="AMRportal" src="../PortalImages/1.html" style="height:480px; width:860px;"></iframe></div>
+   <!-- <h5 style="float:right; margin-bottom:-8px; margin-right:8px; margin-top:8px;"><span id="AmrPatientPortalCounter">1</span> of 10</h5>-->
+</div>
+<!--End of popup of AMRpatientPortal-->
+
+     <!--pop up of AMRportalapp-->
+<div id="form-AMRPortalApp" title="AMR Portal App ">
+   <div id="Div1">
+     <img id="PortalApp" src="../AppImages/1.png" style="height:480px; width:310px;"/></div>
+     <!--<h5 style="float:right; margin-bottom:-8px; margin-right:8px; margin-top:8px;"><span id="amrPortalAppCounter">1</span> of 12</h5>-->
+</div>
+<!--End of popup of AMRportalapp-->
+
+    <!--pop up of MyWorkPlace-->
+<div id="form-myWorkPlace" title="My Marketplace">
+     <iframe id="myWorkPlaceFrame" src="../site/1.html" width="100%" height="400px" style="border-width:1px;"></iframe> 
+    <!-- <h5 style="float:right; margin-right:8px; margin-bottom:-8px; margin-top:8px;"><span id="myWorkPlaceCounter">1</span> of 10</h5>-->
+</div>
+<!--End of popup of MyWorkPlace-->
+
+    <!--pop up of MyVideo-->
+<div id="form-myVideo" title="My Video">
+  <iframe src="http://player.vimeo.com/video/87592320?title=0&amp;byline=0&amp;portrait=0" width="100%" height="350" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
+</div>
+<!--End of popup of Myvideo-->
+</body>
+</html>

@@ -1,0 +1,475 @@
+﻿ @using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@model ReportViewModels
+@{
+    ViewBag.Title = "ReportIndex";
+    Layout = "~/Views/Shared/_LayoutMasterPage.cshtml";
+}
+@section Scripts
+{
+    <script src="@Url.Content("~/Content/js/jquery.treeview.js")"></script>
+    <style>
+    /*.ui-datepicker-calendar {
+            display: none;
+        }
+    .ui-datepicker-month {
+    display: none;
+    }*/
+    </style>
+
+    
+    <script>
+        $(document).ready(function () {
+
+            // first example
+            $("#browser").treeview();
+
+        });
+        $(function () {
+            $("input[type=submit], a, button")
+            .button()
+            .click(function (event) {
+                // event.preventDefault();
+            });
+        });
+
+
+        $(document).ready(function () {
+
+            $("#txtDateFromRep").datepicker({
+                inline: true,
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1900:+0",
+                dateFormat: "mm/dd/yy",
+                onSelect: function (dateText, instance) {
+                    date = $.datepicker.parseDate(instance.settings.dateFormat, dateText, instance.settings);
+                    date.setDate(date.getDate() + 90);
+                    $("#txtDateToRep").datepicker("setDate", date);
+                }
+            });
+            $("#txtDateToRep").datepicker({
+                inline: true,
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1900:+0",
+                dateFormat: "mm/dd/yy"
+            });
+
+
+          
+
+            //$('#txtYear').datepicker({
+            //    	     changeMonth: false,
+            //    	     changeYear: true,
+            //    	     dateFormat: 'yy',
+                	 
+            //	     onClose: function() {
+            //    	       // var iMonth = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            //    	        var iYear = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            //    	        $(this).datepicker('setDate', new Date(iYear, 1));
+            //    	     },
+                	 
+            //	     beforeShow: function() {
+            //           if ((selDate = $(this).val()).length > 0)
+            //        	       {
+            //            	          iYear = selDate.substring(selDate.length - 4, selDate.length);
+            //            	          //iMonth = jQuery.inArray(selDate.substring(0, selDate.length - 5),
+            //            	                  // $(this).datepicker('option', 'monthNames'));
+            //            	          $(this).datepicker('option', 'defaultDate', new Date(iYear, 1));
+            //            	          $(this).datepicker('setDate', new Date(iYear, 1));
+            //            	       }
+            //    	    }
+            //	  });
+           
+            $("#dialog-Report").dialog
+          ({
+              autoOpen: false,
+              show: { 
+                  effect: "blind",
+                  duration: 1000
+              },
+              hide: {
+                  effect: "blind",
+                  duration: 1000
+              },
+            
+              height: 300,
+              width: 650,
+              modal: true,
+              buttons: {
+                  "Run": function () {
+                     
+                      var bValid = true;
+                      var $MU = $("#dialog-Report");
+                      
+                     
+                      if (bValid) {
+
+                         
+                          //ajax 
+                          try {                
+                              
+
+                              var requestData = {
+
+                                      
+                                  Year: $('#cmbYear').val(),
+                                      
+                                  FacilityId: $.trim($('#cmbAppointmentFacility  option:selected').val()),
+                                  QYear: $('#cmbQYear option:selected').val(),
+                                  Quarter: $.trim($('#cmbQuarter option:selected').text()),
+                                  FromDate: $.trim($('#txtDateFromRep').val()),
+                                  ToDate: $.trim($('#txtDateToRep').val()),
+                                  MU: $MU.data('MU'),
+                                  ReportPath: $MU.data('ReportPath')
+                                  
+                                  };
+
+
+                                  $.ajax({
+                                      type: 'POST',
+                                      url: 'report-parameters',
+                                      data: JSON.stringify(requestData),
+                                      dataType: 'json',
+                                      contentType: 'application/json; charset=utf-8',
+                                      success: function (data) {
+                                          
+                                          HideLoader();
+                                          var page = '../../Reports/ReportForm.aspx';
+                                              //data;
+
+                                          $('#page_loader_Report').remove();
+                                          var $dialog = $('<div style="width:1000px;"></div>')
+                                                         .html('<div id="page_loader_Report" style="display: block;"><div id="apDiv1" align="center"><table width="200" border="0" cellspacing="0" cellpadding="0"><tr><td height="70px;">&nbsp;</td></tr><tr><td align="center"><img src="Content/img/image_559926.gif" width="128" height="64" /></td></tr><tr><td style="text-align: center;" height="70px;">Please wait ...</td></tr></table></div></div><iframe style="border: 0px; " src="' + page + '" width="100%" height="100%"></iframe>')
+                                                         .dialog({
+                                                             autoOpen: false,
+                                                             show: {
+                                                                 effect: "blind",
+                                                                 duration: 1000
+                                                             },
+                                                             hide: {
+                                                                 effect: "blind",
+                                                                 duration: 1000
+                                                             },
+                                                             modal: true,
+                                                             height: 600,
+                                                             width: 950,
+                                                             title: "Report"
+                                                         });
+                                          $dialog.dialog('open');
+
+                                      },
+                                      error: function (xhr, ajaxOptions, thrownError) {
+                                          //if error
+
+                                          //alert('Error : ' + xhr.message);
+                                          HideLoader();
+                                      },
+                                      complete: function (data) {
+                                          // if completed
+                                          HideLoader();
+
+                                      },
+                                      async: true,
+                                      processData: false
+                                  });
+                              
+                          } catch (err) {
+
+                              if (err && err !== "") {
+                                  alert(err.message);
+                                  HideLoader();
+                              }
+                          }
+                          $(this).dialog("close");
+                          ShowLoader();
+
+
+                          //   end ajax
+
+
+                      }
+                  }
+                  },
+              close: function () {
+                  $(this).dialog("close");
+              }
+          });
+            // Call horizontalNav on the navigations wrapping element
+            $('.full-width').horizontalNav({});
+        });
+
+        function pop_up_report(id) {
+           
+            //ShowLoader();
+            try {
+               
+                var requestData = {
+
+                    Id: id,
+            
+                };
+                alert(JSON.stringify(requestData));
+                $.ajax({
+                    type: 'POST',
+                    url: 'problemlistreport-index',
+                                        data: JSON.stringify(requestData),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        // if success
+                        // alert("Success : " + data);
+                       // $("#current-med-grid").html(data);
+
+                        HideLoader();
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //if error
+
+                        alert('Error : ' + xhr.message);
+                        HideLoader();
+                    },
+                    complete: function (data) {
+                        // if completed
+                        HideLoader();
+
+                    },
+                    async: true,
+                    processData: false
+                });
+               
+
+            } catch (err) {
+
+                if (err && err !== "") {
+                    alert(err.message);
+                    HideLoader();
+                }
+            }
+      
+
+           
+        }
+
+    </script>
+
+    <script>
+        function test(MU, ReportPath)
+        {
+            clearFields();
+            $('#cmbYear').attr('disabled', true);
+            $('#cmbQYear').attr('disabled', true);
+            $('#cmbQuarter').attr('disabled', true);
+            $('#txtDateFromRep').attr('disabled', true);
+            $('#txtDateToRep').attr('disabled', true);
+    
+            $('#chkYear').change(function () {
+                $('#cmbYear').attr('disabled', false);
+                $('#cmbQYear').attr('disabled', true);
+                $('#cmbQuarter').attr('disabled', true);
+                $('#txtDateFromRep').attr('disabled', true);
+                $('#txtDateToRep').attr('disabled', true);
+            });
+
+            $('#chkQuarter').change(function () {
+                $('#cmbQYear').attr('disabled', false);
+                $('#cmbQuarter').attr('disabled', false);
+                $('#cmbYear').attr('disabled', true);
+                $('#txtDateFromRep').attr('disabled', true);
+                $('#txtDateToRep').attr('disabled', true);
+            });
+
+            $('#chkDate').change(function () {
+                $('#txtDateFromRep').attr('disabled', false);
+                $('#txtDateToRep').attr('disabled', true);
+                $('#cmbYear').attr('disabled', true);
+                $('#cmbQYear').attr('disabled', true);
+                $('#cmbQuarter').attr('disabled', true);
+            });
+            $("#dialog-Report").data('MU',MU);
+            $("#dialog-Report").data('ReportPath', ReportPath);
+            $("#dialog-Report").dialog("open");
+        }
+
+     
+        
+    </script>
+}
+
+<div id="containment-wrapper" style="border-bottom-style: none; border-top-style: none; border-right-style: none; border-left-width: 1px; border-left-color: rgb(166, 201, 226);">
+    
+    <div id="tabs" style="width: 98%; font-size: 12px; margin-top: 5px; margin-right: 4px; height: 98.5%;">
+       
+            <ul>
+                <li><a href="#tabs-1" style="height:30px;  "><p style="margin-top: -5px;">Reports</p></a></li>
+
+            </ul>
+            <div id="tabs-1" >
+                 <div id="Tree" style="height: 510px; overflow: auto">
+                <ul class="filetree treeview" id="browser">
+                    <li class="collapsable">
+                        <div class="hitarea collapsable-hitarea"></div>
+                        <span class="folder">Problem List</span>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 1','/ANRT/ARNTProblemList');" >Stage 1</label></span></li>
+                        </ul>
+                    </li>
+                    <li class="collapsable">
+                        <div class="hitarea collapsable-hitarea"></div>
+                        <span class="folder">Demographics</span>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 1','/ANRT/ANRTDemographics');" >Stage 1</label></span></li>
+                        </ul>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 2','/ANRT/ANRTDemographics');" >Stage 2</label></span></li>
+                        </ul>
+                    </li>
+                    <li class="collapsable">
+                        <div class="hitarea collapsable-hitarea"></div>
+                        <span class="folder">Vital Signs</span>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 1','/ANRT/ANRTVitalSigns');"  >Stage 1</label></span></li>
+                        </ul>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Alternate Stage 1/Stage 1 & Stage 2 – All within Scope','/ANRT/ANRTVitalSigns');" >Alternate Stage 1/Stage 1 & Stage 2 – All within Scope</label></span></li>
+                        </ul>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 1 & Stage 2 - BP Out of Scope','/ANRT/ANRTVitalSigns');" >Stage 1 & Stage 2 - BP Out of Scope</label></span></li>
+                        </ul>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 1 & Stage 2 - Ht/Wt Out of Scope','/ANRT/ANRTVitalSigns');" >Stage 1 & Stage 2 - Ht/Wt Out of Scope </label></span></li>
+                        </ul>
+                    </li>
+                    <li class="collapsable">
+                        <div class="hitarea collapsable-hitarea"></div>
+                        <span class="folder">Smoking Status</span>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 1','/ANRT/ANRTSmoking');" >Stage 1</label></span></li>
+                        </ul>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 2','/ANRT/ANRTSmoking');" >Stage 2</label></span></li>
+                        </ul>
+                    </li>                   
+                    
+                    <li class="collapsable">
+                        <div class="hitarea collapsable-hitarea"></div>
+                        <span class="folder">Family Health History</span>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 2','/ANRT/ANRTFamilyHistoty');" >Stage 2</label></span></li>
+                        </ul>
+                    </li>
+
+                     <li class="collapsable">
+                        <div class="hitarea collapsable-hitarea"></div>
+                        <span class="folder">View, Download and Transmit</span>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 1','/ANRT/ANRTCCD');" >Stage 1</label></span></li>
+                        </ul>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 2','/ANRT/ANRTCCD');" >Stage 2</label></span></li>
+                        </ul>
+                    </li>
+
+                    <li class="collapsable">
+                        <div class="hitarea collapsable-hitarea"></div>
+                        <span class="folder">Clinical Summary</span>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 1','/ANRT/ANRTClinicalSummary');" >Stage 1</label></span></li>
+                        </ul>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 2','/ANRT/ANRTClinicalSummary');" >Stage 2</label></span></li>
+                        </ul>
+                    </li>
+
+                    <li class="collapsable">
+                        <div class="hitarea collapsable-hitarea"></div>
+                        <span class="folder">Secure Messaging</span>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 2','/ANRT/ANRTMessage');" >Stage 2</label></span></li>
+                        </ul>
+                   </li>
+                </ul>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="dialog-Report" title="Report">
+    
+    <table width="100%"  border="0" cellpadding="0" cellspacing="2">
+        <tr>
+            <td align="right"></td>
+            <td width="290"  align="right">Location :</td>
+            <td width="2">&nbsp;</td>
+            <td width="555">
+           @Html.DropDownList("cmbAppointmentFacility", Model.Facilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = " txt  ui-corner-all bcom", style="width:220px; margin-left:30px;", id = "cmbAppointmentFacility" })
+         
+                      </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="right"><input type="radio" id="chkYear" name="Rptradio"  style="position: absolute;margin-left:10px"/>Year :</td>
+            <td align="right">&nbsp;</td>
+            <td>
+                
+                @*<input type="text" id="txtYear" style="width:400px; margin-left:30px;" class="btxt"/></td>*@
+            <select name="preft_com" id="cmbYear" class="txt  ui-corner-all bcom" style="width:100px; margin-left:30px;" >
+                <option value="0">--Select--</option>                   
+                <option value="2010">2010</option>
+  <option value="2011">2011</option>
+  <option value="2012">2012</option>
+  <option value="2013">2013</option>
+<option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                </select>
+            
+        </tr>
+        <tr>
+            <td></td>
+            <td align="right"><input type="radio" id="chkQuarter" name="Rptradio"  style="position: absolute;margin-left:10px"/>Year / Quarter :</td>
+            <td>&nbsp;</td>
+            <td>
+                <select name="preft_com" id="cmbQYear" class="txt  ui-corner-all bcom" style="width:100px; margin-left:30px;" >
+                    <option value="0">--Select--</option>                   
+                <option value="2010">2010</option>
+  <option value="2011">2011</option>
+  <option value="2012">2012</option>
+  <option value="2013">2013</option>
+<option value="2014">2014</option>
+                       <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                </select>
+                 <select name="preft_com" id="cmbQuarter" class="txt  ui-corner-all bcom" style="width:140px; margin-left:15px;">
+                    <option value="0">--Select--</option>
+                    <option value="1">1st Quarter</option>
+                    <option value="2">2nd Quarter</option>
+                    <option value="3">3rd Quarter</option>
+                    <option value="4">4th Quarter</option>
+                </select>
+
+                </td>
+            
+        </tr>
+        <tr>
+            <td></td>
+            <td align="right"><input type="radio" id="chkDate" name="Rptradio" style="position: absolute;margin-left:10px"/>90 Days Date Range :</td>
+            <td>&nbsp;</td>
+            <td>
+                <input type="text" id="txtDateFromRep" style="width:100px; margin-left:30px; margin-top:5px;" class="btxt"/>
+                <input type="text" id="txtDateToRep" style="width:100px; margin-left:150px; margin-top:-25px;" class="btxt"/>
+            </td>
+        </tr>
+    </table>
+
+    
+
+</div>

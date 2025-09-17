@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\Projects\\AMR Project Latest(Portal with App)\\AMR Portal\\trunk\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FEF5BC9E-0E96-4573-8F10-C4E0FAAAA4EF}|Presentation\\AMRPatientPortal\\AMRPatientPortal.csproj|f:\\projects\\amr project latest(portal with app)\\amr portal\\trunk\\presentation\\amrpatientportal\\views\\clinicalsummary\\clinicalsummary.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FEF5BC9E-0E96-4573-8F10-C4E0FAAAA4EF}|Presentation\\AMRPatientPortal\\AMRPatientPortal.csproj|solutionrelative:presentation\\amrpatientportal\\views\\clinicalsummary\\clinicalsummary.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ClinicalSummary.cshtml",
+              "DocumentMoniker": "F:\\Projects\\AMR Project Latest(Portal with App)\\AMR Portal\\trunk\\Presentation\\AMRPatientPortal\\Views\\ClinicalSummary\\ClinicalSummary.cshtml",
+              "RelativeDocumentMoniker": "Presentation\\AMRPatientPortal\\Views\\ClinicalSummary\\ClinicalSummary.cshtml",
+              "ToolTip": "F:\\Projects\\AMR Project Latest(Portal with App)\\AMR Portal\\trunk\\Presentation\\AMRPatientPortal\\Views\\ClinicalSummary\\ClinicalSummary.cshtml",
+              "RelativeToolTip": "Presentation\\AMRPatientPortal\\Views\\ClinicalSummary\\ClinicalSummary.cshtml",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-17T07:24:30.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

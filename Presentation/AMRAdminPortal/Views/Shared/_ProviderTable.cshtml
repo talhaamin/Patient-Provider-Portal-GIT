@@ -1,0 +1,58 @@
+﻿@model IEnumerable<AMR.Models.ProviderSearchModel>
+
+<table class="table">
+
+        <thead>
+
+            <tr>
+
+                <th>Provider ID</th>
+                <th>First Name</th>
+               <th style="width:100px;">Last Name</th>
+              @*   <th style="width:150px;">Date of Birth</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>*@
+                <th>License</th>
+                <th>Phone</th>
+                <th>Email</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+            @if(Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    System.Text.StringBuilder jsonString = new System.Text.StringBuilder();
+
+                    jsonString.Append(" { ");
+                    jsonString.Append("\"ProviderId\": \"" + item.ProviderId + "\",");
+                    jsonString.Append("\"FirstName\": \"" + item.FirstName + "\",");
+                    jsonString.Append("\"LastName\":  \"" + item.LastName + "\",");
+                    jsonString.Append("\"Phone\":  \"" + (item.Phone) + "\",");
+                    jsonString.Append("\"License\":  \"" + (item.License) + "\",");
+                    
+                    jsonString.Append("\"EMail\":  \"" + item.EMail + "\"");
+                    jsonString.Append("}");
+                  
+            <tr style="cursor:pointer;" onclick="ShowProviderData(@item.ProviderId);">
+                <td><input type="hidden" id="@item.ProviderId" value="@jsonString.ToString()"/><a style="cursor:pointer;" onclick="@*ShowProviderData(@item.ProviderId);*@">@item.ProviderId</a></td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+             @*    <td>@DateOfBirth</td>
+                <td>@item.Address1 <br />@item.Address2</td>
+                <td>@item.City</td>
+                <td>@item.State</td>
+                <td>@item.Zip</td>*@
+                <td>@item.License</td>
+                <td>@item.Phone</td>
+                <td>@item.EMail</td>
+            </tr>
+                }
+            }
+        </tbody>
+
+    </table>

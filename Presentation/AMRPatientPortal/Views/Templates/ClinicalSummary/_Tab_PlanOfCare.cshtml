@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AMR.Models.POCModel>
+@using System.Text;
+@using System.Web.Script.Serialization;
+<table class="box-table-a" id="tab-PlanOfCare" summary="DownloadLEgalPlanOfCare">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Instruction</th>                                    
+                                     <th scope="col">Planned Date/Time</th>
+                                    <th scope="col">Goal</th>
+                                    <th scope="col" style="text-align:center;" class="showHideThis">Edit</th>
+                                    <th scope="col">Details</th>
+                                     <th scope="col" style="text-align:center;" class="showHideThis">Delete</th>
+                               </tr>
+                            </thead>
+                             <tbody>
+                                    @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var item in Model)
+                                    {
+
+                                        StringBuilder jsonStringAllergy = new StringBuilder();
+
+                                        jsonStringAllergy.Append(" { ");
+                                        jsonStringAllergy.Append("\"PlanCntr\": \"" + item.PlanCntr + "\",");
+                                        jsonStringAllergy.Append("\"InstructionTypeId\": \"" + item.InstructionTypeId + "\",");
+                                        jsonStringAllergy.Append("\"Note\":  \"" + item.Note + "\",");
+                                        jsonStringAllergy.Append("\"AppointmentDateTime\":  \"" + item.AppointmentDateTime + "\",");
+                                        jsonStringAllergy.Append("\"Instruction\":  \"" + item.Instruction + "\",");
+                                        jsonStringAllergy.Append("\"Goal\":  \"" + item.Goal + "\"");
+                                        jsonStringAllergy.Append("}");
+                        <tr class="@((counter % 2 == 1) ? "r0" : "r1")">
+                              <td width ="90px">@item.InstructionType</td>
+                              <td width="250px">@*<span class="LinkHighlight hoverMe" ></span>*@@item.Instruction</td>
+                            
+                           @if (item.AppointmentDateTime.ToString() == "1/1/1900 00:00:00" || item.AppointmentDateTime.ToString() == "1/1/1900 12:00:00 AM")
+                                    {
+                                        <td width ="130px"></td>
+                                    }
+                                    else if (Convert.ToDateTime(item.AppointmentDateTime).ToShortTimeString() == "12:00 AM")
+                                    {
+                                        <td width ="130px">@Convert.ToDateTime(item.AppointmentDateTime).ToShortDateString()</td> 
+                                    }
+                                    else
+                                    {
+                                       <td width ="130px">@item.AppointmentDateTime</td> 
+                                    }
+                            <td width ="250px"><input type="hidden" id="Plan-@(item.PlanCntr)" value="@jsonStringAllergy.ToString()" />@item.Goal</td>
+                  <td style="text-align:center;" class="showHideThis"><img src="~/Content/img/edit.png" onclick="EditPOC('@item.PlanCntr');"/></td>
+                            <td style="text-align:center;"><img src="~/Content/img/details.png" onclick="DetailPOC('@item.PlanCntr');"/></td>                                      
+                                 <td style="text-align:center;" class="showHideThis"><img src="~/Content/img/delete.png" onclick="DeletePOC('@item.PlanCntr');"/></td>                  
+                   
+                        </tr>   counter++;}
+                                }
+                                   else
+                                {
+                                   <tr>
+                                <td width="200px;">No Information Available.</td>
+                            </tr>
+                                }
+
+                    </tbody>
+                            </table>

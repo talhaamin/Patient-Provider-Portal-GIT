@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AMR.Models.ImmunizationModel>
+@using System.Text;
+<table class="box-table-a" id="tbl-Immunizations" summary="Immunizations">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="vertical-align:middle"><span style="margin-left:0px;">Date</span></th>
+                            <th scope="col" style="vertical-align:middle"><span style="margin-left:0px;">Vaccine Administered</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count()>0)
+                        {
+                            int counter=0;
+                            foreach (var item in Model)
+                            {
+                                StringBuilder jsonStringImmunization = new StringBuilder();
+
+
+                                jsonStringImmunization.Append(" { ");
+                                jsonStringImmunization.Append("\"PatientImmunizationCntr\": \"" + item.PatientImmunizationCntr + "\",");
+                                jsonStringImmunization.Append("\"ImmunizationDate\": \"" + item.ImmunizationDate + "\",");
+                                jsonStringImmunization.Append("\"Time\": \"" + item.Time + "\",");
+                                jsonStringImmunization.Append("\"Vaccine\":  \"" + (item.Vaccine) + "\",");
+                                jsonStringImmunization.Append("\"CodeValue\": \"" + item.CodeValue + "\",");
+                                jsonStringImmunization.Append("\"ImmunizationDate\": \"" + item.ImmunizationDate + "\",");
+                                jsonStringImmunization.Append("\"Amount\":  \"" + (item.Amount) + "\",");
+                                jsonStringImmunization.Append("\"Note\": \"" + item.Note + "\",");
+                                jsonStringImmunization.Append("\"Route\": \"" + item.Route + "\",");
+                                jsonStringImmunization.Append("\"Site\":  \"" + (item.Site) + "\",");
+                                jsonStringImmunization.Append("\"Sequence\": \"" + item.Sequence + "\",");
+                                jsonStringImmunization.Append("\"ExpirationDate\": \"" + item.ExpirationDate.ToShortDateString() + "\",");
+                                jsonStringImmunization.Append("\"LotNumber\":  \"" + (item.LotNumber) + "\",");
+                                jsonStringImmunization.Append("\"Manufacturer\":  \"" + (item.Manufacturer) + "\"");
+                                jsonStringImmunization.Append("}");
+                                <tr class="@((counter % 2 == 0) ? "r1" : "r0")" onclick="OpenImmunizationRecords(@item.PatientImmunizationCntr);">
+                                   @* @if (item.ImmunizationDate.ToString() == "01/01/1900" || item.ImmunizationDate.ToString() == "01/01/1900")
+                                    {
+                                    <td width="95px" style="vertical-align:middle"><input type="hidden" id="Immunization-@item.PatientImmunizationCntr" value="@jsonStringImmunization.ToString()" /></td>
+                                    }
+                                    else{
+                                    *@<td width="95px" style="vertical-align:middle"><input type="hidden" id="Immunization-@item.PatientImmunizationCntr" value="@jsonStringImmunization.ToString()" />@item.ImmunizationDate</td>
+                                    @*}*@
+                                        <td style="vertical-align:middle">@item.Vaccine</td>
+                                </tr>
+                                counter++;
+                            }
+                        }
+                        else
+                        {
+                           <tr>
+                                <td width="200px;" style="vertical-align:middle">No Information Available.</td>
+                            </tr>
+                        }
+                    </tbody>
+</table>
+
+

@@ -1,0 +1,608 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@model HomeViewModel
+@{
+    ViewBag.Title = "Registeration Form";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <link rel="stylesheet" href="@Url.Content("~/Content/css/themes/redmond/jquery-ui.css")" />
+    <link href="@Url.Content("~/Content/css/themes/redmond/jquery-ui-1.10.3.custom.css")" rel="stylesheet">
+   
+    <script src="@Url.Content("~/Content/css/ui/jquery.ui.core.js")"></script>
+	<script src="@Url.Content("~/Content/css/ui/jquery.ui.widget.js")"></script>
+	<script src="@Url.Content("~/Content/css/ui/jquery.ui.accordion.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-1.9.1.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-1.9.2.custom.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-ui.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.maskedinput.min.js")"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js" type="text/javascript"></script>
+     <script>
+
+         //function HideLoader() {
+
+         //    window.parent.document.getElementById('page_loader1').style.display = 'none';
+         //}
+         //function ShowLoader() {
+         //    parent.document.getElementById('page_loader1').style.display = 'block';
+         //}
+         $(document).ready(function () {
+             $("#txthomphon").mask("(999) 999-9999");
+             $("#txtZipcode").mask("99999");
+         });
+    </script>
+    
+    <style type="text/css">
+        .txtSign { width:200px; height:20px; border: 1px solid #a6c9e2; border-radius: 4px; background-color:#dde4ff; }
+input:focus:hover{
+    outline: none;
+    box-shadow: 0px 0px 5px #61C5FA;
+    
+    border-radius:4px;
+
+    
+}
+.coms { width:50px; height:25px; border: 1px solid #a6c9e2; border-radius: 4px; background-color:#dde4ff; }
+        .required {
+    color: #FF0000;
+}
+    /*    .required_field {
+    color: #000000;
+    float: left;
+    font-size: 11px;
+    padding: 10px 0 10px 23px;
+}*/
+        .dateInline {
+        display: inline-block;
+        }
+
+         #Report
+        {
+            position: absolute;
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            font-size: 1em;
+            width: 90%;
+            height: 350px;
+            z-index: 1;
+            left: 50%;
+            top: 9px;
+            margin-left: -380px;
+            color: #222222
+        }
+         
+div.salutation {
+    float: left;
+    font-size: 13px;
+    padding: 10px 0 5px 110px;
+    width: 400px;
+}
+
+       #ui-id-2 {
+        height: 400px;
+        /*background-color:aliceblue;*/
+        } 
+    </style>
+    <title>@ViewBag.Title</title>
+</head>
+<body onload="HideLoader();">
+    <form id="signupform" method="post">
+    <div id="Report">
+       @* <div ><span class="required">*</span>Required Fields</div>
+        <br/>*@
+        <div class="salutation">(Salutation, First, MI, Last, Suffix)</div>
+        <table width="100%" border="0" cellspacing="2" cellpadding="0">
+        <tr>
+            <td height="30" colspan="2">
+                <table width="100%" border="0">
+                   <tbody><tr>
+                        <td width="16%" align="right"><span class="required">*</span>Name :</td>
+                        <td width="11%" align="right">
+                            <select style="width: 90%" class="coms" id="cmbName" name="namcom">
+                                <option value="1">Mr.</option>
+                                 <option value="2">Mrs.</option>
+                                <option value="3">Miss</option>
+                                <option value="4">Ms.</option>
+                                <option value="5">Dr.</option>
+                            </select></td>
+                        <td width="20%" class="field">
+                            
+
+   
+                            <input type="text" class="txtSign" name="txtFname" id="txtFname" value=""  style="width: 95%"></td>
+                        <td width="10%">
+                            <input type="text" style="width: 90%" name="namtxt" id="txtMname" size="1" maxlength="1" class="txtSign"></td>
+                        <td width="20%">
+                            <input type="text" name="namtxt" style="width: 95%" id="txtLname" class="txtSign"></td>
+<td width="10%">
+                            <select name="Salutation2" class="coms">
+									<option value="">---</option>
+									<option value="Jr.">Jr.</option>
+									<option value="Sr.">Sr.</option>
+									<option value="Esq">Esq</option>	
+									<option value="I">I</option>
+									<option value="II">II</option>
+									<option value="III">III</option>
+									<option value="IV">IV</option>
+									<option value="V">V</option>
+								</select>
+                    </td></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td >
+</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="100%" height="218">
+                <table width="100%" border="0">
+                    <tr>
+                        <td  align="right" width="120"><span class="required">*</span>Address Line1:</td>
+                        <td width="1%">&nbsp;</td>
+                        <td >
+                             <input type="text" name="addtxt" id="txtAdd" class="txtSign" style="width:250px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Address Line2:</td>
+                        <td width="1%">&nbsp;</td>
+                        <td >
+                           
+                         <input type="text" name="add2txt" id="txtAdd2" class="txtSign" style="width:250px" />
+                        </td>
+                    </tr>
+                      
+                    <tr>
+                        <td align="right"><span class="required">*</span>City :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="citycombo" id="txtCity" class="txtSign" style="width:150px"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="required">*</span>State : </td>
+                        <td>&nbsp;</td>
+                        <td>
+                           @*  @Html.DropDownList("cmbStates", Model.States.ToStatesModelSelectList(), new {  id = "cmbStates", @class = "txt" })*@
+                         
+                            
+                                <select style="visibility: visible;" class="coms" name="state" id="cmbStates">
+									
+										<option value="AL">AL</option>
+									
+										<option value="AK">AK</option>
+									
+										<option value="AS">AS</option>
+									
+										<option value="AZ">AZ</option>
+									
+										<option value="AR">AR</option>
+									
+										<option value="AA">AA</option>
+									
+										<option value="AE">AE</option>
+									
+										<option value="AP">AP</option>
+									
+										<option value="CA">CA</option>
+									
+										<option value="CO">CO</option>
+									
+										<option value="CT">CT</option>
+									
+										<option value="DE">DE</option>
+									
+										<option value="DC">DC</option>
+									
+										<option value="FL">FL</option>
+									
+										<option value="GA">GA</option>
+									
+										<option value="GU">GU</option>
+									
+										<option value="HI">HI</option>
+									
+										<option value="ID">ID</option>
+									
+										<option value="IL">IL</option>
+									
+										<option value="IN">IN</option>
+									
+										<option value="IA">IA</option>
+									
+										<option value="KS">KS</option>
+									
+										<option value="KY">KY</option>
+									
+										<option value="LA">LA</option>
+									
+										<option value="ME">ME</option>
+									
+										<option value="MH">MH</option>
+									
+										<option value="MD">MD</option>
+									
+										<option value="MA">MA</option>
+									
+										<option value="MI">MI</option>
+									
+										<option value="FM">FM</option>
+									
+										<option value="MN">MN</option>
+									
+										<option value="MS">MS</option>
+									
+										<option value="MO">MO</option>
+									
+										<option value="MT">MT</option>
+									
+										<option value="NE">NE</option>
+									
+										<option value="NV">NV</option>
+									
+										<option value="NH">NH</option>
+									
+										<option value="NJ">NJ</option>
+									
+										<option value="NM">NM</option>
+									
+										<option value="NY">NY</option>
+									
+										<option value="NC">NC</option>
+									
+										<option value="ND">ND</option>
+									
+										<option value="MP">MP</option>
+									
+										<option value="OH">OH</option>
+									
+										<option value="OK">OK</option>
+									
+										<option value="OR">OR</option>
+									
+										<option value="PW">PW</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PA">PA</option>
+									
+										<option value="PR">PR</option>
+									
+										<option value="RI">RI</option>
+									
+										<option value="SC">SC</option>
+									
+										<option value="TN">TN</option>
+									
+										<option value="TX">TX</option>
+									
+										<option value="UT">UT</option>
+									
+										<option value="VT">VT</option>
+									
+										<option value="VI">VI</option>
+									
+										<option value="VA">VA</option>
+									
+										<option value="WA">WA</option>
+									
+										<option value="WV">WV</option>
+									
+										<option value="WI">WI</option>
+									
+										<option value="WY">WY</option>
+									
+										<option value="SD">SD</option>
+									
+								</select>
+                              
+                             	
+                              
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="required">*</span>Zip Code : </td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="zipcodtxt" id="txtZipcode" class="txtSign" style="width:100px" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="required">*</span>Country : </td>
+                        <td>&nbsp;</td>
+                        <td>
+                           @*  @Html.DropDownList("cmbCountry", Model.Country.ToCountryModelSelectList(), new {  id = "cmbCountry", @class = "txt" })*@
+                   
+                         
+                              <div>
+                                <select name="Country" class="coms" id="cmbCountry" style="width:254px;">
+																		<option selected="selected" value="USA">United States</option>
+									<option value="ALB">Albania</option>
+									<option value="DZA">Algeria</option>
+									<option value="WSM">American Samoa</option>
+									<option value="AND">Andorra</option>
+									<option value="AGO">Angola</option>
+									<option value="AIA">Anguilla</option>
+									<option value="ATA">Antarctica</option>
+									<option value="ATG">Antigua And Barbuda</option>
+									<option value="ARG">Argentina</option>
+									<option value="ARM">Armenia</option>
+									<option value="ABW">Aruba</option>
+									<option value="AUT">Austria</option>
+									<option value="AUT">Australia</option>
+									<option value="AZE">Azerbaijan</option>
+									<option value="BHS">Bahamas</option>
+									<option value="BHR">Bahrain</option>
+									<option value="BGD">Bangladesh</option>
+									<option value="BRB">Barbados</option>
+									<option value="BLR">Belarus</option>
+									<option value="BEL">Belgium</option>
+									<option value="BLZ">Belize</option>
+									<option value="BEN">Benin</option>
+									<option value="BMU">Bermuda</option>
+									<option value="BTN">Bhutan</option>
+									<option value="BOL">Bolivia</option>
+									<option value="BIH">Bosnia and Herzegovina</option>
+									<option value="BWA">Botswana</option>
+									<option value="BVT">Bouvet Island</option>
+									<option value="BRA">Brazil</option>
+									<option value="IOT">British Indian Ocean Territory</option>
+									<option value="BRN">Brunei Darussalam</option>
+									<option value="BGR">Bulgaria</option>
+									<option value="BFA">Burkina Faso</option>
+									<option value="BDI">Burundi</option>
+									<option value="KHM">Cambodia</option>
+									<option value="CMR">Cameroon</option>
+									<option value="CAN">Canada</option>
+									<option value="CPV">Cape Verde</option>
+									<option value="CYM">Cayman Islands</option>
+									<option value="CAF">Central African Republic</option>
+									<option value="TCD">Chad</option>
+									<option value="CHL">Chile</option>
+									<option value="CHN">China</option>
+									<option value="CXR">Christmas Island</option>
+									<option value="CCK">Cocos (Keeling) Islands</option>
+									<option value="COL">Colombia</option>
+									<option value="COM">Comoros</option>
+									<option value="COG">Congo</option>
+									<option value="COK">Cook Islands</option>
+									<option value="CRI">Costa Rica</option>
+									<option value="CIV">Cote d'Ivoire</option>
+									<option value="HRV">Croatia</option>
+									<option value="CZE">Czech Republic</option>
+									<option value="DNK">Denmark</option>
+									<option value="DJI">Djibouti</option>
+									<option value="DMA">Dominica</option>
+									<option value="DOM">Dominican Republic</option>
+									<option value="TMP">East Timor</option>
+									<option value="ECU">Ecuador</option>
+									<option value="EGY">Egypt</option>
+									<option value="SLV">El Salvador</option>
+									<option value="ENG">England</option>
+									<option value="GNQ">Equatorial Guinea</option>
+									<option value="ERI">Eritrea</option>
+									<option value="ESP">Espana</option>
+									<option value="EST">Estonia</option>
+									<option value="ETH">Ethiopia</option>
+									<option value="FLK">Falkland Islands</option>
+									<option value="FRO">Faroe Islands</option>
+									<option value="FJI">Fiji</option>
+									<option value="FIN">Finland</option>
+									<option value="FRA">France</option>
+									<option value="GUF">French Guiana</option>
+									<option value="PYF">French Polynesia</option>
+									<option value="ATF">French Southern Territories</option>
+									<option value="GAB">Gabon</option>
+									<option value="GMB">Gambia</option>
+									<option value="GEO">Georgia</option>
+									<option value="DEU">Germany</option>
+									<option value="GHA">Ghana</option>
+									<option value="GIB">Gibraltar</option>
+									<option value="GRC">Greece</option>
+									<option value="GRL">Greenland</option>
+									<option value="GRD">Grenada</option>
+									<option value="GLP">Guadeloupe</option>
+									<option value="GTM">Guatemala</option>
+									<option value="GIN">Guinea</option>
+									<option value="GNB">Guinea-Bissau</option>
+									<option value="GUY">Guyana</option>
+									<option value="HTI">Haiti</option>
+									<option value="HMD">Heard and Mc Donald Islands</option>
+									<option value="HND">Honduras</option>
+									<option value="HKG">Hong Kong</option>
+									<option value="HUN">Hungary</option>
+									<option value="IND">India</option>
+									<option value="IDN">Indonesia</option>
+									<option value="IRL">Ireland</option>
+									<option value="ISR">Israel</option>
+									<option value="ITA">Italy</option>
+									<option value="JAM">Jamaica</option>
+									<option value="JPN">Japan</option>
+									<option value="JOR">Jordan</option>
+									<option value="KAZ">Kazakhstan</option>
+									<option value="KEN">Kenya</option>
+									<option value="KIR">Kiribati</option>
+									<option value="KOR">Korea (North)</option>
+									<option value="KOR">Korea (South)</option>
+									<option value="KWT">Kuwait</option>
+									<option value="KGZ">Kyrgyzstan</option>
+									<option value="LVA">Latvia</option>
+									<option value="LBN">Lebanon</option>
+									<option value="LSO">Lesotho</option>
+									<option value="LBR">Liberia</option>
+									<option value="LIE">Liechtenstein</option>
+									<option value="LTU">Lithuania</option>
+									<option value="LUX">Luxembourg</option>
+									<option value="MAC">Macau</option>
+									<option value="MDG">Madagascar</option>
+									<option value="MWI">Malawi</option>
+									<option value="MDV">Maldives</option>
+									<option value="MLI">Mali</option>
+									<option value="MLT">Malta</option>
+									<option value="MTQ">Martinique</option>
+									<option value="MRT">Mauritania</option>
+									<option value="MUS">Mauritius</option>
+									<option value="MYT">Mayotte</option>
+									<option value="MEX">Mexico</option>
+									<option value="MDA">Moldova, Republic of</option>
+									<option value="MCO">Monaco</option>
+									<option value="MNG">Mongolia</option>
+									<option value="MSR">Montserrat</option>
+									<option value="MAR">Morocco</option>
+									<option value="MOZ">Mozambique</option>
+									<option value="MMR">Myanmar</option>
+									<option value="NAM">Namibia</option>
+									<option value="NRU">Nauru</option>
+									<option value="NPL">Nepal</option>
+									<option value="NLD">Netherlands</option>
+									<option value="ANT">Netherlands Antilles</option>
+									<option value="NCL">New Caledonia</option>
+									<option value="NZE">New Zealand</option>
+									<option value="NIC">Nicaragua</option>
+									<option value="NER">Niger</option>
+									<option value="NGA">Nigeria</option>
+									<option value="NIU">Niue</option>
+									<option value="NFK">Norfolk Island</option>
+									<option value="IRL">Northern Ireland</option>
+									<option value="NOR">Norway</option>
+									<option value="PAK">Pakistan</option>
+									<option value="PAN">Panama</option>
+									<option value="PNG">Papua New Guinea</option>
+									<option value="PRY">Paraguay</option>
+									<option value="PER">Peru</option>
+									<option value="PHL">Philippines</option>
+									<option value="PCN">Pitcairn</option>
+									<option value="POL">Poland</option>
+									<option value="PRT">Portugal</option>
+									<option value="QAT">Qatar</option>
+									<option value="REU">Reunion</option>
+									<option value="ROM">Romania</option>
+									<option value="RUS">Russia</option>
+									<option value="RUS">Russian Federation</option>
+									<option value="RWA">Rwanda</option>
+									<option value="KNA">Saint Kitts and Nevis</option>
+									<option value="LCA">Saint Lucia</option>
+									<option value="VCT">Saint Vincent and the Grenadines</option>
+									<option value="SMR">San Marino</option>
+									<option value="STP">Sao Tome and Principe</option>
+									<option value="SAU">Saudi Arabia</option>
+									<option value="SEN">Senegal</option>
+									<option value="SYC">Seychelles</option>
+									<option value="SLE">Sierra Leone</option>
+									<option value="SGP">Singapore</option>
+									<option value="SVK">Slovakia</option>
+									<option value="SVN">Slovenia</option>
+									<option value="SLB">Solomon Islands</option>
+									<option value="SOM">Somalia</option>
+									<option value="ESP">Spain</option>
+									<option value="LKA">Sri Lanka</option>
+									<option value="SHN">St. Helena</option>
+									<option value="SPM">St. Pierre and Miquelon</option>
+									<option value="SUR">Suriname</option>
+									<option value="SJM">Svalbard and Jan Mayen Islands</option>
+									<option value="SWZ">Swaziland</option>
+									<option value="SWE">Sweden</option>
+									<option value="CHE">Switzerland</option>
+									<option value="TWN">Taiwan</option>
+									<option value="TJK">Tajikistan</option>
+									<option value="TZA">Tanzania</option>
+									<option value="THA">Thailand</option>
+									<option value="TGO">Togo</option>
+									<option value="TKL">Tokelau</option>
+									<option value="TON">Tonga</option>
+									<option value="TTO">Trinidad and Tobago</option>
+									<option value="TUN">Tunisia</option>
+									<option value="TUR">Turkey</option>
+									<option value="TKM">Turkmenistan</option>
+									<option value="TCA">Turks and Caicos Islands</option>
+									<option value="TUV">Tuvalu</option>
+									<option value="UGA">Uganda</option>
+									<option value="UKR">Ukraine</option>
+									<option value="ARE">United Arab Emirates</option>
+									<option value="UK">United Kingdom</option>
+									<option value="URY">Uruguay</option>
+									<option value="UZB">Uzbekistan</option>
+									<option value="VUT">Vanuatu</option>
+									<option value="VAT">Vatican City State (Holy See)</option>
+									<option value="VEN">Venezuela</option>
+									<option value="VNM">Viet Nam</option>
+									<option value="VGB">Virgin Islands</option>
+									<option value="WLF">Wallis and Futuna Islands</option>
+									<option value="ESH">Western Sahara</option>
+									<option value="YEM">Yemen</option>
+									<option value="ZMB">Zambia</option>
+
+							</select>
+                              </div>
+                            
+
+                           </td>
+                    </tr>
+                    <tr>
+                         <td>&nbsp;</td>
+                         <td>&nbsp;</td>
+                         <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="required">*</span>Phone :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="homphontxt" id="txthomphon" class="txtSign" /></td>
+                    </tr>
+                    
+                    
+                    
+                    <tr>
+                        <td align="right"><span class="required">*</span>Email :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="ematxt" id="txtemail" class="txtSign" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="required">*</span>Confirm Email :</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="text" name="ematxt" id="txtconemail" class="txtSign" /></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <br>
+                            <div style="text-align:right">
+                            <input type="checkbox" id="chkterms"/>
+                               </div>
+                        </td>
+                        <td></td>
+                        <td>
+                            <div>
+                                <br />
+                             I have read and agree to the
+                                <a  href="@Url.Action("Terms","Home")">Terms & Conditions </a>
+                                @*@Html.ActionLink("Terms & Conditions")*@
+                                </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+          
+        </tr>
+    </table>
+                      
+                    
+ 		
+                
+           
+    </div>
+        </form>
+</body>
+</html>

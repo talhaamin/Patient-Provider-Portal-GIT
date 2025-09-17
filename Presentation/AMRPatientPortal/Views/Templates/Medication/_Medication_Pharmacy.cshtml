@@ -1,0 +1,83 @@
+﻿@model IEnumerable<AMR.Models.PatientPharmacyModel> 
+<table class="box-table-a" id="tbl-Pharmacies" summary="Pharmacies">
+
+                                    <thead>
+
+                                        <th scope="col"><div style="margin-left:3px;">Name</div></th>
+                                        <th scope="col"><div style="margin-left:3px;">Address</div></th>
+                                        <th scope="col"><div style="margin-left:3px;">City</div></th>
+                                        <th scope="col"><div style="margin-left:3px;">State</div></th>
+                                        <th scope="col"><div style="margin-left:3px;">Zip code</div></th>
+                                        @*<th scope="col">Note</th>*@
+                                       @* <th scope="col"  class="hidePharmacy">Edit</th>
+                                        <th scope="col">Details</th>
+                                        <th scope="col"  class="hidePharmacy">Delete</th>*@
+
+                                    </thead>
+     <tbody>
+                                    @if (Model != null && Model.Count()>0)
+                        {
+                            int counter = 0;
+
+                            foreach (var item in Model)
+                        {
+                                        if (item.PharmacyName == "--Select--")
+                                        {
+                                        }
+                                        else
+                                        {
+                                            System.Text.StringBuilder jsonString = new System.Text.StringBuilder();
+
+                                            jsonString.Append(" { ");
+                                            jsonString.Append("\"ID\": \"" + item.PharmacyCntr + "\",");
+                                            jsonString.Append("\"PharmacyName\": \"" + item.PharmacyName + "\",");
+                                            jsonString.Append("\"Address1\":  \"" + item.Address1 + "\",");
+                                            jsonString.Append("\"Address2\":  \"" + item.Address2 + "\",");
+                                            jsonString.Append("\"City\":  \"" + (item.City) + "\",");
+                                            jsonString.Append("\"State\":  \"" + item.State + "\",");
+                                            jsonString.Append("\"ZipCode\":  \"" + item.PostalCode + "\",");
+                                            jsonString.Append("\"Preferred\":  \"" + item.Preferred + "\",");
+                                            jsonString.Append("\"Phone\":  \"" + item.Phone + "\",");
+                                            jsonString.Append("\"Note\":  \"" + item.Note + "\"");
+
+                                            jsonString.Append("}");
+                         
+                                        <tr class="@((counter % 2 == 0) ? "r0" : "r1")" onclick="OpenPharmacyRecord(@item.PharmacyCntr);">
+                                            <td style="width: 267px;">
+                                                <input type="hidden" id="hdPharmJson@(item.PharmacyCntr)" value=" @jsonString.ToString()" />@item.PharmacyName</td>
+                                            <td style="width: 289px;">@(item.Address1 + " " + item.Address2)</td>
+                                            <td style="width: 114px;">@(item.City)</td>
+                                            <td style="width: 113px;">@(item.State)</td>
+                                            <td>@(item.PostalCode)</td>
+                                            @*<td>@(item.Note)</td>*@
+
+                                            @*<td align="center" style="cursor: pointer; width: auto; height: 20px;" class="hidePharmacy">
+                                                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();editPharmacy(@(item.PharmacyCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="edit-pharmacy">
+                                                    <img id="edt-pharm" src="Content/img/edit.png" />
+                                                    <span class="anc" style="padding-right: 10px;"></span>
+                                                </div>
+                                            </td>
+                                            <td align="center" style="cursor: pointer; width: auto; height: 20px;">
+                                                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();detailPharmacy(@(item.PharmacyCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="detail-pharmacy">
+                                                    <img id="det-pharm" src="Content/img/details.png" />
+                                                    <span class="anc" style="padding-right: 4px;"></span>
+                                                </div>
+                                            </td>
+                                            <td align="center" style="cursor: pointer; width: auto; height: 20px;" class="hidePharmacy">
+                                                <div onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class1();" onclick="removing_class1();deletePharmacyRecord(@(item.PharmacyCntr)); " onmouseout="removing_class1();" onmouseup="removing_class1();" onfocus="removing_class1();" id="delete-pharmacy">
+                                                    <img id="del-pharm" src="Content/img/delete.png" />
+                                                    <span class="anc" style="padding-right: 4px;"></span>
+                                                </div>
+                                            </td>*@
+                                        </tr>
+                                
+                                            counter++;
+                                        }
+                                    }
+                                    }
+                                    else
+                                    {
+                                       <tr><td>No Information Available</td></tr>
+                                    }
+                                  </tbody>
+                                </table>

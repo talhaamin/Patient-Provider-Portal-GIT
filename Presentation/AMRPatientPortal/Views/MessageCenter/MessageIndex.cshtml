@@ -1,0 +1,1038 @@
+﻿@{
+    ViewBag.Title = "Message Center";
+    Layout = "~/Views/Shared/_LayoutMasterPage.cshtml";
+}
+@section Scripts
+{
+    <style>
+        body
+        {
+            background-color: rgb(234,244,253);
+        }
+
+        li
+        {
+            text-decoration: none;
+        }
+
+        #tabs
+        {
+            margin-top: 10px;
+        }
+
+        #Inform_Head
+        {
+            background-color: rgb(234,244,253);
+            height: 100px;
+            margin-top: 10px;
+            border: 1px solid;
+            border-color: rgb(166, 201, 226);
+        }
+
+        #reply
+        {
+            background-color: white;
+            height: 500px;
+            border: 1px solid;
+            border-color: rgb(166, 201, 226);
+            margin-top: 10px;
+        }
+    </style>
+    <!-- applying script for modal pop up -->
+    <script>
+        $(function () {
+            var name = $("#field1"),
+            email = $("#email"),
+            password = $("#password"),
+            allFields = $([]).add(name).add(email).add(password),
+            tips = $(".validateTips");
+            function updateTips(t) {
+                tips
+                .text(t)
+                .addClass("ui-state-highlight");
+                setTimeout(function () {
+                    tips.removeClass("ui-state-highlight", 1500);
+                }, 500);
+            }
+            function checkLength(o, n, min, max) {
+                if (o.val().length > max || o.val().length < min) {
+                    o.addClass("ui-state-error");
+                    updateTips("Length of " + n + " must be between " +
+                    min + " and " + max + ".");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+            function checkRegexp(o, regexp, n) {
+                if (!(regexp.test(o.val()))) {
+                    o.addClass("ui-state-error");
+                    updateTips(n);
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+            $("#dialog-form").dialog({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                height: 650,
+                width: 700,
+                modal: true,
+                buttons: {
+                    "Save": function () {
+                        var bValid = true;
+                        allFields.removeClass("ui-state-error");
+                        bValid = bValid && checkLength(name, "username", 3, 16);
+                        bValid = bValid && checkLength(email, "email", 6, 80);
+                        bValid = bValid && checkLength(password, "password", 5, 16);
+                        bValid = bValid && checkRegexp(name, /^[a-z]([0-9a-z_])+$/i, "Username may consist of a-z, 0-9, underscores, begin with a letter.");
+                        // From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
+
+                        bValid = bValid && checkRegexp(password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
+                        if (bValid) {
+                            $("#users tbody").append("<tr>" +
+                            "<td>" + name.val() + "</td>" +
+                            "<td>" + email.val() + "</td>" +
+                            "<td>" + password.val() + "</td>" +
+                            "</tr>");
+                            $(this).dialog("close");
+                        }
+                    },
+                    Close: function () {
+                        $(this).dialog("close");
+                    }
+                },
+                close: function () {
+                    allFields.val("").removeClass("ui-state-error");
+                }
+            });
+            $("#createuser")
+            .button()
+            .click(function () {
+                $("#dialog-form").dialog("open");
+            });
+        });
+    </script>
+
+    <!-- end of modal pop up script -->
+    <script>
+        $(function () {
+
+            $("#draggable").draggable({ axis: "y" });
+            $("#draggable2").draggable({ axis: "x" });
+            $("#draggable3").draggable({ containment: "#containment-wrapper", scroll: false });
+            $("#draggable3-1").draggable({ containment: "#containment-wrapper", scroll: false });
+            $("#draggable3-2").draggable({ containment: "#containment-wrapper", scroll: false });
+            $("#draggable3-3").draggable({ containment: "#containment-wrapper", scroll: false });
+            $("#draggable3-4").draggable({ containment: "#containment-wrapper", scroll: false });
+            $("#draggable3-5").draggable({ containment: "#containment-wrapper", scroll: false });
+            $("#draggable5").draggable({ containment: "parent" });
+        });
+    </script>
+    <script>
+        $(function () {
+            $("input[type=submit], a, button")
+            .button()
+            .click(function (event) {
+                // event.preventDefault();
+            });
+        });
+
+
+        $(document).ready(function () {
+            $('.disable_button').attr('disabled', true);
+            $('.disable_button').css('color', 'grey');
+            // Call horizontalNav on the navigations wrapping element
+            $('.full-width').horizontalNav({});
+        });
+        function enabling_buttons() {
+            $('.disable_button').attr('disabled', false);
+            $('.disable_button').css('color', 'rgb(46, 110, 158)');
+        }
+
+
+
+    </script>
+    <style>
+        /*	body{
+		font: 62.5% "Trebuchet MS", sans-serif;
+		margin: 50px;
+	}*/
+    </style>
+}
+
+<div id="containment-wrapper" style="border-bottom-style: none; border-top-style: none; border-right-style: none; border-left-width: 1px; border-left-color: rgb(166, 201, 226);">
+    <button style="padding-top: 0px; margin-top: -5px; font-size: 12px;" id="createuser">
+        <img src="Content/img/meesage.png" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">Compose New Message</button>
+    <div id="dialog-form" title="Compose Message" style="height: 20px;">
+        <button>
+            <img src="Content/img/send.png" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">Send</button>
+        <button>
+            <img src="Content/img/attach.gif" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">Attach</button>
+        <br>
+        <br>
+        <p>
+            Please note that you can expect to receive a response within 1 bussiness day
+        </p>
+        <div>
+            <table width="921" height="235" border="1" style="border-color: rgb(166, 201, 226);">
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Location:</b>
+                            <select style="margin-left: 30px; margin-top: -15px;" class="text ui-widget-content ui-corner-all">
+                                <option>Happy Valley Family Practice</option>
+                            </select>
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>To:</b>
+                            <select style="margin-left: 70px; margin-top: -15px;" class="text ui-widget-content ui-corner-all">
+                                <option>Front Desk Non-Medical</option>
+                            </select>
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <b>Subject:</b>
+                            <input name="" type="text" style="margin-left: 95px; margin-top: -15px; width: 520px;"
+                                class="text ui-widget-content ui-corner-all">
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="40" colspan="2">
+                        <p style="margin-left: 10px; margin-top: 10px;">
+                            <select style="margin-left: 0px; margin-top: -15px; width: 150px;" class="text ui-widget-content ui-corner-all">
+                                <option>Arial</option>
+                            </select>
+                            <select style="margin-left: 0px; margin-top: -15px;" class="text ui-widget-content ui-corner-all">
+                                <option>12</option>
+                            </select>
+                            <button>
+                                <img src="Content/img/bold.png" width="20px"></button>
+                            <button>
+                                <img src="Content/img/italic.png" width="20px"></button>
+                            <button>
+                                <img src="Content/img/underline.png" width="20px"></button>
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid; border-color: rgb(166, 201, 226);">
+                    <td height="200" colspan="2" bgcolor="#FFFFFF">Test message for xyz doctor
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="tabs" style="font-size: 12px; margin-top: 10px; width: 885px;">
+        <ul>
+            <li><a href="#tabs-1" style="height: 30px;">
+                <p style="margin-top: -5px;">
+                    Inbox
+                </p>
+            </a></li>
+            <li><a href="#tabs-2" style="height: 30px;">
+                <p style="margin-top: -5px;">
+                    Sent
+                </p>
+            </a></li>
+            <li><a href="#tabs-3" style="height: 30px;">
+                <p style="margin-top: -5px;">
+                    Deleted
+                </p>
+            </a></li>
+            <li><a href="#tabs-4" style="height: 30px;">
+                <p style="margin-top: -5px;">
+                    Appointment
+                </p>
+            </a></li>
+            <li><a href="#tabs-5" style="height: 30px;">
+                <p style="margin-top: -5px;">
+                    Medication Refill
+                </p>
+            </a></li>
+            <li><a href="#tabs-6" style="height: 30px;">
+                <p style="margin-top: -5px;">
+                    Referal Requests
+                </p>
+            </a></li>
+            <li><a href="#tabs-7" style="height: 30px;">
+                <p style="margin-top: -5px;">
+                    Results
+                </p>
+            </a></li>
+        </ul>
+        <div id="tabs-1">
+            <button>
+                <img src="Content/img/reply.png" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">Reply</button>
+            <button>
+                <img src="Content/img/delete.gif" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">Delete</button>
+            <!--Inbox grid start here -->
+            <div style="margin-top: 20px; border: 1px solid; border-color: rgb(166, 201, 226);"
+                class="ui-corner-all">
+                <table id="box-table-a" summary="Medications">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="margin-right: 10px;">
+                                <input name="check" type="checkbox" value="" checked />
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    <img src="Content/img/i.png" />
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    From
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 30px;">
+                                    To
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 80px;">
+                                    Date
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 60px;">
+                                    Subject
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: -20px;">
+                                    <img src="Content/img/attach.gif" style="margin-right: 50px;">
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="r1">
+                            <td>
+                                <input name="check" type="checkbox" value="" checked />
+                            </td>
+                            <td></td>
+                            <td>
+                                <div style="margin-left: 20px;">
+                                    Community Physician
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 30px;">
+                                    Cristia Helms
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 80px;">
+                                    10/1/12 10:58 AM
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 60px;">
+                                    Re: Patient Portal Appt Request
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="r0">
+                            <td>
+                                <input name="check" type="checkbox" value="" checked />
+                            </td>
+                            <td></td>
+                            <td>
+                                <div style="margin-left: 20px;">
+                                    Community Physician
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 30px;">
+                                    Cristia Helms
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 80px;">
+                                    10/1/12 10:34 AM
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 60px;">
+                                    This is a test message for patient portal upgrade testing
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="r1">
+                            <td>
+                                <input name="check" type="checkbox" value="" checked />
+                            </td>
+                            <td></td>
+                            <td>
+                                <div style="margin-left: 20px;">
+                                    Community Physician
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 30px;">
+                                    Cristia Helms
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 80px;">
+                                    10/1/12 10:34 AM
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 60px;">
+                                    Re:Notification of Live Appt Scheduled
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="r0">
+                            <td>
+                                <input name="check" type="checkbox" value="" checked />
+                            </td>
+                            <td></td>
+                            <td>
+                                <div style="margin-left: 20px;">
+                                    Community Physician
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 30px;">
+                                    Cristia Helms
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 80px;">
+                                    10/1/12 10:39 AM
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 60px;">
+                                    Re:Patient Portal Appt Request
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="r1">
+                            <td height="72">
+                                <input name="check" type="checkbox" value="" checked />
+                            </td>
+                            <td></td>
+                            <td>
+                                <div style="margin-left: 20px;">
+                                    Community Physician
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 30px;">
+                                    Cristia Helms
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 80px;">
+                                    10/1/12 09:22 AM
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 60px;">
+                                    This a test message for portal testing only
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--Inbox grid end here -->
+            <!-- Reply Part-->
+            <div id="Inform_Head" class="ui-corner-all">
+                <h4 style="padding-top: 10px; margin-left: 10px;">
+                    <b>Re: Patient Portal Appt Request</b></h4>
+                <div style="float: right; margin-top: -30px; font-size: 12px; color: #999999;">
+                    Monday, October 1,2012 10:58:40 AM
+                </div>
+                <div style="margin-top: 1px; margin-left: 50px; font-size: 12px; color: #999999;">
+                    From: Community Physician Group
+                </div>
+                <div style="margin-top: 1px; margin-left: 90px; font-size: 12px; color: #999999;">
+                    To: Crista Helms
+                </div>
+            </div>
+            <!--End of reply part-->
+            <div id="reply" class="ui-corner-all">
+                <div style="margin-left: 30px;">
+                    <br>
+                    <br>
+                    <br>
+                    Your appointment has been scheduled per your request with Dr.Riddle at 8:00 am
+                                    <br>
+                    ------------------------------------------
+                                    <br>
+                    From:Mary Israel
+                                    <br>
+                    To:Appointment Requests
+                                    <br>
+                    Sent:10/1/2012 2:52:12 PM
+                                    <br>
+                    Subject:Patient Portal ApptRequest
+                                    <br>
+                    <br>
+                    Patient Portal Appointment Request
+                                    <br>
+                    Patient:Mary Israel
+                                    <br>
+                    Date of Birth:3/3/1948
+                                    <br>
+                    Address:
+                                    <br>
+                    2026 Low Street
+                                    <br>
+                    MyTown,NC. 12345
+                                    <br>
+                    Phone:(500)765-4834
+                                    <br>
+                    Reason For Visit:Complete Physical Exam
+                                    <br>
+                    Preferred Location:Main Street
+                                    <br>
+                    Preferred Physician: Dr.Ricki Riddle
+                                    <br>
+                    Preferred Appointment Date/Time:
+                                    <br>
+                    Friday,October 05,2012 8:00 AM
+                </div>
+            </div>
+        </div>
+        <div id="tabs-2">
+            <button>
+                <img src="Content/img/delete.gif" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">Delete</button>
+            <!--sentitem Grid start -->
+            <div style="margin-top: 20px; border: 1px solid; border-color: rgb(166, 201, 226);"
+                class="ui-corner-all">
+                <table id="box-table-a" summary="Medications">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="margin-right: 10px;">
+                                <input name="check" type="checkbox" value="" checked />
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    <img src="Content/img/i.png" />
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    From
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 30px;">
+                                    To
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 80px;">
+                                    Date
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 60px;">
+                                    Subject
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: -20px;">
+                                    <img src="Content/img/attach.gif" style="margin-right: 50px;">
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="r1">
+                            <td>
+                                <input name="check" type="checkbox" value="" checked />
+                            </td>
+                            <td></td>
+                            <td>
+                                <div style="margin-left: 20px;">
+                                    John Smith
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 30px;">
+                                    Front Desk
+                                                    <br>
+                                    Non-Medical
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 80px;">
+                                    11/4/13 7:32 PM
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 60px;">
+                                    Test Message
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="r0">
+                            <td>
+                                <input name="check" type="checkbox" value="" checked />
+                            </td>
+                            <td></td>
+                            <td>
+                                <div style="margin-left: 20px;">
+                                    Community Physician
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 30px;">
+                                    Cristia Helms
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 80px;">
+                                    10/1/12 10:39 AM
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 60px;">
+                                    Re:Patient Portal Appt Request
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="r1">
+                            <td>
+                                <input name="check" type="checkbox" value="" checked />
+                            </td>
+                            <td></td>
+                            <td>
+                                <div style="margin-left: 20px;">
+                                    Johnson Group
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 30px;">
+                                    Cristia Helms
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 80px;">
+                                    10/1/12 10:34 AM
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 60px;">
+                                    This is a test message for patient portal upgrade
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Grid end sentitem-->
+            <!-- Reply Part-->
+            <div id="Inform_Head" class="ui-corner-all">
+                <h4 style="padding-top: 10px; margin-left: 10px;">
+                    <b>Test Message</b></h4>
+                <div style="float: right; margin-top: -30px; font-size: 12px; color: #999999;">
+                    Monday, November 4,2013 7:32:42 PM
+                </div>
+                <div style="margin-top: 1px; margin-left: 50px; font-size: 12px; color: #999999;">
+                    From: John Smith
+                </div>
+                <div style="margin-top: 1px; margin-left: 90px; font-size: 12px; color: #999999;">
+                    To: Front Desk Non-Medical
+                </div>
+            </div>
+            <!--End of reply part-->
+            <div id="reply" style="height: 620px;" class="ui-corner-all">
+                <div style="margin-left: 30px;">
+                    <br>
+                    <br>
+                    Patient Portal Message
+                                    <br>
+                    Patient John Smith
+                                    <br>
+                    Date of Birth: 10/14/1925
+                                    <br>
+                    Address:
+                                    <br>
+                    1010 cherry way
+                                    <br>
+                    new orleans,NO 322882
+                                    <br>
+                    Phone:
+                                    <br>
+                    <br>
+                    <br>
+                    Test message for xyz doctor
+                </div>
+            </div>
+        </div>
+        <div id="tabs-3">
+            <button>
+                <img src="Content/img/delete.gif" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">Delete</button>
+            <!--deleted Grid start -->
+            <div style="margin-top: 20px; border: 1px solid; border-color: rgb(166, 201, 226);"
+                class="ui-corner-all">
+                <table id="box-table-a" summary="Medications">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="margin-right: 10px;">
+                                <input name="check" type="checkbox" value="" checked />
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    <img src="Content/img/i.png" />
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    From
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 30px;">
+                                    To
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 80px;">
+                                    Date
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 60px;">
+                                    Subject
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: -20px;">
+                                    <img src="Content/img/attach.gif" style="margin-right: 50px;">
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="r1">
+                            <td>
+                                <input name="check" type="checkbox" value="" checked />
+                            </td>
+                            <td></td>
+                            <td>
+                                <div style="margin-left: 20px;">
+                                    John Smith
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 30px;">
+                                    Front Desk
+                                                    <br>
+                                    Non-Medical
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 80px;">
+                                    11/4/13 7:32 PM
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 60px;">
+                                    Test Message
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="r0">
+                            <td>
+                                <input name="check" type="checkbox" value="" checked />
+                            </td>
+                            <td></td>
+                            <td>
+                                <div style="margin-left: 20px;">
+                                    Community Physician
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 30px;">
+                                    Cristia Helms
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 80px;">
+                                    10/1/12 10:39 AM
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 60px;">
+                                    Re Patient Portal Appt Request
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Grid end deleted-->
+            <!-- Reply Part-->
+            <div id="Inform_Head" class="ui-corner-all">
+                <h4 style="padding-top: 10px; margin-left: 10px;">
+                    <b>Test Message</b></h4>
+                <div style="float: right; margin-top: -30px; font-size: 12px; color: #999999;">
+                    Monday, November 4,2013 7:32:42 PM
+                </div>
+                <div style="margin-top: 1px; margin-left: 50px; font-size: 12px; color: #999999;">
+                    From: John Smith
+                </div>
+                <div style="margin-top: 1px; margin-left: 90px; font-size: 12px; color: #999999;">
+                    To: Front Desk Non-Medical
+                </div>
+            </div>
+            <!--End of reply part-->
+            <div id="reply" style="height: 695px;" class="ui-corner-all">
+                <div style="margin-left: 30px;">
+                    <br>
+                    <br>
+                    Patient Portal Message
+                                    <br>
+                    Patient John Smith
+                                    <br>
+                    Date of Birth: 10/14/1925
+                                    <br>
+                    Address:
+                                    <br>
+                    1010 cherry way
+                                    <br>
+                    new orleans,NO 322882
+                                    <br>
+                    Phone:
+                                    <br>
+                    <br>
+                    <br>
+                    Test message for xyz doctor
+                </div>
+            </div>
+        </div>
+        <div id="tabs-4">
+            <button>
+                <img src="Content/img/delete.gif" width="20px" style="margin-top: 0px; margin-left: -10px; margin-right: 10px;">Delete</button>
+            <!--Appointment request Grid start -->
+            <div style="margin-top: 20px; border: 1px solid; border-color: rgb(166, 201, 226);"
+                class="ui-corner-all">
+                <table id="box-table-a" summary="Medications">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="margin-right: 10px;">
+                                <input name="check" type="checkbox" value="" checked />
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    <img src="Content/img/i.png" />
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 20px;">
+                                    From
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 30px;">
+                                    To
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 80px;">
+                                    Date
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: 60px;">
+                                    Subject
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left: -20px;">
+                                    <img src="Content/img/attach.gif" style="margin-right: 50px;">
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tr class="r1">
+                        <td>
+                            <input name="check" type="checkbox" value="" checked />
+                        </td>
+                        <td></td>
+                        <td>
+                            <div style="margin-left: 20px;">
+                                Johnson Group
+                            </div>
+                        </td>
+                        <td>
+                            <div style="margin-left: 30px;">
+                                Appointment Requests
+                            </div>
+                        </td>
+                        <td>
+                            <div style="margin-left: 80px;">
+                                11/5/13 7:26 PM
+                            </div>
+                        </td>
+                        <td>
+                            <div style="margin-left: 60px;">
+                                Patient Portal Appt Request
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr class="r0">
+                        <td>
+                            <input name="check" type="checkbox" value="" checked />
+                        </td>
+                        <td></td>
+                        <td>
+                            <div style="margin-left: 20px;">
+                                Community Physician
+                            </div>
+                        </td>
+                        <td>
+                            <div style="margin-left: 30px;">
+                                Cristia Helms
+                            </div>
+                        </td>
+                        <td>
+                            <div style="margin-left: 80px;">
+                                10/1/12 10:39 AM
+                            </div>
+                        </td>
+                        <td>
+                            <div style="margin-left: 60px;">
+                                Re Patient Portal Appt Request
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr class="r1">
+                        <td>
+                            <input name="check" type="checkbox" value="" checked />
+                        </td>
+                        <td></td>
+                        <td>
+                            <div style="margin-left: 20px;">
+                                John Smith
+                            </div>
+                        </td>
+                        <td>
+                            <div style="margin-left: 30px;">
+                                Front Desk
+                                                <br>
+                                Non-Medical
+                            </div>
+                        </td>
+                        <td>
+                            <div style="margin-left: 80px;">
+                                11/4/13 7:32 PM
+                            </div>
+                        </td>
+                        <td>
+                            <div style="margin-left: 60px;">
+                                Test Message
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Grid end appointment request-->
+            <!-- Reply Part-->
+            <div id="Inform_Head" class="ui-corner-all">
+                <h4 style="padding-top: 10px; margin-left: 10px;">
+                    <b>Patient Portal Appt Request</b></h4>
+                <div style="float: right; margin-top: -30px; font-size: 12px; color: #999999;">
+                    Tuesday, November 5,2013 7:26:32 PM
+                </div>
+                <div style="margin-top: 1px; margin-left: 50px; font-size: 12px; color: #999999;">
+                    From: Johnson
+                </div>
+                <div style="margin-top: 1px; margin-left: 90px; font-size: 12px; color: #999999;">
+                    To: Appointment Requests
+                </div>
+            </div>
+            <!--End of reply part-->
+            <div id="reply" style="height: 625px;" class="ui-corner-all">
+                <div style="margin-left: 30px;">
+                    <br>
+                    <br>
+                    Patient Portal Appointment Request
+                                    <br>
+                    Patient:John Smith
+                                    <br>
+                    Date of Birth: 10/14/1925
+                                    <br>
+                    Address:
+                                    <br>
+                    1010 cherry way
+                                    <br>
+                    new orleans, NO 322882
+                                    <br>
+                    Phone: (232)321-3333
+                                    <br>
+                    Reason For Visit:Regular Office Visit
+                                    <br>
+                    Onset
+                                    <br>
+                    Preferred Location:Happy Valley Family Practice
+                                    <br>
+                    Preferred Physician:Dr.Lisa Campbell
+                                    <br>
+                    Preferred Appointment Date/Time(s):
+                                    <br>
+                    Tuesday,November 05,2013 9:40AM
+                                    <br>
+                    Note: Test appointment for demo
+                </div>
+            </div>
+        </div>
+        <div id="tabs-5">
+            <p>
+                Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra
+                                massa metus id nunc. Duis scelerisque molestie
+            </p>
+        </div>
+        <div id="tabs-6">
+            <p>
+                Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate,
+                                pede vel vehicula accumsan, mi neque rutrum erat,
+            </p>
+        </div>
+        <div id="tabs-7">
+            <p>
+                Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate,
+                                pede vel vehicula accumsan, mi neque rutrum erat,
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+﻿@using AMR.Models;
+@model GeneralViewModel
+
+@{
+    Layout= null;
+}
+
+<select  class=" txt ui-corner-all bcom"  style = "width:200px;"  id = "cmbContinuityFacilitySend" onchange = " SendHealthRecord(this.value,'location'); toggle_combobox();">
+
+@if (Model.Facilities != null && Model.Facilities.Count() > 0)
+{
+    foreach (var item in Model.Facilities)
+    {
+        <option value="@item.Value">@item.Text</option>     
+    }
+}
+</select>
+

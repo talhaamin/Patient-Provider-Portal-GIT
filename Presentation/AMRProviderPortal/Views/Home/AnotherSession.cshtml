@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Another session already opened";
+    Layout = null;
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/themes/redmond/jquery-ui.css")" />
+    <link href="@Url.Content("~/Content/css/themes/redmond/jquery-ui-1.10.3.custom.css")" rel="stylesheet">
+     <script type="text/javascript" src="@Url.Content("~/Content/js/CookieHandler.js")"></script>
+    <script src="@Url.Content("~/Content/css/ui/jquery.ui.core.js")"></script>
+    <script src="@Url.Content("~/Content/css/ui/jquery.ui.widget.js")"></script>
+    <script src="@Url.Content("~/Content/css/ui/jquery.ui.accordion.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-1.9.1.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-1.9.2.custom.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-ui.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.maskedinput-1.2.2.js")"></script>
+    <script src="@Url.Content("~/Content/js/validator.js")"></script>
+
+    <link href="~/Content/css/login.css" rel="stylesheet" />
+    <style type="text/css">
+      
+       
+</style>
+    <script>
+
+        function LogoutOtherUser() {
+            window.location = '/logout';
+        }
+
+    </script>
+</head>
+<body>
+    
+    <div id="page_loader1" style="display: none;">
+
+        <div id="apDiv" align="center">
+            <table width="200" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td height="70px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <img src="Content/img/image_559926.gif" width="128" height="64" alt="" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;" height="70px;">Thank You !
+                    you will be receiving an email shortly, please click on the link to complete registration process</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div id="wrapper" style="height: 680px">
+        <div id="apDiv1">
+            <img src="Content/img/amr.png" width="428" height="81" style="margin-left: 30px;" alt="" />
+            <div id="apDiv7" style="margin-top: -15px;">Welcome to your portal services!</div>
+            <div id="apDiv8" style="margin-top: -13px;">Provided to you by Access My Records, Inc.</div>
+        </div>
+        <div style="width: 940px; height: 620px; margin: 0px auto;">
+
+            <div id="Box_1" style="margin-left: 30%; margin-top: 5%;">
+                <div id="apDiv2" style="margin-top: 5%;">
+                    <img src="Content/img/users_warning.png" width="64" height="64" />
+                </div>
+                <div id="tabl" style="margin-top: 5%;">
+                      <table width="294" height="189" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td colspan="2">
+                                    <h4>You already have another session opened</h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><label for="userlogin"></label></td>
+                            </tr>
+                             <tr>
+                                <td colspan="2" >                               
+                                    <a href="#">
+                                <img style="border-style: none;" src="Content/img/logoutsession_btn.png" width="250" height="40" id="btnanothersession" onclick="createCookie('storagecookie', 'provider', 1);localStorage.quit = $.now();LogoutOtherUser();"/></a>
+                                    </td>
+                            </tr>
+                            
+                        </table>
+                </div>
+            </div>
+
+        </div>
+        <div style="width: 940px; height: 40px; margin: 0px auto; border-radius: 30px; background-color: #fff; margin-top: 5px;">
+            @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar!=null)
+            {
+            <p style="margin-left: 40px; padding-top: 10px; font-family: Verdana, Geneva, sans-serif; font-size: 12px;">Copyright © 2005 -2014 Access My Records, Inc. - AMR Patient Portal Version 2.0 (@AMR.Core.Utilities.RequestHelper.MyGlobalVar.BuildNo)</p>
+            }
+            else
+            {
+                <p style="margin-left: 40px; padding-top: 10px; font-family: Verdana, Geneva, sans-serif; font-size: 12px;">Copyright © 2005 -2014 Access My Records, Inc. - AMR Patient Portal Version 2.0</p>
+            }
+
+
+        </div>
+
+    </div>
+</body>
+</html>

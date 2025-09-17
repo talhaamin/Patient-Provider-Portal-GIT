@@ -1,0 +1,9 @@
+C:\SourceControl\AMRPortal\trunk\Data\AMR.DataService\bin\AMR.DataService.dll
+C:\SourceControl\AMRPortal\trunk\Data\AMR.DataService\bin\AMR.DataService.pdb
+C:\SourceControl\AMRPortal\trunk\Data\AMR.DataService\bin\AMR.Data.dll
+C:\SourceControl\AMRPortal\trunk\Data\AMR.DataService\bin\EntityFramework.dll
+C:\SourceControl\AMRPortal\trunk\Data\AMR.DataService\bin\AMR.Data.pdb
+C:\SourceControl\AMRPortal\trunk\Data\AMR.DataService\bin\EntityFramework.xml
+C:\SourceControl\AMRPortal\trunk\Data\AMR.DataService\obj\Release\AMR.DataService.csprojResolveAssemblyReference.cache
+C:\SourceControl\AMRPortal\trunk\Data\AMR.DataService\obj\Release\AMR.DataService.dll
+C:\SourceControl\AMRPortal\trunk\Data\AMR.DataService\obj\Release\AMR.DataService.pdb

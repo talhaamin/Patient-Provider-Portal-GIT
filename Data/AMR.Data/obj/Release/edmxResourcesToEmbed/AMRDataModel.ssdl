@@ -1,0 +1,3247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AMRModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="AMRModelStoreContainer">
+    <EntitySet Name="AttachmentMessage" EntityType="AMRModel.Store.AttachmentMessage" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BillPayment" EntityType="AMRModel.Store.BillPayment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BillRate" EntityType="AMRModel.Store.BillRate" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_AccessStatus" EntityType="AMRModel.Store.C_AccessStatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_ActivityLevel" EntityType="AMRModel.Store.C_ActivityLevel" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_Advisor" EntityType="AMRModel.Store.C_Advisor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_AlcoholFrequency" EntityType="AMRModel.Store.C_AlcoholFrequency" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_AuditAction" EntityType="AMRModel.Store.C_AuditAction" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_BloodType" EntityType="AMRModel.Store.C_BloodType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_CodeSystem" EntityType="AMRModel.Store.C_CodeSystem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_ConditionStatus" EntityType="AMRModel.Store.C_ConditionStatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_Country" EntityType="AMRModel.Store.C_Country" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_DoctorType" EntityType="AMRModel.Store.C_DoctorType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_DocumentType" EntityType="AMRModel.Store.C_DocumentType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_DocUploadType" EntityType="AMRModel.Store.C_DocUploadType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_EducationLevel" EntityType="AMRModel.Store.C_EducationLevel" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_EMRSystem" EntityType="AMRModel.Store.C_EMRSystem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_Ethnicity" EntityType="AMRModel.Store.C_Ethnicity" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_ExerciseFrequency" EntityType="AMRModel.Store.C_ExerciseFrequency" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_FacilityTypes" EntityType="AMRModel.Store.C_FacilityTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_Frequency" EntityType="AMRModel.Store.C_Frequency" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_Gender" EntityType="AMRModel.Store.C_Gender" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_InstructionType" EntityType="AMRModel.Store.C_InstructionType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_MaritalStatus" EntityType="AMRModel.Store.C_MaritalStatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_Medication" EntityType="AMRModel.Store.C_Medication" store:Type="Tables" store:Schema="dbo" store:Name="C_Medication">
+      <DefiningQuery>SELECT 
+      [C_Medication].[RxNormId] AS [RxNormId], 
+      [C_Medication].[Description] AS [Description]
+      FROM [dbo].[C_Medication] AS [C_Medication]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="C_MessagePeriod" EntityType="AMRModel.Store.C_MessagePeriod" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_MessageResponseType" EntityType="AMRModel.Store.C_MessageResponseType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_MessageStatus" EntityType="AMRModel.Store.C_MessageStatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_MessageType" EntityType="AMRModel.Store.C_MessageType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_PolicyType" EntityType="AMRModel.Store.C_PolicyType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_PreferredLanguage" EntityType="AMRModel.Store.C_PreferredLanguage" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_Problem" EntityType="AMRModel.Store.C_Problem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_Race" EntityType="AMRModel.Store.C_Race" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_Relationship" EntityType="AMRModel.Store.C_Relationship" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_Religion" EntityType="AMRModel.Store.C_Religion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_RouteOfAdministration" EntityType="AMRModel.Store.C_RouteOfAdministration" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_SecurityQuestion" EntityType="AMRModel.Store.C_SecurityQuestion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_SmokingStatus" EntityType="AMRModel.Store.C_SmokingStatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_Social" EntityType="AMRModel.Store.C_Social" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_State" EntityType="AMRModel.Store.C_State" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_ThirdParty" EntityType="AMRModel.Store.C_ThirdParty" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_UserRole" EntityType="AMRModel.Store.C_UserRole" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="C_Vaccine" EntityType="AMRModel.Store.C_Vaccine" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Carrier" EntityType="AMRModel.Store.Carrier" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Config" EntityType="AMRModel.Store.Config" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ConfigAttachment" EntityType="AMRModel.Store.ConfigAttachment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DirectReceived" EntityType="AMRModel.Store.DirectReceived" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Facility" EntityType="AMRModel.Store.Facility" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Message" EntityType="AMRModel.Store.Message" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MessageAudit" EntityType="AMRModel.Store.MessageAudit" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MessageDetail" EntityType="AMRModel.Store.MessageDetail" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Organization" EntityType="AMRModel.Store.Organization" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Patient" EntityType="AMRModel.Store.Patient" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientAccountLink" EntityType="AMRModel.Store.PatientAccountLink" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientAdvisor" EntityType="AMRModel.Store.PatientAdvisor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientAllergy" EntityType="AMRModel.Store.PatientAllergy" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientCareDocument" EntityType="AMRModel.Store.PatientCareDocument" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientClinicalDocument" EntityType="AMRModel.Store.PatientClinicalDocument" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientDoctor" EntityType="AMRModel.Store.PatientDoctor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientDocument" EntityType="AMRModel.Store.PatientDocument" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientDocumentAudit" EntityType="AMRModel.Store.PatientDocumentAudit" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientEmergency" EntityType="AMRModel.Store.PatientEmergency" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientFacilityLink" EntityType="AMRModel.Store.PatientFacilityLink" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientFamilyHist" EntityType="AMRModel.Store.PatientFamilyHist" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientImmunization" EntityType="AMRModel.Store.PatientImmunization" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientInsurance" EntityType="AMRModel.Store.PatientInsurance" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientInsurancePlan" EntityType="AMRModel.Store.PatientInsurancePlan" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientLabResult" EntityType="AMRModel.Store.PatientLabResult" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientLabResultTest" EntityType="AMRModel.Store.PatientLabResultTest" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientMatch" EntityType="AMRModel.Store.PatientMatch" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientMedicalDocument" EntityType="AMRModel.Store.PatientMedicalDocument" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientMedicalHist" EntityType="AMRModel.Store.PatientMedicalHist" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientMedication" EntityType="AMRModel.Store.PatientMedication" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientNote" EntityType="AMRModel.Store.PatientNote" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientOrgan" EntityType="AMRModel.Store.PatientOrgan" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientPharmacy" EntityType="AMRModel.Store.PatientPharmacy" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientPlanOfCare" EntityType="AMRModel.Store.PatientPlanOfCare" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientPolicy" EntityType="AMRModel.Store.PatientPolicy" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientProblem" EntityType="AMRModel.Store.PatientProblem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientProcedure" EntityType="AMRModel.Store.PatientProcedure" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientProviderLink" EntityType="AMRModel.Store.PatientProviderLink" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientRepresentative" EntityType="AMRModel.Store.PatientRepresentative" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientShare" EntityType="AMRModel.Store.PatientShare" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientSocialHist" EntityType="AMRModel.Store.PatientSocialHist" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientSocialSelf" EntityType="AMRModel.Store.PatientSocialSelf" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientSurgicalHist" EntityType="AMRModel.Store.PatientSurgicalHist" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientVisit" EntityType="AMRModel.Store.PatientVisit" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientVitalSign" EntityType="AMRModel.Store.PatientVitalSign" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientWebSetting" EntityType="AMRModel.Store.PatientWebSetting" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Practice" EntityType="AMRModel.Store.Practice" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Provider" EntityType="AMRModel.Store.Provider" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProviderFacilityLink" EntityType="AMRModel.Store.ProviderFacilityLink" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProviderWebSettings" EntityType="AMRModel.Store.ProviderWebSettings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Token" EntityType="AMRModel.Store.Token" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="AMRModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserLoginAudit" EntityType="AMRModel.Store.UserLoginAudit" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="vwCCDAuditLog" EntityType="AMRModel.Store.vwCCDAuditLog" store:Type="Views" store:Schema="dbo" store:Name="vwCCDAuditLog">
+      <DefiningQuery>SELECT 
+      [vwCCDAuditLog].[AuditId] AS [AuditId], 
+      [vwCCDAuditLog].[PatientId] AS [PatientId], 
+      [vwCCDAuditLog].[Method] AS [Method], 
+      [vwCCDAuditLog].[UserId] AS [UserId], 
+      [vwCCDAuditLog].[Name] AS [Name], 
+      [vwCCDAuditLog].[TDStamp] AS [TDStamp]
+      FROM [dbo].[vwCCDAuditLog] AS [vwCCDAuditLog]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwFacilitiesForPatient" EntityType="AMRModel.Store.vwFacilitiesForPatient" store:Type="Views" store:Schema="dbo" store:Name="vwFacilitiesForPatient">
+      <DefiningQuery>SELECT 
+      [vwFacilitiesForPatient].[PatientId] AS [PatientId], 
+      [vwFacilitiesForPatient].[FacilityId] AS [FacilityId], 
+      [vwFacilitiesForPatient].[FacilityName] AS [FacilityName]
+      FROM [dbo].[vwFacilitiesForPatient] AS [vwFacilitiesForPatient]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwMessageDetailReceived" EntityType="AMRModel.Store.vwMessageDetailReceived" store:Type="Views" store:Schema="dbo" store:Name="vwMessageDetailReceived">
+      <DefiningQuery>SELECT 
+      [vwMessageDetailReceived].[MessageId] AS [MessageId], 
+      [vwMessageDetailReceived].[MessageDetailId] AS [MessageDetailId], 
+      [vwMessageDetailReceived].[PatientId] AS [PatientId], 
+      [vwMessageDetailReceived].[PatientName] AS [PatientName], 
+      [vwMessageDetailReceived].[MessageTypeId] AS [MessageTypeId], 
+      [vwMessageDetailReceived].[MessageType] AS [MessageType], 
+      [vwMessageDetailReceived].[FacilityId] AS [FacilityId], 
+      [vwMessageDetailReceived].[FacilityName] AS [FacilityName], 
+      [vwMessageDetailReceived].[MessageStatusId] AS [MessageStatusId], 
+      [vwMessageDetailReceived].[MessageStatus] AS [MessageStatus], 
+      [vwMessageDetailReceived].[Expr1] AS [Expr1], 
+      [vwMessageDetailReceived].[ProviderId_To] AS [ProviderId_To], 
+      [vwMessageDetailReceived].[ProviderTo] AS [ProviderTo], 
+      [vwMessageDetailReceived].[ProviderId_From] AS [ProviderId_From], 
+      [vwMessageDetailReceived].[ProviderFrom] AS [ProviderFrom], 
+      [vwMessageDetailReceived].[MessageRequest] AS [MessageRequest], 
+      [vwMessageDetailReceived].[MessageResponse] AS [MessageResponse], 
+      [vwMessageDetailReceived].[MessageResponseTypeId] AS [MessageResponseTypeId], 
+      [vwMessageDetailReceived].[MessageResponseType] AS [MessageResponseType], 
+      [vwMessageDetailReceived].[PreferredPeriod] AS [PreferredPeriod], 
+      [vwMessageDetailReceived].[PreferredTime] AS [PreferredTime], 
+      [vwMessageDetailReceived].[PreferredWeekDay] AS [PreferredWeekDay], 
+      [vwMessageDetailReceived].[VisitReason] AS [VisitReason], 
+      [vwMessageDetailReceived].[MessageUrgency] AS [MessageUrgency], 
+      [vwMessageDetailReceived].[AppointmentStart] AS [AppointmentStart], 
+      [vwMessageDetailReceived].[AppointmentEnd] AS [AppointmentEnd], 
+      [vwMessageDetailReceived].[ProviderId_Appointment] AS [ProviderId_Appointment], 
+      [vwMessageDetailReceived].[ProviderAppointment] AS [ProviderAppointment], 
+      [vwMessageDetailReceived].[MedicationNDC] AS [MedicationNDC], 
+      [vwMessageDetailReceived].[MedicationName] AS [MedicationName], 
+      [vwMessageDetailReceived].[NoOfRefills] AS [NoOfRefills], 
+      [vwMessageDetailReceived].[MedicationStatus] AS [MedicationStatus], 
+      [vwMessageDetailReceived].[PharmacyName] AS [PharmacyName], 
+      [vwMessageDetailReceived].[PharmacyAddress] AS [PharmacyAddress], 
+      [vwMessageDetailReceived].[PharmacyPhone] AS [PharmacyPhone], 
+      [vwMessageDetailReceived].[DateCreated] AS [DateCreated], 
+      [vwMessageDetailReceived].[MessageRead] AS [MessageRead], 
+      [vwMessageDetailReceived].[MessageAttachmentId] AS [MessageAttachmentId], 
+      [vwMessageDetailReceived].[DocumentFormat] AS [DocumentFormat]
+      FROM [dbo].[vwMessageDetailReceived] AS [vwMessageDetailReceived]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwMessageDetailSent" EntityType="AMRModel.Store.vwMessageDetailSent" store:Type="Views" store:Schema="dbo" store:Name="vwMessageDetailSent">
+      <DefiningQuery>SELECT 
+      [vwMessageDetailSent].[MessageId] AS [MessageId], 
+      [vwMessageDetailSent].[MessageDetailId] AS [MessageDetailId], 
+      [vwMessageDetailSent].[PatientId] AS [PatientId], 
+      [vwMessageDetailSent].[PatientName] AS [PatientName], 
+      [vwMessageDetailSent].[MessageTypeId] AS [MessageTypeId], 
+      [vwMessageDetailSent].[MessageType] AS [MessageType], 
+      [vwMessageDetailSent].[FacilityId] AS [FacilityId], 
+      [vwMessageDetailSent].[FacilityName] AS [FacilityName], 
+      [vwMessageDetailSent].[MessageStatusId] AS [MessageStatusId], 
+      [vwMessageDetailSent].[MessageStatus] AS [MessageStatus], 
+      [vwMessageDetailSent].[Expr1] AS [Expr1], 
+      [vwMessageDetailSent].[ProviderId_To] AS [ProviderId_To], 
+      [vwMessageDetailSent].[ProviderTo] AS [ProviderTo], 
+      [vwMessageDetailSent].[ProviderId_From] AS [ProviderId_From], 
+      [vwMessageDetailSent].[ProviderFrom] AS [ProviderFrom], 
+      [vwMessageDetailSent].[MessageRequest] AS [MessageRequest], 
+      [vwMessageDetailSent].[MessageResponse] AS [MessageResponse], 
+      [vwMessageDetailSent].[MessageResponseTypeId] AS [MessageResponseTypeId], 
+      [vwMessageDetailSent].[MessageResponseType] AS [MessageResponseType], 
+      [vwMessageDetailSent].[PreferredPeriod] AS [PreferredPeriod], 
+      [vwMessageDetailSent].[PreferredTime] AS [PreferredTime], 
+      [vwMessageDetailSent].[PreferredWeekDay] AS [PreferredWeekDay], 
+      [vwMessageDetailSent].[VisitReason] AS [VisitReason], 
+      [vwMessageDetailSent].[MessageUrgency] AS [MessageUrgency], 
+      [vwMessageDetailSent].[AppointmentStart] AS [AppointmentStart], 
+      [vwMessageDetailSent].[AppointmentEnd] AS [AppointmentEnd], 
+      [vwMessageDetailSent].[ProviderId_Appointment] AS [ProviderId_Appointment], 
+      [vwMessageDetailSent].[ProviderAppointment] AS [ProviderAppointment], 
+      [vwMessageDetailSent].[MedicationNDC] AS [MedicationNDC], 
+      [vwMessageDetailSent].[MedicationName] AS [MedicationName], 
+      [vwMessageDetailSent].[NoOfRefills] AS [NoOfRefills], 
+      [vwMessageDetailSent].[MedicationStatus] AS [MedicationStatus], 
+      [vwMessageDetailSent].[PharmacyName] AS [PharmacyName], 
+      [vwMessageDetailSent].[PharmacyAddress] AS [PharmacyAddress], 
+      [vwMessageDetailSent].[PharmacyPhone] AS [PharmacyPhone], 
+      [vwMessageDetailSent].[DateCreated] AS [DateCreated], 
+      [vwMessageDetailSent].[MessageRead] AS [MessageRead], 
+      [vwMessageDetailSent].[MessageAttachmentId] AS [MessageAttachmentId], 
+      [vwMessageDetailSent].[DocumentFormat] AS [DocumentFormat]
+      FROM [dbo].[vwMessageDetailSent] AS [vwMessageDetailSent]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwMessageGetCancelled" EntityType="AMRModel.Store.vwMessageGetCancelled" store:Type="Views" store:Schema="dbo" store:Name="vwMessageGetCancelled">
+      <DefiningQuery>SELECT 
+      [vwMessageGetCancelled].[FacilityId] AS [FacilityId], 
+      [vwMessageGetCancelled].[MessageId] AS [MessageId], 
+      [vwMessageGetCancelled].[AMRPatientId] AS [AMRPatientId], 
+      [vwMessageGetCancelled].[MessageTypeId] AS [MessageTypeId]
+      FROM [dbo].[vwMessageGetCancelled] AS [vwMessageGetCancelled]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwMessageGetWaiting" EntityType="AMRModel.Store.vwMessageGetWaiting" store:Type="Views" store:Schema="dbo" store:Name="vwMessageGetWaiting">
+      <DefiningQuery>SELECT 
+      [vwMessageGetWaiting].[FacilityId] AS [FacilityId], 
+      [vwMessageGetWaiting].[MessageId] AS [MessageId], 
+      [vwMessageGetWaiting].[AMRPatientId] AS [AMRPatientId], 
+      [vwMessageGetWaiting].[MessageTypeId] AS [MessageTypeId], 
+      [vwMessageGetWaiting].[ToProvider] AS [ToProvider], 
+      [vwMessageGetWaiting].[MessageRequest] AS [MessageRequest], 
+      [vwMessageGetWaiting].[PreferredResponseBy] AS [PreferredResponseBy], 
+      [vwMessageGetWaiting].[PreferredPeriod] AS [PreferredPeriod], 
+      [vwMessageGetWaiting].[PreferredTime] AS [PreferredTime], 
+      [vwMessageGetWaiting].[PreferredDay] AS [PreferredDay], 
+      [vwMessageGetWaiting].[VisitReason] AS [VisitReason], 
+      [vwMessageGetWaiting].[VisitUrgency] AS [VisitUrgency], 
+      [vwMessageGetWaiting].[Medication] AS [Medication], 
+      [vwMessageGetWaiting].[Pharmacy] AS [Pharmacy], 
+      [vwMessageGetWaiting].[AppointmentStart] AS [AppointmentStart], 
+      [vwMessageGetWaiting].[AppointmentEnd] AS [AppointmentEnd]
+      FROM [dbo].[vwMessageGetWaiting] AS [vwMessageGetWaiting]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwMessageSummary" EntityType="AMRModel.Store.vwMessageSummary" store:Type="Views" store:Schema="dbo" store:Name="vwMessageSummary">
+      <DefiningQuery>SELECT 
+      [vwMessageSummary].[PatientId] AS [PatientId], 
+      [vwMessageSummary].[MessageId] AS [MessageId], 
+      [vwMessageSummary].[FacilityId] AS [FacilityId], 
+      [vwMessageSummary].[FacilityName] AS [FacilityName], 
+      [vwMessageSummary].[MessageTypeId] AS [MessageTypeId], 
+      [vwMessageSummary].[MessageType] AS [MessageType], 
+      [vwMessageSummary].[MessageStatusId] AS [MessageStatusId], 
+      [vwMessageSummary].[MessageStatus] AS [MessageStatus], 
+      [vwMessageSummary].[MessageRequest] AS [MessageRequest], 
+      [vwMessageSummary].[PreferredPeriod] AS [PreferredPeriod], 
+      [vwMessageSummary].[PreferredTime] AS [PreferredTime], 
+      [vwMessageSummary].[PreferredWeekDay] AS [PreferredWeekDay], 
+      [vwMessageSummary].[MessageUrgency] AS [MessageUrgency], 
+      [vwMessageSummary].[VisitReason] AS [VisitReason], 
+      [vwMessageSummary].[MedicationName] AS [MedicationName], 
+      [vwMessageSummary].[PharmacyName] AS [PharmacyName], 
+      [vwMessageSummary].[ProviderId_To] AS [ProviderId_To], 
+      [vwMessageSummary].[ProviderName_To] AS [ProviderName_To], 
+      [vwMessageSummary].[ProviderId_From] AS [ProviderId_From], 
+      [vwMessageSummary].[ProviderName_From] AS [ProviderName_From], 
+      [vwMessageSummary].[UserId_Created] AS [UserId_Created], 
+      [vwMessageSummary].[CreatedByName] AS [CreatedByName], 
+      [vwMessageSummary].[MessageResponse] AS [MessageResponse], 
+      [vwMessageSummary].[MessageResponseTypeId] AS [MessageResponseTypeId], 
+      [vwMessageSummary].[AppointmentStart] AS [AppointmentStart], 
+      [vwMessageSummary].[AppointmentEnd] AS [AppointmentEnd], 
+      [vwMessageSummary].[ProviderId_Appointment] AS [ProviderId_Appointment], 
+      [vwMessageSummary].[ProviderName_Appointment] AS [ProviderName_Appointment], 
+      [vwMessageSummary].[MedicationNDC] AS [MedicationNDC], 
+      [vwMessageSummary].[NoOfRefills] AS [NoOfRefills], 
+      [vwMessageSummary].[MedicationStatus] AS [MedicationStatus], 
+      [vwMessageSummary].[PharmacyAddress] AS [PharmacyAddress], 
+      [vwMessageSummary].[PharmacyPhone] AS [PharmacyPhone], 
+      [vwMessageSummary].[AttachmentId] AS [AttachmentId]
+      FROM [dbo].[vwMessageSummary] AS [vwMessageSummary]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwMessageUnread" EntityType="AMRModel.Store.vwMessageUnread" store:Type="Views" store:Schema="dbo" store:Name="vwMessageUnread">
+      <DefiningQuery>SELECT 
+      [vwMessageUnread].[PatientId] AS [PatientId], 
+      [vwMessageUnread].[Medication] AS [Medication], 
+      [vwMessageUnread].[Appointment] AS [Appointment], 
+      [vwMessageUnread].[Referral] AS [Referral], 
+      [vwMessageUnread].[General] AS [General]
+      FROM [dbo].[vwMessageUnread] AS [vwMessageUnread]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwMessageUnreadProv" EntityType="AMRModel.Store.vwMessageUnreadProv" store:Type="Views" store:Schema="dbo" store:Name="vwMessageUnreadProv">
+      <DefiningQuery>SELECT 
+      [vwMessageUnreadProv].[ProviderId] AS [ProviderId], 
+      [vwMessageUnreadProv].[Medication] AS [Medication], 
+      [vwMessageUnreadProv].[Appointment] AS [Appointment], 
+      [vwMessageUnreadProv].[Referral] AS [Referral], 
+      [vwMessageUnreadProv].[General] AS [General]
+      FROM [dbo].[vwMessageUnreadProv] AS [vwMessageUnreadProv]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwPatientDocumentsList" EntityType="AMRModel.Store.vwPatientDocumentsList" store:Type="Views" store:Schema="dbo" store:Name="vwPatientDocumentsList">
+      <DefiningQuery>SELECT 
+      [vwPatientDocumentsList].[PatientId] AS [PatientId], 
+      [vwPatientDocumentsList].[FacilityId] AS [FacilityId], 
+      [vwPatientDocumentsList].[VisitId] AS [VisitId], 
+      [vwPatientDocumentsList].[DocumentCntr] AS [DocumentCntr], 
+      [vwPatientDocumentsList].[DocType] AS [DocType], 
+      [vwPatientDocumentsList].[DocumentDescription] AS [DocumentDescription]
+      FROM [dbo].[vwPatientDocumentsList] AS [vwPatientDocumentsList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwPatientFacilityOptions" EntityType="AMRModel.Store.vwPatientFacilityOptions" store:Type="Views" store:Schema="dbo" store:Name="vwPatientFacilityOptions">
+      <DefiningQuery>SELECT 
+      [vwPatientFacilityOptions].[PatientId] AS [PatientId], 
+      [vwPatientFacilityOptions].[GeneralMessageAvailable] AS [GeneralMessageAvailable], 
+      [vwPatientFacilityOptions].[AppointmentMessageAvailable] AS [AppointmentMessageAvailable], 
+      [vwPatientFacilityOptions].[MedicationMessageAvailable] AS [MedicationMessageAvailable], 
+      [vwPatientFacilityOptions].[ReferralMessageAvailable] AS [ReferralMessageAvailable], 
+      [vwPatientFacilityOptions].[PremiumAvailable] AS [PremiumAvailable], 
+      [vwPatientFacilityOptions].[OnlineBillPayment] AS [OnlineBillPayment]
+      FROM [dbo].[vwPatientFacilityOptions] AS [vwPatientFacilityOptions]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwPatientSearch" EntityType="AMRModel.Store.vwPatientSearch" store:Type="Views" store:Schema="dbo" store:Name="vwPatientSearch">
+      <DefiningQuery>SELECT 
+      [vwPatientSearch].[PatientId] AS [PatientId], 
+      [vwPatientSearch].[PRank] AS [PRank], 
+      [vwPatientSearch].[FirstName] AS [FirstName], 
+      [vwPatientSearch].[LastName] AS [LastName], 
+      [vwPatientSearch].[DOB] AS [DOB], 
+      [vwPatientSearch].[PAddress] AS [PAddress], 
+      [vwPatientSearch].[State] AS [State]
+      FROM [dbo].[vwPatientSearch] AS [vwPatientSearch]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwPatientsForFacility" EntityType="AMRModel.Store.vwPatientsForFacility" store:Type="Views" store:Schema="dbo" store:Name="vwPatientsForFacility">
+      <DefiningQuery>SELECT 
+      [vwPatientsForFacility].[FacilityId] AS [FacilityId], 
+      [vwPatientsForFacility].[PatientId] AS [PatientId], 
+      [vwPatientsForFacility].[FirstName] AS [FirstName], 
+      [vwPatientsForFacility].[LastName] AS [LastName], 
+      [vwPatientsForFacility].[Address1] AS [Address1], 
+      [vwPatientsForFacility].[DOB] AS [DOB]
+      FROM [dbo].[vwPatientsForFacility] AS [vwPatientsForFacility]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwPatientSummary" EntityType="AMRModel.Store.vwPatientSummary" store:Type="Views" store:Schema="dbo" store:Name="vwPatientSummary">
+      <DefiningQuery>SELECT 
+      [vwPatientSummary].[PatientId] AS [PatientId], 
+      [vwPatientSummary].[Title] AS [Title], 
+      [vwPatientSummary].[FirstName] AS [FirstName], 
+      [vwPatientSummary].[MiddleName] AS [MiddleName], 
+      [vwPatientSummary].[LastName] AS [LastName], 
+      [vwPatientSummary].[Suffix] AS [Suffix], 
+      [vwPatientSummary].[PAddress] AS [PAddress], 
+      [vwPatientSummary].[City] AS [City], 
+      [vwPatientSummary].[State] AS [State], 
+      [vwPatientSummary].[Zip] AS [Zip], 
+      [vwPatientSummary].[CountryCode] AS [CountryCode], 
+      [vwPatientSummary].[HeightFt] AS [HeightFt], 
+      [vwPatientSummary].[HeightIn] AS [HeightIn], 
+      [vwPatientSummary].[Weight] AS [Weight], 
+      [vwPatientSummary].[Comments] AS [Comments], 
+      [vwPatientSummary].[CountryName] AS [CountryName], 
+      [vwPatientSummary].[DOB] AS [DOB], 
+      [vwPatientSummary].[HomePhone] AS [HomePhone], 
+      [vwPatientSummary].[WorkPhone] AS [WorkPhone], 
+      [vwPatientSummary].[MobilePhone] AS [MobilePhone], 
+      [vwPatientSummary].[EMail] AS [EMail], 
+      [vwPatientSummary].[EyeColor] AS [EyeColor], 
+      [vwPatientSummary].[HairColor] AS [HairColor], 
+      [vwPatientSummary].[OrganDoner] AS [OrganDoner], 
+      [vwPatientSummary].[MaritalStatusId] AS [MaritalStatusId], 
+      [vwPatientSummary].[MaritalStatus] AS [MaritalStatus], 
+      [vwPatientSummary].[PreferredLanguageId] AS [PreferredLanguageId], 
+      [vwPatientSummary].[PreferredLanguage] AS [PreferredLanguage], 
+      [vwPatientSummary].[RaceId_NotAnswer] AS [RaceId_NotAnswer], 
+      [vwPatientSummary].[RaceId_Native] AS [RaceId_Native], 
+      [vwPatientSummary].[RaceId_Asian] AS [RaceId_Asian], 
+      [vwPatientSummary].[RaceId_Black] AS [RaceId_Black], 
+      [vwPatientSummary].[RaceId_Hawaiian] AS [RaceId_Hawaiian], 
+      [vwPatientSummary].[RaceId_White] AS [RaceId_White], 
+      [vwPatientSummary].[Race] AS [Race], 
+      [vwPatientSummary].[ReligionId] AS [ReligionId], 
+      [vwPatientSummary].[Religion] AS [Religion], 
+      [vwPatientSummary].[GenderId] AS [GenderId], 
+      [vwPatientSummary].[Gender] AS [Gender], 
+      [vwPatientSummary].[EthnicityId] AS [EthnicityId], 
+      [vwPatientSummary].[Ethnicity] AS [Ethnicity], 
+      [vwPatientSummary].[BloodTypeId] AS [BloodTypeId], 
+      [vwPatientSummary].[BloodType] AS [BloodType], 
+      [vwPatientSummary].[SmokingStatusId] AS [SmokingStatusId], 
+      [vwPatientSummary].[SmokingStatus] AS [SmokingStatus], 
+      [vwPatientSummary].[PatientEmergencyId] AS [PatientEmergencyId], 
+      [vwPatientSummary].[RelationshipId] AS [RelationshipId], 
+      [vwPatientSummary].[EmergencyName] AS [EmergencyName], 
+      [vwPatientSummary].[EmergencyAddress] AS [EmergencyAddress], 
+      [vwPatientSummary].[EmergencyCity] AS [EmergencyCity], 
+      [vwPatientSummary].[EmergencyState] AS [EmergencyState], 
+      [vwPatientSummary].[EmergencyZip] AS [EmergencyZip], 
+      [vwPatientSummary].[EmergencyCountryCode] AS [EmergencyCountryCode], 
+      [vwPatientSummary].[EmergencyCountryName] AS [EmergencyCountryName], 
+      [vwPatientSummary].[EmergencyHomePhone] AS [EmergencyHomePhone], 
+      [vwPatientSummary].[EmergencyMobilePhone] AS [EmergencyMobilePhone], 
+      [vwPatientSummary].[EmergencyWorkPhone] AS [EmergencyWorkPhone], 
+      [vwPatientSummary].[EmergencyRelationshipId] AS [EmergencyRelationshipId], 
+      [vwPatientSummary].[EmergencyRelationship] AS [EmergencyRelationship], 
+      [vwPatientSummary].[IsPrimary] AS [IsPrimary], 
+      [vwPatientSummary].[PCP] AS [PCP], 
+      [vwPatientSummary].[MailAddress] AS [MailAddress], 
+      [vwPatientSummary].[MailCity] AS [MailCity], 
+      [vwPatientSummary].[MailState] AS [MailState], 
+      [vwPatientSummary].[MailZip] AS [MailZip], 
+      [vwPatientSummary].[MailCountryCode] AS [MailCountryCode], 
+      [vwPatientSummary].[MailCountryName] AS [MailCountryName], 
+      [vwPatientSummary].[Heart] AS [Heart], 
+      [vwPatientSummary].[Liver] AS [Liver], 
+      [vwPatientSummary].[Pancreas] AS [Pancreas], 
+      [vwPatientSummary].[Lungs] AS [Lungs], 
+      [vwPatientSummary].[Kidneys] AS [Kidneys], 
+      [vwPatientSummary].[Intestines] AS [Intestines], 
+      [vwPatientSummary].[Cornea] AS [Cornea], 
+      [vwPatientSummary].[Skin] AS [Skin], 
+      [vwPatientSummary].[BoneMarrow] AS [BoneMarrow], 
+      [vwPatientSummary].[HeartValves] AS [HeartValves], 
+      [vwPatientSummary].[ConnectiveTissue] AS [ConnectiveTissue]
+      FROM [dbo].[vwPatientSummary] AS [vwPatientSummary]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwPatientVisitSummary" EntityType="AMRModel.Store.vwPatientVisitSummary" store:Type="Views" store:Schema="dbo" store:Name="vwPatientVisitSummary">
+      <DefiningQuery>SELECT 
+      [vwPatientVisitSummary].[PatientId] AS [PatientId], 
+      [vwPatientVisitSummary].[FacilityId] AS [FacilityId], 
+      [vwPatientVisitSummary].[FacilityName] AS [FacilityName], 
+      [vwPatientVisitSummary].[FacilityAddress] AS [FacilityAddress], 
+      [vwPatientVisitSummary].[FacilityCityStatePostal] AS [FacilityCityStatePostal], 
+      [vwPatientVisitSummary].[VisitId] AS [VisitId], 
+      [vwPatientVisitSummary].[VisitDate] AS [VisitDate], 
+      [vwPatientVisitSummary].[ProviderId] AS [ProviderId], 
+      [vwPatientVisitSummary].[VisitReason] AS [VisitReason], 
+      [vwPatientVisitSummary].[ProviderName] AS [ProviderName], 
+      [vwPatientVisitSummary].[Viewable] AS [Viewable]
+      FROM [dbo].[vwPatientVisitSummary] AS [vwPatientVisitSummary]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwProvidersForFacility" EntityType="AMRModel.Store.vwProvidersForFacility" store:Type="Views" store:Schema="dbo" store:Name="vwProvidersForFacility">
+      <DefiningQuery>SELECT 
+      [vwProvidersForFacility].[FacilityId] AS [FacilityId], 
+      [vwProvidersForFacility].[ProviderId] AS [ProviderId], 
+      [vwProvidersForFacility].[FirstName] AS [FirstName], 
+      [vwProvidersForFacility].[LastName] AS [LastName]
+      FROM [dbo].[vwProvidersForFacility] AS [vwProvidersForFacility]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwRptPatientLogin" EntityType="AMRModel.Store.vwRptPatientLogin" store:Type="Views" store:Schema="dbo" store:Name="vwRptPatientLogin">
+      <DefiningQuery>SELECT 
+      [vwRptPatientLogin].[FacilityId] AS [FacilityId], 
+      [vwRptPatientLogin].[PatientId] AS [PatientId], 
+      [vwRptPatientLogin].[StartDateTime] AS [StartDateTime]
+      FROM [dbo].[vwRptPatientLogin] AS [vwRptPatientLogin]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwRptSecureMessage" EntityType="AMRModel.Store.vwRptSecureMessage" store:Type="Views" store:Schema="dbo" store:Name="vwRptSecureMessage">
+      <DefiningQuery>SELECT 
+      [vwRptSecureMessage].[MessageDetailId] AS [MessageDetailId], 
+      [vwRptSecureMessage].[FacilityId] AS [FacilityId], 
+      [vwRptSecureMessage].[PatientId] AS [PatientId], 
+      [vwRptSecureMessage].[DateCreated] AS [DateCreated], 
+      [vwRptSecureMessage].[ProviderId_To] AS [ProviderId_To], 
+      [vwRptSecureMessage].[FirstName] AS [FirstName], 
+      [vwRptSecureMessage].[LastName] AS [LastName], 
+      [vwRptSecureMessage].[License] AS [License]
+      FROM [dbo].[vwRptSecureMessage] AS [vwRptSecureMessage]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwVisitCCD" EntityType="AMRModel.Store.vwVisitCCD" store:Type="Views" store:Schema="dbo" store:Name="vwVisitCCD">
+      <DefiningQuery>SELECT 
+      [vwVisitCCD].[PatientId] AS [PatientId], 
+      [vwVisitCCD].[FacilityId] AS [FacilityId], 
+      [vwVisitCCD].[VisitId] AS [VisitId], 
+      [vwVisitCCD].[ProviderId] AS [ProviderId], 
+      [vwVisitCCD].[Title] AS [Title], 
+      [vwVisitCCD].[FirstName] AS [FirstName], 
+      [vwVisitCCD].[LastName] AS [LastName], 
+      [vwVisitCCD].[License] AS [License], 
+      [vwVisitCCD].[Phone] AS [Phone], 
+      [vwVisitCCD].[Email] AS [Email], 
+      [vwVisitCCD].[FacilityTypeId] AS [FacilityTypeId], 
+      [vwVisitCCD].[FacilityType] AS [FacilityType], 
+      [vwVisitCCD].[FacilityName] AS [FacilityName], 
+      [vwVisitCCD].[Address1] AS [Address1], 
+      [vwVisitCCD].[Address2] AS [Address2], 
+      [vwVisitCCD].[City] AS [City], 
+      [vwVisitCCD].[State] AS [State], 
+      [vwVisitCCD].[CountryCode] AS [CountryCode], 
+      [vwVisitCCD].[CountryName] AS [CountryName], 
+      [vwVisitCCD].[PostalCode] AS [PostalCode], 
+      [vwVisitCCD].[FacilityPhone] AS [FacilityPhone], 
+      [vwVisitCCD].[FacilityFax] AS [FacilityFax], 
+      [vwVisitCCD].[VisitReason] AS [VisitReason], 
+      [vwVisitCCD].[VisitDate] AS [VisitDate]
+      FROM [dbo].[vwVisitCCD] AS [vwVisitCCD]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="C_AuditAction_PatientlDocumentAudit_FK1" Association="AMRModel.Store.C_AuditAction_PatientlDocumentAudit_FK1">
+      <End Role="C_AuditAction" EntitySet="C_AuditAction" />
+      <End Role="PatientDocumentAudit" EntitySet="PatientDocumentAudit" />
+    </AssociationSet>
+    <AssociationSet Name="C_BloodType_Patient_FK1" Association="AMRModel.Store.C_BloodType_Patient_FK1">
+      <End Role="C_BloodType" EntitySet="C_BloodType" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="C_DocumentType_PatientlDocumentAudit_FK1" Association="AMRModel.Store.C_DocumentType_PatientlDocumentAudit_FK1">
+      <End Role="C_DocumentType" EntitySet="C_DocumentType" />
+      <End Role="PatientDocumentAudit" EntitySet="PatientDocumentAudit" />
+    </AssociationSet>
+    <AssociationSet Name="C_Ethnicity_Patient_FK1" Association="AMRModel.Store.C_Ethnicity_Patient_FK1">
+      <End Role="C_Ethnicity" EntitySet="C_Ethnicity" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="C_Gender_Patient_FK1" Association="AMRModel.Store.C_Gender_Patient_FK1">
+      <End Role="C_Gender" EntitySet="C_Gender" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="C_InstructionType_PatientPlanOfCare_FK1" Association="AMRModel.Store.C_InstructionType_PatientPlanOfCare_FK1">
+      <End Role="C_InstructionType" EntitySet="C_InstructionType" />
+      <End Role="PatientPlanOfCare" EntitySet="PatientPlanOfCare" />
+    </AssociationSet>
+    <AssociationSet Name="C_MaritalStatus_Patient_FK1" Association="AMRModel.Store.C_MaritalStatus_Patient_FK1">
+      <End Role="C_MaritalStatus" EntitySet="C_MaritalStatus" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="C_MessageResponseType_MessageDetail_FK1" Association="AMRModel.Store.C_MessageResponseType_MessageDetail_FK1">
+      <End Role="C_MessageResponseType" EntitySet="C_MessageResponseType" />
+      <End Role="MessageDetail" EntitySet="MessageDetail" />
+    </AssociationSet>
+    <AssociationSet Name="C_MessageStatus_Message_FK1" Association="AMRModel.Store.C_MessageStatus_Message_FK1">
+      <End Role="C_MessageStatus" EntitySet="C_MessageStatus" />
+      <End Role="Message" EntitySet="Message" />
+    </AssociationSet>
+    <AssociationSet Name="C_MessageStatus_MessageAudit_FK1" Association="AMRModel.Store.C_MessageStatus_MessageAudit_FK1">
+      <End Role="C_MessageStatus" EntitySet="C_MessageStatus" />
+      <End Role="MessageAudit" EntitySet="MessageAudit" />
+    </AssociationSet>
+    <AssociationSet Name="C_MessageType_Message_FK1" Association="AMRModel.Store.C_MessageType_Message_FK1">
+      <End Role="C_MessageType" EntitySet="C_MessageType" />
+      <End Role="Message" EntitySet="Message" />
+    </AssociationSet>
+    <AssociationSet Name="C_PreferredLanguage_Patient_FK1" Association="AMRModel.Store.C_PreferredLanguage_Patient_FK1">
+      <End Role="C_PreferredLanguage" EntitySet="C_PreferredLanguage" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="C_Relationship_PatientEmergency_FK1" Association="AMRModel.Store.C_Relationship_PatientEmergency_FK1">
+      <End Role="C_Relationship" EntitySet="C_Relationship" />
+      <End Role="PatientEmergency" EntitySet="PatientEmergency" />
+    </AssociationSet>
+    <AssociationSet Name="C_Religion_Patient_FK1" Association="AMRModel.Store.C_Religion_Patient_FK1">
+      <End Role="C_Religion" EntitySet="C_Religion" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="C_SmokingStatus_Patient_FK1" Association="AMRModel.Store.C_SmokingStatus_Patient_FK1">
+      <End Role="C_SmokingStatus" EntitySet="C_SmokingStatus" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="C_UserRole_User_FK1" Association="AMRModel.Store.C_UserRole_User_FK1">
+      <End Role="C_UserRole" EntitySet="C_UserRole" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="Facility_PatientFacilityLink_FK1" Association="AMRModel.Store.Facility_PatientFacilityLink_FK1">
+      <End Role="Facility" EntitySet="Facility" />
+      <End Role="PatientFacilityLink" EntitySet="PatientFacilityLink" />
+    </AssociationSet>
+    <AssociationSet Name="Facility_ProviderFacilityLink_FK1" Association="AMRModel.Store.Facility_ProviderFacilityLink_FK1">
+      <End Role="Facility" EntitySet="Facility" />
+      <End Role="ProviderFacilityLink" EntitySet="ProviderFacilityLink" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BillPayment_BillRate" Association="AMRModel.Store.FK_BillPayment_BillRate">
+      <End Role="BillRate" EntitySet="BillRate" />
+      <End Role="BillPayment" EntitySet="BillPayment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Provider_ProviderFacilityLink" Association="AMRModel.Store.FK_Provider_ProviderFacilityLink">
+      <End Role="Provider" EntitySet="Provider" />
+      <End Role="ProviderFacilityLink" EntitySet="ProviderFacilityLink" />
+    </AssociationSet>
+    <AssociationSet Name="Message_MessageAudit_FK1" Association="AMRModel.Store.Message_MessageAudit_FK1">
+      <End Role="Message" EntitySet="Message" />
+      <End Role="MessageAudit" EntitySet="MessageAudit" />
+    </AssociationSet>
+    <AssociationSet Name="Message_MessageDetail_FK1" Association="AMRModel.Store.Message_MessageDetail_FK1">
+      <End Role="Message" EntitySet="Message" />
+      <End Role="MessageDetail" EntitySet="MessageDetail" />
+    </AssociationSet>
+    <AssociationSet Name="Organization_Practice_FK1" Association="AMRModel.Store.Organization_Practice_FK1">
+      <End Role="Organization" EntitySet="Organization" />
+      <End Role="Practice" EntitySet="Practice" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientAccountLink_FK1" Association="AMRModel.Store.Patient_PatientAccountLink_FK1">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="PatientAccountLink" EntitySet="PatientAccountLink" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientCareDocument_FK1" Association="AMRModel.Store.Patient_PatientCareDocument_FK1">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="PatientCareDocument" EntitySet="PatientCareDocument" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientDocument_FK1" Association="AMRModel.Store.Patient_PatientDocument_FK1">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="PatientDocument" EntitySet="PatientDocument" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientEmergency_FK1" Association="AMRModel.Store.Patient_PatientEmergency_FK1">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="PatientEmergency" EntitySet="PatientEmergency" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientFacilityLink_FK1" Association="AMRModel.Store.Patient_PatientFacilityLink_FK1">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="PatientFacilityLink" EntitySet="PatientFacilityLink" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientMedicalDocument_FK1" Association="AMRModel.Store.Patient_PatientMedicalDocument_FK1">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="PatientMedicalDocument" EntitySet="PatientMedicalDocument" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientOrgan_FK1" Association="AMRModel.Store.Patient_PatientOrgan_FK1">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="PatientOrgan" EntitySet="PatientOrgan" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientShare_FK1" Association="AMRModel.Store.Patient_PatientShare_FK1">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="PatientShare" EntitySet="PatientShare" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientVisit_FK1" Association="AMRModel.Store.Patient_PatientVisit_FK1">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="PatientVisit" EntitySet="PatientVisit" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientWebSetting_FK1" Association="AMRModel.Store.Patient_PatientWebSetting_FK1">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="PatientWebSetting" EntitySet="PatientWebSetting" />
+    </AssociationSet>
+    <AssociationSet Name="PatientLabResult_PatientLabResultsTest_FK1" Association="AMRModel.Store.PatientLabResult_PatientLabResultsTest_FK1">
+      <End Role="PatientLabResult" EntitySet="PatientLabResult" />
+      <End Role="PatientLabResultTest" EntitySet="PatientLabResultTest" />
+    </AssociationSet>
+    <AssociationSet Name="PatientProviderLink_Patient_FK1" Association="AMRModel.Store.PatientProviderLink_Patient_FK1">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="PatientProviderLink" EntitySet="PatientProviderLink" />
+    </AssociationSet>
+    <AssociationSet Name="PatientProviderLink_Provider_FK1" Association="AMRModel.Store.PatientProviderLink_Provider_FK1">
+      <End Role="Provider" EntitySet="Provider" />
+      <End Role="PatientProviderLink" EntitySet="PatientProviderLink" />
+    </AssociationSet>
+    <AssociationSet Name="Practice_Facility_FK1" Association="AMRModel.Store.Practice_Facility_FK1">
+      <End Role="Practice" EntitySet="Practice" />
+      <End Role="Facility" EntitySet="Facility" />
+    </AssociationSet>
+    <AssociationSet Name="Practice_Provider_FK1" Association="AMRModel.Store.Practice_Provider_FK1">
+      <End Role="Practice" EntitySet="Practice" />
+      <End Role="Provider" EntitySet="Provider" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AttachmentMessage">
+    <Key>
+      <PropertyRef Name="MessageAttachmentId" />
+    </Key>
+    <Property Name="MessageAttachmentId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MessageId" Type="bigint" Nullable="false" />
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FileDirectory" Type="varchar" MaxLength="100" />
+    <Property Name="FileName" Type="varchar" MaxLength="100" />
+    <Property Name="DocumentFormat" Type="varchar" MaxLength="10" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="BillPayment">
+    <Key>
+      <PropertyRef Name="BillPaymentId" />
+    </Key>
+    <Property Name="BillPaymentId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="BillRateId" Type="int" Nullable="false" />
+    <Property Name="TransactionDate" Type="smalldatetime" />
+    <Property Name="Response" Type="varchar" MaxLength="5" />
+    <Property Name="CustId" Type="varchar" MaxLength="20" />
+    <Property Name="RecurrId" Type="varchar" MaxLength="20" />
+    <Property Name="PaymentType" Type="char" MaxLength="2" />
+    <Property Name="PaymentFrequency" Type="varchar" MaxLength="10" />
+    <Property Name="PaymentId" Type="varchar" MaxLength="20" />
+    <Property Name="NoOfPayments" Type="int" />
+    <Property Name="StartDate" Type="smalldatetime" />
+    <Property Name="AccountHolderName" Type="varchar" MaxLength="50" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="BillRate">
+    <Key>
+      <PropertyRef Name="BillRateId" />
+    </Key>
+    <Property Name="BillRateId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PromoCode" Type="varchar" MaxLength="20" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="IsFree" Type="bit" />
+    <Property Name="Rate" Type="money" />
+    <Property Name="Renewal" Type="money" />
+    <Property Name="Residual" Type="money" />
+    <Property Name="FreeMonths" Type="int" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="C_AccessStatus">
+    <Key>
+      <PropertyRef Name="AccessStatusId" />
+    </Key>
+    <Property Name="AccessStatusId" Type="smallint" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="C_ActivityLevel">
+    <Key>
+      <PropertyRef Name="ActivityLevelId" />
+    </Key>
+    <Property Name="ActivityLevelId" Type="smallint" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="C_Advisor">
+    <Key>
+      <PropertyRef Name="AdvisorId" />
+    </Key>
+    <Property Name="AdvisorId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="C_AlcoholFrequency">
+    <Key>
+      <PropertyRef Name="AlcoholFrequencyId" />
+    </Key>
+    <Property Name="AlcoholFrequencyId" Type="smallint" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="C_AuditAction">
+    <Key>
+      <PropertyRef Name="AuditActionId" />
+    </Key>
+    <Property Name="AuditActionId" Type="smallint" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="C_BloodType">
+    <Key>
+      <PropertyRef Name="BloodTypeId" />
+    </Key>
+    <Property Name="BloodTypeId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="C_CodeSystem">
+    <Key>
+      <PropertyRef Name="CodeSystemId" />
+    </Key>
+    <Property Name="CodeSystemId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="C_ConditionStatus">
+    <Key>
+      <PropertyRef Name="ConditionStatusId" />
+    </Key>
+    <Property Name="ConditionStatusId" Type="smallint" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="C_Country">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="char" Nullable="false" MaxLength="3" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="C_DoctorType">
+    <Key>
+      <PropertyRef Name="DoctorTypeId" />
+    </Key>
+    <Property Name="DoctorTypeId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="C_DocumentType">
+    <Key>
+      <PropertyRef Name="DocumentTypeId" />
+    </Key>
+    <Property Name="DocumentTypeId" Type="smallint" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="C_DocUploadType">
+    <Key>
+      <PropertyRef Name="DocUploadTypeId" />
+    </Key>
+    <Property Name="DocUploadTypeId" Type="smallint" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="C_EducationLevel">
+    <Key>
+      <PropertyRef Name="EducationLevelId" />
+    </Key>
+    <Property Name="EducationLevelId" Type="smallint" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="C_EMRSystem">
+    <Key>
+      <PropertyRef Name="EMRSystemId" />
+    </Key>
+    <Property Name="EMRSystemId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="50" />
+    <Property Name="UseProviderPortal" Type="bit" />
+  </EntityType>
+  <EntityType Name="C_Ethnicity">
+    <Key>
+      <PropertyRef Name="EthnicityId" />
+    </Key>
+    <Property Name="EthnicityId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="C_ExerciseFrequency">
+    <Key>
+      <PropertyRef Name="ExerciseFrequencyId" />
+    </Key>
+    <Property Name="ExerciseFrequencyId" Type="smallint" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="C_FacilityTypes">
+    <Key>
+      <PropertyRef Name="FacilityTypeId" />
+    </Key>
+    <Property Name="FacilityTypeId" Type="int" Nullable="false" />
+    <Property Name="FacilityType" Type="varchar" Nullable="false" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="C_Frequency">
+    <Key>
+      <PropertyRef Name="FrequencyId" />
+    </Key>
+    <Property Name="FrequencyId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="C_Gender">
+    <Key>
+      <PropertyRef Name="GenderId" />
+    </Key>
+    <Property Name="GenderId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="C_InstructionType">
+    <Key>
+      <PropertyRef Name="InstructionTypeId" />
+    </Key>
+    <Property Name="InstructionTypeId" Type="smallint" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="C_MaritalStatus">
+    <Key>
+      <PropertyRef Name="MaritalStatusId" />
+    </Key>
+    <Property Name="MaritalStatusId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.C_Medication' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="C_Medication">
+    <Key>
+      <PropertyRef Name="RxNormId" />
+    </Key>
+    <Property Name="RxNormId" Type="char" Nullable="false" MaxLength="8" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="C_MessagePeriod">
+    <Key>
+      <PropertyRef Name="MessagePeriodId" />
+    </Key>
+    <Property Name="MessagePeriodId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="C_MessageResponseType">
+    <Key>
+      <PropertyRef Name="MessageResponseTypeId" />
+    </Key>
+    <Property Name="MessageResponseTypeId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="C_MessageStatus">
+    <Key>
+      <PropertyRef Name="MessageStatusId" />
+    </Key>
+    <Property Name="MessageStatusId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="C_MessageType">
+    <Key>
+      <PropertyRef Name="MessageTypeId" />
+    </Key>
+    <Property Name="MessageTypeId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="30" />
+    <Property Name="General" Type="bit" />
+  </EntityType>
+  <EntityType Name="C_PolicyType">
+    <Key>
+      <PropertyRef Name="PolicyTypeId" />
+    </Key>
+    <Property Name="PolicyTypeId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="C_PreferredLanguage">
+    <Key>
+      <PropertyRef Name="PreferredLanguageId" />
+    </Key>
+    <Property Name="PreferredLanguageId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="100" />
+    <Property Name="ISO639_2" Type="char" MaxLength="3" />
+    <Property Name="Inactive" Type="bit" />
+  </EntityType>
+  <EntityType Name="C_Problem">
+    <Key>
+      <PropertyRef Name="ProblemId" />
+    </Key>
+    <Property Name="ProblemId" Type="char" Nullable="false" MaxLength="15" />
+    <Property Name="Value" Type="varchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="C_Race">
+    <Key>
+      <PropertyRef Name="RaceId" />
+    </Key>
+    <Property Name="RaceId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="C_Relationship">
+    <Key>
+      <PropertyRef Name="RelationshipId" />
+    </Key>
+    <Property Name="RelationshipId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="30" />
+    <Property Name="SNOMED" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="C_Religion">
+    <Key>
+      <PropertyRef Name="ReligionId" />
+    </Key>
+    <Property Name="ReligionId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="C_RouteOfAdministration">
+    <Key>
+      <PropertyRef Name="RouteId" />
+    </Key>
+    <Property Name="RouteId" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="Value" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="C_SecurityQuestion">
+    <Key>
+      <PropertyRef Name="SecurityQuestionId" />
+    </Key>
+    <Property Name="SecurityQuestionId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="C_SmokingStatus">
+    <Key>
+      <PropertyRef Name="SmokingStatusId" />
+    </Key>
+    <Property Name="SmokingStatusId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="40" />
+    <Property Name="SNOMED" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="C_Social">
+    <Key>
+      <PropertyRef Name="SNOMED_Social" />
+    </Key>
+    <Property Name="SNOMED_Social" Type="char" Nullable="false" MaxLength="15" />
+    <Property Name="Value" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="C_State">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="char" Nullable="false" MaxLength="2" />
+    <Property Name="Name" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="C_ThirdParty">
+    <Key>
+      <PropertyRef Name="ThirdPartyId" />
+    </Key>
+    <Property Name="ThirdPartyId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="C_UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleId" />
+    </Key>
+    <Property Name="UserRoleId" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="C_Vaccine">
+    <Key>
+      <PropertyRef Name="CVX_Code" />
+    </Key>
+    <Property Name="CVX_Code" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="255" />
+    <Property Name="Status" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Carrier">
+    <Key>
+      <PropertyRef Name="CarrierId" />
+    </Key>
+    <Property Name="CarrierId" Type="int" Nullable="false" />
+    <Property Name="CarrierURL" Type="varchar" MaxLength="50" />
+    <Property Name="CarrierName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Config">
+    <Key>
+      <PropertyRef Name="ConfigId" />
+    </Key>
+    <Property Name="ConfigId" Type="int" Nullable="false" />
+    <Property Name="EmailHost" Type="varchar" MaxLength="50" />
+    <Property Name="EmailUser" Type="varchar" MaxLength="50" />
+    <Property Name="EmailPassword" Type="varchar" MaxLength="20" />
+    <Property Name="EmailEnableSSL" Type="bit" />
+    <Property Name="EmailActive" Type="bit" />
+    <Property Name="SMSHost" Type="varchar" MaxLength="50" />
+    <Property Name="SMSUser" Type="varchar" MaxLength="50" />
+    <Property Name="SMSPassword" Type="varchar" MaxLength="20" />
+    <Property Name="EmailFolder" Type="varchar" MaxLength="256" />
+    <Property Name="SiteURL" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ConfigAttachment">
+    <Key>
+      <PropertyRef Name="ConfigAttachmentId" />
+    </Key>
+    <Property Name="ConfigAttachmentId" Type="int" Nullable="false" />
+    <Property Name="AttachmentLocation" Type="varchar" MaxLength="100" />
+    <Property Name="AttachmentFolderCntr" Type="int" />
+    <Property Name="CurrentFolderDocCntr" Type="int" />
+  </EntityType>
+  <EntityType Name="DirectReceived">
+    <Key>
+      <PropertyRef Name="DirectReceivedId" />
+    </Key>
+    <Property Name="DirectReceivedId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Processed" Type="bit" />
+    <Property Name="DateProcessed" Type="smalldatetime" />
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="EmailId" Type="varchar" MaxLength="256" />
+    <Property Name="FromEmail" Type="varchar" MaxLength="100" />
+    <Property Name="ToEmail" Type="varchar" MaxLength="100" />
+    <Property Name="Body" Type="text" />
+    <Property Name="Attachment" Type="text" />
+    <Property Name="Message" Type="text" />
+  </EntityType>
+  <EntityType Name="Facility">
+    <Key>
+      <PropertyRef Name="FacilityId" />
+    </Key>
+    <Property Name="FacilityId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PracticeId" Type="bigint" />
+    <Property Name="EMRSystemId" Type="int" />
+    <Property Name="FacilityTypeId" Type="int" />
+    <Property Name="FacilityName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Address1" Type="varchar" MaxLength="50" />
+    <Property Name="Address2" Type="varchar" MaxLength="50" />
+    <Property Name="Address3" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="30" />
+    <Property Name="State" Type="varchar" MaxLength="10" />
+    <Property Name="CountryCode" Type="char" MaxLength="3" />
+    <Property Name="PostalCode" Type="varchar" MaxLength="10" />
+    <Property Name="Phone" Type="varchar" MaxLength="16" />
+    <Property Name="Fax" Type="varchar" MaxLength="16" />
+    <Property Name="BillAddress1" Type="varchar" MaxLength="50" />
+    <Property Name="BillAddress2" Type="varchar" MaxLength="50" />
+    <Property Name="BillAddress3" Type="varchar" MaxLength="50" />
+    <Property Name="BillCity" Type="varchar" MaxLength="30" />
+    <Property Name="BillState" Type="varchar" MaxLength="10" />
+    <Property Name="BillPostalCode" Type="varchar" MaxLength="10" />
+    <Property Name="BillCountryCode" Type="char" MaxLength="3" />
+    <Property Name="BillPhone" Type="varchar" MaxLength="16" />
+    <Property Name="BillFax" Type="varchar" MaxLength="16" />
+    <Property Name="GeneralMessageAvailable" Type="bit" />
+    <Property Name="GeneralMessageNotify" Type="int" />
+    <Property Name="GeneralMessageEmail" Type="varchar" MaxLength="256" />
+    <Property Name="AppointmentMessageAvailable" Type="bit" />
+    <Property Name="AppointmentMessageNotify" Type="int" />
+    <Property Name="AppointmentMessageEmail" Type="varchar" MaxLength="256" />
+    <Property Name="MedicationMessageAvailable" Type="bit" />
+    <Property Name="MedicationMessageNotify" Type="int" />
+    <Property Name="MedicationMessageEmail" Type="varchar" MaxLength="256" />
+    <Property Name="ReferralMessageAvailable" Type="bit" />
+    <Property Name="ReferralMessageNotify" Type="int" />
+    <Property Name="ReferralMessageEmail" Type="varchar" MaxLength="256" />
+    <Property Name="PremiumAvailable" Type="bit" />
+    <Property Name="OnlineBillPayment" Type="smallint" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="UserId_Deactivated" Type="bigint" />
+    <Property Name="DateDeactivated" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Name="MessageId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PatientId" Type="bigint" />
+    <Property Name="MessageTypeId" Type="int" />
+    <Property Name="FacilityId" Type="bigint" />
+    <Property Name="MessageStatusId" Type="int" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="CreatedByName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MessageAudit">
+    <Key>
+      <PropertyRef Name="AuditId" />
+    </Key>
+    <Property Name="AuditId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MessageId" Type="bigint" Nullable="false" />
+    <Property Name="MessageStatusId" Type="int" />
+    <Property Name="FacilityId" Type="bigint" />
+    <Property Name="UserId" Type="bigint" />
+    <Property Name="TDStamp" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="MessageDetail">
+    <Key>
+      <PropertyRef Name="MessageId" />
+      <PropertyRef Name="MessageDetailId" />
+    </Key>
+    <Property Name="MessageId" Type="bigint" Nullable="false" />
+    <Property Name="MessageDetailId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProviderId_To" Type="bigint" />
+    <Property Name="ProviderId_From" Type="bigint" />
+    <Property Name="MessageRequest" Type="varchar" MaxLength="256" />
+    <Property Name="MessageResponse" Type="varchar" MaxLength="256" />
+    <Property Name="MessageResponseTypeId" Type="int" />
+    <Property Name="PreferredPeriod" Type="char" MaxLength="3" />
+    <Property Name="PreferredTime" Type="varchar" MaxLength="10" />
+    <Property Name="PreferredWeekDay" Type="char" MaxLength="7" />
+    <Property Name="VisitReason" Type="varchar" MaxLength="100" />
+    <Property Name="MessageUrgency" Type="bit" />
+    <Property Name="AppointmentStart" Type="smalldatetime" />
+    <Property Name="AppointmentEnd" Type="smalldatetime" />
+    <Property Name="ProviderId_Appointment" Type="bigint" />
+    <Property Name="MedicationNDC" Type="char" MaxLength="10" />
+    <Property Name="MedicationName" Type="varchar" MaxLength="50" />
+    <Property Name="NoOfRefills" Type="int" />
+    <Property Name="MedicationStatus" Type="int" />
+    <Property Name="PharmacyName" Type="varchar" MaxLength="50" />
+    <Property Name="PharmacyAddress" Type="varchar" MaxLength="150" />
+    <Property Name="AttachmentId" Type="varchar" MaxLength="50" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="MessageRead" Type="bit" />
+    <Property Name="PharmacyPhone" Type="varchar" MaxLength="16" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="OrganizationId" />
+    </Key>
+    <Property Name="OrganizationId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationName" Type="varchar" Nullable="false" MaxLength="128" />
+    <Property Name="Address1" Type="varchar" MaxLength="50" />
+    <Property Name="Address2" Type="varchar" MaxLength="50" />
+    <Property Name="Address3" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="30" />
+    <Property Name="State" Type="varchar" MaxLength="10" />
+    <Property Name="CountryCode" Type="char" MaxLength="3" />
+    <Property Name="PostalCode" Type="varchar" MaxLength="10" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="UserId_Deactivated" Type="bigint" />
+    <Property Name="DateDeactivated" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="varchar" MaxLength="20" />
+    <Property Name="MiddleName" Type="varchar" MaxLength="20" />
+    <Property Name="LastName" Type="varchar" MaxLength="20" />
+    <Property Name="Title" Type="varchar" MaxLength="10" />
+    <Property Name="Address1" Type="varchar" MaxLength="50" />
+    <Property Name="Address2" Type="varchar" MaxLength="50" />
+    <Property Name="Address3" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="30" />
+    <Property Name="State" Type="varchar" MaxLength="10" />
+    <Property Name="CommunityName" Type="char" MaxLength="10" />
+    <Property Name="BuildingName" Type="char" MaxLength="10" />
+    <Property Name="County" Type="varchar" MaxLength="30" />
+    <Property Name="Zip" Type="varchar" MaxLength="10" />
+    <Property Name="CountryCode" Type="char" MaxLength="3" />
+    <Property Name="MailAddress1" Type="varchar" MaxLength="50" />
+    <Property Name="MailAddress2" Type="varchar" MaxLength="50" />
+    <Property Name="MailAddress3" Type="varchar" MaxLength="50" />
+    <Property Name="MailCity" Type="varchar" MaxLength="30" />
+    <Property Name="MailState" Type="varchar" MaxLength="10" />
+    <Property Name="MailPostalCode" Type="varchar" MaxLength="10" />
+    <Property Name="MailCountryCode" Type="char" MaxLength="3" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="SSN" Type="varchar" MaxLength="50" />
+    <Property Name="HomePhone" Type="varchar" MaxLength="16" />
+    <Property Name="MobilePhone" Type="varchar" MaxLength="16" />
+    <Property Name="WorkPhone" Type="varchar" MaxLength="16" />
+    <Property Name="Fax" Type="varchar" MaxLength="16" />
+    <Property Name="EMail" Type="varchar" MaxLength="60" />
+    <Property Name="PreferredLanguageId" Type="int" />
+    <Property Name="GenderId" Type="int" />
+    <Property Name="RaceId_NotAnswer" Type="bit" />
+    <Property Name="RaceId_Native" Type="bit" />
+    <Property Name="RaceId_Asian" Type="bit" />
+    <Property Name="RaceId_Black" Type="bit" />
+    <Property Name="RaceId_Hawaiian" Type="bit" />
+    <Property Name="RaceId_White" Type="bit" />
+    <Property Name="EthnicityId" Type="int" />
+    <Property Name="MaritalStatusId" Type="int" />
+    <Property Name="ReligionId" Type="int" />
+    <Property Name="BloodTypeId" Type="int" />
+    <Property Name="HeightFt" Type="int" />
+    <Property Name="HeightIn" Type="int" />
+    <Property Name="Eyes" Type="varchar" MaxLength="10" />
+    <Property Name="Hair" Type="varchar" MaxLength="10" />
+    <Property Name="Weight" Type="int" />
+    <Property Name="OrganDoner" Type="bit" />
+    <Property Name="SmokingStatusId" Type="int" />
+    <Property Name="Comments" Type="varchar" MaxLength="255" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="FacilityId_Created" Type="bigint" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="PremiumFlag" Type="bit" />
+    <Property Name="PremiumStartDate" Type="smalldatetime" />
+    <Property Name="PremiumExpireDate" Type="smalldatetime" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="SmokingDate" Type="char" MaxLength="8" />
+    <Property Name="ThirdPartyId" Type="int" />
+    <Property Name="EMRSystemId" Type="int" />
+    <Property Name="Suffix" Type="varchar" MaxLength="10" />
+    <Property Name="MedicareId" Type="varchar" MaxLength="20" />
+    <Property Name="MedicaidState" Type="char" MaxLength="2" />
+    <Property Name="MedicaidId" Type="varchar" MaxLength="20" />
+    <Property Name="AltId1_Type" Type="varchar" MaxLength="10" />
+    <Property Name="AltId1_Key" Type="varchar" MaxLength="20" />
+    <Property Name="AltId2_Type" Type="varchar" MaxLength="10" />
+    <Property Name="AltId2_Key" Type="varchar" MaxLength="20" />
+    <Property Name="AltId3_Type" Type="varchar" MaxLength="10" />
+    <Property Name="AltId3_Key" Type="varchar" MaxLength="20" />
+    <Property Name="AltId4_Type" Type="varchar" MaxLength="10" />
+    <Property Name="AltId4_Key" Type="varchar" MaxLength="20" />
+    <Property Name="AltId5_Type" Type="varchar" MaxLength="10" />
+    <Property Name="AltId5_Key" Type="varchar" MaxLength="20" />
+    <Property Name="MergePatientId" Type="bigint" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientAccountLink">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PatientId_Linked" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="PatientId_Linked" Type="bigint" Nullable="false" />
+    <Property Name="DateApproved" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientAdvisor">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PatientAdvisorId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="PatientAdvisorId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AdvisorId" Type="int" />
+    <Property Name="AdvisorDesc" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="ContactAgent" Type="varchar" MaxLength="50" />
+    <Property Name="Address1" Type="varchar" MaxLength="50" />
+    <Property Name="Address2" Type="varchar" MaxLength="50" />
+    <Property Name="Address3" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="30" />
+    <Property Name="State" Type="varchar" MaxLength="10" />
+    <Property Name="PostalCode" Type="varchar" MaxLength="10" />
+    <Property Name="CountryCode" Type="char" MaxLength="3" />
+    <Property Name="WorkPhone" Type="varchar" MaxLength="16" />
+    <Property Name="MobilePhone" Type="varchar" MaxLength="16" />
+    <Property Name="Fax" Type="varchar" MaxLength="16" />
+    <Property Name="EMail" Type="varchar" MaxLength="60" />
+    <Property Name="Notes" Type="varchar" MaxLength="256" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientAllergy">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatientAllergyCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="PatientAllergyCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CodeValue_Allergen" Type="varchar" MaxLength="20" />
+    <Property Name="CodeSystemId_Allergen" Type="int" />
+    <Property Name="Allergen" Type="varchar" MaxLength="50" />
+    <Property Name="AllergenType" Type="varchar" MaxLength="20" />
+    <Property Name="CodeValue_Reaction" Type="varchar" MaxLength="20" />
+    <Property Name="CodeSystemId_Reaction" Type="int" />
+    <Property Name="Reaction" Type="varchar" MaxLength="50" />
+    <Property Name="EffectiveDate" Type="char" MaxLength="8" />
+    <Property Name="ConditionStatusId" Type="smallint" />
+    <Property Name="Note" Type="varchar" MaxLength="256" />
+    <Property Name="OnCard" Type="bit" />
+    <Property Name="OnKeys" Type="bit" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientCareDocument">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="DocumentCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="DocumentCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentDescription" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DoctorName" Type="varchar" MaxLength="50" />
+    <Property Name="DocumentId" Type="varchar" MaxLength="50" />
+    <Property Name="DocumentFormat" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="StorageLocation" Type="varchar" MaxLength="100" />
+    <Property Name="Notes" Type="varchar" MaxLength="256" />
+    <Property Name="Viewable" Type="bit" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientClinicalDocument">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="DocumentCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="DocumentCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentDescription" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DocumentId" Type="varchar" MaxLength="50" />
+    <Property Name="DocumentFormat" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="StorageLocation" Type="varchar" MaxLength="100" />
+    <Property Name="Notes" Type="varchar" MaxLength="256" />
+    <Property Name="Viewable" Type="bit" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientDoctor">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PatientDoctorId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="PatientDoctorId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DoctorTypeId" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Address1" Type="varchar" MaxLength="50" />
+    <Property Name="Address2" Type="varchar" MaxLength="50" />
+    <Property Name="Address3" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="30" />
+    <Property Name="State" Type="varchar" MaxLength="10" />
+    <Property Name="PostalCode" Type="varchar" MaxLength="10" />
+    <Property Name="CountryCode" Type="char" MaxLength="3" />
+    <Property Name="WorkPhone" Type="varchar" MaxLength="16" />
+    <Property Name="MobilePhone" Type="varchar" MaxLength="16" />
+    <Property Name="Fax" Type="varchar" MaxLength="16" />
+    <Property Name="Email" Type="varchar" MaxLength="60" />
+    <Property Name="IsPrimary" Type="bit" />
+    <Property Name="OnCard" Type="bit" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientDocument">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="DocumentCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="DocumentCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentDescription" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DocumentId" Type="varchar" MaxLength="50" />
+    <Property Name="DocumentFormat" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="StorageLocation" Type="varchar" MaxLength="100" />
+    <Property Name="Notes" Type="varchar" MaxLength="256" />
+    <Property Name="Viewable" Type="bit" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientDocumentAudit">
+    <Key>
+      <PropertyRef Name="AuditId" />
+    </Key>
+    <Property Name="AuditId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="DocCntr" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="DocumentTypeId" Type="smallint" />
+    <Property Name="UserId" Type="bigint" />
+    <Property Name="TDStamp" Type="datetime" />
+    <Property Name="AuditActionId" Type="smallint" />
+  </EntityType>
+  <EntityType Name="PatientEmergency">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PatientEmergencyId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="PatientEmergencyId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Address1" Type="varchar" MaxLength="50" />
+    <Property Name="Address2" Type="varchar" MaxLength="50" />
+    <Property Name="Address3" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="30" />
+    <Property Name="State" Type="varchar" MaxLength="10" />
+    <Property Name="PostalCode" Type="varchar" MaxLength="10" />
+    <Property Name="CountryCode" Type="char" MaxLength="3" />
+    <Property Name="HomePhone" Type="varchar" MaxLength="16" />
+    <Property Name="MobilePhone" Type="varchar" MaxLength="16" />
+    <Property Name="WorkPhone" Type="varchar" MaxLength="16" />
+    <Property Name="Email" Type="varchar" MaxLength="60" />
+    <Property Name="IsPrimary" Type="bit" />
+    <Property Name="RelationshipId" Type="int" />
+    <Property Name="OnCard" Type="bit" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="FacilityId_Created" Type="bigint" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientFacilityLink">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="DataAdded" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientFamilyHist">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatFamilyHistCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="PatFamilyHistCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RelationshipId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+    <Property Name="Qualifier" Type="varchar" MaxLength="20" />
+    <Property Name="CodeValue" Type="varchar" MaxLength="20" />
+    <Property Name="CodeSystemId" Type="int" />
+    <Property Name="ConditionStatusId" Type="smallint" />
+    <Property Name="AgeAtOnset" Type="int" />
+    <Property Name="Diseased" Type="bit" />
+    <Property Name="DiseasedAge" Type="int" />
+    <Property Name="Note" Type="varchar" MaxLength="256" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientImmunization">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatientImmunizationCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="PatientImmunizationCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ImmunizationDate" Type="char" MaxLength="8" />
+    <Property Name="ImmunizationTime" Type="char" MaxLength="4" />
+    <Property Name="CodeValue" Type="varchar" MaxLength="20" />
+    <Property Name="CodeSystemId" Type="int" />
+    <Property Name="Vaccine" Type="varchar" MaxLength="100" />
+    <Property Name="Amount" Type="varchar" MaxLength="20" />
+    <Property Name="Route" Type="varchar" MaxLength="20" />
+    <Property Name="Site" Type="varchar" MaxLength="20" />
+    <Property Name="Sequence" Type="varchar" MaxLength="20" />
+    <Property Name="ExpirationDate" Type="date" />
+    <Property Name="LotNumber" Type="varchar" MaxLength="20" />
+    <Property Name="Manufacturer" Type="varchar" MaxLength="50" />
+    <Property Name="Note" Type="varchar" MaxLength="256" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientInsurance">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatientInsuranceId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="PatientInsuranceId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PlanName" Type="varchar" MaxLength="35" />
+    <Property Name="MemberNumber" Type="varchar" MaxLength="35" />
+    <Property Name="GroupNumber" Type="varchar" MaxLength="35" />
+    <Property Name="Subscriber" Type="varchar" MaxLength="35" />
+    <Property Name="Relationship" Type="varchar" MaxLength="15" />
+    <Property Name="EffectiveDate" Type="date" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientInsurancePlan">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PatientInsuranceId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="PatientInsuranceId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InsuranceId" Type="int" />
+    <Property Name="InsuranceDesc" Type="varchar" MaxLength="50" />
+    <Property Name="Company" Type="varchar" MaxLength="50" />
+    <Property Name="PolicyNo" Type="varchar" MaxLength="50" />
+    <Property Name="GroupNo" Type="varchar" MaxLength="50" />
+    <Property Name="AgentName" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" MaxLength="16" />
+    <Property Name="Fax" Type="varchar" MaxLength="16" />
+    <Property Name="Notes" Type="varchar" MaxLength="256" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientLabResult">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="LabResultCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="LabResultCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProviderId_Requested" Type="bigint" />
+    <Property Name="CodeValue" Type="varchar" MaxLength="20" />
+    <Property Name="CodeSystemId" Type="int" />
+    <Property Name="LabName" Type="varchar" MaxLength="50" />
+    <Property Name="OrderDate" Type="date" />
+    <Property Name="CollectionDate" Type="date" />
+    <Property Name="Requisiton" Type="varchar" MaxLength="20" />
+    <Property Name="Specimen" Type="varchar" MaxLength="20" />
+    <Property Name="SpecimenSource" Type="varchar" MaxLength="20" />
+    <Property Name="ReportDate" Type="date" />
+    <Property Name="ReviewDate" Type="date" />
+    <Property Name="Reviewer" Type="varchar" MaxLength="20" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientLabResultTest">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="LabResultCntr" />
+      <PropertyRef Name="TestCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="LabResultCntr" Type="bigint" Nullable="false" />
+    <Property Name="TestCntr" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CodeValue" Type="varchar" MaxLength="20" />
+    <Property Name="CodeSystemId" Type="int" />
+    <Property Name="Component" Type="varchar" MaxLength="50" />
+    <Property Name="Result" Type="varchar" MaxLength="20" />
+    <Property Name="RefRange" Type="varchar" MaxLength="120" />
+    <Property Name="Units" Type="varchar" MaxLength="20" />
+    <Property Name="Abnormal" Type="char" MaxLength="1" />
+    <Property Name="ResultStatus" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PatientMatch">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FirstClean" Type="varchar" MaxLength="20" />
+    <Property Name="LastClean" Type="varchar" MaxLength="20" />
+    <Property Name="GenderId" Type="int" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="AddressClean" Type="varchar" MaxLength="50" />
+    <Property Name="CityClean" Type="varchar" MaxLength="30" />
+    <Property Name="StateClean" Type="varchar" MaxLength="10" />
+    <Property Name="PostalClean" Type="varchar" MaxLength="10" />
+    <Property Name="PhoneClean" Type="varchar" MaxLength="16" />
+    <Property Name="FirstSoundex" Type="varchar" MaxLength="5" StoreGeneratedPattern="Computed" />
+    <Property Name="LastSoundex" Type="varchar" MaxLength="5" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="PatientMedicalDocument">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="DocumentCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="DocumentCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentDescription" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="FacilityName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DoctorName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DocumentId" Type="varchar" MaxLength="50" />
+    <Property Name="DocumentFormat" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="StorageLocation" Type="varchar" MaxLength="100" />
+    <Property Name="Notes" Type="varchar" MaxLength="256" />
+    <Property Name="Viewable" Type="bit" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientMedicalHist">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatMedicalHistCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="PatMedicalHistCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="DateOfOccurance" Type="char" MaxLength="8" />
+    <Property Name="Note" Type="varchar" MaxLength="256" />
+    <Property Name="OnCard" Type="bit" />
+    <Property Name="OnKeys" Type="bit" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientMedication">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatientMedicationCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="PatientMedicationCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CodeValue" Type="varchar" MaxLength="20" />
+    <Property Name="CodeSystemId" Type="int" />
+    <Property Name="MedicationName" Type="varchar" Nullable="false" MaxLength="60" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="RouteId" Type="varchar" MaxLength="100" />
+    <Property Name="Dose" Type="int" />
+    <Property Name="DoseUnit" Type="varchar" MaxLength="20" />
+    <Property Name="Refills" Type="int" />
+    <Property Name="Frequency" Type="varchar" MaxLength="10" />
+    <Property Name="Sig" Type="varchar" MaxLength="50" />
+    <Property Name="Diagnosis" Type="varchar" MaxLength="50" />
+    <Property Name="StartDate" Type="smalldatetime" />
+    <Property Name="ExpireDate" Type="smalldatetime" />
+    <Property Name="Pharmacy" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="10" />
+    <Property Name="Note" Type="varchar" MaxLength="256" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+    <Property Name="DuringVisit" Type="bit" />
+  </EntityType>
+  <EntityType Name="PatientNote">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="DateCreated" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="DateCreated" Type="smalldatetime" Nullable="false" />
+    <Property Name="Note" Type="text" />
+  </EntityType>
+  <EntityType Name="PatientOrgan">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="Heart" Type="bit" />
+    <Property Name="Liver" Type="bit" />
+    <Property Name="Pancreas" Type="bit" />
+    <Property Name="Lungs" Type="bit" />
+    <Property Name="Kidneys" Type="bit" />
+    <Property Name="Intestines" Type="bit" />
+    <Property Name="Cornea" Type="bit" />
+    <Property Name="Skin" Type="bit" />
+    <Property Name="BoneMarrow" Type="bit" />
+    <Property Name="HeartValves" Type="bit" />
+    <Property Name="ConnectiveTissue" Type="bit" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientPharmacy">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PharmacyCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="PharmacyCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PharmacyName" Type="varchar" Nullable="false" MaxLength="128" />
+    <Property Name="Address1" Type="varchar" MaxLength="50" />
+    <Property Name="Address2" Type="varchar" MaxLength="50" />
+    <Property Name="Address3" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="30" />
+    <Property Name="State" Type="varchar" MaxLength="10" />
+    <Property Name="CountryCode" Type="char" MaxLength="3" />
+    <Property Name="PostalCode" Type="varchar" MaxLength="10" />
+    <Property Name="Phone" Type="varchar" MaxLength="16" />
+    <Property Name="Preferred" Type="bit" />
+    <Property Name="Note" Type="varchar" MaxLength="256" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientPlanOfCare">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PlanCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="PlanCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstructionTypeId" Type="smallint" Nullable="false" />
+    <Property Name="CodeValue" Type="varchar" MaxLength="20" />
+    <Property Name="CodeSystemId" Type="int" />
+    <Property Name="Instruction" Type="varchar" MaxLength="256" />
+    <Property Name="Goal" Type="varchar" MaxLength="256" />
+    <Property Name="Note" Type="varchar" MaxLength="256" />
+    <Property Name="AppointmentDateTime" Type="smalldatetime" />
+    <Property Name="ProviderId" Type="bigint" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientPolicy">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PatientPolicyId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="PatientPolicyId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PolicyTypeId" Type="int" />
+    <Property Name="PolicyTypeName" Type="varchar" MaxLength="50" />
+    <Property Name="Company" Type="varchar" MaxLength="50" />
+    <Property Name="PolicyNo" Type="varchar" MaxLength="50" />
+    <Property Name="GroupNumber" Type="varchar" MaxLength="50" />
+    <Property Name="PlanNumber" Type="varchar" MaxLength="50" />
+    <Property Name="Agent" Type="varchar" MaxLength="50" />
+    <Property Name="AgentPhone" Type="varchar" MaxLength="16" />
+    <Property Name="AgentFax" Type="varchar" MaxLength="16" />
+    <Property Name="Notes" Type="varchar" MaxLength="256" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientProblem">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatientProblemCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="PatientProblemCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CodeValue" Type="varchar" MaxLength="20" />
+    <Property Name="CodeSystemId" Type="int" />
+    <Property Name="Condition" Type="varchar" MaxLength="100" />
+    <Property Name="EffectiveDate" Type="char" MaxLength="8" />
+    <Property Name="LastChangeDate" Type="char" MaxLength="8" />
+    <Property Name="ConditionStatusId" Type="smallint" />
+    <Property Name="Note" Type="varchar" MaxLength="256" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientProcedure">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatProcedureCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="PatProcedureCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="CodeValue" Type="varchar" MaxLength="20" />
+    <Property Name="CodeSystemId" Type="int" />
+    <Property Name="Diagnosis" Type="varchar" MaxLength="100" />
+    <Property Name="PerformedBy" Type="varchar" MaxLength="50" />
+    <Property Name="ServiceLocation" Type="varchar" MaxLength="50" />
+    <Property Name="ServiceDate" Type="char" MaxLength="8" />
+    <Property Name="Note" Type="varchar" MaxLength="256" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientProviderLink">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="ProviderId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="ProviderId" Type="bigint" Nullable="false" />
+    <Property Name="PCP" Type="bit" />
+    <Property Name="DateAdded" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientRepresentative">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="20" />
+    <Property Name="LastName" Type="varchar" MaxLength="20" />
+    <Property Name="Demographics" Type="bit" />
+    <Property Name="Allergy" Type="bit" />
+    <Property Name="FamilyHistory" Type="bit" />
+    <Property Name="LabResults" Type="bit" />
+    <Property Name="MedicalHistory" Type="bit" />
+    <Property Name="Medication" Type="bit" />
+    <Property Name="Problem" Type="bit" />
+    <Property Name="Procedure" Type="bit" />
+    <Property Name="SocialHistory" Type="bit" />
+    <Property Name="SurgicalHistory" Type="bit" />
+    <Property Name="VitalSigns" Type="bit" />
+    <Property Name="Immunization" Type="bit" />
+    <Property Name="Organ" Type="bit" />
+    <Property Name="ClinicalDoc" Type="bit" />
+    <Property Name="Insurance" Type="bit" />
+    <Property Name="EmergencyContact" Type="bit" />
+    <Property Name="Appointment" Type="bit" />
+    <Property Name="Visit" Type="bit" />
+    <Property Name="UploadDocs" Type="bit" />
+    <Property Name="PlanOfCare" Type="bit" />
+    <Property Name="Messaging" Type="bit" />
+    <Property Name="DownloadTransmit" Type="bit" />
+    <Property Name="ClinicalSummary" Type="bit" />
+    <Property Name="Enabled" Type="bit" />
+  </EntityType>
+  <EntityType Name="PatientShare">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="Demographics" Type="bit" />
+    <Property Name="Allergy" Type="bit" />
+    <Property Name="FamilyHistory" Type="bit" />
+    <Property Name="LabResults" Type="bit" />
+    <Property Name="MedicalHistory" Type="bit" />
+    <Property Name="Medication" Type="bit" />
+    <Property Name="Problem" Type="bit" />
+    <Property Name="Procedure" Type="bit" />
+    <Property Name="SocialHistory" Type="bit" />
+    <Property Name="SurgicalHistory" Type="bit" />
+    <Property Name="VitalSigns" Type="bit" />
+    <Property Name="Immunization" Type="bit" />
+    <Property Name="Organ" Type="bit" />
+    <Property Name="ClinicalDoc" Type="bit" />
+    <Property Name="Insurance" Type="bit" />
+    <Property Name="EmergencyContact" Type="bit" />
+    <Property Name="Appointment" Type="bit" />
+    <Property Name="Visit" Type="bit" />
+    <Property Name="UploadDocs" Type="bit" />
+    <Property Name="PlanOfCare" Type="bit" />
+    <Property Name="ClinicalInstructions" Type="bit" />
+  </EntityType>
+  <EntityType Name="PatientSocialHist">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatSocialHistCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="PatSocialHistCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Qualifier" Type="varchar" MaxLength="20" />
+    <Property Name="CodeValue" Type="varchar" MaxLength="20" />
+    <Property Name="CodeSystemId" Type="int" />
+    <Property Name="BeginDate" Type="char" MaxLength="8" />
+    <Property Name="EndDate" Type="char" MaxLength="8" />
+    <Property Name="Note" Type="varchar" MaxLength="256" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientSocialSelf">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="Birthplace" Type="varchar" MaxLength="30" />
+    <Property Name="EducationLevelId" Type="smallint" />
+    <Property Name="Occupation" Type="varchar" MaxLength="30" />
+    <Property Name="Retired" Type="bit" />
+    <Property Name="ChildrenSon" Type="smallint" />
+    <Property Name="ChildrenDaughter" Type="smallint" />
+    <Property Name="CaffeineUser" Type="bit" />
+    <Property Name="CaffieneType" Type="varchar" MaxLength="20" />
+    <Property Name="CaffeineAmount" Type="varchar" MaxLength="10" />
+    <Property Name="ExerciseMember" Type="bit" />
+    <Property Name="ExerciseFrequencyId" Type="smallint" />
+    <Property Name="ExerciseAmount" Type="varchar" MaxLength="10" />
+    <Property Name="ActivityLevelId" Type="smallint" />
+    <Property Name="Activity1" Type="varchar" MaxLength="20" />
+    <Property Name="Activity2" Type="varchar" MaxLength="20" />
+    <Property Name="Activity3" Type="varchar" MaxLength="20" />
+    <Property Name="AlcoholUser" Type="bit" />
+    <Property Name="AlcoholFrequencyId" Type="smallint" />
+    <Property Name="AlcoholLastUse" Type="date" />
+    <Property Name="AlcoholType" Type="varchar" MaxLength="20" />
+    <Property Name="AlcoholStartAge" Type="smallint" />
+    <Property Name="AlcoholFamilyHist" Type="bit" />
+    <Property Name="SmokingStatusId" Type="int" />
+    <Property Name="SmokingDailyAmount" Type="smallint" />
+    <Property Name="SmokingType" Type="varchar" MaxLength="20" />
+    <Property Name="SmokingYears" Type="smallint" />
+    <Property Name="SmokingQuitAttempts" Type="smallint" />
+    <Property Name="SmokingQuitDate" Type="date" />
+    <Property Name="SmokingSecondHand" Type="bit" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientSurgicalHist">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatSurgicalHistCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="PatSurgicalHistCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="CodeValue" Type="varchar" MaxLength="20" />
+    <Property Name="CodeSystemId" Type="int" />
+    <Property Name="Diagnosis" Type="varchar" MaxLength="100" />
+    <Property Name="PerformedBy" Type="varchar" MaxLength="50" />
+    <Property Name="ServiceLocation" Type="varchar" MaxLength="50" />
+    <Property Name="ServiceDate" Type="char" MaxLength="8" />
+    <Property Name="Note" Type="varchar" MaxLength="256" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientVisit">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="VisitDate" Type="datetime" />
+    <Property Name="ProviderId" Type="bigint" />
+    <Property Name="VisitReason" Type="varchar" MaxLength="256" />
+    <Property Name="Viewable" Type="bit" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="ClinicalSummary" Type="varchar" MaxLength="10" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientVitalSign">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatientVitalCntr" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="PatientVitalCntr" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="VitalDate" Type="smalldatetime" />
+    <Property Name="HeightIn" Type="int" />
+    <Property Name="WeightLb" Type="int" />
+    <Property Name="BloodPressurePosn" Type="varchar" MaxLength="15" />
+    <Property Name="Systolic" Type="int" />
+    <Property Name="Diastolic" Type="int" />
+    <Property Name="Pulse" Type="int" />
+    <Property Name="Respiration" Type="int" />
+    <Property Name="Temperature" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="UserId_Deleted" Type="bigint" />
+    <Property Name="DateDeleted" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="PatientWebSetting">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="VisitWidgetLeft" Type="smallint" />
+    <Property Name="VisitWidgetRight" Type="smallint" />
+    <Property Name="AllergyWidgetLeft" Type="smallint" />
+    <Property Name="AllergyWidgetRight" Type="smallint" />
+    <Property Name="AppointmentsWidgetLeft" Type="smallint" />
+    <Property Name="AppointmentsWidgetRight" Type="smallint" />
+    <Property Name="ClinicalDocWidgetLeft" Type="smallint" />
+    <Property Name="ClinicalDocWidgetRight" Type="smallint" />
+    <Property Name="FamilyWidgetLeft" Type="smallint" />
+    <Property Name="FamilyWidgetRight" Type="smallint" />
+    <Property Name="ImmunizationWidgetLeft" Type="smallint" />
+    <Property Name="ImmunizationWidgetRight" Type="smallint" />
+    <Property Name="InsuranceWidgetLeft" Type="smallint" />
+    <Property Name="InsuranceWidgetRight" Type="smallint" />
+    <Property Name="LabTestWidgetLeft" Type="smallint" />
+    <Property Name="LabTestWidgetRight" Type="smallint" />
+    <Property Name="MedicationWidgetLeft" Type="smallint" />
+    <Property Name="MedicationWidgetRight" Type="smallint" />
+    <Property Name="PastMedicalWidgetLeft" Type="smallint" />
+    <Property Name="PastMedicalWidgetRight" Type="smallint" />
+    <Property Name="ProblemWidgetLeft" Type="smallint" />
+    <Property Name="ProblemWidgetRight" Type="smallint" />
+    <Property Name="ProcedureWidgetLeft" Type="smallint" />
+    <Property Name="ProcedureWidgetRight" Type="smallint" />
+    <Property Name="SocialWidgetLeft" Type="smallint" />
+    <Property Name="SocialWidgetRight" Type="smallint" />
+    <Property Name="SurgicalWidgetLeft" Type="smallint" />
+    <Property Name="SurgicalWidgetRight" Type="smallint" />
+    <Property Name="VitalSignsWidgetLeft" Type="smallint" />
+    <Property Name="VitalSignsWidgetRight" Type="smallint" />
+    <Property Name="PremiumWidgetLeft" Type="smallint" />
+    <Property Name="PremiumWidgetRight" Type="smallint" />
+    <Property Name="StatementWidgetLeft" Type="smallint" />
+    <Property Name="StatementWidgetRight" Type="smallint" />
+    <Property Name="DocumentWidgetLeft" Type="smallint" />
+    <Property Name="DocumentWidgetRight" Type="smallint" />
+    <Property Name="EmailNotifyNewMessage" Type="bit" />
+    <Property Name="PictureLocation" Type="varchar" MaxLength="100" />
+    <Property Name="TextNotifyNewMesssage" Type="bit" />
+    <Property Name="CellCarrier" Type="int" />
+    <Property Name="PlanOfCareWidgetLeft" Type="smallint" />
+    <Property Name="PlanOfCareWidgetRight" Type="smallint" />
+    <Property Name="ClinicalInstructionsWidgetLeft" Type="smallint" />
+    <Property Name="ClinicalInstructionsWidgetRight" Type="smallint" />
+    <Property Name="ProviderWidgetLeft" Type="smallint" />
+    <Property Name="ProviderWidgetRight" Type="smallint" />
+  </EntityType>
+  <EntityType Name="Practice">
+    <Key>
+      <PropertyRef Name="PracticeId" />
+    </Key>
+    <Property Name="PracticeId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="bigint" Nullable="false" />
+    <Property Name="PracticeName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Address1" Type="varchar" MaxLength="50" />
+    <Property Name="Address2" Type="varchar" MaxLength="50" />
+    <Property Name="Address3" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="30" />
+    <Property Name="State" Type="varchar" MaxLength="10" />
+    <Property Name="CountryCode" Type="char" MaxLength="3" />
+    <Property Name="PostalCode" Type="varchar" MaxLength="10" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="UserId_Deactivated" Type="bigint" />
+    <Property Name="DateDeactivated" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="Provider">
+    <Key>
+      <PropertyRef Name="ProviderId" />
+    </Key>
+    <Property Name="ProviderId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PracticeId" Type="bigint" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="10" />
+    <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="MiddleName" Type="varchar" MaxLength="20" />
+    <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="DEA" Type="varchar" MaxLength="50" />
+    <Property Name="License" Type="varchar" MaxLength="50" />
+    <Property Name="Disabled" Type="bit" />
+    <Property Name="Phone" Type="varchar" MaxLength="16" />
+    <Property Name="Email" Type="varchar" MaxLength="60" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="UserId_Modified" Type="bigint" />
+    <Property Name="DateModified" Type="smalldatetime" />
+    <Property Name="UserId_Deactivated" Type="bigint" />
+    <Property Name="DateDeactivated" Type="smalldatetime" />
+    <Property Name="FullName" Type="varchar" Nullable="false" MaxLength="41" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="ProviderFacilityLink">
+    <Key>
+      <PropertyRef Name="ProviderId" />
+      <PropertyRef Name="FacilityId" />
+    </Key>
+    <Property Name="ProviderId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityProviderId" Type="varchar" MaxLength="20" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="ProviderWebSettings">
+    <Key>
+      <PropertyRef Name="ProviderId" />
+    </Key>
+    <Property Name="ProviderId" Type="bigint" Nullable="false" />
+    <Property Name="EmailNotifyNewMessage" Type="bit" />
+    <Property Name="PictureLocation" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Token">
+    <Key>
+      <PropertyRef Name="TokenId" />
+    </Key>
+    <Property Name="TokenId" Type="char" Nullable="false" MaxLength="20" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserLogin" Type="varchar" MaxLength="60" />
+    <Property Name="UserEmail" Type="varchar" MaxLength="60" />
+    <Property Name="Password" Type="varchar" MaxLength="100" />
+    <Property Name="UserRoleId" Type="int" />
+    <Property Name="UserRoleLink" Type="bigint" />
+    <Property Name="LastLoginDate" Type="datetime" />
+    <Property Name="LastPasswordChange" Type="datetime" />
+    <Property Name="FailedLoginCount" Type="int" />
+    <Property Name="Enabled" Type="bit" />
+    <Property Name="Locked" Type="bit" />
+    <Property Name="SecurityQuestionId" Type="int" />
+    <Property Name="SecurityAnswer" Type="varchar" MaxLength="100" />
+    <Property Name="SecurityQuestionId2" Type="int" />
+    <Property Name="SecurityAnswer2" Type="varchar" MaxLength="100" />
+    <Property Name="ResetPassword" Type="bit" />
+  </EntityType>
+  <EntityType Name="UserLoginAudit">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="StartDateTime" />
+    </Key>
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+    <Property Name="UserLogin" Type="varchar" MaxLength="60" />
+    <Property Name="LoginType" Type="smallint" />
+    <Property Name="EndDateTime" Type="datetime" />
+    <Property Name="AccessStatusId" Type="smallint" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwCCDAuditLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwCCDAuditLog">
+    <Key>
+      <PropertyRef Name="AuditId" />
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="AuditId" Type="bigint" Nullable="false" />
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="Method" Type="varchar" MaxLength="8" />
+    <Property Name="UserId" Type="bigint" />
+    <Property Name="Name" Type="varchar" MaxLength="41" />
+    <Property Name="TDStamp" Type="smalldatetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwFacilitiesForPatient' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwFacilitiesForPatient">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwMessageDetailReceived' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwMessageDetailReceived">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Name="MessageId" Type="bigint" Nullable="false" />
+    <Property Name="MessageDetailId" Type="bigint" />
+    <Property Name="PatientId" Type="bigint" />
+    <Property Name="PatientName" Type="varchar" MaxLength="41" />
+    <Property Name="MessageTypeId" Type="int" />
+    <Property Name="MessageType" Type="varchar" MaxLength="30" />
+    <Property Name="FacilityId" Type="bigint" />
+    <Property Name="FacilityName" Type="varchar" MaxLength="50" />
+    <Property Name="MessageStatusId" Type="int" />
+    <Property Name="MessageStatus" Type="varchar" MaxLength="30" />
+    <Property Name="Expr1" Type="bigint" />
+    <Property Name="ProviderId_To" Type="bigint" />
+    <Property Name="ProviderTo" Type="varchar" MaxLength="41" />
+    <Property Name="ProviderId_From" Type="bigint" />
+    <Property Name="ProviderFrom" Type="varchar" MaxLength="41" />
+    <Property Name="MessageRequest" Type="varchar" MaxLength="256" />
+    <Property Name="MessageResponse" Type="varchar" MaxLength="256" />
+    <Property Name="MessageResponseTypeId" Type="int" />
+    <Property Name="MessageResponseType" Type="varchar" MaxLength="30" />
+    <Property Name="PreferredPeriod" Type="char" MaxLength="3" />
+    <Property Name="PreferredTime" Type="varchar" MaxLength="10" />
+    <Property Name="PreferredWeekDay" Type="char" MaxLength="7" />
+    <Property Name="VisitReason" Type="varchar" MaxLength="100" />
+    <Property Name="MessageUrgency" Type="bit" />
+    <Property Name="AppointmentStart" Type="smalldatetime" />
+    <Property Name="AppointmentEnd" Type="smalldatetime" />
+    <Property Name="ProviderId_Appointment" Type="bigint" />
+    <Property Name="ProviderAppointment" Type="varchar" MaxLength="41" />
+    <Property Name="MedicationNDC" Type="char" MaxLength="10" />
+    <Property Name="MedicationName" Type="varchar" MaxLength="50" />
+    <Property Name="NoOfRefills" Type="int" />
+    <Property Name="MedicationStatus" Type="int" />
+    <Property Name="PharmacyName" Type="varchar" MaxLength="50" />
+    <Property Name="PharmacyAddress" Type="varchar" MaxLength="150" />
+    <Property Name="PharmacyPhone" Type="varchar" MaxLength="16" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="MessageRead" Type="bit" />
+    <Property Name="MessageAttachmentId" Type="bigint" />
+    <Property Name="DocumentFormat" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwMessageDetailSent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwMessageDetailSent">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Name="MessageId" Type="bigint" Nullable="false" />
+    <Property Name="MessageDetailId" Type="bigint" />
+    <Property Name="PatientId" Type="bigint" />
+    <Property Name="PatientName" Type="varchar" MaxLength="41" />
+    <Property Name="MessageTypeId" Type="int" />
+    <Property Name="MessageType" Type="varchar" MaxLength="30" />
+    <Property Name="FacilityId" Type="bigint" />
+    <Property Name="FacilityName" Type="varchar" MaxLength="50" />
+    <Property Name="MessageStatusId" Type="int" />
+    <Property Name="MessageStatus" Type="varchar" MaxLength="30" />
+    <Property Name="Expr1" Type="bigint" />
+    <Property Name="ProviderId_To" Type="bigint" />
+    <Property Name="ProviderTo" Type="varchar" MaxLength="41" />
+    <Property Name="ProviderId_From" Type="bigint" />
+    <Property Name="ProviderFrom" Type="varchar" MaxLength="41" />
+    <Property Name="MessageRequest" Type="varchar" MaxLength="256" />
+    <Property Name="MessageResponse" Type="varchar" MaxLength="256" />
+    <Property Name="MessageResponseTypeId" Type="int" />
+    <Property Name="MessageResponseType" Type="varchar" MaxLength="30" />
+    <Property Name="PreferredPeriod" Type="char" MaxLength="3" />
+    <Property Name="PreferredTime" Type="varchar" MaxLength="10" />
+    <Property Name="PreferredWeekDay" Type="char" MaxLength="7" />
+    <Property Name="VisitReason" Type="varchar" MaxLength="100" />
+    <Property Name="MessageUrgency" Type="bit" />
+    <Property Name="AppointmentStart" Type="smalldatetime" />
+    <Property Name="AppointmentEnd" Type="smalldatetime" />
+    <Property Name="ProviderId_Appointment" Type="bigint" />
+    <Property Name="ProviderAppointment" Type="varchar" MaxLength="41" />
+    <Property Name="MedicationNDC" Type="char" MaxLength="10" />
+    <Property Name="MedicationName" Type="varchar" MaxLength="50" />
+    <Property Name="NoOfRefills" Type="int" />
+    <Property Name="MedicationStatus" Type="int" />
+    <Property Name="PharmacyName" Type="varchar" MaxLength="50" />
+    <Property Name="PharmacyAddress" Type="varchar" MaxLength="150" />
+    <Property Name="PharmacyPhone" Type="varchar" MaxLength="16" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="MessageRead" Type="bit" />
+    <Property Name="MessageAttachmentId" Type="bigint" />
+    <Property Name="DocumentFormat" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwMessageGetCancelled' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwMessageGetCancelled">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Name="FacilityId" Type="bigint" />
+    <Property Name="MessageId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AMRPatientId" Type="bigint" />
+    <Property Name="MessageTypeId" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwMessageGetWaiting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwMessageGetWaiting">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Name="FacilityId" Type="bigint" />
+    <Property Name="MessageId" Type="bigint" Nullable="false" />
+    <Property Name="AMRPatientId" Type="bigint" />
+    <Property Name="MessageTypeId" Type="int" />
+    <Property Name="ToProvider" Type="bigint" />
+    <Property Name="MessageRequest" Type="varchar" MaxLength="256" />
+    <Property Name="PreferredResponseBy" Type="int" />
+    <Property Name="PreferredPeriod" Type="char" MaxLength="3" />
+    <Property Name="PreferredTime" Type="varchar" MaxLength="10" />
+    <Property Name="PreferredDay" Type="char" MaxLength="7" />
+    <Property Name="VisitReason" Type="varchar" MaxLength="100" />
+    <Property Name="VisitUrgency" Type="smallint" />
+    <Property Name="Medication" Type="varchar" MaxLength="50" />
+    <Property Name="Pharmacy" Type="varchar" MaxLength="50" />
+    <Property Name="AppointmentStart" Type="smalldatetime" />
+    <Property Name="AppointmentEnd" Type="smalldatetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwMessageSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwMessageSummary">
+    <Key>
+      <PropertyRef Name="MessageId" />
+      <PropertyRef Name="FacilityName" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" />
+    <Property Name="MessageId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" />
+    <Property Name="FacilityName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="MessageTypeId" Type="int" />
+    <Property Name="MessageType" Type="varchar" MaxLength="30" />
+    <Property Name="MessageStatusId" Type="int" />
+    <Property Name="MessageStatus" Type="varchar" MaxLength="30" />
+    <Property Name="MessageRequest" Type="varchar" MaxLength="256" />
+    <Property Name="PreferredPeriod" Type="char" MaxLength="3" />
+    <Property Name="PreferredTime" Type="varchar" MaxLength="10" />
+    <Property Name="PreferredWeekDay" Type="char" MaxLength="7" />
+    <Property Name="MessageUrgency" Type="bit" />
+    <Property Name="VisitReason" Type="varchar" MaxLength="100" />
+    <Property Name="MedicationName" Type="varchar" MaxLength="50" />
+    <Property Name="PharmacyName" Type="varchar" MaxLength="50" />
+    <Property Name="ProviderId_To" Type="bigint" />
+    <Property Name="ProviderName_To" Type="varchar" MaxLength="41" />
+    <Property Name="ProviderId_From" Type="bigint" />
+    <Property Name="ProviderName_From" Type="varchar" MaxLength="41" />
+    <Property Name="UserId_Created" Type="bigint" />
+    <Property Name="CreatedByName" Type="varchar" MaxLength="50" />
+    <Property Name="MessageResponse" Type="varchar" MaxLength="256" />
+    <Property Name="MessageResponseTypeId" Type="int" />
+    <Property Name="AppointmentStart" Type="smalldatetime" />
+    <Property Name="AppointmentEnd" Type="smalldatetime" />
+    <Property Name="ProviderId_Appointment" Type="bigint" />
+    <Property Name="ProviderName_Appointment" Type="varchar" MaxLength="41" />
+    <Property Name="MedicationNDC" Type="char" MaxLength="10" />
+    <Property Name="NoOfRefills" Type="int" />
+    <Property Name="MedicationStatus" Type="int" />
+    <Property Name="PharmacyAddress" Type="varchar" MaxLength="150" />
+    <Property Name="PharmacyPhone" Type="varchar" MaxLength="16" />
+    <Property Name="AttachmentId" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwMessageUnread' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwMessageUnread">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="Medication" Type="int" />
+    <Property Name="Appointment" Type="int" />
+    <Property Name="Referral" Type="int" />
+    <Property Name="General" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwMessageUnreadProv' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwMessageUnreadProv">
+    <Key>
+      <PropertyRef Name="ProviderId" />
+    </Key>
+    <Property Name="ProviderId" Type="bigint" Nullable="false" />
+    <Property Name="Medication" Type="int" />
+    <Property Name="Appointment" Type="int" />
+    <Property Name="Referral" Type="int" />
+    <Property Name="General" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwPatientDocumentsList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwPatientDocumentsList">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="DocumentCntr" />
+      <PropertyRef Name="DocType" />
+      <PropertyRef Name="DocumentDescription" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="DocumentCntr" Type="bigint" Nullable="false" />
+    <Property Name="DocType" Type="varchar" Nullable="false" MaxLength="16" />
+    <Property Name="DocumentDescription" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwPatientFacilityOptions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwPatientFacilityOptions">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="GeneralMessageAvailable" Type="int" />
+    <Property Name="AppointmentMessageAvailable" Type="int" />
+    <Property Name="MedicationMessageAvailable" Type="int" />
+    <Property Name="ReferralMessageAvailable" Type="int" />
+    <Property Name="PremiumAvailable" Type="int" />
+    <Property Name="OnlineBillPayment" Type="smallint" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwPatientSearch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwPatientSearch">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PRank" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PRank" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="20" />
+    <Property Name="LastName" Type="varchar" MaxLength="20" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="PAddress" Type="varchar" MaxLength="101" />
+    <Property Name="State" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwPatientsForFacility' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwPatientsForFacility">
+    <Key>
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="20" />
+    <Property Name="LastName" Type="varchar" MaxLength="20" />
+    <Property Name="Address1" Type="varchar" MaxLength="50" />
+    <Property Name="DOB" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwPatientSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwPatientSummary">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="MiddleName" />
+      <PropertyRef Name="Suffix" />
+      <PropertyRef Name="PAddress" />
+      <PropertyRef Name="City" />
+      <PropertyRef Name="State" />
+      <PropertyRef Name="Zip" />
+      <PropertyRef Name="CountryCode" />
+      <PropertyRef Name="CountryName" />
+      <PropertyRef Name="HomePhone" />
+      <PropertyRef Name="WorkPhone" />
+      <PropertyRef Name="MobilePhone" />
+      <PropertyRef Name="EMail" />
+      <PropertyRef Name="EyeColor" />
+      <PropertyRef Name="HairColor" />
+      <PropertyRef Name="OrganDoner" />
+      <PropertyRef Name="Race" />
+      <PropertyRef Name="EmergencyName" />
+      <PropertyRef Name="EmergencyAddress" />
+      <PropertyRef Name="EmergencyCity" />
+      <PropertyRef Name="EmergencyState" />
+      <PropertyRef Name="EmergencyZip" />
+      <PropertyRef Name="EmergencyCountryCode" />
+      <PropertyRef Name="EmergencyCountryName" />
+      <PropertyRef Name="EmergencyHomePhone" />
+      <PropertyRef Name="EmergencyMobilePhone" />
+      <PropertyRef Name="EmergencyWorkPhone" />
+      <PropertyRef Name="EmergencyRelationship" />
+      <PropertyRef Name="PCP" />
+      <PropertyRef Name="MailAddress" />
+      <PropertyRef Name="MailCity" />
+      <PropertyRef Name="MailState" />
+      <PropertyRef Name="MailZip" />
+      <PropertyRef Name="MailCountryCode" />
+      <PropertyRef Name="MailCountryName" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="FirstName" Type="varchar" MaxLength="20" />
+    <Property Name="MiddleName" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="LastName" Type="varchar" MaxLength="20" />
+    <Property Name="Suffix" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="PAddress" Type="varchar" Nullable="false" MaxLength="101" />
+    <Property Name="City" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="State" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="Zip" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="CountryCode" Type="char" Nullable="false" MaxLength="3" />
+    <Property Name="HeightFt" Type="int" />
+    <Property Name="HeightIn" Type="int" />
+    <Property Name="Weight" Type="int" />
+    <Property Name="Comments" Type="varchar" MaxLength="255" />
+    <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="HomePhone" Type="varchar" Nullable="false" MaxLength="16" />
+    <Property Name="WorkPhone" Type="varchar" Nullable="false" MaxLength="16" />
+    <Property Name="MobilePhone" Type="varchar" Nullable="false" MaxLength="16" />
+    <Property Name="EMail" Type="varchar" Nullable="false" MaxLength="60" />
+    <Property Name="EyeColor" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="HairColor" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="OrganDoner" Type="varchar" Nullable="false" MaxLength="3" />
+    <Property Name="MaritalStatusId" Type="int" />
+    <Property Name="MaritalStatus" Type="varchar" MaxLength="20" />
+    <Property Name="PreferredLanguageId" Type="int" />
+    <Property Name="PreferredLanguage" Type="varchar" MaxLength="100" />
+    <Property Name="RaceId_NotAnswer" Type="bit" />
+    <Property Name="RaceId_Native" Type="bit" />
+    <Property Name="RaceId_Asian" Type="bit" />
+    <Property Name="RaceId_Black" Type="bit" />
+    <Property Name="RaceId_Hawaiian" Type="bit" />
+    <Property Name="RaceId_White" Type="bit" />
+    <Property Name="Race" Type="varchar" Nullable="false" MaxLength="138" />
+    <Property Name="ReligionId" Type="int" />
+    <Property Name="Religion" Type="varchar" MaxLength="20" />
+    <Property Name="GenderId" Type="int" />
+    <Property Name="Gender" Type="varchar" MaxLength="15" />
+    <Property Name="EthnicityId" Type="int" />
+    <Property Name="Ethnicity" Type="varchar" MaxLength="30" />
+    <Property Name="BloodTypeId" Type="int" />
+    <Property Name="BloodType" Type="varchar" MaxLength="10" />
+    <Property Name="SmokingStatusId" Type="int" />
+    <Property Name="SmokingStatus" Type="varchar" MaxLength="40" />
+    <Property Name="PatientEmergencyId" Type="bigint" />
+    <Property Name="RelationshipId" Type="int" />
+    <Property Name="EmergencyName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="EmergencyAddress" Type="varchar" Nullable="false" MaxLength="101" />
+    <Property Name="EmergencyCity" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="EmergencyState" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="EmergencyZip" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="EmergencyCountryCode" Type="char" Nullable="false" MaxLength="3" />
+    <Property Name="EmergencyCountryName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="EmergencyHomePhone" Type="varchar" Nullable="false" MaxLength="16" />
+    <Property Name="EmergencyMobilePhone" Type="varchar" Nullable="false" MaxLength="16" />
+    <Property Name="EmergencyWorkPhone" Type="varchar" Nullable="false" MaxLength="16" />
+    <Property Name="EmergencyRelationshipId" Type="int" />
+    <Property Name="EmergencyRelationship" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="IsPrimary" Type="bit" />
+    <Property Name="PCP" Type="varchar" Nullable="false" MaxLength="52" />
+    <Property Name="MailAddress" Type="varchar" Nullable="false" MaxLength="101" />
+    <Property Name="MailCity" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="MailState" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="MailZip" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="MailCountryCode" Type="char" Nullable="false" MaxLength="3" />
+    <Property Name="MailCountryName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Heart" Type="bit" />
+    <Property Name="Liver" Type="bit" />
+    <Property Name="Pancreas" Type="bit" />
+    <Property Name="Lungs" Type="bit" />
+    <Property Name="Kidneys" Type="bit" />
+    <Property Name="Intestines" Type="bit" />
+    <Property Name="Cornea" Type="bit" />
+    <Property Name="Skin" Type="bit" />
+    <Property Name="BoneMarrow" Type="bit" />
+    <Property Name="HeartValves" Type="bit" />
+    <Property Name="ConnectiveTissue" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwPatientVisitSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwPatientVisitSummary">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="FacilityName" />
+      <PropertyRef Name="FacilityAddress" />
+      <PropertyRef Name="FacilityCityStatePostal" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="ProviderName" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="FacilityAddress" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="FacilityCityStatePostal" Type="varchar" Nullable="false" MaxLength="52" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="VisitDate" Type="datetime" />
+    <Property Name="ProviderId" Type="bigint" />
+    <Property Name="VisitReason" Type="varchar" MaxLength="256" />
+    <Property Name="ProviderName" Type="varchar" Nullable="false" MaxLength="52" />
+    <Property Name="Viewable" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwProvidersForFacility' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwProvidersForFacility">
+    <Key>
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="ProviderId" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="LastName" />
+    </Key>
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="ProviderId" Type="bigint" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwRptPatientLogin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwRptPatientLogin">
+    <Key>
+      <PropertyRef Name="StartDateTime" />
+    </Key>
+    <Property Name="FacilityId" Type="bigint" />
+    <Property Name="PatientId" Type="bigint" />
+    <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwRptSecureMessage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwRptSecureMessage">
+    <Key>
+      <PropertyRef Name="MessageDetailId" />
+    </Key>
+    <Property Name="MessageDetailId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" />
+    <Property Name="PatientId" Type="bigint" />
+    <Property Name="DateCreated" Type="smalldatetime" />
+    <Property Name="ProviderId_To" Type="bigint" />
+    <Property Name="FirstName" Type="varchar" MaxLength="20" />
+    <Property Name="LastName" Type="varchar" MaxLength="20" />
+    <Property Name="License" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AMR.dbo.vwVisitCCD' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwVisitCCD">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+    </Key>
+    <Property Name="PatientId" Type="bigint" Nullable="false" />
+    <Property Name="FacilityId" Type="bigint" Nullable="false" />
+    <Property Name="VisitId" Type="bigint" Nullable="false" />
+    <Property Name="ProviderId" Type="bigint" />
+    <Property Name="Title" Type="varchar" MaxLength="10" />
+    <Property Name="FirstName" Type="varchar" MaxLength="20" />
+    <Property Name="LastName" Type="varchar" MaxLength="20" />
+    <Property Name="License" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" MaxLength="16" />
+    <Property Name="Email" Type="varchar" MaxLength="60" />
+    <Property Name="FacilityTypeId" Type="int" />
+    <Property Name="FacilityType" Type="varchar" MaxLength="40" />
+    <Property Name="FacilityName" Type="varchar" MaxLength="50" />
+    <Property Name="Address1" Type="varchar" MaxLength="50" />
+    <Property Name="Address2" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="30" />
+    <Property Name="State" Type="varchar" MaxLength="10" />
+    <Property Name="CountryCode" Type="char" MaxLength="3" />
+    <Property Name="CountryName" Type="varchar" MaxLength="50" />
+    <Property Name="PostalCode" Type="varchar" MaxLength="10" />
+    <Property Name="FacilityPhone" Type="varchar" MaxLength="16" />
+    <Property Name="FacilityFax" Type="varchar" MaxLength="16" />
+    <Property Name="VisitReason" Type="varchar" MaxLength="256" />
+    <Property Name="VisitDate" Type="datetime" />
+  </EntityType>
+  <Association Name="C_AuditAction_PatientlDocumentAudit_FK1">
+    <End Role="C_AuditAction" Type="AMRModel.Store.C_AuditAction" Multiplicity="0..1" />
+    <End Role="PatientDocumentAudit" Type="AMRModel.Store.PatientDocumentAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_AuditAction">
+        <PropertyRef Name="AuditActionId" />
+      </Principal>
+      <Dependent Role="PatientDocumentAudit">
+        <PropertyRef Name="AuditActionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_BloodType_Patient_FK1">
+    <End Role="C_BloodType" Type="AMRModel.Store.C_BloodType" Multiplicity="0..1" />
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_BloodType">
+        <PropertyRef Name="BloodTypeId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="BloodTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_DocumentType_PatientlDocumentAudit_FK1">
+    <End Role="C_DocumentType" Type="AMRModel.Store.C_DocumentType" Multiplicity="0..1" />
+    <End Role="PatientDocumentAudit" Type="AMRModel.Store.PatientDocumentAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_DocumentType">
+        <PropertyRef Name="DocumentTypeId" />
+      </Principal>
+      <Dependent Role="PatientDocumentAudit">
+        <PropertyRef Name="DocumentTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_Ethnicity_Patient_FK1">
+    <End Role="C_Ethnicity" Type="AMRModel.Store.C_Ethnicity" Multiplicity="0..1" />
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_Ethnicity">
+        <PropertyRef Name="EthnicityId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="EthnicityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_Gender_Patient_FK1">
+    <End Role="C_Gender" Type="AMRModel.Store.C_Gender" Multiplicity="0..1" />
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_Gender">
+        <PropertyRef Name="GenderId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="GenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_InstructionType_PatientPlanOfCare_FK1">
+    <End Role="C_InstructionType" Type="AMRModel.Store.C_InstructionType" Multiplicity="1" />
+    <End Role="PatientPlanOfCare" Type="AMRModel.Store.PatientPlanOfCare" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_InstructionType">
+        <PropertyRef Name="InstructionTypeId" />
+      </Principal>
+      <Dependent Role="PatientPlanOfCare">
+        <PropertyRef Name="InstructionTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_MaritalStatus_Patient_FK1">
+    <End Role="C_MaritalStatus" Type="AMRModel.Store.C_MaritalStatus" Multiplicity="0..1" />
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_MaritalStatus">
+        <PropertyRef Name="MaritalStatusId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="MaritalStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_MessageResponseType_MessageDetail_FK1">
+    <End Role="C_MessageResponseType" Type="AMRModel.Store.C_MessageResponseType" Multiplicity="0..1" />
+    <End Role="MessageDetail" Type="AMRModel.Store.MessageDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_MessageResponseType">
+        <PropertyRef Name="MessageResponseTypeId" />
+      </Principal>
+      <Dependent Role="MessageDetail">
+        <PropertyRef Name="MessageResponseTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_MessageStatus_Message_FK1">
+    <End Role="C_MessageStatus" Type="AMRModel.Store.C_MessageStatus" Multiplicity="0..1" />
+    <End Role="Message" Type="AMRModel.Store.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_MessageStatus">
+        <PropertyRef Name="MessageStatusId" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="MessageStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_MessageStatus_MessageAudit_FK1">
+    <End Role="C_MessageStatus" Type="AMRModel.Store.C_MessageStatus" Multiplicity="0..1" />
+    <End Role="MessageAudit" Type="AMRModel.Store.MessageAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_MessageStatus">
+        <PropertyRef Name="MessageStatusId" />
+      </Principal>
+      <Dependent Role="MessageAudit">
+        <PropertyRef Name="MessageStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_MessageType_Message_FK1">
+    <End Role="C_MessageType" Type="AMRModel.Store.C_MessageType" Multiplicity="0..1" />
+    <End Role="Message" Type="AMRModel.Store.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_MessageType">
+        <PropertyRef Name="MessageTypeId" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="MessageTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_PreferredLanguage_Patient_FK1">
+    <End Role="C_PreferredLanguage" Type="AMRModel.Store.C_PreferredLanguage" Multiplicity="0..1" />
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_PreferredLanguage">
+        <PropertyRef Name="PreferredLanguageId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="PreferredLanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_Relationship_PatientEmergency_FK1">
+    <End Role="C_Relationship" Type="AMRModel.Store.C_Relationship" Multiplicity="0..1" />
+    <End Role="PatientEmergency" Type="AMRModel.Store.PatientEmergency" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_Relationship">
+        <PropertyRef Name="RelationshipId" />
+      </Principal>
+      <Dependent Role="PatientEmergency">
+        <PropertyRef Name="RelationshipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_Religion_Patient_FK1">
+    <End Role="C_Religion" Type="AMRModel.Store.C_Religion" Multiplicity="0..1" />
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_Religion">
+        <PropertyRef Name="ReligionId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="ReligionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_SmokingStatus_Patient_FK1">
+    <End Role="C_SmokingStatus" Type="AMRModel.Store.C_SmokingStatus" Multiplicity="0..1" />
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_SmokingStatus">
+        <PropertyRef Name="SmokingStatusId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="SmokingStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_UserRole_User_FK1">
+    <End Role="C_UserRole" Type="AMRModel.Store.C_UserRole" Multiplicity="0..1" />
+    <End Role="User" Type="AMRModel.Store.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_UserRole">
+        <PropertyRef Name="UserRoleId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Facility_PatientFacilityLink_FK1">
+    <End Role="Facility" Type="AMRModel.Store.Facility" Multiplicity="1" />
+    <End Role="PatientFacilityLink" Type="AMRModel.Store.PatientFacilityLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facility">
+        <PropertyRef Name="FacilityId" />
+      </Principal>
+      <Dependent Role="PatientFacilityLink">
+        <PropertyRef Name="FacilityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Facility_ProviderFacilityLink_FK1">
+    <End Role="Facility" Type="AMRModel.Store.Facility" Multiplicity="1" />
+    <End Role="ProviderFacilityLink" Type="AMRModel.Store.ProviderFacilityLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facility">
+        <PropertyRef Name="FacilityId" />
+      </Principal>
+      <Dependent Role="ProviderFacilityLink">
+        <PropertyRef Name="FacilityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BillPayment_BillRate">
+    <End Role="BillRate" Type="AMRModel.Store.BillRate" Multiplicity="1" />
+    <End Role="BillPayment" Type="AMRModel.Store.BillPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BillRate">
+        <PropertyRef Name="BillRateId" />
+      </Principal>
+      <Dependent Role="BillPayment">
+        <PropertyRef Name="BillRateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Provider_ProviderFacilityLink">
+    <End Role="Provider" Type="AMRModel.Store.Provider" Multiplicity="1" />
+    <End Role="ProviderFacilityLink" Type="AMRModel.Store.ProviderFacilityLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="ProviderId" />
+      </Principal>
+      <Dependent Role="ProviderFacilityLink">
+        <PropertyRef Name="ProviderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Message_MessageAudit_FK1">
+    <End Role="Message" Type="AMRModel.Store.Message" Multiplicity="1" />
+    <End Role="MessageAudit" Type="AMRModel.Store.MessageAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="MessageId" />
+      </Principal>
+      <Dependent Role="MessageAudit">
+        <PropertyRef Name="MessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Message_MessageDetail_FK1">
+    <End Role="Message" Type="AMRModel.Store.Message" Multiplicity="1" />
+    <End Role="MessageDetail" Type="AMRModel.Store.MessageDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="MessageId" />
+      </Principal>
+      <Dependent Role="MessageDetail">
+        <PropertyRef Name="MessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Organization_Practice_FK1">
+    <End Role="Organization" Type="AMRModel.Store.Organization" Multiplicity="1" />
+    <End Role="Practice" Type="AMRModel.Store.Practice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="OrganizationId" />
+      </Principal>
+      <Dependent Role="Practice">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientAccountLink_FK1">
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="1" />
+    <End Role="PatientAccountLink" Type="AMRModel.Store.PatientAccountLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientAccountLink">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientCareDocument_FK1">
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="1" />
+    <End Role="PatientCareDocument" Type="AMRModel.Store.PatientCareDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientCareDocument">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientDocument_FK1">
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="1" />
+    <End Role="PatientDocument" Type="AMRModel.Store.PatientDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientDocument">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientEmergency_FK1">
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="1" />
+    <End Role="PatientEmergency" Type="AMRModel.Store.PatientEmergency" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientEmergency">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientFacilityLink_FK1">
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="1" />
+    <End Role="PatientFacilityLink" Type="AMRModel.Store.PatientFacilityLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientFacilityLink">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientMedicalDocument_FK1">
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="1" />
+    <End Role="PatientMedicalDocument" Type="AMRModel.Store.PatientMedicalDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientMedicalDocument">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientOrgan_FK1">
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="1" />
+    <End Role="PatientOrgan" Type="AMRModel.Store.PatientOrgan" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientOrgan">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientShare_FK1">
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="1" />
+    <End Role="PatientShare" Type="AMRModel.Store.PatientShare" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientShare">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientVisit_FK1">
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="1" />
+    <End Role="PatientVisit" Type="AMRModel.Store.PatientVisit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientVisit">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientWebSetting_FK1">
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="1" />
+    <End Role="PatientWebSetting" Type="AMRModel.Store.PatientWebSetting" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientWebSetting">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatientLabResult_PatientLabResultsTest_FK1">
+    <End Role="PatientLabResult" Type="AMRModel.Store.PatientLabResult" Multiplicity="1" />
+    <End Role="PatientLabResultTest" Type="AMRModel.Store.PatientLabResultTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientLabResult">
+        <PropertyRef Name="PatientId" />
+        <PropertyRef Name="FacilityId" />
+        <PropertyRef Name="VisitId" />
+        <PropertyRef Name="LabResultCntr" />
+      </Principal>
+      <Dependent Role="PatientLabResultTest">
+        <PropertyRef Name="PatientId" />
+        <PropertyRef Name="FacilityId" />
+        <PropertyRef Name="VisitId" />
+        <PropertyRef Name="LabResultCntr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatientProviderLink_Patient_FK1">
+    <End Role="Patient" Type="AMRModel.Store.Patient" Multiplicity="1" />
+    <End Role="PatientProviderLink" Type="AMRModel.Store.PatientProviderLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientProviderLink">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatientProviderLink_Provider_FK1">
+    <End Role="Provider" Type="AMRModel.Store.Provider" Multiplicity="1" />
+    <End Role="PatientProviderLink" Type="AMRModel.Store.PatientProviderLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="ProviderId" />
+      </Principal>
+      <Dependent Role="PatientProviderLink">
+        <PropertyRef Name="ProviderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Practice_Facility_FK1">
+    <End Role="Practice" Type="AMRModel.Store.Practice" Multiplicity="0..1" />
+    <End Role="Facility" Type="AMRModel.Store.Facility" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Practice">
+        <PropertyRef Name="PracticeId" />
+      </Principal>
+      <Dependent Role="Facility">
+        <PropertyRef Name="PracticeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Practice_Provider_FK1">
+    <End Role="Practice" Type="AMRModel.Store.Practice" Multiplicity="1" />
+    <End Role="Provider" Type="AMRModel.Store.Provider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Practice">
+        <PropertyRef Name="PracticeId" />
+      </Principal>
+      <Dependent Role="Provider">
+        <PropertyRef Name="PracticeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="FindPatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PatientId" Type="bigint" Mode="InOut" />
+    <Parameter Name="FirstName" Type="varchar" Mode="In" />
+    <Parameter Name="LastName" Type="varchar" Mode="In" />
+    <Parameter Name="DOB" Type="date" Mode="In" />
+    <Parameter Name="SSN" Type="varchar" Mode="In" />
+    <Parameter Name="Gender" Type="int" Mode="In" />
+    <Parameter Name="Address1" Type="varchar" Mode="In" />
+    <Parameter Name="City" Type="varchar" Mode="In" />
+    <Parameter Name="State" Type="varchar" Mode="In" />
+    <Parameter Name="Postal" Type="varchar" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="MedicareId" Type="varchar" Mode="In" />
+    <Parameter Name="MedicaidState" Type="char" Mode="In" />
+    <Parameter Name="MedicaidId" Type="varchar" Mode="In" />
+    <Parameter Name="AltId1_Type" Type="varchar" Mode="In" />
+    <Parameter Name="AltId1_Key" Type="varchar" Mode="In" />
+    <Parameter Name="AltId2_Type" Type="varchar" Mode="In" />
+    <Parameter Name="AltId2_Key" Type="varchar" Mode="In" />
+    <Parameter Name="AltId3_Type" Type="varchar" Mode="In" />
+    <Parameter Name="AltId3_Key" Type="varchar" Mode="In" />
+    <Parameter Name="AltId4_Type" Type="varchar" Mode="In" />
+    <Parameter Name="AltId4_Key" Type="varchar" Mode="In" />
+    <Parameter Name="AltId5_Type" Type="varchar" Mode="In" />
+    <Parameter Name="AltId5_Key" Type="varchar" Mode="In" />
+  </Function>
+</Schema>

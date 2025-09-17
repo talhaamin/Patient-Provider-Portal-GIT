@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AMR.Models.PatientNotesModel>
+
+<table class="box-table-a">
+
+        <thead>
+
+            <tr>
+
+                <th>Date Created</th>
+                <th>Notes</th>
+                
+            </tr>
+
+        </thead>
+
+        <tbody>
+            @if(Model != null && Model.Count() > 0)
+            {
+                int counter=0;
+                foreach (var item in Model)
+                {
+                    
+            <tr class="@((counter % 2 == 0) ? "r0" : "r1")">
+                <td>@item.DateCreated</td>
+                <td>@item.Note</td>
+                
+            </tr>
+                    counter++;
+                }
+            }
+        </tbody>
+
+    </table>

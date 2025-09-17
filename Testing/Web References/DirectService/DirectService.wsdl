@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ValidateEmailAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateEmailAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidateEmailAddressResult" type="tns:DirectResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DirectResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendDirectEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Parms" type="tns:SendDirectParms" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SendDirectParms">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PatientId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="VisitId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="Problems" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Allergies" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Immunizations" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Medications" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Social" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Procedures" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="VitalSigns" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Labs" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClinicalInstructions" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="FutureAppointments" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Referrals" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ScheduledTests" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="DecisionAids" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendDirectEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendDirectEmailResult" type="tns:DirectResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ValidateEmailAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateEmailAddress" />
+  </wsdl:message>
+  <wsdl:message name="ValidateEmailAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateEmailAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendDirectEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:SendDirectEmail" />
+  </wsdl:message>
+  <wsdl:message name="SendDirectEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:SendDirectEmailResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DirectWSSoap">
+    <wsdl:operation name="ValidateEmailAddress">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Validate Email Address</wsdl:documentation>
+      <wsdl:input message="tns:ValidateEmailAddressSoapIn" />
+      <wsdl:output message="tns:ValidateEmailAddressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendDirectEmail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Send Direct Email With CCD</wsdl:documentation>
+      <wsdl:input message="tns:SendDirectEmailSoapIn" />
+      <wsdl:output message="tns:SendDirectEmailSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DirectWSSoap" type="tns:DirectWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidateEmailAddress">
+      <soap:operation soapAction="http://tempuri.org/ValidateEmailAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDirectEmail">
+      <soap:operation soapAction="http://tempuri.org/SendDirectEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DirectWSSoap12" type="tns:DirectWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidateEmailAddress">
+      <soap12:operation soapAction="http://tempuri.org/ValidateEmailAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDirectEmail">
+      <soap12:operation soapAction="http://tempuri.org/SendDirectEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DirectWS">
+    <wsdl:port name="DirectWSSoap" binding="tns:DirectWSSoap">
+      <soap:address location="http://localhost:61065/DirectService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DirectWSSoap12" binding="tns:DirectWSSoap12">
+      <soap12:address location="http://localhost:61065/DirectService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

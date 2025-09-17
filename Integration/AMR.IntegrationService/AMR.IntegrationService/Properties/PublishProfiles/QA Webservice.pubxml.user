@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
+    <LastUsedPlatform>Any CPU</LastUsedPlatform>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAITvQS7ScMEG9q22Yp7BiewAAAAACAAAAAAAQZgAAAAEAACAAAADwrXC3HiZ/WaOGd6Rrbm/Ze5cqo2PIGuXfhFdbv3VkcQAAAAAOgAAAAAIAACAAAADmxBw3k3i71u7Z/7VFkeJ+ud457lYHko0bohPixY3d+yAAAADuJ5gPagy3W8R3RK3eDLMNLBJBEUZ8WkwxOdy2A9i1KEAAAAB0RlXO4fo/21rVxkcHES42Y1iEqApOxyP6a7KS0VLoEpU17fecBimk3B3FmEYn+MCS7rzbbzWx71VflJZ4DXJT</EncryptedPassword>
+    <_PublishTargetUrl>ftp://74.85.128.129/Websites/QAIntegrationWS/</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="AuthenticationService.asmx">
+      <publishTime>10/28/2013 20:16:38</publishTime>
+    </File>
+    <File Include="bin/AMR.Data.dll">
+      <publishTime>11/17/2014 18:10:05</publishTime>
+    </File>
+    <File Include="bin/AMR.IntegrationService.dll">
+      <publishTime>11/17/2014 18:10:16</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>10/24/2013 08:38:53</publishTime>
+    </File>
+    <File Include="ConfigService.asmx">
+      <publishTime>06/18/2014 11:00:28</publishTime>
+    </File>
+    <File Include="DirectService.asmx">
+      <publishTime>08/22/2014 15:14:08</publishTime>
+    </File>
+    <File Include="MessageService.asmx">
+      <publishTime>11/11/2013 15:05:11</publishTime>
+    </File>
+    <File Include="PatientService.asmx">
+      <publishTime>10/28/2013 12:00:11</publishTime>
+    </File>
+    <File Include="ProviderService.asmx">
+      <publishTime>10/28/2013 20:19:41</publishTime>
+    </File>
+    <File Include="ReportService.asmx">
+      <publishTime>04/18/2014 10:28:40</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>10/20/2014 11:34:39</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

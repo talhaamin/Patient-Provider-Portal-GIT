@@ -1,0 +1,7 @@
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\bin\Release\AMR.Data.dll.config
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\bin\Release\AMR.Data.dll
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\bin\Release\AMR.Data.pdb
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\bin\Release\EntityFramework.dll
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\bin\Release\EntityFramework.xml
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\obj\Release\AMR.Data.dll
+C:\SourceControl\AMRPortal\trunk\Data\AMR.Data\obj\Release\AMR.Data.pdb

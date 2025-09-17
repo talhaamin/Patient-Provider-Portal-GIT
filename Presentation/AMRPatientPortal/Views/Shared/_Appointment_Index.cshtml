@@ -1,0 +1,126 @@
+﻿@model IEnumerable<AMR.Models.PatientMessageModel>
+
+<table class="box-table-a" id="tbl-App" summary="AppointmentsGrid" >
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                  <div style="margin-left:2px;">Date</div>  
+                                
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left:1px;">Time</div> 
+                                    
+                                
+                            </th>
+                          @*  <th scope="col">
+                             
+                                    Visit Reason
+                              
+                            </th>*@
+                            <th scope="col">
+                               <div>Location</div> 
+                                    
+                                
+                            </th>
+                            <th scope="col">
+                                <div style="margin-left:5px;">Provider</div> 
+                                    
+                                
+                            </th>
+                              <th scope="col">
+                                <div style="margin-left:7px;">Status</div> 
+                                    
+                                
+                            </th>
+                            <th scope="col">
+                                <div>Details</div> 
+                                    
+                               
+                            </th>
+                             <th scope="col">
+                                <div>Cancel</div> 
+                                    
+                                
+                            </th>
+                              <th scope="col">
+                                <div>Delete</div> 
+                                    
+                                
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                          @if (Model != null && Model.Count()>0)
+                        {
+                            int counter = 0;
+
+                            foreach (var item in Model)
+                        {
+
+                            if (item.MessageType == "Appointment Request" && item.MessageStatusId != "7")
+                            {
+                                //if(item.PatientMessageModel.MessageStatusId != "5")
+                               /// {
+                                System.Text.StringBuilder jsonStringAppointment = new System.Text.StringBuilder();
+
+                                jsonStringAppointment.Append(" { ");
+                                jsonStringAppointment.Append("\"MessageId\": \"" + item.MessageId + "\",");
+                                jsonStringAppointment.Append("\"FacilityId\": \"" + item.FacilityId + "\",");
+                                jsonStringAppointment.Append("\"ProviderId_To\": \"" + item.ProviderId_To + "\",");
+                                jsonStringAppointment.Append("\"PreferredPeriod\":  \"" + item.PreferredPeriod + "\",");
+                                jsonStringAppointment.Append("\"MessageUrgency\":  \"" + (item.MessageUrgency) + "\",");
+                                jsonStringAppointment.Append("\"PreferredWeekDay\":  \"" + item.PreferredWeekDay + "\",");
+                                jsonStringAppointment.Append("\"AppointmentStart\":  \"" + item.AppointmentStart.ToShortDateString() + "\",");
+                                jsonStringAppointment.Append("\"AppointmentEnd\":  \"" + item.AppointmentEnd.ToShortDateString() + "\",");
+                                jsonStringAppointment.Append("\"PreferredTime\":  \"" + item.PreferredTime + "\",");
+                                jsonStringAppointment.Append("\"VisitReason\":  \"" + item.VisitReason + "\",");
+                                jsonStringAppointment.Append("\"MessageRequest\":  \"" + item.MessageRequest + "\"");
+                                jsonStringAppointment.Append("}");
+                                
+                           <tr class="@((counter % 2 == 0) ? "r1" : "r0")" >
+                                
+                               
+                                <td><input type="hidden" id="hdAppointmentDetails@(item.MessageId)" value="@jsonStringAppointment.ToString()" />
+                           
+                                        @Convert.ToDateTime(item.ProviderApprDate).ToShortDateString()
+                        </td>
+                        <td>     
+                                        @item.AppointmentStart.ToShortTimeString()
+                                   
+                                </td>
+                          @*      <td>
+                                        @item.VisitReason
+                        </td>*@
+                        <td>
+                                        @item.FacilityName
+                        </td>
+                        <td>
+                                       @item.ProviderName_To                  
+                        </td>
+                                <td>   
+                                       @item.MessageStatus
+                        </td>
+                               <td>
+                                   <img src="Content/img/details.png" onclick="AppointmentDetail(@item.MessageId);"/>
+                                      
+                                   
+                                </td>
+                               <td>
+                                   <img src="Content/img/cancel.png" onclick="AppointmentDelete(@item.MessageId);"/>
+                                      
+                                  
+                                </td>
+                               <td >  <img  onclick="ConfrimDialog(@item.MessageId);"   src="Content/img/delete.png" />  </td>
+                            </tr>
+                                counter++;
+                            }
+                        } 
+                          }
+                         else
+                        {
+                            <tr class="r1">
+                                <td colspan="5">No Information Available.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>

@@ -1,0 +1,852 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@using System.Web.Optimization;
+@model HomeViewModel
+
+            <div id="PatientSummary">
+
+            <table width="100%">
+                <tr><td colspan="6"></td></tr>
+
+                <tr>
+                    
+    
+                    <td height="54" colspan="5" align="center">
+                        
+                       
+                        <h2>Created On: @DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss tt")</h2>
+
+
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        @*<input type="checkbox" id="chkDemo" name="checkbox" checked="checked" /><label for="chkDemo"><strong>Include Demographics</strong></label>*@</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td width="153" height="28"><strong>Patient :</strong></td>
+                    <td width="269" height="28">@Model.PatientSummary.FirstName @Model.PatientSummary.LastName</td>
+                    <td width="4">&nbsp;</td>
+                    <td width="152" height="28"><strong>Access ID : </strong></td>
+                    <td width="370" height="28">@Model.PatientSummary.PatientId</td>
+                    <td width="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong>Address :</strong></td>
+                    <td>@Model.PatientSummary.PAddress<br>
+                        @Model.PatientSummary.City, @Model.PatientSummary.State @Model.PatientSummary.Zip<br>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td height="28"><strong>Work Phone :</strong></td>
+                    <td height="28">@Model.PatientSummary.WorkPhone</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong>Birth Date :</strong></td>
+                    <td>@Model.PatientSummary.DOB</td>
+                    <td>&nbsp;</td>
+                    <td><strong>Mobile Phone :</strong></td>
+                    <td>@Model.PatientSummary.MobilePhone</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28" width="160"><strong>Preferred Language :</strong></td>
+                    <td>@Model.PatientSummary.PreferredLanguage</td>
+                    <td>&nbsp;</td>
+                    <td><strong>Sex :</strong></td>
+                    <td>@Model.PatientSummary.Gender</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong>Ethnicity :</strong></td>
+                    <td>@Model.PatientSummary.Ethnicity</td>
+                    <td>&nbsp;</td>
+                    <td><strong>Race :</strong></td>
+                    <td>@Model.PatientSummary.Race</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28">
+                        @*<input type="checkbox" id="chkprovider" name="chkprovider" checked="checked" /><strong><label for="chkprovider">Include Provider</label></strong>*@</td>
+
+                    <td></td>
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong>Provider :</strong></td>
+                    <td>@Model.PatientVisitCCD.Title @Model.PatientVisitCCD.FirstName @Model.PatientVisitCCD.LastName </td>
+                    <td>&nbsp;</td>
+                   @*  <td ><strong>Reason For Visit :</strong></td>
+      <td>@Model.PatientVisitCCD.VisitReason</td>
+      <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <td height="28"><strong>Practice Name :</strong></td>
+                    <td>@Model.PatientVisitCCD.FacilityName
+
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong></strong></td>
+                    <td>@Model.PatientVisitCCD.Address1
+                        <br />
+                        @Model.PatientVisitCCD.City, @Model.PatientVisitCCD.State @Model.PatientVisitCCD.PostalCode
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="28"><strong>Practice Phone :</strong></td>
+                    <td>@Model.PatientVisitCCD.FacilityPhone
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+               <tr>
+                    <td height="28">
+                        @*<input type="checkbox" id="chkvisit" name="chkvisit" checked="checked" /><strong><label for="chkvisit">Include Visit Information</label></strong>*@</td>
+
+                    <td></td>
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td>&nbsp;</td>
+                </tr>
+                 <tr>
+                    <td height="28"><strong>Visit Date :</strong></td>
+                    <td>@Model.PatientVisitCCD.VisitDate
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                 <tr>
+                    <td height="28"><strong>Visit Location :</strong></td>
+                    <td>@Model.PatientVisitCCD.Address1
+                        <br />
+                        @Model.PatientVisitCCD.City, @Model.PatientVisitCCD.State @Model.PatientVisitCCD.PostalCode
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h3><span id="toc">Table of Contents</span></h3>
+           @* <img id="loader" src="https://www.amrportal.com/PatientPortal/Content/img/login-loader.gif" alt="Loading..." style="display: none;">*@
+            <ul>
+                 <li><span class="anc"  onclick="location.href='#widget_Reason'" >Reason For Visit/Chief Complaint</span></li>
+                 <li><span class="anc" onclick="location.href='#widget_Medications Administered'" >Medications Administered During Visit</span></li>
+                <li><span class="anc"  onclick="location.href='#widget_Medications'" >Medications</span></li>
+                <li><span class="anc" onclick="location.href='#widget_Problems'" >Problems</span></li>
+                <li><span class="anc" onclick="location.href='#widget_Allergies, Adverse Reactions, Alerts'"  >Allergies, Adverse Reactions, Alerts</span></li>
+                <li><span class="anc" onclick="location.href='#widget_Immunizations'"  >Immunizations</span></li>
+                <li><span class="anc" onclick="location.href='#widget_Social History'"  >Social History</span></li>
+                <li><span class="anc" onclick="location.href='#widget_Family History'"  >Family History</span></li>
+                <li><span class="anc" onclick="location.href='#widget_Procedures'"  >Procedures</span></li>
+                <li><span class="anc" onclick="location.href='#widget_Medical History'"  >Medical History</span></li>
+                <li><span class="anc" onclick="location.href='#widget_Vital Signs'" >Vital Signs</span></li>
+                <li><span class="anc" onclick="location.href='#widget_Lab Tests'"  >Lab Tests</span></li>
+                <li><span class="anc" onclick="location.href='#widget_Plan Of Care'"  >Care Plan</span></li>
+                <li><span class="anc" onclick="location.href='#widget_ClinicalInstructions'"  >Clinical Instructions</span></li>
+            </ul>
+        </div>
+        <div id="widgets">
+           @* @if (Model.Medications != null && Model.Medications.Count > 0)
+            {
+                *@
+            
+            <div class="uploadBox" id="widget_Reason">
+
+                    <h3><span style="font-weight: bold;"><label for="chkRes"><span> Reason For Visit/Chief Complaint</span></label></span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                    <div class="widgetTable">
+
+                        <table class="widget" summary="VisitReason" id="EditReason" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th style="display:none"></th>
+                                    <th>Reason For Visit/Chief Complaint</th>
+                                    
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                               
+                                    <tr>
+                                         <td style="display:none">
+                                            <input type="hidden" value="1" />
+                                        </td>
+                                        <td>@Model.PatientVisitCCD.VisitReason</td>
+                                        
+                                    </tr>
+                                
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            <div class="uploadBox" id="widget_Medications Administered">
+                    <h3><span style="font-weight: bold;"><label for="chkmedAdm"><span>Medications Administered During Visit</span></label></span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                    <div class="widgetTable">
+
+                        <table class="widget" summary="MedsAdministered" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>RxNorm Code</th>
+                                    <th>Product</th>
+                                    <th>Medication Name</th>
+                                    <th>Frequency</th>
+                                    <th>Date Started</th>
+                                    <th>Status</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach (var item in Model.MedicationsAdministered)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" value="@item.PatientMedicationCntr" />@item.CodeValue</td>
+                                        <td>Medication</td>
+                                        <td>@item.MedicationName</td>
+                                        <td>@item.Frequency</td>
+                                         @if (Convert.ToDateTime(item.StartDate).ToShortTimeString() == "12:00 AM") 
+                                    {
+                                        <td>@Convert.ToDateTime(item.StartDate).ToShortDateString()</td>
+                                    }
+                                     else
+                                    {
+                                       <td>@item.StartDate</td> 
+                                    }                                        
+                                        <td>@item.Status</td>
+                                        <td>@item.Note</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            <div class="uploadBox" id="widget_Medications">
+                    <h3><span style="font-weight: bold;">
+                    <label for="chkmed"><span>Medications</span></label></span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                    <div class="widgetTable">
+
+                        <table class="widget" summary="Medications" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>RxNorm Code</th>
+                                    <th>Product</th>
+                                    <th>Medication Name</th>
+                                    <th>Frequency</th>
+                                    <th>Date Started</th>
+                                    <th>Status</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach (var item in Model.Medications)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" value="@item.PatientMedicationCntr" />@item.CodeValue</td>
+                                        <td>Medication</td>
+                                        <td>@item.MedicationName</td>
+                                        <td>@item.Frequency</td>
+                                    @if (Convert.ToDateTime(item.StartDate).ToShortTimeString() == "12:00 AM") 
+                                    {
+                                        <td>@Convert.ToDateTime(item.StartDate).ToShortDateString()</td>
+                                    }
+                                     else
+                                    {
+                                       <td>@item.StartDate</td> 
+                                    }
+
+                                        <td>@item.Status</td>
+                                        <td>@item.Note</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+           @* }
+            @if (Model.Problems != null && Model.Problems.Count > 0)
+            {
+                *@
+            <div class="uploadBox" id="widget_Problems">
+                    <h3><span style="font-weight: bold;">
+                        
+                        <label for="chkProblems"><span>Problems</span></label></span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="Problems" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>SNOMED Code</th>
+                                    <th>Patient Problem</th>
+                                    <th>Status</th>
+                                    <th>Date Diagnosed</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach (var item1 in Model.Problems)
+                                {
+		 
+                                    <tr>
+                                      
+
+                                        <td>@item1.CodeValue<input type="hidden" value="@item1.PatientProblemCntr" /></td>
+                                        <td>@item1.Condition</td>
+                                        <td>@item1.ConditionStatus</td>                                        
+                                           @{
+                                    DateTime dtexDate;
+                                    if (item1.EffectiveDate.Length == 8 && DateTime.TryParseExact(item1.EffectiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtexDate))
+                                    {
+                                        DateTime dtEff = DateTime.ParseExact(item1.EffectiveDate, "yyyyMMdd", null);
+                                        string s = dtEff.ToString("MM/dd/yyyy");
+
+                                        <td>@s</td>
+                                    }
+
+
+
+                                    else if ((item1.EffectiveDate).Trim().Length == 6)
+                                    {
+                                        string strYear = item1.EffectiveDate.Substring(0, 4);
+                                        string strMonth = item1.EffectiveDate.Substring(4, 2);
+                                        string strEffectiveDate = strMonth + "/" + strYear;
+                                        <td>@strEffectiveDate</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@item1.EffectiveDate</td>
+                                    }
+                                                   
+                                                   
+                                    }
+
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            @*}
+            @if (Model.Allergies != null && Model.Allergies.Count > 0)
+            {
+                *@<div class="uploadBox" id="widget_Allergies, Adverse Reactions, Alerts">
+                    <h3><span style="font-weight: bold;">
+                        <label for="ckhallergies"><span>Allergies, Adverse Reactions, Alerts</span></label></span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="Allergies" border="1" width="100%">
+                            <thead>
+                                <tr>                                    
+                                    <th>SNOMED Code</th>
+                                    <th>RxNorm Code</th>
+                                    <th>Medication/Agent Allergy</th>
+                                    <th>Reaction</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach (var item2 in Model.Allergies)
+                                {
+                                    <tr>
+                                        
+
+                                        <td><input type="hidden" value="@item2.PatientAllergyCntr" /></td>
+                                        <td>@item2.CodeValue_Allergen</td>
+                                        <td>@item2.Allergen</td>
+                                        <td>@item2.Reaction</td>
+                                        <td>@item2.ConditionStatus</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+            @*}
+            @if (Model.Immunizations != null && Model.Immunizations.Count > 0)
+            {
+                *@<div class="uploadBox" id="widget_Immunizations">
+                    <h3><span style="font-weight: bold;">
+                        <label for="chkImmunizations"><span>Immunizations</span></label></span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="Immunizations" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Vaccine</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody>
+                                @foreach (var item3 in Model.Immunizations)
+                                {
+                                    <tr>
+                                       
+                                        <td>
+                                            <input type="hidden" value="@item3.PatientImmunizationCntr" />@item3.Vaccine</td>
+                                        <td>@item3.ImmunizationDate</td>
+                                        <td>Completed</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+           @* }
+            @if (Model.SocialHistories != null && Model.SocialHistories.Count > 0)
+            {
+                *@<div class="uploadBox" id="widget_Social History">
+                    <h3><span style="font-weight: bold;"><label for="chkSocial"><span> Social History</span></label></span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="Social" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Code System</th>
+                                    <th>Code</th>
+                                    <th>Description</th>
+                                    <th>Begin Date</th>
+                                    <th>End Date</th>
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody>
+                                @foreach (var item4 in Model.SocialHistories)
+                                {
+                                    <tr>
+                                        
+                                        <td>
+                                            <input type="hidden" value="@item4.PatSocialHistCntr" />
+                                            @item4.CodeSystem</td>
+                                        <td>@item4.CodeValue</td>
+                                        <td>@item4.Description</td>
+                                         @{
+                                            DateTime dtBDate;
+                                            if (item4.BeginDate.Length == 8 && DateTime.TryParseExact(item4.BeginDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtBDate))
+                                            {
+                                                DateTime dtOcc = DateTime.ParseExact(item4.BeginDate, "yyyyMMdd", null);
+                                                string s = dtOcc.ToString("MM/dd/yyyy");
+
+                                                <td>@s</td>
+                                            }
+                                            else if ((item4.BeginDate).Trim().Length == 6)
+                                            {
+                                                string strYear = item4.BeginDate.Substring(0, 4);
+                                                string strMonth = item4.BeginDate.Substring(4, 2);
+                                                string strBDate = strMonth + "/" + strYear;
+                                                <td>@strBDate</td>
+                                            }
+                                            else
+                                            {
+                                                <td>@item4.BeginDate</td>
+                                            }      
+                                          }
+                                         
+                                         @{
+                                            DateTime dtEDate;
+                                            if (item4.EndDate.Length == 8 && DateTime.TryParseExact(item4.EndDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtEDate))
+                                                {
+                                                    DateTime dtEndDate = DateTime.ParseExact(item4.EndDate, "yyyyMMdd", null);
+                                                    string s = dtEndDate.ToString("MM/dd/yyyy");
+
+                                                    <td>@s</td>
+                                                }
+                                            else if ((item4.EndDate).Trim().Length == 6)
+                                                {
+                                                    string strYear = item4.EndDate.Substring(0, 4);
+                                                    string strMonth = item4.EndDate.Substring(4, 2);
+                                                    string strEDate = strMonth + "/" + strYear;
+                                                    <td>@strEDate</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>@item4.EndDate</td>
+                                                }
+                            
+                                                   
+                                         }
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+          @*  }
+             @if (Model.Procedures != null && Model.Procedures.Count > 0)
+            {
+            *@
+            <div class="uploadBox" id="widget_Family History">
+                    <h3><span style="font-weight: bold;"><label for="chkSocial"><span> Family History</span></label></span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="Family History" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Code System</th>
+                                    <th>Code Relationship</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody>
+                                @foreach (var item4 in Model.FamilyHistories)
+                                {
+                                    <tr>
+                                        
+                                        <td>
+                                            <input type="hidden" value="@item4.PatFamilyHistCntr" />
+                                            @item4.CodeSystem</td>
+                                        <td>@item4.Relationship</td>
+                                        <td>@item4.Description</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+            <div class="uploadBox" id="widget_Procedures">
+                <h3><span style="font-weight: bold;"><label for="chkProcedures"><span>Procedures</span></label>
+                    </span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                <div class="widgetTable">
+                    <table class="widget" summary="Procedures" border="1" width="100%">
+                        <thead>
+                            <tr>
+                                
+                                <th>Code System</th>
+                                <th>Code</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                              @foreach (var item in Model.Procedures)
+                                {
+                            <tr>
+                                 <td>
+                                            <input type="hidden" value="@item.PatProcedureCntr" />
+                                    @item.CodeSystem
+                                             </td>
+                                <td>@item.CodeValue</td>
+                                <td>@item.Description</td>
+                                <td>1/15/2014</td>
+                            </tr>
+                              }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="uploadBox" id="widget_Medical History">
+                    <h3><span style="font-weight: bold;"><label for="chkMedical"><span> Medical History</span></label></span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="Medical History" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Code System</th>
+                                    <th>Code Date</th>
+                                    <th>Diagnosis/Disease</th>
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody>
+                                @foreach (var item in Model.MedicalHistories)
+                                {
+                                    <tr>
+                                        
+                                        <td>
+                                            <input type="hidden" value="@item.PatMedicalHistCntr" />
+                                            @item.Note</td>
+                                        <td>
+                                            @{
+                                                DateTime dtexDate;
+                                                if (item.DateOfOccurance.Length == 8 && DateTime.TryParseExact(item.DateOfOccurance, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtexDate))
+                                                {
+                                                    DateTime dtEff = DateTime.ParseExact(item.DateOfOccurance, "yyyyMMdd", null);
+                                                    string s = dtEff.ToString("MM/dd/yyyy");
+                                                                                           
+                                                    @s
+                                                }
+                                                else if ((item.DateOfOccurance).Trim().Length == 6)
+                                                {
+                                                    string strYear = item.DateOfOccurance.Substring(0, 4);
+                                                    string strMonth = item.DateOfOccurance.Substring(4, 2);
+                                                    string strOccDate = strMonth + "/" + strYear;
+                                                    
+                                                     @strOccDate
+                                                    
+                                                }
+                                                else
+                                                {
+                                                    @item.DateOfOccurance
+                                                }          
+                                             }
+                                        </td>
+                                        <td>@item.Description</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            @* }
+             @if (Model.VitalSigns != null && Model.VitalSigns.Count > 0)
+            {
+            *@<div class="uploadBox" id="widget_Vital Signs">
+                <h3><span style="font-weight: bold;"><label for="chkVitalSigns"><span>Vital Signs</span></label>
+                    </span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                <div class="widgetTable">
+                    <table class="widget" summary="VitalSigns" border="1" width="100%">
+                        <thead>
+                            <tr>
+                                
+                                <th>Date / Time</th>
+                                <th>BP-Sys(mm[Hg]</th>
+                                <th>BP-Dia(mm[Hg]</th>
+                                <th>HR(bpm)</th>
+                                <th>RR(rpm)</th>
+                                <th>Temp</th>
+                                <th>WT</th>
+                                <th>HT</th>
+                                <th>BMI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             @foreach (var item in Model.VitalSigns)
+                                {
+                            <tr>
+                             
+                             @if (Convert.ToDateTime(item.VitalDate).ToShortTimeString() == "12:00 AM")
+                             {
+                                <td>
+                                            <input type="hidden" value="@item.PatientVitalCntr" />
+                                             @Convert.ToDateTime(item.VitalDate).ToShortDateString()</td>
+                             }
+                             else
+                             {
+                                 <td>
+                                            <input type="hidden" value="@item.PatientVitalCntr" />
+                                             @item.VitalDate</td>
+                             }
+
+                                <td>@item.Systolic</td>
+                                <td>@item.Diastolic</td>
+                                <td>@item.Pulse</td>
+                                <td>@item.Respiration</td>
+                                <td>@item.Temperature</td>
+                                <td>@item.WeightLb</td>
+                                <td>@item.HeightIn</td>
+                                <td>@*27.5*@</td>
+                            </tr>
+                             }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           @*  }
+            @if (Model.LabResults != null && Model.LabResults.Count > 0)
+            {
+                *@<div class="uploadBox" id="widget_Lab Tests">
+                    <h3><span style="font-weight: bold;"><label for="ckhDiagnostic"><span> Lab Tests</span></label></span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                    <div class="widgetTable">
+                        <table class="widget" summary="LabResults" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Test</th>
+                                    <th>Result</th>
+                                    <th>Ref. Range</th>
+                                    <th>Abnormal Flag</th>
+                                    <th>Date Performed</th>
+                                    <th>Set</th>
+                                    <th>Code System</th>
+                                    <th>Code</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach (var item5 in Model.LabResults)
+                                {
+                          
+                                    <tr>
+                                      
+                                        <td>@item5.LabName<input type="hidden" value="@item5.LabResultCntr" /></td>
+                                        <td>@item5.Result</td>
+                                        <td>@item5.RefRange</td>
+                                        <td>@item5.Abnormal</td>                                       
+                                         @if (item5.ReportDate.ToString() == "1/1/1900 00:00:00" || item5.ReportDate.ToString() == "1/1/1900 12:00:00 AM")
+                                    {
+                                        <td></td>
+                                    }
+                                          else if (Convert.ToDateTime(item5.ReportDate).ToShortTimeString() == "12:00 AM")
+                                    {
+                                        <td>@Convert.ToDateTime(item5.ReportDate).ToShortDateString()</td> 
+                                    }
+                                    else
+                                    {
+                                       <td>@item5.ReportDate</td> 
+                                    } 
+                                        <td></td>
+                                        <td>@item5.CodeSystemId</td>
+                                        <td>@item5.CodeValue</td>
+                                    </tr>
+                  
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+           @* }
+            @if (Model.Pocs != null && Model.Pocs.Count > 0)
+            {
+                *@<div class="uploadBox" id="widget_Plan Of Care">
+                    <h3><span style="font-weight: bold;"><label for="chkplan"><span> Care Plan</span></label></span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                    <div class="widgetTable">
+                        <table class="widget" id="EditPOC" summary="POC" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Type</th>
+                                    <th>Code System</th>
+                                    <th>Code</th>                                    
+                                    <th>Instructions</th>
+                                    <th>Comments</th>
+                                    <th>Planned Date/Time</th>
+                                    <th>Plan/Goal</th>
+                                    
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var item in Model.Pocs)
+                                {
+                               
+                           
+                                    <tr>
+                                        
+                                        <td>@item.InstructionType</td>
+                                         <td>@item.CodeSystem</td>
+                                        <td>@item.CodeValue</td>                                       
+                                        <td>@item.Instruction</td>
+                                        <td>@item.Note</td>
+                                    @if (item.AppointmentDateTime.ToString() == "1/1/1900 00:00:00" || item.AppointmentDateTime.ToString() == "1/1/1900 12:00:00 AM")
+                                    {
+                                        <td></td>
+                                    }
+                                    else if (Convert.ToDateTime(item.AppointmentDateTime).ToShortTimeString() == "12:00 AM")
+                                    {
+                                        <td>@Convert.ToDateTime(item.AppointmentDateTime).ToShortDateString()</td> 
+                                    }
+                                    else
+                                    {
+                                       <td>@item.AppointmentDateTime</td> 
+                                    } 
+                                        <td>@item.Goal</td>
+                                       
+
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+         @*   }*@
+            <div class="uploadBox" id="widget_ClinicalInstructions">
+                    <h3><span style="font-weight: bold;"><label for="chkCI"><span>Clinical Instructions</span></label></span><span style="float: right;color:blue;" href="#toc" onclick="toc(); " class="anc">Top</span></h3>
+                    <div class="widgetTable">
+                        <table class="widget" id="EditCI" summary="Clinical" border="1" width="100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Type</th>
+                                    <th>Code System</th>
+                                    <th>Code</th>                                    
+                                    <th>Instructions</th>
+                                    <th>Comments</th>
+                                    <th>Planned Date/Time</th>
+                                    <th>Plan/Goal</th>
+                                    
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var item in Model.ClinicalInstructions)
+                                {
+                               
+                           
+                                    <tr>
+                                        
+                                        <td>@item.InstructionType</td>
+                                         <td>@item.CodeSystem</td>
+                                        <td>@item.CodeValue</td>                                       
+                                        <td>@item.Instruction</td>
+                                        <td>@item.Note</td>
+                                    @if (item.AppointmentDateTime.ToString() == "1/1/1900 00:00:00" || item.AppointmentDateTime.ToString() == "1/1/1900 12:00:00 AM")
+                                    {
+                                        <td></td>
+                                    }
+                                    else if (Convert.ToDateTime(item.AppointmentDateTime).ToShortTimeString() == "12:00 AM")
+                                    {
+                                        <td>@Convert.ToDateTime(item.AppointmentDateTime).ToShortDateString()</td> 
+                                    }
+                                    else
+                                    {
+                                       <td>@item.AppointmentDateTime</td> 
+                                    } 
+                                        <td>@item.Goal</td>
+                                        
+
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+        </div>

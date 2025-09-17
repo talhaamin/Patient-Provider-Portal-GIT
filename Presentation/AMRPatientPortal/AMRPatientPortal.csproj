@@ -1,0 +1,2392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FEF5BC9E-0E96-4573-8F10-C4E0FAAAA4EF}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AMRPatientPortal</RootNamespace>
+    <AssemblyName>AMRPatientPortal</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <WebGreaseLibPath>..\..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\AppImages\1.png" />
+    <Content Include="Content\AppImages\10.png" />
+    <Content Include="Content\AppImages\11.png" />
+    <Content Include="Content\AppImages\12.png" />
+    <Content Include="Content\AppImages\2.png" />
+    <Content Include="Content\AppImages\3.png" />
+    <Content Include="Content\AppImages\4.png" />
+    <Content Include="Content\AppImages\5.png" />
+    <Content Include="Content\AppImages\6.png" />
+    <Content Include="Content\AppImages\7.png" />
+    <Content Include="Content\AppImages\8.png" />
+    <Content Include="Content\AppImages\9.png" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\colorbox.css" />
+    <Content Include="Content\css\EmergencyContact.css" />
+    <Content Include="Content\css\fixed-header\960.css" />
+    <Content Include="Content\css\fixed-header\defaultTheme.css" />
+    <Content Include="Content\css\fixed-header\myTheme.css" />
+    <Content Include="Content\css\GeneralDocIndex.css" />
+    <Content Include="Content\css\Index.css" />
+    <Content Include="Content\css\justified-nav.css" />
+    <Content Include="Content\css\login.css" />
+    <Content Include="Content\css\ManageDoctorIndex.css" />
+    <Content Include="Content\css\MedicalPortfolioIndex.css" />
+    <Content Include="Content\css\MsgIndex.css" />
+    <Content Include="Content\css\navigation-bar.css" />
+    <Content Include="Content\css\ShareMyRecIndex.css" />
+    <Content Include="Content\css\style-main.css" />
+    <Content Include="Content\css\table-style.css" />
+    <Content Include="Content\css\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\css\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\css\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\css\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\css\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\css\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\css\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\css\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\css\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\css\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\css\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\css\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\css\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\css\themes\base\jquery-ui.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\css\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\css\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\css\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\css\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\css\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\css\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\css\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\css\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\css\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\css\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\css\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\css\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\css\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\css\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\css\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\css\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Content\css\themes\redmond\images\animated-overlay.gif" />
+    <Content Include="Content\css\themes\redmond\images\grid_header_bg.png" />
+    <Content Include="Content\css\themes\redmond\images\grid_header_bg_tab.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\css\themes\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\css\themes\redmond\jquery-ui-1.10.3.custom.css" />
+    <Content Include="Content\css\themes\redmond\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="Content\css\themes\redmond\jquery-ui-1.9.2.custom.css" />
+    <Content Include="Content\css\themes\redmond\jquery-ui-1.9.2.custom.min.css" />
+    <Content Include="Content\css\themes\redmond\jquery-ui.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.accordion.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.all.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.autocomplete.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.base.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.button.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.core.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.datepicker.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.dialog.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.menu.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.progressbar.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.resizable.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.selectable.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.slider.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.spinner.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.tabs.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.theme.css" />
+    <Content Include="Content\css\themes\redmond\jquery.ui.tooltip.css" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\css\themes\redmond\minified\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\css\themes\redmond\minified\jquery-ui.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\css\themes\redmond\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Content\css\ui\i18n\jquery-ui-i18n.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-af.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-ar-DZ.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-ar.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-az.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-bg.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-bs.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-ca.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-cs.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-cy-GB.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-da.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-de.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-el.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-en-AU.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-en-GB.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-en-NZ.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-eo.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-es.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-et.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-eu.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-fa.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-fi.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-fo.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-fr-CH.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-fr.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-gl.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-he.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-hi.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-hr.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-hu.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-hy.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-id.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-is.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-it.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-ja.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-ka.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-kk.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-km.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-ko.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-lb.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-lt.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-lv.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-mk.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-ml.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-ms.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-nl-BE.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-nl.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-no.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-pl.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-pt-BR.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-pt.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-rm.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-ro.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-ru.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-sk.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-sl.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-sq.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-sr-SR.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-sr.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-sv.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-ta.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-th.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-tj.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-tr.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-uk.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-vi.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-zh-CN.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-zh-HK.js" />
+    <Content Include="Content\css\ui\i18n\jquery.ui.datepicker-zh-TW.js" />
+    <Content Include="Content\css\ui\jquery-ui.custom.js" />
+    <Content Include="Content\css\ui\jquery.ui.accordion.js" />
+    <Content Include="Content\css\ui\jquery.ui.autocomplete.js" />
+    <Content Include="Content\css\ui\jquery.ui.button.js" />
+    <Content Include="Content\css\ui\jquery.ui.core.js" />
+    <Content Include="Content\css\ui\jquery.ui.datepicker.js" />
+    <Content Include="Content\css\ui\jquery.ui.dialog.js" />
+    <Content Include="Content\css\ui\jquery.ui.draggable.js" />
+    <Content Include="Content\css\ui\jquery.ui.droppable.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect-blind.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect-bounce.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect-clip.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect-drop.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect-explode.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect-fade.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect-fold.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect-highlight.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect-pulsate.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect-scale.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect-shake.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect-slide.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect-transfer.js" />
+    <Content Include="Content\css\ui\jquery.ui.effect.js" />
+    <Content Include="Content\css\ui\jquery.ui.menu.js" />
+    <Content Include="Content\css\ui\jquery.ui.mouse.js" />
+    <Content Include="Content\css\ui\jquery.ui.position.js" />
+    <Content Include="Content\css\ui\jquery.ui.progressbar.js" />
+    <Content Include="Content\css\ui\jquery.ui.resizable.js" />
+    <Content Include="Content\css\ui\jquery.ui.selectable.js" />
+    <Content Include="Content\css\ui\jquery.ui.slider.js" />
+    <Content Include="Content\css\ui\jquery.ui.sortable.js" />
+    <Content Include="Content\css\ui\jquery.ui.spinner.js" />
+    <Content Include="Content\css\ui\jquery.ui.tabs.js" />
+    <Content Include="Content\css\ui\jquery.ui.tooltip.js" />
+    <Content Include="Content\css\ui\jquery.ui.widget.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery-ui-i18n.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-af.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-ar-DZ.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-ar.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-az.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-bg.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-bs.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-ca.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-cs.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-cy-GB.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-da.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-de.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-el.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-en-AU.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-en-GB.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-en-NZ.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-eo.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-es.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-et.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-eu.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-fa.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-fi.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-fo.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-fr-CH.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-fr.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-gl.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-he.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-hi.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-hr.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-hu.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-hy.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-id.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-is.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-it.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-ja.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-ka.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-kk.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-km.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-ko.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-lb.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-lt.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-lv.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-mk.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-ml.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-ms.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-nl-BE.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-nl.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-no.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-pl.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-pt-BR.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-pt.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-rm.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-ro.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-ru.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-sk.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-sl.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-sq.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-sr-SR.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-sr.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-sv.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-ta.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-th.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-tj.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-tr.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-uk.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-vi.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-zh-CN.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-zh-HK.min.js" />
+    <Content Include="Content\css\ui\minified\i18n\jquery.ui.datepicker-zh-TW.min.js" />
+    <Content Include="Content\css\ui\minified\jquery-ui.custom.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.accordion.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.autocomplete.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.button.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.core.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.datepicker.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.dialog.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.draggable.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.droppable.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect-blind.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect-bounce.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect-clip.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect-drop.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect-explode.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect-fade.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect-fold.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect-highlight.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect-pulsate.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect-scale.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect-shake.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect-slide.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect-transfer.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.effect.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.menu.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.mouse.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.position.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.progressbar.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.resizable.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.selectable.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.slider.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.sortable.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.spinner.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.tabs.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.tooltip.min.js" />
+    <Content Include="Content\css\ui\minified\jquery.ui.widget.min.js" />
+    <Content Include="Content\development-bundle\AUTHORS.txt" />
+    <Content Include="Content\development-bundle\demos\accordion\collapsible.html" />
+    <Content Include="Content\development-bundle\demos\accordion\custom-icons.html" />
+    <Content Include="Content\development-bundle\demos\accordion\default.html" />
+    <Content Include="Content\development-bundle\demos\accordion\fillspace.html" />
+    <Content Include="Content\development-bundle\demos\accordion\hoverintent.html" />
+    <Content Include="Content\development-bundle\demos\accordion\index.html" />
+    <Content Include="Content\development-bundle\demos\accordion\no-auto-height.html" />
+    <Content Include="Content\development-bundle\demos\accordion\sortable.html" />
+    <Content Include="Content\development-bundle\demos\addClass\default.html" />
+    <Content Include="Content\development-bundle\demos\addClass\index.html" />
+    <Content Include="Content\development-bundle\demos\animate\default.html" />
+    <Content Include="Content\development-bundle\demos\animate\index.html" />
+    <Content Include="Content\development-bundle\demos\autocomplete\categories.html" />
+    <Content Include="Content\development-bundle\demos\autocomplete\combobox.html" />
+    <Content Include="Content\development-bundle\demos\autocomplete\custom-data.html" />
+    <Content Include="Content\development-bundle\demos\autocomplete\default.html" />
+    <Content Include="Content\development-bundle\demos\autocomplete\folding.html" />
+    <Content Include="Content\development-bundle\demos\autocomplete\images\jqueryui_32x32.png" />
+    <Content Include="Content\development-bundle\demos\autocomplete\images\jquery_32x32.png" />
+    <Content Include="Content\development-bundle\demos\autocomplete\images\sizzlejs_32x32.png" />
+    <Content Include="Content\development-bundle\demos\autocomplete\images\transparent_1x1.png" />
+    <Content Include="Content\development-bundle\demos\autocomplete\images\ui-anim_basic_16x16.gif" />
+    <Content Include="Content\development-bundle\demos\autocomplete\index.html" />
+    <Content Include="Content\development-bundle\demos\autocomplete\london.xml" />
+    <Content Include="Content\development-bundle\demos\autocomplete\maxheight.html" />
+    <Content Include="Content\development-bundle\demos\autocomplete\multiple-remote.html" />
+    <Content Include="Content\development-bundle\demos\autocomplete\multiple.html" />
+    <Content Include="Content\development-bundle\demos\autocomplete\remote-jsonp.html" />
+    <Content Include="Content\development-bundle\demos\autocomplete\remote-with-cache.html" />
+    <Content Include="Content\development-bundle\demos\autocomplete\remote.html" />
+    <Content Include="Content\development-bundle\demos\autocomplete\xml.html" />
+    <Content Include="Content\development-bundle\demos\button\checkbox.html" />
+    <Content Include="Content\development-bundle\demos\button\default.html" />
+    <Content Include="Content\development-bundle\demos\button\icons.html" />
+    <Content Include="Content\development-bundle\demos\button\index.html" />
+    <Content Include="Content\development-bundle\demos\button\radio.html" />
+    <Content Include="Content\development-bundle\demos\button\splitbutton.html" />
+    <Content Include="Content\development-bundle\demos\button\toolbar.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\alt-field.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\animation.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\buttonbar.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\date-formats.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\date-range.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\default.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\dropdown-month-year.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\icon-trigger.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\images\calendar.gif" />
+    <Content Include="Content\development-bundle\demos\datepicker\index.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\inline.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\localization.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\min-max.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\multiple-calendars.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\other-months.html" />
+    <Content Include="Content\development-bundle\demos\datepicker\show-week.html" />
+    <Content Include="Content\development-bundle\demos\demos.css" />
+    <Content Include="Content\development-bundle\demos\dialog\animated.html" />
+    <Content Include="Content\development-bundle\demos\dialog\default.html" />
+    <Content Include="Content\development-bundle\demos\dialog\index.html" />
+    <Content Include="Content\development-bundle\demos\dialog\modal-confirmation.html" />
+    <Content Include="Content\development-bundle\demos\dialog\modal-form.html" />
+    <Content Include="Content\development-bundle\demos\dialog\modal-message.html" />
+    <Content Include="Content\development-bundle\demos\dialog\modal.html" />
+    <Content Include="Content\development-bundle\demos\draggable\constrain-movement.html" />
+    <Content Include="Content\development-bundle\demos\draggable\cursor-style.html" />
+    <Content Include="Content\development-bundle\demos\draggable\default.html" />
+    <Content Include="Content\development-bundle\demos\draggable\delay-start.html" />
+    <Content Include="Content\development-bundle\demos\draggable\events.html" />
+    <Content Include="Content\development-bundle\demos\draggable\handle.html" />
+    <Content Include="Content\development-bundle\demos\draggable\index.html" />
+    <Content Include="Content\development-bundle\demos\draggable\revert.html" />
+    <Content Include="Content\development-bundle\demos\draggable\scroll.html" />
+    <Content Include="Content\development-bundle\demos\draggable\snap-to.html" />
+    <Content Include="Content\development-bundle\demos\draggable\sortable.html" />
+    <Content Include="Content\development-bundle\demos\draggable\visual-feedback.html" />
+    <Content Include="Content\development-bundle\demos\droppable\accepted-elements.html" />
+    <Content Include="Content\development-bundle\demos\droppable\default.html" />
+    <Content Include="Content\development-bundle\demos\droppable\images\high_tatras.jpg" />
+    <Content Include="Content\development-bundle\demos\droppable\images\high_tatras2.jpg" />
+    <Content Include="Content\development-bundle\demos\droppable\images\high_tatras2_min.jpg" />
+    <Content Include="Content\development-bundle\demos\droppable\images\high_tatras3.jpg" />
+    <Content Include="Content\development-bundle\demos\droppable\images\high_tatras3_min.jpg" />
+    <Content Include="Content\development-bundle\demos\droppable\images\high_tatras4.jpg" />
+    <Content Include="Content\development-bundle\demos\droppable\images\high_tatras4_min.jpg" />
+    <Content Include="Content\development-bundle\demos\droppable\images\high_tatras_min.jpg" />
+    <Content Include="Content\development-bundle\demos\droppable\index.html" />
+    <Content Include="Content\development-bundle\demos\droppable\photo-manager.html" />
+    <Content Include="Content\development-bundle\demos\droppable\propagation.html" />
+    <Content Include="Content\development-bundle\demos\droppable\revert.html" />
+    <Content Include="Content\development-bundle\demos\droppable\shopping-cart.html" />
+    <Content Include="Content\development-bundle\demos\droppable\visual-feedback.html" />
+    <Content Include="Content\development-bundle\demos\effect\default.html" />
+    <Content Include="Content\development-bundle\demos\effect\easing.html" />
+    <Content Include="Content\development-bundle\demos\effect\index.html" />
+    <Content Include="Content\development-bundle\demos\hide\default.html" />
+    <Content Include="Content\development-bundle\demos\hide\index.html" />
+    <Content Include="Content\development-bundle\demos\images\calendar.gif" />
+    <Content Include="Content\development-bundle\demos\images\demo-config-on-tile.gif" />
+    <Content Include="Content\development-bundle\demos\images\demo-config-on.gif" />
+    <Content Include="Content\development-bundle\demos\images\demo-spindown-closed.gif" />
+    <Content Include="Content\development-bundle\demos\images\demo-spindown-open.gif" />
+    <Content Include="Content\development-bundle\demos\images\icon-docs-info.gif" />
+    <Content Include="Content\development-bundle\demos\images\pbar-ani.gif" />
+    <Content Include="Content\development-bundle\demos\index.html" />
+    <Content Include="Content\development-bundle\demos\menu\default.html" />
+    <Content Include="Content\development-bundle\demos\menu\icons.html" />
+    <Content Include="Content\development-bundle\demos\menu\index.html" />
+    <Content Include="Content\development-bundle\demos\position\cycler.html" />
+    <Content Include="Content\development-bundle\demos\position\default.html" />
+    <Content Include="Content\development-bundle\demos\position\images\earth.jpg" />
+    <Content Include="Content\development-bundle\demos\position\images\flight.jpg" />
+    <Content Include="Content\development-bundle\demos\position\images\rocket.jpg" />
+    <Content Include="Content\development-bundle\demos\position\index.html" />
+    <Content Include="Content\development-bundle\demos\progressbar\animated.html" />
+    <Content Include="Content\development-bundle\demos\progressbar\default.html" />
+    <Content Include="Content\development-bundle\demos\progressbar\images\pbar-ani.gif" />
+    <Content Include="Content\development-bundle\demos\progressbar\index.html" />
+    <Content Include="Content\development-bundle\demos\progressbar\resize.html" />
+    <Content Include="Content\development-bundle\demos\removeClass\default.html" />
+    <Content Include="Content\development-bundle\demos\removeClass\index.html" />
+    <Content Include="Content\development-bundle\demos\resizable\animate.html" />
+    <Content Include="Content\development-bundle\demos\resizable\aspect-ratio.html" />
+    <Content Include="Content\development-bundle\demos\resizable\constrain-area.html" />
+    <Content Include="Content\development-bundle\demos\resizable\default.html" />
+    <Content Include="Content\development-bundle\demos\resizable\delay-start.html" />
+    <Content Include="Content\development-bundle\demos\resizable\helper.html" />
+    <Content Include="Content\development-bundle\demos\resizable\index.html" />
+    <Content Include="Content\development-bundle\demos\resizable\max-min.html" />
+    <Content Include="Content\development-bundle\demos\resizable\snap-to-grid.html" />
+    <Content Include="Content\development-bundle\demos\resizable\synchronous-resize.html" />
+    <Content Include="Content\development-bundle\demos\resizable\textarea.html" />
+    <Content Include="Content\development-bundle\demos\resizable\visual-feedback.html" />
+    <Content Include="Content\development-bundle\demos\selectable\default.html" />
+    <Content Include="Content\development-bundle\demos\selectable\display-grid.html" />
+    <Content Include="Content\development-bundle\demos\selectable\index.html" />
+    <Content Include="Content\development-bundle\demos\selectable\serialize.html" />
+    <Content Include="Content\development-bundle\demos\show\default.html" />
+    <Content Include="Content\development-bundle\demos\show\index.html" />
+    <Content Include="Content\development-bundle\demos\slider\colorpicker.html" />
+    <Content Include="Content\development-bundle\demos\slider\default.html" />
+    <Content Include="Content\development-bundle\demos\slider\hotelrooms.html" />
+    <Content Include="Content\development-bundle\demos\slider\index.html" />
+    <Content Include="Content\development-bundle\demos\slider\multiple-vertical.html" />
+    <Content Include="Content\development-bundle\demos\slider\range-vertical.html" />
+    <Content Include="Content\development-bundle\demos\slider\range.html" />
+    <Content Include="Content\development-bundle\demos\slider\rangemax.html" />
+    <Content Include="Content\development-bundle\demos\slider\rangemin.html" />
+    <Content Include="Content\development-bundle\demos\slider\side-scroll.html" />
+    <Content Include="Content\development-bundle\demos\slider\slider-vertical.html" />
+    <Content Include="Content\development-bundle\demos\slider\steps.html" />
+    <Content Include="Content\development-bundle\demos\sortable\connect-lists-through-tabs.html" />
+    <Content Include="Content\development-bundle\demos\sortable\connect-lists.html" />
+    <Content Include="Content\development-bundle\demos\sortable\default.html" />
+    <Content Include="Content\development-bundle\demos\sortable\delay-start.html" />
+    <Content Include="Content\development-bundle\demos\sortable\display-grid.html" />
+    <Content Include="Content\development-bundle\demos\sortable\empty-lists.html" />
+    <Content Include="Content\development-bundle\demos\sortable\index.html" />
+    <Content Include="Content\development-bundle\demos\sortable\items.html" />
+    <Content Include="Content\development-bundle\demos\sortable\placeholder.html" />
+    <Content Include="Content\development-bundle\demos\sortable\portlets.html" />
+    <Content Include="Content\development-bundle\demos\spinner\currency.html" />
+    <Content Include="Content\development-bundle\demos\spinner\decimal.html" />
+    <Content Include="Content\development-bundle\demos\spinner\default.html" />
+    <Content Include="Content\development-bundle\demos\spinner\index.html" />
+    <Content Include="Content\development-bundle\demos\spinner\latlong.html" />
+    <Content Include="Content\development-bundle\demos\spinner\overflow.html" />
+    <Content Include="Content\development-bundle\demos\spinner\time.html" />
+    <Content Include="Content\development-bundle\demos\switchClass\default.html" />
+    <Content Include="Content\development-bundle\demos\switchClass\index.html" />
+    <Content Include="Content\development-bundle\demos\tabs\ajax.html" />
+    <Content Include="Content\development-bundle\demos\tabs\ajax\content1.html" />
+    <Content Include="Content\development-bundle\demos\tabs\ajax\content2.html" />
+    <Content Include="Content\development-bundle\demos\tabs\bottom.html" />
+    <Content Include="Content\development-bundle\demos\tabs\collapsible.html" />
+    <Content Include="Content\development-bundle\demos\tabs\default.html" />
+    <Content Include="Content\development-bundle\demos\tabs\index.html" />
+    <Content Include="Content\development-bundle\demos\tabs\manipulation.html" />
+    <Content Include="Content\development-bundle\demos\tabs\mouseover.html" />
+    <Content Include="Content\development-bundle\demos\tabs\sortable.html" />
+    <Content Include="Content\development-bundle\demos\tabs\vertical.html" />
+    <Content Include="Content\development-bundle\demos\toggleClass\default.html" />
+    <Content Include="Content\development-bundle\demos\toggleClass\index.html" />
+    <Content Include="Content\development-bundle\demos\toggle\default.html" />
+    <Content Include="Content\development-bundle\demos\toggle\index.html" />
+    <Content Include="Content\development-bundle\demos\tooltip\ajax\content1.html" />
+    <Content Include="Content\development-bundle\demos\tooltip\ajax\content2.html" />
+    <Content Include="Content\development-bundle\demos\tooltip\custom-animation.html" />
+    <Content Include="Content\development-bundle\demos\tooltip\custom-content.html" />
+    <Content Include="Content\development-bundle\demos\tooltip\custom-style.html" />
+    <Content Include="Content\development-bundle\demos\tooltip\default.html" />
+    <Content Include="Content\development-bundle\demos\tooltip\forms.html" />
+    <Content Include="Content\development-bundle\demos\tooltip\images\st-stephens.jpg" />
+    <Content Include="Content\development-bundle\demos\tooltip\images\tower-bridge.jpg" />
+    <Content Include="Content\development-bundle\demos\tooltip\index.html" />
+    <Content Include="Content\development-bundle\demos\tooltip\tracking.html" />
+    <Content Include="Content\development-bundle\demos\tooltip\video-player.html" />
+    <Content Include="Content\development-bundle\demos\widget\default.html" />
+    <Content Include="Content\development-bundle\demos\widget\index.html" />
+    <Content Include="Content\development-bundle\docs\accordion.html" />
+    <Content Include="Content\development-bundle\docs\autocomplete.html" />
+    <Content Include="Content\development-bundle\docs\blind-effect.html" />
+    <Content Include="Content\development-bundle\docs\bounce-effect.html" />
+    <Content Include="Content\development-bundle\docs\button.html" />
+    <Content Include="Content\development-bundle\docs\clip-effect.html" />
+    <Content Include="Content\development-bundle\docs\datepicker.html" />
+    <Content Include="Content\development-bundle\docs\dialog.html" />
+    <Content Include="Content\development-bundle\docs\draggable.html" />
+    <Content Include="Content\development-bundle\docs\drop-effect.html" />
+    <Content Include="Content\development-bundle\docs\droppable.html" />
+    <Content Include="Content\development-bundle\docs\explode-effect.html" />
+    <Content Include="Content\development-bundle\docs\fade-effect.html" />
+    <Content Include="Content\development-bundle\docs\fold-effect.html" />
+    <Content Include="Content\development-bundle\docs\highlight-effect.html" />
+    <Content Include="Content\development-bundle\docs\jQuery.widget.html" />
+    <Content Include="Content\development-bundle\docs\menu.html" />
+    <Content Include="Content\development-bundle\docs\mouse.html" />
+    <Content Include="Content\development-bundle\docs\position.html" />
+    <Content Include="Content\development-bundle\docs\progressbar.html" />
+    <Content Include="Content\development-bundle\docs\puff-effect.html" />
+    <Content Include="Content\development-bundle\docs\pulsate-effect.html" />
+    <Content Include="Content\development-bundle\docs\resizable.html" />
+    <Content Include="Content\development-bundle\docs\scale-effect.html" />
+    <Content Include="Content\development-bundle\docs\selectable.html" />
+    <Content Include="Content\development-bundle\docs\shake-effect.html" />
+    <Content Include="Content\development-bundle\docs\size-effect.html" />
+    <Content Include="Content\development-bundle\docs\slide-effect.html" />
+    <Content Include="Content\development-bundle\docs\slider.html" />
+    <Content Include="Content\development-bundle\docs\sortable.html" />
+    <Content Include="Content\development-bundle\docs\spinner.html" />
+    <Content Include="Content\development-bundle\docs\tabs.html" />
+    <Content Include="Content\development-bundle\docs\tooltip.html" />
+    <Content Include="Content\development-bundle\docs\transfer-effect.html" />
+    <Content Include="Content\development-bundle\external\globalize.culture.de-DE.js" />
+    <Content Include="Content\development-bundle\external\globalize.culture.ja-JP.js" />
+    <Content Include="Content\development-bundle\external\globalize.js" />
+    <Content Include="Content\development-bundle\external\jquery.bgiframe-2.1.2.js" />
+    <Content Include="Content\development-bundle\external\jquery.cookie.js" />
+    <Content Include="Content\development-bundle\external\jquery.metadata.js" />
+    <Content Include="Content\development-bundle\external\jquery.mousewheel.js" />
+    <Content Include="Content\development-bundle\external\jshint.js" />
+    <Content Include="Content\development-bundle\external\qunit.css" />
+    <Content Include="Content\development-bundle\external\qunit.js" />
+    <Content Include="Content\development-bundle\grunt.js" />
+    <Content Include="Content\development-bundle\jquery-1.8.3.js" />
+    <Content Include="Content\development-bundle\MIT-LICENSE.txt" />
+    <Content Include="Content\development-bundle\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\development-bundle\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\development-bundle\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\development-bundle\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\development-bundle\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\development-bundle\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\development-bundle\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\development-bundle\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\development-bundle\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\development-bundle\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\development-bundle\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\development-bundle\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\development-bundle\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\development-bundle\themes\base\jquery-ui.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\development-bundle\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\development-bundle\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\development-bundle\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\development-bundle\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\development-bundle\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\development-bundle\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\development-bundle\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\development-bundle\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\development-bundle\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\development-bundle\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\development-bundle\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\development-bundle\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\development-bundle\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\development-bundle\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery-ui.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.accordion.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.all.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.autocomplete.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.base.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.button.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.core.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.datepicker.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.dialog.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.menu.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.progressbar.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.resizable.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.selectable.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.slider.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.spinner.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.tabs.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.theme.css" />
+    <Content Include="Content\development-bundle\themes\redmond\jquery.ui.tooltip.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery-ui.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\development-bundle\themes\redmond\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery-ui-i18n.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-af.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-ar-DZ.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-ar.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-az.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-bg.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-bs.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-ca.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-cs.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-cy-GB.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-da.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-de.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-el.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-en-AU.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-en-GB.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-en-NZ.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-eo.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-es.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-et.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-eu.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-fa.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-fi.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-fo.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-fr-CH.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-fr.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-gl.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-he.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-hi.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-hr.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-hu.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-hy.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-id.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-is.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-it.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-ja.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-ka.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-kk.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-km.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-ko.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-lb.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-lt.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-lv.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-mk.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-ml.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-ms.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-nl-BE.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-nl.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-no.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-pl.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-pt-BR.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-pt.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-rm.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-ro.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-ru.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-sk.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-sl.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-sq.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-sr-SR.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-sr.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-sv.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-ta.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-th.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-tj.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-tr.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-uk.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-vi.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-zh-CN.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-zh-HK.js" />
+    <Content Include="Content\development-bundle\ui\i18n\jquery.ui.datepicker-zh-TW.js" />
+    <Content Include="Content\development-bundle\ui\jquery-ui.custom.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.accordion.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.autocomplete.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.button.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.core.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.datepicker.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.dialog.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.draggable.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.droppable.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect-blind.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect-bounce.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect-clip.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect-drop.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect-explode.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect-fade.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect-fold.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect-highlight.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect-pulsate.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect-scale.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect-shake.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect-slide.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect-transfer.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.effect.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.menu.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.mouse.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.position.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.progressbar.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.resizable.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.selectable.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.slider.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.sortable.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.spinner.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.tabs.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.tooltip.js" />
+    <Content Include="Content\development-bundle\ui\jquery.ui.widget.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery-ui-i18n.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-af.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ar-DZ.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ar.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-az.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-bg.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-bs.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ca.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-cs.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-cy-GB.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-da.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-de.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-el.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-en-AU.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-en-GB.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-en-NZ.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-eo.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-es.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-et.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-eu.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fa.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fi.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fo.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fr-CH.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fr.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-gl.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-he.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-hi.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-hr.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-hu.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-hy.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-id.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-is.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-it.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ja.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ka.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-kk.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-km.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ko.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-lb.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-lt.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-lv.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-mk.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ml.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ms.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-nl-BE.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-nl.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-no.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-pl.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-pt-BR.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-pt.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-rm.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ro.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ru.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sk.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sl.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sq.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sr-SR.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sr.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sv.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ta.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-th.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-tj.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-tr.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-uk.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-vi.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-zh-CN.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-zh-HK.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\i18n\jquery.ui.datepicker-zh-TW.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery-ui.custom.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.accordion.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.autocomplete.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.button.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.core.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.datepicker.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.dialog.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.draggable.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.droppable.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect-blind.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect-bounce.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect-clip.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect-drop.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect-explode.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect-fade.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect-fold.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect-highlight.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect-pulsate.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect-scale.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect-shake.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect-slide.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect-transfer.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.effect.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.menu.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.mouse.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.position.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.progressbar.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.resizable.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.selectable.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.slider.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.sortable.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.spinner.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.tabs.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.tooltip.min.js" />
+    <Content Include="Content\development-bundle\ui\minified\jquery.ui.widget.min.js" />
+    <Content Include="Content\Features\features.html" />
+    <Content Include="Content\Features\images\AMR-Portal.png" />
+    <Content Include="Content\Features\images\amr.png" />
+    <Content Include="Content\Features\images\APP1.png" />
+    <Content Include="Content\Features\images\b.png" />
+    <Content Include="Content\Features\images\bg.jpg" />
+    <Content Include="Content\Features\images\Market.png" />
+    <Content Include="Content\Features\images\video.jpg" />
+    <Content Include="Content\Features\images\video.png" />
+    <Content Include="Content\Features\images\wild_oliva.jpg" />
+    <Content Include="Content\img\1.png" />
+    <Content Include="Content\img\2.png" />
+    <Content Include="Content\img\3.png" />
+    <Content Include="Content\img\4.png" />
+    <Content Include="Content\img\account1.png" />
+    <Content Include="Content\img\account_tab_disabled.png" />
+    <Content Include="Content\img\add.png" />
+    <Content Include="Content\img\allergies-icon.png" />
+    <Content Include="Content\img\AMR-2014-Patient-Portal-Logo.jpg" />
+    <Content Include="Content\img\AMR-2014-Patient-Portal-Logo.png" />
+    <Content Include="Content\img\amr.png" />
+    <Content Include="Content\img\appointment-icon.png" />
+    <Content Include="Content\img\appointment_soon.png" />
+    <Content Include="Content\img\appoint_tab.png" />
+    <Content Include="Content\img\appoint_tab_disabled.png" />
+    <Content Include="Content\img\appoint_tab_tab.png" />
+    <Content Include="Content\img\arrowdown.png" />
+    <Content Include="Content\img\attach.gif" />
+    <Content Include="Content\img\b.png" />
+    <Content Include="Content\img\bg.jpg" />
+    <Content Include="Content\img\bg.png" />
+    <Content Include="Content\img\bg_blue.png" />
+    <Content Include="Content\img\bg_green.png" />
+    <Content Include="Content\img\bg_patient.png" />
+    <Content Include="Content\img\bg_tab.png" />
+    <Content Include="Content\img\bg_tabp.png" />
+    <Content Include="Content\img\big-banner.png" />
+    <Content Include="Content\img\blue.png" />
+    <Content Include="Content\img\bold.png" />
+    <Content Include="Content\img\border.png" />
+    <Content Include="Content\img\calender.png" />
+    <Content Include="Content\img\cancel.png" />
+    <Content Include="Content\img\ccdpicture.png" />
+    <Content Include="Content\img\chart Summary-icon.png" />
+    <Content Include="Content\img\chart1.png" />
+    <Content Include="Content\img\clinicalsumm_tab.png" />
+    <Content Include="Content\img\clinicalsumm_tab_disabled.png" />
+    <Content Include="Content\img\clinicalsumm_tab_over.png" />
+    <Content Include="Content\img\controls.png" />
+    <Content Include="Content\img\credit.png" />
+    <Content Include="Content\img\d.jpg" />
+    <Content Include="Content\img\dd.png" />
+    <Content Include="Content\img\delete.gif" />
+    <Content Include="Content\img\delete.png" />
+    <Content Include="Content\img\demographics.png" />
+    <Content Include="Content\img\details.png" />
+    <Content Include="Content\img\digital_tabs_disabled.png" />
+    <Content Include="Content\img\discover.png" />
+    <Content Include="Content\img\Dollar.png" />
+    <Content Include="Content\img\download1.png" />
+    <Content Include="Content\img\downloaded_file%281%29.png" />
+    <Content Include="Content\img\edit.png" />
+    <Content Include="Content\img\emergency.png" />
+    <Content Include="Content\img\Emergencycontact_disabled.png" />
+    <Content Include="Content\img\Emergencycontact_over.png" />
+    <Content Include="Content\img\Emergencycontact_tab.png" />
+    <Content Include="Content\img\Family History.png" />
+    <Content Include="Content\img\folder_download.png" />
+    <Content Include="Content\img\generaldocuments_disabled.png" />
+    <Content Include="Content\img\generaldocuments_over.png" />
+    <Content Include="Content\img\generaldocuments_tab.png" />
+    <Content Include="Content\img\GenericPerson.png" />
+    <Content Include="Content\img\green_header.png" />
+    <Content Include="Content\img\health-information-library2.gif" />
+    <Content Include="Content\img\hide-icon.png" />
+    <Content Include="Content\img\hide.png" />
+    <Content Include="Content\img\history-icon.png" />
+    <Content Include="Content\img\home-icon.png" />
+    <Content Include="Content\img\home_tab.png" />
+    <Content Include="Content\img\home_tab_disabled.png" />
+    <Content Include="Content\img\home_tab_over.png" />
+    <Content Include="Content\img\i.png" />
+    <Content Include="Content\img\image_559926.gif" />
+    <Content Include="Content\img\in-case-of-emergency.gif" />
+    <Content Include="Content\img\italic.png" />
+    <Content Include="Content\img\lab-icon.png" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\loading_background.png" />
+    <Content Include="Content\img\login-loader.gif" />
+    <Content Include="Content\img\login.png" />
+    <Content Include="Content\img\login_btn.png" />
+    <Content Include="Content\img\logout.png" />
+    <Content Include="Content\img\logout_btn.jpg" />
+    <Content Include="Content\img\managedoctor_disabled.png" />
+    <Content Include="Content\img\managedoctor_over.png" />
+    <Content Include="Content\img\managedoctor_tab.png" />
+    <Content Include="Content\img\Mastercard.png" />
+    <Content Include="Content\img\medicalportfolio_disabled.png" />
+    <Content Include="Content\img\medicalportfolio_over.png" />
+    <Content Include="Content\img\medicalportfolio_tab.png" />
+    <Content Include="Content\img\medicalSummaryHeader.PNG" />
+    <Content Include="Content\img\medications-icon.png" />
+    <Content Include="Content\img\med_tab.png" />
+    <Content Include="Content\img\med_tab_disabled.png" />
+    <Content Include="Content\img\med_tab_over.png" />
+    <Content Include="Content\img\meesage.png" />
+    <Content Include="Content\img\Member Program-icon.png" />
+    <Content Include="Content\img\message_tab.png" />
+    <Content Include="Content\img\message_tab_disabled.png" />
+    <Content Include="Content\img\message_tab_over.png" />
+    <Content Include="Content\img\mmm.png" />
+    <Content Include="Content\img\mymarketplace_disabled.png" />
+    <Content Include="Content\img\mymarketplace_over.png" />
+    <Content Include="Content\img\mymarketplace_tab.png" />
+    <Content Include="Content\img\my_tab.png" />
+    <Content Include="Content\img\my_tab_disabled.png" />
+    <Content Include="Content\img\my_tab_over.png" />
+    <Content Include="Content\img\next.png" />
+    <Content Include="Content\img\online-lab-member.jpg" />
+    <Content Include="Content\img\overlay.png" />
+    <Content Include="Content\img\PastMedicalHistory_icon.png" />
+    <Content Include="Content\img\patient.png" />
+    <Content Include="Content\img\patient1.png" />
+    <Content Include="Content\img\patient2.png" />
+    <Content Include="Content\img\payment.png" />
+    <Content Include="Content\img\personal.png" />
+    <Content Include="Content\img\Pratice-icon.png" />
+    <Content Include="Content\img\previous.png" />
+    <Content Include="Content\img\print.png" />
+    <Content Include="Content\img\ref.png" />
+    <Content Include="Content\img\ref_tab.png" />
+    <Content Include="Content\img\ref_tab_disabled.png" />
+    <Content Include="Content\img\ref_tab_over.png" />
+    <Content Include="Content\img\register %281%29.png" />
+    <Content Include="Content\img\register.png" />
+    <Content Include="Content\img\reply.jpg" />
+    <Content Include="Content\img\reply.png" />
+    <Content Include="Content\img\report.png" />
+    <Content Include="Content\img\ReportNumeration_tab_disabled.png" />
+    <Content Include="Content\img\result.gif" />
+    <Content Include="Content\img\search.png" />
+    <Content Include="Content\img\send.png" />
+    <Content Include="Content\img\Setting-icon.png" />
+    <Content Include="Content\img\share.png" />
+    <Content Include="Content\img\sharemyrecords_disabled.png" />
+    <Content Include="Content\img\sharemyrecords_over.png" />
+    <Content Include="Content\img\sharemyrecords_tab.png" />
+    <Content Include="Content\img\sidebar.gif" />
+    <Content Include="Content\img\social History.png" />
+    <Content Include="Content\img\startnow_btn.png" />
+    <Content Include="Content\img\Statements-icon.png" />
+    <Content Include="Content\img\top.png" />
+    <Content Include="Content\img\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\img\underline.png" />
+    <Content Include="Content\img\upgrade.png" />
+    <Content Include="Content\img\visa.png" />
+    <Content Include="Content\img\Visit-icon.png" />
+    <Content Include="Content\img\vital.png" />
+    <Content Include="Content\img\wild_oliva.jpg" />
+    <Content Include="Content\js\AccountIndex.js" />
+    <Content Include="Content\js\AppointmentIndex.js" />
+    <Content Include="Content\js\CookieHandler.js" />
+    <Content Include="Content\js\EmergencyContact.js" />
+    <Content Include="Content\js\ClincialSummaryIndex.js" />
+    <Content Include="Content\js\GeneralDocIndex.js" />
+    <Content Include="Content\js\IndexScript.js" />
+    <Content Include="Content\js\jquery-1.8.3.js" />
+    <Content Include="Content\js\jquery-1.9.1.js" />
+    <Content Include="Content\js\jquery-ui-1.10.3.custom.js" />
+    <Content Include="Content\js\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Content\js\jquery-ui-1.9.2.custom.js" />
+    <Content Include="Content\js\jquery-ui-1.9.2.custom.min.js" />
+    <Content Include="Content\js\jquery-ui-timepicker-addon.js" />
+    <Content Include="Content\js\jquery-ui.js" />
+    <Content Include="Content\js\jquery.colorbox.js" />
+    <Content Include="Content\js\jquery.editable-combo.js" />
+    <Content Include="Content\js\jquery.fileupload-ui.js" />
+    <Content Include="Content\js\jquery.fileupload.js" />
+    <Content Include="Content\js\jquery.fixedheadertable.js" />
+    <Content Include="Content\js\jquery.idle-timer.js" />
+    <Content Include="Content\js\jquery.iframe-transport.js" />
+    <Content Include="Content\js\jquery.limit.js" />
+    <Content Include="Content\js\jquery.maskedinput.min.js" />
+    <Content Include="Content\js\jquery.mb.browser.js" />
+    <Content Include="Content\js\jquery.mb.browser.min.js" />
+    <Content Include="Content\js\LayoutMaster.js" />
+    <Content Include="Content\js\ManageDoctorIndex.js" />
+    <Content Include="Content\js\MedicalPortfolioIndex.js" />
+    <Content Include="Content\js\MedicationIndex.js" />
+    <Content Include="Content\js\MsgIndex.js" />
+    <Content Include="Content\js\ProblemIndex.js" />
+    <Content Include="Content\js\ShareMyRecIndex.js" />
+    <Content Include="Content\js\timeout-dialog.js" />
+    <Content Include="Content\js\validator.js" />
+    <Content Include="Content\PortalImages\1.html" />
+    <Content Include="Content\PortalImages\1.png" />
+    <Content Include="Content\PortalImages\10.html" />
+    <Content Include="Content\PortalImages\10.png" />
+    <Content Include="Content\PortalImages\2.html" />
+    <Content Include="Content\PortalImages\2.png" />
+    <Content Include="Content\PortalImages\3.html" />
+    <Content Include="Content\PortalImages\3.png" />
+    <Content Include="Content\PortalImages\4.html" />
+    <Content Include="Content\PortalImages\4.png" />
+    <Content Include="Content\PortalImages\5.html" />
+    <Content Include="Content\PortalImages\5.png" />
+    <Content Include="Content\PortalImages\6.html" />
+    <Content Include="Content\PortalImages\6.png" />
+    <Content Include="Content\PortalImages\7.html" />
+    <Content Include="Content\PortalImages\7.png" />
+    <Content Include="Content\PortalImages\8.html" />
+    <Content Include="Content\PortalImages\8.png" />
+    <Content Include="Content\PortalImages\9.html" />
+    <Content Include="Content\PortalImages\9.png" />
+    <Content Include="Content\PortalImages\img\lower.jpg" />
+    <Content Include="Content\PortalImages\img\screen1.jpg" />
+    <Content Include="Content\PortalImages\img\screen2.jpg" />
+    <Content Include="Content\PortalImages\img\screen3.jpg" />
+    <Content Include="Content\PortalImages\img\screen4.jpg" />
+    <Content Include="Content\PortalImages\img\screen5.jpg" />
+    <Content Include="Content\PortalImages\img\screen6.jpg" />
+    <Content Include="Content\PortalImages\img\screen7.jpg" />
+    <Content Include="Content\PortalImages\img\screen8.jpg" />
+    <Content Include="Content\PortalImages\img\screen9.jpg" />
+    <Content Include="Content\PortalImages\img\splash.png" />
+    <Content Include="Content\site\1.html" />
+    <Content Include="Content\site\10.html" />
+    <Content Include="Content\site\11.html" />
+    <Content Include="Content\site\2.html" />
+    <Content Include="Content\site\3.html" />
+    <Content Include="Content\site\4.html" />
+    <Content Include="Content\site\5.html" />
+    <Content Include="Content\site\6.html" />
+    <Content Include="Content\site\7.html" />
+    <Content Include="Content\site\8.html" />
+    <Content Include="Content\site\9.html" />
+    <Content Include="Content\site\DownloadAMRApp.html" />
+    <Content Include="Content\site\images\01-product-couple.png" />
+    <Content Include="Content\site\images\01-product-single.png" />
+    <Content Include="Content\site\images\10r.gif" />
+    <Content Include="Content\site\images\20b.gif" />
+    <Content Include="Content\site\images\20r.gif" />
+    <Content Include="Content\site\images\24-7_emergency.gif" />
+    <Content Include="Content\site\images\24-members_center.gif" />
+    <Content Include="Content\site\images\30b.gif" />
+    <Content Include="Content\site\images\30r.gif" />
+    <Content Include="Content\site\images\50b.gif" />
+    <Content Include="Content\site\images\aba_routing.gif" />
+    <Content Include="Content\site\images\about_us.gif" />
+    <Content Include="Content\site\images\Access-id-card-03.jpg" />
+    <Content Include="Content\site\images\Access-id-card-06.jpg" />
+    <Content Include="Content\site\images\access-id-card-07.gif" />
+    <Content Include="Content\site\images\access-id-card-08.jpg" />
+    <Content Include="Content\site\images\access-id-card-09.gif" />
+    <Content Include="Content\site\images\access-id-card-10.gif" />
+    <Content Include="Content\site\images\access-id-card-11.gif" />
+    <Content Include="Content\site\images\access-id-card-12.gif" />
+    <Content Include="Content\site\images\access-id-card-13.gif" />
+    <Content Include="Content\site\images\access-id-card-2.jpg" />
+    <Content Include="Content\site\images\access-id-card.jpg" />
+    <Content Include="Content\site\images\Access-my-records-ad-1.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS-Card.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS-couple_21.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS-logo.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS-menu.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_01.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_02.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_03.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_04.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_05.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_06.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_07.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_08.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_09.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_10.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_11.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_12.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_13.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_14.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_15.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_16.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_17.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_18.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_19-1.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_19.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_20.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_20b.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_22.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_24.gif" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_27.jpg" />
+    <Content Include="Content\site\images\ACCESS-MY-RECORDS_paramedic.jpg" />
+    <Content Include="Content\site\images\ACCESS-RECORDS-Button-1.gif" />
+    <Content Include="Content\site\images\ACCESS-RECORDS-Button-2.gif" />
+    <Content Include="Content\site\images\accesscard.gif" />
+    <Content Include="Content\site\images\accessmyrecords-logo-100x100.gif" />
+    <Content Include="Content\site\images\accessmyrecords_01.gif" />
+    <Content Include="Content\site\images\accessmyrecords_02.gif" />
+    <Content Include="Content\site\images\accessmyrecords_03.gif" />
+    <Content Include="Content\site\images\accessmyrecords_04.gif" />
+    <Content Include="Content\site\images\accessmyrecords_05.gif" />
+    <Content Include="Content\site\images\accessmyrecords_06.gif" />
+    <Content Include="Content\site\images\accessmyrecords_07.gif" />
+    <Content Include="Content\site\images\accessmyrecords_08.gif" />
+    <Content Include="Content\site\images\accessmyrecords_09.gif" />
+    <Content Include="Content\site\images\accessmyrecords_10.gif" />
+    <Content Include="Content\site\images\accessmyrecords_11.gif" />
+    <Content Include="Content\site\images\accessmyrecords_12.gif" />
+    <Content Include="Content\site\images\accessmyrecords_13.gif" />
+    <Content Include="Content\site\images\accessmyrecords_14.gif" />
+    <Content Include="Content\site\images\accessmyrecords_15.gif" />
+    <Content Include="Content\site\images\accessmyrecords_16.gif" />
+    <Content Include="Content\site\images\accessmyrecords_17.gif" />
+    <Content Include="Content\site\images\accessmyrecords_18.gif" />
+    <Content Include="Content\site\images\accessmyrecords_19.gif" />
+    <Content Include="Content\site\images\accessmyrecords_20.gif" />
+    <Content Include="Content\site\images\accessmyrecords_21.gif" />
+    <Content Include="Content\site\images\accessmyrecords_22.gif" />
+    <Content Include="Content\site\images\accessmyrecords_23.gif" />
+    <Content Include="Content\site\images\accessmyrecords_24.gif" />
+    <Content Include="Content\site\images\accessmyrecords_25.gif" />
+    <Content Include="Content\site\images\accessmyrecords_26.gif" />
+    <Content Include="Content\site\images\accessmyrecords_27.gif" />
+    <Content Include="Content\site\images\accessmyrecords_28.gif" />
+    <Content Include="Content\site\images\accessmyrecords_29.gif" />
+    <Content Include="Content\site\images\accessmyrecords_30.gif" />
+    <Content Include="Content\site\images\accessmyrecords_31.gif" />
+    <Content Include="Content\site\images\accessmyrecords_32.gif" />
+    <Content Include="Content\site\images\accessmyrecords_33.gif" />
+    <Content Include="Content\site\images\accessmyrecords_34.gif" />
+    <Content Include="Content\site\images\accessmyrecords_35.gif" />
+    <Content Include="Content\site\images\accessmyrecords_36.gif" />
+    <Content Include="Content\site\images\accessmyrecords_37.gif" />
+    <Content Include="Content\site\images\accessmyrecords_38.gif" />
+    <Content Include="Content\site\images\accessmyrecords_39.gif" />
+    <Content Include="Content\site\images\accessmyrecords_40.gif" />
+    <Content Include="Content\site\images\accessmyrecords_41.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_01.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_02.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_03.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_04.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_05.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_06.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_07.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_08.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_09.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_10.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_11.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_12.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_13.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_14.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_15.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_16.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_17.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_18.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_19.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_20.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_21.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_22.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_23.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_24.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_25.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_26.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_27.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_28.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_29.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_30.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_31.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_31a.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_32.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_33.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_34.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_35.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_36.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_37.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_38.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_39.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_40.gif" />
+    <Content Include="Content\site\images\accessmyrecords_roll_41.gif" />
+    <Content Include="Content\site\images\add-a-new-doctor.png" />
+    <Content Include="Content\site\images\add-btn.png" />
+    <Content Include="Content\site\images\adt.gif" />
+    <Content Include="Content\site\images\adthhsslogo.gif" />
+    <Content Include="Content\site\images\alliances_pic.gif" />
+    <Content Include="Content\site\images\AMElogo.bmp" />
+    <Content Include="Content\site\images\AMELogo.gif" />
+    <Content Include="Content\site\images\amex.gif" />
+    <Content Include="Content\site\images\amex_003.gif" />
+    <Content Include="Content\site\images\AMR-advantages.jpg" />
+    <Content Include="Content\site\images\AMR-Join-Button-roll.gif" />
+    <Content Include="Content\site\images\AMR-Join-Button.gif" />
+    <Content Include="Content\site\images\AMR-Prescription-Card.gif" />
+    <Content Include="Content\site\images\AMR-Rollover_03.gif" />
+    <Content Include="Content\site\images\AMR-Rollover_04.gif" />
+    <Content Include="Content\site\images\AMR-Rollover_05.gif" />
+    <Content Include="Content\site\images\AMR-Rollover_06.gif" />
+    <Content Include="Content\site\images\AMR-Rollover_07.gif" />
+    <Content Include="Content\site\images\AMR-Rollover_08.gif" />
+    <Content Include="Content\site\images\AMR-Rollover_14.jpg" />
+    <Content Include="Content\site\images\AMR-Rollover_15.jpg" />
+    <Content Include="Content\site\images\AMR-Rollover_16.jpg" />
+    <Content Include="Content\site\images\AMR-Rollover_17.jpg" />
+    <Content Include="Content\site\images\AMR-Rollover_18.jpg" />
+    <Content Include="Content\site\images\AMR-side-bar.jpg" />
+    <Content Include="Content\site\images\AMR-Tour-Button-roll.gif" />
+    <Content Include="Content\site\images\AMR-Tour-Button.gif" />
+    <Content Include="Content\site\images\amr-tv.jpg" />
+    <Content Include="Content\site\images\amr_button_01.gif" />
+    <Content Include="Content\site\images\amr_button_02.gif" />
+    <Content Include="Content\site\images\amr_button_03.gif" />
+    <Content Include="Content\site\images\amr_button_04.gif" />
+    <Content Include="Content\site\images\amr_button_05.gif" />
+    <Content Include="Content\site\images\amr_button_roll_01.gif" />
+    <Content Include="Content\site\images\amr_button_roll_02.gif" />
+    <Content Include="Content\site\images\amr_button_roll_03.gif" />
+    <Content Include="Content\site\images\amr_button_roll_04.gif" />
+    <Content Include="Content\site\images\amr_button_roll_05.gif" />
+    <Content Include="Content\site\images\arrow_select_info.png" />
+    <Content Include="Content\site\images\attachment.png" />
+    <Content Include="Content\site\images\b.gif" />
+    <Content Include="Content\site\images\bg-2011.gif" />
+    <Content Include="Content\site\images\bg_accessmyrecords.gif" />
+    <Content Include="Content\site\images\bg_accessmyrecords_inside.gif" />
+    <Content Include="Content\site\images\bg_accessmyrecords_inside2.gif" />
+    <Content Include="Content\site\images\billing_information.gif" />
+    <Content Include="Content\site\images\blank.png" />
+    <Content Include="Content\site\images\blue-bar.png" />
+    <Content Include="Content\site\images\blue-dot.png" />
+    <Content Include="Content\site\images\blue-grad.jpg" />
+    <Content Include="Content\site\images\bottome-border.jpg" />
+    <Content Include="Content\site\images\bottom_bar.gif" />
+    <Content Include="Content\site\images\box-container.jpg" />
+    <Content Include="Content\site\images\brownbar.gif" />
+    <Content Include="Content\site\images\bullet.gif" />
+    <Content Include="Content\site\images\c.gif" />
+    <Content Include="Content\site\images\card-1.png" />
+    <Content Include="Content\site\images\card-2.png" />
+    <Content Include="Content\site\images\card-ico.png" />
+    <Content Include="Content\site\images\card-info.png" />
+    <Content Include="Content\site\images\card-sep.png" />
+    <Content Include="Content\site\images\Cardfront.gif" />
+    <Content Include="Content\site\images\Cardfront3.gif" />
+    <Content Include="Content\site\images\cardhome.gif" />
+    <Content Include="Content\site\images\CardsKeys.gif" />
+    <Content Include="Content\site\images\CardsKeys2.gif" />
+    <Content Include="Content\site\images\card_template1.gif" />
+    <Content Include="Content\site\images\cc.gif" />
+    <Content Include="Content\site\images\children_table.gif" />
+    <Content Include="Content\site\images\chk-even.png" />
+    <Content Include="Content\site\images\chk-odd.png" />
+    <Content Include="Content\site\images\citrus-memorial.gif" />
+    <Content Include="Content\site\images\cncs.jpg" />
+    <Content Include="Content\site\images\Construct_0.gif" />
+    <Content Include="Content\site\images\Construct_1.gif" />
+    <Content Include="Content\site\images\Construct_2.gif" />
+    <Content Include="Content\site\images\Contact.gif" />
+    <Content Include="Content\site\images\contacts.gif" />
+    <Content Include="Content\site\images\contact_us.gif" />
+    <Content Include="Content\site\images\contact_us_pic.gif" />
+    <Content Include="Content\site\images\continue-btn.png" />
+    <Content Include="Content\site\images\couples_table.gif" />
+    <Content Include="Content\site\images\create_my_family.gif" />
+    <Content Include="Content\site\images\create_my_family_roll.gif" />
+    <Content Include="Content\site\images\detailed_general.gif" />
+    <Content Include="Content\site\images\disccard.gif" />
+    <Content Include="Content\site\images\doctor-form-bottom.png" />
+    <Content Include="Content\site\images\doctor-form-middle.png" />
+    <Content Include="Content\site\images\doctor-form-top.png" />
+    <Content Include="Content\site\images\Doctors.gif" />
+    <Content Include="Content\site\images\doctor_ipad.jpg" />
+    <Content Include="Content\site\images\drug-database.jpg" />
+    <Content Include="Content\site\images\drug-information.jpg" />
+    <Content Include="Content\site\images\emergency-click-area-1.gif" />
+    <Content Include="Content\site\images\emergency-click-area-2.gif" />
+    <Content Include="Content\site\images\emergency-click-area.gif" />
+    <Content Include="Content\site\images\emergency-records.gif" />
+    <Content Include="Content\site\images\emergency_contacts.gif" />
+    <Content Include="Content\site\images\EPRO.jpg" />
+    <Content Include="Content\site\images\every_secund.gif" />
+    <Content Include="Content\site\images\facebook.png" />
+    <Content Include="Content\site\images\family-image.gif" />
+    <Content Include="Content\site\images\family.gif" />
+    <Content Include="Content\site\images\family_notification.gif" />
+    <Content Include="Content\site\images\family_pic.gif" />
+    <Content Include="Content\site\images\family_welcome.gif" />
+    <Content Include="Content\site\images\faqs.gif" />
+    <Content Include="Content\site\images\faq_pic.gif" />
+    <Content Include="Content\site\images\footer-logo.png" />
+    <Content Include="Content\site\images\footer.gif" />
+    <Content Include="Content\site\images\FooterBarHomePage.jpg" />
+    <Content Include="Content\site\images\general-information.jpg" />
+    <Content Include="Content\site\images\general_information.gif" />
+    <Content Include="Content\site\images\geotust.jpg" />
+    <Content Include="Content\site\images\header-bg.jpg" />
+    <Content Include="Content\site\images\HeaderInsidePage.gif" />
+    <Content Include="Content\site\images\HeaderInsidePage2.gif" />
+    <Content Include="Content\site\images\HeaderInsidePages2.gif" />
+    <Content Include="Content\site\images\health-awareness-logo.gif" />
+    <Content Include="Content\site\images\health-information-library-1.gif" />
+    <Content Include="Content\site\images\health-information-library-2.jpg" />
+    <Content Include="Content\site\images\health-information-library.gif" />
+    <Content Include="Content\site\images\health-information-library2.gif" />
+    <Content Include="Content\site\images\health-information-library3.jpg" />
+    <Content Include="Content\site\images\health-information-library4.jpg" />
+    <Content Include="Content\site\images\health-testing-center.gif" />
+    <Content Include="Content\site\images\health-testing-centers.gif" />
+    <Content Include="Content\site\images\health-testing.png" />
+    <Content Include="Content\site\images\healthcare.gif" />
+    <Content Include="Content\site\images\HealthTesting.jpg" />
+    <Content Include="Content\site\images\healthy-trucking.gif" />
+    <Content Include="Content\site\images\health_insurance_provider.gif" />
+    <Content Include="Content\site\images\hipaa.gif" />
+    <Content Include="Content\site\images\homepage.gif" />
+    <Content Include="Content\site\images\homepage2.gif" />
+    <Content Include="Content\site\images\homepage3.gif" />
+    <Content Include="Content\site\images\Horizontal_bg.gif" />
+    <Content Include="Content\site\images\hover_info_menu_bar.png" />
+    <Content Include="Content\site\images\ice-program.jpg" />
+    <Content Include="Content\site\images\icon_contactinfo.gif" />
+    <Content Include="Content\site\images\icon_medicalinformation.gif" />
+    <Content Include="Content\site\images\icon_medicalrecords.gif" />
+    <Content Include="Content\site\images\icon_personalinfo.gif" />
+    <Content Include="Content\site\images\icon_print_small.gif" />
+    <Content Include="Content\site\images\img_man.png" />
+    <Content Include="Content\site\images\in-case-of-emergency.gif" />
+    <Content Include="Content\site\images\info_menu_bar.png" />
+    <Content Include="Content\site\images\info_menu_bar2.png" />
+    <Content Include="Content\site\images\insurance_policies.gif" />
+    <Content Include="Content\site\images\jarden.gif" />
+    <Content Include="Content\site\images\join-AMR-now.gif" />
+    <Content Include="Content\site\images\join_table.gif" />
+    <Content Include="Content\site\images\leftbar_01.gif" />
+    <Content Include="Content\site\images\leftbar_02.gif" />
+    <Content Include="Content\site\images\leftbar_03.gif" />
+    <Content Include="Content\site\images\leftbar_04.gif" />
+    <Content Include="Content\site\images\leftbar_05.gif" />
+    <Content Include="Content\site\images\leftbar_06.gif" />
+    <Content Include="Content\site\images\leftbar_07.gif" />
+    <Content Include="Content\site\images\leftbar_08.gif" />
+    <Content Include="Content\site\images\leftbar_09.gif" />
+    <Content Include="Content\site\images\leftbar_10.gif" />
+    <Content Include="Content\site\images\leftbar_11.gif" />
+    <Content Include="Content\site\images\leftbar_12.gif" />
+    <Content Include="Content\site\images\leftbar_13.gif" />
+    <Content Include="Content\site\images\leftbar_14.gif" />
+    <Content Include="Content\site\images\leftbar_15.gif" />
+    <Content Include="Content\site\images\leftbar_16.gif" />
+    <Content Include="Content\site\images\leftbar_inside_01.gif" />
+    <Content Include="Content\site\images\leftbar_inside_02.gif" />
+    <Content Include="Content\site\images\leftbar_inside_03.gif" />
+    <Content Include="Content\site\images\leftbar_inside_04.gif" />
+    <Content Include="Content\site\images\leftbar_inside_05.gif" />
+    <Content Include="Content\site\images\leftbar_inside_06.gif" />
+    <Content Include="Content\site\images\leftbar_inside_07.gif" />
+    <Content Include="Content\site\images\leftbar_inside_08.gif" />
+    <Content Include="Content\site\images\leftbar_inside_09.gif" />
+    <Content Include="Content\site\images\leftbar_inside_10.gif" />
+    <Content Include="Content\site\images\leftbar_inside_11.gif" />
+    <Content Include="Content\site\images\leftbar_inside_12.gif" />
+    <Content Include="Content\site\images\leftbar_inside_13.gif" />
+    <Content Include="Content\site\images\leftbar_inside_14.gif" />
+    <Content Include="Content\site\images\leftbar_inside_15.gif" />
+    <Content Include="Content\site\images\leftbar_inside_16.gif" />
+    <Content Include="Content\site\images\leftbar_inside_17.gif" />
+    <Content Include="Content\site\images\leftbar_inside_18.gif" />
+    <Content Include="Content\site\images\leftbar_inside_19.gif" />
+    <Content Include="Content\site\images\leftbar_inside_20.gif" />
+    <Content Include="Content\site\images\leftbar_inside_21.gif" />
+    <Content Include="Content\site\images\leftbar_inside_22.gif" />
+    <Content Include="Content\site\images\leftbar_inside_23.gif" />
+    <Content Include="Content\site\images\leftbar_inside_24.gif" />
+    <Content Include="Content\site\images\leftbar_inside_25.gif" />
+    <Content Include="Content\site\images\leftbar_inside_26.gif" />
+    <Content Include="Content\site\images\leftbar_inside_27.gif" />
+    <Content Include="Content\site\images\leftbar_inside_28.gif" />
+    <Content Include="Content\site\images\leftbar_inside_29.gif" />
+    <Content Include="Content\site\images\leftbar_inside_30.gif" />
+    <Content Include="Content\site\images\leftbar_inside_31.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_01.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_02.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_03.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_04.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_05.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_06.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_07.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_08.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_09.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_10.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_11.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_12.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_13.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_14.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_15.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_16.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_17.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_18.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_19.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_20.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_21.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_22.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_23.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_24.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_25.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_26.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_27.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_28.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_29.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_30.gif" />
+    <Content Include="Content\site\images\leftbar_inside_roll_31.gif" />
+    <Content Include="Content\site\images\leftbar_roll_01.gif" />
+    <Content Include="Content\site\images\leftbar_roll_02.gif" />
+    <Content Include="Content\site\images\leftbar_roll_03.gif" />
+    <Content Include="Content\site\images\leftbar_roll_04.gif" />
+    <Content Include="Content\site\images\leftbar_roll_05.gif" />
+    <Content Include="Content\site\images\leftbar_roll_06.gif" />
+    <Content Include="Content\site\images\leftbar_roll_07.gif" />
+    <Content Include="Content\site\images\leftbar_roll_08.gif" />
+    <Content Include="Content\site\images\leftbar_roll_09.gif" />
+    <Content Include="Content\site\images\leftbar_roll_10.gif" />
+    <Content Include="Content\site\images\leftbar_roll_11.gif" />
+    <Content Include="Content\site\images\leftbar_roll_12.gif" />
+    <Content Include="Content\site\images\leftbar_roll_13.gif" />
+    <Content Include="Content\site\images\leftbar_roll_14.gif" />
+    <Content Include="Content\site\images\leftbar_roll_15.gif" />
+    <Content Include="Content\site\images\leftbar_roll_16.gif" />
+    <Content Include="Content\site\images\leftbar_roll_17.gif" />
+    <Content Include="Content\site\images\leftbar_roll_18.gif" />
+    <Content Include="Content\site\images\leftbar_roll_19.gif" />
+    <Content Include="Content\site\images\leftbar_roll_20.gif" />
+    <Content Include="Content\site\images\leftbar_roll_21.gif" />
+    <Content Include="Content\site\images\leftbar_roll_22.gif" />
+    <Content Include="Content\site\images\leftbar_roll_23.gif" />
+    <Content Include="Content\site\images\leftbar_roll_24.gif" />
+    <Content Include="Content\site\images\leftbar_roll_25.gif" />
+    <Content Include="Content\site\images\leftbar_roll_26.gif" />
+    <Content Include="Content\site\images\leftbar_roll_27.gif" />
+    <Content Include="Content\site\images\leftbar_roll_28.gif" />
+    <Content Include="Content\site\images\leftbar_roll_29.gif" />
+    <Content Include="Content\site\images\leftbar_welcome.gif" />
+    <Content Include="Content\site\images\leftbar_welcome_roll_02.gif" />
+    <Content Include="Content\site\images\legal_disclaimer.gif" />
+    <Content Include="Content\site\images\liberator-2.jpg" />
+    <Content Include="Content\site\images\liberator.gif" />
+    <Content Include="Content\site\images\living_will.gif" />
+    <Content Include="Content\site\images\locate-pharmacy.gif" />
+    <Content Include="Content\site\images\locating-pharmacies.jpg" />
+    <Content Include="Content\site\images\lock-icon.png" />
+    <Content Include="Content\site\images\logo.png" />
+    <Content Include="Content\site\images\LogoNancy.gif" />
+    <Content Include="Content\site\images\logo_250.gif" />
+    <Content Include="Content\site\images\long_bar.png" />
+    <Content Include="Content\site\images\main-bg.jpg" />
+    <Content Include="Content\site\images\marketing.gif" />
+    <Content Include="Content\site\images\mcard.gif" />
+    <Content Include="Content\site\images\mediaids.png" />
+    <Content Include="Content\site\images\medic-logo.gif" />
+    <Content Include="Content\site\images\medical-care-provider.jpg" />
+    <Content Include="Content\site\images\medical-id-bracelet-user.gif" />
+    <Content Include="Content\site\images\medical-id-bracelets.jpg" />
+    <Content Include="Content\site\images\medical-id-card-members.gif" />
+    <Content Include="Content\site\images\medical-id-card.gif" />
+    <Content Include="Content\site\images\medical-records-20.jpg" />
+    <Content Include="Content\site\images\medical-records-card.jpg" />
+    <Content Include="Content\site\images\medical-records.jpg" />
+    <Content Include="Content\site\images\medical_conditions.gif" />
+    <Content Include="Content\site\images\medical_profiles.gif" />
+    <Content Include="Content\site\images\medical_profiles_a.gif" />
+    <Content Include="Content\site\images\medical_profiles_mc.gif" />
+    <Content Include="Content\site\images\medical_profiles_ms.gif" />
+    <Content Include="Content\site\images\medids.gif" />
+    <Content Include="Content\site\images\member-shiprenewal-bg.jpg" />
+    <Content Include="Content\site\images\member_area.gif" />
+    <Content Include="Content\site\images\member_type.gif" />
+    <Content Include="Content\site\images\Messaging-Request.jpg" />
+    <Content Include="Content\site\images\middle-bg.jpg" />
+    <Content Include="Content\site\images\middle-border.jpg" />
+    <Content Include="Content\site\images\middle_bullets.gif" />
+    <Content Include="Content\site\images\minors_privacy.gif" />
+    <Content Include="Content\site\images\My-Very.jpg" />
+    <Content Include="Content\site\images\myMedicalIDroll.gif" />
+    <Content Include="Content\site\images\myMedicalID_roll.gif" />
+    <Content Include="Content\site\images\MyVery.jpg" />
+    <Content Include="Content\site\images\MyVNLogo2.jpg" />
+    <Content Include="Content\site\images\my_account.gif" />
+    <Content Include="Content\site\images\my_account_pic.gif" />
+    <Content Include="Content\site\images\my_education.gif" />
+    <Content Include="Content\site\images\my_education_roll.gif" />
+    <Content Include="Content\site\images\my_family.gif" />
+    <Content Include="Content\site\images\my_family_roll.gif" />
+    <Content Include="Content\site\images\my_MedicalIDcard.gif" />
+    <Content Include="Content\site\images\my_MedicalID_card.gif" />
+    <Content Include="Content\site\images\my_MedicalID_card_roll.gif" />
+    <Content Include="Content\site\images\my_medical_id_card.gif" />
+    <Content Include="Content\site\images\my_medical_id_card_roll.gif" />
+    <Content Include="Content\site\images\my_medical_reports.gif" />
+    <Content Include="Content\site\images\my_medical_reports_roll.gif" />
+    <Content Include="Content\site\images\my_partner.gif" />
+    <Content Include="Content\site\images\my_partnerroll.gif" />
+    <Content Include="Content\site\images\my_partner_roll.gif" />
+    <Content Include="Content\site\images\my_roll.gif" />
+    <Content Include="Content\site\images\nancycardback.gif" />
+    <Content Include="Content\site\images\nancyCardFront.gif" />
+    <Content Include="Content\site\images\navigaion-members.jpg" />
+    <Content Include="Content\site\images\navigaion.jpg" />
+    <Content Include="Content\site\images\need-help-bg.jpg" />
+    <Content Include="Content\site\images\new-btn-arrow.jpg" />
+    <Content Include="Content\site\images\news.gif" />
+    <Content Include="Content\site\images\news_pic.gif" />
+    <Content Include="Content\site\images\NHA.gif" />
+    <Content Include="Content\site\images\NSDlogo.gif" />
+    <Content Include="Content\site\images\number.png" />
+    <Content Include="Content\site\images\online-blood-lab.gif" />
+    <Content Include="Content\site\images\online-lab-member.jpg" />
+    <Content Include="Content\site\images\online_access.gif" />
+    <Content Include="Content\site\images\over-lay-box.png" />
+    <Content Include="Content\site\images\over-lay-image.png" />
+    <Content Include="Content\site\images\overlay-corner.png" />
+    <Content Include="Content\site\images\pageb_adtlogo.gif" />
+    <Content Include="Content\site\images\pageb_cs_unit.jpg" />
+    <Content Include="Content\site\images\pageb_header1.gif" />
+    <Content Include="Content\site\images\pageb_header2.gif" />
+    <Content Include="Content\site\images\pageb_header3.gif" />
+    <Content Include="Content\site\images\pageb_header_left.jpg" />
+    <Content Include="Content\site\images\pageb_header_right.gif" />
+    <Content Include="Content\site\images\pageb_screenshot.jpg" />
+    <Content Include="Content\site\images\pageb_side_btm.gif" />
+    <Content Include="Content\site\images\pageb_side_top.jpg" />
+    <Content Include="Content\site\images\PalmBeachCounty.jpg" />
+    <Content Include="Content\site\images\PalmBeachCountyLogo.jpg" />
+    <Content Include="Content\site\images\partner_pic.gif" />
+    <Content Include="Content\site\images\patient-education-institute.gif" />
+    <Content Include="Content\site\images\phone-icon.png" />
+    <Content Include="Content\site\images\phone.png" />
+    <Content Include="Content\site\images\POWERED-BY.gif" />
+    <Content Include="Content\site\images\PPortal-Insert-MY.jpg" />
+    <Content Include="Content\site\images\prescription-discount-card.gif" />
+    <Content Include="Content\site\images\prescription-discount-members.gif" />
+    <Content Include="Content\site\images\prescription-medical-records-card.gif" />
+    <Content Include="Content\site\images\price-box.jpg" />
+    <Content Include="Content\site\images\primary_physician.gif" />
+    <Content Include="Content\site\images\print-ico.png" />
+    <Content Include="Content\site\images\print.png" />
+    <Content Include="Content\site\images\printer-bar.png" />
+    <Content Include="Content\site\images\print_btn.png" />
+    <Content Include="Content\site\images\privacy_menu_01.gif" />
+    <Content Include="Content\site\images\privacy_menu_02.gif" />
+    <Content Include="Content\site\images\privacy_menu_03.gif" />
+    <Content Include="Content\site\images\privacy_menu_04.gif" />
+    <Content Include="Content\site\images\privacy_menu_05.gif" />
+    <Content Include="Content\site\images\privacy_menu_06.gif" />
+    <Content Include="Content\site\images\privacy_menu_07.gif" />
+    <Content Include="Content\site\images\privacy_menu_08.gif" />
+    <Content Include="Content\site\images\privacy_menu_09.gif" />
+    <Content Include="Content\site\images\privacy_menu_10.gif" />
+    <Content Include="Content\site\images\privacy_menu_11.gif" />
+    <Content Include="Content\site\images\privacy_menu_12.gif" />
+    <Content Include="Content\site\images\privacy_menu_13.gif" />
+    <Content Include="Content\site\images\privacy_menu_14.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_01.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_02.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_03.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_04.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_05.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_06.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_07.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_08.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_09.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_10.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_11.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_12.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_13.gif" />
+    <Content Include="Content\site\images\privacy_menu_roll_14.gif" />
+    <Content Include="Content\site\images\privacy_policy.gif" />
+    <Content Include="Content\site\images\professionals.gif" />
+    <Content Include="Content\site\images\professional_advisors.gif" />
+    <Content Include="Content\site\images\quickssl_anim.gif" />
+    <Content Include="Content\site\images\receipt_and_summary_info.gif" />
+    <Content Include="Content\site\images\Records-Exchange-Request.jpg" />
+    <Content Include="Content\site\images\record_summary.gif" />
+    <Content Include="Content\site\images\RedButtonHOVER.jpg" />
+    <Content Include="Content\site\images\RedButtonNORMAL.jpg" />
+    <Content Include="Content\site\images\Refill-Request.jpg" />
+    <Content Include="Content\site\images\renew-your-membership.png" />
+    <Content Include="Content\site\images\renew_table.gif" />
+    <Content Include="Content\site\images\request-appointment.jpg" />
+    <Content Include="Content\site\images\return.gif" />
+    <Content Include="Content\site\images\return_roll.gif" />
+    <Content Include="Content\site\images\RRJFS Color ogo.gif" />
+    <Content Include="Content\site\images\ruth rales logo.JPG" />
+    <Content Include="Content\site\images\scsd_logo.gif" />
+    <Content Include="Content\site\images\secure-icon.jpg" />
+    <Content Include="Content\site\images\select-membership.jpg" />
+    <Content Include="Content\site\images\sep-line.png" />
+    <Content Include="Content\site\images\services-logo.jpg" />
+    <Content Include="Content\site\images\single_table.gif" />
+    <Content Include="Content\site\images\slide-1-card.png" />
+    <Content Include="Content\site\images\slide-1.png" />
+    <Content Include="Content\site\images\slide-2-card.png" />
+    <Content Include="Content\site\images\slide-2.png" />
+    <Content Include="Content\site\images\slide-3-moile.png" />
+    <Content Include="Content\site\images\slide-3.png" />
+    <Content Include="Content\site\images\slide-4.png" />
+    <Content Include="Content\site\images\slide-5.png" />
+    <Content Include="Content\site\images\slide-6-icon.png" />
+    <Content Include="Content\site\images\slide-6.png" />
+    <Content Include="Content\site\images\slide-7.png" />
+    <Content Include="Content\site\images\slide-8.jpg" />
+    <Content Include="Content\site\images\slide-description-1.png" />
+    <Content Include="Content\site\images\slide-description-2.png" />
+    <Content Include="Content\site\images\slide-description-3.png" />
+    <Content Include="Content\site\images\slide-description-4.png" />
+    <Content Include="Content\site\images\slide-description-5.png" />
+    <Content Include="Content\site\images\slide-description-7.png" />
+    <Content Include="Content\site\images\slide-description-8.png" />
+    <Content Include="Content\site\images\slider-bg.png" />
+    <Content Include="Content\site\images\small-bullet.jpg" />
+    <Content Include="Content\site\images\spacer.gif" />
+    <Content Include="Content\site\images\spacer_2.gif" />
+    <Content Include="Content\site\images\special_needs.gif" />
+    <Content Include="Content\site\images\sprite - Copy %282%29.png" />
+    <Content Include="Content\site\images\sprite - Copy %283%29.png" />
+    <Content Include="Content\site\images\sprite - Copy.png" />
+    <Content Include="Content\site\images\sprite.png" />
+    <Content Include="Content\site\images\sprites-welcome.png" />
+    <Content Include="Content\site\images\Standard-PortalFeaturesInsert.jpg" />
+    <Content Include="Content\site\images\steps_01.gif" />
+    <Content Include="Content\site\images\steps_02.gif" />
+    <Content Include="Content\site\images\steps_03.gif" />
+    <Content Include="Content\site\images\steps_04.gif" />
+    <Content Include="Content\site\images\steps_04b.gif" />
+    <Content Include="Content\site\images\steps_05.gif" />
+    <Content Include="Content\site\images\steps_06.gif" />
+    <Content Include="Content\site\images\steps_roll_01.gif" />
+    <Content Include="Content\site\images\steps_roll_02.gif" />
+    <Content Include="Content\site\images\steps_roll_03.gif" />
+    <Content Include="Content\site\images\steps_roll_04.gif" />
+    <Content Include="Content\site\images\steps_roll_04b.gif" />
+    <Content Include="Content\site\images\steps_roll_05.gif" />
+    <Content Include="Content\site\images\steps_roll_06.gif" />
+    <Content Include="Content\site\images\support-man.png" />
+    <Content Include="Content\site\images\switch.gif" />
+    <Content Include="Content\site\images\s_menu.jpg" />
+    <Content Include="Content\site\images\tagline-bg.png" />
+    <Content Include="Content\site\images\take_a_tour_01.gif" />
+    <Content Include="Content\site\images\take_a_tour_02.gif" />
+    <Content Include="Content\site\images\take_a_tour_03.gif" />
+    <Content Include="Content\site\images\take_a_tour_roll_01.gif" />
+    <Content Include="Content\site\images\take_a_tour_roll_02.gif" />
+    <Content Include="Content\site\images\take_a_tour_roll_03.gif" />
+    <Content Include="Content\site\images\tenetcu.jpg" />
+    <Content Include="Content\site\images\testimonials-bg.gif" />
+    <Content Include="Content\site\images\Testimonials-rollover.gif" />
+    <Content Include="Content\site\images\Testimonials.gif" />
+    <Content Include="Content\site\images\top-border.jpg" />
+    <Content Include="Content\site\images\topbanner.gif" />
+    <Content Include="Content\site\images\topbanner_01.gif" />
+    <Content Include="Content\site\images\topbanner_01b.gif" />
+    <Content Include="Content\site\images\topbanner_01c.gif" />
+    <Content Include="Content\site\images\topbanner_01d.gif" />
+    <Content Include="Content\site\images\topbanner_01_copy.gif" />
+    <Content Include="Content\site\images\topbanner_01_original.gif" />
+    <Content Include="Content\site\images\topbanner_02.gif" />
+    <Content Include="Content\site\images\topbanner_500.gif" />
+    <Content Include="Content\site\images\topbanner_small.gif" />
+    <Content Include="Content\site\images\top_arrow.png" />
+    <Content Include="Content\site\images\top_banner1.gif" />
+    <Content Include="Content\site\images\trademarks.gif" />
+    <Content Include="Content\site\images\tristar.gif" />
+    <Content Include="Content\site\images\trust-wave.png" />
+    <Content Include="Content\site\images\trustwave.jpg" />
+    <Content Include="Content\site\images\Tutorial-Button-1.gif" />
+    <Content Include="Content\site\images\Tutorial-Button-2.gif" />
+    <Content Include="Content\site\images\TV-commercial1.gif" />
+    <Content Include="Content\site\images\TV-commercial2.jpg" />
+    <Content Include="Content\site\images\UpgradeInsertBlock.jpg" />
+    <Content Include="Content\site\images\US-Legal-Forms.gif" />
+    <Content Include="Content\site\images\Vertical_bg.gif" />
+    <Content Include="Content\site\images\vf.jpg" />
+    <Content Include="Content\site\images\visa.gif" />
+    <Content Include="Content\site\images\visa.png" />
+    <Content Include="Content\site\images\visa_003.gif" />
+    <Content Include="Content\site\images\Welcome-to-Full-Service-Portal-Insert-2.jpg" />
+    <Content Include="Content\site\images\welcome.gif" />
+    <Content Include="Content\site\images\WelcomeMain.jpg" />
+    <Content Include="Content\site\images\When-you-can%27t-Text.jpg" />
+    <Content Include="Content\site\images\why_choose_us.gif" />
+    <Content Include="Content\site\images\why_choose_us_pic.gif" />
+    <Content Include="Content\site\images\yearly-membership-check.gif" />
+    <Content Include="Content\site\images\your-safe-with-us.png" />
+    <Content Include="Content\site\LicenseAgreement.html" />
+    <Content Include="Content\site\Premium.html" />
+    <Content Include="Content\SliderImages\1.JPG" />
+    <Content Include="Content\SliderImages\2.JPG" />
+    <Content Include="Content\SliderImages\3.JPG" />
+    <Content Include="Content\SliderImages\4.JPG" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Scripts\" />
+    <Folder Include="Uploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\AMR.Controllers\AMR.Controllers.csproj">
+      <Project>{11dc3941-dc60-4d46-89a0-ff420f3cb516}</Project>
+      <Name>AMR.Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\AMR.Core\AMR.Core.csproj">
+      <Project>{e778f762-2d8a-4d50-8bed-6c9e57647892}</Project>
+      <Name>AMR.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\AMR.Models\AMR.Models.csproj">
+      <Project>{3efd479e-fa9b-42a5-bcd5-3487fce76f98}</Project>
+      <Name>AMR.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\development-bundle\demos\autocomplete\search.php" />
+    <Content Include="Content\development-bundle\demos\tabs\ajax\content3-slow.php" />
+    <Content Include="Content\development-bundle\demos\tabs\ajax\content4-broken.php" />
+    <Content Include="Content\development-bundle\package.json" />
+    <Content Include="Content\development-bundle\README.md" />
+    <Content Include="Content\development-bundle\ui.accordion.jquery.json" />
+    <Content Include="Content\development-bundle\ui.autocomplete.jquery.json" />
+    <Content Include="Content\development-bundle\ui.button.jquery.json" />
+    <Content Include="Content\development-bundle\ui.core.jquery.json" />
+    <Content Include="Content\development-bundle\ui.datepicker.jquery.json" />
+    <Content Include="Content\development-bundle\ui.dialog.jquery.json" />
+    <Content Include="Content\development-bundle\ui.draggable.jquery.json" />
+    <Content Include="Content\development-bundle\ui.droppable.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect-blind.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect-bounce.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect-clip.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect-drop.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect-explode.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect-fade.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect-fold.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect-highlight.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect-pulsate.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect-scale.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect-shake.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect-slide.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect-transfer.jquery.json" />
+    <Content Include="Content\development-bundle\ui.effect.jquery.json" />
+    <Content Include="Content\development-bundle\ui.menu.jquery.json" />
+    <Content Include="Content\development-bundle\ui.mouse.jquery.json" />
+    <Content Include="Content\development-bundle\ui.position.jquery.json" />
+    <Content Include="Content\development-bundle\ui.progressbar.jquery.json" />
+    <Content Include="Content\development-bundle\ui.resizable.jquery.json" />
+    <Content Include="Content\development-bundle\ui.selectable.jquery.json" />
+    <Content Include="Content\development-bundle\ui.slider.jquery.json" />
+    <Content Include="Content\development-bundle\ui.sortable.jquery.json" />
+    <Content Include="Content\development-bundle\ui.spinner.jquery.json" />
+    <Content Include="Content\development-bundle\ui.tabs.jquery.json" />
+    <Content Include="Content\development-bundle\ui.tooltip.jquery.json" />
+    <Content Include="Content\development-bundle\ui.widget.jquery.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LayoutMasterPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Medication\MedicationIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ClinicalSummary\ClinicalSummaryIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Message\MessageIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Medication\MedicationPrint.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ClinicalSummary\ClinicalSummaryPrint.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Message\AppointmentIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Message\ReferralIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\SignUp.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Terms.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\AccountIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Premium\EmergencyContactIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Premium\MedicalPortfolioIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\site\images\.DS_Store" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\CCD.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_FacilityDropDown.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_VisitDropDown.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Premium\ShareMyRecordsIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Premium\GeneralDocumentIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Premium\CareProviderLogin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Premium\CareProviderIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Premium\ManageDoctorIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Premium\MedicalSummaryReportLogin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Premium\MedicalSummaryReportIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_AttachmentSupport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_FileNotFound.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_FacilityProvider.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_FacilityProviderSendMessage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_FacilityProviderRequestRefferal.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_Appointment.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_SocialHistory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_LabTests.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_Visits.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_FamilyHistory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_Medication.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_MedicalHistory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_Immunization.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_Problems.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_VitalSign.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_Allergies.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_PlanofCare.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_Statements.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Appointment_Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\Message\_Message_Inbox.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\Message\_Message_Appointment.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\Message\_Message_Refill.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\Message\_Message_Refferal.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ClinicalSummary\_Tab_LabTests.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_NoRecordFound.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ClinicalSummary\_Tab_History_Family.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ClinicalSummary\_Tab_History_Social.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ClinicalSummary\_Tab_History_Medical.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ClinicalSummary\_Tab_Allergies.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ClinicalSummary\_Tab_Visits.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\Message\_Message_Inbox_Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\Medication\_Medication_Current.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\Medication\_Medication_Past.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ClinicalSummary\_Tab_Immunization.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ClinicalSummary\_Tab_Problems.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ClinicalSummary\_Tab_Vitals.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ManageDoctor\_ManageDoctor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\EmergencyContact\_EmergencyContact.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\MedicalPortfolio\_HealthCareDataExchange.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\MedicalPortfolio\_PatientOutsideDoctors.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\MedicalPortfolio\_PatientMedicalDocument.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\GeneralDocument\_GeneralDocument.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\GeneralDocument\_InsurancePolicy.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\GeneralDocument\_ProfessionalAdvisor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\Medication\_Medication_Pharmacy.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ShareMyRecords\_ShareMyRecords_Member.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ShareMyRecords\_ShareMyRecords_Emergency.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ShareMyRecords\_ShareMyRecords_Healthcare.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ShareMyRecords\_ShareMyRecords_DocotorUploadDocs.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ShareMyRecords\_ShareMyRecords_PatientMedicalDocument.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ShareMyRecords\_ShareMyRecords_Allergies.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ShareMyRecords\_ShareMyRecords_Medications.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ShareMyRecords\_ShareMyRecords_Problems.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ShareMyRecords\_ShareMyRecords_Policy.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ShareMyRecords\_ShareMyRecords_GeneralDocument.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\Message\_Message_Sent.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\Message\_Message_Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_Insurance.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Index_Documents.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_CCD_Patient.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Templates\ClinicalSummary\_Tab_Document.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\CCDView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\CCDLogin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\CCDActivityLog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_CCD_Download_HTML.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\AMRPatientPortal.pubxml" />
+    <Content Include="Views\Home\CCDLocation.cshtml" />
+    <Content Include="Views\Home\CustomizeCCD.cshtml" />
+    <Content Include="Views\Shared\_VisitDropDown_DownloadHealthRecord.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\_FacilityDropDown_DownloadHealthRecord.cshtml" />
+    <Content Include="Views\Shared\_CmbRefildoctorDropDown.cshtml" />
+    <Content Include="Views\Shared\_Index_Switch_Account.cshtml" />
+    <Content Include="Views\Shared\_Index_AccountLink.cshtml" />
+    <Content Include="Views\Home\Confirmation.cshtml" />
+    <Content Include="Views\Home\PaymentTransfer.cshtml" />
+    <Content Include="Views\Home\PremiumPay.cshtml" />
+    <Content Include="Views\Shared\_Index_Procedures.cshtml" />
+    <Content Include="Views\Shared\_Index_RefillMedication.cshtml" />
+    <Content Include="Views\Shared\_LeftWidgetPartial.cshtml" />
+    <Content Include="Views\Shared\_RightWidgetPartial.cshtml" />
+    <Content Include="Views\Home\LicenseAgreement.cshtml" />
+    <Content Include="Views\Home\ProblemsIndex.cshtml" />
+    <Content Include="Views\Home\DownloadAMRApp.cshtml" />
+    <Content Include="Views\Shared\_Index_ClinicalInstructions.cshtml" />
+    <Content Include="Views\Shared\_Index_Provider.cshtml" />
+    <Content Include="Views\Shared\_Index_SocialHistory_New.cshtml" />
+    <Content Include="Views\Shared\_ListOfUser.cshtml" />
+    <Content Include="Views\Shared\AppointmentTab_index.cshtml" />
+    <Content Include="Views\Shared\_PatientRepresentative.cshtml" />
+    <Content Include="Views\Shared\_RefillPharmacyDropDown.cshtml" />
+    <Content Include="Views\Shared\_SocailHistorySelf.cshtml" />
+    <Content Include="Views\Shared\_SocailHistorySelf_New.cshtml" />
+    <Content Include="Views\Home\AnotherSession.cshtml" />
+    <Content Include="Views\ClinicalSummary\ClinicalSummary.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\ClinicalSummary\Documents.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\ClinicalSummary\PatientInfoIndex.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Home\ResetPassword.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>60731</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:30911/AMRPortal</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

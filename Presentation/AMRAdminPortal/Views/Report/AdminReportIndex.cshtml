@@ -1,0 +1,382 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@model AdminViewModel
+
+@{
+    ViewBag.Title = "AdminReportIndex";
+    Layout = "~/Views/Shared/_LayoutMasterPage.cshtml";
+}
+
+
+ 
+<script src="@Url.Content("~/Content/js/jquery.treeview.js")">
+
+</script>
+<link href="~/Content/css/jquery.treeview.css" rel="stylesheet" />
+      <script>
+          $(document).ready(function () {
+              $("#IndexRemoveClass").removeClass("active");
+              $("#FaciltySetupRemoveClass").removeClass("active");
+
+              $("#ReportIndexclass").addClass("active");
+              // first example
+              $("#browser").treeview();
+              $("#cmbAccountType").val("-1");
+              $("#txtDateFromRep").val("");
+              $("#txtDateToRep").val("");
+
+          });
+          //$(function () {
+          //    $("input[type=submit], a, button")
+          //    .button()
+          //    .click(function (event) {
+          //        // event.preventDefault();
+          //    });
+          //});
+
+
+          $(document).ready(function () {
+
+              $("#txtDateFromRep").datepicker({
+                  inline: true,
+                  changeMonth: true,
+                  changeYear: true,
+                  yearRange: "1900:+0",
+                  dateFormat: "mm/dd/yy",
+                  onSelect: function (dateText, instance) {
+                      date = $.datepicker.parseDate(instance.settings.dateFormat, dateText, instance.settings);
+                      date.setDate(date.getDate() + 90);
+                    //  $("#txtDateToRep").datepicker("setDate", date);
+                  }
+              });
+              $("#txtDateToRep").datepicker({
+                  inline: true,
+                  changeMonth: true,
+                  changeYear: true,
+                  yearRange: "1900:+0",
+                  dateFormat: "mm/dd/yy"
+              });
+
+
+
+
+        
+
+              $("#dialog-Report").dialog
+            ({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "blind",
+                    duration: 1000
+                },
+
+                height: 300,
+                width: 650,
+                modal: true,
+                buttons: {
+                    "Run": function () {
+
+                        var bValid = true;
+                        var $MU = $("#dialog-Report");
+                        var accountType = $('#cmbAccountNumber option:selected').val();
+                        //alert(year);
+                      //  bValid = false;
+                        if (accountType == "-1")
+                        {
+                            accountType = null;
+                        }
+                        if ($('#txtDateToRep').val() < $('#txtDateFromRep').val())
+                        {
+                            alert("To date should be less than From Date");
+                            bValid = false;
+                        }
+                        var thirdparty = $('#thirdParty option:selected').text();
+                        if (thirdparty == "--Select--")
+                            {
+                            thirdparty = null;
+                        }
+                        var fromdate = $('#txtDateFromRep').val();
+                        if(fromdate =="")
+                        {
+                            fromdate = null;
+                        }
+
+                        var Todate = $('#txtDateToRep').val();
+                        if (Todate == "")
+                        {
+                            Todate = null;
+                        }
+
+                        if (bValid) {
+
+
+                            //ajax 
+                            try {
+
+
+                                var requestData = {
+
+
+                                    //Year: year,
+                                    //Quarter:"0",
+                                    //QYear: thirdparty,
+                                    AccountType:accountType,
+                                        ThirdParty: thirdparty,
+                                    FromDate: fromdate,
+                                    ToDate: Todate,
+                                    MU: $MU.data('MU'),
+                                    ReportPath: $MU.data('ReportPath')
+
+                                };
+                              
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: 'report-parameters',
+                                    data: JSON.stringify(requestData),
+                                    dataType: 'json',
+                                    contentType: 'application/json; charset=utf-8',
+                                    success: function (data) {
+
+                                        HideLoader();
+                                        var page = '../../Reports/ReportForm.aspx';
+                                        //data;
+                                        //alert(page);
+                                        $('#page_loader_Report').remove();
+                                        var $dialog = $('<div style="width:1000px;"></div>')
+                                                       .html('<div id="page_loader_Report" style="display: block;"><div id="apDiv1" align="center"><table width="200" border="0" cellspacing="0" cellpadding="0"><tr><td height="70px;">&nbsp;</td></tr><tr><td align="center"><img src="Content/img/image_559926.gif" width="128" height="64" /></td></tr><tr><td style="text-align: center;" height="70px;">Please wait ...</td></tr></table></div></div><iframe style="border: 0px; " src="' + page + '" width="100%" height="100%"></iframe>')
+                                                       .dialog({
+                                                           autoOpen: false,
+                                                           show: {
+                                                               effect: "blind",
+                                                               duration: 1000
+                                                           },
+                                                           hide: {
+                                                               effect: "blind",
+                                                               duration: 1000
+                                                           },
+                                                           modal: true,
+                                                           height: 600,
+                                                           width: 950,
+                                                           title: "Report"
+                                                       });
+                                        $dialog.dialog('open');
+
+                                    },
+                                    error: function (xhr, ajaxOptions, thrownError) {
+                                        //if error
+
+                                        //alert('Error : ' + xhr.message);
+                                        HideLoader();
+                                    },
+                                    complete: function (data) {
+                                        // if completed
+                                        HideLoader();
+
+                                    },
+                                    async: true,
+                                    processData: false
+                                });
+
+                            } catch (err) {
+
+                                if (err && err !== "") {
+                                    alert(err.message);
+                                    HideLoader();
+                                }
+                            }
+                            $(this).dialog("close");
+                            ShowLoader();
+
+
+                            //   end ajax
+
+
+                        }
+                    }
+                },
+                close: function () {
+                    $(this).dialog("close");
+                }
+            });
+              // Call horizontalNav on the navigations wrapping element
+              $('.full-width').horizontalNav({});
+          });
+
+          function pop_up_report(id) {
+
+              //ShowLoader();
+              try {
+
+                  var requestData = {
+
+                      Id: id,
+
+                  };
+                  alert(JSON.stringify(requestData));
+                  $.ajax({
+                      type: 'POST',
+                      url: 'problemlistreport-index',
+                      data: JSON.stringify(requestData),
+                      dataType: 'json',
+                      contentType: 'application/json; charset=utf-8',
+                      success: function (data) {
+                          // if success
+                          // alert("Success : " + data);
+                          // $("#current-med-grid").html(data);
+
+                          HideLoader();
+
+                      },
+                      error: function (xhr, ajaxOptions, thrownError) {
+                          //if error
+
+                          alert('Error : ' + xhr.message);
+                          HideLoader();
+                      },
+                      complete: function (data) {
+                          // if completed
+                          HideLoader();
+
+                      },
+                      async: true,
+                      processData: false
+                  });
+
+
+              } catch (err) {
+
+                  if (err && err !== "") {
+                      alert(err.message);
+                      HideLoader();
+                  }
+              }
+
+
+
+          }
+
+    </script>
+
+    <script>
+        function test(MU, ReportPath) {
+            //  clearFields();
+            $("#cmbAccountNumber").val("-1");
+          //  $("#cmbAccountNumber").text("--Select--");
+            $("#thirdParty").val("0");
+            $("#txtDateFromRep").val("");
+            $("#txtDateToRep").val("");
+            $('#cmbYear').attr('disabled', true);
+            $('#cmbQYear').attr('disabled', true);
+            $('#cmbQuarter').attr('disabled', true);
+           // $('#txtDateFromRep').attr('disabled', true);
+           // $('#txtDateToRep').attr('disabled', true);
+
+            $('#chkAccountType').change(function () {
+                $('#cmbYear').attr('disabled', false);
+                $('#cmbQYear').attr('disabled', true);
+                $('#cmbQuarter').attr('disabled', true);
+                $('#txtDateFromRep').attr('disabled', true);
+                $('#txtDateToRep').attr('disabled', true);
+            });
+
+            $('#chkPartner').change(function () {
+                $('#cmbQYear').attr('disabled', false);
+                $('#cmbQuarter').attr('disabled', false);
+                $('#cmbYear').attr('disabled', true);
+                $('#txtDateFromRep').attr('disabled', true);
+                $('#txtDateToRep').attr('disabled', true);
+            });
+
+            $('#chkDate').change(function () {
+                $('#txtDateFromRep').attr('disabled', false);
+                $('#txtDateToRep').attr('disabled', true);
+                $('#cmbYear').attr('disabled', true);
+                $('#cmbQYear').attr('disabled', true);
+                $('#cmbQuarter').attr('disabled', true);
+            });
+            $("#dialog-Report").data('MU', MU);
+            $("#dialog-Report").data('ReportPath', ReportPath);
+            $("#dialog-Report").dialog("open");
+        }
+
+
+
+    </script>
+ 
+
+
+<div id="Tree" style="height: 510px; overflow: auto">
+                <ul class="filetree treeview" id="browser">
+                    <li class="collapsable">
+                        <div class="hitarea collapsable-hitarea"></div>
+                        <span class="folder">Customer</span>
+                        <ul>
+                            <li class="last"><span class="file"><label onmouseover="this.style.cursor='pointer';" onclick="test('Stage 1','/Admin/AdminCustomerList');" >Customers List</label></span></li>
+                        </ul>
+                    </li>
+                   
+                   
+                   
+                </ul>
+
+
+            </div>
+<div id="dialog-Report" title="Report">
+    
+    <table width="100%"  border="0" cellpadding="0" cellspacing="2">
+        <tr>
+            <td align="right"></td>
+            <td width="290"  align="right"</td>
+            <td width="2">&nbsp;</td>
+            <td width="555">
+          @* @Html.DropDownList("cmbAppointmentFacility", Model.Facilities.ToFacilityModelWithoutPatientEnteredSelectList(), new { @class = " txt  ui-corner-all bcom", style="width:220px; margin-left:30px;", id = "cmbAppointmentFacility" })
+         *@
+                      </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="right">Account Type :</td>
+            <td align="right">&nbsp;</td>
+            <td>
+                
+                @*<input type="text" id="txtYear" style="width:400px; margin-left:30px;" class="btxt"/></td>*@
+            <select name="preft_com" id="cmbAccountNumber" class="txt " style="width:100px; margin-left:30px;" >                <option value="-1">--Select--</option>                   
+                <option value="0">Standard</option>
+  <option value="1">Premium</option>
+  
+                </select>
+            
+        </tr>
+        <tr>
+            <td></td>
+            <td align="right">Third Party :</td>
+            <td>&nbsp;</td>
+            <td>
+               <div id="homeComboBoxPortlet">
+                       
+                @Html.DropDownList("thirdParty", Model.ThirdParty.ToThirdPartyModelSelectList(), new { @class = "txt", style = "width:200px; padding:2px;margin-left:30px;", id = "thirdParty" })
+                </div>
+
+                </td>
+            
+        </tr>
+        <tr>
+            <td></td>
+            <td align="right">Date Range :</td>
+            <td>&nbsp;</td>
+            <td>
+                <input type="text" id="txtDateFromRep" style="width:100px; margin-left:30px; margin-top:5px;" class="btxt"/>
+                <input type="text" id="txtDateToRep" style="width:100px; margin-left:100px; margin-top:-25px;" class="btxt"/>
+            </td>
+        </tr>
+    </table>
+
+    
+
+</div>

@@ -1,0 +1,24 @@
+﻿  #container1 {
+            float: left;
+            width: 100%;
+            border: 1px solid;
+            margin: 2px 5px 5px 15px;
+        }
+
+        #sample2 {
+            width: 90%;
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 2px 5px 5px 35px;
+        }
+
+        #sampleID {
+            font-weight: bold;
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .add_btn_container2 {
+            float: left;
+            padding: 0 0 0 247px;
+        }

@@ -1,0 +1,25 @@
+﻿   input[type='file'] {
+      color: transparent;
+    }
+
+    .hoverMe:hover {
+        color: #E17009;
+        cursor: pointer;
+        text-decoration:none;
+    }
+    .LinkHighlight {
+        font-weight:bold; 
+        text-decoration:underline; 
+        cursor:pointer;
+    }
+
+    table.grid th, table.grid td {
+      width:100px;
+    }
+    .palabel {
+         width:100px;
+         text-align:right;
+     }
+    .patextbox {
+         width:200px;
+     }

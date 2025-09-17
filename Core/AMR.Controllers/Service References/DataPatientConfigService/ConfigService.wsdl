@@ -1,0 +1,2336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetPracticeData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Parms" type="tns:PracticeParms" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PracticeParms">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Option" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PracticeId" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPracticeDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetPracticeDataResult" type="tns:PracticeData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PracticeData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PracticeId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="PracticeName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SavePracticeData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PracticeData" type="tns:PracticeData" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SavePracticeDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SavePracticeDataResult" type="tns:PracticeData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPracticesForOrganization">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrganizationId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPracticesForOrganizationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetPracticesForOrganizationResult" type="tns:PracticeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PracticeTableData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dt">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetOrganizationData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Parms" type="tns:OrganizationParms" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OrganizationParms">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Option" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationId" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetOrganizationDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetOrganizationDataResult" type="tns:OrganizationData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OrganizationData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrganizationName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SaveOrganizationData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrganizationData" type="tns:OrganizationData" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveOrganizationDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SaveOrganizationDataResult" type="tns:OrganizationData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrganizationSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Parms" type="tns:OrganizationSearchParms" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OrganizationSearchParms">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OrganizationName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="OrganizationSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrganizationSearchResult" type="tns:OrganizationTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OrganizationTableData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dt">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetFacilityData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Parms" type="tns:FacilityParms" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FacilityParms">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Option" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetFacilityDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetFacilityDataResult" type="tns:FacilityData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FacilityData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="PracticeId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="EMRSystemId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FacilityTypeId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillAddress1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillAddress2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillAddress3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillCity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillState" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillPostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillCountryCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillPhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillFax" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GeneralMessageAvailable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="GeneralMessageNotify" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GeneralMessageEmail" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AppointmentMessageAvailable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AppointmentMessageNotify" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AppointmentMessageEmail" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MedicationMessageAvailable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="MedicationMessageNotify" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MedicationMessageEmail" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReferalMessageAvailable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReferralMessageNotify" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralMessageEmail" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PremiumAvailable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OnlineBillPayment" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SaveFacilityData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityData" type="tns:FacilityData" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveFacilityDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SaveFacilityDataResult" type="tns:FacilityData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilitiesForPractice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PracticeId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilitiesForPracticeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetFacilitiesForPracticeResult" type="tns:FacilityTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FacilityTableData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dt">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="1" maxOccurs="1" name="count" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FacilitySearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Parms" type="tns:FacilitySearchParms" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FacilitySearchParms">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Option" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageNumber" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageSize" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalRecord" nillable="true" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FacilitySearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacilitySearchResult" type="tns:FacilityTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPreferredLanguageCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPreferredLanguageCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetPreferredLanguageCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CodeTableData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dt">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetGenderCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGenderCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetGenderCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRaceCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRaceCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetRaceCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEthnicityCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEthnicityCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetEthnicityCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMaritalStatusCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMaritalStatusCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetMaritalStatusCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConditionStatusCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConditionStatusCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetConditionStatusCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReligionCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReligionCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetReligionCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBloodTypeCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBloodTypeCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetBloodTypeCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSmokingStatusCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSmokingStatusCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetSmokingStatusCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityTypesCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityTypesCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetFacilityTypesCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserRoleCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserRoleCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetUserRoleCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentTypeCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentTypeCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetDocumentTypeCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAuditActionCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAuditActionCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetAuditActionCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEMRSystemCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEMRSystemCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetEMRSystemCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRelationshipCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRelationshipCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetRelationshipCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRelationshipSNOMED">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="SNOMED" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRelationshipSNOMEDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetRelationshipSNOMEDResult" type="tns:CodeTableValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CodeTableValue">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CodeValueId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSecurityQuestionCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSecurityQuestionCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetSecurityQuestionCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInstructionTypeCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInstructionTypeCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetInstructionTypeCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProblemCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchValue" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProblemCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetProblemCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVaccineCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchValue" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVaccineCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetVaccineCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMedicationsCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchValue" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMedicationsCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetMedicationsCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFrequencyCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFrequencyCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetFrequencyCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCountryCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCountryCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetCountryCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStateCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStateCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetStateCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSocialCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSocialCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetSocialCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRouteOfAdministrationCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRouteOfAdministrationCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetRouteOfAdministrationCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocUploadTypeCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocUploadTypeCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetDocUploadTypeCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDoctorTypeCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDoctorTypeCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetDoctorTypeCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPolicyTypeCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPolicyTypeCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetPolicyTypeCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAdvisorCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAdvisorCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetAdvisorCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetExerciseFrequencyCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetExerciseFrequencyCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetExerciseFrequencyCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActivityLevelCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActivityLevelCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetActivityLevelCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAlcoholFrequencyCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAlcoholFrequencyCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetAlcoholFrequencyCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEducationLevelCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEducationLevelCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetEducationLevelCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetThirdPartyCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetThirdPartyCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetThirdPartyCodesResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCarriers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCarriersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetCarriersResult" type="tns:CodeTableData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilitySetupData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Parms" type="tns:FacilityParms" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilitySetupDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetFacilitySetupDataResult" type="tns:FacilitySetupResp" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FacilitySetupResp">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FacilityId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Logon" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPracticeDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPracticeData" />
+  </wsdl:message>
+  <wsdl:message name="GetPracticeDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPracticeDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="SavePracticeDataSoapIn">
+    <wsdl:part name="parameters" element="tns:SavePracticeData" />
+  </wsdl:message>
+  <wsdl:message name="SavePracticeDataSoapOut">
+    <wsdl:part name="parameters" element="tns:SavePracticeDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPracticesForOrganizationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPracticesForOrganization" />
+  </wsdl:message>
+  <wsdl:message name="GetPracticesForOrganizationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPracticesForOrganizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrganizationData" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrganizationDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveOrganizationDataSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveOrganizationData" />
+  </wsdl:message>
+  <wsdl:message name="SaveOrganizationDataSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveOrganizationDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="OrganizationSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:OrganizationSearch" />
+  </wsdl:message>
+  <wsdl:message name="OrganizationSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:OrganizationSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilityData" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilityDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveFacilityDataSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveFacilityData" />
+  </wsdl:message>
+  <wsdl:message name="SaveFacilityDataSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveFacilityDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilitiesForPracticeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilitiesForPractice" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilitiesForPracticeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilitiesForPracticeResponse" />
+  </wsdl:message>
+  <wsdl:message name="FacilitySearchSoapIn">
+    <wsdl:part name="parameters" element="tns:FacilitySearch" />
+  </wsdl:message>
+  <wsdl:message name="FacilitySearchSoapOut">
+    <wsdl:part name="parameters" element="tns:FacilitySearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPreferredLanguageCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPreferredLanguageCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetPreferredLanguageCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPreferredLanguageCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGenderCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGenderCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetGenderCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGenderCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRaceCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRaceCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetRaceCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRaceCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEthnicityCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEthnicityCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetEthnicityCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEthnicityCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMaritalStatusCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMaritalStatusCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetMaritalStatusCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMaritalStatusCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConditionStatusCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetConditionStatusCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetConditionStatusCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetConditionStatusCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReligionCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReligionCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetReligionCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReligionCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBloodTypeCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBloodTypeCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetBloodTypeCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBloodTypeCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSmokingStatusCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSmokingStatusCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetSmokingStatusCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSmokingStatusCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityTypesCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilityTypesCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityTypesCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilityTypesCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserRoleCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserRoleCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetUserRoleCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserRoleCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentTypeCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocumentTypeCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentTypeCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocumentTypeCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAuditActionCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAuditActionCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetAuditActionCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAuditActionCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEMRSystemCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEMRSystemCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetEMRSystemCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEMRSystemCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRelationshipCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRelationshipCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetRelationshipCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRelationshipCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRelationshipSNOMEDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRelationshipSNOMED" />
+  </wsdl:message>
+  <wsdl:message name="GetRelationshipSNOMEDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRelationshipSNOMEDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSecurityQuestionCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSecurityQuestionCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetSecurityQuestionCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSecurityQuestionCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInstructionTypeCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInstructionTypeCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetInstructionTypeCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInstructionTypeCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProblemCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProblemCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetProblemCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProblemCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVaccineCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVaccineCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetVaccineCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVaccineCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMedicationsCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMedicationsCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetMedicationsCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMedicationsCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFrequencyCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFrequencyCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetFrequencyCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFrequencyCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCountryCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCountryCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStateCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStateCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetStateCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStateCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSocialCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSocialCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetSocialCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSocialCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteOfAdministrationCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRouteOfAdministrationCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteOfAdministrationCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRouteOfAdministrationCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocUploadTypeCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocUploadTypeCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetDocUploadTypeCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocUploadTypeCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDoctorTypeCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDoctorTypeCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetDoctorTypeCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDoctorTypeCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPolicyTypeCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPolicyTypeCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetPolicyTypeCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPolicyTypeCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAdvisorCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAdvisorCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetAdvisorCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAdvisorCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetExerciseFrequencyCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetExerciseFrequencyCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetExerciseFrequencyCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetExerciseFrequencyCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetActivityLevelCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetActivityLevelCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetActivityLevelCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetActivityLevelCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAlcoholFrequencyCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAlcoholFrequencyCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetAlcoholFrequencyCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAlcoholFrequencyCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEducationLevelCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEducationLevelCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetEducationLevelCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEducationLevelCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetThirdPartyCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetThirdPartyCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetThirdPartyCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetThirdPartyCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCarriersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCarriers" />
+  </wsdl:message>
+  <wsdl:message name="GetCarriersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCarriersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilitySetupDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilitySetupData" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilitySetupDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilitySetupDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ConfigWSSoap">
+    <wsdl:operation name="GetPracticeData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Practice Data</wsdl:documentation>
+      <wsdl:input message="tns:GetPracticeDataSoapIn" />
+      <wsdl:output message="tns:GetPracticeDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SavePracticeData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Save Practice Data</wsdl:documentation>
+      <wsdl:input message="tns:SavePracticeDataSoapIn" />
+      <wsdl:output message="tns:SavePracticeDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPracticesForOrganization">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Practices For Organization</wsdl:documentation>
+      <wsdl:input message="tns:GetPracticesForOrganizationSoapIn" />
+      <wsdl:output message="tns:GetPracticesForOrganizationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Organization Data</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationDataSoapIn" />
+      <wsdl:output message="tns:GetOrganizationDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveOrganizationData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Save Organization Data</wsdl:documentation>
+      <wsdl:input message="tns:SaveOrganizationDataSoapIn" />
+      <wsdl:output message="tns:SaveOrganizationDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrganizationSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Organization Search</wsdl:documentation>
+      <wsdl:input message="tns:OrganizationSearchSoapIn" />
+      <wsdl:output message="tns:OrganizationSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Facility Data</wsdl:documentation>
+      <wsdl:input message="tns:GetFacilityDataSoapIn" />
+      <wsdl:output message="tns:GetFacilityDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveFacilityData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Save Facility Data</wsdl:documentation>
+      <wsdl:input message="tns:SaveFacilityDataSoapIn" />
+      <wsdl:output message="tns:SaveFacilityDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilitiesForPractice">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Facilities For Practice</wsdl:documentation>
+      <wsdl:input message="tns:GetFacilitiesForPracticeSoapIn" />
+      <wsdl:output message="tns:GetFacilitiesForPracticeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FacilitySearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Facility Search</wsdl:documentation>
+      <wsdl:input message="tns:FacilitySearchSoapIn" />
+      <wsdl:output message="tns:FacilitySearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPreferredLanguageCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get PreferredLanguage Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetPreferredLanguageCodesSoapIn" />
+      <wsdl:output message="tns:GetPreferredLanguageCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGenderCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Gender Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetGenderCodesSoapIn" />
+      <wsdl:output message="tns:GetGenderCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRaceCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Race Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetRaceCodesSoapIn" />
+      <wsdl:output message="tns:GetRaceCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEthnicityCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Ethnicity Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetEthnicityCodesSoapIn" />
+      <wsdl:output message="tns:GetEthnicityCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMaritalStatusCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get MaritalStatus Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetMaritalStatusCodesSoapIn" />
+      <wsdl:output message="tns:GetMaritalStatusCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConditionStatusCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get ConditionStatus Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetConditionStatusCodesSoapIn" />
+      <wsdl:output message="tns:GetConditionStatusCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReligionCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Religion Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetReligionCodesSoapIn" />
+      <wsdl:output message="tns:GetReligionCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBloodTypeCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get BloodType Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetBloodTypeCodesSoapIn" />
+      <wsdl:output message="tns:GetBloodTypeCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSmokingStatusCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get SmokingStatus Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetSmokingStatusCodesSoapIn" />
+      <wsdl:output message="tns:GetSmokingStatusCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityTypesCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get FacilityTypes Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetFacilityTypesCodesSoapIn" />
+      <wsdl:output message="tns:GetFacilityTypesCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserRoleCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get UserRole Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetUserRoleCodesSoapIn" />
+      <wsdl:output message="tns:GetUserRoleCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentTypeCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get DocumentType Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetDocumentTypeCodesSoapIn" />
+      <wsdl:output message="tns:GetDocumentTypeCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuditActionCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get AuditAction Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetAuditActionCodesSoapIn" />
+      <wsdl:output message="tns:GetAuditActionCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEMRSystemCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get EMRSystem Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetEMRSystemCodesSoapIn" />
+      <wsdl:output message="tns:GetEMRSystemCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationshipCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Relationship Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetRelationshipCodesSoapIn" />
+      <wsdl:output message="tns:GetRelationshipCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationshipSNOMED">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get RelationshipId From SNOMED</wsdl:documentation>
+      <wsdl:input message="tns:GetRelationshipSNOMEDSoapIn" />
+      <wsdl:output message="tns:GetRelationshipSNOMEDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSecurityQuestionCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get SecurityQuestion Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetSecurityQuestionCodesSoapIn" />
+      <wsdl:output message="tns:GetSecurityQuestionCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInstructionTypeCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get InstructionType Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetInstructionTypeCodesSoapIn" />
+      <wsdl:output message="tns:GetInstructionTypeCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProblemCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Problem Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetProblemCodesSoapIn" />
+      <wsdl:output message="tns:GetProblemCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVaccineCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Vaccine Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetVaccineCodesSoapIn" />
+      <wsdl:output message="tns:GetVaccineCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMedicationsCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Medications Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetMedicationsCodesSoapIn" />
+      <wsdl:output message="tns:GetMedicationsCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFrequencyCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Frequency Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetFrequencyCodesSoapIn" />
+      <wsdl:output message="tns:GetFrequencyCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Country Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetCountryCodesSoapIn" />
+      <wsdl:output message="tns:GetCountryCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStateCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get State Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetStateCodesSoapIn" />
+      <wsdl:output message="tns:GetStateCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSocialCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Social Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetSocialCodesSoapIn" />
+      <wsdl:output message="tns:GetSocialCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteOfAdministrationCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get RouteOfAdministration Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetRouteOfAdministrationCodesSoapIn" />
+      <wsdl:output message="tns:GetRouteOfAdministrationCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocUploadTypeCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get DocUploadType Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetDocUploadTypeCodesSoapIn" />
+      <wsdl:output message="tns:GetDocUploadTypeCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDoctorTypeCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get DoctorType Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetDoctorTypeCodesSoapIn" />
+      <wsdl:output message="tns:GetDoctorTypeCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPolicyTypeCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get PolicyType Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetPolicyTypeCodesSoapIn" />
+      <wsdl:output message="tns:GetPolicyTypeCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdvisorCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Advisor Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetAdvisorCodesSoapIn" />
+      <wsdl:output message="tns:GetAdvisorCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExerciseFrequencyCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get ExerciseFrequency Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetExerciseFrequencyCodesSoapIn" />
+      <wsdl:output message="tns:GetExerciseFrequencyCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActivityLevelCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get ActivityLevel Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetActivityLevelCodesSoapIn" />
+      <wsdl:output message="tns:GetActivityLevelCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlcoholFrequencyCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get AlcoholFrequency Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetAlcoholFrequencyCodesSoapIn" />
+      <wsdl:output message="tns:GetAlcoholFrequencyCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEducationLevelCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get EducationLevel Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetEducationLevelCodesSoapIn" />
+      <wsdl:output message="tns:GetEducationLevelCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetThirdPartyCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get ThirdParty Codes</wsdl:documentation>
+      <wsdl:input message="tns:GetThirdPartyCodesSoapIn" />
+      <wsdl:output message="tns:GetThirdPartyCodesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCarriers">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Carriers</wsdl:documentation>
+      <wsdl:input message="tns:GetCarriersSoapIn" />
+      <wsdl:output message="tns:GetCarriersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilitySetupData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Facility Setup Data</wsdl:documentation>
+      <wsdl:input message="tns:GetFacilitySetupDataSoapIn" />
+      <wsdl:output message="tns:GetFacilitySetupDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ConfigWSSoap" type="tns:ConfigWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPracticeData">
+      <soap:operation soapAction="http://tempuri.org/GetPracticeData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePracticeData">
+      <soap:operation soapAction="http://tempuri.org/SavePracticeData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPracticesForOrganization">
+      <soap:operation soapAction="http://tempuri.org/GetPracticesForOrganization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationData">
+      <soap:operation soapAction="http://tempuri.org/GetOrganizationData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveOrganizationData">
+      <soap:operation soapAction="http://tempuri.org/SaveOrganizationData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrganizationSearch">
+      <soap:operation soapAction="http://tempuri.org/OrganizationSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityData">
+      <soap:operation soapAction="http://tempuri.org/GetFacilityData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveFacilityData">
+      <soap:operation soapAction="http://tempuri.org/SaveFacilityData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilitiesForPractice">
+      <soap:operation soapAction="http://tempuri.org/GetFacilitiesForPractice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FacilitySearch">
+      <soap:operation soapAction="http://tempuri.org/FacilitySearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPreferredLanguageCodes">
+      <soap:operation soapAction="http://tempuri.org/GetPreferredLanguageCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGenderCodes">
+      <soap:operation soapAction="http://tempuri.org/GetGenderCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRaceCodes">
+      <soap:operation soapAction="http://tempuri.org/GetRaceCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEthnicityCodes">
+      <soap:operation soapAction="http://tempuri.org/GetEthnicityCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaritalStatusCodes">
+      <soap:operation soapAction="http://tempuri.org/GetMaritalStatusCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConditionStatusCodes">
+      <soap:operation soapAction="http://tempuri.org/GetConditionStatusCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReligionCodes">
+      <soap:operation soapAction="http://tempuri.org/GetReligionCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBloodTypeCodes">
+      <soap:operation soapAction="http://tempuri.org/GetBloodTypeCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSmokingStatusCodes">
+      <soap:operation soapAction="http://tempuri.org/GetSmokingStatusCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityTypesCodes">
+      <soap:operation soapAction="http://tempuri.org/GetFacilityTypesCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserRoleCodes">
+      <soap:operation soapAction="http://tempuri.org/GetUserRoleCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentTypeCodes">
+      <soap:operation soapAction="http://tempuri.org/GetDocumentTypeCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuditActionCodes">
+      <soap:operation soapAction="http://tempuri.org/GetAuditActionCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEMRSystemCodes">
+      <soap:operation soapAction="http://tempuri.org/GetEMRSystemCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationshipCodes">
+      <soap:operation soapAction="http://tempuri.org/GetRelationshipCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationshipSNOMED">
+      <soap:operation soapAction="http://tempuri.org/GetRelationshipSNOMED" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSecurityQuestionCodes">
+      <soap:operation soapAction="http://tempuri.org/GetSecurityQuestionCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInstructionTypeCodes">
+      <soap:operation soapAction="http://tempuri.org/GetInstructionTypeCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProblemCodes">
+      <soap:operation soapAction="http://tempuri.org/GetProblemCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVaccineCodes">
+      <soap:operation soapAction="http://tempuri.org/GetVaccineCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMedicationsCodes">
+      <soap:operation soapAction="http://tempuri.org/GetMedicationsCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFrequencyCodes">
+      <soap:operation soapAction="http://tempuri.org/GetFrequencyCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryCodes">
+      <soap:operation soapAction="http://tempuri.org/GetCountryCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStateCodes">
+      <soap:operation soapAction="http://tempuri.org/GetStateCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSocialCodes">
+      <soap:operation soapAction="http://tempuri.org/GetSocialCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteOfAdministrationCodes">
+      <soap:operation soapAction="http://tempuri.org/GetRouteOfAdministrationCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocUploadTypeCodes">
+      <soap:operation soapAction="http://tempuri.org/GetDocUploadTypeCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDoctorTypeCodes">
+      <soap:operation soapAction="http://tempuri.org/GetDoctorTypeCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPolicyTypeCodes">
+      <soap:operation soapAction="http://tempuri.org/GetPolicyTypeCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdvisorCodes">
+      <soap:operation soapAction="http://tempuri.org/GetAdvisorCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExerciseFrequencyCodes">
+      <soap:operation soapAction="http://tempuri.org/GetExerciseFrequencyCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActivityLevelCodes">
+      <soap:operation soapAction="http://tempuri.org/GetActivityLevelCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlcoholFrequencyCodes">
+      <soap:operation soapAction="http://tempuri.org/GetAlcoholFrequencyCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEducationLevelCodes">
+      <soap:operation soapAction="http://tempuri.org/GetEducationLevelCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetThirdPartyCodes">
+      <soap:operation soapAction="http://tempuri.org/GetThirdPartyCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarriers">
+      <soap:operation soapAction="http://tempuri.org/GetCarriers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilitySetupData">
+      <soap:operation soapAction="http://tempuri.org/GetFacilitySetupData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ConfigWSSoap12" type="tns:ConfigWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPracticeData">
+      <soap12:operation soapAction="http://tempuri.org/GetPracticeData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePracticeData">
+      <soap12:operation soapAction="http://tempuri.org/SavePracticeData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPracticesForOrganization">
+      <soap12:operation soapAction="http://tempuri.org/GetPracticesForOrganization" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationData">
+      <soap12:operation soapAction="http://tempuri.org/GetOrganizationData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveOrganizationData">
+      <soap12:operation soapAction="http://tempuri.org/SaveOrganizationData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrganizationSearch">
+      <soap12:operation soapAction="http://tempuri.org/OrganizationSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityData">
+      <soap12:operation soapAction="http://tempuri.org/GetFacilityData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveFacilityData">
+      <soap12:operation soapAction="http://tempuri.org/SaveFacilityData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilitiesForPractice">
+      <soap12:operation soapAction="http://tempuri.org/GetFacilitiesForPractice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FacilitySearch">
+      <soap12:operation soapAction="http://tempuri.org/FacilitySearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPreferredLanguageCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetPreferredLanguageCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGenderCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetGenderCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRaceCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetRaceCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEthnicityCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetEthnicityCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaritalStatusCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetMaritalStatusCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConditionStatusCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetConditionStatusCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReligionCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetReligionCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBloodTypeCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetBloodTypeCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSmokingStatusCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetSmokingStatusCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityTypesCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetFacilityTypesCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserRoleCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetUserRoleCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentTypeCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetDocumentTypeCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuditActionCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetAuditActionCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEMRSystemCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetEMRSystemCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationshipCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetRelationshipCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationshipSNOMED">
+      <soap12:operation soapAction="http://tempuri.org/GetRelationshipSNOMED" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSecurityQuestionCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetSecurityQuestionCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInstructionTypeCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetInstructionTypeCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProblemCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetProblemCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVaccineCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetVaccineCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMedicationsCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetMedicationsCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFrequencyCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetFrequencyCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetCountryCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStateCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetStateCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSocialCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetSocialCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteOfAdministrationCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetRouteOfAdministrationCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocUploadTypeCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetDocUploadTypeCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDoctorTypeCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetDoctorTypeCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPolicyTypeCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetPolicyTypeCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdvisorCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetAdvisorCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExerciseFrequencyCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetExerciseFrequencyCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActivityLevelCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetActivityLevelCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlcoholFrequencyCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetAlcoholFrequencyCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEducationLevelCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetEducationLevelCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetThirdPartyCodes">
+      <soap12:operation soapAction="http://tempuri.org/GetThirdPartyCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarriers">
+      <soap12:operation soapAction="http://tempuri.org/GetCarriers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilitySetupData">
+      <soap12:operation soapAction="http://tempuri.org/GetFacilitySetupData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ConfigWS">
+    <wsdl:port name="ConfigWSSoap" binding="tns:ConfigWSSoap">
+      <soap:address location="http://localhost:61065/ConfigService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ConfigWSSoap12" binding="tns:ConfigWSSoap12">
+      <soap12:address location="http://localhost:61065/ConfigService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

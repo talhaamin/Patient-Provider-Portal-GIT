@@ -1,0 +1,14 @@
+﻿    input[type='file'] {
+        color: transparent;
+    }
+
+    .hoverMe:hover {
+        color: #E17009;
+        cursor: pointer;
+        text-decoration:none;
+    }
+    .LinkHighlight {
+        font-weight:bold; 
+        text-decoration:underline; 
+        cursor:pointer;
+    }

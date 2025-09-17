@@ -1,0 +1,62 @@
+﻿@model IEnumerable<AMR.Models.PatientMessageModel>
+
+
+<table class="box-table-a" id="tbl-Appointments" summary="Appointments">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>                            
+                            <th scope="col">Location</th>
+                            
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count()>0)
+                        {
+                            int counter = 0;
+                            
+                            foreach (var item in Model)
+                            {
+                                
+                                if (item.MessageType == "Appointment Request")
+                                {
+                                    System.Text.StringBuilder jsonStringAppointment = new System.Text.StringBuilder();
+
+                                    jsonStringAppointment.Append(" { ");
+                                    jsonStringAppointment.Append("\"MessageId\": \"" + item.MessageId + "\",");
+                                    jsonStringAppointment.Append("\"FacilityId\": \"" + item.FacilityId + "\",");
+                                    jsonStringAppointment.Append("\"ProviderId_To\": \"" + item.ProviderId_To + "\",");
+                                    jsonStringAppointment.Append("\"PreferredPeriod\":  \"" + item.PreferredPeriod + "\",");
+                                    jsonStringAppointment.Append("\"MessageUrgencyId\":  \"" + (item.MessageUrgencyId) + "\",");
+                                    jsonStringAppointment.Append("\"PreferredWeekDay\":  \"" + item.PreferredWeekDay + "\",");
+                                    jsonStringAppointment.Append("\"AppointmentStart\":  \"" + item.AppointmentStart.ToShortDateString() + "\",");
+                                    jsonStringAppointment.Append("\"AppointmentEnd\":  \"" + item.AppointmentEnd.ToShortDateString() + "\",");
+                                    jsonStringAppointment.Append("\"PreferredTime\":  \"" + item.PreferredTime + "\",");
+                                    jsonStringAppointment.Append("\"VisitReason\":  \"" + item.VisitReason + "\",");
+                                    jsonStringAppointment.Append("\"MessageRequest\":  \"" + item.MessageRequest + "\"");
+                                    jsonStringAppointment.Append("}");
+                                    
+                                    <tr class="@((counter % 2 == 0) ? "r1" : "r0")" onclick="AppointmentDetail(@item.MessageId);">
+                                    <td><input type="hidden" id="hdAppointmentDetails@(item.MessageId)" value="@jsonStringAppointment.ToString()" />
+                                        @Convert.ToDateTime(item.AppointmentStart).ToShortDateString()</td>
+                                    <td>@item.PreferredTime</td>                                    
+                                    <td>@item.FacilityName</td>
+                                    
+                                
+                                    </tr>
+                                    counter++;
+                                }
+                            }    
+                        }
+                        else
+                        {
+                            <tr class="r1">
+                                <td>No Information Available.</td>
+                                <td></td> 
+                                          <td></td> 
+                                <td></td> 
+                            </tr>
+                        }
+                    </tbody>
+                </table>

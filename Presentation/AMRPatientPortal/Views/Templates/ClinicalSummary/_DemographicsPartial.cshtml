@@ -1,0 +1,361 @@
+﻿@using AMR.Models;
+@using AMR.Core.Extensions;
+@using System.Text;
+@using System.Web.Optimization;
+@model ClinicalSummaryViewModel
+
+ <table width="100%">
+                                        <tr height="50px">
+                                            <td style="width: 32px;" align="center">
+                                                <img src="Content/img/demographics.png" />
+                                            </td>
+                                            <td>
+                                                <h3 id="createdemographics" onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" onclick="removing_class(); " onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();"><span class="anc_clin" style="padding-right: 4px; font-weight: bold;">Demographics </span>
+                                                  </h3> 
+                                                    @* @if(Model.PatientRepresentatives.Demographics==true)   {    *@<img src="Content/img/edit.png" onclick="editDemographics();" style="cursor:pointer; margin-left:100px; margin-top:-60px;" >
+                                                
+                                               
+                                                @{
+                                                    StringBuilder jsonString = new StringBuilder();
+
+                                                    jsonString.Append(" { ");
+                                                    jsonString.Append("\"ID\": \"" + Model.PatientSummary.PatientId + "\",");
+                                                    jsonString.Append("\"FirstName\": \"" + Model.PatientSummary.FirstName + "\",");
+                                                    jsonString.Append("\"MiddleName\": \"" + Model.PatientSummary.MiddleName + "\",");
+                                                    jsonString.Append("\"LastName\": \"" + Model.PatientSummary.LastName + "\",");
+                                                    jsonString.Append("\"Title\": \"" + Model.PatientSummary.Title + "\",");
+                                                    jsonString.Append("\"Suffix\": \"" + Model.PatientSummary.Suffix + "\",");
+                                                    jsonString.Append("\"GenderId\": \"" + Model.PatientSummary.GenderId + "\",");
+                                                    jsonString.Append("\"PreferredLanguageId\": \"" + Model.PatientSummary.PreferredLanguageId + "\",");
+                                                    jsonString.Append("\"EthnicityId\": \"" + Model.PatientSummary.EthnicityId + "\",");
+                                                    jsonString.Append("\"PAddress\": \"" + Model.PatientSummary.PAddress + "\",");
+                                                    jsonString.Append("\"HomePhone\": \"" + Model.PatientSummary.HomePhone + "\",");
+                                                    jsonString.Append("\"MobilePhone\": \"" + Model.PatientSummary.MobilePhone + "\",");
+                                                    jsonString.Append("\"WorkPhone\": \"" + Model.PatientSummary.WorkPhone + "\",");
+                                                    jsonString.Append("\"EMail\": \"" + Model.PatientSummary.EMail + "\",");
+                                                    jsonString.Append("\"DOB\": \"" + Model.PatientSummary.DOB + "\",");
+                                                    jsonString.Append("\"RaceId\": \"" + Model.PatientSummary.RaceId + "\",");
+                                                    jsonString.Append("\"City\": \"" + Model.PatientSummary.City + "\",");
+                                                    jsonString.Append("\"State\": \"" + Model.PatientSummary.State + "\",");
+                                                    jsonString.Append("\"Zip\": \"" + Model.PatientSummary.Zip + "\",");
+                                                    jsonString.Append("\"CountryCode\": \"" + Model.PatientSummary.CountryCode + "\",");
+                                                    jsonString.Append("\"CountryName\": \"" + Model.PatientSummary.CountryName + "\",");
+
+                                                    jsonString.Append("\"SmokingStatusId\": \"" + Model.PatientSummary.SmokingStatusId + "\",");
+                                                    jsonString.Append("\"MailAddress1\": \"" + Model.PatientSummary.MailAddress1 + "\",");
+                                                    jsonString.Append("\"MailAddress2\": \"" + Model.PatientSummary.MailAddress2 + "\",");
+                                                    jsonString.Append("\"MailCity\": \"" + Model.PatientSummary.MailCity + "\",");
+                                                    jsonString.Append("\"MailCountryCode\": \"" + Model.PatientSummary.MailCountryCode + "\",");
+                                                    jsonString.Append("\"MailPostalCode\": \"" + Model.PatientSummary.MailPostalCode + "\",");
+                                                    jsonString.Append("\"RaceId_NotAnswered\": \"" + Model.PatientSummary.RaceId_NotAnswered + "\",");
+                                                    jsonString.Append("\"RaceId_Native\": \"" + Model.PatientSummary.RaceId_Native + "\",");
+                                                    jsonString.Append("\"RaceId_Asian\": \"" + Model.PatientSummary.RaceId_Asian + "\",");
+                                                    jsonString.Append("\"RaceId_Black\": \"" + Model.PatientSummary.RaceId_Black + "\",");
+                                                    jsonString.Append("\"RaceId_Hawaiian\": \"" + Model.PatientSummary.RaceId_Hawaiian + "\",");
+                                                    jsonString.Append("\"RaceId_White\": \"" + Model.PatientSummary.RaceId_White + "\",");
+                                                    jsonString.Append("\"MailState\": \"" + Model.PatientSummary.MailState + "\"");
+                                                    jsonString.Append("}");
+                                             
+                                                    <input type="hidden" value=" @jsonString.ToString()" id="demographicsdata" />
+                                                    
+                                                    StringBuilder jsonEmergencyString = new StringBuilder();
+                                                    jsonEmergencyString.Append("{");
+                                                    jsonEmergencyString.Append("\"PatientEmergencyId\": \"" + Model.PatientSummary.EmergencyId + "\",");
+                                                    jsonEmergencyString.Append("\"EmergencyName\": \"" + Model.PatientSummary.EmergencyName + "\",");
+                                                    jsonEmergencyString.Append("\"EmergencyHomePhone\": \"" + Model.PatientSummary.EmergencyHomePhone + "\",");
+                                                    jsonEmergencyString.Append("\"EmergencyAddress\": \"" + Model.PatientSummary.EmergencyAddress + "\",");
+                                                    jsonEmergencyString.Append("\"EmergencyCity\": \"" + Model.PatientSummary.EmergencyCity + "\",");
+                                                    jsonEmergencyString.Append("\"EmergencyCountryCode\": \"" + Model.PatientSummary.EmergencyCountryCode + "\",");
+                                                    jsonEmergencyString.Append("\"EmergencyCountryName\": \"" + Model.PatientSummary.EmergencyCountryName + "\",");
+                                                    jsonEmergencyString.Append("\"EmergencyMobilePhone\": \"" + Model.PatientSummary.EmergencyMobilePhone + "\",");
+                                                    jsonEmergencyString.Append("\"EmergencyRelationshipId\": \"" + Model.PatientSummary.EmergencyRelationshipId + "\",");
+                                                    jsonEmergencyString.Append("\"EmergencyState\": \"" + Model.PatientSummary.EmergencyState + "\",");
+                                                    jsonEmergencyString.Append("\"EmergencyWorkPhone\": \"" + Model.PatientSummary.EmergencyWorkPhone + "\",");
+                                                    jsonEmergencyString.Append("\"EmergencyZip\": \"" + Model.PatientSummary.EmergencyZip + "\",");
+                                                    jsonEmergencyString.Append("\"IsPrimary\": \"" + Model.PatientSummary.IsPrimary + "\",");
+                                                    jsonEmergencyString.Append("\"EmergencyRelationship\": \"" + Model.PatientSummary.EmergencyRelationship + "\"");
+                                                    jsonEmergencyString.Append("}");
+                                                    <input type="hidden" value=" @jsonEmergencyString.ToString()" id="objEmergency" />
+                                                    
+                                                    StringBuilder jsonPersonalString = new StringBuilder();
+                                                    jsonPersonalString.Append("{");
+                                                    jsonPersonalString.Append("\"HeightFt\": \"" + Model.PatientSummary.HeightFt + "\",");
+                                                    jsonPersonalString.Append("\"HeightIn\": \"" + Model.PatientSummary.HeightIn + "\",");
+                                                    jsonPersonalString.Append("\"HairColor\": \"" + Model.PatientSummary.HairColor + "\",");
+                                                    jsonPersonalString.Append("\"EyeColor\": \"" + Model.PatientSummary.EyeColor + "\",");
+                                                    jsonPersonalString.Append("\"BloodTypeId\": \"" + Model.PatientSummary.BloodTypeId + "\",");
+                                                    jsonPersonalString.Append("\"ReligionId\": \"" + Model.PatientSummary.ReligionId + "\",");
+                                                    jsonPersonalString.Append("\"Comments\": \"" + Model.PatientSummary.Comments + "\",");
+                                                    jsonPersonalString.Append("\"Weight\": \"" + Model.PatientSummary.Weight + "\",");
+                                                    jsonPersonalString.Append("\"OrganDoner\": \"" + Model.PatientSummary.OrganDoner + "\",");
+                                                    jsonPersonalString.Append("\"BoneMarrow\": \"" + Model.PatientOrgan.BoneMarrow + "\",");
+                                                    jsonPersonalString.Append("\"ConnectiveTissue\": \"" + Model.PatientOrgan.ConnectiveTissue + "\",");
+                                                    jsonPersonalString.Append("\"Cornea\": \"" + Model.PatientOrgan.Cornea + "\",");
+                                                    jsonPersonalString.Append("\"Heart\": \"" + Model.PatientOrgan.Heart + "\",");
+                                                    jsonPersonalString.Append("\"HeartValves\": \"" + Model.PatientOrgan.HeartValves + "\",");
+                                                    jsonPersonalString.Append("\"Intestines\": \"" + Model.PatientOrgan.Intestines + "\",");
+                                                    jsonPersonalString.Append("\"Kidneys\": \"" + Model.PatientOrgan.Kidneys + "\",");
+                                                    jsonPersonalString.Append("\"Liver\": \"" + Model.PatientOrgan.Liver + "\",");
+                                                    jsonPersonalString.Append("\"Lungs\": \"" + Model.PatientOrgan.Lungs + "\",");
+                                                    jsonPersonalString.Append("\"Pancreas\": \"" + Model.PatientOrgan.Pancreas + "\",");
+                                                    jsonPersonalString.Append("\"PatientId\": \"" + Model.PatientOrgan.PatientId + "\",");
+
+                                                    jsonPersonalString.Append("\"Skin\": \"" + Model.PatientOrgan.Skin + "\"");
+
+                                                    jsonPersonalString.Append("}");
+                                                    <input type="hidden" value=" @jsonPersonalString.ToString()" id="objPersonal" />
+                                                }
+                                                    @* }*@
+                                            </td>
+                                            <td>&nbsp;</td>
+                                         @*   <td style="width: 32px;" align="center">
+                                                <img src="Content/img/personal.png" />&nbsp;
+                                               
+                                            </td>
+
+                                            <td colspan="3">
+                                           <h3 id="createpersonal"  onmousemove="removing_class();" onmouseover="removing_class(); " onmousedown="removing_class();" 
+                                    onclick="removing_class(); "onmouseout="removing_class();" onmouseup="removing_class();" onfocus="removing_class();">
+                                    <span class="anc_clin" style="padding-right: 4px; font-weight: bold;">Personal Information </span>
+                                                   
+                                     <img src="Content/img/edit.png" onclick="editPersonal();" style="cursor:pointer;">
+                          
+
+                                                          </h3>
+
+                                            </td>*@
+
+
+                                        </tr>
+                                        <tr class="table_brder">
+                                            <td></td>
+                                     @* @if(Model.PatientRepresentatives.Demographics==true)   {  *@<td width="16%"><b>Address:</b> </td>
+                                            <td width="35%">@Html.DisplayTextFor(a => a.PatientSummary.PAddress)<br />@Html.DisplayTextFor(a => a.PatientSummary.City),@Html.DisplayTextFor(a => a.PatientSummary.State)&nbsp;&nbsp;@Html.DisplayTextFor(a => a.PatientSummary.Zip)</td>@* }*@
+                                            @*else{*@
+                                            <td width="16%">@* This content is restricted *@</td>
+                                            <td width="35%"></td>
+                                            @*}*@
+                                            <td colspan="3"> 
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3"> </td>
+
+
+
+
+
+
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                              @* @if(Model.PatientRepresentatives.Demographics==true)   {  
+                                            *@<td><b>Home Phone:</b></td>
+                                            <td>@Html.DisplayTextFor(a => a.PatientSummary.HomePhone) </td> @*}*@
+                                           @* else
+                                            {*@
+                                            <td></td>
+                                            <td></td>
+                                              @* }*@
+                                            <td colspan="3"> 
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3"> </td>
+
+
+
+                                        </tr>
+                                        <tr class="table_brder">
+                                            <td></td>
+                                            @* @if(Model.PatientRepresentatives.Demographics==true)   {  
+                                            *@<td><b>Work Phone:</b> </td>
+                                            <td>@Html.DisplayTextFor(a => a.PatientSummary.WorkPhone)</td> @*}
+                                            else{*@
+                                            <td></td>
+                                            <td></td>
+                                            @*}*@
+                                            <td colspan="3"> 
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3"> </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            @* @if (Model.PatientRepresentatives.Demographics == true)
+                                             {  
+                                            *@<td><b>Mobile Phone:</b> </td>
+                                            <td>@Html.DisplayTextFor(a => a.PatientSummary.MobilePhone)</td>@* }
+                                            else{*@
+                                            <td></td>
+                                            <td></td>@*}*@
+                                            <td></td>
+                                           @*   @if(Model.PatientRepresentatives.Organ==true)   { 
+                                            *@<td></td>
+                                           <td colspan="3"> 
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3"> </td>
+                                          @*  }*@
+
+                                        </tr>
+                                        <tr class="table_brder">
+                                            <td></td>
+                                          @*   @if (Model.PatientRepresentatives.Demographics == true)
+                                             { 
+                                            *@<td><b>Email:</b> </td>
+                                            <td>@Html.DisplayTextFor(a => a.PatientSummary.EMail)</td>@* }
+                                            else{*@
+                                            <td></td>
+                                            <td></td>
+                                           @* }*@
+                                            <td></td>
+                                          @*   @if (Model.PatientRepresentatives.Organ == true)
+                                             { 
+                                            *@<td>@*Organ*@</td>
+                                            <td colspan="3"> @*@if (Model.PatientSummary.BoneMarrow == true)
+                                                             { 
+                                                                @("BoneMarrow,")} 
+                                                            @if (Model.PatientSummary.ConnectiveTissue == true)
+                                                            { 
+                                                                @("ConnectiveTissue,")} 
+                                                            @if (Model.PatientSummary.Cornea == true)
+                                                            { 
+                                                                @("Cornea,")}
+                                                            @if (Model.PatientSummary.Heart == true)
+                                                            { @("Heart,")
+                                                            }
+                                                
+                                                            @if (Model.PatientSummary.HeartValves == true)
+                                                            { @("Heart Valves,")}
+                                                            @if (Model.PatientSummary.Intestines == true)
+                                                            { 
+                                                                @("Intestines,")}
+                                                            @if (Model.PatientSummary.Kidneys == true)
+                                                            { 
+                                                                @("Kidneys,")}
+                                                            @if (Model.PatientSummary.Liver == true)
+                                                            { 
+                                                                @("Liver,")
+                                                            }
+                                                
+                                                            @if (Model.PatientSummary.Lungs == true)
+                                                            { 
+                                                                @("Lungs,")}
+                                                             @if (Model.PatientSummary.Pancreas == true)
+                                                             { 
+                                                                @("Pancreas,")}
+                                                            @if (Model.PatientSummary.Skin == true)
+                                                            { 
+                                                                @("Skin")}     *@
+                                            </td>
+                                            @* }*@
+                                           @* else
+                                            {
+                                                *@  <td></td>
+                                            <td colspan="3"> </td>
+                                            @* }*@
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                             @* @if (Model.PatientRepresentatives.Demographics == true)
+                                             { 
+                                            *@<td><b>Date of Birth:</b></td>
+                                            <td>@Html.DisplayTextFor(a => a.PatientSummary.DOB)</td> @*}
+                                            else
+                                            {*@
+                                            <td></td>
+                                            <td></td>
+                                             @* }*@
+                                            <td colspan="3"> 
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3"> </td>
+
+
+
+                                        </tr>
+                                        <tr class="table_brder">
+
+                                            <td></td>
+                                           @*  @if (Model.PatientRepresentatives.Demographics == true)
+                                             { 
+                                            *@<td><b>Sex:</b> </td>
+                                            <td>@Html.DisplayTextFor(a => a.PatientSummary.Gender) </td>
+                                            @* }
+                                            else
+                                            {*@
+                                             <td> </td>
+                                            <td> </td>
+                                            <td colspan="3"> 
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3"> </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                              @*  @if (Model.PatientRepresentatives.Demographics == true)
+                                             { 
+                                            *@<td><b>Preferred Language:</b> </td>
+                                            <td>@Html.DisplayTextFor(a => a.PatientSummary.PreferredLanguage) </td> @*}
+                                            else
+                                            {*@<td> </td>
+                                            <td> </td>@*}*@
+                                            <td colspan="3"> 
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3"> </td>
+
+
+                                        </tr>
+                                        <tr class="table_brder">
+                                            <td></td>
+                                              @* @if (Model.PatientRepresentatives.Demographics == true)
+                                             { 
+                                            *@<td><b>Race:</b> </td>
+                                            <td>@Html.DisplayTextFor(a => a.PatientSummary.Race) </td>
+                                              @* }
+                                             else
+                                            {*@<td> </td>
+                                            <td> </td>@*}*@
+                                            <td colspan="3"> 
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3"> </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td></td>
+                                            @* @if (Model.PatientRepresentatives.Demographics == true)
+                                             { 
+                                            *@<td><b>Ethnicity:</b> </td>
+                                            <td>@Html.DisplayTextFor(a => a.PatientSummary.Ethnicity)</td>@* }
+                                            else
+                                             {*@<td> </td>
+                                            <td> </td>@*}*@
+                                            <td colspan="3"> 
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3"> </td>
+
+                                        </tr>
+                                        <tr class="table_brder">
+                                            <td></td>
+                                            @* @if (Model.PatientRepresentatives.Demographics == true)
+                                             { 
+                                            *@<td><b></b> </td>
+                                            <td></td> @*}
+                                              else
+                                             {*@<td> </td>
+                                            <td> </td>@*}*@
+                                            <td colspan="3"> 
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3"> </td>
+
+                                        </tr>
+
+                                    </table>

@@ -1,0 +1,2893 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AMRModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="AMREntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="C_BloodType" EntityType="AMRModel.C_BloodType" />
+    <EntitySet Name="C_Ethnicity" EntityType="AMRModel.C_Ethnicity" />
+    <EntitySet Name="C_Gender" EntityType="AMRModel.C_Gender" />
+    <EntitySet Name="C_MaritalStatus" EntityType="AMRModel.C_MaritalStatus" />
+    <EntitySet Name="C_Race" EntityType="AMRModel.C_Race" />
+    <EntitySet Name="C_Religion" EntityType="AMRModel.C_Religion" />
+    <EntitySet Name="C_AuditAction" EntityType="AMRModel.C_AuditAction" />
+    <EntitySet Name="C_DocumentType" EntityType="AMRModel.C_DocumentType" />
+    <EntitySet Name="PatientDocumentAudits" EntityType="AMRModel.PatientDocumentAudit" />
+    <AssociationSet Name="C_AuditAction_PatientlDocumentAudit_FK1" Association="AMRModel.C_AuditAction_PatientlDocumentAudit_FK1">
+      <End Role="C_AuditAction" EntitySet="C_AuditAction" />
+      <End Role="PatientDocumentAudit" EntitySet="PatientDocumentAudits" />
+    </AssociationSet>
+    <AssociationSet Name="C_DocumentType_PatientlDocumentAudit_FK1" Association="AMRModel.C_DocumentType_PatientlDocumentAudit_FK1">
+      <End Role="C_DocumentType" EntitySet="C_DocumentType" />
+      <End Role="PatientDocumentAudit" EntitySet="PatientDocumentAudits" />
+    </AssociationSet>
+    <EntitySet Name="C_FacilityTypes" EntityType="AMRModel.C_FacilityTypes" />
+    <EntitySet Name="Practices" EntityType="AMRModel.Practice" />
+    <EntitySet Name="PatientFacilityLinks" EntityType="AMRModel.PatientFacilityLink" />
+    <EntitySet Name="C_UserRole" EntityType="AMRModel.C_UserRole" />
+    <EntitySet Name="ProviderFacilityLinks" EntityType="AMRModel.ProviderFacilityLink" />
+    <EntitySet Name="Tokens" EntityType="AMRModel.Token" />
+    <EntitySet Name="C_SmokingStatus" EntityType="AMRModel.C_SmokingStatus" />
+    <EntitySet Name="PatientOrgans" EntityType="AMRModel.PatientOrgan" />
+    <EntitySet Name="C_ConditionStatus" EntityType="AMRModel.C_ConditionStatus" />
+    <EntitySet Name="C_CodeSystem" EntityType="AMRModel.C_CodeSystem" />
+    <EntitySet Name="C_MessagePeriod" EntityType="AMRModel.C_MessagePeriod" />
+    <EntitySet Name="C_MessageResponseType" EntityType="AMRModel.C_MessageResponseType" />
+    <EntitySet Name="C_MessageStatus" EntityType="AMRModel.C_MessageStatus" />
+    <EntitySet Name="Messages" EntityType="AMRModel.Message" />
+    <AssociationSet Name="C_MessageStatus_Message_FK1" Association="AMRModel.C_MessageStatus_Message_FK1">
+      <End Role="C_MessageStatus" EntitySet="C_MessageStatus" />
+      <End Role="Message" EntitySet="Messages" />
+    </AssociationSet>
+    <EntitySet Name="vwFacilitiesForPatients" EntityType="AMRModel.vwFacilitiesForPatient" />
+    <EntitySet Name="vwProvidersForFacilities" EntityType="AMRModel.vwProvidersForFacility" />
+    <EntitySet Name="PatientMatches" EntityType="AMRModel.PatientMatch" />
+    <EntitySet Name="AttachmentMessages" EntityType="AMRModel.AttachmentMessage" />
+    <EntitySet Name="ConfigAttachments" EntityType="AMRModel.ConfigAttachment" />
+    <EntitySet Name="vwPatientSearches" EntityType="AMRModel.vwPatientSearch" />
+    <EntitySet Name="Organizations" EntityType="AMRModel.Organization" />
+    <AssociationSet Name="Organization_Practice_FK1" Association="AMRModel.Organization_Practice_FK1">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="Practice" EntitySet="Practices" />
+    </AssociationSet>
+    <EntitySet Name="C_EMRSystem" EntityType="AMRModel.C_EMRSystem" />
+    <EntitySet Name="C_Relationship" EntityType="AMRModel.C_Relationship" />
+    <EntitySet Name="PatientAccountLinks" EntityType="AMRModel.PatientAccountLink" />
+    <EntitySet Name="C_SecurityQuestion" EntityType="AMRModel.C_SecurityQuestion" />
+    <EntitySet Name="C_InstructionType" EntityType="AMRModel.C_InstructionType" />
+    <EntitySet Name="C_Problem" EntityType="AMRModel.C_Problem" />
+    <EntitySet Name="C_AccessStatus" EntityType="AMRModel.C_AccessStatus" />
+    <EntitySet Name="UserLoginAudits" EntityType="AMRModel.UserLoginAudit" />
+    <EntitySet Name="MessageAudits" EntityType="AMRModel.MessageAudit" />
+    <AssociationSet Name="C_MessageStatus_MessageAudit_FK1" Association="AMRModel.C_MessageStatus_MessageAudit_FK1">
+      <End Role="C_MessageStatus" EntitySet="C_MessageStatus" />
+      <End Role="MessageAudit" EntitySet="MessageAudits" />
+    </AssociationSet>
+    <AssociationSet Name="Message_MessageAudit_FK1" Association="AMRModel.Message_MessageAudit_FK1">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="MessageAudit" EntitySet="MessageAudits" />
+    </AssociationSet>
+    <EntitySet Name="PatientProviderLinks" EntityType="AMRModel.PatientProviderLink" />
+    <EntitySet Name="PatientMedicalHists" EntityType="AMRModel.PatientMedicalHist" />
+    <EntitySet Name="C_Medication" EntityType="AMRModel.C_Medication" />
+    <EntitySet Name="PatientAllergies" EntityType="AMRModel.PatientAllergy" />
+    <EntitySet Name="PatientInsurances" EntityType="AMRModel.PatientInsurance" />
+    <EntitySet Name="PatientProcedures" EntityType="AMRModel.PatientProcedure" />
+    <EntitySet Name="C_Vaccine" EntityType="AMRModel.C_Vaccine" />
+    <EntitySet Name="PatientSocialHists" EntityType="AMRModel.PatientSocialHist" />
+    <EntitySet Name="PatientSurgicalHists" EntityType="AMRModel.PatientSurgicalHist" />
+    <EntitySet Name="PatientClinicalDocuments" EntityType="AMRModel.PatientClinicalDocument" />
+    <EntitySet Name="C_Country" EntityType="AMRModel.C_Country" />
+    <EntitySet Name="C_Frequency" EntityType="AMRModel.C_Frequency" />
+    <EntitySet Name="C_RouteOfAdministration" EntityType="AMRModel.C_RouteOfAdministration" />
+    <EntitySet Name="C_State" EntityType="AMRModel.C_State" />
+    <EntitySet Name="C_Social" EntityType="AMRModel.C_Social" />
+    <EntitySet Name="PatientVitalSigns" EntityType="AMRModel.PatientVitalSign" />
+    <EntitySet Name="C_MessageType" EntityType="AMRModel.C_MessageType" />
+    <AssociationSet Name="C_MessageType_Message_FK1" Association="AMRModel.C_MessageType_Message_FK1">
+      <End Role="C_MessageType" EntitySet="C_MessageType" />
+      <End Role="Message" EntitySet="Messages" />
+    </AssociationSet>
+    <EntitySet Name="vwPatientsForFacilities" EntityType="AMRModel.vwPatientsForFacility" />
+    <EntitySet Name="PatientRepresentatives" EntityType="AMRModel.PatientRepresentative" />
+    <EntitySet Name="C_PreferredLanguage" EntityType="AMRModel.C_PreferredLanguage" />
+    <EntitySet Name="PatientLabResultTests" EntityType="AMRModel.PatientLabResultTest" />
+    <EntitySet Name="PatientImmunizations" EntityType="AMRModel.PatientImmunization" />
+    <EntitySet Name="PatientFamilyHists" EntityType="AMRModel.PatientFamilyHist" />
+    <EntitySet Name="PatientProblems" EntityType="AMRModel.PatientProblem" />
+    <EntitySet Name="C_DoctorType" EntityType="AMRModel.C_DoctorType" />
+    <EntitySet Name="PatientCareDocuments" EntityType="AMRModel.PatientCareDocument" />
+    <EntitySet Name="PatientDocuments" EntityType="AMRModel.PatientDocument" />
+    <EntitySet Name="PatientMedicalDocuments" EntityType="AMRModel.PatientMedicalDocument" />
+    <EntitySet Name="C_Advisor" EntityType="AMRModel.C_Advisor" />
+    <EntitySet Name="PatientAdvisors" EntityType="AMRModel.PatientAdvisor" />
+    <EntitySet Name="PatientDoctors" EntityType="AMRModel.PatientDoctor" />
+    <EntitySet Name="PatientInsurancePlans" EntityType="AMRModel.PatientInsurancePlan" />
+    <EntitySet Name="ProviderWebSettings" EntityType="AMRModel.ProviderWebSetting" />
+    <EntitySet Name="C_DocUploadType" EntityType="AMRModel.C_DocUploadType" />
+    <EntitySet Name="C_PolicyType" EntityType="AMRModel.C_PolicyType" />
+    <EntitySet Name="PatientPolicies" EntityType="AMRModel.PatientPolicy" />
+    <EntitySet Name="PatientEmergencies" EntityType="AMRModel.PatientEmergency" />
+    <AssociationSet Name="C_Relationship_PatientEmergency_FK1" Association="AMRModel.C_Relationship_PatientEmergency_FK1">
+      <End Role="C_Relationship" EntitySet="C_Relationship" />
+      <End Role="PatientEmergency" EntitySet="PatientEmergencies" />
+    </AssociationSet>
+    <EntitySet Name="vwMessageUnreads" EntityType="AMRModel.vwMessageUnread" />
+    <EntitySet Name="BillPayments" EntityType="AMRModel.BillPayment" />
+    <EntitySet Name="BillRates" EntityType="AMRModel.BillRate" />
+    <AssociationSet Name="FK_BillPayment_BillRate" Association="AMRModel.FK_BillPayment_BillRate">
+      <End Role="BillRate" EntitySet="BillRates" />
+      <End Role="BillPayment" EntitySet="BillPayments" />
+    </AssociationSet>
+    <EntitySet Name="vwMessageUnreadProvs" EntityType="AMRModel.vwMessageUnreadProv" />
+    <EntitySet Name="PatientVisits" EntityType="AMRModel.PatientVisit" />
+    <EntitySet Name="Providers" EntityType="AMRModel.Provider" />
+    <AssociationSet Name="PatientProviderLink_Provider_FK1" Association="AMRModel.PatientProviderLink_Provider_FK1">
+      <End Role="Provider" EntitySet="Providers" />
+      <End Role="PatientProviderLink" EntitySet="PatientProviderLinks" />
+    </AssociationSet>
+    <AssociationSet Name="Practice_Provider_FK1" Association="AMRModel.Practice_Provider_FK1">
+      <End Role="Practice" EntitySet="Practices" />
+      <End Role="Provider" EntitySet="Providers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Provider_ProviderFacilityLink" Association="AMRModel.FK_Provider_ProviderFacilityLink">
+      <End Role="Provider" EntitySet="Providers" />
+      <End Role="ProviderFacilityLink" EntitySet="ProviderFacilityLinks" />
+    </AssociationSet>
+    <EntitySet Name="vwCCDAuditLogs" EntityType="AMRModel.vwCCDAuditLog" />
+    <EntitySet Name="vwRptPatientLogins" EntityType="AMRModel.vwRptPatientLogin" />
+    <EntitySet Name="vwRptSecureMessages" EntityType="AMRModel.vwRptSecureMessage" />
+    <EntitySet Name="vwVisitCCDs" EntityType="AMRModel.vwVisitCCD" />
+    <EntitySet Name="vwPatientFacilityOptions" EntityType="AMRModel.vwPatientFacilityOption" />
+    <EntitySet Name="Facilities" EntityType="AMRModel.Facility" />
+    <EntitySet Name="PatientShares" EntityType="AMRModel.PatientShare" />
+    <AssociationSet Name="Facility_PatientFacilityLink_FK1" Association="AMRModel.Facility_PatientFacilityLink_FK1">
+      <End Role="Facility" EntitySet="Facilities" />
+      <End Role="PatientFacilityLink" EntitySet="PatientFacilityLinks" />
+    </AssociationSet>
+    <AssociationSet Name="Facility_ProviderFacilityLink_FK1" Association="AMRModel.Facility_ProviderFacilityLink_FK1">
+      <End Role="Facility" EntitySet="Facilities" />
+      <End Role="ProviderFacilityLink" EntitySet="ProviderFacilityLinks" />
+    </AssociationSet>
+    <AssociationSet Name="Practice_Facility_FK1" Association="AMRModel.Practice_Facility_FK1">
+      <End Role="Practice" EntitySet="Practices" />
+      <End Role="Facility" EntitySet="Facilities" />
+    </AssociationSet>
+    <EntitySet Name="PatientPlanOfCares" EntityType="AMRModel.PatientPlanOfCare" />
+    <AssociationSet Name="C_InstructionType_PatientPlanOfCare_FK1" Association="AMRModel.C_InstructionType_PatientPlanOfCare_FK1">
+      <End Role="C_InstructionType" EntitySet="C_InstructionType" />
+      <End Role="PatientPlanOfCare" EntitySet="PatientPlanOfCares" />
+    </AssociationSet>
+    <EntitySet Name="PatientNotes" EntityType="AMRModel.PatientNote" />
+    <EntitySet Name="C_ActivityLevel" EntityType="AMRModel.C_ActivityLevel" />
+    <EntitySet Name="C_AlcoholFrequency" EntityType="AMRModel.C_AlcoholFrequency" />
+    <EntitySet Name="C_EducationLevel" EntityType="AMRModel.C_EducationLevel" />
+    <EntitySet Name="C_ExerciseFrequency" EntityType="AMRModel.C_ExerciseFrequency" />
+    <EntitySet Name="PatientSocialSelves" EntityType="AMRModel.PatientSocialSelf" />
+    <EntitySet Name="C_ThirdParty" EntityType="AMRModel.C_ThirdParty" />
+    <EntitySet Name="PatientWebSettings" EntityType="AMRModel.PatientWebSetting" />
+    <EntitySet Name="Configs" EntityType="AMRModel.Config" />
+    <EntitySet Name="Patients" EntityType="AMRModel.Patient" />
+    <EntitySet Name="Users" EntityType="AMRModel.User" />
+    <AssociationSet Name="C_BloodType_Patient_FK1" Association="AMRModel.C_BloodType_Patient_FK1">
+      <End Role="C_BloodType" EntitySet="C_BloodType" />
+      <End Role="Patient" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="C_Ethnicity_Patient_FK1" Association="AMRModel.C_Ethnicity_Patient_FK1">
+      <End Role="C_Ethnicity" EntitySet="C_Ethnicity" />
+      <End Role="Patient" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="C_Gender_Patient_FK1" Association="AMRModel.C_Gender_Patient_FK1">
+      <End Role="C_Gender" EntitySet="C_Gender" />
+      <End Role="Patient" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="C_MaritalStatus_Patient_FK1" Association="AMRModel.C_MaritalStatus_Patient_FK1">
+      <End Role="C_MaritalStatus" EntitySet="C_MaritalStatus" />
+      <End Role="Patient" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="C_PreferredLanguage_Patient_FK1" Association="AMRModel.C_PreferredLanguage_Patient_FK1">
+      <End Role="C_PreferredLanguage" EntitySet="C_PreferredLanguage" />
+      <End Role="Patient" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="C_Religion_Patient_FK1" Association="AMRModel.C_Religion_Patient_FK1">
+      <End Role="C_Religion" EntitySet="C_Religion" />
+      <End Role="Patient" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="C_SmokingStatus_Patient_FK1" Association="AMRModel.C_SmokingStatus_Patient_FK1">
+      <End Role="C_SmokingStatus" EntitySet="C_SmokingStatus" />
+      <End Role="Patient" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="C_UserRole_User_FK1" Association="AMRModel.C_UserRole_User_FK1">
+      <End Role="C_UserRole" EntitySet="C_UserRole" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientAccountLink_FK1" Association="AMRModel.Patient_PatientAccountLink_FK1">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientAccountLink" EntitySet="PatientAccountLinks" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientCareDocument_FK1" Association="AMRModel.Patient_PatientCareDocument_FK1">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientCareDocument" EntitySet="PatientCareDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientDocument_FK1" Association="AMRModel.Patient_PatientDocument_FK1">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientDocument" EntitySet="PatientDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientEmergency_FK1" Association="AMRModel.Patient_PatientEmergency_FK1">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientEmergency" EntitySet="PatientEmergencies" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientFacilityLink_FK1" Association="AMRModel.Patient_PatientFacilityLink_FK1">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientFacilityLink" EntitySet="PatientFacilityLinks" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientMedicalDocument_FK1" Association="AMRModel.Patient_PatientMedicalDocument_FK1">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientMedicalDocument" EntitySet="PatientMedicalDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientOrgan_FK1" Association="AMRModel.Patient_PatientOrgan_FK1">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientOrgan" EntitySet="PatientOrgans" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientShare_FK1" Association="AMRModel.Patient_PatientShare_FK1">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientShare" EntitySet="PatientShares" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientVisit_FK1" Association="AMRModel.Patient_PatientVisit_FK1">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientVisit" EntitySet="PatientVisits" />
+    </AssociationSet>
+    <AssociationSet Name="Patient_PatientWebSetting_FK1" Association="AMRModel.Patient_PatientWebSetting_FK1">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientWebSetting" EntitySet="PatientWebSettings" />
+    </AssociationSet>
+    <AssociationSet Name="PatientProviderLink_Patient_FK1" Association="AMRModel.PatientProviderLink_Patient_FK1">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientProviderLink" EntitySet="PatientProviderLinks" />
+    </AssociationSet>
+    <EntitySet Name="vwPatientSummaries" EntityType="AMRModel.vwPatientSummary" />
+    <EntitySet Name="Carriers" EntityType="AMRModel.Carrier" />
+    <EntitySet Name="vwPatientVisitSummaries" EntityType="AMRModel.vwPatientVisitSummary" />
+    <EntitySet Name="PatientMedications" EntityType="AMRModel.PatientMedication" />
+    <EntitySet Name="vwMessageGetWaitings" EntityType="AMRModel.vwMessageGetWaiting" />
+    <EntitySet Name="MessageDetails" EntityType="AMRModel.MessageDetail" />
+    <AssociationSet Name="C_MessageResponseType_MessageDetail_FK1" Association="AMRModel.C_MessageResponseType_MessageDetail_FK1">
+      <End Role="C_MessageResponseType" EntitySet="C_MessageResponseType" />
+      <End Role="MessageDetail" EntitySet="MessageDetails" />
+    </AssociationSet>
+    <AssociationSet Name="Message_MessageDetail_FK1" Association="AMRModel.Message_MessageDetail_FK1">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="MessageDetail" EntitySet="MessageDetails" />
+    </AssociationSet>
+    <EntitySet Name="vwMessageSummaries" EntityType="AMRModel.vwMessageSummary" />
+    <EntitySet Name="PatientPharmacies" EntityType="AMRModel.PatientPharmacy" />
+    <EntitySet Name="vwMessageDetailReceiveds" EntityType="AMRModel.vwMessageDetailReceived" />
+    <EntitySet Name="vwMessageDetailSents" EntityType="AMRModel.vwMessageDetailSent" />
+    <FunctionImport Name="FindPatient">
+      <Parameter Name="PatientId" Mode="InOut" Type="Int64" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="DOB" Mode="In" Type="DateTime" />
+      <Parameter Name="SSN" Mode="In" Type="String" />
+      <Parameter Name="Gender" Mode="In" Type="Int32" />
+      <Parameter Name="Address1" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="State" Mode="In" Type="String" />
+      <Parameter Name="Postal" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="MedicareId" Mode="In" Type="String" />
+      <Parameter Name="MedicaidState" Mode="In" Type="String" />
+      <Parameter Name="MedicaidId" Mode="In" Type="String" />
+      <Parameter Name="AltId1_Type" Mode="In" Type="String" />
+      <Parameter Name="AltId1_Key" Mode="In" Type="String" />
+      <Parameter Name="AltId2_Type" Mode="In" Type="String" />
+      <Parameter Name="AltId2_Key" Mode="In" Type="String" />
+      <Parameter Name="AltId3_Type" Mode="In" Type="String" />
+      <Parameter Name="AltId3_Key" Mode="In" Type="String" />
+      <Parameter Name="AltId4_Type" Mode="In" Type="String" />
+      <Parameter Name="AltId4_Key" Mode="In" Type="String" />
+      <Parameter Name="AltId5_Type" Mode="In" Type="String" />
+      <Parameter Name="AltId5_Key" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="vwMessageGetCancelleds" EntityType="AMRModel.vwMessageGetCancelled" />
+    <EntitySet Name="DirectReceiveds" EntityType="AMRModel.DirectReceived" />
+    <EntitySet Name="vwPatientDocumentsLists" EntityType="AMRModel.vwPatientDocumentsList" />
+    <EntitySet Name="PatientLabResults" EntityType="AMRModel.PatientLabResult" />
+    <AssociationSet Name="PatientLabResult_PatientLabResultsTest_FK1" Association="AMRModel.PatientLabResult_PatientLabResultsTest_FK1">
+      <End Role="PatientLabResult" EntitySet="PatientLabResults" />
+      <End Role="PatientLabResultTest" EntitySet="PatientLabResultTests" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C_BloodType">
+    <Key>
+      <PropertyRef Name="BloodTypeId" />
+    </Key>
+    <Property Name="BloodTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Patients" Relationship="AMRModel.C_BloodType_Patient_FK1" FromRole="C_BloodType" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="C_Ethnicity">
+    <Key>
+      <PropertyRef Name="EthnicityId" />
+    </Key>
+    <Property Name="EthnicityId" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Patients" Relationship="AMRModel.C_Ethnicity_Patient_FK1" FromRole="C_Ethnicity" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="C_Gender">
+    <Key>
+      <PropertyRef Name="GenderId" />
+    </Key>
+    <Property Name="GenderId" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Patients" Relationship="AMRModel.C_Gender_Patient_FK1" FromRole="C_Gender" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="C_MaritalStatus">
+    <Key>
+      <PropertyRef Name="MaritalStatusId" />
+    </Key>
+    <Property Name="MaritalStatusId" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Patients" Relationship="AMRModel.C_MaritalStatus_Patient_FK1" FromRole="C_MaritalStatus" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="C_Race">
+    <Key>
+      <PropertyRef Name="RaceId" />
+    </Key>
+    <Property Name="RaceId" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="C_Religion">
+    <Key>
+      <PropertyRef Name="ReligionId" />
+    </Key>
+    <Property Name="ReligionId" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Patients" Relationship="AMRModel.C_Religion_Patient_FK1" FromRole="C_Religion" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="C_AuditAction">
+    <Key>
+      <PropertyRef Name="AuditActionId" />
+    </Key>
+    <Property Type="Int16" Name="AuditActionId" Nullable="false" />
+    <Property Type="String" Name="Description" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PatientDocumentAudits" Relationship="AMRModel.C_AuditAction_PatientlDocumentAudit_FK1" FromRole="C_AuditAction" ToRole="PatientDocumentAudit" />
+  </EntityType>
+  <EntityType Name="C_DocumentType">
+    <Key>
+      <PropertyRef Name="DocumentTypeId" />
+    </Key>
+    <Property Type="Int16" Name="DocumentTypeId" Nullable="false" />
+    <Property Type="String" Name="Description" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PatientDocumentAudits" Relationship="AMRModel.C_DocumentType_PatientlDocumentAudit_FK1" FromRole="C_DocumentType" ToRole="PatientDocumentAudit" />
+  </EntityType>
+  <EntityType Name="PatientDocumentAudit">
+    <Key>
+      <PropertyRef Name="AuditId" />
+    </Key>
+    <Property Type="Int64" Name="AuditId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="DocCntr" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int16" Name="DocumentTypeId" />
+    <Property Type="Int64" Name="UserId" />
+    <Property Type="DateTime" Name="TDStamp" Precision="3" />
+    <Property Type="Int16" Name="AuditActionId" />
+    <NavigationProperty Name="C_AuditAction" Relationship="AMRModel.C_AuditAction_PatientlDocumentAudit_FK1" FromRole="PatientDocumentAudit" ToRole="C_AuditAction" />
+    <NavigationProperty Name="C_DocumentType" Relationship="AMRModel.C_DocumentType_PatientlDocumentAudit_FK1" FromRole="PatientDocumentAudit" ToRole="C_DocumentType" />
+  </EntityType>
+  <Association Name="C_AuditAction_PatientlDocumentAudit_FK1">
+    <End Type="AMRModel.C_AuditAction" Role="C_AuditAction" Multiplicity="0..1" />
+    <End Type="AMRModel.PatientDocumentAudit" Role="PatientDocumentAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_AuditAction">
+        <PropertyRef Name="AuditActionId" />
+      </Principal>
+      <Dependent Role="PatientDocumentAudit">
+        <PropertyRef Name="AuditActionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_DocumentType_PatientlDocumentAudit_FK1">
+    <End Type="AMRModel.C_DocumentType" Role="C_DocumentType" Multiplicity="0..1" />
+    <End Type="AMRModel.PatientDocumentAudit" Role="PatientDocumentAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_DocumentType">
+        <PropertyRef Name="DocumentTypeId" />
+      </Principal>
+      <Dependent Role="PatientDocumentAudit">
+        <PropertyRef Name="DocumentTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="C_FacilityTypes">
+    <Key>
+      <PropertyRef Name="FacilityTypeId" />
+    </Key>
+    <Property Type="Int32" Name="FacilityTypeId" Nullable="false" />
+    <Property Type="String" Name="FacilityType" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Practice">
+    <Key>
+      <PropertyRef Name="PracticeId" />
+    </Key>
+    <Property Type="Int64" Name="PracticeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="OrganizationId" Nullable="false" />
+    <Property Type="String" Name="PracticeName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address3" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CountryCode" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="PostalCode" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Int64" Name="UserId_Deactivated" />
+    <Property Type="DateTime" Name="DateDeactivated" Precision="0" />
+    <NavigationProperty Name="Organization" Relationship="AMRModel.Organization_Practice_FK1" FromRole="Practice" ToRole="Organization" />
+    <NavigationProperty Name="Providers" Relationship="AMRModel.Practice_Provider_FK1" FromRole="Practice" ToRole="Provider" />
+    <NavigationProperty Name="Facilities" Relationship="AMRModel.Practice_Facility_FK1" FromRole="Practice" ToRole="Facility" />
+  </EntityType>
+  <EntityType Name="PatientFacilityLink">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="DateTime" Name="DataAdded" Precision="0" />
+    <NavigationProperty Name="Facility" Relationship="AMRModel.Facility_PatientFacilityLink_FK1" FromRole="PatientFacilityLink" ToRole="Facility" />
+    <NavigationProperty Name="Patient" Relationship="AMRModel.Patient_PatientFacilityLink_FK1" FromRole="PatientFacilityLink" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="C_UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleId" />
+    </Key>
+    <Property Type="Int32" Name="UserRoleId" Nullable="false" />
+    <Property Type="String" Name="RoleName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="AMRModel.C_UserRole_User_FK1" FromRole="C_UserRole" ToRole="User" />
+  </EntityType>
+  <EntityType Name="ProviderFacilityLink">
+    <Key>
+      <PropertyRef Name="ProviderId" />
+      <PropertyRef Name="FacilityId" />
+    </Key>
+    <Property Type="Int64" Name="ProviderId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="String" Name="FacilityProviderId" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <NavigationProperty Name="Provider" Relationship="AMRModel.FK_Provider_ProviderFacilityLink" FromRole="ProviderFacilityLink" ToRole="Provider" />
+    <NavigationProperty Name="Facility" Relationship="AMRModel.Facility_ProviderFacilityLink_FK1" FromRole="ProviderFacilityLink" ToRole="Facility" />
+  </EntityType>
+  <EntityType Name="Token">
+    <Key>
+      <PropertyRef Name="TokenId" />
+    </Key>
+    <Property Type="String" Name="TokenId" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Type="Int64" Name="UserId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="C_SmokingStatus">
+    <Key>
+      <PropertyRef Name="SmokingStatusId" />
+    </Key>
+    <Property Type="Int32" Name="SmokingStatusId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SNOMED" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Patients" Relationship="AMRModel.C_SmokingStatus_Patient_FK1" FromRole="C_SmokingStatus" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="PatientOrgan">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Boolean" Name="Heart" />
+    <Property Type="Boolean" Name="Liver" />
+    <Property Type="Boolean" Name="Pancreas" />
+    <Property Type="Boolean" Name="Lungs" />
+    <Property Type="Boolean" Name="Kidneys" />
+    <Property Type="Boolean" Name="Intestines" />
+    <Property Type="Boolean" Name="Cornea" />
+    <Property Type="Boolean" Name="Skin" />
+    <Property Type="Boolean" Name="BoneMarrow" />
+    <Property Type="Boolean" Name="HeartValves" />
+    <Property Type="Boolean" Name="ConnectiveTissue" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <NavigationProperty Name="Patient" Relationship="AMRModel.Patient_PatientOrgan_FK1" FromRole="PatientOrgan" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="C_ConditionStatus">
+    <Key>
+      <PropertyRef Name="ConditionStatusId" />
+    </Key>
+    <Property Type="Int16" Name="ConditionStatusId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_CodeSystem">
+    <Key>
+      <PropertyRef Name="CodeSystemId" />
+    </Key>
+    <Property Type="Int32" Name="CodeSystemId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_MessagePeriod">
+    <Key>
+      <PropertyRef Name="MessagePeriodId" />
+    </Key>
+    <Property Type="Int32" Name="MessagePeriodId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_MessageResponseType">
+    <Key>
+      <PropertyRef Name="MessageResponseTypeId" />
+    </Key>
+    <Property Type="Int32" Name="MessageResponseTypeId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="MessageDetails" Relationship="AMRModel.C_MessageResponseType_MessageDetail_FK1" FromRole="C_MessageResponseType" ToRole="MessageDetail" />
+  </EntityType>
+  <EntityType Name="C_MessageStatus">
+    <Key>
+      <PropertyRef Name="MessageStatusId" />
+    </Key>
+    <Property Type="Int32" Name="MessageStatusId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Messages" Relationship="AMRModel.C_MessageStatus_Message_FK1" FromRole="C_MessageStatus" ToRole="Message" />
+    <NavigationProperty Name="MessageAudits" Relationship="AMRModel.C_MessageStatus_MessageAudit_FK1" FromRole="C_MessageStatus" ToRole="MessageAudit" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Type="Int64" Name="MessageId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="PatientId" />
+    <Property Type="Int32" Name="MessageTypeId" />
+    <Property Type="Int64" Name="FacilityId" />
+    <Property Type="Int32" Name="MessageStatusId" />
+    <NavigationProperty Name="C_MessageStatus" Relationship="AMRModel.C_MessageStatus_Message_FK1" FromRole="Message" ToRole="C_MessageStatus" />
+    <NavigationProperty Name="MessageAudits" Relationship="AMRModel.Message_MessageAudit_FK1" FromRole="Message" ToRole="MessageAudit" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="String" Name="CreatedByName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="C_MessageType" Relationship="AMRModel.C_MessageType_Message_FK1" FromRole="Message" ToRole="C_MessageType" />
+    <NavigationProperty Name="MessageDetails" Relationship="AMRModel.Message_MessageDetail_FK1" FromRole="Message" ToRole="MessageDetail" />
+  </EntityType>
+  <Association Name="C_MessageStatus_Message_FK1">
+    <End Type="AMRModel.C_MessageStatus" Role="C_MessageStatus" Multiplicity="0..1" />
+    <End Type="AMRModel.Message" Role="Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_MessageStatus">
+        <PropertyRef Name="MessageStatusId" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="MessageStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="vwFacilitiesForPatient">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="String" Name="FacilityName" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vwProvidersForFacility">
+    <Key>
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="ProviderId" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="LastName" />
+    </Key>
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="ProviderId" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <ComplexType Name="FindPatient_Result">
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int32" Name="PRank" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="20" />
+    <Property Type="DateTime" Name="DOB" Nullable="true" />
+    <Property Type="String" Name="PAddress" Nullable="true" MaxLength="101" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <EntityType Name="PatientMatch">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="String" Name="FirstClean" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LastClean" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="GenderId" />
+    <Property Type="DateTime" Name="DOB" Precision="0" />
+    <Property Type="String" Name="AddressClean" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CityClean" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="StateClean" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PostalClean" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PhoneClean" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FirstSoundex" MaxLength="5" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Type="String" Name="LastSoundex" MaxLength="5" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="AttachmentMessage">
+    <Key>
+      <PropertyRef Name="MessageAttachmentId" />
+    </Key>
+    <Property Type="Int64" Name="MessageAttachmentId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="MessageId" Nullable="false" />
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="String" Name="FileDirectory" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FileName" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DocumentFormat" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+  </EntityType>
+  <EntityType Name="ConfigAttachment">
+    <Key>
+      <PropertyRef Name="ConfigAttachmentId" />
+    </Key>
+    <Property Type="Int32" Name="ConfigAttachmentId" Nullable="false" />
+    <Property Type="String" Name="AttachmentLocation" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="AttachmentFolderCntr" />
+    <Property Type="Int32" Name="CurrentFolderDocCntr" />
+  </EntityType>
+  <EntityType Name="vwPatientSearch">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PRank" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="PRank" Nullable="false" />
+    <Property Type="String" Name="FirstName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LastName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DOB" Precision="0" />
+    <Property Type="String" Name="PAddress" MaxLength="101" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="OrganizationId" />
+    </Key>
+    <Property Type="Int64" Name="OrganizationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="OrganizationName" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address3" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CountryCode" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="PostalCode" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Int64" Name="UserId_Deactivated" />
+    <Property Type="DateTime" Name="DateDeactivated" Precision="0" />
+    <NavigationProperty Name="Practices" Relationship="AMRModel.Organization_Practice_FK1" FromRole="Organization" ToRole="Practice" />
+  </EntityType>
+  <Association Name="Organization_Practice_FK1">
+    <End Type="AMRModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="AMRModel.Practice" Role="Practice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="OrganizationId" />
+      </Principal>
+      <Dependent Role="Practice">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="C_EMRSystem">
+    <Key>
+      <PropertyRef Name="EMRSystemId" />
+    </Key>
+    <Property Type="Int32" Name="EMRSystemId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_Relationship">
+    <Key>
+      <PropertyRef Name="RelationshipId" />
+    </Key>
+    <Property Type="Int32" Name="RelationshipId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SNOMED" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PatientEmergencies" Relationship="AMRModel.C_Relationship_PatientEmergency_FK1" FromRole="C_Relationship" ToRole="PatientEmergency" />
+  </EntityType>
+  <EntityType Name="PatientAccountLink">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PatientId_Linked" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="PatientId_Linked" Nullable="false" />
+    <Property Type="DateTime" Name="DateApproved" Precision="0" />
+    <NavigationProperty Name="Patient" Relationship="AMRModel.Patient_PatientAccountLink_FK1" FromRole="PatientAccountLink" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="C_SecurityQuestion">
+    <Key>
+      <PropertyRef Name="SecurityQuestionId" />
+    </Key>
+    <Property Type="Int32" Name="SecurityQuestionId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_InstructionType">
+    <Key>
+      <PropertyRef Name="InstructionTypeId" />
+    </Key>
+    <Property Type="Int16" Name="InstructionTypeId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PatientPlanOfCares" Relationship="AMRModel.C_InstructionType_PatientPlanOfCare_FK1" FromRole="C_InstructionType" ToRole="PatientPlanOfCare" />
+  </EntityType>
+  <EntityType Name="C_Problem">
+    <Key>
+      <PropertyRef Name="ProblemId" />
+    </Key>
+    <Property Type="String" Name="ProblemId" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Value" MaxLength="256" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_AccessStatus">
+    <Key>
+      <PropertyRef Name="AccessStatusId" />
+    </Key>
+    <Property Type="Int16" Name="AccessStatusId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UserLoginAudit">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="StartDateTime" />
+    </Key>
+    <Property Type="Int64" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="StartDateTime" Nullable="false" Precision="3" />
+    <Property Type="String" Name="UserLogin" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="LoginType" />
+    <Property Type="DateTime" Name="EndDateTime" Precision="3" />
+    <Property Type="Int16" Name="AccessStatusId" />
+  </EntityType>
+  <EntityType Name="MessageAudit">
+    <Key>
+      <PropertyRef Name="AuditId" />
+    </Key>
+    <Property Type="Int64" Name="AuditId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="MessageId" Nullable="false" />
+    <Property Type="Int32" Name="MessageStatusId" />
+    <Property Type="Int64" Name="FacilityId" />
+    <Property Type="Int64" Name="UserId" />
+    <Property Type="DateTime" Name="TDStamp" Precision="0" />
+    <NavigationProperty Name="C_MessageStatus" Relationship="AMRModel.C_MessageStatus_MessageAudit_FK1" FromRole="MessageAudit" ToRole="C_MessageStatus" />
+    <NavigationProperty Name="Message" Relationship="AMRModel.Message_MessageAudit_FK1" FromRole="MessageAudit" ToRole="Message" />
+  </EntityType>
+  <Association Name="C_MessageStatus_MessageAudit_FK1">
+    <End Type="AMRModel.C_MessageStatus" Role="C_MessageStatus" Multiplicity="0..1" />
+    <End Type="AMRModel.MessageAudit" Role="MessageAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_MessageStatus">
+        <PropertyRef Name="MessageStatusId" />
+      </Principal>
+      <Dependent Role="MessageAudit">
+        <PropertyRef Name="MessageStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Message_MessageAudit_FK1">
+    <End Type="AMRModel.Message" Role="Message" Multiplicity="1" />
+    <End Type="AMRModel.MessageAudit" Role="MessageAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="MessageId" />
+      </Principal>
+      <Dependent Role="MessageAudit">
+        <PropertyRef Name="MessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PatientProviderLink">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="ProviderId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="ProviderId" Nullable="false" />
+    <Property Type="Boolean" Name="PCP" />
+    <Property Type="DateTime" Name="DateAdded" Precision="0" />
+    <NavigationProperty Name="Provider" Relationship="AMRModel.PatientProviderLink_Provider_FK1" FromRole="PatientProviderLink" ToRole="Provider" />
+    <NavigationProperty Name="Patient" Relationship="AMRModel.PatientProviderLink_Patient_FK1" FromRole="PatientProviderLink" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="PatientMedicalHist">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatMedicalHistCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="PatMedicalHistCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DateOfOccurance" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Note" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="OnCard" />
+    <Property Type="Boolean" Name="OnKeys" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="C_Medication">
+    <Key>
+      <PropertyRef Name="RxNormId" />
+    </Key>
+    <Property Type="String" Name="RxNormId" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PatientAllergy">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatientAllergyCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="PatientAllergyCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CodeValue_Allergen" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodeSystemId_Allergen" />
+    <Property Type="String" Name="Allergen" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AllergenType" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CodeValue_Reaction" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodeSystemId_Reaction" />
+    <Property Type="String" Name="Reaction" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EffectiveDate" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Type="Int16" Name="ConditionStatusId" />
+    <Property Type="String" Name="Note" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="OnCard" />
+    <Property Type="Boolean" Name="OnKeys" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="PatientInsurance">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatientInsuranceId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="PatientInsuranceId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="PlanName" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MemberNumber" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GroupNumber" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Subscriber" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Relationship" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="EffectiveDate" Precision="0" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="PatientProcedure">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatProcedureCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="PatProcedureCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CodeValue" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodeSystemId" />
+    <Property Type="String" Name="Diagnosis" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PerformedBy" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ServiceLocation" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ServiceDate" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Note" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="C_Vaccine">
+    <Key>
+      <PropertyRef Name="CVX_Code" />
+    </Key>
+    <Property Type="Int32" Name="CVX_Code" Nullable="false" />
+    <Property Type="String" Name="Description" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Status" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PatientSocialHist">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatSocialHistCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="PatSocialHistCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Qualifier" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CodeValue" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodeSystemId" />
+    <Property Type="String" Name="BeginDate" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="EndDate" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Note" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="PatientSurgicalHist">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatSurgicalHistCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="PatSurgicalHistCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CodeValue" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodeSystemId" />
+    <Property Type="String" Name="Diagnosis" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PerformedBy" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ServiceLocation" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ServiceDate" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Note" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="PatientClinicalDocument">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="DocumentCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="DocumentCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="DocumentDescription" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DocumentId" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DocumentFormat" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="StorageLocation" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Notes" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Viewable" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="C_Country">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Type="String" Name="CountryId" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_Frequency">
+    <Key>
+      <PropertyRef Name="FrequencyId" />
+    </Key>
+    <Property Type="Int32" Name="FrequencyId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_RouteOfAdministration">
+    <Key>
+      <PropertyRef Name="RouteId" />
+    </Key>
+    <Property Type="String" Name="RouteId" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Value" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_State">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Type="String" Name="StateId" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Name" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_Social">
+    <Key>
+      <PropertyRef Name="SNOMED_Social" />
+    </Key>
+    <Property Type="String" Name="SNOMED_Social" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Value" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PatientVitalSign">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatientVitalCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="PatientVitalCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="VitalDate" Precision="0" />
+    <Property Type="Int32" Name="HeightIn" />
+    <Property Type="Int32" Name="WeightLb" />
+    <Property Type="String" Name="BloodPressurePosn" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Systolic" />
+    <Property Type="Int32" Name="Diastolic" />
+    <Property Type="Int32" Name="Pulse" />
+    <Property Type="Int32" Name="Respiration" />
+    <Property Type="Decimal" Name="Temperature" Precision="9" Scale="2" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="C_MessageType">
+    <Key>
+      <PropertyRef Name="MessageTypeId" />
+    </Key>
+    <Property Type="Int32" Name="MessageTypeId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="General" />
+    <NavigationProperty Name="Messages" Relationship="AMRModel.C_MessageType_Message_FK1" FromRole="C_MessageType" ToRole="Message" />
+  </EntityType>
+  <Association Name="C_MessageType_Message_FK1">
+    <End Type="AMRModel.C_MessageType" Role="C_MessageType" Multiplicity="0..1" />
+    <End Type="AMRModel.Message" Role="Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_MessageType">
+        <PropertyRef Name="MessageTypeId" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="MessageTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="vwPatientsForFacility">
+    <Key>
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="String" Name="FirstName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LastName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DOB" Precision="0" />
+  </EntityType>
+  <EntityType Name="PatientRepresentative">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="Int64" Name="UserId" Nullable="false" />
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="String" Name="FirstName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LastName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Demographics" />
+    <Property Type="Boolean" Name="Allergy" />
+    <Property Type="Boolean" Name="FamilyHistory" />
+    <Property Type="Boolean" Name="LabResults" />
+    <Property Type="Boolean" Name="MedicalHistory" />
+    <Property Type="Boolean" Name="Medication" />
+    <Property Type="Boolean" Name="Problem" />
+    <Property Type="Boolean" Name="Procedure" />
+    <Property Type="Boolean" Name="SocialHistory" />
+    <Property Type="Boolean" Name="SurgicalHistory" />
+    <Property Type="Boolean" Name="VitalSigns" />
+    <Property Type="Boolean" Name="Immunization" />
+    <Property Type="Boolean" Name="Organ" />
+    <Property Type="Boolean" Name="ClinicalDoc" />
+    <Property Type="Boolean" Name="Insurance" />
+    <Property Type="Boolean" Name="EmergencyContact" />
+    <Property Type="Boolean" Name="Appointment" />
+    <Property Type="Boolean" Name="Visit" />
+    <Property Type="Boolean" Name="UploadDocs" />
+    <Property Type="Boolean" Name="PlanOfCare" />
+    <Property Type="Boolean" Name="Messaging" />
+    <Property Type="Boolean" Name="DownloadTransmit" />
+    <Property Type="Boolean" Name="ClinicalSummary" />
+    <Property Type="Boolean" Name="Enabled" />
+  </EntityType>
+  <EntityType Name="C_PreferredLanguage">
+    <Key>
+      <PropertyRef Name="PreferredLanguageId" />
+    </Key>
+    <Property Type="Int32" Name="PreferredLanguageId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ISO639_2" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="Boolean" Name="Inactive" />
+    <NavigationProperty Name="Patients" Relationship="AMRModel.C_PreferredLanguage_Patient_FK1" FromRole="C_PreferredLanguage" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="PatientLabResultTest">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="LabResultCntr" />
+      <PropertyRef Name="TestCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="LabResultCntr" Nullable="false" />
+    <Property Type="Int32" Name="TestCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CodeValue" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodeSystemId" />
+    <Property Type="String" Name="Component" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Result" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RefRange" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Units" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Abnormal" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ResultStatus" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PatientLabResult" Relationship="AMRModel.PatientLabResult_PatientLabResultsTest_FK1" FromRole="PatientLabResultTest" ToRole="PatientLabResult" />
+  </EntityType>
+  <EntityType Name="PatientImmunization">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatientImmunizationCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="PatientImmunizationCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ImmunizationDate" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ImmunizationTime" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="CodeValue" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodeSystemId" />
+    <Property Type="String" Name="Vaccine" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Amount" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Route" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Site" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Sequence" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ExpirationDate" Precision="0" />
+    <Property Type="String" Name="LotNumber" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Manufacturer" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Note" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="PatientFamilyHist">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatFamilyHistCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="PatFamilyHistCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="RelationshipId" Nullable="false" />
+    <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Qualifier" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CodeValue" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodeSystemId" />
+    <Property Type="Int16" Name="ConditionStatusId" />
+    <Property Type="Int32" Name="AgeAtOnset" />
+    <Property Type="Boolean" Name="Diseased" />
+    <Property Type="Int32" Name="DiseasedAge" />
+    <Property Type="String" Name="Note" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="PatientProblem">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatientProblemCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="PatientProblemCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CodeValue" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodeSystemId" />
+    <Property Type="String" Name="Condition" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EffectiveDate" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="LastChangeDate" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Type="Int16" Name="ConditionStatusId" />
+    <Property Type="String" Name="Note" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="C_DoctorType">
+    <Key>
+      <PropertyRef Name="DoctorTypeId" />
+    </Key>
+    <Property Type="Int32" Name="DoctorTypeId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PatientCareDocument">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="DocumentCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="DocumentCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="DocumentDescription" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DoctorName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DocumentId" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DocumentFormat" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="StorageLocation" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Notes" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Viewable" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+    <NavigationProperty Name="Patient" Relationship="AMRModel.Patient_PatientCareDocument_FK1" FromRole="PatientCareDocument" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="PatientDocument">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="DocumentCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="DocumentCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="DocumentDescription" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DocumentId" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DocumentFormat" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="StorageLocation" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Notes" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Viewable" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+    <NavigationProperty Name="Patient" Relationship="AMRModel.Patient_PatientDocument_FK1" FromRole="PatientDocument" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="PatientMedicalDocument">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="DocumentCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="DocumentCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="DocumentDescription" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FacilityName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DoctorName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DocumentId" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DocumentFormat" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="StorageLocation" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Notes" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Viewable" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+    <NavigationProperty Name="Patient" Relationship="AMRModel.Patient_PatientMedicalDocument_FK1" FromRole="PatientMedicalDocument" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="C_Advisor">
+    <Key>
+      <PropertyRef Name="AdvisorId" />
+    </Key>
+    <Property Type="Int32" Name="AdvisorId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PatientAdvisor">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PatientAdvisorId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="PatientAdvisorId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="AdvisorId" />
+    <Property Type="String" Name="AdvisorDesc" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ContactAgent" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address3" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PostalCode" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CountryCode" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="WorkPhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobilePhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Fax" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EMail" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Notes" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="PatientDoctor">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PatientDoctorId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="PatientDoctorId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="DoctorTypeId" />
+    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address3" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PostalCode" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CountryCode" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="WorkPhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobilePhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Fax" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="IsPrimary" />
+    <Property Type="Boolean" Name="OnCard" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="PatientInsurancePlan">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PatientInsuranceId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="PatientInsuranceId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InsuranceId" />
+    <Property Type="String" Name="InsuranceDesc" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Company" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PolicyNo" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GroupNo" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AgentName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Phone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Fax" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Notes" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="ProviderWebSetting">
+    <Key>
+      <PropertyRef Name="ProviderId" />
+    </Key>
+    <Property Type="Int64" Name="ProviderId" Nullable="false" />
+    <Property Type="Boolean" Name="EmailNotifyNewMessage" />
+    <Property Type="String" Name="PictureLocation" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_DocUploadType">
+    <Key>
+      <PropertyRef Name="DocUploadTypeId" />
+    </Key>
+    <Property Type="Int16" Name="DocUploadTypeId" Nullable="false" />
+    <Property Type="String" Name="Description" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_PolicyType">
+    <Key>
+      <PropertyRef Name="PolicyTypeId" />
+    </Key>
+    <Property Type="Int32" Name="PolicyTypeId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PatientPolicy">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PatientPolicyId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="PatientPolicyId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="PolicyTypeId" />
+    <Property Type="String" Name="PolicyTypeName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Company" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PolicyNo" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GroupNumber" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PlanNumber" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Agent" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AgentPhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AgentFax" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Notes" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="PatientEmergency">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PatientEmergencyId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="PatientEmergencyId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address3" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PostalCode" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CountryCode" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="HomePhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobilePhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="WorkPhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="IsPrimary" />
+    <Property Type="Int32" Name="RelationshipId" />
+    <Property Type="Boolean" Name="OnCard" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="FacilityId_Created" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+    <NavigationProperty Name="C_Relationship" Relationship="AMRModel.C_Relationship_PatientEmergency_FK1" FromRole="PatientEmergency" ToRole="C_Relationship" />
+    <NavigationProperty Name="Patient" Relationship="AMRModel.Patient_PatientEmergency_FK1" FromRole="PatientEmergency" ToRole="Patient" />
+  </EntityType>
+  <Association Name="C_Relationship_PatientEmergency_FK1">
+    <End Type="AMRModel.C_Relationship" Role="C_Relationship" Multiplicity="0..1" />
+    <End Type="AMRModel.PatientEmergency" Role="PatientEmergency" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_Relationship">
+        <PropertyRef Name="RelationshipId" />
+      </Principal>
+      <Dependent Role="PatientEmergency">
+        <PropertyRef Name="RelationshipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="vwMessageUnread">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int32" Name="Medication" />
+    <Property Type="Int32" Name="Appointment" />
+    <Property Type="Int32" Name="Referral" />
+    <Property Type="Int32" Name="General" />
+  </EntityType>
+  <EntityType Name="BillPayment">
+    <Key>
+      <PropertyRef Name="BillPaymentId" />
+    </Key>
+    <Property Type="Int64" Name="BillPaymentId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int32" Name="BillRateId" Nullable="false" />
+    <Property Type="DateTime" Name="TransactionDate" Precision="0" />
+    <Property Type="String" Name="Response" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CustId" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RecurrId" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PaymentType" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="PaymentFrequency" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PaymentId" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="NoOfPayments" />
+    <Property Type="DateTime" Name="StartDate" Precision="0" />
+    <Property Type="String" Name="AccountHolderName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="Amount" Precision="19" Scale="4" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <NavigationProperty Name="BillRate" Relationship="AMRModel.FK_BillPayment_BillRate" FromRole="BillPayment" ToRole="BillRate" />
+  </EntityType>
+  <EntityType Name="BillRate">
+    <Key>
+      <PropertyRef Name="BillRateId" />
+    </Key>
+    <Property Type="Int32" Name="BillRateId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="PromoCode" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Active" />
+    <Property Type="Boolean" Name="IsFree" />
+    <Property Type="Decimal" Name="Rate" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Renewal" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Residual" Precision="19" Scale="4" />
+    <Property Type="Int32" Name="FreeMonths" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <NavigationProperty Name="BillPayments" Relationship="AMRModel.FK_BillPayment_BillRate" FromRole="BillRate" ToRole="BillPayment" />
+  </EntityType>
+  <Association Name="FK_BillPayment_BillRate">
+    <End Type="AMRModel.BillRate" Role="BillRate" Multiplicity="1" />
+    <End Type="AMRModel.BillPayment" Role="BillPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BillRate">
+        <PropertyRef Name="BillRateId" />
+      </Principal>
+      <Dependent Role="BillPayment">
+        <PropertyRef Name="BillRateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="vwMessageUnreadProv">
+    <Key>
+      <PropertyRef Name="ProviderId" />
+    </Key>
+    <Property Type="Int64" Name="ProviderId" Nullable="false" />
+    <Property Type="Int32" Name="Medication" />
+    <Property Type="Int32" Name="Appointment" />
+    <Property Type="Int32" Name="Referral" />
+    <Property Type="Int32" Name="General" />
+  </EntityType>
+  <EntityType Name="PatientVisit">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="DateTime" Name="VisitDate" Precision="3" />
+    <Property Type="Int64" Name="ProviderId" />
+    <Property Type="String" Name="VisitReason" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Viewable" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="String" Name="ClinicalSummary" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Patient" Relationship="AMRModel.Patient_PatientVisit_FK1" FromRole="PatientVisit" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="Provider">
+    <Key>
+      <PropertyRef Name="ProviderId" />
+    </Key>
+    <Property Type="Int64" Name="ProviderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="PracticeId" Nullable="false" />
+    <Property Type="Int64" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="Title" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MiddleName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DEA" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="License" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Disabled" />
+    <Property Type="String" Name="Phone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Int64" Name="UserId_Deactivated" />
+    <Property Type="DateTime" Name="DateDeactivated" Precision="0" />
+    <Property Type="String" Name="FullName" Nullable="false" MaxLength="41" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="PatientProviderLinks" Relationship="AMRModel.PatientProviderLink_Provider_FK1" FromRole="Provider" ToRole="PatientProviderLink" />
+    <NavigationProperty Name="Practice" Relationship="AMRModel.Practice_Provider_FK1" FromRole="Provider" ToRole="Practice" />
+    <NavigationProperty Name="ProviderFacilityLinks" Relationship="AMRModel.FK_Provider_ProviderFacilityLink" FromRole="Provider" ToRole="ProviderFacilityLink" />
+  </EntityType>
+  <Association Name="PatientProviderLink_Provider_FK1">
+    <End Type="AMRModel.Provider" Role="Provider" Multiplicity="1" />
+    <End Type="AMRModel.PatientProviderLink" Role="PatientProviderLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="ProviderId" />
+      </Principal>
+      <Dependent Role="PatientProviderLink">
+        <PropertyRef Name="ProviderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Practice_Provider_FK1">
+    <End Type="AMRModel.Practice" Role="Practice" Multiplicity="1" />
+    <End Type="AMRModel.Provider" Role="Provider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Practice">
+        <PropertyRef Name="PracticeId" />
+      </Principal>
+      <Dependent Role="Provider">
+        <PropertyRef Name="PracticeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Provider_ProviderFacilityLink">
+    <End Type="AMRModel.Provider" Role="Provider" Multiplicity="1" />
+    <End Type="AMRModel.ProviderFacilityLink" Role="ProviderFacilityLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="ProviderId" />
+      </Principal>
+      <Dependent Role="ProviderFacilityLink">
+        <PropertyRef Name="ProviderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="vwCCDAuditLog">
+    <Key>
+      <PropertyRef Name="AuditId" />
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Type="Int64" Name="AuditId" Nullable="false" />
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="String" Name="Method" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId" />
+    <Property Type="String" Name="Name" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="TDStamp" Precision="0" />
+  </EntityType>
+  <EntityType Name="vwRptPatientLogin">
+    <Key>
+      <PropertyRef Name="StartDateTime" />
+    </Key>
+    <Property Type="Int64" Name="FacilityId" />
+    <Property Type="Int64" Name="PatientId" />
+    <Property Type="DateTime" Name="StartDateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="vwRptSecureMessage">
+    <Key>
+      <PropertyRef Name="MessageDetailId" />
+    </Key>
+    <Property Type="Int64" Name="MessageDetailId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" />
+    <Property Type="Int64" Name="PatientId" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="ProviderId_To" />
+    <Property Type="String" Name="FirstName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LastName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="License" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vwVisitCCD">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="ProviderId" />
+    <Property Type="String" Name="Title" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FirstName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LastName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="License" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Phone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="FacilityTypeId" />
+    <Property Type="String" Name="FacilityType" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FacilityName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CountryCode" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="CountryName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PostalCode" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FacilityPhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FacilityFax" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="VisitReason" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="VisitDate" Precision="3" />
+  </EntityType>
+  <EntityType Name="vwPatientFacilityOption">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int32" Name="GeneralMessageAvailable" />
+    <Property Type="Int32" Name="AppointmentMessageAvailable" />
+    <Property Type="Int32" Name="MedicationMessageAvailable" />
+    <Property Type="Int32" Name="ReferralMessageAvailable" />
+    <Property Type="Int32" Name="PremiumAvailable" />
+    <Property Type="Int16" Name="OnlineBillPayment" />
+  </EntityType>
+  <EntityType Name="Facility">
+    <Key>
+      <PropertyRef Name="FacilityId" />
+    </Key>
+    <Property Type="Int64" Name="FacilityId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="PracticeId" />
+    <Property Type="Int32" Name="EMRSystemId" />
+    <Property Type="Int32" Name="FacilityTypeId" />
+    <Property Type="String" Name="FacilityName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address3" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CountryCode" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="PostalCode" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Phone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Fax" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="BillAddress1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="BillAddress2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="BillAddress3" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="BillCity" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="BillState" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="BillPostalCode" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="BillCountryCode" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="BillPhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="BillFax" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="GeneralMessageAvailable" />
+    <Property Type="Int32" Name="GeneralMessageNotify" />
+    <Property Type="String" Name="GeneralMessageEmail" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="AppointmentMessageAvailable" />
+    <Property Type="Int32" Name="AppointmentMessageNotify" />
+    <Property Type="String" Name="AppointmentMessageEmail" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="MedicationMessageAvailable" />
+    <Property Type="Int32" Name="MedicationMessageNotify" />
+    <Property Type="String" Name="MedicationMessageEmail" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="ReferralMessageAvailable" />
+    <Property Type="Int32" Name="ReferralMessageNotify" />
+    <Property Type="String" Name="ReferralMessageEmail" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="PremiumAvailable" />
+    <Property Type="Int16" Name="OnlineBillPayment" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Int64" Name="UserId_Deactivated" />
+    <Property Type="DateTime" Name="DateDeactivated" Precision="0" />
+    <NavigationProperty Name="PatientFacilityLinks" Relationship="AMRModel.Facility_PatientFacilityLink_FK1" FromRole="Facility" ToRole="PatientFacilityLink" />
+    <NavigationProperty Name="ProviderFacilityLinks" Relationship="AMRModel.Facility_ProviderFacilityLink_FK1" FromRole="Facility" ToRole="ProviderFacilityLink" />
+    <NavigationProperty Name="Practice" Relationship="AMRModel.Practice_Facility_FK1" FromRole="Facility" ToRole="Practice" />
+  </EntityType>
+  <EntityType Name="PatientShare">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Boolean" Name="Demographics" />
+    <Property Type="Boolean" Name="Allergy" />
+    <Property Type="Boolean" Name="FamilyHistory" />
+    <Property Type="Boolean" Name="LabResults" />
+    <Property Type="Boolean" Name="MedicalHistory" />
+    <Property Type="Boolean" Name="Medication" />
+    <Property Type="Boolean" Name="Problem" />
+    <Property Type="Boolean" Name="Procedure" />
+    <Property Type="Boolean" Name="SocialHistory" />
+    <Property Type="Boolean" Name="SurgicalHistory" />
+    <Property Type="Boolean" Name="VitalSigns" />
+    <Property Type="Boolean" Name="Immunization" />
+    <Property Type="Boolean" Name="Organ" />
+    <Property Type="Boolean" Name="ClinicalDoc" />
+    <Property Type="Boolean" Name="Insurance" />
+    <Property Type="Boolean" Name="EmergencyContact" />
+    <Property Type="Boolean" Name="Appointment" />
+    <Property Type="Boolean" Name="Visit" />
+    <Property Type="Boolean" Name="UploadDocs" />
+    <Property Type="Boolean" Name="PlanOfCare" />
+    <Property Type="Boolean" Name="ClinicalInstructions" />
+    <NavigationProperty Name="Patient" Relationship="AMRModel.Patient_PatientShare_FK1" FromRole="PatientShare" ToRole="Patient" />
+  </EntityType>
+  <Association Name="Facility_PatientFacilityLink_FK1">
+    <End Type="AMRModel.Facility" Role="Facility" Multiplicity="1" />
+    <End Type="AMRModel.PatientFacilityLink" Role="PatientFacilityLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facility">
+        <PropertyRef Name="FacilityId" />
+      </Principal>
+      <Dependent Role="PatientFacilityLink">
+        <PropertyRef Name="FacilityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Facility_ProviderFacilityLink_FK1">
+    <End Type="AMRModel.Facility" Role="Facility" Multiplicity="1" />
+    <End Type="AMRModel.ProviderFacilityLink" Role="ProviderFacilityLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facility">
+        <PropertyRef Name="FacilityId" />
+      </Principal>
+      <Dependent Role="ProviderFacilityLink">
+        <PropertyRef Name="FacilityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Practice_Facility_FK1">
+    <End Type="AMRModel.Practice" Role="Practice" Multiplicity="0..1" />
+    <End Type="AMRModel.Facility" Role="Facility" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Practice">
+        <PropertyRef Name="PracticeId" />
+      </Principal>
+      <Dependent Role="Facility">
+        <PropertyRef Name="PracticeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PatientPlanOfCare">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PlanCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="PlanCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int16" Name="InstructionTypeId" Nullable="false" />
+    <Property Type="String" Name="CodeValue" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodeSystemId" />
+    <Property Type="String" Name="Instruction" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Goal" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Note" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="AppointmentDateTime" Precision="0" />
+    <Property Type="Int64" Name="ProviderId" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+    <NavigationProperty Name="C_InstructionType" Relationship="AMRModel.C_InstructionType_PatientPlanOfCare_FK1" FromRole="PatientPlanOfCare" ToRole="C_InstructionType" />
+  </EntityType>
+  <Association Name="C_InstructionType_PatientPlanOfCare_FK1">
+    <End Type="AMRModel.C_InstructionType" Role="C_InstructionType" Multiplicity="1" />
+    <End Type="AMRModel.PatientPlanOfCare" Role="PatientPlanOfCare" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_InstructionType">
+        <PropertyRef Name="InstructionTypeId" />
+      </Principal>
+      <Dependent Role="PatientPlanOfCare">
+        <PropertyRef Name="InstructionTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PatientNote">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="DateCreated" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="0" />
+    <Property Type="String" Name="Note" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_ActivityLevel">
+    <Key>
+      <PropertyRef Name="ActivityLevelId" />
+    </Key>
+    <Property Type="Int16" Name="ActivityLevelId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_AlcoholFrequency">
+    <Key>
+      <PropertyRef Name="AlcoholFrequencyId" />
+    </Key>
+    <Property Type="Int16" Name="AlcoholFrequencyId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_EducationLevel">
+    <Key>
+      <PropertyRef Name="EducationLevelId" />
+    </Key>
+    <Property Type="Int16" Name="EducationLevelId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="C_ExerciseFrequency">
+    <Key>
+      <PropertyRef Name="ExerciseFrequencyId" />
+    </Key>
+    <Property Type="Int16" Name="ExerciseFrequencyId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PatientSocialSelf">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="String" Name="Birthplace" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="EducationLevelId" />
+    <Property Type="String" Name="Occupation" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Retired" />
+    <Property Type="Int16" Name="ChildrenSon" />
+    <Property Type="Int16" Name="ChildrenDaughter" />
+    <Property Type="Boolean" Name="CaffeineUser" />
+    <Property Type="String" Name="CaffieneType" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CaffeineAmount" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="ExerciseMember" />
+    <Property Type="Int16" Name="ExerciseFrequencyId" />
+    <Property Type="String" Name="ExerciseAmount" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="ActivityLevelId" />
+    <Property Type="String" Name="Activity1" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Activity2" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Activity3" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="AlcoholUser" />
+    <Property Type="Int16" Name="AlcoholFrequencyId" />
+    <Property Type="DateTime" Name="AlcoholLastUse" Precision="0" />
+    <Property Type="String" Name="AlcoholType" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="AlcoholStartAge" />
+    <Property Type="Boolean" Name="AlcoholFamilyHist" />
+    <Property Type="Int32" Name="SmokingStatusId" />
+    <Property Type="Int16" Name="SmokingDailyAmount" />
+    <Property Type="String" Name="SmokingType" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="SmokingYears" />
+    <Property Type="Int16" Name="SmokingQuitAttempts" />
+    <Property Type="DateTime" Name="SmokingQuitDate" Precision="0" />
+    <Property Type="Boolean" Name="SmokingSecondHand" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+  </EntityType>
+  <EntityType Name="C_ThirdParty">
+    <Key>
+      <PropertyRef Name="ThirdPartyId" />
+    </Key>
+    <Property Type="Int32" Name="ThirdPartyId" Nullable="false" />
+    <Property Type="String" Name="Value" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PatientWebSetting">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int16" Name="VisitWidgetLeft" />
+    <Property Type="Int16" Name="VisitWidgetRight" />
+    <Property Type="Int16" Name="AllergyWidgetLeft" />
+    <Property Type="Int16" Name="AllergyWidgetRight" />
+    <Property Type="Int16" Name="AppointmentsWidgetLeft" />
+    <Property Type="Int16" Name="AppointmentsWidgetRight" />
+    <Property Type="Int16" Name="FamilyWidgetLeft" />
+    <Property Type="Int16" Name="FamilyWidgetRight" />
+    <Property Type="Int16" Name="ImmunizationWidgetLeft" />
+    <Property Type="Int16" Name="ImmunizationWidgetRight" />
+    <Property Type="Int16" Name="InsuranceWidgetLeft" />
+    <Property Type="Int16" Name="InsuranceWidgetRight" />
+    <Property Type="Int16" Name="LabTestWidgetLeft" />
+    <Property Type="Int16" Name="LabTestWidgetRight" />
+    <Property Type="Int16" Name="MedicationWidgetLeft" />
+    <Property Type="Int16" Name="MedicationWidgetRight" />
+    <Property Type="Int16" Name="PastMedicalWidgetLeft" />
+    <Property Type="Int16" Name="PastMedicalWidgetRight" />
+    <Property Type="Int16" Name="ProblemWidgetLeft" />
+    <Property Type="Int16" Name="ProblemWidgetRight" />
+    <Property Type="Int16" Name="ProcedureWidgetLeft" />
+    <Property Type="Int16" Name="ProcedureWidgetRight" />
+    <Property Type="Int16" Name="SocialWidgetLeft" />
+    <Property Type="Int16" Name="SocialWidgetRight" />
+    <Property Type="Int16" Name="VitalSignsWidgetLeft" />
+    <Property Type="Int16" Name="VitalSignsWidgetRight" />
+    <Property Type="Int16" Name="PremiumWidgetLeft" />
+    <Property Type="Int16" Name="PremiumWidgetRight" />
+    <Property Type="Int16" Name="StatementWidgetLeft" />
+    <Property Type="Int16" Name="StatementWidgetRight" />
+    <Property Type="Int16" Name="DocumentWidgetLeft" />
+    <Property Type="Int16" Name="DocumentWidgetRight" />
+    <Property Type="Boolean" Name="EmailNotifyNewMessage" />
+    <Property Type="String" Name="PictureLocation" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="TextNotifyNewMesssage" />
+    <Property Type="Int32" Name="CellCarrier" />
+    <Property Type="Int16" Name="PlanOfCareWidgetLeft" />
+    <Property Type="Int16" Name="PlanOfCareWidgetRight" />
+    <Property Type="Int16" Name="ClinicalInstructionsWidgetLeft" />
+    <Property Type="Int16" Name="ClinicalInstructionsWidgetRight" />
+    <Property Type="Int16" Name="ProviderWidgetLeft" />
+    <Property Type="Int16" Name="ProviderWidgetRight" />
+    <NavigationProperty Name="Patient" Relationship="AMRModel.Patient_PatientWebSetting_FK1" FromRole="PatientWebSetting" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="Config">
+    <Key>
+      <PropertyRef Name="ConfigId" />
+    </Key>
+    <Property Type="Int32" Name="ConfigId" Nullable="false" />
+    <Property Type="String" Name="EmailHost" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmailUser" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmailPassword" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="EmailEnableSSL" />
+    <Property Type="Boolean" Name="EmailActive" />
+    <Property Type="String" Name="SMSHost" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SMSUser" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SMSPassword" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmailFolder" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SiteURL" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="FirstName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MiddleName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LastName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Title" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address3" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CommunityName" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="BuildingName" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="County" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Zip" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CountryCode" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="MailAddress1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MailAddress2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MailAddress3" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MailCity" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MailState" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MailPostalCode" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MailCountryCode" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="DateTime" Name="DOB" Precision="0" />
+    <Property Type="String" Name="SSN" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="HomePhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobilePhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="WorkPhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Fax" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EMail" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="PreferredLanguageId" />
+    <Property Type="Int32" Name="GenderId" />
+    <Property Type="Boolean" Name="RaceId_NotAnswer" />
+    <Property Type="Boolean" Name="RaceId_Native" />
+    <Property Type="Boolean" Name="RaceId_Asian" />
+    <Property Type="Boolean" Name="RaceId_Black" />
+    <Property Type="Boolean" Name="RaceId_Hawaiian" />
+    <Property Type="Boolean" Name="RaceId_White" />
+    <Property Type="Int32" Name="EthnicityId" />
+    <Property Type="Int32" Name="MaritalStatusId" />
+    <Property Type="Int32" Name="ReligionId" />
+    <Property Type="Int32" Name="BloodTypeId" />
+    <Property Type="Int32" Name="HeightFt" />
+    <Property Type="Int32" Name="HeightIn" />
+    <Property Type="String" Name="Eyes" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Hair" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Weight" />
+    <Property Type="Boolean" Name="OrganDoner" />
+    <Property Type="Int32" Name="SmokingStatusId" />
+    <Property Type="String" Name="Comments" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="FacilityId_Created" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="PremiumFlag" />
+    <Property Type="DateTime" Name="PremiumStartDate" Precision="0" />
+    <Property Type="DateTime" Name="PremiumExpireDate" Precision="0" />
+    <Property Type="Boolean" Name="Active" />
+    <Property Type="String" Name="SmokingDate" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Type="Int32" Name="ThirdPartyId" />
+    <Property Type="Int32" Name="EMRSystemId" />
+    <Property Type="String" Name="Suffix" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="C_BloodType" Relationship="AMRModel.C_BloodType_Patient_FK1" FromRole="Patient" ToRole="C_BloodType" />
+    <NavigationProperty Name="C_Ethnicity" Relationship="AMRModel.C_Ethnicity_Patient_FK1" FromRole="Patient" ToRole="C_Ethnicity" />
+    <NavigationProperty Name="C_Gender" Relationship="AMRModel.C_Gender_Patient_FK1" FromRole="Patient" ToRole="C_Gender" />
+    <NavigationProperty Name="C_MaritalStatus" Relationship="AMRModel.C_MaritalStatus_Patient_FK1" FromRole="Patient" ToRole="C_MaritalStatus" />
+    <NavigationProperty Name="C_PreferredLanguage" Relationship="AMRModel.C_PreferredLanguage_Patient_FK1" FromRole="Patient" ToRole="C_PreferredLanguage" />
+    <NavigationProperty Name="C_Religion" Relationship="AMRModel.C_Religion_Patient_FK1" FromRole="Patient" ToRole="C_Religion" />
+    <NavigationProperty Name="C_SmokingStatus" Relationship="AMRModel.C_SmokingStatus_Patient_FK1" FromRole="Patient" ToRole="C_SmokingStatus" />
+    <NavigationProperty Name="PatientAccountLinks" Relationship="AMRModel.Patient_PatientAccountLink_FK1" FromRole="Patient" ToRole="PatientAccountLink" />
+    <NavigationProperty Name="PatientCareDocuments" Relationship="AMRModel.Patient_PatientCareDocument_FK1" FromRole="Patient" ToRole="PatientCareDocument" />
+    <NavigationProperty Name="PatientDocuments" Relationship="AMRModel.Patient_PatientDocument_FK1" FromRole="Patient" ToRole="PatientDocument" />
+    <NavigationProperty Name="PatientEmergencies" Relationship="AMRModel.Patient_PatientEmergency_FK1" FromRole="Patient" ToRole="PatientEmergency" />
+    <NavigationProperty Name="PatientFacilityLinks" Relationship="AMRModel.Patient_PatientFacilityLink_FK1" FromRole="Patient" ToRole="PatientFacilityLink" />
+    <NavigationProperty Name="PatientMedicalDocuments" Relationship="AMRModel.Patient_PatientMedicalDocument_FK1" FromRole="Patient" ToRole="PatientMedicalDocument" />
+    <NavigationProperty Name="PatientOrgan" Relationship="AMRModel.Patient_PatientOrgan_FK1" FromRole="Patient" ToRole="PatientOrgan" />
+    <NavigationProperty Name="PatientShare" Relationship="AMRModel.Patient_PatientShare_FK1" FromRole="Patient" ToRole="PatientShare" />
+    <NavigationProperty Name="PatientVisits" Relationship="AMRModel.Patient_PatientVisit_FK1" FromRole="Patient" ToRole="PatientVisit" />
+    <NavigationProperty Name="PatientWebSetting" Relationship="AMRModel.Patient_PatientWebSetting_FK1" FromRole="Patient" ToRole="PatientWebSetting" />
+    <NavigationProperty Name="PatientProviderLinks" Relationship="AMRModel.PatientProviderLink_Patient_FK1" FromRole="Patient" ToRole="PatientProviderLink" />
+    <Property Type="String" Name="MedicareId" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MedicaidState" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="MedicaidId" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AltId1_Type" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AltId1_Key" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AltId2_Type" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AltId2_Key" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AltId3_Type" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AltId3_Key" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AltId4_Type" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AltId4_Key" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AltId5_Type" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AltId5_Key" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="Int64" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserLogin" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="UserEmail" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Password" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="UserRoleId" />
+    <Property Type="Int64" Name="UserRoleLink" />
+    <Property Type="DateTime" Name="LastLoginDate" Precision="3" />
+    <Property Type="DateTime" Name="LastPasswordChange" Precision="3" />
+    <Property Type="Int32" Name="FailedLoginCount" />
+    <Property Type="Boolean" Name="Enabled" />
+    <Property Type="Boolean" Name="Locked" />
+    <Property Type="Int32" Name="SecurityQuestionId" />
+    <Property Type="String" Name="SecurityAnswer" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="SecurityQuestionId2" />
+    <Property Type="String" Name="SecurityAnswer2" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="C_UserRole" Relationship="AMRModel.C_UserRole_User_FK1" FromRole="User" ToRole="C_UserRole" />
+  </EntityType>
+  <Association Name="C_BloodType_Patient_FK1">
+    <End Type="AMRModel.C_BloodType" Role="C_BloodType" Multiplicity="0..1" />
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_BloodType">
+        <PropertyRef Name="BloodTypeId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="BloodTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_Ethnicity_Patient_FK1">
+    <End Type="AMRModel.C_Ethnicity" Role="C_Ethnicity" Multiplicity="0..1" />
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_Ethnicity">
+        <PropertyRef Name="EthnicityId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="EthnicityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_Gender_Patient_FK1">
+    <End Type="AMRModel.C_Gender" Role="C_Gender" Multiplicity="0..1" />
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_Gender">
+        <PropertyRef Name="GenderId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="GenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_MaritalStatus_Patient_FK1">
+    <End Type="AMRModel.C_MaritalStatus" Role="C_MaritalStatus" Multiplicity="0..1" />
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_MaritalStatus">
+        <PropertyRef Name="MaritalStatusId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="MaritalStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_PreferredLanguage_Patient_FK1">
+    <End Type="AMRModel.C_PreferredLanguage" Role="C_PreferredLanguage" Multiplicity="0..1" />
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_PreferredLanguage">
+        <PropertyRef Name="PreferredLanguageId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="PreferredLanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_Religion_Patient_FK1">
+    <End Type="AMRModel.C_Religion" Role="C_Religion" Multiplicity="0..1" />
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_Religion">
+        <PropertyRef Name="ReligionId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="ReligionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_SmokingStatus_Patient_FK1">
+    <End Type="AMRModel.C_SmokingStatus" Role="C_SmokingStatus" Multiplicity="0..1" />
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_SmokingStatus">
+        <PropertyRef Name="SmokingStatusId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="SmokingStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C_UserRole_User_FK1">
+    <End Type="AMRModel.C_UserRole" Role="C_UserRole" Multiplicity="0..1" />
+    <End Type="AMRModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_UserRole">
+        <PropertyRef Name="UserRoleId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientAccountLink_FK1">
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="AMRModel.PatientAccountLink" Role="PatientAccountLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientAccountLink">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientCareDocument_FK1">
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="AMRModel.PatientCareDocument" Role="PatientCareDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientCareDocument">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientDocument_FK1">
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="AMRModel.PatientDocument" Role="PatientDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientDocument">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientEmergency_FK1">
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="AMRModel.PatientEmergency" Role="PatientEmergency" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientEmergency">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientFacilityLink_FK1">
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="AMRModel.PatientFacilityLink" Role="PatientFacilityLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientFacilityLink">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientMedicalDocument_FK1">
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="AMRModel.PatientMedicalDocument" Role="PatientMedicalDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientMedicalDocument">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientOrgan_FK1">
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="AMRModel.PatientOrgan" Role="PatientOrgan" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientOrgan">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientShare_FK1">
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="AMRModel.PatientShare" Role="PatientShare" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientShare">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientVisit_FK1">
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="AMRModel.PatientVisit" Role="PatientVisit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientVisit">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Patient_PatientWebSetting_FK1">
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="AMRModel.PatientWebSetting" Role="PatientWebSetting" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientWebSetting">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatientProviderLink_Patient_FK1">
+    <End Type="AMRModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="AMRModel.PatientProviderLink" Role="PatientProviderLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientProviderLink">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="vwPatientSummary">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="MiddleName" />
+      <PropertyRef Name="Suffix" />
+      <PropertyRef Name="PAddress" />
+      <PropertyRef Name="City" />
+      <PropertyRef Name="State" />
+      <PropertyRef Name="Zip" />
+      <PropertyRef Name="CountryCode" />
+      <PropertyRef Name="CountryName" />
+      <PropertyRef Name="HomePhone" />
+      <PropertyRef Name="WorkPhone" />
+      <PropertyRef Name="MobilePhone" />
+      <PropertyRef Name="EMail" />
+      <PropertyRef Name="EyeColor" />
+      <PropertyRef Name="HairColor" />
+      <PropertyRef Name="OrganDoner" />
+      <PropertyRef Name="Race" />
+      <PropertyRef Name="EmergencyName" />
+      <PropertyRef Name="EmergencyAddress" />
+      <PropertyRef Name="EmergencyCity" />
+      <PropertyRef Name="EmergencyState" />
+      <PropertyRef Name="EmergencyZip" />
+      <PropertyRef Name="EmergencyCountryCode" />
+      <PropertyRef Name="EmergencyCountryName" />
+      <PropertyRef Name="EmergencyHomePhone" />
+      <PropertyRef Name="EmergencyMobilePhone" />
+      <PropertyRef Name="EmergencyWorkPhone" />
+      <PropertyRef Name="EmergencyRelationship" />
+      <PropertyRef Name="PCP" />
+      <PropertyRef Name="MailAddress" />
+      <PropertyRef Name="MailCity" />
+      <PropertyRef Name="MailState" />
+      <PropertyRef Name="MailZip" />
+      <PropertyRef Name="MailCountryCode" />
+      <PropertyRef Name="MailCountryName" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FirstName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MiddleName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LastName" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Suffix" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PAddress" Nullable="false" MaxLength="101" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Zip" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CountryCode" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="Int32" Name="HeightFt" />
+    <Property Type="Int32" Name="HeightIn" />
+    <Property Type="Int32" Name="Weight" />
+    <Property Type="String" Name="Comments" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CountryName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DOB" Precision="0" />
+    <Property Type="String" Name="HomePhone" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="WorkPhone" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MobilePhone" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EMail" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EyeColor" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="HairColor" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="OrganDoner" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="MaritalStatusId" />
+    <Property Type="String" Name="MaritalStatus" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="PreferredLanguageId" />
+    <Property Type="String" Name="PreferredLanguage" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="RaceId_NotAnswer" />
+    <Property Type="Boolean" Name="RaceId_Native" />
+    <Property Type="Boolean" Name="RaceId_Asian" />
+    <Property Type="Boolean" Name="RaceId_Black" />
+    <Property Type="Boolean" Name="RaceId_Hawaiian" />
+    <Property Type="Boolean" Name="RaceId_White" />
+    <Property Type="String" Name="Race" Nullable="false" MaxLength="138" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ReligionId" />
+    <Property Type="String" Name="Religion" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="GenderId" />
+    <Property Type="String" Name="Gender" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="EthnicityId" />
+    <Property Type="String" Name="Ethnicity" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="BloodTypeId" />
+    <Property Type="String" Name="BloodType" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="SmokingStatusId" />
+    <Property Type="String" Name="SmokingStatus" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="PatientEmergencyId" />
+    <Property Type="Int32" Name="RelationshipId" />
+    <Property Type="String" Name="EmergencyName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmergencyAddress" Nullable="false" MaxLength="101" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmergencyCity" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmergencyState" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmergencyZip" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmergencyCountryCode" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="EmergencyCountryName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmergencyHomePhone" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmergencyMobilePhone" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmergencyWorkPhone" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="EmergencyRelationshipId" />
+    <Property Type="String" Name="EmergencyRelationship" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="IsPrimary" />
+    <Property Type="String" Name="PCP" Nullable="false" MaxLength="52" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MailAddress" Nullable="false" MaxLength="101" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MailCity" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MailState" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MailZip" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MailCountryCode" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="MailCountryName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Heart" />
+    <Property Type="Boolean" Name="Liver" />
+    <Property Type="Boolean" Name="Pancreas" />
+    <Property Type="Boolean" Name="Lungs" />
+    <Property Type="Boolean" Name="Kidneys" />
+    <Property Type="Boolean" Name="Intestines" />
+    <Property Type="Boolean" Name="Cornea" />
+    <Property Type="Boolean" Name="Skin" />
+    <Property Type="Boolean" Name="BoneMarrow" />
+    <Property Type="Boolean" Name="HeartValves" />
+    <Property Type="Boolean" Name="ConnectiveTissue" />
+  </EntityType>
+  <EntityType Name="Carrier">
+    <Key>
+      <PropertyRef Name="CarrierId" />
+    </Key>
+    <Property Type="Int32" Name="CarrierId" Nullable="false" />
+    <Property Type="String" Name="CarrierURL" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CarrierName" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vwPatientVisitSummary">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="FacilityName" />
+      <PropertyRef Name="FacilityAddress" />
+      <PropertyRef Name="FacilityCityStatePostal" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="ProviderName" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="String" Name="FacilityName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FacilityAddress" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FacilityCityStatePostal" Nullable="false" MaxLength="52" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="DateTime" Name="VisitDate" Precision="3" />
+    <Property Type="Int64" Name="ProviderId" />
+    <Property Type="String" Name="VisitReason" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProviderName" Nullable="false" MaxLength="52" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Viewable" />
+  </EntityType>
+  <EntityType Name="PatientMedication">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="PatientMedicationCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="PatientMedicationCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CodeValue" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodeSystemId" />
+    <Property Type="String" Name="MedicationName" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Active" />
+    <Property Type="Int32" Name="Quantity" />
+    <Property Type="String" Name="RouteId" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Dose" />
+    <Property Type="String" Name="DoseUnit" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Refills" />
+    <Property Type="String" Name="Frequency" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Sig" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Diagnosis" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="StartDate" Precision="0" />
+    <Property Type="DateTime" Name="ExpireDate" Precision="0" />
+    <Property Type="String" Name="Pharmacy" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Status" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Note" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+    <Property Type="Boolean" Name="DuringVisit" />
+  </EntityType>
+  <EntityType Name="vwMessageGetWaiting">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Type="Int64" Name="FacilityId" />
+    <Property Type="Int64" Name="MessageId" Nullable="false" />
+    <Property Type="Int64" Name="AMRPatientId" />
+    <Property Type="Int32" Name="MessageTypeId" />
+    <Property Type="Int64" Name="ToProvider" />
+    <Property Type="String" Name="MessageRequest" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="PreferredResponseBy" />
+    <Property Type="String" Name="PreferredPeriod" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="PreferredTime" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PreferredDay" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="VisitReason" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="VisitUrgency" />
+    <Property Type="String" Name="Medication" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Pharmacy" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="AppointmentStart" Precision="0" />
+    <Property Type="DateTime" Name="AppointmentEnd" Precision="0" />
+  </EntityType>
+  <EntityType Name="MessageDetail">
+    <Key>
+      <PropertyRef Name="MessageId" />
+      <PropertyRef Name="MessageDetailId" />
+    </Key>
+    <Property Type="Int64" Name="MessageId" Nullable="false" />
+    <Property Type="Int64" Name="MessageDetailId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="ProviderId_To" />
+    <Property Type="Int64" Name="ProviderId_From" />
+    <Property Type="String" Name="MessageRequest" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MessageResponse" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="MessageResponseTypeId" />
+    <Property Type="String" Name="PreferredPeriod" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="PreferredTime" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PreferredWeekDay" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="VisitReason" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="MessageUrgency" />
+    <Property Type="DateTime" Name="AppointmentStart" Precision="0" />
+    <Property Type="DateTime" Name="AppointmentEnd" Precision="0" />
+    <Property Type="Int64" Name="ProviderId_Appointment" />
+    <Property Type="String" Name="MedicationNDC" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="MedicationName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="NoOfRefills" />
+    <Property Type="Int32" Name="MedicationStatus" />
+    <Property Type="String" Name="PharmacyName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PharmacyAddress" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AttachmentId" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Boolean" Name="MessageRead" />
+    <Property Type="String" Name="PharmacyPhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="C_MessageResponseType" Relationship="AMRModel.C_MessageResponseType_MessageDetail_FK1" FromRole="MessageDetail" ToRole="C_MessageResponseType" />
+    <NavigationProperty Name="Message" Relationship="AMRModel.Message_MessageDetail_FK1" FromRole="MessageDetail" ToRole="Message" />
+  </EntityType>
+  <Association Name="C_MessageResponseType_MessageDetail_FK1">
+    <End Type="AMRModel.C_MessageResponseType" Role="C_MessageResponseType" Multiplicity="0..1" />
+    <End Type="AMRModel.MessageDetail" Role="MessageDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_MessageResponseType">
+        <PropertyRef Name="MessageResponseTypeId" />
+      </Principal>
+      <Dependent Role="MessageDetail">
+        <PropertyRef Name="MessageResponseTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Message_MessageDetail_FK1">
+    <End Type="AMRModel.Message" Role="Message" Multiplicity="1" />
+    <End Type="AMRModel.MessageDetail" Role="MessageDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="MessageId" />
+      </Principal>
+      <Dependent Role="MessageDetail">
+        <PropertyRef Name="MessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="vwMessageSummary">
+    <Key>
+      <PropertyRef Name="MessageId" />
+      <PropertyRef Name="FacilityName" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" />
+    <Property Type="Int64" Name="MessageId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" />
+    <Property Type="String" Name="FacilityName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="MessageTypeId" />
+    <Property Type="String" Name="MessageType" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="MessageStatusId" />
+    <Property Type="String" Name="MessageStatus" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MessageRequest" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PreferredPeriod" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="PreferredTime" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PreferredWeekDay" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Type="Boolean" Name="MessageUrgency" />
+    <Property Type="String" Name="VisitReason" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MedicationName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PharmacyName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="ProviderId_To" />
+    <Property Type="String" Name="ProviderName_To" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="ProviderId_From" />
+    <Property Type="String" Name="ProviderName_From" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="String" Name="CreatedByName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MessageResponse" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="MessageResponseTypeId" />
+    <Property Type="DateTime" Name="AppointmentStart" Precision="0" />
+    <Property Type="DateTime" Name="AppointmentEnd" Precision="0" />
+    <Property Type="Int64" Name="ProviderId_Appointment" />
+    <Property Type="String" Name="ProviderName_Appointment" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MedicationNDC" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Type="Int32" Name="NoOfRefills" />
+    <Property Type="Int32" Name="MedicationStatus" />
+    <Property Type="String" Name="PharmacyAddress" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PharmacyPhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AttachmentId" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PatientPharmacy">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="PharmacyCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="PharmacyCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="PharmacyName" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address1" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address2" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address3" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CountryCode" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="PostalCode" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Phone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Preferred" />
+    <Property Type="String" Name="Note" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Int64" Name="UserId_Modified" />
+    <Property Type="DateTime" Name="DateModified" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+  </EntityType>
+  <EntityType Name="vwMessageDetailReceived">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Type="Int64" Name="MessageId" Nullable="false" />
+    <Property Type="Int64" Name="MessageDetailId" />
+    <Property Type="Int64" Name="PatientId" />
+    <Property Type="String" Name="PatientName" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="MessageTypeId" />
+    <Property Type="String" Name="MessageType" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="FacilityId" />
+    <Property Type="String" Name="FacilityName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="MessageStatusId" />
+    <Property Type="String" Name="MessageStatus" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="Expr1" />
+    <Property Type="Int64" Name="ProviderId_To" />
+    <Property Type="String" Name="ProviderTo" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="ProviderId_From" />
+    <Property Type="String" Name="ProviderFrom" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MessageRequest" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MessageResponse" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="MessageResponseTypeId" />
+    <Property Type="String" Name="MessageResponseType" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PreferredPeriod" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="PreferredTime" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PreferredWeekDay" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="VisitReason" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="MessageUrgency" />
+    <Property Type="DateTime" Name="AppointmentStart" Precision="0" />
+    <Property Type="DateTime" Name="AppointmentEnd" Precision="0" />
+    <Property Type="Int64" Name="ProviderId_Appointment" />
+    <Property Type="String" Name="ProviderAppointment" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MedicationNDC" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="MedicationName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="NoOfRefills" />
+    <Property Type="Int32" Name="MedicationStatus" />
+    <Property Type="String" Name="PharmacyName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PharmacyAddress" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PharmacyPhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Boolean" Name="MessageRead" />
+    <Property Type="Int64" Name="MessageAttachmentId" />
+    <Property Type="String" Name="DocumentFormat" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vwMessageDetailSent">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Type="Int64" Name="MessageId" Nullable="false" />
+    <Property Type="Int64" Name="MessageDetailId" />
+    <Property Type="Int64" Name="PatientId" />
+    <Property Type="String" Name="PatientName" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="MessageTypeId" />
+    <Property Type="String" Name="MessageType" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="FacilityId" />
+    <Property Type="String" Name="FacilityName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="MessageStatusId" />
+    <Property Type="String" Name="MessageStatus" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="Expr1" />
+    <Property Type="Int64" Name="ProviderId_To" />
+    <Property Type="String" Name="ProviderTo" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="ProviderId_From" />
+    <Property Type="String" Name="ProviderFrom" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MessageRequest" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MessageResponse" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="MessageResponseTypeId" />
+    <Property Type="String" Name="MessageResponseType" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PreferredPeriod" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="PreferredTime" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PreferredWeekDay" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="VisitReason" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="MessageUrgency" />
+    <Property Type="DateTime" Name="AppointmentStart" Precision="0" />
+    <Property Type="DateTime" Name="AppointmentEnd" Precision="0" />
+    <Property Type="Int64" Name="ProviderId_Appointment" />
+    <Property Type="String" Name="ProviderAppointment" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MedicationNDC" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="MedicationName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="NoOfRefills" />
+    <Property Type="Int32" Name="MedicationStatus" />
+    <Property Type="String" Name="PharmacyName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PharmacyAddress" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PharmacyPhone" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Boolean" Name="MessageRead" />
+    <Property Type="Int64" Name="MessageAttachmentId" />
+    <Property Type="String" Name="DocumentFormat" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vwMessageGetCancelled">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Type="Int64" Name="FacilityId" />
+    <Property Type="Int64" Name="MessageId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="AMRPatientId" />
+    <Property Type="Int32" Name="MessageTypeId" />
+  </EntityType>
+  <EntityType Name="DirectReceived">
+    <Key>
+      <PropertyRef Name="DirectReceivedId" />
+    </Key>
+    <Property Type="Int64" Name="DirectReceivedId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Boolean" Name="Processed" />
+    <Property Type="DateTime" Name="DateProcessed" Precision="0" />
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="String" Name="EmailId" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FromEmail" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ToEmail" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Body" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Attachment" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Message" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vwPatientDocumentsList">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="DocumentCntr" />
+      <PropertyRef Name="DocType" />
+      <PropertyRef Name="DocumentDescription" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="DocumentCntr" Nullable="false" />
+    <Property Type="String" Name="DocType" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DocumentDescription" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PatientLabResult">
+    <Key>
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="FacilityId" />
+      <PropertyRef Name="VisitId" />
+      <PropertyRef Name="LabResultCntr" />
+    </Key>
+    <Property Type="Int64" Name="PatientId" Nullable="false" />
+    <Property Type="Int64" Name="FacilityId" Nullable="false" />
+    <Property Type="Int64" Name="VisitId" Nullable="false" />
+    <Property Type="Int64" Name="LabResultCntr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="ProviderId_Requested" />
+    <Property Type="String" Name="CodeValue" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodeSystemId" />
+    <Property Type="String" Name="LabName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="OrderDate" Precision="0" />
+    <Property Type="DateTime" Name="CollectionDate" Precision="0" />
+    <Property Type="String" Name="Requisiton" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Specimen" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SpecimenSource" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ReportDate" Precision="0" />
+    <Property Type="DateTime" Name="ReviewDate" Precision="0" />
+    <Property Type="String" Name="Reviewer" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="UserId_Created" />
+    <Property Type="DateTime" Name="DateCreated" Precision="0" />
+    <Property Type="Boolean" Name="Deleted" />
+    <Property Type="Int64" Name="UserId_Deleted" />
+    <Property Type="DateTime" Name="DateDeleted" Precision="0" />
+    <NavigationProperty Name="PatientLabResultTests" Relationship="AMRModel.PatientLabResult_PatientLabResultsTest_FK1" FromRole="PatientLabResult" ToRole="PatientLabResultTest" />
+  </EntityType>
+  <Association Name="PatientLabResult_PatientLabResultsTest_FK1">
+    <End Type="AMRModel.PatientLabResult" Role="PatientLabResult" Multiplicity="1" />
+    <End Type="AMRModel.PatientLabResultTest" Role="PatientLabResultTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientLabResult">
+        <PropertyRef Name="PatientId" />
+        <PropertyRef Name="FacilityId" />
+        <PropertyRef Name="VisitId" />
+        <PropertyRef Name="LabResultCntr" />
+      </Principal>
+      <Dependent Role="PatientLabResultTest">
+        <PropertyRef Name="PatientId" />
+        <PropertyRef Name="FacilityId" />
+        <PropertyRef Name="VisitId" />
+        <PropertyRef Name="LabResultCntr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

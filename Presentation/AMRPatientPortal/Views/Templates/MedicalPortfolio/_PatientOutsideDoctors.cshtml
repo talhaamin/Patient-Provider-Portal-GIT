@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AMR.Models.PatientOutsideDoctorModel>
+
+<table class="box-table-a" id="tbl-DoctorsRecord" summary="Dr'sRecords">
+                            <thead>
+                                <tr>
+                                    <!---<th scope="col" style="margin-right: 10px;">
+                                        <input name="check" type="checkbox" class="CheckAll" id="chk_2" onclick="checkAll(this);" />
+                                    </th>-->
+                                    <th scope="col">Upload Date</th>
+                                    <th scope="col">Physician</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Comments</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Permission</th>
+                               </tr>
+                            </thead>
+                            <tbody id="tbodyPatientOutsideDoctorList">
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var outsideDoctor in Model)
+                                    {
+                                        <tr @((counter%2==0)? "class=r1" : "class=r0")>
+                                          <!--<td>
+                                              <input type="checkbox" data-myVal="@(outsideDoctor.DocumentCntr)"  id="chk2"  name="chk2[]" />
+                                          </td>-->
+                                          <td>@outsideDoctor.DateCreated.ToString("MM/dd/yyyy")</td>
+                                          <td>@outsideDoctor.DoctorName</td>
+                                          <td><span class="LinkHighlight hoverMe" onclick="ViewDoctorAttachment('@(outsideDoctor.DocumentCntr+"|"+outsideDoctor.DocumentFormat)');"> @((outsideDoctor.DocumentDescription.Length >22)?outsideDoctor.DocumentDescription.Substring(0,22) + "..." : outsideDoctor.DocumentDescription) </span></td>
+                                          <td>@((outsideDoctor.Notes.Length>22)?outsideDoctor.Notes.Substring(0,22) + "..." : outsideDoctor.Notes)</td>                                          
+                                          <td>@((outsideDoctor.Viewable)?"Shared":"Hidden")</td>
+                                          <td><span class="LinkHighlight hoverMe" onclick="shareHidePatientOutsideDoctor('@((outsideDoctor.Viewable) ? ("0|" + outsideDoctor.DocumentCntr) : ("1|" + outsideDoctor.DocumentCntr))');"><img src='@((outsideDoctor.Viewable)? "Content/img/hide.png" : "Content/img/share.png")'/>  @((outsideDoctor.Viewable) ? "Hide" : "Share") </span></td>
+                                        </tr>       
+                                        counter++;
+                                    }
+                                }
+                                else
+                                {
+                                    <tr><td>No Information Available</td></tr>
+                                }
+                                </tbody>
+</table>
+

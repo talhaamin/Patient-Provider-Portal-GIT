@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AMR.Models.PatientVisitModel>
+
+<table class="box-table-a" id="tbl-HealthCareDataExchange" summary="HealthCareDataExchange">
+
+                            <thead>
+                                <tr>
+                                    <!--<th scope="col" style="margin-right: 10px;">
+                                        <input name="check" type="checkbox" class="CheckAll" id="chk_1" onclick="checkAll(this);" />
+                                    </th>-->
+                                    <th scope="col">Visit Date</th>
+                                    <th scope="col">Facility</th>
+                                    <th scope="col">Physician</th>
+                                    <th scope="col">Visit Reason</th>
+                                @if(AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag ==true){    <th scope="col">Status</th>
+                                 <th scope="col">Permission</th>}
+                               </tr>
+                            </thead>
+                            <tbody id="tbodyVisitList">
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter=0;
+                                    bool flag=AMR.Core.Utilities.RequestHelper.MyGlobalVar.PremiumFlag;
+                                    foreach (var visit in Model)
+                                    {
+                                        <tr @((counter%2==0)? "class=r1" : "class=r0")>
+                                          <!--<td>
+                                            <input type="checkbox" data-myVal="@(visit.VisitId + "|" + visit.FacilityId)" id="chk1"  name="chk1[]" value="1"/>
+                                          </td>-->
+                                          <td><span  class="LinkHighlight hoverMe" onclick="ViewVisitRecord('@visit.VisitId','@visit.FacilityId');">@visit.VisitDate.ToString("MM/dd/yyyy")</span></td>
+                                          <td>@visit.FacilityName</td>
+                                          <td>@visit.ProviderName</td>
+                                          <td>@((visit.VisitReason.Length>22)?visit.VisitReason.Substring(0,22) + "...":visit.VisitReason)</td>
+                                         @if(flag ==true){ <td>@((visit.Viewable)?"Shared":"Hidden")</td>
+                                          <td><span class="LinkHighlight hoverMe" onclick="shareHidePatientVisit('@((visit.Viewable) ? ("0|" + visit.VisitId + "|" + visit.FacilityId) : ("1|" + visit.VisitId + "|" + visit.FacilityId))');"><img src='@((visit.Viewable)? "Content/img/hide.png" : "Content/img/share.png")'/>  @((visit.Viewable) ? "Hide" : "Share") </span></td>}
+                                        </tr>       
+                                        counter++;
+                                    }
+                                }
+                                else
+                                {
+                                    <tr><td>No Information Available</td></tr>    
+                                }
+                                </tbody>
+</table>
+

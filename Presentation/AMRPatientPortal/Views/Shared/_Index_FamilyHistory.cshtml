@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AMR.Models.FamilyHistoryModel>
+@using System.Text;
+<table class="box-table-a" id="tbl-FamilyHistory" summary="FamilyHistory">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Relationship</span></th>
+                            <th scope="col" style="vertical-align:middle">Description</th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count()>0)
+                        {
+                            int counter=0;
+                            foreach (var item in Model)
+                            {
+                                string desc = item.Description.Replace("'", "`");
+                                StringBuilder jsonStringFamily = new StringBuilder();
+
+                                jsonStringFamily.Append(" { ");
+                                jsonStringFamily.Append("\"PatFamilyHistCntr\": \"" + item.PatFamilyHistCntr + "\",");
+                                jsonStringFamily.Append("\"RelationshipId\": \"" + item.RelationshipId + "\",");
+                                jsonStringFamily.Append("\"ConditionStatusId\": \"" + item.ConditionStatusId + "\",");
+                                jsonStringFamily.Append("\"Description\":  \"" + desc + "\",");
+                                jsonStringFamily.Append("\"CodeValue\":  \"" + item.CodeValue + "\",");
+                                jsonStringFamily.Append("\"DateReported\":  \"" + item.DateReported + "\",");
+                                jsonStringFamily.Append("\"Note\":  \"" + item.Note + "\",");
+                                jsonStringFamily.Append("\"AgeAtOnset\":  \"" + item.AgeAtOnset + "\",");
+                                jsonStringFamily.Append("\"DiseasedAge\":  \"" + (item.DiseasedAge) + "\",");
+                                jsonStringFamily.Append("\"Diseased\":  \"" + (item.Diseased) + "\",");
+                                jsonStringFamily.Append("\"FamilyMember\":  \"" + item.SNOMEDCode + "\"");
+
+
+                                jsonStringFamily.Append("}");
+                                        
+                                <tr class="@((counter % 2 == 0) ? "r1" : "r0")" onclick="OpenFamilyHistoryRecords(@item.PatFamilyHistCntr);">
+                                    <td style="vertical-align:middle"><input type="hidden" id="FamilyHist-@item.PatFamilyHistCntr" value="@jsonStringFamily.ToString()" />@item.FamilyMember</td>
+                                    <td style="vertical-align:middle">@item.Description</td>                                    
+                                </tr>
+                                counter++;
+                            }
+                        }
+                        else
+                        {
+                                 <tr>
+                                <td width="200px;" style="vertical-align:middle">No Information Available.</td>
+                            </tr>
+                        }
+                    </tbody>
+</table>

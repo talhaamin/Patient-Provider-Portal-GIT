@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AMR.Models.FacilityModel>
+
+
+<table  class="table">
+   
+        <thead>
+
+            <tr>
+
+              <th>Location ID</th>
+                <th>Location Name</th>
+               
+                
+            </tr>
+
+        </thead>
+    
+        <tbody id="ClearData">
+            @if(Model != null && Model.Count() > 0)
+            {
+                int counter=0;
+                foreach (var item in Model)
+                {
+                    System.Text.StringBuilder jsonString = new System.Text.StringBuilder();
+
+                    jsonString.Append(" { ");
+                    jsonString.Append("\"ID\": \"" + item.FacilityID + "\",");
+                    jsonString.Append("\"FacilityName\":  \"" + item.FacilityName + "\",");
+                  
+                    jsonString.Append("}");
+                    
+            <tr  >
+                <td ><a style="cursor:pointer;color:blue;" onclick="ShowFacilityData('@item.FacilityID','@item.FacilityName');">@item.FacilityID </a><input type="hidden" id="hdfacility-@item.FacilityID.ToString()" value="@jsonString.ToString()" /></td>
+                <td>@item.FacilityName</td>
+                    
+            </tr>
+                    counter++;
+                }
+            }
+             else
+            {
+            <tr>
+                <td colspan="2">No Information Found</td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+
+
+
+

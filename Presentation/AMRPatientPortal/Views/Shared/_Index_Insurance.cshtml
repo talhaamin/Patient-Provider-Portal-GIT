@@ -1,0 +1,38 @@
+﻿@model IEnumerable<AMR.Models.PatientInsuranceModel>
+@using System.Web.Script.Serialization;
+<table class="box-table-a" id="tbl-Insurance" summary="InsuranceInformation">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Member Number</span></th>
+                                    <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Plan Name</span></th>
+                                    <th scope="col" style="vertical-align:middle"><span style="margin-left:2px;">Group Number</span></th>
+                               </tr>
+                            </thead>
+                             <tbody>
+                   @if (Model != null && Model.Count() > 0)
+                                {
+                                    int counter = 0;
+                                    foreach (var item in Model)
+                                    {
+                        <tr class="@((counter % 2 == 0) ? "r0" : "r1")">
+                            <td style="vertical-align:middle">@item.MemberNumber </td> 
+                            <td style="vertical-align:middle">@item.PlanName </td>
+                            <td style="vertical-align:middle">@item.GroupNumber </td>
+     
+                      
+                   
+                        </tr>  counter++;
+                                    }
+                                }
+                                   else
+                                {
+                                      <tr> 
+                                <td style="vertical-align:middle">No Information Available</td> 
+                                          <td></td> 
+                                          <td></td> 
+                                        </tr>  
+                                  @* @Html.Partial("_NoRecordFound",2) *@
+                                }
+                    </tbody>
+                            </table>
+

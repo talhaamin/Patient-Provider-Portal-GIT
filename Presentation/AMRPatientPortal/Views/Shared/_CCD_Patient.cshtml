@@ -1,0 +1,125 @@
+﻿ @using AMR.Models;
+@model HomeViewModel
+@*@model AMR.Models.PatientVisitCCDModel*@
+
+<table width="100%">
+    <tr>
+        <td height="54" colspan="5" align="center">
+            <h1><strong>View Continuity of Care Document</strong>
+
+      </h1>         
+        <h2>Created On: @DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss tt")</h2>        
+      
+          
+         </td>
+      <td>&nbsp;</td>
+    </tr>
+    
+    <tr>
+            <td width="153" height="28"><strong>Patient :</strong></td>
+      <td width="269" height="28">@Model.PatientSummary.FirstName @Model.PatientSummary.LastName</td>
+      <td width="4">&nbsp;</td>
+            <td width="152" height="28"><strong>Access ID : </strong></td>
+      <td width="370" height="28">@Model.PatientSummary.PatientId</td>
+      <td width="2">&nbsp;</td>
+    </tr>
+    <tr>
+            <td height="28"><strong>Address :</strong></td>
+            <td>@Model.PatientSummary.PAddress<br>
+                @Model.PatientSummary.City, @Model.PatientSummary.State @Model.PatientSummary.Zip<br>
+            </td>
+      <td>&nbsp;</td>
+            <td height="28"><strong>Work Phone :</strong></td>
+            <td height="28">@Model.PatientSummary.WorkPhone</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+        @if(Model.PatientCCDownload.Demographics == true)
+                {
+            <td height="28"><strong>Birth Date :</strong></td>
+      <td>@Model.PatientSummary.DOB</td>
+      <td>&nbsp;</td>
+        }
+            <td><strong>Mobile Phone :</strong></td>
+      <td>@Model.PatientSummary.MobilePhone</td>
+      <td>&nbsp;</td>
+    </tr>
+    @if(Model.PatientCCDownload.Demographics == true)
+                {
+    <tr>
+            <td height="28"><strong>Preferred Language :</strong></td>
+      <td>@Model.PatientSummary.PreferredLanguage</td>
+      <td>&nbsp;</td>
+            <td><strong>Sex :</strong></td>
+      <td>@Model.PatientSummary.Gender</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+            <td height="28"><strong>Ethnicity :</strong></td>
+      <td>@Model.PatientSummary.Ethnicity</td>
+      <td>&nbsp;</td>
+            <td><strong>Race :</strong></td>
+      <td>@Model.PatientSummary.Race</td>
+      <td>&nbsp;</td>
+    </tr>
+        @*<tr>
+            <td height="28"><strong>PCP :</strong></td>
+
+      <td>@Model.PatientSummary.PCP </td>
+      <td>&nbsp;</td>
+            <td><strong>Smoking Status :</strong></td>
+      <td>@Model.PatientSummary.SmokingStatus</td>
+      <td>&nbsp;</td>
+        </tr>*@
+    }
+    @if(Model.PatientCCDownload.Provider == true)
+                {
+    <tr>
+            <td height="28"><strong>Provider :</strong></td>
+      <td>@Model.PatientVisitCCD.Title @Model.PatientVisitCCD.FirstName @Model.PatientVisitCCD.LastName </td>
+      <td>&nbsp;</td>
+     @*<td ><strong>Reason For Visit :</strong></td>
+      <td>@Model.PatientVisitCCD.VisitReason</td>
+      <td>&nbsp;</td>*@
+    </tr>
+      <tr>
+            <td height="28"><strong>Practice Name :</strong></td>
+      <td>@Model.PatientVisitCCD.FacilityName
+         
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+            <td height="28"><strong></strong></td>
+            <td>@Model.PatientVisitCCD.Address1
+                <br />
+          @Model.PatientVisitCCD.City, @Model.PatientVisitCCD.State @Model.PatientVisitCCD.PostalCode
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+     <tr>
+            <td height="28"><strong>Practice Phone :</strong></td>
+      <td>@Model.PatientVisitCCD.FacilityPhone
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+        
+    }
+        @if(Model.PatientCCDownload.Visit == true)
+                {
+         <tr>
+                    <td height="28"><strong>Visit Date :</strong></td>
+                    <td>@Model.PatientVisitCCD.VisitDate
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                 <tr>
+                    <td height="28"><strong>Visit Location :</strong></td>
+                    <td>@Model.PatientVisitCCD.Address1
+                <br />
+          @Model.PatientVisitCCD.City, @Model.PatientVisitCCD.State @Model.PatientVisitCCD.PostalCode
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+        }
+  </table>

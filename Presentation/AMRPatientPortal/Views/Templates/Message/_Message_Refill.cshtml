@@ -1,0 +1,226 @@
+﻿@model IEnumerable<AMR.Models.PatientMessageModel>
+@using System.Text;
+<table class="box-table-a" id="tbl-MessageRefill" summary="Medications">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="margin-right: 10px; vertical-align:middle;">
+                                @*<input name="check" type="checkbox" class="CheckAll" onclick="checkAll('chk4');"/>*@
+                                  <input name="check" type="checkbox" class="CheckAll" id="chk_3" onclick="checkAll(this);"style="margin-left:6px; margin-top:-1px;" />
+                            </th>
+                                 <th scope="col" style="vertical-align:middle;">
+                                <div style="margin-left:8px; " >
+                                    From
+                                </div>
+                            </th>
+                                 <th scope="col" style="vertical-align:middle;">
+                                <div style="margin-left:10px; " >
+                                    Subject
+                                </div>
+                            </th>
+                                 <th scope="col" style="vertical-align:middle;">
+                                <div style="margin-left:12px; " >
+                                    Received
+                                </div>
+                            </th>
+                                 <th scope="col" style="vertical-align:middle;">
+                                <div style="margin-left:-7px; " >
+                                    Status
+                                </div>
+                            </th>
+                      @*  <th scope="col" style="vertical-align:middle;">
+                                <div style="margin-left:8px; " >
+                                    Date
+                                </div>
+                            </th>
+                            <th scope="col" style="vertical-align:middle;">
+                                <div style="margin-left: 11px;">
+                                    Provider
+                                </div>
+                            </th>
+                            <th scope="col" style="vertical-align:middle;">
+                                <div style="margin-left: 11px;">
+                                    Facility
+                                </div>
+                            </th>
+                            <th scope="col" style="vertical-align:middle;">
+                                <div style="margin-left: 11px;">
+                                    Request
+                                </div>
+                            </th>
+                            <th scope="col" style="vertical-align:middle;">
+                                <div style="margin-left: -8px;">
+                                    Status
+                                </div>
+                            </th>
+                            <th scope="col" style="vertical-align:middle;">
+                                <div style="margin-left: 11px;">
+                                    Message
+                                </div>
+                            </th>*@
+                            @*<th scope="col">
+                                
+                                    Details
+                               
+                            </th>*@
+                         
+                        </tr>
+                    </thead>
+                    <tbody>
+                          @if (Model != null && Model.Count()>0)
+                        {
+                            int counter = 0;
+                            string classrow = "";
+                            foreach (var item in Model)
+                        {
+                            if (item.MessageType == "Medication Refill" && item.MessageStatusId != "7" )
+                            {
+                                StringBuilder jsonString = new StringBuilder();
+
+                                jsonString.Append(" { ");
+                                jsonString.Append("\"ID\": \"" + item.MessageDetailId + "\",");
+                                jsonString.Append("\"FacilityName\":  \"" + item.FacilityName + "\",");
+                                jsonString.Append("\"From\":  \"" + item.ProviderName_From + "\",");
+                                // jsonString.Append("\"From\":  \"" + ((item.PatientMessageModel.CreatedByName != null && item.PatientMessageModel.CreatedByName.Length > 0) ? item.PatientMessageModel.CreatedByName : item.PatientMessageModel.ProviderName_From) + "\",");
+                                jsonString.Append("\"To\":  \"" + item.ProviderName_To + "\",");
+                                jsonString.Append("\"MessageType\":  \"" + item.MessageType + "\",");
+
+                                var Resoutput = item.MessageResponse;
+                                Resoutput = Resoutput.Replace("\'", "&#39;");
+                                Resoutput.Replace("\\\"", "&#39;");
+                                Resoutput = Resoutput.Replace("\n", "\\n");
+                                Resoutput = Resoutput.Replace("\\n", "<br>");
+                                jsonString.Append("\"MessageResponse\":  \"" + Resoutput + "\",");
+                                jsonString.Append("\"MessageId\":  \"" + item.MessageId + "\",");
+                                jsonString.Append("\"ProviderIdFrom\":  \"" + item.ProviderId_From + "\",");
+                                jsonString.Append("\"ProviderIdTo\":  \"" + item.ProviderId_To + "\",");
+                                jsonString.Append("\"MessageTypeId\":  \"" + item.MessageTypeId + "\",");
+                                jsonString.Append("\"FacilityId\":  \"" + item.FacilityId + "\",");
+                                jsonString.Append("\"MessageType\": \"" + item.MessageType + "\",");
+
+
+                                var Reqoutput = item.MessageRequest;
+                                Reqoutput = Reqoutput.Replace("\'", "&#39;");
+                                Reqoutput = Reqoutput.Replace("\n", "\\n");
+                                Reqoutput = Reqoutput.Replace("\\n", "<br>");
+                                Reqoutput.Replace("\\\"", "&#39;");
+                                jsonString.Append("\"MessageRequest\":  \"" + Reqoutput + "\",");
+                                jsonString.Append("\"PreferredTime\":  \"" + item.PreferredTime + "\",");
+                                jsonString.Append("\"PreferredPeriod\":  \"" + item.PreferredPeriod + "\",");
+                                jsonString.Append("\"PreferredWeekDay\":  \"" + item.PreferredWeekDay + "\",");
+
+                                var Visoutput = item.VisitReason;
+                                Visoutput = Visoutput.Replace("\'", "&#39;");
+                                Visoutput = Visoutput.Replace("\n", "\\n");
+                                Visoutput = Visoutput.Replace("\\n", "<br>");
+                                Visoutput.Replace("\\\"", "&#39;");
+                                jsonString.Append("\"VisitReason\":  \"" + Visoutput + "\",");
+                                jsonString.Append("\"AppointmentStart\":  \"" + item.AppointmentStart.ToShortDateString() + "\",");
+                                jsonString.Append("\"AppointmentEnd\":  \"" + item.AppointmentEnd.ToShortDateString() + "\",");
+                                jsonString.Append("\"MessageUrgency\":  \"" + item.MessageUrgency + "\",");
+                                jsonString.Append("\"MedicationNDC\": \"" + item.MedicationNDC + "\",");
+
+                                jsonString.Append("\"MedicationName\":  \"" + item.MedicationName + "\",");
+                                jsonString.Append("\"NoOfRefills\":  \"" + item.NoOfRefills + "\",");
+                                jsonString.Append("\"MedicationStatus\":  \"" + item.MedicationStatus + "\",");
+                                jsonString.Append("\"PharmacyName\":  \"" + item.PharmacyName + "\",");
+                                jsonString.Append("\"PharmacyAddress\":  \"" + item.PharmacyAddress + "\",");
+                                jsonString.Append("\"PharmacyPhone\": \"" + item.PharmacyPhone + "\",");
+
+
+                                jsonString.Append("\"MessageRead\":  \"" + item.MessageRead + "\",");
+                                jsonString.Append("\"FacilityName\":  \"" + item.FacilityName + "\",");
+                                jsonString.Append("\"ProviderId_To\":  \"" + item.ProviderId_To + "\",");
+                                jsonString.Append("\"ProviderTo\":  \"" + item.ProviderTo + "\",");
+                                jsonString.Append("\"PharmacyAddress\":  \"" + item.PharmacyAddress + "\",");
+                                jsonString.Append("\"PharmacyPhone\": \"" + item.PharmacyPhone + "\",");
+                                jsonString.Append("\"PatientName\": \"" + item.PatientName + "\",");
+
+
+                                //jsonString.Append("\"MessageRequest\": \"" + item.MessageRequest + "\",");
+                                jsonString.Append("\"HeaderID\": \"" + item.MessageId + "\"");
+                                jsonString.Append("}");
+                                if (counter % 2 == 0)
+                                {
+                                    classrow = "r0";
+                                }
+                                else
+                                {
+                                    classrow = "r1";
+                                }    
+                            <tr class="@classrow" id="MessageHeader-@item.MessageDetailId" onclick="medicationRefillDetail(@item.MessageDetailId,'@classrow');">
+                                <td style="vertical-align:middle;"><input type="hidden" id="Refil-@item.MessageDetailId" value="@jsonString.ToString()"   />
+                                     <input type="checkbox" id="chkR" value="1" name="chkR[]"  class="@item.MessageId" style="margin-left:5px;"/>
+                                </td>
+                                <td style="vertical-align:middle;">
+                                   <div style="margin-left: 10px;color:@if (item.MessageRead == false)
+                                                                             {
+                                                                                 <text>orange; font-weight:bold; </text>}
+                                                                                                  else
+                                                                                                  {<text>#666699</text>}">
+                                        
+                                    @item.FacilityName
+                                   </div>
+                                </td >
+                                <td style="vertical-align:middle;">
+                                    <div style="margin-left: 10px;color:@if (item.MessageRead == false)
+                                                                             {
+                                                                                 <text>orange; font-weight:bold; </text>}
+                                                                                                  else
+                                                                                                  {<text>#666699</text>}">
+                                        Refill Request Response
+                                    </div>
+                                </td>
+                          @*      <td style="vertical-align:middle;">
+                                    <div style="margin-left: 10px;width:120px;color:@if (item.MessageUnRead > 0 )
+                                                                             {
+                                                                                 <text>orange; font-weight:bold; </text>}
+                                                                                                  else
+                                                                                                  {<text>#666699</text>}">
+                                
+                                         @((item.FacilityName.Length>15)?item.FacilityName.Substring(0,15) + "..." : item.FacilityName)
+                                    </div>
+                                </td>*@
+
+                                <td style="vertical-align:middle;">
+                                    <div style="margin-left: 10px;color:@if (item.MessageRead == false)
+                                                                             {
+                                                                                 <text>orange; font-weight:bold; </text>}
+                                                                                                  else
+                                                                                                  {<text>#666699</text>}">
+                                        @item.DateCreated
+                                    </div>
+                                </td>
+                                <td style="vertical-align:middle;">
+                                    <div style="margin-left:-10px;color:@if (item.MessageRead == false)
+                                                                             {
+                                                                                 <text>orange; font-weight:bold; </text>}
+                                                                                                  else
+                                                                                                  {<text>#666699</text>}">
+                                         @item.MessageStatus
+                                    </div>
+                                </td>
+                           @*     <td style="vertical-align:middle;">
+                                     <div style="margin-left: 10px;width:120px;color:@if (item.MessageUnRead > 0)
+                                                                             {
+                                                                                 <text>orange; font-weight:bold; </text>}
+                                                                                                  else
+                                                                                                  {<text>#666699</text>}">
+                                   
+                                         @((item.MessageRequest.Length>15)?item.MessageRequest.Substring(0,15) + "..." : item.MessageRequest)
+                                    </div>
+                                </td>*@
+                                @*<td>
+                                       <img src="Content/img/details.png" onclick="medicationRefillDetail(@item.MessageId);"/>
+                                </td>*@
+                              
+                            </tr>
+                                         counter++;
+                            }
+                        }
+                        }
+                          else
+                          {
+                          <tr><td style="vertical-align:middle;">No Information Available</td></tr>
+                        }
+                    </tbody>
+                </table>
